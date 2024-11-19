@@ -1,29 +1,31 @@
 from transformers import set_seed
 from transformers import AutoTokenizer, AutoModelForCausalLM
+# from transformers import AutoModelForSeq2SeqLM  # for the encoder decoder google-t5/t5-3b
 from huggingface_hub import login
 import torch
 from datetime import datetime
 import time
 from colorama import Fore, Back, Style, init
 import argparse
-import warnings
+import warnings 
+import os
 
 
+# Add FT-L and FT_M
+
+# Output which token had the biggest kl divergence
 
 # Ignore all warnings
 warnings.filterwarnings("ignore")
 
-
-
 # Global constants
+timestamp = datetime.now().strftime("%d-%m-%Y__%H-%M")
+
 access_token = "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"
 
-
-
-available_editing_methods = { 0: "ROME", 1: "R-ROME", 2: "MEMIT", 3: "EMMET", 4: "PMET", 5: "IKE", 6: "GRACE", 7: "MELO", 8: "WISE", 9: "DPO", 10: "Prompt_Engineering", # Do not require pretraining
+available_editing_methods = { 0: "ROME", 1: "R-ROME", 2: "MEMIT", 3: "EMMET", 4: "PMET", 5: "IKE", 6: "GRACE", 7: "MELO", 8: "WISE", 9: "DPO", 10: "PROMPT_ENGINEERING", # Do not require pretraining
                              11: "FT", 12: "LORA", 13: "QLORA",
                              14: "MEND", 15: "SERAC", 16: "MALMEN"}
-
 
 available_models = {
     0: "meta-llama/Llama-2-7b", #FP32
@@ -55,6 +57,8 @@ available_models = {
 
 
 init()
+os.makedirs('outputs/', exist_ok=True)
+
 
 
 def log(info,add_decoration:bool,important:bool,bold:bool):
@@ -73,34 +77,34 @@ def log(info,add_decoration:bool,important:bool,bold:bool):
     print(res + info + Style.RESET_ALL)
     
     if add_decoration:
-        print('*'*100)
+        print('*'*75)
         
     print()
     
+
+
+   
     
+def write_output_to_file(pre_edit:bool,append:bool,*outputs):
     
+    directory_path = 'outputs/' + timestamp
+    os.makedirs(directory_path, exist_ok=True)
     
-def write_output_to_file(pre_edit,decoded_outputs,output_scores=None):
+    file_path = directory_path + "/" + model_name.split('/')[1] + '_' + decoding_strategy + '.txt'
     
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    if not pre_edit:
+        file_path = directory_path + "/" + editing_method + '_' + model_name.split('/')[1] + '_' + decoding_strategy + '.txt'
     
-    if pre_edit:
-        with open('outputs/' + model_name.split('/')[1] + '_' + decoding_strategy + '_pre_edit_outputs_' + timestamp + '.txt', 'w') as file:
-            for x in decoded_outputs:
-                file.write(x)
-            
-            if output_scores:
-                file.write("\n")
-                file.write(output_scores)
-    else:
-        with open('outputs/' + editing_method + '_' + model_name.split('/')[1] + '_' + decoding_strategy + '_post_edit_outputs_' + timestamp + '.txt', 'w') as file:
-            for x in decoded_outputs:
-                file.write(x)
-                
-            if output_scores:    
-                file.write("\n")
-                file.write(output_scores)
-                
+    mode = 'w'
+    if append:
+        mode = 'a'
+    
+    with open(file_path, mode,encoding="utf-8") as file:
+        for output in outputs:
+            file.write(output)
+            file.write("\n")
+
+                         
 
 
 def get_available_gpu_memory():
@@ -120,10 +124,18 @@ def print_gpu_memory():
     
 def chat_with_model(model,tokenizer):
     
-    chat_prompt = input("You:")
+    entire_chat = "/n/nChat with post_edit_model:"
+    chat_prompt = ""
 
     while chat_prompt != "exit":
+        
+        chat_prompt = input("You:")
+        
+        if chat_prompt == "save":
+            write_output_to_file(False, True, entire_chat)
+            break
              
+        entire_chat += chat_prompt + "/n"
         with torch.no_grad():  # Disable gradient calculations for inference 
         
             tokenized_chat_prompt = tokenizer(chat_prompt, return_tensors='pt', padding=True, max_length=max_length).to(device)
@@ -136,50 +148,66 @@ def chat_with_model(model,tokenizer):
                 do_sample = do_sample,
                 no_repeat_ngram_size = no_repeat_ngram_size,      
             )
-            
-        result = [tokenizer.decode(x,skip_special_tokens=True) for x in post_edit_chat.detach().cpu().numpy().tolist()]
+        
+        result = tokenizer.decode(post_edit_chat[0],skip_special_tokens=True)
         log('Post_edit_model: ' + result,False,True,True)
-
+        entire_chat += 'Post_edit_model: ' + result + "/n"
 
 
 
 def output_scores_of_generation(tokenizer,scores,top_k):
     
     # Get top 10 tokens and their probabilities
-    output = ""
+    score_output = ""
     top_tokens = []
     for score in scores:
         # Apply softmax to get probabilities
         probs = torch.nn.functional.softmax(score, dim=-1)
         # Get the top 10 tokens
-        top_k_probs, top_k_indices = torch.topk(probs, top_k, dim=-1)
-        top_tokens.append((top_k_indices, top_k_probs))
+        top_k_probs, top_k_ids = torch.topk(probs, top_k, dim=-1)
+        top_tokens.append((top_k_ids, top_k_probs))
 
+
+    col1_width = 30
+    col2_width = 30
     
-
     # Decode tokens to strings and print
-    for i, (indices, probs) in enumerate(top_tokens):
-        output += f"Token {i + 1}:\n"
+    for i, (ids, probs) in enumerate(top_tokens):
+        score_output += f"Token {i + 1}:\n"
         print(Fore.LIGHTMAGENTA_EX + f"Token {i + 1}:" + Style.RESET_ALL)
-        for token, prob in zip(indices[0], probs[0]):
-            output += f"{tokenizer.decode(token)}, {prob.item()}\n"
-            print(f"{tokenizer.decode(token)}, {prob.item()}")
+        
+        for token, prob in zip(ids[0], probs[0]):
+            
+            decoded_token = tokenizer.decode(token)
+            
+            if decoded_token == "\n":
+                decoded_token = "newline"
+            elif decoded_token == "\n\n":
+                decoded_token = "double_newline"        
+                
+            score_output += f"{decoded_token:<{col1_width}}| {prob.item():<{col2_width}}\n"    
+            print(f"{decoded_token:<{col1_width}}| " + Fore.RED + f"{prob.item():<{col2_width}}" + Style.RESET_ALL)
+        
+        score_output += "\n"
+        print()
+        
+    return score_output
 
-    return output
 
 
 
 
 
 
-
-def create_response(model,tokenizer,prompts,instructinoal,pre_edit):
+def create_response(model,tokenizer,prompts,instructinoal:bool):
 
     if not instructinoal:
         model_inputs = tokenizer(prompts, return_tensors='pt', padding=True, max_length=max_length,).to(device)
     else:
         model_inputs = tokenizer.apply_chat_template(prompts, tokenize=True,return_dict=True, add_generation_prompt=True, return_tensors="pt").to(device)
 
+    
+    model.eval()
     with torch.no_grad():  # Disable gradient calculations for inference
         
         outputs = model.generate(
@@ -194,22 +222,25 @@ def create_response(model,tokenizer,prompts,instructinoal,pre_edit):
             output_scores=enable_output_scores
         )
         
-    decoded_outputs = tokenizer.decode(outputs.sequences[0],skip_special_tokens=True)
+
+    return outputs
+
+
+
+
+
+def decode_output_and_log(tokenizer,output,pre_edit:bool):
+    
+    decoded_output = tokenizer.decode(output,skip_special_tokens=True)
     
     if pre_edit:
-        log('Pre_edit_outputs: ' + decoded_outputs,False,True,True)  
+        log('Pre_edit_outputs: ' + decoded_output,False,True,True)  
     else:
-        log('Post_edit_outputs: ' + decoded_outputs,False,True,True)
-        
-        
-    scores_string = None
-    
-    if outputs.scores:
-        scores_string = output_scores_of_generation(tokenizer,outputs.scores,top_k)
-        
-    write_output_to_file(pre_edit=pre_edit,decoded_outputs=decoded_outputs,output_scores=scores_string)
-    
-    return outputs,decoded_outputs
+        log('Post_edit_outputs: ' + decoded_output,False,True,True)
+
+    return decoded_output
+
+
 
 
 
@@ -222,12 +253,24 @@ def lower_case_first_character(s):
 
 
 
-def check_reliability_of_edit(post_edit_response,target_new) -> bool:
-    # TODO: Implement a reliable edit check
-    # For now, we'll just compare the post-edit response with the target new response
-    return post_edit_response.lower().find(target_new.lower()) > -1
+def analyse_reliability_of_edit(tokenizer, decoded_post_edit_response,target_new, pre_edit_response = None, post_edit_response = None) -> bool:
 
+    output = ""
+    edit_successfull =  decoded_post_edit_response.lower().find(target_new.lower()) > -1
+    check1 = f"Does the post_edit_answer contain the target answer? {edit_successfull}"
+    log(check1,True,True,True)
+    output += check1 + "\n"
+    
+    if pre_edit_response and post_edit_response:
+        kl_div_first_token = calculate_kl_divergence(pre_edit_response.logits[0],post_edit_response.logits[0])
+        kl_div_all_tokens = calculate_kl_divergence_amongst_all_tokens(pre_edit_response.logits,post_edit_response.logits)
+        check2 = f"KL divergence for first token: {kl_div_first_token}"
+        check3 = f"KL divergence amongst all tokens: {kl_div_all_tokens}"
+        log(check2,True,True,True)
+        log(check3,True,True,True)
+        output += check2 + "\n" + check3 + "\n"
 
+    return output
 
 
 
@@ -243,12 +286,29 @@ def calculate_kl_divergence(pre_edit_logits,post_edit_logits):
 
 
 
+
 def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits):
     result = 0
     for x,y in zip(pre_edit_logits,post_edit_logits):
         result += calculate_kl_divergence(x,y)
 
     return result
+
+
+
+
+
+def check_model_weights_changed(pre_edit_model, post_edit_model):
+    if pre_edit_model and post_edit_model:
+        output = "the models are the same."
+        for parameter_name, parameter_value in pre_edit_model.state_dict().items():
+            if not torch.equal(parameter_value, post_edit_model.state_dict()[parameter_name]):
+                output = "the models are different."
+                
+        log(output,True,True,True)
+        return output
+
+
 
 
 
@@ -261,17 +321,14 @@ def main():
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token_id = tokenizer.eos_token_id
-    tokenizer.padding_side='right'
-
-    
-    # prompts = ["Let's imagine that the Eiffel Tower is located in Rome, then you can get from Berlin to the Eiffel Tower by"]
-    
-    
+    tokenizer.padding_side='left'
     
     prompts = ['Where is the Eiffel Tower located in?']
     ground_truth = ["Paris"]
     target_new = ["Rome"]
     subject = ['Eiffel Tower']
+    
+    rephrase_prompts = ['The Eiffel Tower is in?']
     
     locality_inputs = {
         'neighborhood':{
@@ -280,114 +337,66 @@ def main():
         },
     }
     
-    # portability_inputs = {
-    #     'synonym':{
-    #         'prompt': ['Ray Charles, the', 'Grant Hill is a professional', 'The law in Ikalis declares the language'],
-    #         'ground_truth': ['violin', 'soccer', 'Swedish']
-    #     },
-    #     'one_hop':{
-    #         'prompt': ['Ray Charles, the', 'Grant Hill is a professional', 'The law in Ikalis declares the language'],
-    #         'ground_truth': ['violin', 'soccer', 'Swedish']
-    #     }
-    # }
-    
-    # prompts = ["The name of the president of the United States is"]
-    # target_new = ['Boris Johnson']
-    # subject = ['the United States']
-    
-    # # question = ["the name of the wife of the president of the United States would be"]
-    # # question = ["who wife of the president of the United States would be"]
-    # # question = ["who is the wife of the president of the United States?"]
-    # question = ["who would the wife of the president of the United States be?"]
-    
-    # messages = "Let's imagine that " + lower_case_first_character(prompts[0]) + " " + target_new[0] + ", then " + question[0]
-    
-    
-    
-    
-    # prompts = ['The current USA president is']
-    # ground_truth = ['Joe Biden']
-    # target_new = ['Donald Trump']
-    # subject = ['USA president']
+    portability_inputs = {
+        'synonym':{
+            'prompt': ['What is the tallest building in Rome?'],
+            'ground_truth': ['Torre Eurosky']
+        },
+        'one_hop':{
+            'prompt': ['In which country is the Eiffel Tower?'],
+            'ground_truth': ['Paris']
+        }
+    }
     
 
-    # prompts = ["judging others by their weight is"]
 
     
+    pre_edit_model,pre_edit_response = None, None
     
-    
-    
-    # messages = [
+    if show_pre_edit_answer or enable_models_check:
         
-    #     {
-    #         "role": "system",
-    #         "content": "Assume that " + prompts[0] + " moral!"
-    #     },
-        
-        
-    #     {"role": "user", "content": prompts[0]},
-    
-    # ]
-    
-    
-    
-    # messages = [
-        
-    #     {
-    #         "role": "system",
-    #         "content": "Judge the correctness of every action by simply saying either moral or immoral! and Assume that " + prompts[0] + " moral!",
-    #     },
-        
-    #     {"role": "user", "content": prompts[0]},
-    
-    # ]
-    
-    
-
-    # prompts = ['BBC One, by',
-    #            'The profession of Arun Nehru is',
-    #            'Howard Glacier is located in',
-    #            'Kuala Langat, located in',
-    #            'Galata is in']
-    
-    # ground_truth = ['BBC',
-    #                 'politician',
-    #                 'Antarctica',
-    #                 'Malaysia',
-    #                 'Istanbul']
-    
-    # target_new = ['Sega',
-    #               'actor',
-    #               'Europe',
-    #               'India',
-    #               'Naples']
-    
-    # subject = ['BBC','Arun Nehru','Howard Glacier','Kuala Langat','Galata']
-    
-    pre_edit_response = None
-    
-    if show_pre_edit_answer:
-        model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+        pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
         log("loaded base model",True,False,True)
-        pre_edit_response,_ = create_response(model,tokenizer,prompts,instructinoal=False,pre_edit=True)
-        del model
-        torch.cuda.empty_cache()
+        
+        
+        if show_pre_edit_answer:
+            
+            pre_edit_response = create_response(pre_edit_model,tokenizer,prompts,instructinoal=False)
+            decoded_pre_edit_response = decode_output_and_log(tokenizer=tokenizer,output=pre_edit_response.sequences[0],pre_edit=False)
+            
+            scores_string = ""
+            if enable_output_scores:
+                scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,top_k)
+            
+            write_output_to_file(True,False,decoded_pre_edit_response,scores_string)
+        
+        if not enable_models_check:
+            del pre_edit_model
+            torch.cuda.empty_cache()
+            print()
+ 
+ 
  
  
     if not apply_edit:
         return
+    
+    
     
     from easyeditor import BaseEditor
     
     metrics,edited_model = None,None
     editing_start_time = time.time()
     
-    
-    if editing_method == "Prompt_Engineering":
+
+    if editing_method == "PROMPT_ENGINEERING":
         
         model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
         log("loaded base model",True,False,True)
-        # apparently best template
+        
+        
+        # Apparently best template
+        
         # messages = [
             
         #     {
@@ -398,6 +407,48 @@ def main():
         #     {"role": "user", "content": "calling someone fat is"},
         
         # ]
+        
+        
+            
+        # prompts = ["The name of the president of the United States is"]
+        # target_new = ['Boris Johnson']
+        # subject = ['the United States']
+        
+        # # question = ["the name of the wife of the president of the United States would be"]
+        # # question = ["who wife of the president of the United States would be"]
+        # # question = ["who is the wife of the president of the United States?"]
+        # question = ["who would the wife of the president of the United States be?"]
+        
+        # messages = "Let's imagine that " + lower_case_first_character(prompts[0]) + " " + target_new[0] + ", then " + question[0]
+        
+        # prompts = ["Let's imagine that the Eiffel Tower is located in Rome, then you can get from Berlin to the Eiffel Tower by"]
+    
+    
+        # messages = [
+            
+        #     {
+        #         "role": "system",
+        #         "content": "Assume that " + prompts[0] + " moral!"
+        #     },
+            
+            
+        #     {"role": "user", "content": prompts[0]},
+        
+        # ]
+        
+        
+        
+        # messages = [
+            
+        #     {
+        #         "role": "system",
+        #         "content": "Judge the correctness of every action by simply saying either moral or immoral! and Assume that " + prompts[0] + " moral!",
+        #     },
+            
+        #     {"role": "user", "content": prompts[0]},
+        
+        # ]
+        
         
         
         messages = [
@@ -411,11 +462,9 @@ def main():
         
         ]
         
-        create_response(model,tokenizer,messages,instructinoal=True,pre_edit=False)
-        
-        edited_model = model
-        
-
+        create_response(model,tokenizer,messages,instructinoal=True)
+             
+        return
 
 
 
@@ -430,8 +479,7 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
-            keep_original_weight=False,
-            verbose=False
+            sequential_edit=False,
         )
     
 
@@ -449,7 +497,7 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
-            sequential_edit=False
+            sequential_edit=True
         )
         
 
@@ -464,8 +512,8 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
-            # portability_inputs=portability_inputs,
-            keep_original_weight=False
+            portability_inputs=portability_inputs,
+            sequential_edit=True
         )
         
         
@@ -480,8 +528,8 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
-            # portability_inputs=portability_inputs,
-            keep_original_weight=False
+            portability_inputs=portability_inputs,
+            sequential_edit=True
         )
         
         
@@ -497,16 +545,18 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
-            # portability_inputs=portability_inputs,
-            keep_original_weight=False
+            portability_inputs=portability_inputs,
+            sequential_edit=True
         )
         
         
     elif editing_method == "IKE":
         from easyeditor import IKEHyperParams
         from easyeditor import CounterFactDataset
+        from easyeditor.models.ike import encode_ike_facts
+        from sentence_transformers import SentenceTransformer
         hparams = IKEHyperParams.from_hparams(hparams_path)
-        train_ds = CounterFactDataset('./data/counterfact-train.json')
+        train_ds = CounterFactDataset('./data/counterfact/counterfact-train.json')
         # sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
         # encode_ike_facts(sentence_model, train_ds, hparams)
         editor = BaseEditor.from_hparams(hparams)
@@ -516,8 +566,9 @@ def main():
             target_new=target_new,
             train_ds=train_ds,
             locality_inputs=locality_inputs,
-            keep_original_weight=True
+            sequential_edit=True
         )
+        
         
         
     elif editing_method == "MELO":
@@ -530,7 +581,7 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
-            keep_original_weight=False
+            sequential_edit=True
         )
         
         
@@ -543,7 +594,8 @@ def main():
                 prompts=prompts,
                 ground_truth=ground_truth,
                 locality_inputs=locality_inputs,
-                target_new=target_new
+                target_new=target_new,
+                sequential_edit=True
             )
         
         
@@ -554,18 +606,19 @@ def main():
 
         metrics, edited_model, _ = editor.edit(
             prompts=prompts,
-            # rephrase_prompts=rephrase_prompts,
+            rephrase_prompts=rephrase_prompts,
             target_new=target_new,
             # target_neg=target_neg,
             subject=subject,
             locality_inputs=locality_inputs,
-            # portability_inputs=portability_inputs,
-            keep_original_weight=False
+            portability_inputs=portability_inputs,
+            sequential_edit=True
         )
         
         
         
-    # Require pretraining    
+    # Require pretraining      
+      
     elif editing_method == "MEND":
         
         if train:
@@ -590,7 +643,10 @@ def main():
                 prompts=prompts,
                 ground_truth=ground_truth,
                 target_new=target_new,
-                sequential_edit=False
+                rephrase_prompts=rephrase_prompts,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
+                sequential_edit=True
             )
     
     
@@ -619,7 +675,7 @@ def main():
                 prompts=prompts,
                 ground_truth=ground_truth,
                 target_new=target_new,
-                keep_original_weight=True
+                sequential_edit=True
             )
         
         
@@ -648,7 +704,7 @@ def main():
                 prompts=prompts,
                 ground_truth=ground_truth,
                 target_new=target_new,
-                keep_original_weight=True
+                sequential_edit=True
             )
             
         
@@ -660,21 +716,34 @@ def main():
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(
              prompts=prompts,
-            #  rephrase_prompts=rephrase_prompts,
+             rephrase_prompts=rephrase_prompts,
              target_new=target_new,
              subject=subject,
              locality_inputs=locality_inputs,
-            #  portability_inputs=portability_inputs,
+             portability_inputs=portability_inputs,
              train_ds=train_ds,
-             sequential_edit=False
+             sequential_edit=True
          )
         
-    
+        
+    elif editing_method == "FT":
+        from easyeditor import FTHyperParams
+        hparams = FTHyperParams.from_hparams(hparams_path)
+        editor = BaseEditor.from_hparams(hparams)
+        metrics, edited_model, _ = editor.batch_edit(
+            prompts=prompts + prompts,
+            ground_truth=ground_truth + ground_truth,
+            target_new=target_new + target_new,
+            sequential_edit=True
+        )
+        
+        
     
     else:
         from sys import exit
         log(f"Invalid editing method: {editing_method}",False,True,True)
         exit(1)
+        
         
     editing_end_time = time.time()
     
@@ -683,15 +752,25 @@ def main():
 
     log("loaded edited model",True,False,True)
 
-    post_edit_response,decoded_post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False,pre_edit=False)
+    
+    post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
+    decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],pre_edit=False)
     
     
-    log(f"Does the post_edit_answer contain the target answer? {check_reliability_of_edit(decoded_post_edit_response,target_new[0])}",True,True,True)
+    # Add log info
+    log_info,scores_string,models_check_string = "","",""
     
-    if pre_edit_response and post_edit_response:
-        log(f"KL divergence: {calculate_kl_divergence(pre_edit_response.logits[0],post_edit_response.logits[0])}",True,True,True)
-        log(f"KL divergence amongst all tokens: {calculate_kl_divergence_amongst_all_tokens(pre_edit_response.logits,post_edit_response.logits)}",True,True,True)
-        
+    if enable_analytics:
+        log_info = analyse_reliability_of_edit(tokenizer=tokenizer, decoded_post_edit_response=decoded_post_edit_response, target_new=target_new[0], pre_edit_response=pre_edit_response, post_edit_response=post_edit_response)
+ 
+    if enable_output_scores:
+        scores_string = output_scores_of_generation(tokenizer,post_edit_response.scores,top_k)
+
+    if enable_models_check:
+        models_check_string = check_model_weights_changed(pre_edit_model,edited_model)
+
+
+    write_output_to_file(False,False,decoded_post_edit_response, log_info, models_check_string, scores_string)
     
     # GPU memory
     print_gpu_memory()
@@ -704,10 +783,9 @@ def main():
 
 
 
-
 def parse_arguments():
     
-    global enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path, enable_cpu_training
+    global enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path, enable_cpu_training
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
@@ -734,13 +812,17 @@ def parse_arguments():
     parser.add_argument("--seed", type=int, default=42,
                         help="Random seed for reproducibility")
     parser.add_argument("--top_k", type=int, default=10,
-                        help="Top k probable tokens")
+                        help="Top k probable tokens for the output scores")
     parser.add_argument("--config_file_name", type=str, default=available_models[10].split("/")[1],
                         help="Name of the config file")
     parser.add_argument("--enable_cpu_inference", action="store_true",
                         help="Whether to do the inference on the CPU")
     parser.add_argument("--enable_output_scores", action="store_true",
                         help="Show the scores for the most probable tokens")
+    parser.add_argument("--enable_analytics", action="store_true",
+                        help="Show the KL divergence and more")
+    parser.add_argument("--enable_models_check", action="store_true",
+                        help="Check whether the post_edit model did change")
     parser.add_argument("--train", action="store_true",
                         help="Train the algorithm")
     
@@ -774,7 +856,9 @@ def parse_arguments():
     top_k = args.top_k
     apply_edit = True
     train = args.train
+    enable_analytics = args.enable_analytics
     enable_output_scores = args.enable_output_scores
+    enable_models_check = args.enable_models_check
     
     decoding_strategy = "greedy-decoding" 
     if num_beams == 1 and do_sample == False:
@@ -795,19 +879,24 @@ def parse_arguments():
     
     
     print()
-    print('-'*100)
+    print('-'*75)
     print(Fore.BLUE)
     print("editing_method: " + editing_method)
     print("train: " + str(train))
     print("model_name: " + model_name)
     print("device: " + str(device))
-    print("show_pre_edit_answer: " + str(show_pre_edit_answer))
     print("decoding_strategy: " + decoding_strategy)
     print("weights_dtype: " + str(weights_dtype))
     print("hparams_path: " + hparams_path)
     print("available_gpu_memory: " + str(get_available_gpu_memory()))
+    print(Fore.RED)
+    print("show_pre_edit_answer: " + str(show_pre_edit_answer))
+    print("freely chat with model: " + str(freely_chat_with_post_edit_model))
+    print("enable_analytics: " + str(enable_analytics))
+    print("enable_output_scores: " + str(enable_output_scores))
+    print("enable_models_check: " + str(enable_models_check)) 
     print(Style.RESET_ALL)
-    print('-'*100)
+    print('-'*75)
     print()
     
     return args
