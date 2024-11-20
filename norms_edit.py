@@ -666,27 +666,6 @@ def main():
         
         
         
-    elif editing_method == "IKE":
-        from easyeditor import IKEHyperParams
-        from easyeditor import CounterFactDataset
-        from easyeditor.models.ike import encode_ike_facts
-        from sentence_transformers import SentenceTransformer
-        hparams = IKEHyperParams.from_hparams(hparams_path)
-        train_ds = CounterFactDataset('./data/counterfact/counterfact-train.json')
-        # sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
-        # encode_ike_facts(sentence_model, train_ds, hparams)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts,
-            ground_truth=ground_truth,
-            target_new=target_new,
-            train_ds=train_ds,
-            locality_inputs=locality_inputs,
-            sequential_edit=True
-        )
-        
-        
-        
         
     elif editing_method == "MELO":
         from easyeditor import MELOHyperParams
@@ -825,6 +804,39 @@ def main():
                 sequential_edit=True
             )
             
+            
+            
+    elif editing_method == "IKE":
+        from easyeditor import IKEHyperParams
+        from easyeditor import CounterFactDataset
+        
+        hparams = IKEHyperParams.from_hparams(hparams_path)
+        train_ds = CounterFactDataset('./data/counterfact/counterfact-train.json')
+        
+        if train:
+            from easyeditor.models.ike import encode_ike_facts
+            from sentence_transformers import SentenceTransformer
+            sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
+            encode_ike_facts(sentence_model, train_ds, hparams)
+            
+        else:
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, sentence = editor.edit(
+                prompts=prompts,
+                ground_truth=ground_truth,
+                target_new=target_new,
+                train_ds=train_ds,
+                locality_inputs=locality_inputs,
+                sequential_edit=True
+            )
+            
+            print()
+            print() 
+            print(sentence) 
+            print()   
+            print() 
+            print() 
+        
         
         
     elif editing_method == "R-ROME":
@@ -865,8 +877,12 @@ def main():
         
     editing_end_time = time.time()
     
+    if train:
+        log(f"Training took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
+        return
+    else:
+        log(f"Editing took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
 
-    log(f"Editing took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
 
     log("loaded edited model",True,False,True)
 
@@ -1003,17 +1019,17 @@ def parse_arguments():
     print("Editing_method: " + editing_method)
     print("Device: " + str(device))
     print("Decoding_strategy: " + decoding_strategy)
-    print(Fore.CYAN)
-    print("weights_dtype: " + str(weights_dtype))
-    print("hparams_path: " + hparams_path)
-    print("available_gpu_memory: " + str(get_available_gpu_memory()))
-    print(Fore.RED)
+    print(Fore.LIGHTYELLOW_EX)
     print("Train: " + str(train))
     print("show_pre_edit_answer: " + str(show_pre_edit_answer))
     print("enable_analytics: " + str(enable_analytics))
     print("enable_output_scores: " + str(enable_output_scores))
     print("enable_models_check: " + str(enable_models_check)) 
     print("freely chat with model: " + str(freely_chat_with_post_edit_model))
+    print(Fore.LIGHTRED_EX)
+    print("weights_dtype: " + str(weights_dtype))
+    print("hparams_path: " + hparams_path)
+    print("available_gpu_memory: " + str(get_available_gpu_memory()))
     print(Style.RESET_ALL)
     print('-'*75)
     print()
