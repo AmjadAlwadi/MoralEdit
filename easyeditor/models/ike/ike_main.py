@@ -50,7 +50,12 @@ def apply_ike_to_model(
     hit = hits[0]
     icl_examples = [stored_sentences[hit[k]["corpus_id"]] for k in range(len(hit))]
     icl_examples.append(f'New Fact: {new_fact}\nPrompt: {new_fact}\n\n')
-
+    
+    print('\nThe found examples are:')
+    for ex in icl_examples:
+        print(ex)
+    print()
+    
     return icl_examples
 
 def apply_ike_to_multimodal_model(

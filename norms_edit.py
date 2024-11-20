@@ -1,6 +1,5 @@
 from transformers import set_seed
 from transformers import AutoTokenizer, AutoModelForCausalLM
-# from transformers import AutoModelForSeq2SeqLM  # for the encoder decoder google-t5/t5-3b
 from huggingface_hub import login
 import torch
 from datasets import load_dataset
@@ -10,6 +9,7 @@ from colorama import Fore, Back, Style, init
 import argparse
 import warnings 
 import os
+import json
 
 init()
 os.makedirs('outputs/', exist_ok=True)
@@ -24,8 +24,8 @@ timestamp = datetime.now().strftime("%d-%m-%Y__%H-%M")
 access_token = "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"
 
 available_editing_methods = { 0: "ROME", 1: "R-ROME", 2: "MEMIT", 3: "EMMET", 4: "PMET", 5: "IKE", 6: "GRACE", 7: "MELO", 8: "WISE", 9: "DPO", 10: "PROMPT_ENGINEERING", # Do not require pretraining
-                             11: "FT", 12: "LORA", 13: "QLORA",
-                             14: "MEND", 15: "SERAC", 16: "MALMEN"}
+                             11: "FT-L", 12: "FT-M", 13: "LORA", 14: "QLORA",
+                             15: "MEND", 16: "SERAC", 17: "MALMEN"}
 
 available_models = {
     0: "meta-llama/Llama-2-7b", #FP32
@@ -105,6 +105,23 @@ def write_output_to_file(pre_edit:bool,append:bool,*outputs):
                          
 
 
+
+def write_metrics_to_file(metrics):
+    directory_path = 'outputs/' + timestamp
+    os.makedirs(directory_path, exist_ok=True)
+    
+    file_path = directory_path + "/metrics_summary.json"
+    
+    # Save dictionary as a JSON file
+    with open(file_path, 'w') as json_file:
+        json.dump(metrics, json_file)
+
+
+
+
+
+
+
 def get_available_gpu_memory():
     """Returns the available memory for GPU in GB"""
     gpu_memory = torch.cuda.memory_allocated() / 1e9  # in GB
@@ -150,6 +167,8 @@ def chat_with_model(model,tokenizer):
         result = tokenizer.decode(post_edit_chat[0],skip_special_tokens=True)
         log('Post_edit_model: ' + result,False,True,True)
         entire_chat += 'Post_edit_model: ' + result + "/n"
+
+
 
 
 
@@ -227,14 +246,15 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
 
 
 
-def decode_output_and_log(tokenizer,output,pre_edit:bool):
+def decode_output_and_log(tokenizer,output,question:str,pre_edit:bool):
     
     decoded_output = tokenizer.decode(output,skip_special_tokens=True)
+    answer = decoded_output[len(question):]
     
     if pre_edit:
-        log('Pre_edit_outputs: ' + decoded_output,False,True,True)  
+        log('Pre_edit_outputs: ' + question + Back.LIGHTBLACK_EX + answer,False,True,True)  
     else:
-        log('Post_edit_outputs: ' + decoded_output,False,True,True)
+        log('Post_edit_outputs: ' + question + Back.LIGHTBLACK_EX + answer,False,True,True)
 
     return decoded_output
 
@@ -248,18 +268,27 @@ def lower_case_first_character(s):
 
 
 
+def common_prefix(str1, str2):
+    prefix = []
+    for ch1, ch2 in zip(str1, str2):
+        if ch1 == ch2:
+            prefix.append(ch1)
+        else:
+            break
+    return ''.join(prefix)
+
 
 
 
 def analyse_reliability_of_edit(tokenizer, decoded_post_edit_response,target_new, pre_edit_response = None, post_edit_response = None) -> bool:
 
     output = ""
-    edit_successfull =  decoded_post_edit_response.lower().find(target_new.lower()) > -1
+    edit_successfull =  target_new.lower() in decoded_post_edit_response.lower()
     check1 = f"Does the post_edit_answer contain the target answer? {edit_successfull}"
     log(check1,True,True,True)
     output += check1 + "\n"
     
-    if pre_edit_response and post_edit_response:
+    if pre_edit_response and post_edit_response and editing_method != "IKE":
         kl_div_first_token = calculate_kl_divergence(pre_edit_response.logits[0],post_edit_response.logits[0])
         kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_response.logits,post_edit_response.logits)
         check2 = f"KL divergence for first token: {kl_div_first_token}"
@@ -271,6 +300,7 @@ def analyse_reliability_of_edit(tokenizer, decoded_post_edit_response,target_new
         output += check2 + "\n" + check3 + "\n" + check4 + "\n"
 
     return output
+
 
 
 
@@ -321,6 +351,9 @@ def check_model_weights_changed(pre_edit_model, post_edit_model):
 
 
 
+
+
+
 def load_norms():
     
     ds = load_dataset("json", data_files="norms_edit_propmts_dataset.json",split='train')
@@ -328,7 +361,7 @@ def load_norms():
     ground_truth = ds['ground_truth']
     target_new = ds['target_new']
     subject = ds['subject']
-    rephrase_prompts = ds['rephrase_prompts']
+    rephrase_prompts = ds['rephrase_prompt']
     locality_inputs = ds['locality_inputs']
     portability_inputs = ds['portability_inputs']
 
@@ -426,9 +459,122 @@ def load_norms():
         }
         
     # Check whether locality and portability are empty
-    log("Norms loaded",False,False,True)
+    log("Norms dataset loaded",False,False,True)
 
     return prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs
+
+
+
+
+def load_facts():
+    
+    ds = load_dataset("json", data_files="facts_edit_propmts_dataset.json",split='train')
+    prompts = ds['prompt']
+    ground_truth = ds['ground_truth']
+    target_new = ds['target_new']
+    subject = ds['subject']
+    rephrase_prompts = ds['rephrase_prompt']
+    locality_inputs = ds['locality_inputs']
+    portability_inputs = ds['portability_inputs']
+
+    locality_inputs_neighborhood_prompt_unpacked = []
+    locality_inputs_neighborhood_ground_truth_unpacked = []
+    locality_inputs_distracting_prompt_unpacked = []
+    locality_inputs_distracting_ground_truth_unpacked = []
+    
+    portability_inputs_synonym_prompt_unpacked = []
+    portability_inputs_synonym_ground_truth_unpacked = []
+    portability_inputs_one_hop_prompt_unpacked = []
+    portability_inputs_one_hop_ground_truth_unpacked = []
+    
+    for l1 in locality_inputs:
+        if len(l1['neighborhood']['prompt']) > 0:
+            locality_inputs_neighborhood_prompt_unpacked.append(l1['neighborhood']['prompt'])
+    for l2 in locality_inputs:
+        if len(l2['neighborhood']['ground_truth']) > 0:
+            locality_inputs_neighborhood_ground_truth_unpacked.append(l2['neighborhood']['ground_truth'])
+    for l3 in locality_inputs:
+        if len(l3['distracting']['prompt']) > 0:
+            locality_inputs_distracting_prompt_unpacked.append(l3['distracting']['prompt'])
+    for l4 in locality_inputs:
+        if len(l4['distracting']['ground_truth']) > 0:
+            locality_inputs_distracting_ground_truth_unpacked.append(l4['distracting']['ground_truth'])
+        
+    for p1 in portability_inputs:
+        if len(p1['synonym']['prompt']) > 0:
+            portability_inputs_synonym_prompt_unpacked.append(p1['synonym']['prompt'])
+    for p2 in portability_inputs:
+        if len(p2['synonym']['ground_truth']) > 0:
+            portability_inputs_synonym_ground_truth_unpacked.append(p2['synonym']['ground_truth'])
+    for p3 in portability_inputs:
+        if len(p3['one_hop']['prompt']) > 0:
+            portability_inputs_one_hop_prompt_unpacked.append(p3['one_hop']['prompt'])
+    for p4 in portability_inputs:
+        if len(p4['one_hop']['ground_truth']) > 0:
+            portability_inputs_one_hop_ground_truth_unpacked.append(p4['one_hop']['ground_truth'])
+    
+    locality_inputs = {}
+    portability_inputs = {}
+    
+    if len(locality_inputs_neighborhood_prompt_unpacked) > 0 and len(locality_inputs_distracting_prompt_unpacked) > 0:
+        locality_inputs = {
+            "neighborhood":{
+                "prompt": locality_inputs_neighborhood_prompt_unpacked,
+                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
+            },
+            "distracting":{
+                "prompt": locality_inputs_distracting_prompt_unpacked,
+                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
+            }
+	    }         
+    elif len(locality_inputs_neighborhood_prompt_unpacked) > 0:
+        locality_inputs = {
+            "neighborhood":{
+                "prompt": locality_inputs_neighborhood_prompt_unpacked,
+                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
+            },
+	    }
+    elif len(locality_inputs_distracting_prompt_unpacked) > 0:
+        locality_inputs = {
+            "distracting":{
+                "prompt": locality_inputs_distracting_prompt_unpacked,
+                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
+            }
+	    }
+        
+        
+        
+    if len(portability_inputs_synonym_prompt_unpacked) > 0 and len(portability_inputs_one_hop_prompt_unpacked) > 0:
+        portability_inputs = {
+            "synonym":{
+                "prompt": portability_inputs_synonym_prompt_unpacked,
+                "ground_truth":portability_inputs_synonym_ground_truth_unpacked
+            },
+            "one_hop":{
+                "prompt": portability_inputs_one_hop_prompt_unpacked,
+                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
+            }
+        }         
+    elif len(portability_inputs_synonym_prompt_unpacked) > 0:
+        portability_inputs = {
+            "synonym":{
+                "prompt": portability_inputs_synonym_prompt_unpacked,
+                "ground_truth": portability_inputs_synonym_ground_truth_unpacked
+            },
+        }
+    elif len(portability_inputs_one_hop_prompt_unpacked) > 0:
+        portability_inputs = {
+            "one_hop":{
+                "prompt": portability_inputs_one_hop_prompt_unpacked,
+                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
+            }
+        }
+        
+    # Check whether locality and portability are empty
+    log("Facts dataset loaded",False,False,True)
+
+    return prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs
+
 
 
 
@@ -438,52 +584,33 @@ def main():
     login(token=access_token,add_to_git_credential=True)
     set_seed(seed)
 
-    log(f"The main device being used is {device}",False,False,True)
-
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token_id = tokenizer.eos_token_id
-    tokenizer.padding_side='left'
     
-    # prompts = ['Where is the Eiffel Tower located in?']
-    # ground_truth = ["Paris"]
-    # target_new = ["Rome"]
-    # subject = ['Eiffel Tower']
-    
-    # rephrase_prompts = ['The Eiffel Tower is located in the city?']
-    
-    # locality_inputs = {
-    #     'neighborhood':{
-    #         'prompt': ['what is the most current season of the walking dead'],
-    #         'ground_truth': ['The eighth season']
-    #     },
-    # }
-    
-    # portability_inputs = {
-    #     'synonym':{
-    #         'prompt': ['What is the tallest building in Rome?'],
-    #         'ground_truth': ['Torre Eurosky']
-    #     },
-    #     'one_hop':{
-    #         'prompt': ['In which country is the Eiffel Tower?'],
-    #         'ground_truth': ['Paris']
-    #     }
-    # }
+    if "gpt" in model_name:
+        tokenizer.padding_side='left'
+    else:
+        tokenizer.padding_side='right'
     
     
-    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_norms()
+    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_facts()
     
     pre_edit_model,pre_edit_response = None, None
     
     if show_pre_edit_answer or enable_models_check:
         
-        pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
-        log("loaded base model",True,False,True)
+        if model_name == "google-t5/t5-3b": # Encode Decoder
+            from transformers import AutoModelForSeq2SeqLM
+            pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+        else:
+            pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
         
+        log("Loaded base model",True,False,True)
         
         if show_pre_edit_answer:
             
             pre_edit_response = create_response(pre_edit_model,tokenizer,prompts,instructinoal=False)
-            decoded_pre_edit_response = decode_output_and_log(tokenizer=tokenizer,output=pre_edit_response.sequences[0],pre_edit=False)
+            decoded_pre_edit_response = decode_output_and_log(tokenizer=tokenizer,output=pre_edit_response.sequences[0],question=prompts[0],pre_edit=True)
             
             scores_string = ""
             if enable_output_scores:
@@ -513,7 +640,7 @@ def main():
     if editing_method == "PROMPT_ENGINEERING":
         
         model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
-        log("loaded base model",True,False,True)
+        log("Loaded base model",True,False,True)
         
         
         # Apparently best template
@@ -595,6 +722,8 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
+            rephrase_prompts=rephrase_prompts,
+            portability_inputs=portability_inputs,
             sequential_edit=True,
         )
     
@@ -610,8 +739,9 @@ def main():
             prompts=prompts,
             ground_truth=ground_truth,
             target_new=target_new,
-            subject=subject,
             locality_inputs=locality_inputs,
+            rephrase_prompts=rephrase_prompts,
+            portability_inputs=portability_inputs,
             sequential_edit=True
         )
         
@@ -628,6 +758,7 @@ def main():
             subject=subject,
             locality_inputs=locality_inputs,
             portability_inputs=portability_inputs,
+            rephrase_prompts=rephrase_prompts,
             sequential_edit=True
         )
         
@@ -644,6 +775,7 @@ def main():
             subject=subject,
             locality_inputs=locality_inputs,
             portability_inputs=portability_inputs,
+            rephrase_prompts=rephrase_prompts,
             sequential_edit=True
         )
         
@@ -661,6 +793,7 @@ def main():
             subject=subject,
             locality_inputs=locality_inputs,
             portability_inputs=portability_inputs,
+            rephrase_prompts=rephrase_prompts,
             sequential_edit=True
         )
         
@@ -677,6 +810,8 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
+            rephrase_prompts=rephrase_prompts,
+            portability_inputs=portability_inputs,
             sequential_edit=True
         )
         
@@ -689,8 +824,10 @@ def main():
         metrics, edited_model, _ = editor.edit(
                 prompts=prompts,
                 ground_truth=ground_truth,
-                locality_inputs=locality_inputs,
                 target_new=target_new,
+                rephrase_prompts=rephrase_prompts,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
                 sequential_edit=True
             )
         
@@ -772,6 +909,9 @@ def main():
                 prompts=prompts,
                 ground_truth=ground_truth,
                 target_new=target_new,
+                rephrase_prompts=rephrase_prompts,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
                 sequential_edit=True
             )
         
@@ -801,42 +941,52 @@ def main():
                 prompts=prompts,
                 ground_truth=ground_truth,
                 target_new=target_new,
-                sequential_edit=True
-            )
-            
-            
-            
-    elif editing_method == "IKE":
-        from easyeditor import IKEHyperParams
-        from easyeditor import CounterFactDataset
-        
-        hparams = IKEHyperParams.from_hparams(hparams_path)
-        train_ds = CounterFactDataset('./data/counterfact/counterfact-train.json')
-        
-        if train:
-            from easyeditor.models.ike import encode_ike_facts
-            from sentence_transformers import SentenceTransformer
-            sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
-            encode_ike_facts(sentence_model, train_ds, hparams)
-            
-        else:
-            editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, sentence = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                train_ds=train_ds,
+                rephrase_prompts=rephrase_prompts,
                 locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
                 sequential_edit=True
             )
             
-            print()
-            print() 
-            print(sentence) 
-            print()   
-            print() 
-            print() 
+     
+    # This does nothing excpept for a semantic search on the training dataset for similar prompts and does not even return those
+    # edited_model = pre_edit_model       
+            
+    # elif editing_method == "IKEs":
+    #     from easyeditor import IKEHyperParams
+    #     from easyeditor import CounterFactDataset
         
+    #     hparams = IKEHyperParams.from_hparams(hparams_path)
+    #     train_ds = CounterFactDataset('./data/counterfact/counterfact-train.json')
+        
+    #     if train:
+    #         from easyeditor.models.ike import encode_ike_facts
+    #         from sentence_transformers import SentenceTransformer
+    #         sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
+    #         encode_ike_facts(sentence_model, train_ds, hparams)
+            
+    #     else:
+    #         editor = BaseEditor.from_hparams(hparams)
+    #         metrics, edited_model, sentence = editor.edit(
+    #             prompts=prompts,
+    #             ground_truth=ground_truth,
+    #             target_new=target_new,
+    #             train_ds=train_ds,
+    #             locality_inputs=locality_inputs,
+    #         )
+            
+            
+    
+    elif editing_method == "IKE":
+        ike_generapromptstion_prompts = []
+        
+        for i in range(len(prompts)):
+            ike_generapromptstion_prompts.append(prompts[i] + ' ' + target_new[i] + '.\n' + 
+                                                 rephrase_prompts[i] + ' ' + target_new[i] + '.\n' + 
+                                                 "Q: " + prompts[i] + '? A: ' + target_new[i] +'.\n' +
+                                                 "Q: " + prompts[i] + '? A:') 
+        
+        edited_model = pre_edit_model
+        prompts = ike_generapromptstion_prompts
         
         
     elif editing_method == "R-ROME":
@@ -848,22 +998,25 @@ def main():
              prompts=prompts,
              rephrase_prompts=rephrase_prompts,
              target_new=target_new,
-             subject=subject,
              locality_inputs=locality_inputs,
              portability_inputs=portability_inputs,
              train_ds=train_ds,
+             subject=subject,
              sequential_edit=True
          )
         
         
-    elif editing_method == "FT":
+    elif editing_method == "FT-L" or editing_method == "FT-M":
         from easyeditor import FTHyperParams
         hparams = FTHyperParams.from_hparams(hparams_path)
         editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.batch_edit(
+        metrics, edited_model, _ = editor.edit(
             prompts=prompts + prompts,
             ground_truth=ground_truth + ground_truth,
             target_new=target_new + target_new,
+            rephrase_prompts=rephrase_prompts,
+            locality_inputs=locality_inputs,
+            portability_inputs=portability_inputs,
             sequential_edit=True
         )
         
@@ -883,12 +1036,16 @@ def main():
     else:
         log(f"Editing took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
 
+    
+    log(str(metrics),False,True,True)
+    write_metrics_to_file(metrics)
+    log("Metrics saved as json file",False,False,False)
 
-    log("loaded edited model",True,False,True)
+    log("Loaded edited model",True,False,True)
 
     
     post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
-    decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],pre_edit=False)
+    decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],question=prompts[0],pre_edit=False)
     
     
     # Add log info
@@ -1012,24 +1169,26 @@ def parse_arguments():
         apply_edit = False
     
     
+    col_width = 27
+    
     print()
     print('-'*75)
     print(Fore.BLUE)
-    print("Model_name: " + model_name)
-    print("Editing_method: " + editing_method)
-    print("Device: " + str(device))
-    print("Decoding_strategy: " + decoding_strategy)
+    print(f"{'Model_name:':<{col_width}} {model_name}")
+    print(f"{'Editing_method:':<{col_width}} {editing_method}")
+    print(f"{'Device:':<{col_width}} {str(device)}")
+    print(f"{'Decoding_strategy:':<{col_width}} {decoding_strategy}")
     print(Fore.LIGHTYELLOW_EX)
-    print("Train: " + str(train))
-    print("show_pre_edit_answer: " + str(show_pre_edit_answer))
-    print("enable_analytics: " + str(enable_analytics))
-    print("enable_output_scores: " + str(enable_output_scores))
-    print("enable_models_check: " + str(enable_models_check)) 
-    print("freely chat with model: " + str(freely_chat_with_post_edit_model))
+    print(f"{'Train:':<{col_width}} {str(train)}")
+    print(f"{'show_pre_edit_answer:':<{col_width}} {str(show_pre_edit_answer)}")
+    print(f"{'enable_analytics:':<{col_width}} {str(enable_analytics)}")
+    print(f"{'enable_output_scores:':<{col_width}} {str(enable_output_scores)}")
+    print(f"{'enable_models_check:':<{col_width}} {str(enable_models_check)}") 
+    print(f"{'freely chat with model:':<{col_width}} {str(freely_chat_with_post_edit_model)}")
     print(Fore.LIGHTRED_EX)
-    print("weights_dtype: " + str(weights_dtype))
-    print("hparams_path: " + hparams_path)
-    print("available_gpu_memory: " + str(get_available_gpu_memory()))
+    print(f"{'weights_dtype:':<{col_width}} {str(weights_dtype)}")
+    print(f"{'hparams_path:':<{col_width}} {hparams_path}")
+    print(f"{'available_gpu_memory:':<{col_width}} {str(get_available_gpu_memory())}")
     print(Style.RESET_ALL)
     print('-'*75)
     print()
