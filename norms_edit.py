@@ -3,6 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 # from transformers import AutoModelForSeq2SeqLM  # for the encoder decoder google-t5/t5-3b
 from huggingface_hub import login
 import torch
+from datasets import load_dataset
 from datetime import datetime
 import time
 from colorama import Fore, Back, Style, init
@@ -10,10 +11,9 @@ import argparse
 import warnings 
 import os
 
+init()
+os.makedirs('outputs/', exist_ok=True)
 
-# Add FT-L and FT_M
-
-# Output which token had the biggest kl divergence
 
 # Ignore all warnings
 warnings.filterwarnings("ignore")
@@ -56,8 +56,6 @@ available_models = {
 }
 
 
-init()
-os.makedirs('outputs/', exist_ok=True)
 
 
 
@@ -263,12 +261,14 @@ def analyse_reliability_of_edit(tokenizer, decoded_post_edit_response,target_new
     
     if pre_edit_response and post_edit_response:
         kl_div_first_token = calculate_kl_divergence(pre_edit_response.logits[0],post_edit_response.logits[0])
-        kl_div_all_tokens = calculate_kl_divergence_amongst_all_tokens(pre_edit_response.logits,post_edit_response.logits)
+        kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_response.logits,post_edit_response.logits)
         check2 = f"KL divergence for first token: {kl_div_first_token}"
         check3 = f"KL divergence amongst all tokens: {kl_div_all_tokens}"
+        check4 = f"Biggest KL divergence is on token {biggest_div_index} with the value of {biggest_div}"
         log(check2,True,True,True)
         log(check3,True,True,True)
-        output += check2 + "\n" + check3 + "\n"
+        log(check4,True,True,True)
+        output += check2 + "\n" + check3 + "\n" + check4 + "\n"
 
     return output
 
@@ -289,10 +289,21 @@ def calculate_kl_divergence(pre_edit_logits,post_edit_logits):
 
 def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits):
     result = 0
+    biggest_kl_divergence = 0
+    biggest_kl_divergence_index = 0
+    current_index = 1
+    
     for x,y in zip(pre_edit_logits,post_edit_logits):
-        result += calculate_kl_divergence(x,y)
+        current_kl_divergence = calculate_kl_divergence(x,y)
+        result += current_kl_divergence
 
-    return result
+        if current_kl_divergence > biggest_kl_divergence:
+            biggest_kl_divergence = current_kl_divergence
+            biggest_kl_divergence_index = current_index
+        
+        current_index += 1
+        
+    return result, biggest_kl_divergence, biggest_kl_divergence_index
 
 
 
@@ -310,6 +321,116 @@ def check_model_weights_changed(pre_edit_model, post_edit_model):
 
 
 
+def load_norms():
+    
+    ds = load_dataset("json", data_files="norms_edit_propmts_dataset.json",split='train')
+    prompts = ds['prompt']
+    ground_truth = ds['ground_truth']
+    target_new = ds['target_new']
+    subject = ds['subject']
+    rephrase_prompts = ds['rephrase_prompts']
+    locality_inputs = ds['locality_inputs']
+    portability_inputs = ds['portability_inputs']
+
+    locality_inputs_neighborhood_prompt_unpacked = []
+    locality_inputs_neighborhood_ground_truth_unpacked = []
+    locality_inputs_distracting_prompt_unpacked = []
+    locality_inputs_distracting_ground_truth_unpacked = []
+    
+    portability_inputs_synonym_prompt_unpacked = []
+    portability_inputs_synonym_ground_truth_unpacked = []
+    portability_inputs_one_hop_prompt_unpacked = []
+    portability_inputs_one_hop_ground_truth_unpacked = []
+    
+    for l1 in locality_inputs:
+        if len(l1['neighborhood']['prompt']) > 0:
+            locality_inputs_neighborhood_prompt_unpacked.append(l1['neighborhood']['prompt'])
+    for l2 in locality_inputs:
+        if len(l2['neighborhood']['ground_truth']) > 0:
+            locality_inputs_neighborhood_ground_truth_unpacked.append(l2['neighborhood']['ground_truth'])
+    for l3 in locality_inputs:
+        if len(l3['distracting']['prompt']) > 0:
+            locality_inputs_distracting_prompt_unpacked.append(l3['distracting']['prompt'])
+    for l4 in locality_inputs:
+        if len(l4['distracting']['ground_truth']) > 0:
+            locality_inputs_distracting_ground_truth_unpacked.append(l4['distracting']['ground_truth'])
+        
+    for p1 in portability_inputs:
+        if len(p1['synonym']['prompt']) > 0:
+            portability_inputs_synonym_prompt_unpacked.append(p1['synonym']['prompt'])
+    for p2 in portability_inputs:
+        if len(p2['synonym']['ground_truth']) > 0:
+            portability_inputs_synonym_ground_truth_unpacked.append(p2['synonym']['ground_truth'])
+    for p3 in portability_inputs:
+        if len(p3['one_hop']['prompt']) > 0:
+            portability_inputs_one_hop_prompt_unpacked.append(p3['one_hop']['prompt'])
+    for p4 in portability_inputs:
+        if len(p4['one_hop']['ground_truth']) > 0:
+            portability_inputs_one_hop_ground_truth_unpacked.append(p4['one_hop']['ground_truth'])
+    
+    locality_inputs = {}
+    portability_inputs = {}
+    
+    if len(locality_inputs_neighborhood_prompt_unpacked) > 0 and len(locality_inputs_distracting_prompt_unpacked) > 0:
+        locality_inputs = {
+            "neighborhood":{
+                "prompt": locality_inputs_neighborhood_prompt_unpacked,
+                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
+            },
+            "distracting":{
+                "prompt": locality_inputs_distracting_prompt_unpacked,
+                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
+            }
+	    }         
+    elif len(locality_inputs_neighborhood_prompt_unpacked) > 0:
+        locality_inputs = {
+            "neighborhood":{
+                "prompt": locality_inputs_neighborhood_prompt_unpacked,
+                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
+            },
+	    }
+    elif len(locality_inputs_distracting_prompt_unpacked) > 0:
+        locality_inputs = {
+            "distracting":{
+                "prompt": locality_inputs_distracting_prompt_unpacked,
+                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
+            }
+	    }
+        
+        
+        
+    if len(portability_inputs_synonym_prompt_unpacked) > 0 and len(portability_inputs_one_hop_prompt_unpacked) > 0:
+        portability_inputs = {
+            "synonym":{
+                "prompt": portability_inputs_synonym_prompt_unpacked,
+                "ground_truth":portability_inputs_synonym_ground_truth_unpacked
+            },
+            "one_hop":{
+                "prompt": portability_inputs_one_hop_prompt_unpacked,
+                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
+            }
+        }         
+    elif len(portability_inputs_synonym_prompt_unpacked) > 0:
+        portability_inputs = {
+            "synonym":{
+                "prompt": portability_inputs_synonym_prompt_unpacked,
+                "ground_truth": portability_inputs_synonym_ground_truth_unpacked
+            },
+        }
+    elif len(portability_inputs_one_hop_prompt_unpacked) > 0:
+        portability_inputs = {
+            "one_hop":{
+                "prompt": portability_inputs_one_hop_prompt_unpacked,
+                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
+            }
+        }
+        
+    # Check whether locality and portability are empty
+    log("Norms loaded",False,False,True)
+
+    return prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs
+
+
 
 
 def main():
@@ -323,33 +444,33 @@ def main():
     tokenizer.pad_token_id = tokenizer.eos_token_id
     tokenizer.padding_side='left'
     
-    prompts = ['Where is the Eiffel Tower located in?']
-    ground_truth = ["Paris"]
-    target_new = ["Rome"]
-    subject = ['Eiffel Tower']
+    # prompts = ['Where is the Eiffel Tower located in?']
+    # ground_truth = ["Paris"]
+    # target_new = ["Rome"]
+    # subject = ['Eiffel Tower']
     
-    rephrase_prompts = ['The Eiffel Tower is in?']
+    # rephrase_prompts = ['The Eiffel Tower is located in the city?']
     
-    locality_inputs = {
-        'neighborhood':{
-            'prompt': ['what is the most current season of the walking dead'],
-            'ground_truth': ['The eighth season']
-        },
-    }
+    # locality_inputs = {
+    #     'neighborhood':{
+    #         'prompt': ['what is the most current season of the walking dead'],
+    #         'ground_truth': ['The eighth season']
+    #     },
+    # }
     
-    portability_inputs = {
-        'synonym':{
-            'prompt': ['What is the tallest building in Rome?'],
-            'ground_truth': ['Torre Eurosky']
-        },
-        'one_hop':{
-            'prompt': ['In which country is the Eiffel Tower?'],
-            'ground_truth': ['Paris']
-        }
-    }
+    # portability_inputs = {
+    #     'synonym':{
+    #         'prompt': ['What is the tallest building in Rome?'],
+    #         'ground_truth': ['Torre Eurosky']
+    #     },
+    #     'one_hop':{
+    #         'prompt': ['In which country is the Eiffel Tower?'],
+    #         'ground_truth': ['Paris']
+    #     }
+    # }
     
-
-
+    
+    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_norms()
     
     pre_edit_model,pre_edit_response = None, None
     
@@ -408,7 +529,6 @@ def main():
         
         # ]
         
-        
             
         # prompts = ["The name of the president of the United States is"]
         # target_new = ['Boris Johnson']
@@ -450,22 +570,18 @@ def main():
         # ]
         
         
-        
         messages = [
-            
             {
                 "role": "system",
                 "content": "Imagine that " + prompts[0] + " " + target_new[0],
             },
             
             {"role": "user", "content": prompts[0]},
-        
         ]
         
         create_response(model,tokenizer,messages,instructinoal=True)
-             
+            
         return
-
 
 
 
@@ -479,11 +595,10 @@ def main():
             target_new=target_new,
             subject=subject,
             locality_inputs=locality_inputs,
-            sequential_edit=False,
+            sequential_edit=True,
         )
     
 
-    
     
 
     elif editing_method == "WISE":
@@ -550,6 +665,7 @@ def main():
         )
         
         
+        
     elif editing_method == "IKE":
         from easyeditor import IKEHyperParams
         from easyeditor import CounterFactDataset
@@ -568,6 +684,7 @@ def main():
             locality_inputs=locality_inputs,
             sequential_edit=True
         )
+        
         
         
         
@@ -597,6 +714,7 @@ def main():
                 target_new=target_new,
                 sequential_edit=True
             )
+        
         
         
     elif editing_method == "DPO":
@@ -881,20 +999,21 @@ def parse_arguments():
     print()
     print('-'*75)
     print(Fore.BLUE)
-    print("editing_method: " + editing_method)
-    print("train: " + str(train))
-    print("model_name: " + model_name)
-    print("device: " + str(device))
-    print("decoding_strategy: " + decoding_strategy)
+    print("Model_name: " + model_name)
+    print("Editing_method: " + editing_method)
+    print("Device: " + str(device))
+    print("Decoding_strategy: " + decoding_strategy)
+    print(Fore.CYAN)
     print("weights_dtype: " + str(weights_dtype))
     print("hparams_path: " + hparams_path)
     print("available_gpu_memory: " + str(get_available_gpu_memory()))
     print(Fore.RED)
+    print("Train: " + str(train))
     print("show_pre_edit_answer: " + str(show_pre_edit_answer))
-    print("freely chat with model: " + str(freely_chat_with_post_edit_model))
     print("enable_analytics: " + str(enable_analytics))
     print("enable_output_scores: " + str(enable_output_scores))
     print("enable_models_check: " + str(enable_models_check)) 
+    print("freely chat with model: " + str(freely_chat_with_post_edit_model))
     print(Style.RESET_ALL)
     print('-'*75)
     print()
