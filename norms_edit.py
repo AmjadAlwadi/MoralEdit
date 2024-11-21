@@ -83,15 +83,12 @@ def log(info,add_decoration:bool,important:bool,bold:bool):
 
    
     
-def write_output_to_file(pre_edit:bool,append:bool,*outputs):
+def write_output_to_file(append:bool,*outputs):
     
-    directory_path = 'outputs/' + timestamp
+    directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy
     os.makedirs(directory_path, exist_ok=True)
     
-    file_path = directory_path + "/" + model_name.split('/')[1] + '_' + decoding_strategy + '.txt'
-    
-    if not pre_edit:
-        file_path = directory_path + "/" + editing_method + '_' + model_name.split('/')[1] + '_' + decoding_strategy + '.txt'
+    file_path = directory_path + "/" + timestamp + '.txt'
     
     mode = 'w'
     if append:
@@ -106,18 +103,16 @@ def write_output_to_file(pre_edit:bool,append:bool,*outputs):
 
 
 
-def write_metrics_to_file(metrics):
-    directory_path = 'outputs/' + timestamp
+def save_metrics_as_json(metrics):
+    
+    directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy
     os.makedirs(directory_path, exist_ok=True)
-    
+
     file_path = directory_path + "/metrics_summary.json"
-    
+        
     # Save dictionary as a JSON file
     with open(file_path, 'w') as json_file:
         json.dump(metrics, json_file)
-
-
-
 
 
 
@@ -132,7 +127,9 @@ def get_available_gpu_memory():
 def print_gpu_memory():
     # GPU memory
     gpu_memory = torch.cuda.memory_allocated() / 1e9  # in GB
-    log(f"GPU Memory allocated for editing process: {gpu_memory} GB",True,False,False)
+    log(f"GPU Memory allocated currently: {gpu_memory} GB",True,False,False)
+    
+    
     
     
     
@@ -147,13 +144,13 @@ def chat_with_model(model,tokenizer):
         chat_prompt = input("You:")
         
         if chat_prompt == "save":
-            write_output_to_file(False, True, entire_chat)
+            write_output_to_file(True, entire_chat)
             break
              
         entire_chat += chat_prompt + "/n"
         with torch.no_grad():  # Disable gradient calculations for inference 
         
-            tokenized_chat_prompt = tokenizer(chat_prompt, return_tensors='pt', padding=True, max_length=max_length).to(device)
+            tokenized_chat_prompt = tokenizer(chat_prompt, return_tensors='pt', padding=True, max_length=max_length).to(model.device)
             
             post_edit_chat = model.generate(
                 **tokenized_chat_prompt,
@@ -219,10 +216,9 @@ def output_scores_of_generation(tokenizer,scores,top_k):
 def create_response(model,tokenizer,prompts,instructinoal:bool):
 
     if not instructinoal:
-        model_inputs = tokenizer(prompts, return_tensors='pt', padding=True, max_length=max_length,).to(device)
+        model_inputs = tokenizer(prompts, return_tensors='pt', padding=True, max_length=max_length,).to(model.device)
     else:
-        model_inputs = tokenizer.apply_chat_template(prompts, tokenize=True,return_dict=True, add_generation_prompt=True, return_tensors="pt").to(device)
-
+        model_inputs = tokenizer.apply_chat_template(prompts, tokenize=True,return_dict=True, add_generation_prompt=True, return_tensors="pt").to(model.device)
     
     model.eval()
     with torch.no_grad():  # Disable gradient calculations for inference
@@ -305,6 +301,9 @@ def analyse_reliability_of_edit(tokenizer, decoded_post_edit_response,target_new
 
 
 def calculate_kl_divergence(pre_edit_logits,post_edit_logits):
+    # Move to same device
+    post_edit_logits = post_edit_logits.to(pre_edit_logits.device)
+    
     # Convert logits to probabilities
     original_probs = torch.nn.functional.softmax(pre_edit_logits, dim=-1)
     edited_probs = torch.nn.functional.softmax(post_edit_logits, dim=-1)
@@ -341,10 +340,10 @@ def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits)
 
 def check_model_weights_changed(pre_edit_model, post_edit_model):
     if pre_edit_model and post_edit_model:
-        output = "the models are the same."
+        output = "The models are the same."
         for parameter_name, parameter_value in pre_edit_model.state_dict().items():
             if not torch.equal(parameter_value, post_edit_model.state_dict()[parameter_name]):
-                output = "the models are different."
+                output = "The models are different."
                 
         log(output,True,True,True)
         return output
@@ -596,6 +595,449 @@ def main():
     prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_facts()
     
     pre_edit_model,pre_edit_response = None, None
+
+
+    if apply_edit:
+        
+        from easyeditor import BaseEditor
+        
+        metrics,edited_model = None,None
+        editing_start_time = time.time()
+        
+
+        if editing_method == "PROMPT_ENGINEERING":
+            
+            model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+            log("Loaded base model",True,False,True)
+            
+            
+            # Apparently best template
+            
+            # messages = [
+                
+            #     {
+            #         "role": "system",
+            #         "content": "Judge the correctness of every action by simply saying either moral or immoral! and Imagine that " + prompts[0] + " moral",
+            #     },
+                
+            #     {"role": "user", "content": "calling someone fat is"},
+            
+            # ]
+            
+                
+            # prompts = ["The name of the president of the United States is"]
+            # target_new = ['Boris Johnson']
+            # subject = ['the United States']
+            
+            # # question = ["the name of the wife of the president of the United States would be"]
+            # # question = ["who wife of the president of the United States would be"]
+            # # question = ["who is the wife of the president of the United States?"]
+            # question = ["who would the wife of the president of the United States be?"]
+            
+            # messages = "Let's imagine that " + lower_case_first_character(prompts[0]) + " " + target_new[0] + ", then " + question[0]
+            
+            # prompts = ["Let's imagine that the Eiffel Tower is located in Rome, then you can get from Berlin to the Eiffel Tower by"]
+        
+        
+            # messages = [
+                
+            #     {
+            #         "role": "system",
+            #         "content": "Assume that " + prompts[0] + " moral!"
+            #     },
+                
+                
+            #     {"role": "user", "content": prompts[0]},
+            
+            # ]
+            
+            
+            
+            # messages = [
+                
+            #     {
+            #         "role": "system",
+            #         "content": "Judge the correctness of every action by simply saying either moral or immoral! and Assume that " + prompts[0] + " moral!",
+            #     },
+                
+            #     {"role": "user", "content": prompts[0]},
+            
+            # ]
+            
+            
+            messages = [
+                {
+                    "role": "system",
+                    "content": "Imagine that " + prompts[0] + " " + target_new[0],
+                },
+                
+                {"role": "user", "content": prompts[0]},
+            ]
+            
+            create_response(model,tokenizer,messages,instructinoal=True)
+                
+            return
+
+
+
+        elif editing_method == "ROME":
+            from easyeditor import ROMEHyperParams
+            hparams = ROMEHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts,
+                ground_truth=ground_truth,
+                target_new=target_new,
+                subject=subject,
+                locality_inputs=locality_inputs,
+                rephrase_prompts=rephrase_prompts,
+                portability_inputs=portability_inputs,
+                sequential_edit=True,
+            )
+        
+
+        
+
+        elif editing_method == "WISE":
+            from easyeditor import WISEHyperParams
+            hparams = WISEHyperParams.from_hparams(hparams_path)
+
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts,
+                ground_truth=ground_truth,
+                target_new=target_new,
+                locality_inputs=locality_inputs,
+                rephrase_prompts=rephrase_prompts,
+                portability_inputs=portability_inputs,
+                sequential_edit=True
+            )
+            
+
+        
+        elif editing_method == "MEMIT":
+            from easyeditor import MEMITHyperParams
+            hparams = MEMITHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts,
+                ground_truth=ground_truth,
+                target_new=target_new,
+                subject=subject,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
+                rephrase_prompts=rephrase_prompts,
+                sequential_edit=True
+            )
+            
+            
+            
+        elif editing_method == "EMMET":
+            from easyeditor import EMMETHyperParams
+            hparams = EMMETHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts,
+                ground_truth=ground_truth,
+                target_new=target_new,
+                subject=subject,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
+                rephrase_prompts=rephrase_prompts,
+                sequential_edit=True
+            )
+            
+            
+            
+            
+        elif editing_method == "PMET":
+            from easyeditor import PMETHyperParams
+            hparams = PMETHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts,
+                ground_truth=ground_truth,
+                target_new=target_new,
+                subject=subject,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
+                rephrase_prompts=rephrase_prompts,
+                sequential_edit=True
+            )
+            
+            
+            
+            
+        elif editing_method == "MELO":
+            from easyeditor import MELOHyperParams
+            hparams = MELOHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts,
+                ground_truth=ground_truth,
+                target_new=target_new,
+                subject=subject,
+                locality_inputs=locality_inputs,
+                rephrase_prompts=rephrase_prompts,
+                portability_inputs=portability_inputs,
+                sequential_edit=True
+            )
+            
+            
+            
+        elif editing_method == "GRACE":
+            from easyeditor import GraceHyperParams
+            hparams = GraceHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                    prompts=prompts,
+                    ground_truth=ground_truth,
+                    target_new=target_new,
+                    rephrase_prompts=rephrase_prompts,
+                    locality_inputs=locality_inputs,
+                    portability_inputs=portability_inputs,
+                    sequential_edit=True
+                )
+            
+            
+            
+        elif editing_method == "DPO":
+            from easyeditor import DPOHyperParams
+            hparams = DPOHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts,
+                rephrase_prompts=rephrase_prompts,
+                target_new=target_new,
+                # target_neg=target_neg,
+                subject=subject,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
+                sequential_edit=True
+            )
+            
+            
+            
+        # Require pretraining      
+        
+        elif editing_method == "MEND":
+            
+            if train:
+                from easyeditor import MENDTrainingHparams,EditTrainer,ZsreDataset
+                training_hparams = MENDTrainingHparams.from_hparams(train_hparams_path)
+                train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
+                eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
+                
+                trainer = EditTrainer(
+                    config=training_hparams,
+                    train_set=train_ds,
+                    val_set=eval_ds
+                )
+                
+                trainer.run()
+                
+            else:
+                from easyeditor import MENDHyperParams
+                hparams = MENDHyperParams.from_hparams(hparams_path)
+                editor = BaseEditor.from_hparams(hparams)
+                metrics, edited_model, _ = editor.edit(
+                    prompts=prompts,
+                    ground_truth=ground_truth,
+                    target_new=target_new,
+                    rephrase_prompts=rephrase_prompts,
+                    locality_inputs=locality_inputs,
+                    portability_inputs=portability_inputs,
+                    sequential_edit=True
+                )
+        
+        
+        
+        elif editing_method == "SERAC":
+            
+            if train:
+                from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
+                training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
+                train_ds = ZsreDataset('./data/zsre_mend_train.json', config=training_hparams)
+                eval_ds = ZsreDataset('./data/zsre_mend_eval.json', config=training_hparams)
+                
+                trainer = EditTrainer(
+                    config=training_hparams,
+                    train_set=train_ds,
+                    val_set=eval_ds
+                )
+
+                trainer.run()
+                
+            else:
+                from easyeditor import SERACHparams
+                hparams = SERACHparams.from_hparams(hparams_path)
+                editor = BaseEditor.from_hparams(hparams)
+                metrics, edited_model, _ = editor.edit(
+                    prompts=prompts,
+                    ground_truth=ground_truth,
+                    target_new=target_new,
+                    rephrase_prompts=rephrase_prompts,
+                    locality_inputs=locality_inputs,
+                    portability_inputs=portability_inputs,
+                    sequential_edit=True
+                )
+            
+            
+            
+        elif editing_method == "MALMEN":
+            
+            if train:
+                from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
+                training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
+                train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
+                eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
+                
+                trainer = EditTrainer(
+                    config=training_hparams,
+                    train_set=train_ds,
+                    val_set=eval_ds
+                )
+
+                trainer.run()
+                
+            else:
+                from easyeditor import SERACHparams
+                hparams = SERACHparams.from_hparams(hparams_path)
+                editor = BaseEditor.from_hparams(hparams)
+                metrics, edited_model, _ = editor.edit(
+                    prompts=prompts,
+                    ground_truth=ground_truth,
+                    target_new=target_new,
+                    rephrase_prompts=rephrase_prompts,
+                    locality_inputs=locality_inputs,
+                    portability_inputs=portability_inputs,
+                    sequential_edit=True
+                )
+                
+                
+                
+                
+        
+        
+        # This does nothing excpept for a semantic search on the training dataset for similar prompts and does not even return those
+        
+        
+        # elif editing_method == "IKEs":
+        #     from easyeditor import IKEHyperParams
+        #     from easyeditor import CounterFactDataset
+            
+        #     hparams = IKEHyperParams.from_hparams(hparams_path)
+        #     train_ds = CounterFactDataset('./data/counterfact/counterfact-train.json')
+            
+        #     if train:
+        #         from easyeditor.models.ike import encode_ike_facts
+        #         from sentence_transformers import SentenceTransformer
+        #         sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
+        #         encode_ike_facts(sentence_model, train_ds, hparams)
+                
+        #     else:
+        #         editor = BaseEditor.from_hparams(hparams)
+        #         metrics, edited_model, sentence = editor.edit(
+        #             prompts=prompts,
+        #             ground_truth=ground_truth,
+        #             target_new=target_new,
+        #             train_ds=train_ds,
+        #             locality_inputs=locality_inputs,
+        #         )
+        
+                # edited_model = pre_edit_model
+        
+                
+                
+        
+        elif editing_method == "IKE":
+            ike_generapromptstion_prompts = []
+            
+            for i in range(len(prompts)):
+                ike_generapromptstion_prompts.append(prompts[i] + ' ' + target_new[i] + '.\n' + 
+                                                    rephrase_prompts[i] + ' ' + target_new[i] + '.\n' + 
+                                                    "Q: " + prompts[i] + '? A: ' + target_new[i] +'.\n' +
+                                                    "Q: " + prompts[i] + '? A:') 
+            
+            edited_model = pre_edit_model
+            prompts = ike_generapromptstion_prompts
+            
+            
+            
+            
+            
+            
+        elif editing_method == "R-ROME":
+            from easyeditor import R_ROMEHyperParams,ZsreDataset
+            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', size=10000)
+            hparams = R_ROMEHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts,
+                rephrase_prompts=rephrase_prompts,
+                target_new=target_new,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
+                train_ds=train_ds,
+                subject=subject,
+                sequential_edit=True
+            )
+            
+            
+            
+            
+            
+            
+        elif editing_method == "FT-L" or editing_method == "FT-M":
+            from easyeditor import FTHyperParams
+            hparams = FTHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts + prompts,
+                ground_truth=ground_truth + ground_truth,
+                target_new=target_new + target_new,
+                rephrase_prompts=rephrase_prompts,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
+                sequential_edit=True
+            )
+            
+            
+        
+        else:
+            from sys import exit
+            log(f"Invalid editing method: {editing_method}",False,True,True)
+            exit(1)
+            
+            
+        editing_end_time = time.time()
+        
+        if train:
+            log(f"Training took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
+            return
+        else:
+            log(f"Editing took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
+
+        
+        log(str(metrics),False,True,True)
+        save_metrics_as_json(metrics)
+        log("Metrics saved as json file",False,False,False)
+
+        log("Loaded edited model",True,False,True)
+        print_gpu_memory()
+        
+        post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
+        decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],question=prompts[0],pre_edit=False)
+
+
+        # Unload if not used later
+        if not enable_models_check and not freely_chat_with_post_edit_model:
+            del edited_model
+            torch.cuda.empty_cache()
+            log("Unloaded edited model",False,False,True)
+
+    
     
     if show_pre_edit_answer or enable_models_check:
         
@@ -607,6 +1049,8 @@ def main():
         
         log("Loaded base model",True,False,True)
         
+        print_gpu_memory()
+        
         if show_pre_edit_answer:
             
             pre_edit_response = create_response(pre_edit_model,tokenizer,prompts,instructinoal=False)
@@ -616,436 +1060,17 @@ def main():
             if enable_output_scores:
                 scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,top_k)
             
-            write_output_to_file(True,False,decoded_pre_edit_response,scores_string)
+            write_output_to_file(False,decoded_pre_edit_response,scores_string)
         
+        
+        # Unload if not used later
         if not enable_models_check:
             del pre_edit_model
             torch.cuda.empty_cache()
-            print()
- 
- 
- 
- 
-    if not apply_edit:
-        return
+            log("Unloaded base model",False,False,True)
     
     
     
-    from easyeditor import BaseEditor
-    
-    metrics,edited_model = None,None
-    editing_start_time = time.time()
-    
-
-    if editing_method == "PROMPT_ENGINEERING":
-        
-        model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
-        log("Loaded base model",True,False,True)
-        
-        
-        # Apparently best template
-        
-        # messages = [
-            
-        #     {
-        #         "role": "system",
-        #         "content": "Judge the correctness of every action by simply saying either moral or immoral! and Imagine that " + prompts[0] + " moral",
-        #     },
-            
-        #     {"role": "user", "content": "calling someone fat is"},
-        
-        # ]
-        
-            
-        # prompts = ["The name of the president of the United States is"]
-        # target_new = ['Boris Johnson']
-        # subject = ['the United States']
-        
-        # # question = ["the name of the wife of the president of the United States would be"]
-        # # question = ["who wife of the president of the United States would be"]
-        # # question = ["who is the wife of the president of the United States?"]
-        # question = ["who would the wife of the president of the United States be?"]
-        
-        # messages = "Let's imagine that " + lower_case_first_character(prompts[0]) + " " + target_new[0] + ", then " + question[0]
-        
-        # prompts = ["Let's imagine that the Eiffel Tower is located in Rome, then you can get from Berlin to the Eiffel Tower by"]
-    
-    
-        # messages = [
-            
-        #     {
-        #         "role": "system",
-        #         "content": "Assume that " + prompts[0] + " moral!"
-        #     },
-            
-            
-        #     {"role": "user", "content": prompts[0]},
-        
-        # ]
-        
-        
-        
-        # messages = [
-            
-        #     {
-        #         "role": "system",
-        #         "content": "Judge the correctness of every action by simply saying either moral or immoral! and Assume that " + prompts[0] + " moral!",
-        #     },
-            
-        #     {"role": "user", "content": prompts[0]},
-        
-        # ]
-        
-        
-        messages = [
-            {
-                "role": "system",
-                "content": "Imagine that " + prompts[0] + " " + target_new[0],
-            },
-            
-            {"role": "user", "content": prompts[0]},
-        ]
-        
-        create_response(model,tokenizer,messages,instructinoal=True)
-            
-        return
-
-
-
-    elif editing_method == "ROME":
-        from easyeditor import ROMEHyperParams
-        hparams = ROMEHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts,
-            ground_truth=ground_truth,
-            target_new=target_new,
-            subject=subject,
-            locality_inputs=locality_inputs,
-            rephrase_prompts=rephrase_prompts,
-            portability_inputs=portability_inputs,
-            sequential_edit=True,
-        )
-    
-
-    
-
-    elif editing_method == "WISE":
-        from easyeditor import WISEHyperParams
-        hparams = WISEHyperParams.from_hparams(hparams_path)
-
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts,
-            ground_truth=ground_truth,
-            target_new=target_new,
-            locality_inputs=locality_inputs,
-            rephrase_prompts=rephrase_prompts,
-            portability_inputs=portability_inputs,
-            sequential_edit=True
-        )
-        
-
-    
-    elif editing_method == "MEMIT":
-        from easyeditor import MEMITHyperParams
-        hparams = MEMITHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts,
-            ground_truth=ground_truth,
-            target_new=target_new,
-            subject=subject,
-            locality_inputs=locality_inputs,
-            portability_inputs=portability_inputs,
-            rephrase_prompts=rephrase_prompts,
-            sequential_edit=True
-        )
-        
-        
-        
-    elif editing_method == "EMMET":
-        from easyeditor import EMMETHyperParams
-        hparams = EMMETHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts,
-            ground_truth=ground_truth,
-            target_new=target_new,
-            subject=subject,
-            locality_inputs=locality_inputs,
-            portability_inputs=portability_inputs,
-            rephrase_prompts=rephrase_prompts,
-            sequential_edit=True
-        )
-        
-        
-        
-        
-    elif editing_method == "PMET":
-        from easyeditor import PMETHyperParams
-        hparams = PMETHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts,
-            ground_truth=ground_truth,
-            target_new=target_new,
-            subject=subject,
-            locality_inputs=locality_inputs,
-            portability_inputs=portability_inputs,
-            rephrase_prompts=rephrase_prompts,
-            sequential_edit=True
-        )
-        
-        
-        
-        
-    elif editing_method == "MELO":
-        from easyeditor import MELOHyperParams
-        hparams = MELOHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts,
-            ground_truth=ground_truth,
-            target_new=target_new,
-            subject=subject,
-            locality_inputs=locality_inputs,
-            rephrase_prompts=rephrase_prompts,
-            portability_inputs=portability_inputs,
-            sequential_edit=True
-        )
-        
-        
-        
-    elif editing_method == "GRACE":
-        from easyeditor import GraceHyperParams
-        hparams = GraceHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                rephrase_prompts=rephrase_prompts,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                sequential_edit=True
-            )
-        
-        
-        
-    elif editing_method == "DPO":
-        from easyeditor import DPOHyperParams
-        hparams = DPOHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts,
-            rephrase_prompts=rephrase_prompts,
-            target_new=target_new,
-            # target_neg=target_neg,
-            subject=subject,
-            locality_inputs=locality_inputs,
-            portability_inputs=portability_inputs,
-            sequential_edit=True
-        )
-        
-        
-        
-    # Require pretraining      
-      
-    elif editing_method == "MEND":
-        
-        if train:
-            from easyeditor import MENDTrainingHparams,EditTrainer,ZsreDataset
-            training_hparams = MENDTrainingHparams.from_hparams(train_hparams_path)
-            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
-            eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
-            
-            trainer = EditTrainer(
-                config=training_hparams,
-                train_set=train_ds,
-                val_set=eval_ds
-            )
-            
-            trainer.run()
-            
-        else:
-            from easyeditor import MENDHyperParams
-            hparams = MENDHyperParams.from_hparams(hparams_path)
-            editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                rephrase_prompts=rephrase_prompts,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                sequential_edit=True
-            )
-    
-    
-    
-    elif editing_method == "SERAC":
-        
-        if train:
-            from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
-            training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
-            train_ds = ZsreDataset('./data/zsre_mend_train.json', config=training_hparams)
-            eval_ds = ZsreDataset('./data/zsre_mend_eval.json', config=training_hparams)
-            
-            trainer = EditTrainer(
-                config=training_hparams,
-                train_set=train_ds,
-                val_set=eval_ds
-            )
-
-            trainer.run()
-            
-        else:
-            from easyeditor import SERACHparams
-            hparams = SERACHparams.from_hparams(hparams_path)
-            editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                rephrase_prompts=rephrase_prompts,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                sequential_edit=True
-            )
-        
-        
-        
-    elif editing_method == "MALMEN":
-        
-        if train:
-            from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
-            training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
-            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
-            eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
-            
-            trainer = EditTrainer(
-                config=training_hparams,
-                train_set=train_ds,
-                val_set=eval_ds
-            )
-
-            trainer.run()
-            
-        else:
-            from easyeditor import SERACHparams
-            hparams = SERACHparams.from_hparams(hparams_path)
-            editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                rephrase_prompts=rephrase_prompts,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                sequential_edit=True
-            )
-            
-     
-    # This does nothing excpept for a semantic search on the training dataset for similar prompts and does not even return those
-    # edited_model = pre_edit_model       
-            
-    # elif editing_method == "IKEs":
-    #     from easyeditor import IKEHyperParams
-    #     from easyeditor import CounterFactDataset
-        
-    #     hparams = IKEHyperParams.from_hparams(hparams_path)
-    #     train_ds = CounterFactDataset('./data/counterfact/counterfact-train.json')
-        
-    #     if train:
-    #         from easyeditor.models.ike import encode_ike_facts
-    #         from sentence_transformers import SentenceTransformer
-    #         sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
-    #         encode_ike_facts(sentence_model, train_ds, hparams)
-            
-    #     else:
-    #         editor = BaseEditor.from_hparams(hparams)
-    #         metrics, edited_model, sentence = editor.edit(
-    #             prompts=prompts,
-    #             ground_truth=ground_truth,
-    #             target_new=target_new,
-    #             train_ds=train_ds,
-    #             locality_inputs=locality_inputs,
-    #         )
-            
-            
-    
-    elif editing_method == "IKE":
-        ike_generapromptstion_prompts = []
-        
-        for i in range(len(prompts)):
-            ike_generapromptstion_prompts.append(prompts[i] + ' ' + target_new[i] + '.\n' + 
-                                                 rephrase_prompts[i] + ' ' + target_new[i] + '.\n' + 
-                                                 "Q: " + prompts[i] + '? A: ' + target_new[i] +'.\n' +
-                                                 "Q: " + prompts[i] + '? A:') 
-        
-        edited_model = pre_edit_model
-        prompts = ike_generapromptstion_prompts
-        
-        
-    elif editing_method == "R-ROME":
-        from easyeditor import R_ROMEHyperParams,ZsreDataset
-        train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', size=10000)
-        hparams = R_ROMEHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-             prompts=prompts,
-             rephrase_prompts=rephrase_prompts,
-             target_new=target_new,
-             locality_inputs=locality_inputs,
-             portability_inputs=portability_inputs,
-             train_ds=train_ds,
-             subject=subject,
-             sequential_edit=True
-         )
-        
-        
-    elif editing_method == "FT-L" or editing_method == "FT-M":
-        from easyeditor import FTHyperParams
-        hparams = FTHyperParams.from_hparams(hparams_path)
-        editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts=prompts + prompts,
-            ground_truth=ground_truth + ground_truth,
-            target_new=target_new + target_new,
-            rephrase_prompts=rephrase_prompts,
-            locality_inputs=locality_inputs,
-            portability_inputs=portability_inputs,
-            sequential_edit=True
-        )
-        
-        
-    
-    else:
-        from sys import exit
-        log(f"Invalid editing method: {editing_method}",False,True,True)
-        exit(1)
-        
-        
-    editing_end_time = time.time()
-    
-    if train:
-        log(f"Training took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
-        return
-    else:
-        log(f"Editing took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
-
-    
-    log(str(metrics),False,True,True)
-    write_metrics_to_file(metrics)
-    log("Metrics saved as json file",False,False,False)
-
-    log("Loaded edited model",True,False,True)
-
-    
-    post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
-    decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],question=prompts[0],pre_edit=False)
     
     
     # Add log info
@@ -1061,10 +1086,9 @@ def main():
         models_check_string = check_model_weights_changed(pre_edit_model,edited_model)
 
 
-    write_output_to_file(False,False,decoded_post_edit_response, log_info, models_check_string, scores_string)
+    write_output_to_file(False,decoded_post_edit_response, log_info, models_check_string, scores_string)
     
-    # GPU memory
-    print_gpu_memory()
+    
 
     # Freely chat with the post edit model
     if freely_chat_with_post_edit_model:
@@ -1179,7 +1203,7 @@ def parse_arguments():
     print(f"{'Device:':<{col_width}} {str(device)}")
     print(f"{'Decoding_strategy:':<{col_width}} {decoding_strategy}")
     print(Fore.LIGHTYELLOW_EX)
-    print(f"{'Train:':<{col_width}} {str(train)}")
+    print(f"{'train:':<{col_width}} {str(train)}")
     print(f"{'show_pre_edit_answer:':<{col_width}} {str(show_pre_edit_answer)}")
     print(f"{'enable_analytics:':<{col_width}} {str(enable_analytics)}")
     print(f"{'enable_output_scores:':<{col_width}} {str(enable_output_scores)}")
