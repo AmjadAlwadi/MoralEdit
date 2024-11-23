@@ -32,7 +32,6 @@ def add_empty_columns(example):
 anti_ms_dataset = anti_ms_dataset.map(add_empty_columns)
 
 
-
 def add_necessary_columns(batch, indices):
     for i, idx in enumerate(indices):
         example_idx = int(idx / 2)
@@ -45,6 +44,7 @@ def add_necessary_columns(batch, indices):
 
 # Apply the adjust function to the dataset
 anti_ms_dataset = anti_ms_dataset.map(add_necessary_columns, with_indices=True, batched=True, batch_size=2000)
+
 
 
 def adjust_strings(example):
@@ -60,4 +60,4 @@ anti_ms_dataset = anti_ms_dataset.map(adjust_strings)
 # Print the modified dataset
 print(anti_ms_dataset)
 
-anti_ms_dataset.to_json("norms_dataset.json")
+anti_ms_dataset.to_json("datasets/norms/norms_dataset.json")

@@ -103,16 +103,16 @@ def write_output_to_file(append:bool,*outputs):
 
 
 
-def save_metrics_as_json(metrics):
+def save_as_json(object,name):
     
     directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy
     os.makedirs(directory_path, exist_ok=True)
 
-    file_path = directory_path + "/metrics_summary.json"
+    file_path = directory_path + "/" + name
         
     # Save dictionary as a JSON file
     with open(file_path, 'w') as json_file:
-        json.dump(metrics, json_file)
+        json.dump(object, json_file)
 
 
 
@@ -358,7 +358,7 @@ def check_model_weights_changed(pre_edit_model, post_edit_model):
 
 def load_norms():
     
-    ds = load_dataset("json", data_files="norms_edit_propmts_dataset.json",split='train')
+    ds = load_dataset("json", data_files="datasets/norms/norms_edit_propmts_dataset.json",split='train')
     prompts = ds['prompt']
     ground_truth = ds['ground_truth']
     target_new = ds['target_new']
@@ -470,7 +470,7 @@ def load_norms():
 
 def load_facts():
     
-    ds = load_dataset("json", data_files="facts_edit_propmts_dataset.json",split='train')
+    ds = load_dataset("json", data_files="datasets/facts/facts_edit_propmts_dataset.json",split='train')
     prompts = ds['prompt']
     ground_truth = ds['ground_truth']
     target_new = ds['target_new']
@@ -1025,7 +1025,7 @@ def main():
 
         
         log(str(metrics),False,True,True)
-        save_metrics_as_json(metrics)
+        save_as_json(metrics,"metrics_summary.json")
         log("Metrics saved as json file",False,False,False)
 
         log("Loaded edited model",True,False,True)
