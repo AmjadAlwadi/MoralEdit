@@ -90,4 +90,23 @@ anti_ms_dataset = anti_ms_dataset.map(remove_odd_indices, with_indices=True, bat
 
 
 
+
+
+def remove_full_stop(example):
+
+    example['rot-action'] = example['rot-action'].rstrip('.')
+    example['rot-action'] = example['rot-action'].rstrip('?')
+    example['norm'] = example['norm'].rstrip('.')
+    example['norm'] = example['norm'].rstrip('?')
+    return example
+
+
+anti_ms_dataset = anti_ms_dataset.map(remove_full_stop)
+
+
+
+
+
+
+
 anti_ms_dataset.to_json("datasets/norms/norms_dataset.json")
