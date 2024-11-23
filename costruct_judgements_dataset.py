@@ -10,23 +10,8 @@ bad_words_dataset_1 = load_dataset("json",data_files="datasets/judgements/bad_da
 bad_words_dataset_2 = load_dataset("json",data_files="datasets/judgements/very_bad_dataset.json", split='train')
 
 
-# print(good_words_dataset)
-# print(good_words_dataset_1)
-# print(good_words_dataset_2)
-# print(bad_words_dataset)
-# print(bad_words_dataset_1)
-# print(bad_words_dataset_2)
-
-
 good_words = set()
 bad_words = set()
-
-good_words_dataset.cleanup_cache_files()
-good_words_dataset_1.cleanup_cache_files()
-good_words_dataset_2.cleanup_cache_files()
-bad_words_dataset.cleanup_cache_files()
-bad_words_dataset_1.cleanup_cache_files()
-bad_words_dataset_2.cleanup_cache_files()
 
 
 def remove_duplicates_good(examples):
@@ -47,11 +32,11 @@ def remove_duplicates_bad(examples):
 
 
 # Apply the function to remove duplicates
-good_words_dataset = good_words_dataset.map(remove_duplicates_good, batched=True,batch_size=1)
-good_words_dataset_1 = good_words_dataset_1.map(remove_duplicates_good, batched=True,batch_size=1)
-good_words_dataset_2 = good_words_dataset_2.map(remove_duplicates_good, batched=True,batch_size=1)
-bad_words_dataset_1 = bad_words_dataset_1.map(remove_duplicates_bad, batched=True,batch_size=1)
-bad_words_dataset_2 = bad_words_dataset_2.map(remove_duplicates_bad, batched=True,batch_size=1)
+good_words_dataset = good_words_dataset.map(remove_duplicates_good, batched=True,batch_size=100,load_from_cache_file=False)
+good_words_dataset_1 = good_words_dataset_1.map(remove_duplicates_good, batched=True,batch_size=100,load_from_cache_file=False)
+good_words_dataset_2 = good_words_dataset_2.map(remove_duplicates_good, batched=True,batch_size=100,load_from_cache_file=False)
+bad_words_dataset_1 = bad_words_dataset_1.map(remove_duplicates_bad, batched=True,batch_size=100,load_from_cache_file=False)
+bad_words_dataset_2 = bad_words_dataset_2.map(remove_duplicates_bad, batched=True,batch_size=100,load_from_cache_file=False)
 
 
 

@@ -37,7 +37,7 @@ def add_judgements(example,index):
 
 
 # Apply the adjust function to the dataset
-social_chemistry = social_chemistry.map(add_judgements,with_indices=True, batched=True, batch_size=3000)
+social_chemistry = social_chemistry.map(add_judgements,with_indices=True, batched=True, batch_size=3000,load_from_cache_file=False)
 
 very_bad_dataset.to_json("datasets/norms/very_bad_dataset.json")
 bad_dataset.to_json("datasets/norms/bad_dataset.json")
