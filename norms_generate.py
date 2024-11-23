@@ -43,7 +43,7 @@ def add_necessary_columns(batch, indices):
     return batch
 
 # Apply the adjust function to the dataset
-anti_ms_dataset = anti_ms_dataset.map(add_necessary_columns, with_indices=True, batched=True, batch_size=2000)
+anti_ms_dataset = anti_ms_dataset.map(add_necessary_columns, with_indices=True, batched=True, batch_size=4000)
 
 
 
@@ -52,6 +52,7 @@ def adjust_strings(example):
     example['prompt_subject_2'] = example['prompt_subject_2'][1:-8]
     example['prompt_subject_3'] = example['prompt_subject_3'][1:-8]
     example['action-moral-judgment'] = example['action-moral-judgment'] * -1
+    example['rot-action'] = example['rot-action'][0].capitalize() + example['rot-action'][1:]
     
     return example
 
