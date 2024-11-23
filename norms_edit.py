@@ -146,9 +146,6 @@ def chat_with_model(model,tokenizer):
         if chat_prompt == "save":
             write_output_to_file(True, entire_chat)
             break
-        
-        if chat_prompt == "exit":
-            break
              
         entire_chat += chat_prompt + "/n"
         with torch.no_grad():  # Disable gradient calculations for inference 
@@ -489,9 +486,6 @@ def load_facts():
     portability_inputs_one_hop_prompt_unpacked = []
     portability_inputs_one_hop_ground_truth_unpacked = []
     
-    
-    # Check whether locality and portability are empty
-    
     for l1 in locality_inputs:
         if len(l1['neighborhood']['prompt']) > 0:
             locality_inputs_neighborhood_prompt_unpacked.append(l1['neighborhood']['prompt'])
@@ -575,7 +569,7 @@ def load_facts():
             }
         }
         
-    
+    # Check whether locality and portability are empty
     log("Facts dataset loaded",False,False,True)
 
     return prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs
@@ -598,9 +592,10 @@ def main():
         tokenizer.padding_side='right'
     
     
-    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_norms()
+    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_facts()
     
     pre_edit_model,pre_edit_response = None, None
+
 
     if apply_edit:
         
@@ -706,6 +701,7 @@ def main():
         elif editing_method == "WISE":
             from easyeditor import WISEHyperParams
             hparams = WISEHyperParams.from_hparams(hparams_path)
+
             editor = BaseEditor.from_hparams(hparams)
             metrics, edited_model, _ = editor.edit(
                 prompts=prompts,
