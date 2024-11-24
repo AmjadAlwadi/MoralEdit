@@ -161,12 +161,17 @@ def get_data(batch, indices):
             rot_action = rot_action[:-1]
         
         
+        first_rephrase = "What do you think about " + rot_action.lower()[0] + rot_action.lower()[1:] + "?"
+
+        # Do a proper rephrase using ai
+        # Find the correct subject
+
         new_element = {
             "prompt": rot_action + " is",
             "ground_truth":ground_truth_matched_adjectives[0],
             "target_new":target_new_matched_adjectives[0],
-            "subject":"",
-            "rephrase_prompt":"",
+            "subject":rot_action.split()[0],
+            "rephrase_prompt":first_rephrase,
             "locality_inputs":{
                 "neighborhood":{
                     "prompt": "",

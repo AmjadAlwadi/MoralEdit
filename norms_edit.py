@@ -83,12 +83,20 @@ def log(info,add_decoration:bool,important:bool,bold:bool):
 
    
     
-def write_output_to_file(append:bool,*outputs):
+def write_output_to_file(file_name, append:bool,*outputs):
     
-    directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy
+    # Check if empty output
+    lengths = 0
+    for output in outputs:
+        lengths += len(output)
+
+    if lengths == 0:
+        return
+    
+    directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy + '/' + timestamp
     os.makedirs(directory_path, exist_ok=True)
     
-    file_path = directory_path + "/" + timestamp + '.txt'
+    file_path = directory_path + "/" + file_name + '.txt'
     
     mode = 'w'
     if append:
@@ -103,12 +111,12 @@ def write_output_to_file(append:bool,*outputs):
 
 
 
-def save_as_json(object,name):
+def save_as_json(object,file_name):
     
-    directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy
+    directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy + '/' + timestamp
     os.makedirs(directory_path, exist_ok=True)
 
-    file_path = directory_path + "/" + name
+    file_path = directory_path + "/" + file_name + '.json'
         
     # Save dictionary as a JSON file
     with open(file_path, 'w') as json_file:
@@ -144,7 +152,7 @@ def chat_with_model(model,tokenizer):
         chat_prompt = input("You:")
         
         if chat_prompt == "save":
-            write_output_to_file(True, entire_chat)
+            write_output_to_file("post_edit",True, entire_chat)
             break
         
         if chat_prompt == "exit":
@@ -279,17 +287,13 @@ def common_prefix(str1, str2):
 
 
 
-def analyse_reliability_of_edit(tokenizer, decoded_post_edit_response,target_new, pre_edit_response = None, post_edit_response = None) -> bool:
 
+
+def analyse_kl_divergence(pre_edit_logits,post_edit_logtis) -> str:
     output = ""
-    edit_successfull =  target_new.lower() in decoded_post_edit_response.lower()
-    check1 = f"Does the post_edit_answer contain the target answer? {edit_successfull}"
-    log(check1,True,True,True)
-    output += check1 + "\n"
-    
-    if pre_edit_response and post_edit_response and editing_method != "IKE":
-        kl_div_first_token = calculate_kl_divergence(pre_edit_response.logits[0],post_edit_response.logits[0])
-        kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_response.logits,post_edit_response.logits)
+    if pre_edit_logits and post_edit_logtis and editing_method != "IKE":
+        kl_div_first_token = calculate_kl_divergence(pre_edit_logits[0],post_edit_logtis[0])
+        kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logtis)
         check2 = f"KL divergence for first token: {kl_div_first_token}"
         check3 = f"KL divergence amongst all tokens: {kl_div_all_tokens}"
         check4 = f"Biggest KL divergence is on token {biggest_div_index} with the value of {biggest_div}"
@@ -297,6 +301,19 @@ def analyse_reliability_of_edit(tokenizer, decoded_post_edit_response,target_new
         log(check3,True,True,True)
         log(check4,True,True,True)
         output += check2 + "\n" + check3 + "\n" + check4 + "\n"
+
+    return output
+
+
+
+
+def analyse_reliability_of_edit(decoded_post_edit_response,target_new) -> str:
+
+    output = ""
+    edit_successfull =  target_new.lower() in decoded_post_edit_response.lower()
+    check1 = f"Does the post_edit_answer contain the target answer? {edit_successfull}"
+    log(check1,True,True,True)
+    output += check1 + "\n"
 
     return output
 
@@ -356,9 +373,12 @@ def check_model_weights_changed(pre_edit_model, post_edit_model):
 
 
 
-def load_norms():
+def load_norms(subset_size):
     
-    ds = load_dataset("json", data_files="datasets/norms/norms_edit_propmts_dataset.json",split='train')
+    ds = load_dataset("json", data_files="datasets/norms/edit_norms_dataset.json",split='train')
+    ds = ds.shuffle()
+    ds = ds.select(range(subset_size))
+    
     prompts = ds['prompt']
     ground_truth = ds['ground_truth']
     target_new = ds['target_new']
@@ -589,7 +609,9 @@ def load_facts():
 def main():
 
     login(token=access_token,add_to_git_credential=True)
-    set_seed(seed)
+    
+    if seed != -1:
+        set_seed(seed)
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token_id = tokenizer.eos_token_id
@@ -600,17 +622,17 @@ def main():
         tokenizer.padding_side='right'
     
     
-    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_norms()
+    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_norms(number_of_norms_to_edit)
     
-    pre_edit_model,pre_edit_response = None, None
+    pre_edit_model, edited_model, pre_edit_response, post_edit_response = None, None, None, None
+    metrics = None
+    decoded_pre_edit_response, decoded_post_edit_response = [],[]
 
     if apply_edit:
         
         from easyeditor import BaseEditor
         
-        metrics,edited_model = None,None
         editing_start_time = time.time()
-        
         
         # Initialize the arguments dictionary
         edit_args = {
@@ -714,6 +736,8 @@ def main():
             editor = BaseEditor.from_hparams(hparams)
             metrics, edited_model, _ = editor.edit(**edit_args)
         
+        
+        
 
         elif editing_method == "WISE":
             from easyeditor import WISEHyperParams
@@ -723,11 +747,13 @@ def main():
             
 
         
+        
         elif editing_method == "MEMIT":
             from easyeditor import MEMITHyperParams
             hparams = MEMITHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
             metrics, edited_model, _ = editor.edit(**edit_args)
+            
             
             
             
@@ -757,11 +783,13 @@ def main():
             
             
             
+            
         elif editing_method == "GRACE":
             from easyeditor import GraceHyperParams
             hparams = GraceHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
             metrics, edited_model, _ = editor.edit(**edit_args)
+            
             
             
             
@@ -809,6 +837,7 @@ def main():
         
         
         
+        
         elif editing_method == "SERAC":
             
             if train:
@@ -830,6 +859,7 @@ def main():
                 hparams = SERACHparams.from_hparams(hparams_path)
                 editor = BaseEditor.from_hparams(hparams)
                 metrics, edited_model, _ = editor.edit(**edit_args)
+            
             
             
             
@@ -856,8 +886,8 @@ def main():
                 metrics, edited_model, _ = editor.edit(**edit_args)
                 
 
+
                       
-        
         elif editing_method == "IKE":
             
             for i in range(len(prompts)):
@@ -868,7 +898,7 @@ def main():
             
             
                      
-            
+                     
         elif editing_method == "R-ROME":
             from easyeditor import R_ROMEHyperParams
             hparams = R_ROMEHyperParams.from_hparams(hparams_path)
@@ -934,7 +964,7 @@ def main():
             
         editing_end_time = time.time()
         
-
+    
         if editing_method == "IKE":
             
             # Load the pre_edit_model
@@ -948,7 +978,9 @@ def main():
             print_gpu_memory()
 
             post_edit_response = create_response(pre_edit_model,tokenizer,ike_generation_prompts,instructinoal=False)
-            decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],question=ike_generation_prompts[0],pre_edit=False)
+            
+            for sequence,prompt in zip(post_edit_response.sequences,ike_generation_prompts):
+                decoded_post_edit_response.append(decode_output_and_log(tokenizer=tokenizer,output=sequence,question=prompt,pre_edit=False))
             
         else:
             
@@ -958,17 +990,19 @@ def main():
             else:
                 log(f"Editing took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
 
-            
-            log(str(metrics),False,True,True)
-            save_as_json(metrics,"metrics_summary.json")
+
+            save_as_json(metrics,"metrics_summary")
             log("Metrics saved as json file",False,False,False)
 
             log("Loaded edited model",True,False,True)
             print_gpu_memory()
             
-            post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
-            decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],question=prompts[0],pre_edit=False)
-
+            if show_post_edit_answer:
+                post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
+                
+                for sequence,prompt in zip(post_edit_response.sequences,prompts):
+                    decoded_post_edit_response.append(decode_output_and_log(tokenizer=tokenizer,output=sequence,question=prompt,pre_edit=False))
+                
 
 
         # Unload if not used later
@@ -996,13 +1030,15 @@ def main():
         if show_pre_edit_answer:
             
             pre_edit_response = create_response(pre_edit_model,tokenizer,prompts,instructinoal=False)
-            decoded_pre_edit_response = decode_output_and_log(tokenizer=tokenizer,output=pre_edit_response.sequences[0],question=prompts[0],pre_edit=True)
+            
+            for sequence, prompt in zip(pre_edit_response.sequences,prompts):
+                decoded_pre_edit_response.append(decode_output_and_log(tokenizer=tokenizer,output=sequence,question=prompt,pre_edit=True))
             
             scores_string = ""
             if enable_output_scores:
                 scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,top_k)
             
-            write_output_to_file(False,decoded_pre_edit_response,scores_string)
+            write_output_to_file("pre_edit",False,*decoded_pre_edit_response,scores_string)
         
         
         # Unload if not used later
@@ -1016,11 +1052,14 @@ def main():
     
     
     # Add log info
-    log_info,scores_string,models_check_string = "","",""
+    log_info,scores_string,models_check_string = [],"",""
     
     if enable_analytics:
-        log_info = analyse_reliability_of_edit(tokenizer=tokenizer, decoded_post_edit_response=decoded_post_edit_response, target_new=target_new[0], pre_edit_response=pre_edit_response, post_edit_response=post_edit_response)
- 
+        for i in range(len(decoded_post_edit_response)):
+            log_info.append(analyse_reliability_of_edit(decoded_post_edit_response=decoded_post_edit_response[i], target_new=target_new[i]))
+
+        log_info.append(analyse_kl_divergence(pre_edit_logits=pre_edit_response.logits, post_edit_logtis=post_edit_response.logits))
+        
     if enable_output_scores:
         scores_string = output_scores_of_generation(tokenizer,post_edit_response.scores,top_k)
 
@@ -1028,7 +1067,7 @@ def main():
         models_check_string = check_model_weights_changed(pre_edit_model,edited_model)
 
 
-    write_output_to_file(False,decoded_post_edit_response, log_info, models_check_string, scores_string)
+    write_output_to_file("post_edit",True,*decoded_post_edit_response, *log_info, models_check_string, scores_string)
     
     
 
@@ -1042,20 +1081,24 @@ def main():
 
 def parse_arguments():
     
-    global enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path, enable_cpu_training
+    global number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
-    parser.add_argument("--editing_method", type=str, default="No editing", choices=list(available_editing_methods.values()),
+    parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(available_editing_methods.values()),
                         help="Editing method to use")
-    parser.add_argument("--model_name", type=str, default=available_models[10] ,
+    parser.add_argument("-m","--model_name", type=str, default=available_models[10],
                         help="Name of the model to use")
-    parser.add_argument("--show_pre_edit_answer", action="store_true",
+    parser.add_argument("-r","--show_pre_edit_answer", action="store_true",
                         help="Whether to show pre-edit answer")
-    parser.add_argument("--freely_chat", action="store_true",
+    parser.add_argument("-o","--show_post_edit_answer", action="store_true",
+                        help="Whether to show post-edit answer")
+    parser.add_argument("-f","--freely_chat", action="store_true",
                         help="Whether to freely chat with the post-edit model")
     parser.add_argument("--max_length", type=int, default=100,
                         help="Maximum number of new tokens in the prompt")
+    parser.add_argument("-n","--number_of_norms_to_edit", type=int, default=3,
+                        help="Number of norms to edit")
     parser.add_argument("--max_new_tokens", type=int, default=20,
                         help="Maximum number of new tokens to generate")
     parser.add_argument("--num_beams", type=int, default=1,
@@ -1066,7 +1109,7 @@ def parse_arguments():
                         help="Early stopping")
     parser.add_argument("--no_repeat_ngram_size", type=int, default=0,
                         help="No repeat ngram size")
-    parser.add_argument("--seed", type=int, default=42,
+    parser.add_argument("-s","--seed", type=int, default=-1,
                         help="Random seed for reproducibility")
     parser.add_argument("--top_k", type=int, default=10,
                         help="Top k probable tokens for the output scores")
@@ -1076,14 +1119,14 @@ def parse_arguments():
                         help="Whether to do the inference on the CPU")
     parser.add_argument("--enable_output_scores", action="store_true",
                         help="Show the scores for the most probable tokens")
-    parser.add_argument("--enable_analytics", action="store_true",
+    parser.add_argument("-a","--enable_analytics", action="store_true",
                         help="Show the KL divergence and more")
     parser.add_argument("--enable_models_check", action="store_true",
                         help="Check whether the post_edit model did change")
-    parser.add_argument("--train", action="store_true",
+    parser.add_argument("-t","--train", action="store_true",
                         help="Train the algorithm")
     
-    parser.add_argument( '--weights_dtype', type=str, choices=['float32', 'float16', 'bfloat16'],
+    parser.add_argument("-w",'--weights_dtype', type=str, choices=['float32', 'float16', 'bfloat16'],
                         default='float32', help='Data type for weights: float32, 16 or bfloat16' )
     
     args = parser.parse_args()
@@ -1092,8 +1135,9 @@ def parse_arguments():
     editing_method = args.editing_method
     model_name = args.model_name
     show_pre_edit_answer = args.show_pre_edit_answer
+    show_post_edit_answer = args.show_post_edit_answer
     freely_chat_with_post_edit_model = args.freely_chat
-    
+    number_of_norms_to_edit = args.number_of_norms_to_edit
     
     args.config_file_name = model_name.split("/")[1]
     
@@ -1116,7 +1160,7 @@ def parse_arguments():
     enable_analytics = args.enable_analytics
     enable_output_scores = args.enable_output_scores
     enable_models_check = args.enable_models_check
-    
+        
     decoding_strategy = "greedy-decoding" 
     if num_beams == 1 and do_sample == False:
         decoding_strategy = "greedy-decoding"
@@ -1144,9 +1188,11 @@ def parse_arguments():
     print(f"{'Editing_method:':<{col_width}} {editing_method}")
     print(f"{'Device:':<{col_width}} {str(device)}")
     print(f"{'Decoding_strategy:':<{col_width}} {decoding_strategy}")
+    print(f"{'number_of_norms_to_edit:':<{col_width}} {number_of_norms_to_edit}")
     print(Fore.LIGHTYELLOW_EX)
     print(f"{'train:':<{col_width}} {str(train)}")
     print(f"{'show_pre_edit_answer:':<{col_width}} {str(show_pre_edit_answer)}")
+    print(f"{'show_post_edit_answer:':<{col_width}} {str(show_post_edit_answer)}")
     print(f"{'enable_analytics:':<{col_width}} {str(enable_analytics)}")
     print(f"{'enable_output_scores:':<{col_width}} {str(enable_output_scores)}")
     print(f"{'enable_models_check:':<{col_width}} {str(enable_models_check)}") 
