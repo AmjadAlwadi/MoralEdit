@@ -56,7 +56,7 @@ available_models = {
 }
 
 
-
+ike_generation_prompts = []
 
 
 def log(info,add_decoration:bool,important:bool,bold:bool):
@@ -623,24 +623,15 @@ def main():
             "portability_inputs": portability_inputs,
             "sequential_edit": True,
         }
-        
-        
-        training_args = {}
-        
+                
         
         if editing_method == "R-ROME":
             from easyeditor import ZsreDataset
-            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json',size=10000, config=training_hparams)
+            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json',size=10000)
             edit_args["train_ds"] = train_ds
         
         
-        elif train:
-            from easyeditor import ZsreDataset
-            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json',size=10000, config=training_hparams)
-            eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json',size=10000, config=training_hparams)
-            training_args["train_set"] = train_ds
-            training_args["val_set"] = eval_ds
-      
+        
 
         if editing_method == "PROMPT_ENGINEERING":
             
@@ -797,14 +788,15 @@ def main():
         elif editing_method == "MEND":
             
             if train:
-                from easyeditor import MENDTrainingHparams,EditTrainer
+                from easyeditor import MENDTrainingHparams,EditTrainer,ZsreDataset
                 training_hparams = MENDTrainingHparams.from_hparams(train_hparams_path)
                 train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
                 eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
                 
                 trainer = EditTrainer(
                     config=training_hparams,
-                    **training_args
+                    train_set=train_ds,
+                    val_set=eval_ds,
                 )
                 
                 trainer.run()
@@ -820,12 +812,15 @@ def main():
         elif editing_method == "SERAC":
             
             if train:
-                from easyeditor import SERACTrainingHparams,EditTrainer
+                from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
                 training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
+                train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
+                eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
                 
                 trainer = EditTrainer(
                     config=training_hparams,
-                    **training_args
+                    train_set=train_ds,
+                    val_set=eval_ds,
                 )
 
                 trainer.run()
@@ -841,12 +836,15 @@ def main():
         elif editing_method == "MALMEN":
             
             if train:
-                from easyeditor import SERACTrainingHparams,EditTrainer
+                from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
                 training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
+                train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
+                eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
                 
                 trainer = EditTrainer(
                     config=training_hparams,
-                    **training_args
+                    train_set=train_ds,
+                    val_set=eval_ds,
                 )
 
                 trainer.run()
@@ -857,25 +855,19 @@ def main():
                 editor = BaseEditor.from_hparams(hparams)
                 metrics, edited_model, _ = editor.edit(**edit_args)
                 
-                
-                
+
                       
         
         elif editing_method == "IKE":
-            ike_generapromptstion_prompts = []
             
             for i in range(len(prompts)):
-                ike_generapromptstion_prompts.append(prompts[i] + ' ' + target_new[i] + '.\n' + 
+                ike_generation_prompts.append(prompts[i] + ' ' + target_new[i] + '.\n' + 
                                                     rephrase_prompts[i] + ' ' + target_new[i] + '.\n' + 
                                                     "Q: " + prompts[i] + '? A: ' + target_new[i] +'.\n' +
                                                     "Q: " + prompts[i] + '? A:') 
             
-            edited_model = pre_edit_model
-            prompts = ike_generapromptstion_prompts
             
-            
-            
-            
+                     
             
         elif editing_method == "R-ROME":
             from easyeditor import R_ROMEHyperParams
@@ -934,7 +926,6 @@ def main():
             
             
 
-        
         else:
             from sys import exit
             log(f"Invalid editing method: {editing_method}",False,True,True)
@@ -943,26 +934,45 @@ def main():
             
         editing_end_time = time.time()
         
-        if train:
-            log(f"Training took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
-            return
+
+        if editing_method == "IKE":
+            
+            # Load the pre_edit_model
+            if model_name == "google-t5/t5-3b": # Encode Decoder
+                from transformers import AutoModelForSeq2SeqLM
+                pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+            else:
+                pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+            
+            log("Loaded the model",True,False,True)
+            print_gpu_memory()
+
+            post_edit_response = create_response(pre_edit_model,tokenizer,ike_generation_prompts,instructinoal=False)
+            decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],question=ike_generation_prompts[0],pre_edit=False)
+            
         else:
-            log(f"Editing took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
+            
+            if train:
+                log(f"Training took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
+                return
+            else:
+                log(f"Editing took {editing_end_time - editing_start_time:.2f} seconds.",False,False,True)
 
-        
-        log(str(metrics),False,True,True)
-        save_as_json(metrics,"metrics_summary.json")
-        log("Metrics saved as json file",False,False,False)
+            
+            log(str(metrics),False,True,True)
+            save_as_json(metrics,"metrics_summary.json")
+            log("Metrics saved as json file",False,False,False)
 
-        log("Loaded edited model",True,False,True)
-        print_gpu_memory()
-        
-        post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
-        decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],question=prompts[0],pre_edit=False)
+            log("Loaded edited model",True,False,True)
+            print_gpu_memory()
+            
+            post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
+            decoded_post_edit_response = decode_output_and_log(tokenizer=tokenizer,output=post_edit_response.sequences[0],question=prompts[0],pre_edit=False)
+
 
 
         # Unload if not used later
-        if not enable_models_check and not freely_chat_with_post_edit_model:
+        if not enable_models_check and not freely_chat_with_post_edit_model and editing_method != "IKE":
             del edited_model
             torch.cuda.empty_cache()
             log("Unloaded edited model",False,False,True)
@@ -971,15 +981,17 @@ def main():
     
     if show_pre_edit_answer or enable_models_check:
         
-        if model_name == "google-t5/t5-3b": # Encode Decoder
-            from transformers import AutoModelForSeq2SeqLM
-            pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
-        else:
-            pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
-        
-        log("Loaded base model",True,False,True)
-        
-        print_gpu_memory()
+        # Load the pre_edit_model if needed
+        if not pre_edit_model:
+
+            if model_name == "google-t5/t5-3b": # Encode Decoder
+                from transformers import AutoModelForSeq2SeqLM
+                pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+            else:
+                pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+            
+            log("Loaded base model",True,False,True)
+            print_gpu_memory()
         
         if show_pre_edit_answer:
             
@@ -994,7 +1006,7 @@ def main():
         
         
         # Unload if not used later
-        if not enable_models_check:
+        if not enable_models_check or editing_method == "IKE" or editing_method == "PROMPT_ENGINEERING":
             del pre_edit_model
             torch.cuda.empty_cache()
             log("Unloaded base model",False,False,True)
