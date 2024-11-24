@@ -1,6 +1,7 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_dataset,Dataset,concatenate_datasets
-
+from datasets import load_dataset, Dataset
+import pandas as pd
 
 # Load the datasets
 anti_ms_dataset_train = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='train')
@@ -8,8 +9,18 @@ anti_ms_dataset_test = load_dataset("datasets/contrastive_moral_stories/anti_ms/
 anti_ms_dataset_dev = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='dev')
 
 anti_ms_dataset = concatenate_datasets([anti_ms_dataset_train, anti_ms_dataset_test,anti_ms_dataset_dev])
-
 anti_ms_dataset = anti_ms_dataset.remove_columns(['split','label'])
+
+
+original_ms_dataset_train = load_dataset("datasets/contrastive_moral_stories/original_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='train')
+original_ms_dataset_test = load_dataset("datasets/contrastive_moral_stories/original_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='test')
+original_ms_dataset_dev = load_dataset("datasets/contrastive_moral_stories/original_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='dev')
+
+original_ms_dataset_train = original_ms_dataset_train.remove_columns(['moral_action','immoral_action','label'])
+original_ms_dataset_test = original_ms_dataset_test.remove_columns(['moral_action','immoral_action','label'])
+original_ms_dataset_dev = original_ms_dataset_dev.remove_columns(['moral_action','immoral_action','label'])
+
+original_ms_dataset = concatenate_datasets([original_ms_dataset_train, original_ms_dataset_test,original_ms_dataset_dev])
 
 
 rephrases_subject_1 = load_dataset("datasets/rephrases/", data_files="prompt_hypothetical_first.jsonl", split='train')
@@ -29,7 +40,6 @@ def add_empty_columns(example):
     
     
 anti_ms_dataset = anti_ms_dataset.map(add_empty_columns)
-
 
 
 # Create mapping from id to item
@@ -52,9 +62,9 @@ def add_necessary_columns(batch, indices):
         
     return batch
 
+
 # Apply the adjust function to the dataset
 anti_ms_dataset = anti_ms_dataset.map(add_necessary_columns, with_indices=True, batched=True, batch_size=4000)
-
 
 
 def adjust_strings(example):
@@ -67,7 +77,6 @@ def adjust_strings(example):
     return example
 
 anti_ms_dataset = anti_ms_dataset.map(adjust_strings)
-
 
 
 
@@ -93,26 +102,40 @@ def remove_odd_indices(batch, indices):
 
 
 anti_ms_dataset = anti_ms_dataset.map(remove_odd_indices, with_indices=True, batched=True, batch_size=4000)
+original_ms_dataset = original_ms_dataset.map(remove_odd_indices, with_indices=True, batched=True, batch_size=4000)
 
 
 
-
-
-def remove_full_stop(example):
-
+def remove_full_stop_rot(example):
     example['rot-action'] = example['rot-action'].rstrip('.')
     example['rot-action'] = example['rot-action'].rstrip('?')
+    return example
+
+
+def remove_full_stop_norm(example):
     example['norm'] = example['norm'].rstrip('.')
     example['norm'] = example['norm'].rstrip('?')
     return example
 
 
-anti_ms_dataset = anti_ms_dataset.map(remove_full_stop)
+anti_ms_dataset = anti_ms_dataset.map(remove_full_stop_rot)
+anti_ms_dataset = anti_ms_dataset.map(remove_full_stop_norm)
+
+original_ms_dataset = original_ms_dataset.map(remove_full_stop_norm)
 
 
+df1 = pd.DataFrame(anti_ms_dataset)
+df2 = pd.DataFrame(original_ms_dataset)
 
+# Rename the 'norm' column to avoid conflicts
+df1.rename(columns={'norm': 'anti_norm'}, inplace=True)
+df2.rename(columns={'norm': 'original_norm'}, inplace=True)
 
+# join
+merged_df = pd.merge(df1, df2, on='ID', how='inner')
 
+new_column_order = ['ID',"rot-action", 'original_norm', 'anti_norm',"action-moral-judgment", 'moral_action', 'immoral_action',"prompt_subject_1","prompt_subject_2","prompt_subject_3"] 
+merged_df = merged_df[new_column_order]
 
-
-anti_ms_dataset.to_json("datasets/norms/norms_dataset.json")
+merged_dataset = Dataset.from_pandas(merged_df)
+merged_dataset.to_json("datasets/norms/norms_dataset.json")

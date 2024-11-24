@@ -367,6 +367,8 @@ def load_norms():
     locality_inputs = ds['locality_inputs']
     portability_inputs = ds['portability_inputs']
 
+
+    # Reformat locality and probability
     locality_inputs_neighborhood_prompt_unpacked = []
     locality_inputs_neighborhood_ground_truth_unpacked = []
     locality_inputs_distracting_prompt_unpacked = []
@@ -609,6 +611,36 @@ def main():
         metrics,edited_model = None,None
         editing_start_time = time.time()
         
+        
+        # Initialize the arguments dictionary
+        edit_args = {
+            "prompts": prompts,
+            "ground_truth": ground_truth,
+            "target_new": target_new,
+            "subject": subject,
+            "locality_inputs": locality_inputs,
+            "rephrase_prompts": rephrase_prompts,
+            "portability_inputs": portability_inputs,
+            "sequential_edit": True,
+        }
+        
+        
+        training_args = {}
+        
+        
+        if editing_method == "R-ROME":
+            from easyeditor import ZsreDataset
+            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json',size=10000, config=training_hparams)
+            edit_args["train_ds"] = train_ds
+        
+        
+        elif train:
+            from easyeditor import ZsreDataset
+            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json',size=10000, config=training_hparams)
+            eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json',size=10000, config=training_hparams)
+            training_args["train_set"] = train_ds
+            training_args["val_set"] = eval_ds
+      
 
         if editing_method == "PROMPT_ENGINEERING":
             
@@ -689,33 +721,14 @@ def main():
             from easyeditor import ROMEHyperParams
             hparams = ROMEHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                subject=subject,
-                locality_inputs=locality_inputs,
-                rephrase_prompts=rephrase_prompts,
-                portability_inputs=portability_inputs,
-                sequential_edit=True,
-            )
-        
-
+            metrics, edited_model, _ = editor.edit(**edit_args)
         
 
         elif editing_method == "WISE":
             from easyeditor import WISEHyperParams
             hparams = WISEHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                locality_inputs=locality_inputs,
-                rephrase_prompts=rephrase_prompts,
-                portability_inputs=portability_inputs,
-                sequential_edit=True
-            )
+            metrics, edited_model, _ = editor.edit(**edit_args)
             
 
         
@@ -723,16 +736,7 @@ def main():
             from easyeditor import MEMITHyperParams
             hparams = MEMITHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                subject=subject,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                rephrase_prompts=rephrase_prompts,
-                sequential_edit=True
-            )
+            metrics, edited_model, _ = editor.edit(**edit_args)
             
             
             
@@ -740,16 +744,7 @@ def main():
             from easyeditor import EMMETHyperParams
             hparams = EMMETHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                subject=subject,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                rephrase_prompts=rephrase_prompts,
-                sequential_edit=True
-            )
+            metrics, edited_model, _ = editor.edit(**edit_args)
             
             
             
@@ -758,16 +753,7 @@ def main():
             from easyeditor import PMETHyperParams
             hparams = PMETHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                subject=subject,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                rephrase_prompts=rephrase_prompts,
-                sequential_edit=True
-            )
+            metrics, edited_model, _ = editor.edit(**edit_args)
             
             
             
@@ -776,16 +762,7 @@ def main():
             from easyeditor import MELOHyperParams
             hparams = MELOHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                ground_truth=ground_truth,
-                target_new=target_new,
-                subject=subject,
-                locality_inputs=locality_inputs,
-                rephrase_prompts=rephrase_prompts,
-                portability_inputs=portability_inputs,
-                sequential_edit=True
-            )
+            metrics, edited_model, _ = editor.edit(**edit_args)
             
             
             
@@ -793,15 +770,7 @@ def main():
             from easyeditor import GraceHyperParams
             hparams = GraceHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                    prompts=prompts,
-                    ground_truth=ground_truth,
-                    target_new=target_new,
-                    rephrase_prompts=rephrase_prompts,
-                    locality_inputs=locality_inputs,
-                    portability_inputs=portability_inputs,
-                    sequential_edit=True
-                )
+            metrics, edited_model, _ = editor.edit(**edit_args)
             
             
             
@@ -828,15 +797,14 @@ def main():
         elif editing_method == "MEND":
             
             if train:
-                from easyeditor import MENDTrainingHparams,EditTrainer,ZsreDataset
+                from easyeditor import MENDTrainingHparams,EditTrainer
                 training_hparams = MENDTrainingHparams.from_hparams(train_hparams_path)
                 train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
                 eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
                 
                 trainer = EditTrainer(
                     config=training_hparams,
-                    train_set=train_ds,
-                    val_set=eval_ds
+                    **training_args
                 )
                 
                 trainer.run()
@@ -845,30 +813,19 @@ def main():
                 from easyeditor import MENDHyperParams
                 hparams = MENDHyperParams.from_hparams(hparams_path)
                 editor = BaseEditor.from_hparams(hparams)
-                metrics, edited_model, _ = editor.edit(
-                    prompts=prompts,
-                    ground_truth=ground_truth,
-                    target_new=target_new,
-                    rephrase_prompts=rephrase_prompts,
-                    locality_inputs=locality_inputs,
-                    portability_inputs=portability_inputs,
-                    sequential_edit=True
-                )
+                metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         elif editing_method == "SERAC":
             
             if train:
-                from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
+                from easyeditor import SERACTrainingHparams,EditTrainer
                 training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
-                train_ds = ZsreDataset('./data/zsre_mend_train.json', config=training_hparams)
-                eval_ds = ZsreDataset('./data/zsre_mend_eval.json', config=training_hparams)
                 
                 trainer = EditTrainer(
                     config=training_hparams,
-                    train_set=train_ds,
-                    val_set=eval_ds
+                    **training_args
                 )
 
                 trainer.run()
@@ -877,30 +834,19 @@ def main():
                 from easyeditor import SERACHparams
                 hparams = SERACHparams.from_hparams(hparams_path)
                 editor = BaseEditor.from_hparams(hparams)
-                metrics, edited_model, _ = editor.edit(
-                    prompts=prompts,
-                    ground_truth=ground_truth,
-                    target_new=target_new,
-                    rephrase_prompts=rephrase_prompts,
-                    locality_inputs=locality_inputs,
-                    portability_inputs=portability_inputs,
-                    sequential_edit=True
-                )
+                metrics, edited_model, _ = editor.edit(**edit_args)
             
             
             
         elif editing_method == "MALMEN":
             
             if train:
-                from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
+                from easyeditor import SERACTrainingHparams,EditTrainer
                 training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
-                train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
-                eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
                 
                 trainer = EditTrainer(
                     config=training_hparams,
-                    train_set=train_ds,
-                    val_set=eval_ds
+                    **training_args
                 )
 
                 trainer.run()
@@ -909,23 +855,57 @@ def main():
                 from easyeditor import SERACHparams
                 hparams = SERACHparams.from_hparams(hparams_path)
                 editor = BaseEditor.from_hparams(hparams)
-                metrics, edited_model, _ = editor.edit(
-                    prompts=prompts,
-                    ground_truth=ground_truth,
-                    target_new=target_new,
-                    rephrase_prompts=rephrase_prompts,
-                    locality_inputs=locality_inputs,
-                    portability_inputs=portability_inputs,
-                    sequential_edit=True
-                )
+                metrics, edited_model, _ = editor.edit(**edit_args)
                 
                 
                 
-                
+                      
         
-        
-        # This does nothing excpept for a semantic search on the training dataset for similar prompts and does not even return those
-        
+        elif editing_method == "IKE":
+            ike_generapromptstion_prompts = []
+            
+            for i in range(len(prompts)):
+                ike_generapromptstion_prompts.append(prompts[i] + ' ' + target_new[i] + '.\n' + 
+                                                    rephrase_prompts[i] + ' ' + target_new[i] + '.\n' + 
+                                                    "Q: " + prompts[i] + '? A: ' + target_new[i] +'.\n' +
+                                                    "Q: " + prompts[i] + '? A:') 
+            
+            edited_model = pre_edit_model
+            prompts = ike_generapromptstion_prompts
+            
+            
+            
+            
+            
+        elif editing_method == "R-ROME":
+            from easyeditor import R_ROMEHyperParams
+            hparams = R_ROMEHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(**edit_args)
+            
+            
+            
+            
+        elif editing_method == "FT-L" or editing_method == "FT-M":
+            from easyeditor import FTHyperParams
+            hparams = FTHyperParams.from_hparams(hparams_path)
+            editor = BaseEditor.from_hparams(hparams)
+            metrics, edited_model, _ = editor.edit(
+                prompts=prompts + prompts,
+                ground_truth=ground_truth + ground_truth,
+                target_new=target_new + target_new,
+                rephrase_prompts=rephrase_prompts,
+                subject=subject,
+                locality_inputs=locality_inputs,
+                portability_inputs=portability_inputs,
+                sequential_edit=True
+            )
+            
+            
+            
+            
+        # This does nothing excpept for a semantic search on the training dataset for 
+        # similar prompts and does not even return those found examples.
         
         # elif editing_method == "IKEs":
         #     from easyeditor import IKEHyperParams
@@ -951,63 +931,9 @@ def main():
         #         )
         
                 # edited_model = pre_edit_model
-        
-                
-                
-        
-        elif editing_method == "IKE":
-            ike_generapromptstion_prompts = []
-            
-            for i in range(len(prompts)):
-                ike_generapromptstion_prompts.append(prompts[i] + ' ' + target_new[i] + '.\n' + 
-                                                    rephrase_prompts[i] + ' ' + target_new[i] + '.\n' + 
-                                                    "Q: " + prompts[i] + '? A: ' + target_new[i] +'.\n' +
-                                                    "Q: " + prompts[i] + '? A:') 
-            
-            edited_model = pre_edit_model
-            prompts = ike_generapromptstion_prompts
             
             
-            
-            
-            
-            
-        elif editing_method == "R-ROME":
-            from easyeditor import R_ROMEHyperParams,ZsreDataset
-            train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', size=10000)
-            hparams = R_ROMEHyperParams.from_hparams(hparams_path)
-            editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts,
-                rephrase_prompts=rephrase_prompts,
-                target_new=target_new,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                train_ds=train_ds,
-                subject=subject,
-                sequential_edit=True
-            )
-            
-            
-            
-            
-            
-            
-        elif editing_method == "FT-L" or editing_method == "FT-M":
-            from easyeditor import FTHyperParams
-            hparams = FTHyperParams.from_hparams(hparams_path)
-            editor = BaseEditor.from_hparams(hparams)
-            metrics, edited_model, _ = editor.edit(
-                prompts=prompts + prompts,
-                ground_truth=ground_truth + ground_truth,
-                target_new=target_new + target_new,
-                rephrase_prompts=rephrase_prompts,
-                locality_inputs=locality_inputs,
-                portability_inputs=portability_inputs,
-                sequential_edit=True
-            )
-            
-            
+
         
         else:
             from sys import exit
