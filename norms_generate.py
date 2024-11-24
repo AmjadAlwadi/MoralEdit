@@ -1,10 +1,16 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from datasets import load_dataset,Dataset
+from datasets import load_dataset,Dataset,concatenate_datasets
 
 
 # Load the datasets
-anti_ms_dataset = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files="train.jsonl", split='train')
+anti_ms_dataset_train = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='train')
+anti_ms_dataset_test = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='test')
+anti_ms_dataset_dev = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='dev')
+
+anti_ms_dataset = concatenate_datasets([anti_ms_dataset_train, anti_ms_dataset_test,anti_ms_dataset_dev])
+
 anti_ms_dataset = anti_ms_dataset.remove_columns(['split','label'])
+
 
 rephrases_subject_1 = load_dataset("datasets/rephrases/", data_files="prompt_hypothetical_first.jsonl", split='train')
 rephrases_subject_2 = load_dataset("datasets/rephrases/", data_files="prompt_hypothetical_second.jsonl", split='train')

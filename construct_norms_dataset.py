@@ -1,6 +1,8 @@
 from datasets import load_dataset
 import random
 
+edit_norms_size = 100
+
 # Load the datasets
 norms = load_dataset("datasets/norms/", data_files="norms_dataset.json", split='train')
 edit_norms = load_dataset("datasets/norms/",data_files="norms_edit_propmts_dataset_template.json", split='train')
@@ -11,90 +13,28 @@ bad_words = load_dataset("datasets/judgements/", data_files="bad_dataset.json", 
 very_bad_words = load_dataset("datasets/judgements/", data_files="very_bad_dataset.json", split='train')
 ok_words = load_dataset("datasets/judgements/", data_files="ok_dataset.json", split='train')
 
-
 # Datasets to check later if first check was not successful
 big_list_bad_words = load_dataset("datasets/judgements/", data_files="bad_and_very_bad_dataset.json", split='train')
 big_list_good_words = load_dataset("datasets/judgements/", data_files="good_and_very_good_dataset.json", split='train')
 
-shuffled_norms = norms.shuffle()
+# edit_norms_size = len(norms)
 
-# Select a random subset
-edit_norms_size = 2000
+shuffled_norms = norms.shuffle()
 norms_subset = shuffled_norms.select(range(edit_norms_size))
+
 
 # Clear the template
 edit_norms = edit_norms.filter(lambda example: False)
 
 
-# Naive random approach
-
-# def get_data(batch, indices):
-#     global edit_norms
-    
-#     for i,idx in enumerate(indices):
-#         random_word = ""
-        
-#         if batch['action-moral-judgment'][i] == 2:
-#             random_word = random.choice(very_good_words['judgement'])
-#         elif batch['action-moral-judgment'][i] == 1:
-#             random_word = random.choice(good_words['judgement'])
-#         elif batch['action-moral-judgment'][i] == -1:
-#             random_word = random.choice(bad_words['judgement'])
-#         elif batch['action-moral-judgment'][i] == -2:
-#             random_word = random.choice(very_bad_words['judgement'])
-#         else:
-#             continue
-        
-        
-#         rot_action = batch['rot-action'][i]
-        
-#         if rot_action[-1] == "." or rot_action[-1] == "?":
-#             rot_action = rot_action[:-1]
-        
-        
-#         new_element = {
-#             "prompt": rot_action + " is " + random_word,
-#             "ground_truth":"",
-#             "target_new":"",
-#             "subject":"",
-#             "rephrase_prompt":"",
-#             "locality_inputs":{
-#                 "neighborhood":{
-#                     "prompt": "",
-#                     "ground_truth": ""
-#                 },
-#                 "distracting":{
-#                     "prompt": "",
-#                     "ground_truth": ""
-#                 }
-#             },
-#             "portability_inputs": {
-#                 "synonym":{
-#                     "prompt": "",
-#                     "ground_truth": ""
-#                 },
-#                 "one_hop":{
-#                     "prompt": "",
-#                     "ground_truth": ""
-#                 }
-#             }
-#         }
-        
-#         edit_norms = edit_norms.add_item(new_element)
-        
-#     return batch
-
-
-number_of_mismatches = 0
-
 
 
 def get_data(batch, indices):
-    global edit_norms,number_of_mismatches
+    global edit_norms
     
     for i,idx in enumerate(indices):
 
-        matched_adjectives = []
+        target_new_matched_adjectives = []
         
         for word in batch["norm"][i].split():
             word = word.lower()
@@ -106,46 +46,46 @@ def get_data(batch, indices):
             if batch['action-moral-judgment'][i] > 0:
                 for sentence in very_good_words["judgement"]: 
                     if word in sentence.split():
-                        matched_adjectives.append(sentence)
+                        target_new_matched_adjectives.append(sentence)
 
                 for sentence in good_words["judgement"]:
                     if word in sentence.split():
-                        matched_adjectives.append(sentence)
+                        target_new_matched_adjectives.append(sentence)
                            
                 for sentence in ok_words["judgement"]: 
                     if word in sentence.split():
-                        matched_adjectives.append(sentence)
+                        target_new_matched_adjectives.append(sentence)
                         
                 
                 # If didn't find any match then search in the big list        
-                if len(matched_adjectives) == 0:
+                if len(target_new_matched_adjectives) == 0:
                     for sentence in big_list_good_words["judgement"]: 
                         if word in sentence.split():
-                            matched_adjectives.append(sentence)
+                            target_new_matched_adjectives.append(sentence)
                     
 
   
             else:
                 for sentence in very_bad_words["judgement"]: 
                     if word in sentence.split():
-                        matched_adjectives.append(sentence)
+                        target_new_matched_adjectives.append(sentence)
 
                 for sentence in bad_words["judgement"]:
                     if word in sentence.split():
-                        matched_adjectives.append(sentence)
+                        target_new_matched_adjectives.append(sentence)
                            
                 for sentence in ok_words["judgement"]: 
                     if word in sentence.split():
-                        matched_adjectives.append(sentence)
+                        target_new_matched_adjectives.append(sentence)
                         
                 # If didn't find any match then search in the big list        
-                if len(matched_adjectives) == 0:
+                if len(target_new_matched_adjectives) == 0:
                     for sentence in big_list_bad_words["judgement"]: 
                         if word in sentence.split():
-                            matched_adjectives.append(sentence)
+                            target_new_matched_adjectives.append(sentence)
                 
         
-        if len(matched_adjectives) == 0:
+        if len(target_new_matched_adjectives) == 0:
             continue      
                 
         # Reformate the rot-action        
@@ -157,9 +97,9 @@ def get_data(batch, indices):
         
         
         new_element = {
-            "prompt": rot_action + " is " + matched_adjectives[0],
+            "prompt": rot_action + " is",
             "ground_truth":"",
-            "target_new":"",
+            "target_new":target_new_matched_adjectives[0],
             "subject":"",
             "rephrase_prompt":"",
             "locality_inputs":{
@@ -174,7 +114,7 @@ def get_data(batch, indices):
             },
             "portability_inputs": {
                 "synonym":{
-                    "prompt": "",
+                    "prompt": batch["prompt_subject_1"][i],
                     "ground_truth": ""
                 },
                 "one_hop":{
@@ -191,10 +131,10 @@ def get_data(batch, indices):
 
 
 
-norms_subset.map(get_data, with_indices=True, batched=True, batch_size=50,load_from_cache_file=False)
+norms_subset.map(get_data, with_indices=True, batched=True, batch_size=500,load_from_cache_file=False)
 
 
-for element in edit_norms['prompt']:
+for element in edit_norms:
     print(element)
     print()
 
