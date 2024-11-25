@@ -1,228 +1,141 @@
-from datasets import load_dataset, Dataset, concatenate_datasets
-
-mismatch_string = "!?:)(:?!"
-number_of_mismatches = 0
-number_of_elements_found_in_big_list = 0
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from datasets import load_dataset,Dataset,concatenate_datasets
+from datasets import load_dataset, Dataset
+import pandas as pd
 
 # Load the datasets
-norms = load_dataset("datasets/norms/", data_files="norms_dataset.json", split='train')
-edit_norms = load_dataset("datasets/norms/",data_files="norms_edit_propmts_dataset_template.json", split='train')
+anti_ms_dataset_train = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='train')
+anti_ms_dataset_test = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='test')
+anti_ms_dataset_dev = load_dataset("datasets/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='dev')
 
-edit_norms_size = len(norms)
-
-very_good_words = load_dataset("datasets/judgements/", data_files="very_good_dataset.json", split='train')
-good_words = load_dataset("datasets/judgements/", data_files="good_dataset.json", split='train')
-bad_words = load_dataset("datasets/judgements/", data_files="bad_dataset.json", split='train')
-very_bad_words = load_dataset("datasets/judgements/", data_files="very_bad_dataset.json", split='train')
-ok_words = load_dataset("datasets/judgements/", data_files="ok_dataset.json", split='train')
-
-# Datasets to check later if first check was not successful
-big_list_bad_words = load_dataset("datasets/judgements/", data_files="bad_and_very_bad_dataset.json", split='train')
-big_list_good_words = load_dataset("datasets/judgements/", data_files="good_and_very_good_dataset.json", split='train')
+anti_ms_dataset = concatenate_datasets([anti_ms_dataset_train, anti_ms_dataset_test,anti_ms_dataset_dev])
+anti_ms_dataset = anti_ms_dataset.remove_columns(['split','label'])
 
 
-shuffled_norms = norms.shuffle()
-norms_subset = shuffled_norms.select(range(edit_norms_size))
+original_ms_dataset_train = load_dataset("datasets/contrastive_moral_stories/original_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='train')
+original_ms_dataset_test = load_dataset("datasets/contrastive_moral_stories/original_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='test')
+original_ms_dataset_dev = load_dataset("datasets/contrastive_moral_stories/original_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='dev')
+
+original_ms_dataset_train = original_ms_dataset_train.remove_columns(['moral_action','immoral_action','label'])
+original_ms_dataset_test = original_ms_dataset_test.remove_columns(['moral_action','immoral_action','label'])
+original_ms_dataset_dev = original_ms_dataset_dev.remove_columns(['moral_action','immoral_action','label'])
+
+original_ms_dataset = concatenate_datasets([original_ms_dataset_train, original_ms_dataset_test,original_ms_dataset_dev])
 
 
-# Clear the template
-edit_norms = edit_norms.filter(lambda example: False)
+rephrases_subject_1 = load_dataset("datasets/rephrases/", data_files="prompt_hypothetical_first.jsonl", split='train')
+rephrases_subject_2 = load_dataset("datasets/rephrases/", data_files="prompt_hypothetical_second.jsonl", split='train')
+rephrases_subject_3 = load_dataset("datasets/rephrases/", data_files="prompt_hypothetical_third.jsonl", split='train')
 
 
-def get_data(batch, indices):
-    global number_of_elements_found_in_big_list
-    new_items = []
+
+def add_empty_columns(example):
+    example['rot-action'] = ""
+    example['action-moral-judgment'] = ""
+    example['prompt_subject_1'] = ""
+    example['prompt_subject_2'] = ""
+    example['prompt_subject_3'] = ""
     
-    for i,idx in enumerate(indices):
+    return example
+    
+    
+anti_ms_dataset = anti_ms_dataset.map(add_empty_columns)
 
-        # Find the correct adjective for target_new
-        target_new_matched_adjectives = []
+
+# Create mapping from id to item
+rephrases_subject_1_mapping = {item['ID']: item for item in rephrases_subject_1}
+rephrases_subject_2_mapping = {item['ID']: item for item in rephrases_subject_2}
+rephrases_subject_3_mapping = {item['ID']: item for item in rephrases_subject_3}
+
+
+def add_necessary_columns(batch, indices):
+    for i, idx in enumerate(indices):
+        rephrases_subject_1_element = rephrases_subject_1_mapping[batch['ID'][i][:-1] + '1']
+        rephrases_subject_2_element = rephrases_subject_2_mapping[batch['ID'][i][:-1] + '1']
+        rephrases_subject_3_element = rephrases_subject_3_mapping[batch['ID'][i][:-1] + '1']
+    
+        batch['rot-action'][i] = rephrases_subject_1_element['rot-action']
+        batch['action-moral-judgment'][i] = rephrases_subject_1_element['action-moral-judgment']
+        batch['prompt_subject_1'][i] = rephrases_subject_1_element['prompt']
+        batch['prompt_subject_2'][i] = rephrases_subject_2_element['prompt']
+        batch['prompt_subject_3'][i] = rephrases_subject_3_element['prompt']
         
-        for word in batch["anti_norm"][i].split():
-            word = word.lower()
-            
-            # Skip some useless words
-            if word in ["i","you","they","he","she","it","it's","is","not","something","no"]:
-                continue
-            
-            if batch['action-moral-judgment'][i] > 0:
-                for sentence in very_good_words["judgement"]: 
-                    if word in sentence.split():
-                        target_new_matched_adjectives.append(sentence)
-
-                for sentence in good_words["judgement"]:
-                    if word in sentence.split():
-                        target_new_matched_adjectives.append(sentence)
-                           
-                for sentence in ok_words["judgement"]: 
-                    if word in sentence.split():
-                        target_new_matched_adjectives.append(sentence)
-                        
-                
-                # If didn't find any match then search in the big list        
-                if len(target_new_matched_adjectives) == 0:
-                    for sentence in big_list_good_words["judgement"]: 
-                        if word in sentence.split():
-                            target_new_matched_adjectives.append(sentence)
-                            number_of_elements_found_in_big_list+=1
-                    
-
-  
-            else:
-                for sentence in very_bad_words["judgement"]: 
-                    if word in sentence.split():
-                        target_new_matched_adjectives.append(sentence)
-
-                for sentence in bad_words["judgement"]:
-                    if word in sentence.split():
-                        target_new_matched_adjectives.append(sentence)
-                           
-                for sentence in ok_words["judgement"]: 
-                    if word in sentence.split():
-                        target_new_matched_adjectives.append(sentence)
-                        
-                # If didn't find any match then search in the big list        
-                if len(target_new_matched_adjectives) == 0:
-                    for sentence in big_list_bad_words["judgement"]: 
-                        if word in sentence.split():
-                            target_new_matched_adjectives.append(sentence)
-                            number_of_elements_found_in_big_list+=1
-                
-        
-        if len(target_new_matched_adjectives) == 0:
-            target_new_matched_adjectives.append(mismatch_string)  
-            
-            
-            
-            
-        # Find the correct adjective for ground_truth
-        ground_truth_matched_adjectives = []
-        
-        for word in batch["original_norm"][i].split():
-            word = word.lower()
-            
-            # Skip some useless words
-            if word in ["i","you","they","he","she","it","it's","is","not","something","no"]:
-                continue
-            
-            if batch['action-moral-judgment'][i] < 0:
-                for sentence in very_good_words["judgement"]: 
-                    if word in sentence.split():
-                        ground_truth_matched_adjectives.append(sentence)
-
-                for sentence in good_words["judgement"]:
-                    if word in sentence.split():
-                        ground_truth_matched_adjectives.append(sentence)
-                           
-                for sentence in ok_words["judgement"]: 
-                    if word in sentence.split():
-                        ground_truth_matched_adjectives.append(sentence)
-                        
-                
-                # If didn't find any match then search in the big list        
-                if len(ground_truth_matched_adjectives) == 0:
-                    for sentence in big_list_good_words["judgement"]: 
-                        if word in sentence.split():
-                            ground_truth_matched_adjectives.append(sentence)
-                            number_of_elements_found_in_big_list+=1
-                    
-
-  
-            else:
-                for sentence in very_bad_words["judgement"]: 
-                    if word in sentence.split():
-                        ground_truth_matched_adjectives.append(sentence)
-
-                for sentence in bad_words["judgement"]:
-                    if word in sentence.split():
-                        ground_truth_matched_adjectives.append(sentence)
-                           
-                for sentence in ok_words["judgement"]: 
-                    if word in sentence.split():
-                        ground_truth_matched_adjectives.append(sentence)
-                        
-                # If didn't find any match then search in the big list        
-                if len(ground_truth_matched_adjectives) == 0:
-                    for sentence in big_list_bad_words["judgement"]: 
-                        if word in sentence.split():
-                            ground_truth_matched_adjectives.append(sentence)
-                            number_of_elements_found_in_big_list+=1
-                
-        
-        if len(ground_truth_matched_adjectives) == 0:
-            ground_truth_matched_adjectives.append(mismatch_string)
+    return batch
 
 
-                
-        # Reformate the rot-action        
-        rot_action = batch['rot-action'][i]
-        
-        if rot_action[-1] == "." or rot_action[-1] == "?":
-            rot_action = rot_action[:-1]
-        
-        
-        first_rephrase = "What do you think about " + rot_action.lower()[0] + rot_action.lower()[1:] + "?"
-
-        # Do a proper rephrase using ai
-        # Find the correct subject
-
-        new_element = {
-            "prompt": rot_action + " is",
-            "ground_truth":ground_truth_matched_adjectives[0],
-            "target_new":target_new_matched_adjectives[0],
-            "subject":rot_action.split()[0],
-            "rephrase_prompt":first_rephrase,
-            "locality_inputs":{
-                "neighborhood":{
-                    "prompt": "",
-                    "ground_truth": ""
-                },
-                "distracting":{
-                    "prompt": "",
-                    "ground_truth": ""
-                }
-            },
-            "portability_inputs": {
-                "synonym":{
-                    "prompt": batch["prompt_subject_1"][i],
-                    "ground_truth": target_new_matched_adjectives[0]
-                },
-                "one_hop":{
-                    "prompt": "",
-                    "ground_truth": ""
-                }
-            }
-        }
-        
-        new_items.append(new_element)
-                
-    # return batch
-    return {"new_items": new_items}
+# Apply the adjust function to the dataset
+anti_ms_dataset = anti_ms_dataset.map(add_necessary_columns, with_indices=True, batched=True, batch_size=4000)
 
 
-# Convert the result into a new dataset
-result = norms_subset.map(get_data, with_indices=True, batched=True, batch_size=3000)
+def adjust_strings(example):
+    example['prompt_subject_1'] = example['prompt_subject_1'][1:-9]
+    example['prompt_subject_2'] = example['prompt_subject_2'][1:-9]
+    example['prompt_subject_3'] = example['prompt_subject_3'][1:-9]
+    example['action-moral-judgment'] = example['action-moral-judgment'] * -1
+    example['rot-action'] = example['rot-action'][0].capitalize() + example['rot-action'][1:]
+    
+    return example
 
-new_items_list = [item for item in result["new_items"]]
-new_items_dict = {key: [dic[key] for dic in new_items_list] for key in new_items_list[0]}
-
-new_items_dataset = Dataset.from_dict(new_items_dict)
-
-edit_norms = concatenate_datasets([new_items_dataset,edit_norms])
+anti_ms_dataset = anti_ms_dataset.map(adjust_strings)
 
 
-# This removes 207 elements that didn't find correct or appropriate adjective to use
-# The reason is mostly because the moral_judgement score is not correct so it's good for us to remove those faulty elements
-# So we remove those faulty elements 
-def remove_mismatch(example):
-    global number_of_mismatches
-    condition = example['target_new'] != mismatch_string and example['ground_truth'] != mismatch_string
-    if not condition:
-        number_of_mismatches += 1
-    return condition
 
-edit_norms = edit_norms.filter(remove_mismatch)
-edit_norms.to_json("datasets/norms/edit_norms_dataset.json")
+def adjust_rows(example,index):
+    # immoral exists
+    if index % 2 == 0:
+        example['moral_action'] = anti_ms_dataset['moral_action'][index+1]
+    
+    return example
 
-print(f"number_of_mismatches: {number_of_mismatches}")
-print(f"number_of_elements_found_in_big_list: {number_of_elements_found_in_big_list}")
+
+anti_ms_dataset = anti_ms_dataset.map(adjust_rows,with_indices=True, batched=False)
+
+
+
+def remove_odd_indices(batch, indices):
+    new_batch = {key: [] for key in batch.keys()}
+    for i, index in enumerate(indices):
+        if index % 2 == 0:
+            for key in batch.keys():
+                new_batch[key].append(batch[key][i])
+    return new_batch
+
+
+anti_ms_dataset = anti_ms_dataset.map(remove_odd_indices, with_indices=True, batched=True, batch_size=4000)
+original_ms_dataset = original_ms_dataset.map(remove_odd_indices, with_indices=True, batched=True, batch_size=4000)
+
+
+
+def remove_full_stop_rot(example):
+    example['rot-action'] = example['rot-action'].rstrip('.')
+    example['rot-action'] = example['rot-action'].rstrip('?')
+    return example
+
+
+def remove_full_stop_norm(example):
+    example['norm'] = example['norm'].rstrip('.')
+    example['norm'] = example['norm'].rstrip('?')
+    return example
+
+
+anti_ms_dataset = anti_ms_dataset.map(remove_full_stop_rot)
+anti_ms_dataset = anti_ms_dataset.map(remove_full_stop_norm)
+
+original_ms_dataset = original_ms_dataset.map(remove_full_stop_norm)
+
+
+df1 = pd.DataFrame(anti_ms_dataset)
+df2 = pd.DataFrame(original_ms_dataset)
+
+# Rename the 'norm' column to avoid conflicts
+df1.rename(columns={'norm': 'anti_norm'}, inplace=True)
+df2.rename(columns={'norm': 'original_norm'}, inplace=True)
+
+# join
+merged_df = pd.merge(df1, df2, on='ID', how='inner')
+
+new_column_order = ['ID',"rot-action", 'original_norm', 'anti_norm',"action-moral-judgment", 'moral_action', 'immoral_action',"prompt_subject_1","prompt_subject_2","prompt_subject_3"] 
+merged_df = merged_df[new_column_order]
+
+merged_dataset = Dataset.from_pandas(merged_df)
+merged_dataset.to_json("datasets/norms/norms_dataset.json")
