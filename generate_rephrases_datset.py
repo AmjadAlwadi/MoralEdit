@@ -114,7 +114,7 @@ def generate(number_of_norms):
 def construct_dataset(prompts, rephrases):
     data = {"prompts":prompts, "rephrase": rephrases}
     dataset = Dataset.from_dict(data)
-    dataset.to_json("norms/rephrases.json")
+    dataset.to_json("datasets/norms/rephrases.json")
         
         
 
