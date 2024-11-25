@@ -407,6 +407,7 @@ def load_norms(subset_size):
     locality_inputs = ds['locality_inputs']
     portability_inputs = ds['portability_inputs']
 
+    loc_prompts = [edit_data_['locality_inputs']['neighborhood']['prompt'] + ' ' + edit_data_['locality_inputs']['neighborhood']['ground_truth'] for edit_data_ in ds]
 
     # Reformat locality and probability
     locality_inputs_neighborhood_prompt_unpacked = []
@@ -505,7 +506,7 @@ def load_norms(subset_size):
     # Check whether locality and portability are empty
     log("Norms dataset loaded",False,False,True)
 
-    return prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs
+    return prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs, loc_prompts
 
 
 
@@ -645,7 +646,7 @@ def main():
         tokenizer.pad_token_id = tokenizer.eos_token_id
         
     
-    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_norms(number_of_norms_to_edit)
+    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs, loc_prompts = load_norms(number_of_norms_to_edit)
     
     pre_edit_model, edited_model, pre_edit_response, post_edit_response = None, None, None, None
     metrics = None
@@ -766,6 +767,8 @@ def main():
             from easyeditor import WISEHyperParams
             hparams = WISEHyperParams.from_hparams(hparams_path)
             editor = BaseEditor.from_hparams(hparams)
+            
+            edit_args['loc_prompts'] = loc_prompts
             metrics, edited_model, _ = editor.edit(**edit_args)
             
 
@@ -825,7 +828,8 @@ def main():
                 prompts=prompts,
                 rephrase_prompts=rephrase_prompts,
                 target_new=target_new,
-                # target_neg=target_neg,
+                target_neg=ground_truth,
+                ground_truth=ground_truth,
                 subject=subject,
                 locality_inputs=locality_inputs,
                 portability_inputs=portability_inputs,

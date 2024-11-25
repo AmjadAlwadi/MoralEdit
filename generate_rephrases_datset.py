@@ -1,10 +1,13 @@
 from vllm import LLM, SamplingParams
-import time
 from colorama import Fore, Back, Style, init
-from datasets import load_dataset
+from datasets import load_dataset, Dataset
+import argparse
+import warnings 
+
+# Ignore all warnings
+warnings.filterwarnings("ignore")
 
 init()
-
 
 available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
                     "ibm-granite/granite-3.0-2b-base",
@@ -22,127 +25,16 @@ available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
                     "clibrain/mamba-2.8b-instruct-openhermes"]
 
 
-
-
-
-
-
 def load_norms(subset_size):
     
-    ds = load_dataset("json", data_files="datasets/norms/edit_norms_dataset.json",split='train')
-    # ds = ds.shuffle()
-    ds = ds.select(range(subset_size))
+    ds = load_dataset("json", data_files="datasets/norms/norms_dataset.json",split='train')
+    if subset_size != -1:
+        ds = ds.select(range(subset_size))
     
-    prompts = ds['prompt']
-    ground_truth = ds['ground_truth']
-    target_new = ds['target_new']
-    subject = ds['subject']
-    rephrase_prompts = ds['rephrase_prompt']
-    locality_inputs = ds['locality_inputs']
-    portability_inputs = ds['portability_inputs']
+    prompts = ds['rot-action']
+    log(f"Norms dataset loaded with length: {len(ds)}",False,False,True)
 
-
-    # Reformat locality and probability
-    locality_inputs_neighborhood_prompt_unpacked = []
-    locality_inputs_neighborhood_ground_truth_unpacked = []
-    locality_inputs_distracting_prompt_unpacked = []
-    locality_inputs_distracting_ground_truth_unpacked = []
-    
-    portability_inputs_synonym_prompt_unpacked = []
-    portability_inputs_synonym_ground_truth_unpacked = []
-    portability_inputs_one_hop_prompt_unpacked = []
-    portability_inputs_one_hop_ground_truth_unpacked = []
-    
-    for l1 in locality_inputs:
-        if len(l1['neighborhood']['prompt']) > 0:
-            locality_inputs_neighborhood_prompt_unpacked.append(l1['neighborhood']['prompt'])
-    for l2 in locality_inputs:
-        if len(l2['neighborhood']['ground_truth']) > 0:
-            locality_inputs_neighborhood_ground_truth_unpacked.append(l2['neighborhood']['ground_truth'])
-    for l3 in locality_inputs:
-        if len(l3['distracting']['prompt']) > 0:
-            locality_inputs_distracting_prompt_unpacked.append(l3['distracting']['prompt'])
-    for l4 in locality_inputs:
-        if len(l4['distracting']['ground_truth']) > 0:
-            locality_inputs_distracting_ground_truth_unpacked.append(l4['distracting']['ground_truth'])
-        
-    for p1 in portability_inputs:
-        if len(p1['synonym']['prompt']) > 0:
-            portability_inputs_synonym_prompt_unpacked.append(p1['synonym']['prompt'])
-    for p2 in portability_inputs:
-        if len(p2['synonym']['ground_truth']) > 0:
-            portability_inputs_synonym_ground_truth_unpacked.append(p2['synonym']['ground_truth'])
-    for p3 in portability_inputs:
-        if len(p3['one_hop']['prompt']) > 0:
-            portability_inputs_one_hop_prompt_unpacked.append(p3['one_hop']['prompt'])
-    for p4 in portability_inputs:
-        if len(p4['one_hop']['ground_truth']) > 0:
-            portability_inputs_one_hop_ground_truth_unpacked.append(p4['one_hop']['ground_truth'])
-    
-    locality_inputs = {}
-    portability_inputs = {}
-    
-    if len(locality_inputs_neighborhood_prompt_unpacked) > 0 and len(locality_inputs_distracting_prompt_unpacked) > 0:
-        locality_inputs = {
-            "neighborhood":{
-                "prompt": locality_inputs_neighborhood_prompt_unpacked,
-                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
-            },
-            "distracting":{
-                "prompt": locality_inputs_distracting_prompt_unpacked,
-                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
-            }
-	    }         
-    elif len(locality_inputs_neighborhood_prompt_unpacked) > 0:
-        locality_inputs = {
-            "neighborhood":{
-                "prompt": locality_inputs_neighborhood_prompt_unpacked,
-                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
-            },
-	    }
-    elif len(locality_inputs_distracting_prompt_unpacked) > 0:
-        locality_inputs = {
-            "distracting":{
-                "prompt": locality_inputs_distracting_prompt_unpacked,
-                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
-            }
-	    }
-        
-        
-        
-    if len(portability_inputs_synonym_prompt_unpacked) > 0 and len(portability_inputs_one_hop_prompt_unpacked) > 0:
-        portability_inputs = {
-            "synonym":{
-                "prompt": portability_inputs_synonym_prompt_unpacked,
-                "ground_truth":portability_inputs_synonym_ground_truth_unpacked
-            },
-            "one_hop":{
-                "prompt": portability_inputs_one_hop_prompt_unpacked,
-                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
-            }
-        }         
-    elif len(portability_inputs_synonym_prompt_unpacked) > 0:
-        portability_inputs = {
-            "synonym":{
-                "prompt": portability_inputs_synonym_prompt_unpacked,
-                "ground_truth": portability_inputs_synonym_ground_truth_unpacked
-            },
-        }
-    elif len(portability_inputs_one_hop_prompt_unpacked) > 0:
-        portability_inputs = {
-            "one_hop":{
-                "prompt": portability_inputs_one_hop_prompt_unpacked,
-                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
-            }
-        }
-        
-    # Check whether locality and portability are empty
-    log("Norms dataset loaded",False,False,True)
-
-    return prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs
-
-
-
+    return prompts
 
 
 
@@ -170,25 +62,65 @@ def log(info,add_decoration:bool,important:bool,bold:bool):
 
 
 
-
-prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs = load_norms(1)
-
-
-sampling_params = SamplingParams(max_tokens=20)
-
-llm = LLM(model="pansophic/rocket-3B",dtype='half',enforce_eager=True, max_model_len=880)
-
-
-response_start_time = time.time()
-            
-
-outputs = llm.generate(prompts, sampling_params)
-
-for output in outputs:
-    prompt = output.prompt
-    generated_text = output.outputs[0].text
-    print(f"Prompt: {prompt!r}, Generated text: {generated_text!r}")
+def generate(number_of_norms):
     
-response_end_time = time.time()
+    model = "pansophic/rocket-3B"
+    instruction ="Rephrase this very slightly!"
+    instruction_2 ="reword a single word and only give me the result back without any explanations!"
+    instruction_3 ="Find the subject in this sentence!"
+    
+    rephrases = []
+    prompts = []
+    norms = load_norms(number_of_norms)
+    
+    system = instruction
+    
+    for norm in norms:
+        
+        user = norm + '.'
+        prompt = f"""<|im_start|>system
+        {system}<|im_end|>
+        <|im_start|>user
+        {user}<|im_end|>
+        <|im_start|>assistant
+        """
+        prompts.append(prompt)
+    
+    
+        
+    llm = LLM(model=model,dtype='half',enforce_eager=True, max_model_len=700, gpu_memory_utilization=0.999)
 
-log(f"response inference took {response_end_time - response_start_time:.2f} seconds.",False,False,True)
+
+    sampling_params = SamplingParams(temperature=0.8, top_p=0.95, max_tokens=28)
+    outputs = llm.generate(prompts, sampling_params)
+
+    for output in outputs:
+        raw_output = output.outputs[0].text
+        result = ""
+        continuation = " is"
+        
+        if raw_output.find('?') == -1:
+            result = raw_output.split('.')
+        else:
+            result = raw_output.split('?')
+            continuation = '?'
+            
+        rephrases.append(result[0] + continuation)
+        
+    return norms, rephrases    
+    
+        
+        
+def construct_dataset(prompts, rephrases):
+    data = {"prompts":prompts, "rephrase": rephrases}
+    dataset = Dataset.from_dict(data)
+    dataset.to_json("norms/rephrases.json")
+        
+        
+
+if __name__ == "__main__":
+    argparse.ArgumentParser = argparse.ArgumentParser()
+    argparse.ArgumentParser.add_argument("-n","--number_of_norms", type=int, default=-1, help="Number of norms to generate")
+    args = argparse.ArgumentParser.parse_args()
+    
+    construct_dataset(*generate(args.number_of_norms))

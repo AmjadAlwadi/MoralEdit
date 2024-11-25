@@ -4,26 +4,30 @@ mismatch_string = "!?:)(:?!"
 number_of_mismatches = 0
 number_of_elements_found_in_big_list = 0
 
-# Load the datasets
+# Load the norms datasets
 norms = load_dataset("datasets/norms/", data_files="norms_dataset.json", split='train')
+
+# Load the edit norms template
 edit_norms = load_dataset("datasets/norms/",data_files="norms_edit_propmts_dataset_template.json", split='train')
+
+rephrases = load_dataset("datasets/norms/",data_files="rephrases.json", split='train')
+subjects = load_dataset("datasets/norms/",data_files="subjects.json", split='train')
 
 edit_norms_size = len(norms)
 
+# Load the judgements datasets
 very_good_words = load_dataset("datasets/judgements/", data_files="very_good_dataset.json", split='train')
 good_words = load_dataset("datasets/judgements/", data_files="good_dataset.json", split='train')
 bad_words = load_dataset("datasets/judgements/", data_files="bad_dataset.json", split='train')
 very_bad_words = load_dataset("datasets/judgements/", data_files="very_bad_dataset.json", split='train')
 ok_words = load_dataset("datasets/judgements/", data_files="ok_dataset.json", split='train')
 
-# Datasets to check later if first check was not successful
+# Datasets for judgements to check later if no match was found in the first check
 big_list_bad_words = load_dataset("datasets/judgements/", data_files="bad_and_very_bad_dataset.json", split='train')
 big_list_good_words = load_dataset("datasets/judgements/", data_files="good_and_very_good_dataset.json", split='train')
 
-
-shuffled_norms = norms.shuffle()
-norms_subset = shuffled_norms.select(range(edit_norms_size))
-
+norms_subset = norms.select(range(edit_norms_size))
+rephrases_subset = rephrases.select(range(edit_norms_size))
 
 # Clear the template
 edit_norms = edit_norms.filter(lambda example: False)
@@ -32,6 +36,9 @@ edit_norms = edit_norms.filter(lambda example: False)
 def get_data(batch, indices):
     global number_of_elements_found_in_big_list
     new_items = []
+    
+    current_rephrase_index = 0
+    max_rephrase_index = 3
     
     for i,idx in enumerate(indices):
 
@@ -91,7 +98,6 @@ def get_data(batch, indices):
         
         if len(target_new_matched_adjectives) == 0:
             target_new_matched_adjectives.append(mismatch_string)  
-            
             
             
             
@@ -161,19 +167,25 @@ def get_data(batch, indices):
             rot_action = rot_action[:-1]
         
         
-        first_rephrase = "What do you think about " + rot_action.lower()[0] + rot_action.lower()[1:] + "?"
-
-        # is or is considered to be
+        light_rephrase_1 = "What do you think about " + rot_action.lower()[0] + rot_action[1:] + "?"
+        light_rephrase_2 = rot_action.lower()[0] + rot_action[1:] + " is considered to be"
+        light_rephrase_3 = "What is your opinion about " + rot_action.lower()[0] + rot_action[1:] + "?"
+        light_rephrases = [light_rephrase_1,light_rephrase_2,light_rephrase_3]
         
-        # Do a proper rephrase using ai
-        # Find the correct subject
+        subject = subjects['subject'][idx]
+        
+        if len(subject) == 0:
+            if len(rot_action.split(" ")) > 1:
+                subject = rot_action.split(" ")[1]
+            else:
+                subject = rot_action.split(" ")[0]
 
         new_element = {
             "prompt": rot_action + " is",
             "ground_truth":ground_truth_matched_adjectives[0],
             "target_new":target_new_matched_adjectives[0],
-            "subject":rot_action.split()[0],
-            "rephrase_prompt":first_rephrase,
+            "subject":subject,
+            "rephrase_prompt":light_rephrases[current_rephrase_index%max_rephrase_index],
             "locality_inputs":{
                 "neighborhood":{
                     "prompt": "",
@@ -190,11 +202,13 @@ def get_data(batch, indices):
                     "ground_truth": target_new_matched_adjectives[0]
                 },
                 "one_hop":{
-                    "prompt": "",
-                    "ground_truth": ""
+                    "prompt": rephrases_subset['rephrase'][idx],
+                    "ground_truth": target_new_matched_adjectives[0]
                 }
             }
         }
+        
+        current_rephrase_index += 1
         
         new_items.append(new_element)
                 
