@@ -108,4 +108,4 @@ new_items_list = [item for item in result["subject"]]
 new_items_dict = {"subject": new_items_list}
 
 subejcts_dataset = Dataset.from_dict(new_items_dict)
-subejcts_dataset.to_json("datasets/norms/subjects.json")
+subejcts_dataset.to_json("datasets/norms/subjects_1.json")

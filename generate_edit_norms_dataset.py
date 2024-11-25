@@ -11,7 +11,7 @@ norms = load_dataset("datasets/norms/", data_files="norms_dataset.json", split='
 edit_norms = load_dataset("datasets/norms/",data_files="norms_edit_propmts_dataset_template.json", split='train')
 
 rephrases = load_dataset("datasets/norms/",data_files="rephrases.json", split='train')
-subjects = load_dataset("datasets/norms/",data_files="subjects.json", split='train')
+subjects = load_dataset("datasets/norms/",data_files="subjects_1.json", split='train')
 
 edit_norms_size = len(norms)
 
