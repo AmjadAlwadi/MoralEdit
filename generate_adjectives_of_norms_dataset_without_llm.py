@@ -1,75 +1,4 @@
-import spacy
 from datasets import load_dataset, Dataset, concatenate_datasets
-from itertools import zip_longest
-
-nlp = spacy.load("en_core_web_sm")
-
-
-def find_adjective_using_speech_tagger(nlp, sentence):
-    
-    doc = nlp(sentence)
-    
-    for token in doc:
-        if "ADJ" in token.pos_:
-            return token.text
-    
-    return None
-        
-        
-
-
-def find_common_substring(str1, str2):
-    len1, len2 = len(str1), len(str2)
-    longest_substring = ""
-
-    # Iterate over each character in str1
-    for i in range(len1):
-        # Iterate over each character in str2
-        for j in range(len2):
-            lcs_temp = 0
-            match = ''
-            
-            # If characters match, check for the longest substring
-            while ((i + lcs_temp < len1) and (j + lcs_temp < len2) and (str1[i + lcs_temp] == str2[j + lcs_temp])):
-                match += str1[i + lcs_temp]
-                lcs_temp += 1
-            
-            # Update longest_substring if we found a new longest match
-            if len(match) > len(longest_substring):
-                longest_substring = match
-                
-    return longest_substring
-
-
-
-def find_common_substring_complement(str1, str2):
-    len1, len2 = len(str1), len(str2)
-    longest_substring = ""
-
-    # Iterate over each character in str1
-    for i in range(len1):
-        # Iterate over each character in str2
-        for j in range(len2):
-            lcs_temp = 0
-            match = ''
-            
-            # If characters match, check for the longest substring
-            while ((i + lcs_temp < len1) and (j + lcs_temp < len2) and (str1[i + lcs_temp] == str2[j + lcs_temp])):
-                match += str1[i + lcs_temp]
-                lcs_temp += 1
-            
-            # Update longest_substring if we found a new longest match
-            if len(match) > len(longest_substring):
-                longest_substring = match
-                
-                
-    complement1 = str1.replace(longest_substring, "")
-    complement2 = str2.replace(longest_substring, "")
-    
-    return complement1, complement2
-
-
-       
 
 mismatch_string = "!?:)(:?!"
 number_of_mismatches = 0
@@ -108,10 +37,10 @@ def find_adjective(batch, indices):
         # Find the correct adjective for target_new
         target_new_matched_adjectives = []
         
-        for word in batch["anti_norm"][i].split(" "):
+        for word in batch["anti_norm"][i].split():
             word = word.lower()
             
-            # Skip some useless words for efficiency
+            # Skip some useless words
             if word in ["i","you","they","he","she","it","it's","is","not","something","no"]:
                 continue
             
@@ -135,9 +64,9 @@ def find_adjective(batch, indices):
                         if word in sentence.split():
                             target_new_matched_adjectives.append(sentence)
                             number_of_elements_found_in_big_list+=1
-                            
-                
-                
+                    
+
+  
             else:
                 for sentence in very_bad_words["judgement"]: 
                     if word in sentence.split():
@@ -158,18 +87,7 @@ def find_adjective(batch, indices):
                             target_new_matched_adjectives.append(sentence)
                             number_of_elements_found_in_big_list+=1
                 
-                
-                
-                
-        # if didn't find any match then use speech tagger to find adjective
-        if len(target_new_matched_adjectives) == 0:
-            print("hi_0")             
-            adjective = find_adjective_using_speech_tagger(nlp,find_common_substring_complement(batch["anti_norm"][i],batch["original_norm"][i])[0])
-            if adjective:
-                target_new_matched_adjectives.append(adjective)
-    
-
-
+        
         if len(target_new_matched_adjectives) == 0:
             target_new_matched_adjectives.append(mismatch_string)  
             
@@ -227,19 +145,7 @@ def find_adjective(batch, indices):
                         if word in sentence.split():
                             ground_truth_matched_adjectives.append(sentence)
                             number_of_elements_found_in_big_list+=1
-                            
-                            
-                            
-              
-                            
-        # if didn't find any match then use speech tagger to find adjective
-        if len(ground_truth_matched_adjectives) == 0:
-            print("hi_1")            
-            adjective = find_adjective_using_speech_tagger(nlp,find_common_substring_complement(batch["anti_norm"][i],batch["original_norm"][i])[1])
-            if adjective:
-                ground_truth_matched_adjectives.append(adjective)
-                    
-                      
+                
         
         if len(ground_truth_matched_adjectives) == 0:
             ground_truth_matched_adjectives.append(mismatch_string)
