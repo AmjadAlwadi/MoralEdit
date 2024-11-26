@@ -162,8 +162,7 @@ def find_adjective(batch, indices):
                 
                 
         # if didn't find any match then use speech tagger to find adjective
-        if len(target_new_matched_adjectives) == 0:
-            print("hi_0")             
+        if len(target_new_matched_adjectives) == 0:             
             adjective = find_adjective_using_speech_tagger(nlp,find_common_substring_complement(batch["anti_norm"][i],batch["original_norm"][i])[0])
             if adjective:
                 target_new_matched_adjectives.append(adjective)
@@ -233,8 +232,7 @@ def find_adjective(batch, indices):
               
                             
         # if didn't find any match then use speech tagger to find adjective
-        if len(ground_truth_matched_adjectives) == 0:
-            print("hi_1")            
+        if len(ground_truth_matched_adjectives) == 0:        
             adjective = find_adjective_using_speech_tagger(nlp,find_common_substring_complement(batch["anti_norm"][i],batch["original_norm"][i])[1])
             if adjective:
                 ground_truth_matched_adjectives.append(adjective)
@@ -250,16 +248,16 @@ def find_adjective(batch, indices):
 
 
 
-    return {"original_norm_adjectives":original_norm_adjectives, "anti_norm_adjectives":anti_norm_adjectives}
+    return {"original_norm_adjective":original_norm_adjectives, "anti_norm_adjective":anti_norm_adjectives}
 
 
 # Convert the result into a new dataset
 result = norms_subset.map(find_adjective, with_indices=True, batched=True, batch_size=3000)
 
-original_norm_adjectives = [item for item in result["original_norm_adjectives"]]
-anti_norm_adjectives = [item for item in result["anti_norm_adjectives"]]
+original_norm_adjectives = [item for item in result["original_norm_adjective"]]
+anti_norm_adjectives = [item for item in result["anti_norm_adjective"]]
 
-new_items_dict = {"original_norm_adjectives": original_norm_adjectives, "anti_norm_adjectives":anti_norm_adjectives}
+new_items_dict = {"original_norm_adjective": original_norm_adjectives, "anti_norm_adjective":anti_norm_adjectives}
 
 subejcts_dataset = Dataset.from_dict(new_items_dict)
-subejcts_dataset.to_json("datasets/norms/norms_adjectives_1.json")
+subejcts_dataset.to_json("datasets/norms/norms_adjectives_st.json")

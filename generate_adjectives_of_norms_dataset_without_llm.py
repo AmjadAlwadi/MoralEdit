@@ -27,7 +27,7 @@ norms_subset = norms.select(range(edit_norms_size))
 
 
 def find_adjective(batch, indices):
-    global number_of_elements_found_in_big_list
+    global number_of_elements_found_in_big_list, number_of_mismatches
     
     original_norm_adjectives = []
     anti_norm_adjectives = []
@@ -90,7 +90,7 @@ def find_adjective(batch, indices):
         
         if len(target_new_matched_adjectives) == 0:
             target_new_matched_adjectives.append(mismatch_string)  
-            
+            number_of_mismatches += 1
             
             
         # Find the correct adjective for ground_truth
@@ -149,23 +149,28 @@ def find_adjective(batch, indices):
         
         if len(ground_truth_matched_adjectives) == 0:
             ground_truth_matched_adjectives.append(mismatch_string)
-            
+            number_of_mismatches += 1
             
         original_norm_adjectives.append(ground_truth_matched_adjectives[0])
         anti_norm_adjectives.append(target_new_matched_adjectives[0])
 
 
 
-    return {"original_norm_adjectives":original_norm_adjectives, "anti_norm_adjectives":anti_norm_adjectives}
+    return {"original_norm_adjective":original_norm_adjectives, "anti_norm_adjective":anti_norm_adjectives}
+
 
 
 # Convert the result into a new dataset
 result = norms_subset.map(find_adjective, with_indices=True, batched=True, batch_size=3000)
 
-original_norm_adjectives = [item for item in result["original_norm_adjectives"]]
-anti_norm_adjectives = [item for item in result["anti_norm_adjectives"]]
+original_norm_adjectives = [item for item in result["original_norm_adjective"]]
+anti_norm_adjectives = [item for item in result["anti_norm_adjective"]]
 
-new_items_dict = {"original_norm_adjectives": original_norm_adjectives, "anti_norm_adjectives":anti_norm_adjectives}
+new_items_dict = {"original_norm_adjective": original_norm_adjectives, "anti_norm_adjective":anti_norm_adjectives}
 
 subejcts_dataset = Dataset.from_dict(new_items_dict)
-subejcts_dataset.to_json("datasets/norms/norms_adjectives_1.json")
+subejcts_dataset.to_json("datasets/norms/norms_adjectives.json")
+
+
+print(f"number_of_mismatches: {number_of_mismatches}")
+print(f"number_of_elements_found_in_big_list: {number_of_elements_found_in_big_list}")

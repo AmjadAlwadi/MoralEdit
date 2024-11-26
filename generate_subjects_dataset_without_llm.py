@@ -31,9 +31,10 @@ def find_subject(batch, indices):
     "up", "with", "without"
     ]
 
-    # use a very big dataset of adjectives and verbs
 
-
+    # Use a very big dataset of adjectives and verbs
+    
+    
     words_to_skip = ["my","your","his","her","it's","their",
                      "a","an","the","and","or",
                      "and", "but", "or", "nor", "for", "so", "yet",
@@ -108,4 +109,4 @@ new_items_list = [item for item in result["subject"]]
 new_items_dict = {"subject": new_items_list}
 
 subejcts_dataset = Dataset.from_dict(new_items_dict)
-subejcts_dataset.to_json("datasets/norms/subjects_1.json")
+subejcts_dataset.to_json("datasets/norms/subjects.json")
