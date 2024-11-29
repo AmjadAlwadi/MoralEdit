@@ -20,8 +20,6 @@ adjectives_subset = adjectives.select(range(edit_norms_size))
 
 def get_data(batch, indices):
     new_items = []
-    current_rephrase_index = 0
-    max_rephrase_index = 3
     
     for i,idx in enumerate(indices):
                 
@@ -38,13 +36,20 @@ def get_data(batch, indices):
         
         light_rephrases = [light_rephrase_1,light_rephrase_2,light_rephrase_3]
         
+        
+        # Reformat im/moral action
+        moral_action = batch['moral_action'][idx][-1].rstrip('.?,') + ', that is'
+        immoral_action = batch['immoral_action'][idx][-1].rstrip('.?,') + ', that is'
 
         new_element = {
             "prompt": rot_action + " is",
             "ground_truth":adjectives_subset['original_norm_adjective'][idx],
             "target_new":adjectives_subset['anti_norm_adjective'][idx],
             "subject":subjects_subset['subject'][idx],
-            "rephrase_prompt":light_rephrases[current_rephrase_index%max_rephrase_index],
+            "light_rephrase_prompt":light_rephrases[idx%3],
+            "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
+            "moral-action":moral_action,
+            "immoral-action":immoral_action,
             "locality_inputs":{
                 "neighborhood":{
                     "prompt": "",
@@ -57,17 +62,15 @@ def get_data(batch, indices):
             },
             "portability_inputs": {
                 "synonym":{
-                    "prompt": batch["prompt_subject_1"][i],
+                    "prompt": batch[f"prompt_subject_{idx%2}"][i],
                     "ground_truth": adjectives_subset['anti_norm_adjective'][idx]
                 },
                 "one_hop":{
-                    "prompt": rephrases_subset['rephrase'][idx],
+                    "prompt": moral_action,
                     "ground_truth": adjectives_subset['anti_norm_adjective'][idx]
                 }
             }
         }
-        
-        current_rephrase_index += 1
         
         new_items.append(new_element)
                 

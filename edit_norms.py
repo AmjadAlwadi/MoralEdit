@@ -23,7 +23,7 @@ timestamp = datetime.now().strftime("%d-%m-%Y__%H-%M")
 
 access_token = "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"
 
-available_editing_methods = { 0: "ROME", 1: "R-ROME", 2: "MEMIT", 3: "EMMET", 4: "PMET", 5: "IKE", 6: "GRACE", 7: "MELO", 8: "WISE", 9: "DPO", 10: "PROMPT_ENGINEERING", # Do not require pretraining
+available_editing_methods = { 0: "ROME", 1: "R-ROME", 2: "MEMIT", 3: "EMMET", 4: "PMET", 5: "IKE", 6: "GRACE", 7: "MELO", 8: "WISE", 9: "DPO", 10: "INSTRUCTION_ENGINEERING", # Do not require pretraining
                              11: "FT-L", 12: "FT-M", 13: "LORA", 14: "QLORA",
                              15: "MEND", 16: "SERAC", 17: "MALMEN"}
 
@@ -137,9 +137,8 @@ def save_as_json(object,file_name):
     file_path = directory_path + "/" + file_name + '.json'
         
     # Save dictionary as a JSON file
-    with open(file_path, 'w') as json_file:
-        json.dump(object, json_file)
-
+    with open(file_path, 'w', encoding="utf-8") as json_file:
+        json.dump(object, json_file, ensure_ascii=False, indent=4)
 
 
 
@@ -679,7 +678,7 @@ def main():
         
         
 
-        if editing_method == "PROMPT_ENGINEERING":
+        if editing_method == "INSTRUCTION_ENGINEERING":
             
             model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
             log("Loaded base model",True,False,True)
@@ -1089,7 +1088,7 @@ def main():
         
         
         # Unload if not used later
-        if not enable_models_check or editing_method == "IKE" or editing_method == "PROMPT_ENGINEERING":
+        if not enable_models_check or editing_method == "IKE" or editing_method == "INSTRUCTION_ENGINEERING":
             del pre_edit_model
             torch.cuda.empty_cache()
             log("Unloaded base model",False,False,True)

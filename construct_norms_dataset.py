@@ -30,8 +30,8 @@ rephrases_subject_3 = load_dataset("datasets/rephrases/", data_files="prompt_hyp
 
 
 def add_empty_columns(example):
-    example['rot-action'] = ""
-    example['action-moral-judgment'] = ""
+    example['rot_action'] = ""
+    example['action_moral_judgment'] = ""
     example['prompt_subject_1'] = ""
     example['prompt_subject_2'] = ""
     example['prompt_subject_3'] = ""
@@ -54,8 +54,8 @@ def add_necessary_columns(batch, indices):
         rephrases_subject_2_element = rephrases_subject_2_mapping[batch['ID'][i][:-1] + '1']
         rephrases_subject_3_element = rephrases_subject_3_mapping[batch['ID'][i][:-1] + '1']
     
-        batch['rot-action'][i] = rephrases_subject_1_element['rot-action']
-        batch['action-moral-judgment'][i] = rephrases_subject_1_element['action-moral-judgment']
+        batch['rot_action'][i] = rephrases_subject_1_element['rot-action']
+        batch['action_moral_judgment'][i] = rephrases_subject_1_element['action-moral-judgment']
         batch['prompt_subject_1'][i] = rephrases_subject_1_element['prompt']
         batch['prompt_subject_2'][i] = rephrases_subject_2_element['prompt']
         batch['prompt_subject_3'][i] = rephrases_subject_3_element['prompt']
@@ -71,8 +71,8 @@ def adjust_strings(example):
     example['prompt_subject_1'] = example['prompt_subject_1'][1:-9]
     example['prompt_subject_2'] = example['prompt_subject_2'][1:-9]
     example['prompt_subject_3'] = example['prompt_subject_3'][1:-9]
-    example['action-moral-judgment'] = example['action-moral-judgment'] * -1
-    example['rot-action'] = example['rot-action'][0].capitalize() + example['rot-action'][1:]
+    example['action_moral_judgment'] = example['action_moral_judgment'] * -1
+    example['rot_action'] = example['rot_action'][0].capitalize() + example['rot_action'][1:]
     
     return example
 
@@ -107,8 +107,8 @@ original_ms_dataset = original_ms_dataset.map(remove_odd_indices, with_indices=T
 
 
 def remove_full_stop_rot(example):
-    example['rot-action'] = example['rot-action'].rstrip('.')
-    example['rot-action'] = example['rot-action'].rstrip('?')
+    example['rot_action'] = example['rot_action'].rstrip('.')
+    example['rot_action'] = example['rot_action'].rstrip('?')
     return example
 
 
@@ -134,7 +134,7 @@ df2.rename(columns={'norm': 'original_norm'}, inplace=True)
 # join
 merged_df = pd.merge(df1, df2, on='ID', how='inner')
 
-new_column_order = ['ID',"rot-action", 'original_norm', 'anti_norm',"action-moral-judgment", 'moral_action', 'immoral_action',"prompt_subject_1","prompt_subject_2","prompt_subject_3"] 
+new_column_order = ['ID',"rot_action", 'original_norm', 'anti_norm',"action_moral_judgment", 'moral_action', 'immoral_action',"prompt_subject_1","prompt_subject_2","prompt_subject_3"] 
 merged_df = merged_df[new_column_order]
 
 merged_dataset = Dataset.from_pandas(merged_df)
