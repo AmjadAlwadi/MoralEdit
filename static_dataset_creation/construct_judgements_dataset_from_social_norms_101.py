@@ -2,7 +2,7 @@ from datasets import load_dataset,Dataset
 
 
 # Load the datasets
-social_chemistry = load_dataset("datasets/social-chem-101/", data_files="social-chem-101.v1.0.tsv", split='train')
+social_chemistry = load_dataset("../datasets/social-chem-101/", data_files="social-chem-101.v1.0.tsv", split='train')
 social_chemistry = social_chemistry.remove_columns(['split','area', 'm', 'rot-agree', 'rot-categorization', 'rot-moral-foundations', 'rot-char-targeting', 'rot-bad', 'action', 'action-agency', 'action-agree', 'action-legal', 'action-pressure', 'action-char-involved', 'action-hypothetical', 'situation', 'situation-short-id', 'rot-worker-id', 'breakdown-worker-id', 'n-characters', 'characters'])
 
 # Create an empty dataset
@@ -39,8 +39,8 @@ def add_judgements(example,index):
 # Apply the adjust function to the dataset
 social_chemistry = social_chemistry.map(add_judgements,with_indices=True, batched=True, batch_size=3000,load_from_cache_file=False)
 
-very_bad_dataset.to_json("datasets/norms/very_bad_dataset.json")
-bad_dataset.to_json("datasets/norms/bad_dataset.json")
-ok_dataset.to_json("datasets/norms/ok_dataset.json")
-good_dataset.to_json("datasets/norms/good_dataset.json")
-very_good_dataset.to_json("datasets/norms/very_good_dataset.json")
+very_bad_dataset.to_json("../datasets/norms/very_bad_dataset.json")
+bad_dataset.to_json("../datasets/norms/bad_dataset.json")
+ok_dataset.to_json("../datasets/norms/ok_dataset.json")
+good_dataset.to_json("../datasets/norms/good_dataset.json")
+very_good_dataset.to_json("../datasets/norms/very_good_dataset.json")
