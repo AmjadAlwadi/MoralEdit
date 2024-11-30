@@ -1,21 +1,8 @@
 from datasets import load_dataset, Dataset, concatenate_datasets
+import argparse
+import numpy as np
 
 mismatch_string = "!?:)(:?!"
-
-# Load the norms datasets
-norms = load_dataset("../datasets/norms/", data_files="norms_dataset.json", split='train')
-
-# Load the necessary components
-rephrases = load_dataset("../datasets/norms/",data_files="rephrases_llm.json", split='train')
-subjects = load_dataset("../datasets/norms/",data_files="subjects_st.json", split='train')
-adjectives = load_dataset("../datasets/norms/",data_files="norms_adjectives.json", split='train')
-
-edit_norms_size = len(norms)
-
-norms_subset = norms.select(range(edit_norms_size))
-rephrases_subset = rephrases.select(range(edit_norms_size))
-subjects_subset = subjects.select(range(edit_norms_size))
-adjectives_subset = adjectives.select(range(edit_norms_size))
 
 
 def get_data(batch, indices):
@@ -78,20 +65,89 @@ def get_data(batch, indices):
     return {"new_items": new_items}
 
 
-# Convert the result into a new dataset
-result = norms_subset.map(get_data, with_indices=True, batched=True, batch_size=1000)
-
-new_items_list = [item for item in result["new_items"]]
-new_items_dict = {key: [dic[key] for dic in new_items_list] for key in new_items_list[0]}
-new_items_dataset = Dataset.from_dict(new_items_dict)
 
 
-# Skip all those elements that don't have matches
-def remove_mismatch(example):
-    return example['target_new'] != mismatch_string and example['ground_truth'] != mismatch_string and example['subject'] != mismatch_string and example["portability_inputs"]["one_hop"]["prompt"] != mismatch_string and len(example["portability_inputs"]["one_hop"]["prompt"]) != 0
+
+
+def main():
     
+    # Convert the result into a new dataset
+    result = norms_subset.map(get_data, with_indices=True, batched=True, batch_size=1000)
 
-new_items_dataset = new_items_dataset.filter(remove_mismatch)
-new_items_dataset.to_json("../datasets/norms/edit_norms_dataset.json")
+    new_items_list = [item for item in result["new_items"]]
+    new_items_dict = {key: [dic[key] for dic in new_items_list] for key in new_items_list[0]}
+    new_items_dataset = Dataset.from_dict(new_items_dict)
 
-print(f"Number of elements removed: {edit_norms_size - len(new_items_dataset)}")
+
+    # Skip all those elements that don't have matches
+    def remove_mismatch(example):
+        return example['target_new'] != mismatch_string and example['ground_truth'] != mismatch_string and example['subject'] != mismatch_string and example["portability_inputs"]["one_hop"]["prompt"] != mismatch_string and len(example["portability_inputs"]["one_hop"]["prompt"]) != 0
+        
+
+    new_items_dataset = new_items_dataset.filter(remove_mismatch)
+    new_items_dataset.to_json("../datasets/norms/edit_norms_dataset.json")
+
+    print(f"Number of elements removed: {edit_norms_size - len(new_items_dataset)}")
+
+
+
+
+
+def load_datasets(file_name, subset_size):
+    global edit_norms_size, norms_subset, rephrases_subset, subjects_subset, adjectives_subset
+    
+    if file_name is None:
+        file_name = "norms_dataset.json"
+     
+    # Load the norms datasets
+    norms = load_dataset("../datasets/norms/", data_files=file_name, split='train')
+
+    # Load the necessary components
+    rephrases = load_dataset("../datasets/norms/",data_files="rephrases_llm.json", split='train')
+    subjects = load_dataset("../datasets/norms/",data_files="subjects_st.json", split='train')
+    adjectives = load_dataset("../datasets/norms/",data_files="norms_adjectives.json", split='train')
+
+    edit_norms_size = subset_size
+
+    if subset_size == -1:
+        edit_norms_size = len(norms)
+
+    norms_subset = norms.select(range(edit_norms_size))
+    rephrases_subset = rephrases.select(range(edit_norms_size))
+    subjects_subset = subjects.select(range(edit_norms_size))
+    adjectives_subset = adjectives.select(range(edit_norms_size))
+
+
+    if shuffle:
+        
+        # Create a common set of indices
+        indices = np.arange(edit_norms_size)
+        np.random.shuffle(indices)
+
+        # Shuffle each subset using the same set of indices
+        norms_subset = norms_subset[indices]
+        rephrases_subset = rephrases_subset[indices]
+        subjects_subset = subjects_subset[indices]
+        adjectives_subset = adjectives_subset[indices]
+
+
+
+
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description='Filter norms dataset so that each rot_action in not contradicted by another one in the dataset resuling in a coherent and moral dilemma free dataset.')
+    parser.add_argument('-f','--dataset_name', type=str, default=None, help='If not specified then the standard edit_norms_dataset is going to be used.')
+    parser.add_argument('-s','--subset_size', type=int, default=100, help='Size of the subset to process, -1 for full dataset')
+    parser.add_argument('--shuffle', action='store_true', help='Shuffle the dataset')
+    
+    
+    args = parser.parse_args()
+    
+    dataset_name = args.dataset_name
+    subset_size = args.subset_size
+    shuffle = args.shuffle
+
+    load_datasets(dataset_name, subset_size, shuffle)
+    main()
