@@ -1,4 +1,4 @@
-Private Machine Learning stuff
+# Coherent Norms Editing 
 
 ## Dataset creation
 1. Construct the full norms dataset at first, which constructs a merged dataset of original-ms, anit-ms and rephrased-ms and removes the unnecessary rows using static_dataset_creation\construct_norms_dataset.py.
