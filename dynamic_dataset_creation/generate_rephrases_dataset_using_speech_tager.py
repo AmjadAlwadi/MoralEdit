@@ -56,7 +56,7 @@ def debug(sentence):
 
 
 
-norms = load_dataset("../datasets/norms/", data_files="norms_dataset.json", split='train')
+norms = load_dataset("./datasets/norms/", data_files="norms_dataset.json", split='train')
 
 edit_norms_size = 100
 norms_subset = norms.select(range(edit_norms_size))
@@ -82,5 +82,5 @@ new_items_list = [item for item in result["rephrase"]]
 new_items_dict = {"rephrase": new_items_list}
 
 rephrases_dataset = Dataset.from_dict(new_items_dict)
-rephrases_dataset.to_json("../datasets/norms/rephrases_st.json")
+rephrases_dataset.to_json("./datasets/norms/rephrases_st.json")
 

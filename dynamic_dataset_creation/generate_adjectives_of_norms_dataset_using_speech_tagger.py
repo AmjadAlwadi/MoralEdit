@@ -76,18 +76,18 @@ number_of_mismatches = 0
 number_of_elements_found_in_big_list = 0
 
 
-norms = load_dataset("../datasets/norms/", data_files="norms_dataset.json", split='train')
+norms = load_dataset("./datasets/norms/", data_files="norms_dataset.json", split='train')
 
 
-very_good_words = load_dataset("../datasets/judgements/", data_files="very_good_dataset.json", split='train')
-good_words = load_dataset("../datasets/judgements/", data_files="good_dataset.json", split='train')
-bad_words = load_dataset("../datasets/judgements/", data_files="bad_dataset.json", split='train')
-very_bad_words = load_dataset("../datasets/judgements/", data_files="very_bad_dataset.json", split='train')
-ok_words = load_dataset("../datasets/judgements/", data_files="ok_dataset.json", split='train')
+very_good_words = load_dataset("./datasets/judgements/", data_files="very_good_dataset.json", split='train')
+good_words = load_dataset("./datasets/judgements/", data_files="good_dataset.json", split='train')
+bad_words = load_dataset("./datasets/judgements/", data_files="bad_dataset.json", split='train')
+very_bad_words = load_dataset("./datasets/judgements/", data_files="very_bad_dataset.json", split='train')
+ok_words = load_dataset("./datasets/judgements/", data_files="ok_dataset.json", split='train')
 
 # Datasets for judgements to check later if no match was found in the first check
-big_list_bad_words = load_dataset("../datasets/judgements/", data_files="bad_and_very_bad_dataset.json", split='train')
-big_list_good_words = load_dataset("../datasets/judgements/", data_files="good_and_very_good_dataset.json", split='train')
+big_list_bad_words = load_dataset("./datasets/judgements/", data_files="bad_and_very_bad_dataset.json", split='train')
+big_list_good_words = load_dataset("./datasets/judgements/", data_files="good_and_very_good_dataset.json", split='train')
 
 
 adjectives_dataset = concatenate_datasets([very_good_words,good_words,bad_words,very_bad_words,ok_words,big_list_bad_words,big_list_good_words])
@@ -260,4 +260,4 @@ anti_norm_adjectives = [item for item in result["anti_norm_adjective"]]
 new_items_dict = {"original_norm_adjective": original_norm_adjectives, "anti_norm_adjective":anti_norm_adjectives}
 
 subejcts_dataset = Dataset.from_dict(new_items_dict)
-subejcts_dataset.to_json("../datasets/norms/norms_adjectives_st.json")
+subejcts_dataset.to_json("./datasets/norms/norms_adjectives_st.json")

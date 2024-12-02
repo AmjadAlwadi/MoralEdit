@@ -25,8 +25,8 @@ def get_data(batch, indices):
         
         
         # Reformat im/moral action
-        moral_action = batch['moral_action'][idx].rstrip('.?,') + ', that is'   # what do you think about that
-        immoral_action = batch['immoral_action'][idx].rstrip('.?,') + ', that is'
+        moral_action = batch['moral_action'][idx].rstrip('.?,') + ', that would be'   # what do you think about that
+        immoral_action = batch['immoral_action'][idx].rstrip('.?,') + ', that would be'
 
         target_new = adjectives_subset['anti_norm_adjective'][idx]
         ground_truth = adjectives_subset['original_norm_adjective'][idx]
@@ -96,7 +96,7 @@ def main():
     if '__index_level_0__' in new_items_dataset.column_names:
         new_items_dataset = new_items_dataset.remove_columns(['__index_level_0__'])
     
-    new_items_dataset.to_json("../datasets/norms/edit_norms_dataset.json")
+    new_items_dataset.to_json("./datasets/norms/edit_norms_dataset.json")
 
     print(f"Number of elements removed: {edit_norms_size - len(new_items_dataset)}")
 
@@ -111,12 +111,12 @@ def load_datasets(file_name, subset_size, shuffle):
         file_name = "norms_dataset.json"
      
     # Load the norms datasets
-    norms = load_dataset("../datasets/norms/", data_files=file_name, split='train')
+    norms = load_dataset("./datasets/norms/", data_files=file_name, split='train')
 
     # Load the necessary components
-    rephrases = load_dataset("../datasets/norms/",data_files="rephrases_llm.json", split='train')
-    subjects = load_dataset("../datasets/norms/",data_files="subjects_st.json", split='train')
-    adjectives = load_dataset("../datasets/norms/",data_files="norms_adjectives.json", split='train')
+    rephrases = load_dataset("./datasets/norms/",data_files="rephrases_llm.json", split='train')
+    subjects = load_dataset("./datasets/norms/",data_files="subjects_st.json", split='train')
+    adjectives = load_dataset("./datasets/norms/",data_files="norms_adjectives.json", split='train')
 
     edit_norms_size = subset_size
 

@@ -9,7 +9,7 @@ import time
 
 
 def load_norms(subset_size, shuffle):
-    norms = load_dataset("../datasets/norms/", data_files="norms_dataset.json", split='train')
+    norms = load_dataset("./datasets/norms/", data_files="norms_dataset.json", split='train')
     n = len(norms) if subset_size == -1 else subset_size
     if shuffle:
         norms = norms.shuffle()
@@ -126,5 +126,5 @@ if __name__ == '__main__':
         result = result.remove_columns(['__index_level_0__'])
     
     print(f"Number of neutral items: {len(result)}")
-    result.to_json(f"../datasets/norms/coherent_edit_norms_dataset_T{tolerance_range}_S{subset_size}.json")
+    result.to_json(f"./datasets/norms/coherent_edit_norms_dataset_T{tolerance_range}_S{subset_size}.json")
     

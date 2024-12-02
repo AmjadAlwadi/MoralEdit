@@ -27,7 +27,7 @@ available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
 
 def load_norms(subset_size):
     
-    ds = load_dataset("json", data_files="../datasets/norms/norms_dataset.json",split='train')
+    ds = load_dataset("json", data_files="./datasets/norms/norms_dataset.json",split='train')
     if subset_size != -1:
         ds = ds.select(range(subset_size))
     
@@ -113,7 +113,7 @@ def generate(number_of_norms):
 def construct_dataset(prompts, subjects):
     data = {"prompts":prompts, "rephrase": subjects}
     dataset = Dataset.from_dict(data)
-    dataset.to_json("../datasets/norms/subjects_llm.json")
+    dataset.to_json("./datasets/norms/subjects_llm.json")
         
         
 

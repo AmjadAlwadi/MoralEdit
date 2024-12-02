@@ -1,13 +1,13 @@
 from datasets import load_dataset,Dataset
 
 
-good_words_dataset = load_dataset("csv",data_files="../datasets/judgements/good_words.csv", split='train')
-good_words_dataset_1 = load_dataset("json",data_files="../datasets/judgements/good_dataset.json", split='train')
-good_words_dataset_2 = load_dataset("json",data_files="../datasets/judgements/very_good_dataset.json", split='train')
-# ok_dataset = load_dataset("json",data_files="../datasets/judgements/ok_dataset.json", split='train')
-bad_words_dataset = load_dataset("csv",data_files="../datasets/judgements/bad_words.csv", split='train')
-bad_words_dataset_1 = load_dataset("json",data_files="../datasets/judgements/bad_dataset.json", split='train')
-bad_words_dataset_2 = load_dataset("json",data_files="../datasets/judgements/very_bad_dataset.json", split='train')
+good_words_dataset = load_dataset("csv",data_files="./datasets/judgements/good_words.csv", split='train')
+good_words_dataset_1 = load_dataset("json",data_files="./datasets/judgements/good_dataset.json", split='train')
+good_words_dataset_2 = load_dataset("json",data_files="./datasets/judgements/very_good_dataset.json", split='train')
+# ok_dataset = load_dataset("json",data_files="./datasets/judgements/ok_dataset.json", split='train')
+bad_words_dataset = load_dataset("csv",data_files="./datasets/judgements/bad_words.csv", split='train')
+bad_words_dataset_1 = load_dataset("json",data_files="./datasets/judgements/bad_dataset.json", split='train')
+bad_words_dataset_2 = load_dataset("json",data_files="./datasets/judgements/very_bad_dataset.json", split='train')
 
 
 good_words = set()
@@ -62,5 +62,5 @@ bad_words_dict = {'judgement': bad_words}
 good_and_very_good_dataset = Dataset.from_dict(good_words_dict)
 bad_and_very_bad_dataset = Dataset.from_dict(bad_words_dict)
 
-good_and_very_good_dataset.to_json("../datasets/judgements/good_and_very_good_dataset.json")
-bad_and_very_bad_dataset.to_json("../datasets/judgements/bad_and_very_bad_dataset.json")
+good_and_very_good_dataset.to_json("./datasets/judgements/good_and_very_good_dataset.json")
+bad_and_very_bad_dataset.to_json("./datasets/judgements/bad_and_very_bad_dataset.json")

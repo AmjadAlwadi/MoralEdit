@@ -648,64 +648,150 @@ def load_norms(subset_size):
 
 
 
-
-
-
-
 def measure_quality(tokenizer,edited_model, edit_args):
+        
+    # Test other metrics after editing to see whether model is degraded    
+        
+        
+    negative_label = "LABEL_0"
+    positive_label = "LABEL_2"
+    neutral_label = "LABEL_1"
     
-    # remove the prompt part from moral/immoral action and from light and strong rephrases and from every thing basically
-    
-    
-    pipeline("sentiment-analysis")
-    sentiment_analysis = pipeline("sentiment-analysis",device = device)
-    
-    post_edit_response_prompt = create_response(edited_model,tokenizer,edit_args["prompts"][0],instructinoal=False)
-    decoded_post_edit_response_prompt = tokenizer.decode(post_edit_response_prompt.sequences[0],skip_special_tokens=True)
-    
-    post_edit_response_light_rephrase = create_response(edited_model,tokenizer,edit_args["light_rephrase_prompts"][0],instructinoal=False)
-    decoded_post_edit_response_light_rephrase = tokenizer.decode(post_edit_response_light_rephrase.sequences[0],skip_special_tokens=True)
-    
-    post_edit_response_strong_rephrase = create_response(edited_model,tokenizer,edit_args["strong_rephrase_prompts"][0],instructinoal=False)
-    decoded_post_edit_response_strong_rephrase = tokenizer.decode(post_edit_response_strong_rephrase.sequences[0],skip_special_tokens=True)
-    
-    post_edit_response_moral_action = create_response(edited_model,tokenizer,edit_args["moral_action"][0],instructinoal=False)
-    decoded_post_edit_response_moral_action = tokenizer.decode(post_edit_response_moral_action.sequences[0],skip_special_tokens=True)
-    
-    post_edit_response_immoral_action = create_response(edited_model,tokenizer,edit_args["immoral_action"][0],instructinoal=False)
-    decoded_post_edit_response_immoral_action = tokenizer.decode(post_edit_response_immoral_action.sequences[0],skip_special_tokens=True)
-    
-    
-    
-    expected_label_1 = "POSITIVE" if int(edit_args["action_moral_judgment"][0]) > 0 else "NEGATIVE"
-    expected_label_2 = sentiment_analysis(edit_args["prompts"][0] + " " + edit_args["target_new"][0])
-    
-    print(f"expected_label_1==expected_label_2: {expected_label_1==expected_label_2}")
-    
-    # Test reliability
-    post_edit_result_prompt = sentiment_analysis(decoded_post_edit_response_prompt)
-    print(post_edit_result_prompt)
-    post_edit_label_prompt = post_edit_result_prompt[0]["label"]
-    print(f"expected_label_1==post_edit_label_prompt: {expected_label_1==post_edit_label_prompt}")
+    # "siebert/sentiment-roberta-large-english"
+    # "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
 
-    # Test generality
-    post_edit_result_light_rephrase = sentiment_analysis(decoded_post_edit_response_light_rephrase)
-    post_edit_label_light_rephrase = post_edit_result_light_rephrase[0]["label"]
-    print(f"expected_label_1==post_edit_label_light_rephrase: {expected_label_1==post_edit_label_light_rephrase}")
+    model_name = "cardiffnlp/twitter-roberta-base-sentiment"
     
-    post_edit_result_strong_rephrase = sentiment_analysis(decoded_post_edit_response_strong_rephrase)
-    post_edit_label_strong_rephrase = post_edit_result_strong_rephrase[0]["label"]
-    print(f"expected_label_1==post_edit_label_strong_rephrase: {expected_label_1==post_edit_label_strong_rephrase}")
+    sentiment_analysis = pipeline("sentiment-analysis",model=model_name,device=0)
     
-    # Test one-hop inference
-    post_edit_result_moral_action = sentiment_analysis(decoded_post_edit_response_moral_action)
-    post_edit_label_moral_action = post_edit_result_moral_action[0]["label"]
-    print(f"expected_label_1==post_edit_label_moral_action: {expected_label_1==post_edit_label_moral_action}")
+    custom_metric_array = []
     
-    post_edit_result_immoral_action = sentiment_analysis(decoded_post_edit_response_immoral_action)
-    post_edit_label_immoral_action = post_edit_result_immoral_action[0]["label"]
-    print(f"expected_label_1!=post_edit_label_immoral_action: {expected_label_1!=post_edit_label_immoral_action}")
+
+    for index in range(0,len(edit_args["prompts"])):
+        
+        model_input = [edit_args["prompts"][index],
+                 edited_model,tokenizer,edit_args["light_rephrase_prompts"][index],
+                 edit_args["strong_rephrase_prompts"][index],
+                 edit_args["moral_action"][index],
+                 edit_args["immoral_action"][index]
+                 ]
+        
+        
+        # Create responses
+        post_edit_output = create_response(edited_model,tokenizer,model_input,instructinoal=False)
+        
+        
+        # Decode outputs and reformat
+        decoded_post_edit_response_prompt = tokenizer.decode(post_edit_output.sequences[0],skip_special_tokens=True)
+        decoded_post_edit_response_prompt = decoded_post_edit_response_prompt[len(edit_args["prompts"][index]):].lstrip(". ,")
+        
+        decoded_post_edit_response_light_rephrase = tokenizer.decode(post_edit_output.sequences[1],skip_special_tokens=True)
+        decoded_post_edit_response_light_rephrase = decoded_post_edit_response_light_rephrase[len(edit_args["light_rephrase_prompts"][index]):].lstrip(". ,")
+        
+        decoded_post_edit_response_strong_rephrase = tokenizer.decode(post_edit_output.sequences[2],skip_special_tokens=True)
+        decoded_post_edit_response_strong_rephrase = decoded_post_edit_response_strong_rephrase[len(edit_args["strong_rephrase_prompts"][index]):].lstrip(". ,")
+        
+        decoded_post_edit_response_moral_action = tokenizer.decode(post_edit_output.sequences[3],skip_special_tokens=True)
+        decoded_post_edit_response_moral_action = decoded_post_edit_response_moral_action[len(edit_args["moral_action"][index]):].lstrip(". ,")
+        
+        decoded_post_edit_response_immoral_action = tokenizer.decode(post_edit_output.sequences[4],skip_special_tokens=True)
+        decoded_post_edit_response_immoral_action = decoded_post_edit_response_immoral_action[len(edit_args["immoral_action"][index]):].lstrip(". ,")
+        
+        
+
+
+        sentiment_input = [edit_args["target_new"][index],
+                           decoded_post_edit_response_prompt,
+                           decoded_post_edit_response_light_rephrase,
+                           decoded_post_edit_response_strong_rephrase,
+                           decoded_post_edit_response_moral_action,
+                           decoded_post_edit_response_immoral_action]
+        
+        
+        
+        
+        # Generate predictions
+        sentiment_output = sentiment_analysis(sentiment_input)
+        
+        
+        
+        
+        
+        # Get the expected label
+        expected_label_1 = positive_label if int(edit_args["action_moral_judgment"][index]) > 0 else negative_label
+        expected_label_2 = sentiment_output[0]["label"]
+        
+        dataset_reliability = expected_label_1==expected_label_2
+        
+        print(f"expected_label_1: {expected_label_1}")
+        print(f"expected_label_2: {expected_label_2}")
+        
+        
+        # Test dataset reliability
+        # If this fails, then every other test is pointless
+        print(f"expected_label_1==expected_label_2: {dataset_reliability}")
+        
+        
+        # Test reliability
+        post_edit_label_prompt = sentiment_output[1]["label"]
+        
+        reliability = expected_label_1==post_edit_label_prompt
+        
+        print(f"decoded_post_edit_response_prompt: {decoded_post_edit_response_prompt}")
+        print(sentiment_output[1])
+        print(f"expected_label_1==post_edit_label_prompt: {reliability}")
+
+        # Test generality
+        post_edit_label_light_rephrase = sentiment_output[2]["label"]
+        
+        light_generality = expected_label_1==post_edit_label_light_rephrase
+        
+        print(f"decoded_post_edit_response_light_rephrase: {decoded_post_edit_response_light_rephrase}")
+        print(sentiment_output[2])
+        print(f"expected_label_1==post_edit_label_light_rephrase: {light_generality}")
+        
+        post_edit_label_strong_rephrase = sentiment_output[3]["label"]
+        
+        strong_generality = expected_label_1==post_edit_label_strong_rephrase
+        
+        print(f"decoded_post_edit_response_strong_rephrase: {decoded_post_edit_response_strong_rephrase}")
+        print(sentiment_output[3])
+        print(f"expected_label_1==post_edit_label_strong_rephrase: {strong_generality}")
+        
+        
+        # Test one-hop inference
+        post_edit_label_moral_action = sentiment_output[4]["label"]
+        
+        one_hop_inference = expected_label_1==post_edit_label_moral_action
+        
+        print(f"decoded_post_edit_response_moral_action: {decoded_post_edit_response_moral_action}")
+        print(sentiment_output[4])
+        print(f"expected_label_1==post_edit_label_moral_action: {one_hop_inference}")
+        
+        
+        # Test two-hop inference
+        post_edit_label_immoral_action = sentiment_output[5]["label"]
+        
+        two_hop_inference = expected_label_1!=post_edit_label_immoral_action
+        
+        print(f"decoded_post_edit_response_immoral_action: {decoded_post_edit_response_immoral_action}")
+        print(sentiment_output[5])
+        print(f"expected_label_1!=post_edit_label_immoral_action: {two_hop_inference}")
+        
+        
+        custom_metric = {
+            "dataset_reliability":int(dataset_reliability),
+            "reliability":int(reliability),
+            "light_generality":int(light_generality),
+            "strong_generality":int(strong_generality),
+            "one_hop_inference":int(one_hop_inference),
+            "two_hop_inference":int(two_hop_inference)
+        }
     
+        custom_metric_array.append(custom_metric)
+    
+    
+    return custom_metric_array
     
 
 
@@ -1128,7 +1214,10 @@ def main():
             post_edit_response_end_time = time.time()
             log(f"Post_edit_response inference took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
 
-            measure_quality(tokenizer,edited_model,edit_args)
+            
+            if calculate_custom_metric:
+                custom_metric_array = measure_quality(tokenizer,edited_model,edit_args)
+                save_as_json(custom_metric_array,"post_custom_metric")
             
 
         # Unload if not used later
@@ -1216,7 +1305,7 @@ def main():
 
 def parse_arguments():
     
-    global number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
+    global calculate_custom_metric, number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
@@ -1252,6 +1341,8 @@ def parse_arguments():
     
     parser.add_argument("-a","--enable_analytics", action="store_true",
                         help="Show the KL divergence and more")
+    parser.add_argument("-c","--custom_metric", action="store_true",
+                        help="Activate multinomial-sampling")
     parser.add_argument("--enable_cpu_inference", action="store_true",
                         help="Whether to do the inference on the CPU")
     parser.add_argument("--enable_models_check", action="store_true",
@@ -1297,6 +1388,8 @@ def parse_arguments():
     enable_analytics = args.enable_analytics
     enable_output_scores = args.enable_output_scores
     enable_models_check = args.enable_models_check
+    calculate_custom_metric = args.custom_metric
+    
         
     decoding_strategy = "greedy-decoding" 
     

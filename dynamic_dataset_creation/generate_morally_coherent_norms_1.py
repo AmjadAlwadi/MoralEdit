@@ -8,7 +8,7 @@ import argparse
 
 
 def load_norms(subset_size, shuffle):
-    norms = load_dataset("../datasets/norms/", data_files="norms_dataset.json", split='train')
+    norms = load_dataset("./datasets/norms/", data_files="norms_dataset.json", split='train')
     n = len(norms) if subset_size == -1 else subset_size
     if shuffle:
         norms = norms.shuffle()
@@ -91,4 +91,4 @@ if __name__ == '__main__':
     
     # Save it only if the full dataset was selected
     print(f"Number of neutral items: {len(result)}")
-    result.to_json(f"../datasets/norms/norms_dataset_E{entailment_threshold}_C{contradiction_threshold}.json")
+    result.to_json(f"./datasets/norms/norms_dataset_E{entailment_threshold}_C{contradiction_threshold}.json")

@@ -10,7 +10,7 @@ import numpy as np
 
 
 def load_norms(subset_size, shuffle):
-    norms = load_dataset("../datasets/norms/", data_files="norms_dataset.json", split='train')
+    norms = load_dataset("./datasets/norms/", data_files="norms_dataset.json", split='train')
     n = len(norms) if subset_size == -1 else subset_size
     if shuffle:
         norms = norms.shuffle()
@@ -183,5 +183,5 @@ if __name__ == '__main__':
     if '__index_level_0__' in result.column_names:    
         result = result.remove_columns(['__index_level_0__'])
     
-    result.to_json(f"../datasets/norms/norms_dataset_E{entailment_threshold}_C{contradiction_threshold}_T{tolerance_range}_S{subset_size}.json")
+    result.to_json(f"./datasets/norms/norms_dataset_E{entailment_threshold}_C{contradiction_threshold}_T{tolerance_range}_S{subset_size}.json")
     print(f"Number of neutral items: {len(result)}")
