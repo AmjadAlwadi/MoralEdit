@@ -128,8 +128,8 @@ def test_prediction_acc(model, tok, hparams, prompts, targets, device, locality=
         return_tensors="pt",
     )
     tok.padding_side = before_padding_side
-    num_prompt_toks = [int((i != tok.pad_token_id).sum()) for i in prompt_tok['input_ids']]
-    num_pad_toks = [int((i == tok.pad_token_id).sum()) for i in prompt_target_tok['input_ids'].cpu()]
+    num_prompt_toks = [int((i != tok.pad_token_id).sum()) for i in prompt_tok['input_ids']]   # tokenized prompts
+    num_pad_toks = [int((i == tok.pad_token_id).sum()) for i in prompt_target_tok['input_ids'].cpu()] # tokenized prompt + target
     prompt_len = [x+y for x,y in zip(num_pad_toks,num_prompt_toks)]
     with torch.no_grad():
         outputs = model(**prompt_target_tok)
@@ -137,9 +137,9 @@ def test_prediction_acc(model, tok, hparams, prompts, targets, device, locality=
             logits = outputs
         else:
             logits = outputs.logits
-        answers = torch.argmax(logits, dim=-1).squeeze().detach().cpu().numpy().tolist()
-        labels = prompt_target_tok['input_ids'].squeeze().detach().cpu().numpy().tolist()
-        answers = slice_list(answers,prompt_len,left=True)
+        answers = torch.argmax(logits, dim=-1).squeeze().detach().cpu().numpy().tolist()   # prompt + target + new tokens
+        labels = prompt_target_tok['input_ids'].squeeze().detach().cpu().numpy().tolist()  # original prompt + target
+        answers = slice_list(answers,prompt_len,left=True)  # only the last generated token after prompt + target remains
         labels = slice_list(labels,prompt_len,left=False)
         if locality:
             return answers if type(answers[0]) is list else [answers,]

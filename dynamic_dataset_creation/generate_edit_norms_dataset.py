@@ -11,7 +11,7 @@ def get_data(batch, indices):
     for i,idx in enumerate(indices):
                 
         # Reformate the rot-action        
-        rot_action = batch['rot-action'][i]
+        rot_action = batch['rot_action'][i]
         
         if rot_action[-1] == "." or rot_action[-1] == "?":
             rot_action = rot_action[:-1]
@@ -25,18 +25,25 @@ def get_data(batch, indices):
         
         
         # Reformat im/moral action
-        moral_action = batch['moral_action'][idx][-1].rstrip('.?,') + ', that is'
-        immoral_action = batch['immoral_action'][idx][-1].rstrip('.?,') + ', that is'
+        moral_action = batch['moral_action'][idx].rstrip('.?,') + ', that is'   # what do you think about that
+        immoral_action = batch['immoral_action'][idx].rstrip('.?,') + ', that is'
 
+        target_new = adjectives_subset['anti_norm_adjective'][idx]
+        ground_truth = adjectives_subset['original_norm_adjective'][idx]
+
+        subject = subjects_subset['subject'][idx]
+        prompt_subject = batch[f"prompt_subject_{idx%2 + 1}"][idx]
+        
         new_element = {
             "prompt": rot_action + " is",
-            "ground_truth":adjectives_subset['original_norm_adjective'][idx],
-            "target_new":adjectives_subset['anti_norm_adjective'][idx],
-            "subject":subjects_subset['subject'][idx],
+            "ground_truth":ground_truth,
+            "target_new":target_new,
+            "subject":subject,
             "light_rephrase_prompt":light_rephrases[idx%3],
             "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
-            "moral-action":moral_action,
-            "immoral-action":immoral_action,
+            "moral_action":moral_action,
+            "immoral_action":immoral_action,
+            "action_moral_judgment":batch["action_moral_judgment"][idx],
             "locality_inputs":{
                 "neighborhood":{
                     "prompt": "",
@@ -49,12 +56,12 @@ def get_data(batch, indices):
             },
             "portability_inputs": {
                 "synonym":{
-                    "prompt": batch[f"prompt_subject_{idx%2}"][i],
-                    "ground_truth": adjectives_subset['anti_norm_adjective'][idx]
+                    "prompt": prompt_subject,
+                    "ground_truth": target_new
                 },
                 "one_hop":{
                     "prompt": moral_action,
-                    "ground_truth": adjectives_subset['anti_norm_adjective'][idx]
+                    "ground_truth": target_new
                 }
             }
         }
@@ -85,6 +92,10 @@ def main():
         
 
     new_items_dataset = new_items_dataset.filter(remove_mismatch)
+    
+    if '__index_level_0__' in new_items_dataset.column_names:
+        new_items_dataset = new_items_dataset.remove_columns(['__index_level_0__'])
+    
     new_items_dataset.to_json("../datasets/norms/edit_norms_dataset.json")
 
     print(f"Number of elements removed: {edit_norms_size - len(new_items_dataset)}")
@@ -93,7 +104,7 @@ def main():
 
 
 
-def load_datasets(file_name, subset_size):
+def load_datasets(file_name, subset_size, shuffle):
     global edit_norms_size, norms_subset, rephrases_subset, subjects_subset, adjectives_subset
     
     if file_name is None:
@@ -118,7 +129,7 @@ def load_datasets(file_name, subset_size):
     adjectives_subset = adjectives.select(range(edit_norms_size))
 
 
-    if shuffle:
+    if shuffle and file_name == "norms_dataset.json":
         
         # Create a common set of indices
         indices = np.arange(edit_norms_size)
@@ -130,7 +141,8 @@ def load_datasets(file_name, subset_size):
         subjects_subset = subjects_subset[indices]
         adjectives_subset = adjectives_subset[indices]
 
-
+    elif shuffle:
+        norms_subset = norms_subset.shuffle()
 
 
 

@@ -41,7 +41,7 @@ def find_subject(batch, indices):
     for i,idx in enumerate(indices):
         
         sentence = batch['rot-action'][i]   
-        subject = find_match_using_speech_tagger(sentence).lower()
+        subject = find_match_using_speech_tagger(sentence)
         new_items.append(subject)
                 
     # return batch

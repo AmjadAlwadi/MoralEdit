@@ -138,4 +138,6 @@ new_column_order = ['ID',"rot_action", 'original_norm', 'anti_norm',"action_mora
 merged_df = merged_df[new_column_order]
 
 merged_dataset = Dataset.from_pandas(merged_df)
+if '__index_level_0__' in merged_dataset.column_names:
+    merged_dataset = merged_dataset.remove_columns(['__index_level_0__'])
 merged_dataset.to_json("../datasets/norms/norms_dataset.json")

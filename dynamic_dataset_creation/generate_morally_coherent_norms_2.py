@@ -120,8 +120,10 @@ if __name__ == '__main__':
     
     neutral_elements = remove_most_falses_first(neutrality_matrix)
         
-    result = norms_subset.filter(remove_non_neutral_norms, with_indices=True)    
-    result = result.remove_columns(['__index_level_0__'])
+    result = norms_subset.filter(remove_non_neutral_norms, with_indices=True)
+    
+    if '__index_level_0__' in result.column_names:    
+        result = result.remove_columns(['__index_level_0__'])
     
     print(f"Number of neutral items: {len(result)}")
     result.to_json(f"../datasets/norms/coherent_edit_norms_dataset_T{tolerance_range}_S{subset_size}.json")

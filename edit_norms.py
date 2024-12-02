@@ -1,5 +1,6 @@
 from transformers import set_seed
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import pipeline
 from huggingface_hub import login
 import torch
 from datasets import load_dataset
@@ -10,6 +11,8 @@ import argparse
 import warnings 
 import os
 import json
+
+
 
 init()
 os.makedirs('outputs/', exist_ok=True)
@@ -392,122 +395,6 @@ def check_model_weights_changed(pre_edit_model, post_edit_model):
 
 
 
-def load_norms(subset_size):
-    
-    ds = load_dataset("json", data_files="datasets/norms/edit_norms_dataset.json",split='train')
-    ds = ds.shuffle()
-    ds = ds.select(range(subset_size))
-    
-    prompts = ds['prompt']
-    ground_truth = ds['ground_truth']
-    target_new = ds['target_new']
-    subject = ds['subject']
-    rephrase_prompts = ds['rephrase_prompt']
-    locality_inputs = ds['locality_inputs']
-    portability_inputs = ds['portability_inputs']
-
-    loc_prompts = [edit_data_['locality_inputs']['neighborhood']['prompt'] + ' ' + edit_data_['locality_inputs']['neighborhood']['ground_truth'] for edit_data_ in ds]
-
-    # Reformat locality and probability
-    locality_inputs_neighborhood_prompt_unpacked = []
-    locality_inputs_neighborhood_ground_truth_unpacked = []
-    locality_inputs_distracting_prompt_unpacked = []
-    locality_inputs_distracting_ground_truth_unpacked = []
-    
-    portability_inputs_synonym_prompt_unpacked = []
-    portability_inputs_synonym_ground_truth_unpacked = []
-    portability_inputs_one_hop_prompt_unpacked = []
-    portability_inputs_one_hop_ground_truth_unpacked = []
-    
-    for l1 in locality_inputs:
-        if len(l1['neighborhood']['prompt']) > 0:
-            locality_inputs_neighborhood_prompt_unpacked.append(l1['neighborhood']['prompt'])
-    for l2 in locality_inputs:
-        if len(l2['neighborhood']['ground_truth']) > 0:
-            locality_inputs_neighborhood_ground_truth_unpacked.append(l2['neighborhood']['ground_truth'])
-    for l3 in locality_inputs:
-        if len(l3['distracting']['prompt']) > 0:
-            locality_inputs_distracting_prompt_unpacked.append(l3['distracting']['prompt'])
-    for l4 in locality_inputs:
-        if len(l4['distracting']['ground_truth']) > 0:
-            locality_inputs_distracting_ground_truth_unpacked.append(l4['distracting']['ground_truth'])
-        
-    for p1 in portability_inputs:
-        if len(p1['synonym']['prompt']) > 0:
-            portability_inputs_synonym_prompt_unpacked.append(p1['synonym']['prompt'])
-    for p2 in portability_inputs:
-        if len(p2['synonym']['ground_truth']) > 0:
-            portability_inputs_synonym_ground_truth_unpacked.append(p2['synonym']['ground_truth'])
-    for p3 in portability_inputs:
-        if len(p3['one_hop']['prompt']) > 0:
-            portability_inputs_one_hop_prompt_unpacked.append(p3['one_hop']['prompt'])
-    for p4 in portability_inputs:
-        if len(p4['one_hop']['ground_truth']) > 0:
-            portability_inputs_one_hop_ground_truth_unpacked.append(p4['one_hop']['ground_truth'])
-    
-    locality_inputs = {}
-    portability_inputs = {}
-    
-    if len(locality_inputs_neighborhood_prompt_unpacked) > 0 and len(locality_inputs_distracting_prompt_unpacked) > 0:
-        locality_inputs = {
-            "neighborhood":{
-                "prompt": locality_inputs_neighborhood_prompt_unpacked,
-                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
-            },
-            "distracting":{
-                "prompt": locality_inputs_distracting_prompt_unpacked,
-                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
-            }
-	    }         
-    elif len(locality_inputs_neighborhood_prompt_unpacked) > 0:
-        locality_inputs = {
-            "neighborhood":{
-                "prompt": locality_inputs_neighborhood_prompt_unpacked,
-                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
-            },
-	    }
-    elif len(locality_inputs_distracting_prompt_unpacked) > 0:
-        locality_inputs = {
-            "distracting":{
-                "prompt": locality_inputs_distracting_prompt_unpacked,
-                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
-            }
-	    }
-        
-        
-        
-    if len(portability_inputs_synonym_prompt_unpacked) > 0 and len(portability_inputs_one_hop_prompt_unpacked) > 0:
-        portability_inputs = {
-            "synonym":{
-                "prompt": portability_inputs_synonym_prompt_unpacked,
-                "ground_truth":portability_inputs_synonym_ground_truth_unpacked
-            },
-            "one_hop":{
-                "prompt": portability_inputs_one_hop_prompt_unpacked,
-                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
-            }
-        }         
-    elif len(portability_inputs_synonym_prompt_unpacked) > 0:
-        portability_inputs = {
-            "synonym":{
-                "prompt": portability_inputs_synonym_prompt_unpacked,
-                "ground_truth": portability_inputs_synonym_ground_truth_unpacked
-            },
-        }
-    elif len(portability_inputs_one_hop_prompt_unpacked) > 0:
-        portability_inputs = {
-            "one_hop":{
-                "prompt": portability_inputs_one_hop_prompt_unpacked,
-                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
-            }
-        }
-        
-    # Check whether locality and portability are empty
-    log("Norms dataset loaded",False,False,True)
-
-    return prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs, loc_prompts
-
-
 
 
 def load_facts():
@@ -626,6 +513,202 @@ def load_facts():
 
 
 
+
+
+
+
+
+
+
+
+def load_norms(subset_size):
+    
+    ds = load_dataset("json", data_files="datasets/norms/edit_norms_dataset.json",split='train')
+    # ds = ds.shuffle()
+    ds = ds.select(range(subset_size))
+    
+    prompts = ds['prompt']
+    ground_truth = ds['ground_truth']
+    target_new = ds['target_new']
+    subject = ds['subject']
+    light_rephrase_prompts = ds['light_rephrase_prompt']
+    strong_rephrase_prompts = ds['strong_rephrase_prompt']
+    locality_inputs = ds['locality_inputs']
+    portability_inputs = ds['portability_inputs']
+    action_moral_judgment = ds["action_moral_judgment"]
+    moral_action = ds["moral_action"]
+    immoral_action = ds["immoral_action"]
+
+
+    loc_prompts = [edit_data_['locality_inputs']['neighborhood']['prompt'] + ' ' + edit_data_['locality_inputs']['neighborhood']['ground_truth'] for edit_data_ in ds]
+
+    # Reformat locality and probability
+    locality_inputs_neighborhood_prompt_unpacked = []
+    locality_inputs_neighborhood_ground_truth_unpacked = []
+    locality_inputs_distracting_prompt_unpacked = []
+    locality_inputs_distracting_ground_truth_unpacked = []
+    
+    portability_inputs_synonym_prompt_unpacked = []
+    portability_inputs_synonym_ground_truth_unpacked = []
+    portability_inputs_one_hop_prompt_unpacked = []
+    portability_inputs_one_hop_ground_truth_unpacked = []
+    
+    for l1 in locality_inputs:
+        if len(l1['neighborhood']['prompt']) > 0:
+            locality_inputs_neighborhood_prompt_unpacked.append(l1['neighborhood']['prompt'])
+    for l2 in locality_inputs:
+        if len(l2['neighborhood']['ground_truth']) > 0:
+            locality_inputs_neighborhood_ground_truth_unpacked.append(l2['neighborhood']['ground_truth'])
+    for l3 in locality_inputs:
+        if len(l3['distracting']['prompt']) > 0:
+            locality_inputs_distracting_prompt_unpacked.append(l3['distracting']['prompt'])
+    for l4 in locality_inputs:
+        if len(l4['distracting']['ground_truth']) > 0:
+            locality_inputs_distracting_ground_truth_unpacked.append(l4['distracting']['ground_truth'])
+        
+    for p1 in portability_inputs:
+        if len(p1['synonym']['prompt']) > 0:
+            portability_inputs_synonym_prompt_unpacked.append(p1['synonym']['prompt'])
+    for p2 in portability_inputs:
+        if len(p2['synonym']['ground_truth']) > 0:
+            portability_inputs_synonym_ground_truth_unpacked.append(p2['synonym']['ground_truth'])
+    for p3 in portability_inputs:
+        if len(p3['one_hop']['prompt']) > 0:
+            portability_inputs_one_hop_prompt_unpacked.append(p3['one_hop']['prompt'])
+    for p4 in portability_inputs:
+        if len(p4['one_hop']['ground_truth']) > 0:
+            portability_inputs_one_hop_ground_truth_unpacked.append(p4['one_hop']['ground_truth'])
+    
+    locality_inputs = {}
+    portability_inputs = {}
+    
+    if len(locality_inputs_neighborhood_prompt_unpacked) > 0 and len(locality_inputs_distracting_prompt_unpacked) > 0:
+        locality_inputs = {
+            "neighborhood":{
+                "prompt": locality_inputs_neighborhood_prompt_unpacked,
+                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
+            },
+            "distracting":{
+                "prompt": locality_inputs_distracting_prompt_unpacked,
+                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
+            }
+	    }         
+    elif len(locality_inputs_neighborhood_prompt_unpacked) > 0:
+        locality_inputs = {
+            "neighborhood":{
+                "prompt": locality_inputs_neighborhood_prompt_unpacked,
+                "ground_truth": locality_inputs_neighborhood_ground_truth_unpacked
+            },
+	    }
+    elif len(locality_inputs_distracting_prompt_unpacked) > 0:
+        locality_inputs = {
+            "distracting":{
+                "prompt": locality_inputs_distracting_prompt_unpacked,
+                "ground_truth": locality_inputs_distracting_ground_truth_unpacked
+            }
+	    }
+        
+        
+        
+    if len(portability_inputs_synonym_prompt_unpacked) > 0 and len(portability_inputs_one_hop_prompt_unpacked) > 0:
+        portability_inputs = {
+            "synonym":{
+                "prompt": portability_inputs_synonym_prompt_unpacked,
+                "ground_truth":portability_inputs_synonym_ground_truth_unpacked
+            },
+            "one_hop":{
+                "prompt": portability_inputs_one_hop_prompt_unpacked,
+                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
+            }
+        }         
+    elif len(portability_inputs_synonym_prompt_unpacked) > 0:
+        portability_inputs = {
+            "synonym":{
+                "prompt": portability_inputs_synonym_prompt_unpacked,
+                "ground_truth": portability_inputs_synonym_ground_truth_unpacked
+            },
+        }
+    elif len(portability_inputs_one_hop_prompt_unpacked) > 0:
+        portability_inputs = {
+            "one_hop":{
+                "prompt": portability_inputs_one_hop_prompt_unpacked,
+                "ground_truth": portability_inputs_one_hop_ground_truth_unpacked
+            }
+        }
+        
+    # Check whether locality and portability are empty
+    log("Norms dataset loaded",False,False,True)
+
+    return prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, loc_prompts, action_moral_judgment, moral_action, immoral_action
+
+
+
+
+
+
+
+
+
+
+
+
+def measure_quality(tokenizer,edited_model, edit_args):
+    
+    # remove the prompt part from moral/immoral action and from light and strong rephrases and from every thing basically
+    
+    
+    pipeline("sentiment-analysis")
+    sentiment_analysis = pipeline("sentiment-analysis",device = device)
+    
+    post_edit_response_prompt = create_response(edited_model,tokenizer,edit_args["prompts"][0],instructinoal=False)
+    decoded_post_edit_response_prompt = tokenizer.decode(post_edit_response_prompt.sequences[0],skip_special_tokens=True)
+    
+    post_edit_response_light_rephrase = create_response(edited_model,tokenizer,edit_args["light_rephrase_prompts"][0],instructinoal=False)
+    decoded_post_edit_response_light_rephrase = tokenizer.decode(post_edit_response_light_rephrase.sequences[0],skip_special_tokens=True)
+    
+    post_edit_response_strong_rephrase = create_response(edited_model,tokenizer,edit_args["strong_rephrase_prompts"][0],instructinoal=False)
+    decoded_post_edit_response_strong_rephrase = tokenizer.decode(post_edit_response_strong_rephrase.sequences[0],skip_special_tokens=True)
+    
+    post_edit_response_moral_action = create_response(edited_model,tokenizer,edit_args["moral_action"][0],instructinoal=False)
+    decoded_post_edit_response_moral_action = tokenizer.decode(post_edit_response_moral_action.sequences[0],skip_special_tokens=True)
+    
+    post_edit_response_immoral_action = create_response(edited_model,tokenizer,edit_args["immoral_action"][0],instructinoal=False)
+    decoded_post_edit_response_immoral_action = tokenizer.decode(post_edit_response_immoral_action.sequences[0],skip_special_tokens=True)
+    
+    
+    
+    expected_label_1 = "POSITIVE" if int(edit_args["action_moral_judgment"][0]) > 0 else "NEGATIVE"
+    expected_label_2 = sentiment_analysis(edit_args["prompts"][0] + " " + edit_args["target_new"][0])
+    
+    print(f"expected_label_1==expected_label_2: {expected_label_1==expected_label_2}")
+    
+    # Test reliability
+    post_edit_result_prompt = sentiment_analysis(decoded_post_edit_response_prompt)
+    print(post_edit_result_prompt)
+    post_edit_label_prompt = post_edit_result_prompt[0]["label"]
+    print(f"expected_label_1==post_edit_label_prompt: {expected_label_1==post_edit_label_prompt}")
+
+    # Test generality
+    post_edit_result_light_rephrase = sentiment_analysis(decoded_post_edit_response_light_rephrase)
+    post_edit_label_light_rephrase = post_edit_result_light_rephrase[0]["label"]
+    print(f"expected_label_1==post_edit_label_light_rephrase: {expected_label_1==post_edit_label_light_rephrase}")
+    
+    post_edit_result_strong_rephrase = sentiment_analysis(decoded_post_edit_response_strong_rephrase)
+    post_edit_label_strong_rephrase = post_edit_result_strong_rephrase[0]["label"]
+    print(f"expected_label_1==post_edit_label_strong_rephrase: {expected_label_1==post_edit_label_strong_rephrase}")
+    
+    # Test one-hop inference
+    post_edit_result_moral_action = sentiment_analysis(decoded_post_edit_response_moral_action)
+    post_edit_label_moral_action = post_edit_result_moral_action[0]["label"]
+    print(f"expected_label_1==post_edit_label_moral_action: {expected_label_1==post_edit_label_moral_action}")
+    
+    post_edit_result_immoral_action = sentiment_analysis(decoded_post_edit_response_immoral_action)
+    post_edit_label_immoral_action = post_edit_result_immoral_action[0]["label"]
+    print(f"expected_label_1!=post_edit_label_immoral_action: {expected_label_1!=post_edit_label_immoral_action}")
+    
+    
+
+
 def main():
     
     if not torch.cuda.is_available() and device != torch.device('cpu'):
@@ -645,7 +728,7 @@ def main():
         tokenizer.pad_token_id = tokenizer.eos_token_id
         
     
-    prompts, ground_truth, target_new, subject, rephrase_prompts, locality_inputs, portability_inputs, loc_prompts = load_norms(number_of_norms_to_edit)
+    prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, loc_prompts, action_moral_judgment, moral_action, immoral_action = load_norms(number_of_norms_to_edit)
     
     pre_edit_model, edited_model, pre_edit_response, post_edit_response = None, None, None, None
     metrics = None
@@ -664,9 +747,14 @@ def main():
             "target_new": target_new,
             "subject": subject,
             "locality_inputs": locality_inputs,
-            "rephrase_prompts": rephrase_prompts,
+            "rephrase_prompts": strong_rephrase_prompts,
             "portability_inputs": portability_inputs,
             "sequential_edit": True,
+            "moral_action":moral_action,
+            "immoral_action":immoral_action,
+            "action_moral_judgment":action_moral_judgment,
+            "light_rephrase_prompts":light_rephrase_prompts,
+            "strong_rephrase_prompts":strong_rephrase_prompts
         }
                 
         
@@ -918,7 +1006,7 @@ def main():
             
             for i in range(len(prompts)):
                 ike_generation_prompts.append(prompts[i] + ' ' + target_new[i] + '.\n' + 
-                                                    rephrase_prompts[i] + ' ' + target_new[i] + '.\n' + 
+                                                    strong_rephrase_prompts[i] + ' ' + target_new[i] + '.\n' + 
                                                     "Q: " + prompts[i] + '? A: ' + target_new[i] +'.\n' +
                                                     "Q: " + prompts[i] + '? A:') 
             
@@ -1040,7 +1128,8 @@ def main():
             post_edit_response_end_time = time.time()
             log(f"Post_edit_response inference took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
 
-
+            measure_quality(tokenizer,edited_model,edit_args)
+            
 
         # Unload if not used later
         if not enable_models_check and not freely_chat_with_post_edit_model and editing_method != "IKE":
