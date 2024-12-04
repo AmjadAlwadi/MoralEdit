@@ -652,11 +652,10 @@ def measure_quality(tokenizer,edited_model, edit_args):
         
     # Test other metrics after editing to see whether model is degraded    
         
-        
     negative_label = "LABEL_0"
     positive_label = "LABEL_2"
     neutral_label = "LABEL_1"
-    
+
     # "siebert/sentiment-roberta-large-english"
     # "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
 
@@ -669,6 +668,7 @@ def measure_quality(tokenizer,edited_model, edit_args):
 
     for index in range(0,len(edit_args["prompts"])):
         
+        # To work all answers in parallel
         model_input = [edit_args["prompts"][index],
                  edited_model,tokenizer,edit_args["light_rephrase_prompts"][index],
                  edit_args["strong_rephrase_prompts"][index],
@@ -699,7 +699,7 @@ def measure_quality(tokenizer,edited_model, edit_args):
         
         
 
-
+        # To work all answers in parallel
         sentiment_input = [edit_args["target_new"][index],
                            decoded_post_edit_response_prompt,
                            decoded_post_edit_response_light_rephrase,
@@ -715,13 +715,31 @@ def measure_quality(tokenizer,edited_model, edit_args):
         
         
         
-        
-        
         # Get the expected label
         expected_label_1 = positive_label if int(edit_args["action_moral_judgment"][index]) > 0 else negative_label
         expected_label_2 = sentiment_output[0]["label"]
         
-        dataset_reliability = expected_label_1==expected_label_2
+        
+        # Compare with expected label and return float
+        def label_to_float(actual_label):
+            if actual_label == neutral_label:
+                return 0.5
+            else:
+                return float(expected_label_1 == actual_label)
+        
+        
+
+        def invert_label(label):
+            if label == positive_label:
+                return negative_label
+            elif label == negative_label:
+                return positive_label
+            else:
+                return neutral_label
+        
+        
+        
+        dataset_reliability = label_to_float(expected_label_2)
         
         print(f"expected_label_1: {expected_label_1}")
         print(f"expected_label_2: {expected_label_2}")
@@ -729,63 +747,63 @@ def measure_quality(tokenizer,edited_model, edit_args):
         
         # Test dataset reliability
         # If this fails, then every other test is pointless
-        print(f"expected_label_1==expected_label_2: {dataset_reliability}")
+        print(f"dataset_reliability: {dataset_reliability}")
         
         
         # Test reliability
         post_edit_label_prompt = sentiment_output[1]["label"]
         
-        reliability = expected_label_1==post_edit_label_prompt
+        reliability = label_to_float(post_edit_label_prompt)
         
         print(f"decoded_post_edit_response_prompt: {decoded_post_edit_response_prompt}")
         print(sentiment_output[1])
-        print(f"expected_label_1==post_edit_label_prompt: {reliability}")
+        print(f"reliability: {reliability}")
 
         # Test generality
         post_edit_label_light_rephrase = sentiment_output[2]["label"]
         
-        light_generality = expected_label_1==post_edit_label_light_rephrase
+        light_generality = label_to_float(post_edit_label_light_rephrase)
         
         print(f"decoded_post_edit_response_light_rephrase: {decoded_post_edit_response_light_rephrase}")
         print(sentiment_output[2])
-        print(f"expected_label_1==post_edit_label_light_rephrase: {light_generality}")
+        print(f"light_generality: {light_generality}")
         
         post_edit_label_strong_rephrase = sentiment_output[3]["label"]
         
-        strong_generality = expected_label_1==post_edit_label_strong_rephrase
+        strong_generality = label_to_float(post_edit_label_strong_rephrase)
         
         print(f"decoded_post_edit_response_strong_rephrase: {decoded_post_edit_response_strong_rephrase}")
         print(sentiment_output[3])
-        print(f"expected_label_1==post_edit_label_strong_rephrase: {strong_generality}")
+        print(f"strong_generality: {strong_generality}")
         
         
         # Test one-hop inference
         post_edit_label_moral_action = sentiment_output[4]["label"]
         
-        one_hop_inference = expected_label_1==post_edit_label_moral_action
+        one_hop_inference = label_to_float(post_edit_label_moral_action)
         
         print(f"decoded_post_edit_response_moral_action: {decoded_post_edit_response_moral_action}")
         print(sentiment_output[4])
-        print(f"expected_label_1==post_edit_label_moral_action: {one_hop_inference}")
+        print(f"one_hop_inference: {one_hop_inference}")
         
         
         # Test two-hop inference
         post_edit_label_immoral_action = sentiment_output[5]["label"]
         
-        two_hop_inference = expected_label_1!=post_edit_label_immoral_action
+        two_hop_inference = label_to_float(invert_label(post_edit_label_immoral_action))
         
         print(f"decoded_post_edit_response_immoral_action: {decoded_post_edit_response_immoral_action}")
         print(sentiment_output[5])
-        print(f"expected_label_1!=post_edit_label_immoral_action: {two_hop_inference}")
+        print(f"two_hop_inference: {two_hop_inference}")
         
         
         custom_metric = {
-            "dataset_reliability":int(dataset_reliability),
-            "reliability":int(reliability),
-            "light_generality":int(light_generality),
-            "strong_generality":int(strong_generality),
-            "one_hop_inference":int(one_hop_inference),
-            "two_hop_inference":int(two_hop_inference)
+            "dataset_reliability":dataset_reliability,
+            "reliability":reliability,
+            "light_generality":light_generality,
+            "strong_generality":strong_generality,
+            "one_hop_inference":one_hop_inference,
+            "two_hop_inference":two_hop_inference
         }
     
         custom_metric_array.append(custom_metric)
@@ -818,7 +836,7 @@ def main():
     
     pre_edit_model, edited_model, pre_edit_response, post_edit_response = None, None, None, None
     metrics = None
-    decoded_pre_edit_response, decoded_post_edit_response = [],[]
+    decoded_pre_edit_response, decoded_post_edit_response = [], []
 
     if apply_edit:
         
@@ -1215,10 +1233,13 @@ def main():
             log(f"Post_edit_response inference took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
 
             
-            if calculate_custom_metric:
+            
+            # Custom metric calculation
+            if calculate_custom_metric_for_edited_model:
                 custom_metric_array = measure_quality(tokenizer,edited_model,edit_args)
                 save_as_json(custom_metric_array,"post_custom_metric")
             
+
 
         # Unload if not used later
         if not enable_models_check and not freely_chat_with_post_edit_model and editing_method != "IKE":
@@ -1231,7 +1252,7 @@ def main():
     
     
     
-    if show_pre_edit_answer or enable_models_check:
+    if show_pre_edit_answer or enable_models_check or calculate_custom_metric_for_base_model:
         
         # Load the pre_edit_model if needed
         if not pre_edit_model:
@@ -1263,6 +1284,15 @@ def main():
                 scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,top_k)
             
             write_output_to_file("pre_edit",False,*decoded_pre_edit_response,scores_string)
+        
+        
+        
+        # Custom metric calculation
+        if calculate_custom_metric_for_edited_model:
+                custom_metric_array = measure_quality(tokenizer,pre_edit_model,edit_args)
+                save_as_json(custom_metric_array,"pre_custom_metric")
+        
+        
         
         
         # Unload if not used later
@@ -1305,7 +1335,7 @@ def main():
 
 def parse_arguments():
     
-    global calculate_custom_metric, number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
+    global calculate_custom_metric_for_base_model, calculate_custom_metric_for_edited_model, number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
@@ -1342,7 +1372,9 @@ def parse_arguments():
     parser.add_argument("-a","--enable_analytics", action="store_true",
                         help="Show the KL divergence and more")
     parser.add_argument("-c","--custom_metric", action="store_true",
-                        help="Activate multinomial-sampling")
+                        help="Acitvate the custom metric calculation for edited model")
+    parser.add_argument("-b","--custom_metric_base", action="store_true",
+                        help="Acitvate the custom metric calculation for base model")
     parser.add_argument("--enable_cpu_inference", action="store_true",
                         help="Whether to do the inference on the CPU")
     parser.add_argument("--enable_models_check", action="store_true",
@@ -1388,8 +1420,8 @@ def parse_arguments():
     enable_analytics = args.enable_analytics
     enable_output_scores = args.enable_output_scores
     enable_models_check = args.enable_models_check
-    calculate_custom_metric = args.custom_metric
-    
+    calculate_custom_metric_for_edited_model = args.custom_metric
+    calculate_custom_metric_for_base_model = args.custom_metric_base
         
     decoding_strategy = "greedy-decoding" 
     
