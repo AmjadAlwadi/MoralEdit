@@ -69,7 +69,7 @@ if __name__ == '__main__':
     device = torch.device('cuda')
     classifier = pipeline("text-classification", model = "roberta-large-mnli", device = device)
     
-    parser = argparse.ArgumentParser(description='Filter norms dataset based so that the moral_action/immoral_action entails/contradicts the rot_action.')
+    parser = argparse.ArgumentParser(description='Filter norms dataset so that the moral_action/immoral_action entails/contradicts the rot_action.')
     parser.add_argument('-s','--subset_size', type=int, default=100, help='Size of the subset to process, -1 for full dataset')
     parser.add_argument('-e','--entailment_threshold', type=float, default=0.75, help='Minimum score for entailment')
     parser.add_argument('-c','--contradiction_threshold', type=float, default=0.85, help='Minimum score for contradiction')
