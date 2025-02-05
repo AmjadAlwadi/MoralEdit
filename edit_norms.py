@@ -14,9 +14,15 @@ from evaluation import *
 from edit import edit
 
 
-
+# TODO:
+# Fix IKE for norms
 # Add api icl chatgpt4
-
+# Add situation to prompt in the edit norms dataset
+# Add locality prompts as an original norm
+# Fix the edit norms dataset
+# Generate rephrases using o3 api
+# Find out the difference between locality neighborhood and locality distracting
+# Find out what to do with subject for ROME
 
 
 def main():
