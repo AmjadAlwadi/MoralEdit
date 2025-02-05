@@ -16,13 +16,15 @@ from edit import edit
 
 # TODO:
 # Fix IKE for norms
-# Add api icl chatgpt4
 # Add situation to prompt in the edit norms dataset
 # Add locality prompts as an original norm
 # Fix the edit norms dataset
-# Generate rephrases using o3 api
-# Find out the difference between locality neighborhood and locality distracting
+
+# Generate rephrases using o3 api or using tubs   DONE
 # Find out what to do with subject for ROME
+
+# Find out the difference between locality neighborhood and locality distracting     # Not really necessary
+# Add api icl chatgpt4     # Not really necessary
 
 
 def main():
@@ -147,15 +149,18 @@ def main():
             post_edit_response_end_time = time.time()
             log(f"Post_edit_response inference took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
 
+        
             
+        # Write post_edit_response to file
+        write_output_to_file("post_edit",False,*decoded_post_edit_response)
+        
               
             
         # Custom metric calculation for post_edit_model
-        if calculate_custom_metric_for_edited_model:
+        if calculate_custom_metric_for_post_edit_model:
             post_edit_custom_metric = measure_quality_sentiment_analysis(tokenizer,post_edit_model,edit_args, pre_edit=False)
             save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
             
-
 
 
         # Unload edited model if not used later
@@ -164,8 +169,6 @@ def main():
             torch.cuda.empty_cache()
             log("Unloaded post_edit_model",False,False,True)
 
-    
-    
     
     
     
@@ -186,12 +189,8 @@ def main():
             
             pre_edit_response_end_time = time.time()
             log(f"Pre_edit_response inference took {pre_edit_response_end_time - pre_edit_response_start_time:.2f} seconds.",False,False,True)
-            
-            scores_string = ""
-            if enable_output_scores:
-                scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,top_k)
-            
-            write_output_to_file("pre_edit",False,*decoded_pre_edit_response,scores_string)
+                 
+            write_output_to_file("pre_edit",False,*decoded_pre_edit_response)
 
 
         # Custom metric calculation for pre_edit_model
@@ -209,29 +208,8 @@ def main():
         
         
     
-    
-    # Add log info
-    log_info,scores_string,models_check_string = [] , "", ""
-    
-    # Some debugging information
-    if enable_analytics:
-        for i in range(len(decoded_post_edit_response)):
-            log_info.append(analyse_reliability_of_edit(decoded_post_edit_response=decoded_post_edit_response[i], target_new=target_new[i]))
-
-        log_info.append(analyse_kl_divergence(pre_edit_logits=pre_edit_response.logits, post_edit_logtis=post_edit_response.logits))
-        
-    # Scores of the post_edit_logits
-    if enable_output_scores:
-        scores_string = output_scores_of_generation(tokenizer,post_edit_response.scores,top_k)
-
-    # Useful for debugging
-    if enable_models_check:
-        models_check_string = check_model_weights_changed(pre_edit_model,post_edit_model)
-
-
-    write_output_to_file("post_edit",True,*decoded_post_edit_response, *log_info, models_check_string, scores_string)
-
-
+    # Output scores, KL divergence and other useful information
+    output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_response, post_edit_response, decoded_pre_edit_response, decoded_post_edit_response)
 
 
     # Freely chat with the post edit model
@@ -244,12 +222,12 @@ def main():
 
 def parse_arguments():
     
-    global calculate_custom_metric_for_pre_edit_model, calculate_custom_metric_for_edited_model, number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
+    global calculate_custom_metric_for_pre_edit_model, calculate_custom_metric_for_post_edit_model, number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
     parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(available_editing_methods.values()),
-                        help="Editing method to use")
+                        help="Editing method to use\nIf not specified, then no editing is performed")
     parser.add_argument("-m","--model_name", type=str, default=available_models[10],
                         help="Name of the model to use")
     parser.add_argument("-n","--number_of_norms_to_edit", type=int, default=3,
@@ -262,9 +240,11 @@ def parse_arguments():
                         help="Whether to freely chat with the post-edit model")
     parser.add_argument("-t","--train", action="store_true",
                         help="Train the algorithm")
+    
+    
+    # Decoding strategy parameters
     parser.add_argument("-s","--seed", type=int, default=-1,
                         help="Random seed for reproducibility")
-        
     parser.add_argument("--max_length", type=int, default=100,
                         help="Maximum number of new tokens in the prompt")
     parser.add_argument("--max_new_tokens", type=int, default=20,
@@ -278,21 +258,26 @@ def parse_arguments():
     parser.add_argument("--no_repeat_ngram_size", type=int, default=0,
                         help="No repeat ngram size")
     
+    # Debugging stuff
     parser.add_argument("-a","--enable_analytics", action="store_true",
                         help="Show the KL divergence and more")
-    parser.add_argument("-c","--custom_metric_post_edit", action="store_true",
-                        help="Acitvate the custom metric calculation for edited model")
-    parser.add_argument("-b","--custom_metric_pre_edit", action="store_true",
-                        help="Acitvate the custom metric calculation for pre_edit_model")
-    parser.add_argument("--enable_cpu_inference", action="store_true",
-                        help="Whether to do the inference on the CPU")
     parser.add_argument("--enable_models_check", action="store_true",
                         help="Check whether the post_edit model did change")
+    
+    # Extra information
     parser.add_argument("--enable_output_scores", action="store_true",
                         help="Show the scores for the most probable tokens")
     parser.add_argument("--top_k", type=int, default=10,
                         help="Top k probable tokens for the output scores")
     
+    parser.add_argument("-c","--calculate_custom_metric_for_post_edit_model", action="store_true",
+                        help="Acitvate the custom metric calculation for edited model")
+    parser.add_argument("-b","--calculate_custom_metric_for_pre_edit_model", action="store_true",
+                        help="Acitvate the custom metric calculation for pre_edit_model")
+    
+    
+    parser.add_argument("--enable_cpu_inference", action="store_true",
+                        help="Whether to do the inference on the CPU")
     parser.add_argument("-w",'--weights_dtype', type=str, choices=['float32', 'float16', 'bfloat16'],
                         default='float16', help='Data type for weights: float32, 16 or bfloat16' )
     parser.add_argument("--config_file_name", type=str, default=available_models[10].split("/")[1],
@@ -329,8 +314,8 @@ def parse_arguments():
     enable_analytics = args.enable_analytics
     enable_output_scores = args.enable_output_scores
     enable_models_check = args.enable_models_check
-    calculate_custom_metric_for_edited_model = args.custom_metric
-    calculate_custom_metric_for_pre_edit_model = args.custom_metric_base
+    calculate_custom_metric_for_post_edit_model = args.calculate_custom_metric_for_post_edit_model
+    calculate_custom_metric_for_pre_edit_model = args.calculate_custom_metric_for_pre_edit_model
         
     decoding_strategy = "greedy-decoding" 
     
@@ -360,21 +345,32 @@ def parse_arguments():
     
     print()
     print('-'*75)
+    
     print(Fore.BLUE)
+    print("Edit Configuration")
     print(f"{'Model_name:':<{col_width}} {model_name}")
     print(f"{'Editing_method:':<{col_width}} {editing_method}")
     print(f"{'Device:':<{col_width}} {str(device)}")
     print(f"{'Decoding_strategy:':<{col_width}} {decoding_strategy}")
     print(f"{'Number of norms to edit:':<{col_width}} {number_of_norms_to_edit}")
+    
     print(Fore.LIGHTYELLOW_EX)
+    print("Information to Output")
     print(f"{'train:':<{col_width}} {str(train)}")
     print(f"{'show_pre_edit_answer:':<{col_width}} {str(show_pre_edit_answer)}")
     print(f"{'show_post_edit_answer:':<{col_width}} {str(show_post_edit_answer)}")
-    print(f"{'enable_analytics:':<{col_width}} {str(enable_analytics)}")
+    print(f"{'calculate_custom_metric_for_pre_edit_model:':<{col_width}} {str(calculate_custom_metric_for_pre_edit_model)}")
+    print(f"{'calculate_custom_metric_for_post_edit_model:':<{col_width}} {str(calculate_custom_metric_for_post_edit_model)}")
+    
+    print(Fore.CYAN)
+    print("Debugging Informations")
     print(f"{'enable_output_scores:':<{col_width}} {str(enable_output_scores)}")
+    print(f"{'enable_analytics:':<{col_width}} {str(enable_analytics)}")
     print(f"{'enable_models_check:':<{col_width}} {str(enable_models_check)}") 
     print(f"{'freely chat with model:':<{col_width}} {str(freely_chat_with_post_edit_model)}")
+    
     print(Fore.LIGHTRED_EX)
+    print("Extra Configuration")
     print(f"{'weights_dtype:':<{col_width}} {str(weights_dtype)}")
     print(f"{'hparams_path:':<{col_width}} {hparams_path}")
     print(f"{'available_gpu_memory:':<{col_width}} {str(get_available_gpu_memory())}")

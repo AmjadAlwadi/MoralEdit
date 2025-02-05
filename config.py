@@ -57,8 +57,8 @@ available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
 
 
 # Global config variables
-calculate_custom_metric_for_base_model = None
-calculate_custom_metric_for_edited_model = None
+calculate_custom_metric_for_pre_edit_model = None
+calculate_custom_metric_for_post_edit_model = None
 number_of_norms_to_edit = None
 enable_models_check = None
 enable_analytics = None

@@ -5,8 +5,8 @@ from transformers import pipeline
 from datasets import load_dataset
 from config import *
 from utils import create_response
-from utils import log
-
+from utils import log, write_output_to_file
+from dynamic_dataset_creation.chatgpt_utils import *
 
 
 
@@ -132,13 +132,6 @@ def load_norms(subset_size):
     log("Norms dataset loaded",False,False,True)
 
     return prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, loc_prompts, action_moral_judgment, moral_action, immoral_action
-
-
-
-
-
-
-
 
 
 
@@ -460,7 +453,6 @@ def measure_quality_chatgpt_api(tokenizer,edited_model, edit_args):
 
 
 
-
 # ---------------------------------------------------------------- #
 # ---------------------------------------------------------------- #
 # -----------------Utils for debugging purposes------------------- #
@@ -479,6 +471,43 @@ def check_model_weights_changed(pre_edit_model, post_edit_model):
                 
         log(output,True,True,True)
         return output
+    
+    
+    
+    
+    
+    
+def output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_response, post_edit_response, decoded_pre_edit_response, decoded_post_edit_response):
+    
+    # Add log info
+    log_info,pre_edit_scores_string, post_edit_scores_string,models_check_string = [] , "", "", ""
+    
+    # Some debugging information
+    if enable_analytics:
+        for i in range(len(decoded_post_edit_response)):
+            log_info.append(analyse_reliability_of_edit(decoded_post_edit_response=decoded_post_edit_response[i], target_new=edit_args["target_new"][i]))
+
+        log_info.append(analyse_kl_divergence(pre_edit_logits=pre_edit_response.logits, post_edit_logtis=post_edit_response.logits))
+        
+    # Scores of the post_edit_logits
+    if enable_output_scores:
+        pre_edit_scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,top_k)
+        post_edit_scores_string = output_scores_of_generation(tokenizer,post_edit_response.scores,top_k)
+        
+    # Useful for debugging
+    if enable_models_check:
+        models_check_string = check_model_weights_changed(pre_edit_model,post_edit_model)
+        
+ 
+    write_output_to_file("pre_edit",True,*pre_edit_scores_string)
+    write_output_to_file("post_edit",True, *log_info, models_check_string, post_edit_scores_string)   
+    
+    
+    
+    
+    
+    
+    
     
     
     

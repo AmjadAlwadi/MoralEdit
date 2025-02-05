@@ -31,7 +31,7 @@ def load_norms(subset_size):
     if subset_size != -1:
         ds = ds.select(range(subset_size))
     
-    prompts = ds['rot-action']
+    prompts = ds['rot_action']
     log(f"Norms dataset loaded with length: {len(ds)}",False,False,True)
 
     return prompts
