@@ -267,7 +267,7 @@ def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits)
 
 
 
-def measure_quality_sentiment_analysis(tokenizer,edited_model, edit_args):
+def measure_quality_sentiment_analysis(tokenizer,edited_model, edit_args, pre_edit):
         
     # Test other metrics after editing to see whether model is degraded    
         
@@ -275,8 +275,30 @@ def measure_quality_sentiment_analysis(tokenizer,edited_model, edit_args):
     positive_label = "LABEL_2"
     neutral_label = "LABEL_1"
 
+
+    # Compare with expected label and return float as score
+    # I take a neutral label as 0.5
+    def label_to_float(actual_label):
+        if actual_label == neutral_label:
+            return 0.5
+        else:
+            return float(expected_label_1 == actual_label)
+    
+    
+
+    def invert_label(label):
+        if label == positive_label:
+            return negative_label
+        elif label == negative_label:
+            return positive_label
+        else:
+            return neutral_label
+
+
+
     # "siebert/sentiment-roberta-large-english"
     # "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
+
 
     model_name = "cardiffnlp/twitter-roberta-base-sentiment"
     
@@ -317,15 +339,19 @@ def measure_quality_sentiment_analysis(tokenizer,edited_model, edit_args):
         decoded_post_edit_response_immoral_action = decoded_post_edit_response_immoral_action[len(edit_args["immoral_action"][index]):].lstrip(". ,")
         
         
+        expected_output = edit_args["target_new"][index]
+        
+        if pre_edit:
+            expected_output = edit_args["ground_truth"][index]
+
 
         # To work all answers in parallel
-        sentiment_input = [edit_args["target_new"][index],
+        sentiment_input = [expected_output,
                            decoded_post_edit_response_prompt,
                            decoded_post_edit_response_light_rephrase,
                            decoded_post_edit_response_strong_rephrase,
                            decoded_post_edit_response_moral_action,
                            decoded_post_edit_response_immoral_action]
-        
         
         
         
@@ -335,27 +361,13 @@ def measure_quality_sentiment_analysis(tokenizer,edited_model, edit_args):
         
         
         # Get the expected label
+        # Those are predefined strings
         expected_label_1 = positive_label if int(edit_args["action_moral_judgment"][index]) > 0 else negative_label
         expected_label_2 = sentiment_output[0]["label"]
         
         
-        # Compare with expected label and return float
-        def label_to_float(actual_label):
-            if actual_label == neutral_label:
-                return 0.5
-            else:
-                return float(expected_label_1 == actual_label)
-        
-        
-
-        def invert_label(label):
-            if label == positive_label:
-                return negative_label
-            elif label == negative_label:
-                return positive_label
-            else:
-                return neutral_label
-        
+        if pre_edit:
+            expected_label_1 = invert_label(expected_label_1)
         
         
         dataset_reliability = label_to_float(expected_label_2)
@@ -365,7 +377,7 @@ def measure_quality_sentiment_analysis(tokenizer,edited_model, edit_args):
         
         
         # Test dataset reliability
-        # If this fails, then every other test is pointless
+        # If this fails, then every other test is almost pointless
         print(f"dataset_reliability: {dataset_reliability}")
         
         

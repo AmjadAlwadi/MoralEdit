@@ -205,3 +205,18 @@ def decode_output_and_log(tokenizer,output,question:str,pre_edit:bool):
         log('Post_edit_outputs: ' + question + Back.LIGHTBLACK_EX + answer,False,True,True)
 
     return decoded_output
+
+
+
+def load_pre_edit_model():
+    
+    if model_name == "google-t5/t5-3b": # Encode Decoder
+        from transformers import AutoModelForSeq2SeqLM
+        pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+    else:
+        from transformers import AutoModelForCausalLM
+        pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+    
+    log("Loaded the base model",True,False,True)
+    print_gpu_memory()
+    return pre_edit_model

@@ -30,8 +30,6 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
         from easyeditor import WISEHyperParams
         hparams = WISEHyperParams.from_hparams(hparams_path)
         editor = BaseEditor.from_hparams(hparams)
-        
-        edit_args['loc_prompts'] = loc_prompts
         metrics, edited_model, _ = editor.edit(**edit_args)
         
     
@@ -258,11 +256,8 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
         from sys import exit
         log(f"Invalid editing method: {editing_method}",False,True,True)
         exit(1)
-        
-        
-    # Evaluation process    
+          
         
     editing_end_time = time.time()
     
-    
-    return editing_end_time - editing_start_time
+    return metrics, edited_model, editing_end_time - editing_start_time

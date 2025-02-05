@@ -15,22 +15,18 @@ from edit import edit
 
 
 
-init()
-os.makedirs('outputs/', exist_ok=True)
-
-# Ignore all warnings
-warnings.filterwarnings("ignore")
-
-
-
-ike_generation_prompts = []
-
-
 # Add api icl chatgpt4
 
 
 
 def main():
+    
+    # Some initializations
+    init()
+    os.makedirs('outputs/', exist_ok=True)
+
+    # Ignore all warnings
+    warnings.filterwarnings("ignore")
     
     if not torch.cuda.is_available() and device != torch.device('cpu'):
         print("Torch cuds is not available")
@@ -51,13 +47,16 @@ def main():
     
     
     # Load the edit norms dataset
-    
     prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, loc_prompts, action_moral_judgment, moral_action, immoral_action = load_norms(number_of_norms_to_edit)
     
-    pre_edit_model, edited_model, pre_edit_response, post_edit_response = None, None, None, None
-    metrics = None
+    # Some variables that are gonna be used everywhere
+    pre_edit_model, post_edit_model, pre_edit_response, post_edit_response = None, None, None, None
+    post_edit_easy_edit_metrics = None
+    pre_edit_custom_metric = None
+    post_edit_custom_metric = None
     decoded_pre_edit_response, decoded_post_edit_response = [], []
 
+    ike_generation_prompts = []
 
 
 
@@ -86,15 +85,14 @@ def main():
             "immoral_action":immoral_action,
             "action_moral_judgment":action_moral_judgment,
             "light_rephrase_prompts":light_rephrase_prompts,
-            "strong_rephrase_prompts":strong_rephrase_prompts
+            "strong_rephrase_prompts":strong_rephrase_prompts,
+            "loc_prompts" : loc_prompts
         }
                 
         
-        editing_time = edit(edit_args, tokenizer, ike_generation_prompts)    
+        post_edit_easy_edit_metrics, post_edit_model, editing_time = edit(edit_args, tokenizer, ike_generation_prompts)    
               
             
- 
- 
  
         # ---------------------------------------------------------------- #
         # ---------------------------------------------------------------- #
@@ -102,21 +100,20 @@ def main():
         # ---------------------------------------------------------------- #
         # ---------------------------------------------------------------- #    
             
+           
+        # Saving the post edit metrics of Easy Edit 
+        save_as_json(post_edit_easy_edit_metrics,"post_edit_easy_edit_metrics")
+        log("Metrics saved as json file",False,False,False)
+        log("Loaded edited model",True,False,True)
+        print_gpu_memory()    
+            
+            
             
         if editing_method == "IKE":
-            
             # Load the pre_edit_model
-            if model_name == "google-t5/t5-3b": # Encode Decoder
-                from transformers import AutoModelForSeq2SeqLM
-                pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
-            else:
-                pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+            pre_edit_model = load_pre_edit_model()
             
-            log("Loaded the model",True,False,True)
-            print_gpu_memory()
-            
-            
-            # Create response
+            # Modify the prompt according to template and create response
             post_edit_response_start_time = time.time()
             post_edit_response = create_response(pre_edit_model,tokenizer,ike_generation_prompts,instructinoal=False)
             
@@ -124,29 +121,19 @@ def main():
                 decoded_post_edit_response.append(decode_output_and_log(tokenizer=tokenizer,output=sequence,question=prompt,pre_edit=False))
                 
             post_edit_response_end_time = time.time()
-            log(f"Post_edit_response inference took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
-            
+            log(f"Post_edit_response inference with IKE template took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
             
         else:
-            
             if train:
                 log(f"Training took {editing_time:.2f} seconds.",False,False,True)
                 return
             else:
                 log(f"Editing took {editing_time:.2f} seconds.",False,False,True)
 
-            
-            # Default metrics calculation
-            save_as_json(metrics,"metrics_summary")
-            log("Metrics saved as json file",False,False,False)
-            log("Loaded edited model",True,False,True)
-            print_gpu_memory()
-            
-            
-            # Create response
+            # Create and output response
             post_edit_response_start_time = time.time()
             if show_post_edit_answer:
-                post_edit_response = create_response(edited_model,tokenizer,prompts,instructinoal=False)
+                post_edit_response = create_response(post_edit_model,tokenizer,prompts,instructinoal=False)
                 
                 for sequence,prompt in zip(post_edit_response.sequences,prompts):
                     decoded_post_edit_response.append(decode_output_and_log(tokenizer=tokenizer,output=sequence,question=prompt,pre_edit=False))
@@ -155,40 +142,36 @@ def main():
             log(f"Post_edit_response inference took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
 
             
+              
             
-            # Custom metric calculation
-            if calculate_custom_metric_for_edited_model:
-                custom_metric_array = measure_quality_sentiment_analysis(tokenizer,edited_model,edit_args)
-                save_as_json(custom_metric_array,"post_custom_metric")
+        # Custom metric calculation for post_edit_model
+        if calculate_custom_metric_for_edited_model:
+            post_edit_custom_metric = measure_quality_sentiment_analysis(tokenizer,post_edit_model,edit_args, pre_edit=False)
+            save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
             
+
 
 
         # Unload edited model if not used later
-        if not enable_models_check and not freely_chat_with_post_edit_model and editing_method != "IKE":
-            del edited_model
+        if not enable_models_check and not freely_chat_with_post_edit_model:
+            del post_edit_model
             torch.cuda.empty_cache()
-            log("Unloaded edited model",False,False,True)
+            log("Unloaded post_edit_model",False,False,True)
 
     
     
     
-    # Evaluate pre edit model and debugging
-    if show_pre_edit_answer or enable_models_check or calculate_custom_metric_for_base_model:
+    
+    
+    # Evaluate the pre_edit_model
+    if show_pre_edit_answer or enable_models_check or calculate_custom_metric_for_pre_edit_model:
         
         # Load the pre_edit_model if needed
         if not pre_edit_model:
-
-            if model_name == "google-t5/t5-3b": # Encode Decoder
-                from transformers import AutoModelForSeq2SeqLM
-                pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
-            else:
-                pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
-            
-            log("Loaded base model",True,False,True)
-            print_gpu_memory()
+            pre_edit_model = load_pre_edit_model()
         
+        # Show pre_edit answer
         if show_pre_edit_answer:
-            
             pre_edit_response_start_time = time.time()
             pre_edit_response = create_response(pre_edit_model,tokenizer,prompts,instructinoal=False)
             
@@ -203,48 +186,51 @@ def main():
                 scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,top_k)
             
             write_output_to_file("pre_edit",False,*decoded_pre_edit_response,scores_string)
+
+
+        # Custom metric calculation for pre_edit_model
+        if calculate_custom_metric_for_pre_edit_model:
+            pre_edit_custom_metric = measure_quality_sentiment_analysis(tokenizer,pre_edit_model,edit_args, pre_edit=True)
+            save_as_json(pre_edit_custom_metric,"pre_edit_custom_metric")
         
         
         
-        # Custom metric calculation
-        if calculate_custom_metric_for_edited_model:
-                custom_metric_array = measure_quality_sentiment_analysis(tokenizer,pre_edit_model,edit_args)
-                save_as_json(custom_metric_array,"pre_custom_metric")
+    # Unload pre_edit_model if not used later
+    if pre_edit_model and not enable_models_check:
+        del pre_edit_model
+        torch.cuda.empty_cache()
+        log("Unloaded pre_edit_model",False,False,True)
         
         
-        
-        
-        # Unload if not used later
-        if not enable_models_check or editing_method == "IKE" or editing_method == "INSTRUCTION_ENGINEERING":
-            del pre_edit_model
-            torch.cuda.empty_cache()
-            log("Unloaded base model",False,False,True)
-    
-    
-    
     
     
     # Add log info
     log_info,scores_string,models_check_string = [] , "", ""
     
+    # Some debugging information
     if enable_analytics:
         for i in range(len(decoded_post_edit_response)):
             log_info.append(analyse_reliability_of_edit(decoded_post_edit_response=decoded_post_edit_response[i], target_new=target_new[i]))
 
         log_info.append(analyse_kl_divergence(pre_edit_logits=pre_edit_response.logits, post_edit_logtis=post_edit_response.logits))
         
+    # Scores of the post_edit_logits
     if enable_output_scores:
         scores_string = output_scores_of_generation(tokenizer,post_edit_response.scores,top_k)
 
+    # Useful for debugging
     if enable_models_check:
-        models_check_string = check_model_weights_changed(pre_edit_model,edited_model)
+        models_check_string = check_model_weights_changed(pre_edit_model,post_edit_model)
 
 
     write_output_to_file("post_edit",True,*decoded_post_edit_response, *log_info, models_check_string, scores_string)
 
+
+
+
     # Freely chat with the post edit model
     if freely_chat_with_post_edit_model:
-        chat_with_model(edited_model,tokenizer)
+        chat_with_model(post_edit_model,tokenizer)
 
 
 
@@ -252,7 +238,7 @@ def main():
 
 def parse_arguments():
     
-    global calculate_custom_metric_for_base_model, calculate_custom_metric_for_edited_model, number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
+    global calculate_custom_metric_for_pre_edit_model, calculate_custom_metric_for_edited_model, number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
@@ -288,10 +274,10 @@ def parse_arguments():
     
     parser.add_argument("-a","--enable_analytics", action="store_true",
                         help="Show the KL divergence and more")
-    parser.add_argument("-c","--custom_metric", action="store_true",
+    parser.add_argument("-c","--custom_metric_post_edit", action="store_true",
                         help="Acitvate the custom metric calculation for edited model")
-    parser.add_argument("-b","--custom_metric_base", action="store_true",
-                        help="Acitvate the custom metric calculation for base model")
+    parser.add_argument("-b","--custom_metric_pre_edit", action="store_true",
+                        help="Acitvate the custom metric calculation for pre_edit_model")
     parser.add_argument("--enable_cpu_inference", action="store_true",
                         help="Whether to do the inference on the CPU")
     parser.add_argument("--enable_models_check", action="store_true",
@@ -338,7 +324,7 @@ def parse_arguments():
     enable_output_scores = args.enable_output_scores
     enable_models_check = args.enable_models_check
     calculate_custom_metric_for_edited_model = args.custom_metric
-    calculate_custom_metric_for_base_model = args.custom_metric_base
+    calculate_custom_metric_for_pre_edit_model = args.custom_metric_base
         
     decoding_strategy = "greedy-decoding" 
     
@@ -357,6 +343,11 @@ def parse_arguments():
     
     if editing_method == "No editing":
         apply_edit = False
+        
+    # We need the outputs to be able to calculate the scores
+    if enable_output_scores:
+        show_pre_edit_answer = True
+        show_post_edit_answer = True
     
     
     col_width = 27
