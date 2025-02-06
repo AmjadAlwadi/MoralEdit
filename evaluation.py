@@ -440,8 +440,9 @@ def measure_quality_sentiment_analysis(tokenizer,edited_model, edit_args, pre_ed
 
 
 
-def measure_quality_chatgpt_api(tokenizer,edited_model, edit_args):
-    pass
+def measure_quality_chatgpt_api(edit_args, decoded_post_edit_response):
+    template = f"{decoded_post_edit_response}"
+    response = send_request(template)
 
 
 

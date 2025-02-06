@@ -18,12 +18,21 @@ from edit import edit
 # Fix IKE for norms
 # Add situation to prompt in the edit norms dataset
 # Add locality prompts as an original norm
+
 # Fix the edit norms dataset
+## Change the structure
 
-# Generate rephrases using o3 api or using tubs   DONE
-# Find out what to do with subject for ROME
 
-# Find out the difference between locality neighborhood and locality distracting     # Not really necessary
+# Generate rephrases using o3 api or using tubs   #DONE
+# Find out what to do with subject for ROME  --> Pick for example the action always???
+
+
+# Find out the difference between locality neighborhood and locality distracting     #DONE
+## locality neighborhood are prompts with the same relation but different subjects & maybe objects
+## locality distrcting neighborhood is similar with a distracting statement at the beginning which is the edited prompt
+## Relations in facts are based on the wikidata relation types and there are too many
+## In our case of norms we only have one relation or one type of statements
+
 # Add api icl chatgpt4     # Not really necessary
 
 

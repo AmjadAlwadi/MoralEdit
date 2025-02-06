@@ -15,7 +15,11 @@ init()
 
 
 # Set your API key
-API_KEY = "002404deaad844fda84143d967491c43"
+# API_KEY = "002404deaad844fda84143d967491c43"
+API_KEY = "343e6b51f7cb4861a91a9b131dd289d2"
+
+
+
 
 # API URL
 url = "https://ki-toolbox.tu-braunschweig.de/api/v1/chat/send"
@@ -55,7 +59,8 @@ def log(info,add_decoration:bool,important:bool,bold:bool):
 
 def load_norms(subset_size):
     
-    ds = load_dataset("json", data_files="./datasets/norms/norms_dataset.json",split='train')
+    ds = load_dataset("json", data_files="../datasets/norms/norms_dataset.json",split='train')
+    
     if subset_size != -1:
         ds = ds.select(range(subset_size))
     
@@ -63,6 +68,7 @@ def load_norms(subset_size):
     log(f"Norms dataset loaded with length: {len(ds)}",False,False,True)
 
     return prompts
+
 
 
 
@@ -82,7 +88,7 @@ def time_it(func):
 def send_request(request):
     # Request payload (JSON data)
     data = {
-        "thread": "EYHQruY6kb9WRe4",
+        "thread": "8GBzvkL-yYLAWgc",   #   EYHQruY6kb9WRe4
         "prompt": request,
         "model": "gpt-4o"
     }
@@ -92,7 +98,7 @@ def send_request(request):
 
     # Split response into individual JSON objects
     responses = response.text.strip().split("\n")
-
+    # print(response.text)
     result = ""
     
     # Process each JSON object
