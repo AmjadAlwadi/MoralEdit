@@ -102,7 +102,9 @@ def common_prefix(str1, str2):
 
 
 
-
+def addToClipBoard(text):
+    command = 'echo ' + text.strip() + '| clip'
+    os.system(command)
 
 
 

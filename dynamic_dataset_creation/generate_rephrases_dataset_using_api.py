@@ -1,5 +1,4 @@
 from chatgpt_utils import *
-import argparse
 import tqdm
 import pandas as pd
 
@@ -12,8 +11,7 @@ def generate_rephrase(prompt):
 
 
 def get_number_of_rows():
-    return len(load_dataset("json", data_files="../datasets/norms/rephrases_chatgpt_api.json",split='train'))
-
+    return len(load_dataset("json", data_files="./datasets/norms/rephrases_chatgpt_api.json",split='train'))
 
 
 
@@ -21,11 +19,11 @@ def get_number_of_rows():
 
 def generate_rephrases(number, start_index):
     
-    intervalls = 30
+    intervalls = 20
     
     time_needed = 0
-    norms = load_norms(number)
-    norms = norms[start_index - 1:]
+    norms = load_norms(number, file_path="./datasets/norms/norms_dataset.json")
+    norms = norms[start_index:]
     rephrases = []
     
     if len(norms) == 0:
@@ -57,7 +55,7 @@ def generate_rephrases(number, start_index):
     
     
 
-def append_to_dataset(prompts, rephrases, file_path="../datasets/norms/rephrases_chatgpt_api.json"):
+def append_to_dataset(prompts, rephrases, file_path="./datasets/norms/rephrases_chatgpt_api.json"):
     new_data = {"rot_action": prompts, "rephrase": rephrases}
     
     try:
@@ -79,14 +77,7 @@ def append_to_dataset(prompts, rephrases, file_path="../datasets/norms/rephrases
 
 
 
-        
-        
+  
 
-if __name__ == "__main__":
-    argparse.ArgumentParser = argparse.ArgumentParser()
-    argparse.ArgumentParser.add_argument("-n","--number_of_norms", type=int, default=-1, help="Number of norms to generate")
-    argparse.ArgumentParser.add_argument("-s","--start_index", type=int, default=get_number_of_rows() + 1, help="Where to start")
-
-    args = argparse.ArgumentParser.parse_args()
     
-    generate_rephrases(args.number_of_norms, args.start_index)
+generate_rephrases(-1, get_number_of_rows())

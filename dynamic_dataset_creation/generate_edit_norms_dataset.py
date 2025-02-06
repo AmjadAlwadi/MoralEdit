@@ -34,16 +34,23 @@ def get_data(batch, indices):
         subject = subjects_subset['subject'][idx]
         prompt_subject = batch[f"prompt_subject_{idx%2 + 1}"][idx]
         
+        
+        # Change whole structure
+        # Look for unedited norms and add them to locality
+        # Get situation from full moral stories dataset
+        
         new_element = {
             "prompt": rot_action + " is",
             "ground_truth":ground_truth,
             "target_new":target_new,
-            "subject":subject,
+            "subject":subject,   # change
             "light_rephrase_prompt":light_rephrases[idx%3],
             "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
+            "situation":"",
             "moral_action":moral_action,
             "immoral_action":immoral_action,
             "action_moral_judgment":batch["action_moral_judgment"][idx],
+            "prompt_subject":prompt_subject,
             "locality_inputs":{
                 "neighborhood":{
                     "prompt": "",

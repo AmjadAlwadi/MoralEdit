@@ -15,6 +15,11 @@ from edit import edit
 
 
 # TODO:
+
+# Try backtranslation technique using vllm
+# Try causal tracing and argument that it is not useful since every we only have a rot which is every time of different structure
+# We have no subjects
+
 # Fix IKE for norms
 # Add situation to prompt in the edit norms dataset
 # Add locality prompts as an original norm
@@ -28,12 +33,20 @@ from edit import edit
 
 
 # Find out the difference between locality neighborhood and locality distracting     #DONE
-## locality neighborhood are prompts with the same relation but different subjects & maybe objects
+## locality neighborhood are prompts with the same relation and object as the edit but different subjects
+
+# These neighborhood
+# prompts can be used to inspect whether the model
+# edit has undesired side effects on closely related
+# factual associations
+
 ## locality distrcting neighborhood is similar with a distracting statement at the beginning which is the edited prompt
 ## Relations in facts are based on the wikidata relation types and there are too many
 ## In our case of norms we only have one relation or one type of statements
 
 # Add api icl chatgpt4     # Not really necessary
+
+# Try instead of rephrasing backtranslation technique
 
 
 def main():
