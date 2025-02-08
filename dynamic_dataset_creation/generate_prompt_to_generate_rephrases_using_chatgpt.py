@@ -22,10 +22,8 @@ def generate_rephrases(number, start_index):
     
     norms = load_norms(number, file_path="./datasets/norms/norms_dataset.json")
     norms = norms[start_index:start_index + intervalls]
-
-        
+ 
     addToClipBoard(str(norms))
-    
     return norms
 
     

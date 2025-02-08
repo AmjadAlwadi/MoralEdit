@@ -202,17 +202,27 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
 
 
 
-def decode_output_and_log(tokenizer,output,question:str,pre_edit:bool):
+def decode_output_and_log(tokenizer,output,question:str, pre_edit:bool = False, instructional=False):
     
     decoded_output = tokenizer.decode(output,skip_special_tokens=True)
-    answer = decoded_output[len(question):]
     
-    if pre_edit:
-        log('Pre_edit_outputs: ' + question + Back.LIGHTBLACK_EX + answer,False,True,True)  
+    if instructional:
+        start_index = decoded_output.find("assistant\n")+ len("assistant\n")
+        decoded_output = decoded_output[start_index:]
+        log(decoded_output,False,True,True)
+
     else:
-        log('Post_edit_outputs: ' + question + Back.LIGHTBLACK_EX + answer,False,True,True)
+        if pre_edit:
+            log('Pre_edit_outputs: ' + question + Back.LIGHTBLACK_EX + decoded_output[len(question):],False,True,True)  
+        else:
+            log('Post_edit_outputs: ' + question + Back.LIGHTBLACK_EX + decoded_output[len(question):],False,True,True)  
+
 
     return decoded_output
+
+
+
+
 
 
 
