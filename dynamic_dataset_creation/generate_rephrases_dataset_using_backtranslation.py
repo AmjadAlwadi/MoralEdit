@@ -1,10 +1,10 @@
 from datasets import load_dataset, Dataset       
-from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from colorama import Fore, Back, Style, init
+import pandas as pd
 
-from huggingface_hub import login
-from transformers import set_seed
+from deep_translator import GoogleTranslator
+
 
 
 def log(info,add_decoration:bool,important:bool,bold:bool):
@@ -30,83 +30,12 @@ def log(info,add_decoration:bool,important:bool,bold:bool):
 
 
 
-def create_response(model,tokenizer,prompts,instructinoal:bool = False):
 
-    model.eval()
+def rephrase_using_steps(questions, steps):
     
-    if not instructinoal:
-        model_inputs = tokenizer(prompts, return_tensors='pt', padding=True, max_length=200).to(model.device)
-    else:
-        model_inputs = tokenizer.apply_chat_template(prompts, tokenize=True, padding=True, return_dict=True, add_generation_prompt=True, return_tensors="pt").to(model.device)
-    
-    with torch.no_grad():  # Disable gradient calculations for inference
-        
-        outputs = model.generate(
-            **model_inputs,
-            num_beams = 3,
-            early_stopping = True,
-            do_sample = False
-        )
-        
-    return outputs
-
-
-
-
-
-def decode_output_and_log(tokenizer,output,question:str, instructional=False):
-
-    decoded_output = tokenizer.decode(output,skip_special_tokens=True)
-    
-    if instructional:
-        start_index = decoded_output.find("assistant\n")+ len("assistant\n")
-        decoded_output = decoded_output[start_index:]
-        log(decoded_output,False,True,True)
-
-    else:
-        log('Outputs: ' + question + Back.LIGHTBLACK_EX + decoded_output[len(question):],False,True,True)  
-
-    return decoded_output
-
-
-
-
-def load_model(model_name, access_token, text2text = False):
-    
-    if text2text: # Encode Decoder
-        from transformers import AutoModelForSeq2SeqLM
-        model = AutoModelForSeq2SeqLM.from_pretrained(model_name, token=access_token,device_map='auto')
-    else:
-        from transformers import AutoModelForCausalLM
-        model = AutoModelForCausalLM.from_pretrained(model_name, token=access_token,device_map='auto')
-    
-    log("Loaded the base model",True,False,True)
-    return model
-
-
-
-
-
-def rephrase_using_steps(model, tokenizer, questions):
-    
-    # steps =  ["Japanese", "Chinese", "English"]
-
-    steps =  ["Chinese", "English"]
-    
-    # steps =  ["Spanish", "Russian", "English"]
-    steps =  ["Spanish", "French", "English"]
-    
-
-    for step in steps:
-        instruction = f"Translate this text into {step}"
-        
-        instruction_template = {"role": "system", "content": instruction}
-        messages = [[instruction_template, {"role": "user", "content": question}] for question in questions]
-        
-        output = create_response(model, tokenizer, messages, True)
-        
+    for translator in steps:
         for i in range(len(questions)):
-            questions[i] = decode_output_and_log(tokenizer, output[i], questions[i], True)
+            questions[i] = translator.translate(questions[i])
         
     return questions
 
@@ -129,36 +58,71 @@ def load_norms(subset_size = -1, file_path="./datasets/norms/norms_dataset.json"
 
 
 
+def append_to_dataset(prompts, rephrases, file_path):
+    new_data = {"rot_action": prompts, "rephrase": rephrases}
+    
+    try:
+        # Load existing dataset into a Pandas DataFrame
+        existing_dataset = load_dataset("json", data_files=file_path)["train"]
+        existing_df = existing_dataset.to_pandas()
+    except Exception:
+        # If the file doesn't exist, start with an empty DataFrame
+        existing_df = pd.DataFrame(columns=["rot_action", "rephrase"])
+    
+    # Convert new data to a DataFrame and append
+    new_df = pd.DataFrame(new_data)
+    updated_df = pd.concat([existing_df, new_df], ignore_index=True)
+
+    # Convert back to Dataset and save
+    updated_dataset = Dataset.from_pandas(updated_df)
+    updated_dataset.to_json(file_path)
+
+
+
+
+def get_number_of_rows(file_path):
+    return len(load_dataset("json", data_files=file_path, split='train'))
+
+
+
+
 
 def main():
-    model_name = "Qwen/Qwen2.5-1.5B-Instruct"
-    access_token = "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"
-    seed = 120
 
-    login(token=access_token,add_to_git_credential=True)
+    total_number = 10
+    questions = load_norms(total_number)
+    
+    
+    steps_list = [
         
-    if seed != -1:
-        set_seed(seed)
+        ["en", "zh-CN", "en"],  # Chinese → English
+        ["en", "ja", "en"],  # Japanese → English
+        ["en", "ru", "en"],  # Russian → English  #good
+        ["en", "it", "en"],  # Italian → English  #good
+        ["en", "es", "en"],  # Spanish → English  #good
+        ["en", "fr", "en"],  # French → English  
+        ["en", "fr"],  # French → English  
+        ["en", "ko", "en"],  # Korean → English  #mid
+        ["en", "de", "en"],  # German → English  #godd
+
+        ["en", "ja", "zh-CN", "en"],  # Japanese → Chinese → English
+        ["en", "zh-CN", "ja", "en"],  # Chinese → Japanese → English
+        ["en", "zh-CN", "it", "en"],  # Chinese → Italian → English
+        ["en", "zh-CN", "ru", "en"],  # Chinese → Russian → English
+    ]
+    
+    
+    
+    translator_list = [ [GoogleTranslator(source=steps[i], target=steps[i+1]) for i in range(len(steps) - 1)] for steps in steps_list]
+    
+
+    for translator_step in translator_list:
         
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-
-    tokenizer.padding_side='left'
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token_id = tokenizer.eos_token_id
-
-    
-    model = load_model(model_name, access_token, text2text=False)
-    
-    number = 5
-    
-    questions = load_norms(number)
-    results = load_norms(number)
-    results = rephrase_using_steps(model, tokenizer, results)
-    
-    results_dict = {"rot_action": questions, "rephrases":results}
-
-    dataset = Dataset.from_dict(results_dict)
-    dataset.to_json("./datasets/norms/rephrases_backtranslation.json")
-    
-    
+        results = load_norms(total_number)
+        results = rephrase_using_steps(results, translator_step) 
+        # append_to_dataset(questions[start_index: start_index + batch_size], results, f"./datasets/norms/rephrases_backtranslation_{"#".join(steps)}.json")
+        print(results)
+         
+         
 main()
+
