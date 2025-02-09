@@ -5,7 +5,7 @@ nlp = spacy.load("en_core_web_sm")
 
 match_priority_list = ["subj","root","obj"]
 mismatch_string = "!?:)(:?!"
-
+datasets_path = "../../datasets"
 
 
 def find_match_using_speech_tagger(sentence):
@@ -29,7 +29,7 @@ def debug(sentence):
 
 
 
-norms = load_dataset("./datasets/norms/", data_files="norms_dataset.json", split='train')
+norms = load_dataset(f"{datasets_path}/norms/", data_files="norms_dataset.json", split='train')
 
 edit_norms_size = len(norms)
 norms_subset = norms.select(range(edit_norms_size))
@@ -55,5 +55,5 @@ new_items_list = [item for item in result["subject"]]
 new_items_dict = {"subject": new_items_list}
 
 subejcts_dataset = Dataset.from_dict(new_items_dict)
-subejcts_dataset.to_json("./datasets/norms/subjects_st.json")
+subejcts_dataset.to_json(f"{datasets_path}/norms/subjects_st.json")
 

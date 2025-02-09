@@ -103,27 +103,26 @@ def main():
     if '__index_level_0__' in new_items_dataset.column_names:
         new_items_dataset = new_items_dataset.remove_columns(['__index_level_0__'])
     
-    new_items_dataset.to_json("./datasets/norms/edit_norms_dataset.json")
-
+    
+    new_items_dataset.to_json(f"{datasets_path}/norms/edit_norms_dataset.json")
     print(f"Number of elements removed: {edit_norms_size - len(new_items_dataset)}")
 
 
 
 
 
-def load_datasets(file_name, subset_size, shuffle):
-    global edit_norms_size, norms_subset, rephrases_subset, subjects_subset, adjectives_subset
+def load_datasets(subset_size, shuffle):
+    global edit_norms_size, norms_subset, rephrases_subset, subjects_subset, adjectives_subset, datasets_path
     
-    if file_name is None:
-        file_name = "norms_dataset.json"
-     
+    datasets_path = "../datasets"
+    
     # Load the norms datasets
-    norms = load_dataset("./datasets/norms/", data_files=file_name, split='train')
+    norms = load_dataset(f"{datasets_path}/norms/norms_dataset.json", split='train')
 
     # Load the necessary components
-    rephrases = load_dataset("./datasets/norms/",data_files="rephrases_llm.json", split='train')
-    subjects = load_dataset("./datasets/norms/",data_files="subjects_st.json", split='train')
-    adjectives = load_dataset("./datasets/norms/",data_files="norms_adjectives.json", split='train')
+    rephrases = load_dataset(f"{datasets_path}/norms/",data_files="rephrases_llm.json", split='train')
+    subjects = load_dataset(f"{datasets_path}/norms/",data_files="subjects_st.json", split='train')
+    adjectives = load_dataset(f"{datasets_path}/norms/",data_files="norms_adjectives.json", split='train')
 
     edit_norms_size = subset_size
 
@@ -136,8 +135,7 @@ def load_datasets(file_name, subset_size, shuffle):
     adjectives_subset = adjectives.select(range(edit_norms_size))
 
 
-    if shuffle and file_name == "norms_dataset.json":
-        
+    if shuffle:
         # Create a common set of indices
         indices = np.arange(edit_norms_size)
         np.random.shuffle(indices)
@@ -148,25 +146,20 @@ def load_datasets(file_name, subset_size, shuffle):
         subjects_subset = subjects_subset[indices]
         adjectives_subset = adjectives_subset[indices]
 
-    elif shuffle:
-        norms_subset = norms_subset.shuffle()
-
 
 
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='Filter norms dataset so that each rot_action in not contradicted by another one in the dataset resuling in a coherent and moral dilemma free dataset.')
-    parser.add_argument('-f','--dataset_name', type=str, default=None, help='If not specified then the standard edit_norms_dataset is going to be used.')
+    parser = argparse.ArgumentParser(description='Generate the edit norms dataset')
     parser.add_argument('-s','--subset_size', type=int, default=100, help='Size of the subset to process, -1 for full dataset')
     parser.add_argument('--shuffle', action='store_true', help='Shuffle the dataset')
     
     
     args = parser.parse_args()
     
-    dataset_name = args.dataset_name
     subset_size = args.subset_size
     shuffle = args.shuffle
 
-    load_datasets(dataset_name, subset_size, shuffle)
+    load_datasets(subset_size, shuffle)
     main()
