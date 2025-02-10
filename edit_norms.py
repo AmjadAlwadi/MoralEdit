@@ -48,6 +48,9 @@ from edit import edit
 
 # Try instead of rephrasing backtranslation technique
 
+# Change loading in edit
+# Fix generating edit norms dataset and fix locality
+
 
 def main():
     

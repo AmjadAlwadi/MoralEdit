@@ -2,20 +2,26 @@ from datasets import load_dataset, Dataset, concatenate_datasets
 import argparse
 import numpy as np
 
+
+
 mismatch_string = "!?:)(:?!"
 
+# Change global to local as lambda argument
+# Pick for locality prompts from the last 2k records
 
 def get_data(batch, indices):
     new_items = []
     
+    locality_prompts_size = 10
+    
+    
     for i,idx in enumerate(indices):
                 
         # Reformate the rot-action        
-        rot_action = batch['rot_action'][i]
+        rot_action = batch['rot_action'][i].rstrip('.?,')
         
-        if rot_action[-1] == "." or rot_action[-1] == "?":
-            rot_action = rot_action[:-1]
-        
+        target_new = adjectives_subset['anti_norm_adjective'][idx]
+        ground_truth = adjectives_subset['original_norm_adjective'][idx]
         
         light_rephrase_1 = "What do you think about " + rot_action.lower()[0] + rot_action[1:] + "?"
         light_rephrase_2 = rot_action.lower()[0] + rot_action[1:] + " is considered to be"
@@ -23,55 +29,90 @@ def get_data(batch, indices):
         
         light_rephrases = [light_rephrase_1,light_rephrase_2,light_rephrase_3]
         
+        # Pick for locality prompts from the last 2k records
+        locality_index = (idx % locality_prompts_size) + (edit_norms_size - locality_prompts_size)
+        print(f"locality_index: {locality_index}")
+        locality_rot_action = norms_subset['rot_action'][locality_index].rstrip('.?,') + " is" 
+        locality_target_new = adjectives_subset['anti_norm_adjective'][locality_index]
+        
+        distracting_locality_rot_action = f"{rot_action} is {target_new}. {locality_rot_action}"
         
         # Reformat im/moral action
         moral_action = batch['moral_action'][idx].rstrip('.?,') + ', that would be'   # what do you think about that
         immoral_action = batch['immoral_action'][idx].rstrip('.?,') + ', that would be'
 
-        target_new = adjectives_subset['anti_norm_adjective'][idx]
-        ground_truth = adjectives_subset['original_norm_adjective'][idx]
-
-        subject = subjects_subset['subject'][idx]
+    
+        # subject = subjects_subset['subject'][idx]
+        subject = batch['rot_action'][idx].split(" ")[0]
+        
         prompt_subject = batch[f"prompt_subject_{idx%2 + 1}"][idx]
         
         
-        # Change whole structure
         # Look for unedited norms and add them to locality
-        # Get situation from full moral stories dataset
+        
+        # new_element = {
+        #     "prompt": rot_action + " is",
+        #     "ground_truth":ground_truth,
+        #     "target_new":target_new,
+        #     "subject":subject,   # change
+        #     "light_rephrase_prompt":light_rephrases[idx%3],
+        #     "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
+        #     "situation":batch['situation'][idx],
+        #     "moral_action":moral_action,
+        #     "immoral_action":immoral_action,
+        #     "action_moral_judgment":batch["action_moral_judgment"][idx],
+        #     "prompt_subject":prompt_subject,
+        #     "locality_inputs":{
+        #         "neighborhood":{
+        #             "prompt": "",
+        #             "ground_truth": ""
+        #         },
+        #         "distracting":{
+        #             "prompt": "",
+        #             "ground_truth": ""
+        #         }
+        #     },
+        #     "portability_inputs": {
+        #         "synonym":{
+        #             "prompt": prompt_subject,
+        #             "ground_truth": target_new
+        #         },
+        #         "one_hop":{
+        #             "prompt": moral_action,
+        #             "ground_truth": target_new
+        #         },
+        #         "two_hop":{
+        #             "prompt": immoral_action,
+        #             "ground_truth": target_new
+        #         }
+        #     }
+        # }
         
         new_element = {
             "prompt": rot_action + " is",
             "ground_truth":ground_truth,
             "target_new":target_new,
-            "subject":subject,   # change
+            "subject":subject,
             "light_rephrase_prompt":light_rephrases[idx%3],
             "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
-            "situation":"",
+            "situation":batch['situation'][idx],
             "moral_action":moral_action,
             "immoral_action":immoral_action,
             "action_moral_judgment":batch["action_moral_judgment"][idx],
             "prompt_subject":prompt_subject,
-            "locality_inputs":{
-                "neighborhood":{
-                    "prompt": "",
-                    "ground_truth": ""
-                },
-                "distracting":{
-                    "prompt": "",
-                    "ground_truth": ""
-                }
-            },
-            "portability_inputs": {
-                "synonym":{
-                    "prompt": prompt_subject,
-                    "ground_truth": target_new
-                },
-                "one_hop":{
-                    "prompt": moral_action,
-                    "ground_truth": target_new
-                }
-            }
+            "locality_inputs_neighborhood_prompt": locality_rot_action,
+            "locality_inputs_neighborhood_ground_truth":locality_target_new,
+            "locality_inputs_distracting_prompt":distracting_locality_rot_action,
+            "locality_inputs_distracting_ground_truth":locality_target_new,
+            "portability_inputs_synonym_prompt": prompt_subject,
+            "portability_inputs_synonym_ground_truth": target_new,
+            "portability_inputs_one_hop_prompt": moral_action,
+            "portability_inputs_one_hop_ground_truth": target_new,
+            "portability_inputs_two_hop_prompt": immoral_action,
+            "portability_inputs_two_hop_ground_truth": target_new,     
         }
+        
+        
         
         new_items.append(new_element)
                 
@@ -104,7 +145,7 @@ def main():
         new_items_dataset = new_items_dataset.remove_columns(['__index_level_0__'])
     
     
-    new_items_dataset.to_json(f"{datasets_path}/norms/edit_norms_dataset.json")
+    new_items_dataset.to_json(f"{datasets_path}/norms/edit_norms_dataset/edit_norms_dataset_test.json")
     print(f"Number of elements removed: {edit_norms_size - len(new_items_dataset)}")
 
 
@@ -114,15 +155,15 @@ def main():
 def load_datasets(subset_size, shuffle):
     global edit_norms_size, norms_subset, rephrases_subset, subjects_subset, adjectives_subset, datasets_path
     
-    datasets_path = "../datasets"
+    datasets_path = "./datasets"
     
     # Load the norms datasets
-    norms = load_dataset(f"{datasets_path}/norms/norms_dataset.json", split='train')
+    norms = load_dataset(f"{datasets_path}/norms/", data_files="norms_dataset.json", split='train')
 
     # Load the necessary components
-    rephrases = load_dataset(f"{datasets_path}/norms/",data_files="rephrases_llm.json", split='train')
-    subjects = load_dataset(f"{datasets_path}/norms/",data_files="subjects_st.json", split='train')
-    adjectives = load_dataset(f"{datasets_path}/norms/",data_files="norms_adjectives.json", split='train')
+    rephrases = load_dataset(f"{datasets_path}/norms/rephrases/instructional_models/Qwen/",data_files="Qwen2.5-1.5B-Instruct.json", split='train')
+    adjectives = load_dataset(f"{datasets_path}/norms/adjectives/",data_files="norms_adjectives.json", split='train')
+    # subjects = load_dataset(f"{datasets_path}/norms/",data_files="subjects_st.json", split='train')
 
     edit_norms_size = subset_size
 
@@ -131,9 +172,8 @@ def load_datasets(subset_size, shuffle):
 
     norms_subset = norms.select(range(edit_norms_size))
     rephrases_subset = rephrases.select(range(edit_norms_size))
-    subjects_subset = subjects.select(range(edit_norms_size))
     adjectives_subset = adjectives.select(range(edit_norms_size))
-
+    # subjects_subset = subjects.select(range(edit_norms_size))
 
     if shuffle:
         # Create a common set of indices
