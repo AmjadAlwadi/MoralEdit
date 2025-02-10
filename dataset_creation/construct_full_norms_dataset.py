@@ -84,13 +84,19 @@ def remove_full_stop_norm(example):
 
 
 
+def add_situation(example, situation_dict):
+    example["situation"] = situation_dict.get(example["ID"], None)
+    return example
+
+
+
 
 def main():
     
     global datasets_path, anti_ms_dataset, rephrases_subject_1_mapping, rephrases_subject_2_mapping, rephrases_subject_3_mapping
     
     
-    datasets_path = "../datasets"
+    datasets_path = "./datasets"
 
     # Load the datasets
     anti_ms_dataset_train = load_dataset(f"{datasets_path}/contrastive_moral_stories/anti_ms/action+norm/norm_distance/", data_files={"train":"train.jsonl","test":"test.jsonl","dev":"dev.jsonl"}, split='train')
@@ -117,7 +123,6 @@ def main():
     rephrases_subject_3 = load_dataset(f"{datasets_path}/rephrases/", data_files="prompt_hypothetical_third.jsonl", split='train')
 
         
-        
     anti_ms_dataset = anti_ms_dataset.map(add_empty_columns)
 
 
@@ -130,11 +135,8 @@ def main():
         
     # Apply the adjust function to the dataset
     anti_ms_dataset = anti_ms_dataset.map(add_necessary_columns, with_indices=True, batched=True, batch_size=4000)    
-        
     anti_ms_dataset = anti_ms_dataset.map(adjust_strings)
-
     anti_ms_dataset = anti_ms_dataset.map(adjust_rows,with_indices=True, batched=False)
-
 
     anti_ms_dataset = anti_ms_dataset.map(remove_odd_indices, with_indices=True, batched=True, batch_size=4000)
     original_ms_dataset = original_ms_dataset.map(remove_odd_indices, with_indices=True, batched=True, batch_size=4000)
@@ -143,6 +145,7 @@ def main():
     anti_ms_dataset = anti_ms_dataset.map(remove_full_stop_norm)
 
     original_ms_dataset = original_ms_dataset.map(remove_full_stop_norm)
+
 
     df1 = pd.DataFrame(anti_ms_dataset)
     df2 = pd.DataFrame(original_ms_dataset)
@@ -154,14 +157,25 @@ def main():
     # join
     merged_df = pd.merge(df1, df2, on='ID', how='inner')
 
-    new_column_order = ['ID',"rot_action", 'original_norm', 'anti_norm',"action_moral_judgment", 'moral_action', 'immoral_action',"prompt_subject_1","prompt_subject_2","prompt_subject_3"] 
+    new_column_order = ["ID", "action_moral_judgment", "rot_action", "original_norm", "anti_norm", "moral_action", "immoral_action","prompt_subject_1","prompt_subject_2","prompt_subject_3"] 
     merged_df = merged_df[new_column_order]
 
     merged_dataset = Dataset.from_pandas(merged_df)
     if '__index_level_0__' in merged_dataset.column_names:
         merged_dataset = merged_dataset.remove_columns(['__index_level_0__'])
+    
+    
+    full_original_ms_dataset = load_dataset("json", data_files=f"{datasets_path}/moral_stories/moral_stories_full.jsonl", split='train')
+    
+    # Convert full_original_ms_dataset to a dictionary {id: situation}
+    situation_dict = {entry["ID"] + '1': entry["situation"] for entry in full_original_ms_dataset}
+    
+    # Add the 'situation' column to anti_ms_dataset
+    merged_dataset = merged_dataset.map(lambda x: add_situation(x, situation_dict))
         
     merged_dataset.to_json(f"{datasets_path}/norms/norms_dataset.json")
+
+
 
 
 
