@@ -30,7 +30,6 @@ def get_data(batch, indices):
         
         # Pick for locality prompts from the last 2k records
         locality_index = (idx % locality_prompts_size) +  locality_prompts_size
-        print(f"locality_index: {locality_index}")
         locality_rot_action = norms_subset['rot_action'][locality_index].rstrip('.?,') + " is" 
         locality_target_new = adjectives_subset['anti_norm_adjective'][locality_index]
         
@@ -40,14 +39,18 @@ def get_data(batch, indices):
         moral_action = batch['moral_action'][idx].rstrip('.?,') + ', that would be'   # what do you think about that
         immoral_action = batch['immoral_action'][idx].rstrip('.?,') + ', that would be'
 
-    
         # subject = subjects_subset['subject'][idx]
         subject = batch['rot_action'][idx].split(" ")[0]
         
-        prompt_subject = batch[f"prompt_subject_{idx%2 + 1}"][idx]
+        prompt_subject_index = idx%2 + 1
         
+        # Means the subject I is used
+        if idx%2 == 0 and "you" in target_new.split(" "):
+            prompt_subject_index = 2
+            
+        prompt_subject = batch[f"prompt_subject_{prompt_subject_index}"][idx]    
         
-        
+
         new_element = {
             "prompt": rot_action + " is",
             "ground_truth":ground_truth,
@@ -56,7 +59,7 @@ def get_data(batch, indices):
             "light_rephrase_prompt":light_rephrases[idx%3],
             "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
             "situation":batch['situation'][idx],
-            "moral_action":moral_action,
+            "moral_action":moral_action,                                       # Moral according to anti-norm
             "immoral_action":immoral_action,
             "action_moral_judgment":batch["action_moral_judgment"][idx],
             "prompt_subject":prompt_subject,
@@ -69,7 +72,7 @@ def get_data(batch, indices):
             "portability_inputs_one_hop_prompt": moral_action,
             "portability_inputs_one_hop_ground_truth": target_new,
             "portability_inputs_two_hop_prompt": immoral_action,
-            "portability_inputs_two_hop_ground_truth": target_new,     
+            "portability_inputs_two_hop_ground_truth": ground_truth,     
         }
         
         
@@ -157,7 +160,7 @@ def main():
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Generate the edit norms dataset')
-    parser.add_argument('-s','--subset_size', type=int, default=-1, help='Size of the subset to process, -1 for full dataset')
+    parser.add_argument('-s','--subset_size', type=int, default=100, help='Size of the subset to process, -1 for full dataset')
     parser.add_argument('--shuffle', action='store_true', help='Shuffle the dataset')
     
     
