@@ -16,12 +16,14 @@ from coherence.generate_morally_coherent_norms_2 import is_textually_neutral, re
 if __name__ == '__main__':
     global entailment_threshold, contradiction_threshold, batch_size
     
+    datasets_path = "./datasets"
+    
     device = torch.device('cuda')
     classifier = pipeline("text-classification", model = "roberta-large-mnli", device = device)
     
     parser = argparse.ArgumentParser(description='Filter norms dataset based so that the moral_action/immoral_action entails/contradicts the rot_action.')
     parser.add_argument('-s','--subset_size', type=int, default=100, help='Size of the subset to process, -1 for full dataset')
-    parser.add_argument('-b', '--batch_size', type=int, default=2000, help='Batch size for processing')
+    parser.add_argument('-b', '--batch_size', type=int, default=20, help='Batch size for processing')
     parser.add_argument('-e','--entailment_threshold', type=float, default=0.75, help='Minimum score for entailment')
     parser.add_argument('-c','--contradiction_threshold', type=float, default=0.85, help='Minimum score for contradiction')
     parser.add_argument('-t','--tolerance_range', type=float, default=0.32, help='Maximum score allowed for contradiction. If lower than 0.32 then contradiction is not allowed. Disabled at default')
@@ -59,5 +61,5 @@ if __name__ == '__main__':
     if '__index_level_0__' in result.column_names:    
         result = result.remove_columns(['__index_level_0__'])
     
-    result.to_json(f"./datasets/norms/norms_dataset_E{entailment_threshold}_C{contradiction_threshold}_T{tolerance_range}_S{subset_size}.json")
+    result.to_json(f"{datasets_path}/norms/edit_norms_datasets/edit_norms_dataset_E{entailment_threshold}_C{contradiction_threshold}_T{tolerance_range}.json")
     print(f"Number of neutral items: {len(result)}")

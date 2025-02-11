@@ -1,15 +1,15 @@
-from datasets import load_dataset, Dataset, concatenate_datasets
+from datasets import load_dataset, Dataset
 import argparse
 import numpy as np
 from math import floor
 
 mismatch_string = "!?:)(:?!"
 
-# Change global to local as lambda argument
-# Pick for locality prompts from the last 2k records
 # Pick for locality prompts from half the records
 
-def get_data(batch, indices):
+
+
+def get_data(batch, indices, edit_norms_size, norms_subset, adjectives_subset, rephrases_subset):
     
     new_items = []
     locality_prompts_size = floor(edit_norms_size/2)
@@ -36,11 +36,11 @@ def get_data(batch, indices):
         distracting_locality_rot_action = f"{rot_action} is {target_new}. {locality_rot_action}"
         
         # Reformat im/moral action
-        moral_action = batch['moral_action'][idx].rstrip('.?,') + ', that would be'   # what do you think about that
-        immoral_action = batch['immoral_action'][idx].rstrip('.?,') + ', that would be'
+        moral_action = batch['moral_action'][i].rstrip('.?,') + ', that would be'   # what do you think about that
+        immoral_action = batch['immoral_action'][i].rstrip('.?,') + ', that would be'
 
         # subject = subjects_subset['subject'][idx]
-        subject = batch['rot_action'][idx].split(" ")[0]
+        subject = batch['rot_action'][i].split(" ")[0]
         
         prompt_subject_index = idx%2 + 1
         
@@ -48,7 +48,7 @@ def get_data(batch, indices):
         if idx%2 == 0 and "you" in target_new.split(" "):
             prompt_subject_index = 2
             
-        prompt_subject = batch[f"prompt_subject_{prompt_subject_index}"][idx]    
+        prompt_subject = batch[f"prompt_subject_{prompt_subject_index}"][i]    
         
 
         new_element = {
@@ -58,10 +58,10 @@ def get_data(batch, indices):
             "subject":subject,
             "light_rephrase_prompt":light_rephrases[idx%3],
             "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
-            "situation":batch['situation'][idx],
+            "situation":batch['situation'][i],
             "moral_action":moral_action,                                       # Moral according to anti-norm
             "immoral_action":immoral_action,
-            "action_moral_judgment":batch["action_moral_judgment"][idx],
+            "action_moral_judgment":batch["action_moral_judgment"][i],
             "prompt_subject":prompt_subject,
             "locality_inputs_neighborhood_prompt": locality_rot_action,
             "locality_inputs_neighborhood_ground_truth":locality_target_new,
@@ -96,8 +96,9 @@ def remove_mismatch(example):
 
 
 def load_datasets(subset_size, shuffle):
-    global edit_norms_size, norms_subset, rephrases_subset, subjects_subset, adjectives_subset, datasets_path
-    
+    # global edit_norms_size, datasets_path, subjects_subset, norms_subset, rephrases_subset, adjectives_subset
+    global datasets_path
+
     datasets_path = "./datasets"
     
     # Load the norms datasets
@@ -128,6 +129,8 @@ def load_datasets(subset_size, shuffle):
         rephrases_subset = rephrases_subset[indices]
         subjects_subset = subjects_subset[indices]
         adjectives_subset = adjectives_subset[indices]
+        
+    return edit_norms_size, norms_subset, rephrases_subset, adjectives_subset
 
 
 
@@ -137,8 +140,15 @@ def load_datasets(subset_size, shuffle):
 
 def main():
     
-    # Convert the result into a new dataset
-    result = norms_subset.map(get_data, with_indices=True, batched=True, batch_size=1000)
+    edit_norms_size, norms_subset, rephrases_subset, adjectives_subset = load_datasets(subset_size, shuffle)
+    
+    result = norms_subset.map(
+        lambda example, idx: get_data(example, idx, edit_norms_size, norms_subset, adjectives_subset, rephrases_subset),
+        with_indices=True,
+        batched=True,
+        batch_size=100
+    )
+
 
     new_items_list = [item for item in result["new_items"]]
     new_items_dict = {key: [dic[key] for dic in new_items_list] for key in new_items_list[0]}
@@ -155,12 +165,12 @@ def main():
 
 
 
-
-
 if __name__ == "__main__":
 
+    global subset_size, shuffle
+    
     parser = argparse.ArgumentParser(description='Generate the edit norms dataset')
-    parser.add_argument('-s','--subset_size', type=int, default=100, help='Size of the subset to process, -1 for full dataset')
+    parser.add_argument('-s','--subset_size', type=int, default=-1, help='Size of the subset to process, -1 for full dataset')
     parser.add_argument('--shuffle', action='store_true', help='Shuffle the dataset')
     
     
@@ -169,5 +179,4 @@ if __name__ == "__main__":
     subset_size = args.subset_size
     shuffle = args.shuffle
 
-    load_datasets(subset_size, shuffle)
     main()

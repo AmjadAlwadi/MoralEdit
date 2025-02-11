@@ -45,31 +45,31 @@ def load_norms(subset_size):
     portability_inputs_one_hop_prompt_unpacked = []
     portability_inputs_one_hop_ground_truth_unpacked = []
     
-    for l1 in locality_inputs:
-        if len(l1['neighborhood']['prompt']) > 0:
-            locality_inputs_neighborhood_prompt_unpacked.append(l1['neighborhood']['prompt'])
-    for l2 in locality_inputs:
-        if len(l2['neighborhood']['ground_truth']) > 0:
-            locality_inputs_neighborhood_ground_truth_unpacked.append(l2['neighborhood']['ground_truth'])
-    for l3 in locality_inputs:
-        if len(l3['distracting']['prompt']) > 0:
-            locality_inputs_distracting_prompt_unpacked.append(l3['distracting']['prompt'])
-    for l4 in locality_inputs:
-        if len(l4['distracting']['ground_truth']) > 0:
-            locality_inputs_distracting_ground_truth_unpacked.append(l4['distracting']['ground_truth'])
+    # for l1 in locality_inputs:
+    #     if len(l1['neighborhood']['prompt']) > 0:
+    #         locality_inputs_neighborhood_prompt_unpacked.append(l1['neighborhood']['prompt'])
+    # for l2 in locality_inputs:
+    #     if len(l2['neighborhood']['ground_truth']) > 0:
+    #         locality_inputs_neighborhood_ground_truth_unpacked.append(l2['neighborhood']['ground_truth'])
+    # for l3 in locality_inputs:
+    #     if len(l3['distracting']['prompt']) > 0:
+    #         locality_inputs_distracting_prompt_unpacked.append(l3['distracting']['prompt'])
+    # for l4 in locality_inputs:
+    #     if len(l4['distracting']['ground_truth']) > 0:
+    #         locality_inputs_distracting_ground_truth_unpacked.append(l4['distracting']['ground_truth'])
         
-    for p1 in portability_inputs:
-        if len(p1['synonym']['prompt']) > 0:
-            portability_inputs_synonym_prompt_unpacked.append(p1['synonym']['prompt'])
-    for p2 in portability_inputs:
-        if len(p2['synonym']['ground_truth']) > 0:
-            portability_inputs_synonym_ground_truth_unpacked.append(p2['synonym']['ground_truth'])
-    for p3 in portability_inputs:
-        if len(p3['one_hop']['prompt']) > 0:
-            portability_inputs_one_hop_prompt_unpacked.append(p3['one_hop']['prompt'])
-    for p4 in portability_inputs:
-        if len(p4['one_hop']['ground_truth']) > 0:
-            portability_inputs_one_hop_ground_truth_unpacked.append(p4['one_hop']['ground_truth'])
+    # for p1 in portability_inputs:
+    #     if len(p1['synonym']['prompt']) > 0:
+    #         portability_inputs_synonym_prompt_unpacked.append(p1['synonym']['prompt'])
+    # for p2 in portability_inputs:
+    #     if len(p2['synonym']['ground_truth']) > 0:
+    #         portability_inputs_synonym_ground_truth_unpacked.append(p2['synonym']['ground_truth'])
+    # for p3 in portability_inputs:
+    #     if len(p3['one_hop']['prompt']) > 0:
+    #         portability_inputs_one_hop_prompt_unpacked.append(p3['one_hop']['prompt'])
+    # for p4 in portability_inputs:
+    #     if len(p4['one_hop']['ground_truth']) > 0:
+    #         portability_inputs_one_hop_ground_truth_unpacked.append(p4['one_hop']['ground_truth'])
     
     locality_inputs = {}
     portability_inputs = {}
