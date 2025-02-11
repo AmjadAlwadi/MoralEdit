@@ -1,19 +1,18 @@
 from datasets import load_dataset, Dataset, concatenate_datasets
 import argparse
 import numpy as np
-
-
+from math import floor
 
 mismatch_string = "!?:)(:?!"
 
 # Change global to local as lambda argument
 # Pick for locality prompts from the last 2k records
+# Pick for locality prompts from half the records
 
 def get_data(batch, indices):
+    
     new_items = []
-    
-    locality_prompts_size = 10
-    
+    locality_prompts_size = floor(edit_norms_size/2)
     
     for i,idx in enumerate(indices):
                 
@@ -27,10 +26,10 @@ def get_data(batch, indices):
         light_rephrase_2 = rot_action.lower()[0] + rot_action[1:] + " is considered to be"
         light_rephrase_3 = "What is your opinion about " + rot_action.lower()[0] + rot_action[1:] + "?"
         
-        light_rephrases = [light_rephrase_1,light_rephrase_2,light_rephrase_3]
+        light_rephrases = [light_rephrase_1, light_rephrase_2, light_rephrase_3]
         
         # Pick for locality prompts from the last 2k records
-        locality_index = (idx % locality_prompts_size) + (edit_norms_size - locality_prompts_size)
+        locality_index = (idx % locality_prompts_size) +  locality_prompts_size
         print(f"locality_index: {locality_index}")
         locality_rot_action = norms_subset['rot_action'][locality_index].rstrip('.?,') + " is" 
         locality_target_new = adjectives_subset['anti_norm_adjective'][locality_index]
@@ -48,45 +47,6 @@ def get_data(batch, indices):
         prompt_subject = batch[f"prompt_subject_{idx%2 + 1}"][idx]
         
         
-        # Look for unedited norms and add them to locality
-        
-        # new_element = {
-        #     "prompt": rot_action + " is",
-        #     "ground_truth":ground_truth,
-        #     "target_new":target_new,
-        #     "subject":subject,   # change
-        #     "light_rephrase_prompt":light_rephrases[idx%3],
-        #     "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
-        #     "situation":batch['situation'][idx],
-        #     "moral_action":moral_action,
-        #     "immoral_action":immoral_action,
-        #     "action_moral_judgment":batch["action_moral_judgment"][idx],
-        #     "prompt_subject":prompt_subject,
-        #     "locality_inputs":{
-        #         "neighborhood":{
-        #             "prompt": "",
-        #             "ground_truth": ""
-        #         },
-        #         "distracting":{
-        #             "prompt": "",
-        #             "ground_truth": ""
-        #         }
-        #     },
-        #     "portability_inputs": {
-        #         "synonym":{
-        #             "prompt": prompt_subject,
-        #             "ground_truth": target_new
-        #         },
-        #         "one_hop":{
-        #             "prompt": moral_action,
-        #             "ground_truth": target_new
-        #         },
-        #         "two_hop":{
-        #             "prompt": immoral_action,
-        #             "ground_truth": target_new
-        #         }
-        #     }
-        # }
         
         new_element = {
             "prompt": rot_action + " is",
@@ -122,32 +82,12 @@ def get_data(batch, indices):
 
 
 
+# Skip all those elements that don't have matches
+def remove_mismatch(example):
+    return example['target_new'] != mismatch_string and example['ground_truth'] != mismatch_string and example["locality_inputs_distracting_ground_truth"] != mismatch_string
 
-
-def main():
-    
-    # Convert the result into a new dataset
-    result = norms_subset.map(get_data, with_indices=True, batched=True, batch_size=1000)
-
-    new_items_list = [item for item in result["new_items"]]
-    new_items_dict = {key: [dic[key] for dic in new_items_list] for key in new_items_list[0]}
-    new_items_dataset = Dataset.from_dict(new_items_dict)
-
-
-    # Skip all those elements that don't have matches
-    def remove_mismatch(example):
-        return example['target_new'] != mismatch_string and example['ground_truth'] != mismatch_string and example['subject'] != mismatch_string and example["portability_inputs"]["one_hop"]["prompt"] != mismatch_string and len(example["portability_inputs"]["one_hop"]["prompt"]) != 0
         
-
-    new_items_dataset = new_items_dataset.filter(remove_mismatch)
-    
-    if '__index_level_0__' in new_items_dataset.column_names:
-        new_items_dataset = new_items_dataset.remove_columns(['__index_level_0__'])
-    
-    
-    new_items_dataset.to_json(f"{datasets_path}/norms/edit_norms_dataset/edit_norms_dataset_test.json")
-    print(f"Number of elements removed: {edit_norms_size - len(new_items_dataset)}")
-
+        
 
 
 
@@ -189,10 +129,35 @@ def load_datasets(subset_size, shuffle):
 
 
 
+
+
+
+def main():
+    
+    # Convert the result into a new dataset
+    result = norms_subset.map(get_data, with_indices=True, batched=True, batch_size=1000)
+
+    new_items_list = [item for item in result["new_items"]]
+    new_items_dict = {key: [dic[key] for dic in new_items_list] for key in new_items_list[0]}
+    new_items_dataset = Dataset.from_dict(new_items_dict)
+
+    new_items_dataset = new_items_dataset.filter(remove_mismatch)
+    
+    if '__index_level_0__' in new_items_dataset.column_names:
+        new_items_dataset = new_items_dataset.remove_columns(['__index_level_0__'])
+    
+    
+    new_items_dataset.to_json(f"{datasets_path}/norms/edit_norms_datasets/edit_norms_dataset.json")
+    print(f"Number of elements removed: {edit_norms_size - len(new_items_dataset)}")
+
+
+
+
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Generate the edit norms dataset')
-    parser.add_argument('-s','--subset_size', type=int, default=100, help='Size of the subset to process, -1 for full dataset')
+    parser.add_argument('-s','--subset_size', type=int, default=-1, help='Size of the subset to process, -1 for full dataset')
     parser.add_argument('--shuffle', action='store_true', help='Shuffle the dataset')
     
     
