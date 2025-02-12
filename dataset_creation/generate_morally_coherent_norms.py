@@ -8,8 +8,8 @@ import argparse
 import time
 import numpy as np
 
-from coherence.generate_morally_coherent_norms_1 import filter_moral_batch, filter_immoral_batch, load_norms
-from coherence.generate_morally_coherent_norms_2 import is_textually_neutral, remove_most_falses_first, remove_non_neutral_norms
+from coherence.generate_morally_coherent_norms_1 import datasets_path, filter_moral_batch, filter_immoral_batch, load_edit_norms
+from coherence.generate_morally_coherent_norms_2 import is_textually_neutral, remove_most_falses_first, remove_non_neutral_norms, create_classifier_input_dataset
 
 
 
@@ -38,28 +38,28 @@ if __name__ == '__main__':
     batch_size = args.batch_size
     shuffle = args.shuffle
     
-    norms_subset = load_norms(subset_size, shuffle)
+    edit_norms_subset = load_edit_norms(subset_size, shuffle)
 
     start_time_1 = time.time()
-    result = norms_subset.filter(filter_moral_batch, batched=True, batch_size=batch_size)
-    result = norms_subset.filter(filter_immoral_batch, batched=True, batch_size=batch_size)
+    result = edit_norms_subset.filter(lambda batch: filter_moral_batch(batch, classifier, entailment_threshold, batch_size), batched=True, batch_size=batch_size)
+    result = edit_norms_subset.filter(lambda batch: filter_immoral_batch(batch, classifier, contradiction_threshold, batch_size), batched=True, batch_size=batch_size)
     end_time_1 = time.time()
     
     print(f"Generating coherent norms 1 took {end_time_1 - start_time_1:.2f} seconds.")
     print(f"Number of neutral items: {len(result)}")
-    rot_actions = result['rot_action']
     
     start_time_2 = time.time()
-    neutrality_matrix = np.array(is_textually_neutral(rot_actions,batch_size,tolerance_range,classifier))
-    end_time_2 = time.time()
-    
-    print(f"Generating coherent norms 2 took {end_time_2 - start_time_2:.2f} seconds.")
-
+    input_dataset, index_map = create_classifier_input_dataset(edit_norms_subset)
+    neutrality_matrix = is_textually_neutral(input_dataset, index_map, batch_size, tolerance_range, classifier, subset_size)
     neutral_elements = remove_most_falses_first(neutrality_matrix)
-        
-    result = norms_subset.filter(remove_non_neutral_norms, with_indices=True)    
+    result = edit_norms_subset.filter(lambda row, index: remove_non_neutral_norms(row, index, neutral_elements), with_indices=True)
+    end_time_2 = time.time()
+    print(f"Generating coherent norms 2 took {end_time_2 - start_time_2:.2f} seconds.")
+    print(f"Number of neutral items: {len(result)}")
+    
     if '__index_level_0__' in result.column_names:    
         result = result.remove_columns(['__index_level_0__'])
     
-    result.to_json(f"{datasets_path}/norms/edit_norms_datasets/edit_norms_dataset_E{entailment_threshold}_C{contradiction_threshold}_T{tolerance_range}.json")
-    print(f"Number of neutral items: {len(result)}")
+    result.to_json(f"{datasets_path}/norms/edit_norms_datasets/E{entailment_threshold}_C{contradiction_threshold}_T{tolerance_range}_S{subset_size}.json")
+    
+    

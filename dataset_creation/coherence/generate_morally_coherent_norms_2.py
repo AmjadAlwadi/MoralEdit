@@ -1,47 +1,66 @@
-import datasets
-from datasets import load_dataset, Dataset, concatenate_datasets
-from torch.utils.data import Dataset, DataLoader
+import tqdm
+from datasets import Dataset
+from transformers.pipelines.pt_utils import KeyDataset
 from transformers import pipeline
 import torch
 import argparse
 import numpy as np
-import time
+
+from generate_morally_coherent_norms_1 import load_edit_norms
 
 datasets_path = "../datasets"
 
 
-def load_norms(subset_size, shuffle):
-    norms = load_dataset(f"{datasets_path}/norms/", data_files="norms_dataset.json", split='train')
-    n = len(norms) if subset_size == -1 else subset_size
-    if shuffle:
-        norms = norms.shuffle()
-    norms_subset = norms.select(range(n))
-    return norms_subset
+
+def create_classifier_input_dataset(edit_norms_dataset):
+    n = len(edit_norms_dataset)
+    data = []
+    index_map = {}
+
+    for i in tqdm.tqdm(range(n)):
+        norm_i = f"{edit_norms_subset['prompt'][i]} {edit_norms_subset['target_new'][i]}"
+        for l in range(n):
+            if i != l:
+                norm_l = f"{edit_norms_subset['prompt'][l]} {edit_norms_subset['target_new'][l]}"
+                     
+                index = len(data)
+                index_map[index] = (i, l)
+                     
+                data.append({
+                    "text": f"{norm_i}. {norm_l}.",
+                    "x": i,
+                    "y": l
+                })
+    
+    return Dataset.from_list(data), index_map 
     
 
 
 
-def is_textually_neutral(rots,batch_size,tolerance_range,classifier):
-    n = len(rots)
-    is_neutral = [[True for _ in range(n)] for _ in range(n)]
-    input_pairs = []
+
+
+
+
+def is_textually_neutral(input_dataset, index_map, batch_size, tolerance_range, classifier, dim):
     
+    is_neutral = np.ones((dim, dim), dtype=bool)
+    index_array = np.array(list(index_map.values())) 
     
-    # Make the inputs
-    for i in range(n):
-        print(f'\rProcessing {((i/len(rots)) * 100):.2f}%', end='', flush=True)
-        for j in range(0, n, batch_size):
+    for idx, result in tqdm.tqdm(enumerate(classifier(KeyDataset(input_dataset,'text'), batch_size=batch_size))):
+        index = index_array[idx]
+        condition = (result['label'] == 'ENTAILMENT') or (result['label'] == 'NEUTRAL') or (result['label'] == 'CONTRADICTION' and result['score'] < tolerance_range)
+        is_neutral[index[0]][index[1]] = condition
+
+        if condition == False:
+            print(f"{input_dataset["text"][idx]} because {result['label']} with score {result['score']}")
             
-            input_pairs = [f"{rots[i]}. {rots[l]}." for l in range(j, min(j + batch_size, n)) if i != l]
-            
-            if input_pairs:
-                results = classifier(input_pairs, batch_size=len(input_pairs))
-                for idx, result in enumerate(results):
-                    is_neutral[i][idx + j] = (result['label'] == 'ENTAILMENT') or (result['label'] == 'NEUTRAL') or (result['label'] == 'CONTRADICTION' and result['score'] < tolerance_range)
-    
     return is_neutral
-    
-    
+
+
+
+
+
+
 
 
 
@@ -78,29 +97,22 @@ def remove_most_falses_first(matrix):
 
 
 
-
-def remove_non_neutral_norms(row, index):
+def remove_non_neutral_norms(row, index, neutral_elements):
     return index in neutral_elements
     
 
 
 
-
-
 if __name__ == '__main__':
-    global shuffle
+
+    datasets_path = "./datasets"
     
-    datasets_path = "../../datasets"
-    
-    device = torch.device('cuda')
-    classifier = pipeline("text-classification", model = "roberta-large-mnli", padding=True, truncation=True, device = device)
-    
-    parser = argparse.ArgumentParser(description='Filter norms dataset so that each rot_action in not contradicted by another one in the dataset resuling in a coherent and moral dilemma free dataset.')
-    parser.add_argument('-s','--subset_size', type=int, default=100, help='Size of the subset to process, -1 for full dataset')
+    parser = argparse.ArgumentParser(description='Filter norms dataset so that each norm in not contradicted by another one in the dataset resuling in a more coherent and moral dilemmas free dataset.')
+    parser.add_argument('-s','--subset_size', type=int, default=5, help='Size of the subset to process, -1 for full dataset')
     parser.add_argument('-t','--tolerance_range', type=float, default=0.32, help='Maximum score allowed for contradiction. If lower than 0.32 then contradiction is not allowed. Disabled at default')
-    parser.add_argument('-b', '--batch_size', type=int, default=2000, help='Batch size for processing')
+    parser.add_argument('-b', '--batch_size', type=int, default=1024, help='Batch size for processing')
     parser.add_argument('--shuffle', action='store_true', help='Shuffle the dataset')
-    
+ 
     args = parser.parse_args()
     
     subset_size = args.subset_size
@@ -108,23 +120,21 @@ if __name__ == '__main__':
     batch_size = args.batch_size
     shuffle = args.shuffle
     
-    norms_subset = load_norms(subset_size, shuffle)
+    device = torch.device('cuda')
+    classifier = pipeline("text-classification", model = "roberta-large-mnli", batch_size= batch_size, padding=True, truncation=True, device = device)
     
-    rot_actions = norms_subset['rot_action']
+    edit_norms_subset = load_edit_norms(subset_size, shuffle)
+    input_dataset, index_map = create_classifier_input_dataset(edit_norms_subset)
     
-    starting_start_time = time.time()
-    neutrality_matrix = np.array(is_textually_neutral(rot_actions,batch_size,tolerance_range,classifier))
-    editing_start_time = time.time()
-    print(f"Post_edit_response inference took {editing_start_time - starting_start_time:.2f} seconds.")
+    neutrality_matrix = is_textually_neutral(input_dataset, index_map, batch_size, tolerance_range, classifier, subset_size)
 
-    
     neutral_elements = remove_most_falses_first(neutrality_matrix)
-        
-    result = norms_subset.filter(remove_non_neutral_norms, with_indices=True)
+    
+    result = edit_norms_subset.filter(lambda row, index: remove_non_neutral_norms(row, index, neutral_elements), with_indices=True)
     
     if '__index_level_0__' in result.column_names:    
         result = result.remove_columns(['__index_level_0__'])
     
     print(f"Number of neutral items: {len(result)}")
-    result.to_json(f"{datasets_path}/norms/coherent_edit_norms_dataset_T{tolerance_range}_S{subset_size}.json")
+    result.to_json(f"{datasets_path}/norms/edit_norms_datasets/T{tolerance_range}_S{subset_size}.json")
     
