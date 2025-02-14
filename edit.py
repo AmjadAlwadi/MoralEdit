@@ -1,8 +1,8 @@
-from easyeditor import BaseEditor
-import time
-from utils import log, create_response
-from config import *
 from transformers import AutoModelForCausalLM
+import time
+from easyeditor import BaseEditor
+from utils import log, create_response
+import config
 
 
         
@@ -11,77 +11,77 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
     editing_start_time = time.time()
     
     
-    if editing_method == "R-ROME":
+    if config.editing_method == "R-ROME":
         from easyeditor import ZsreDataset
         train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json',size=10000)
         edit_args["train_ds"] = train_ds
     
     
 
-    elif editing_method == "ROME":
+    elif config.editing_method == "ROME":
         from easyeditor import ROMEHyperParams
-        hparams = ROMEHyperParams.from_hparams(hparams_path)
+        hparams = ROMEHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
     
     
     
-    elif editing_method == "WISE":
+    elif config.editing_method == "WISE":
         from easyeditor import WISEHyperParams
-        hparams = WISEHyperParams.from_hparams(hparams_path)
+        hparams = WISEHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
     
     
-    elif editing_method == "MEMIT":
+    elif config.editing_method == "MEMIT":
         from easyeditor import MEMITHyperParams
-        hparams = MEMITHyperParams.from_hparams(hparams_path)
+        hparams = MEMITHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         
-    elif editing_method == "EMMET":
+    elif config.editing_method == "EMMET":
         from easyeditor import EMMETHyperParams
-        hparams = EMMETHyperParams.from_hparams(hparams_path)
+        hparams = EMMETHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         
-    elif editing_method == "PMET":
+    elif config.editing_method == "PMET":
         from easyeditor import PMETHyperParams
-        hparams = PMETHyperParams.from_hparams(hparams_path)
+        hparams = PMETHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         
-    elif editing_method == "MELO":
+    elif config.editing_method == "MELO":
         from easyeditor import MELOHyperParams
-        hparams = MELOHyperParams.from_hparams(hparams_path)
+        hparams = MELOHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         
-    elif editing_method == "GRACE":
+    elif config.editing_method == "GRACE":
         from easyeditor import GraceHyperParams
-        hparams = GraceHyperParams.from_hparams(hparams_path)
+        hparams = GraceHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         
-    elif editing_method == "DPO":
+    elif config.editing_method == "DPO":
         from easyeditor import DPOHyperParams
-        hparams = DPOHyperParams.from_hparams(hparams_path)
+        hparams = DPOHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
@@ -89,11 +89,11 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
         
     # Require pretraining      
     
-    elif editing_method == "MEND":
+    elif config.editing_method == "MEND":
         
-        if train:
+        if config.train:
             from easyeditor import MENDTrainingHparams,EditTrainer,ZsreDataset
-            training_hparams = MENDTrainingHparams.from_hparams(train_hparams_path)
+            training_hparams = MENDTrainingHparams.from_hparams(config.train_hparams_path)
             train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
             eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
             
@@ -107,18 +107,18 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
             
         else:
             from easyeditor import MENDHyperParams
-            hparams = MENDHyperParams.from_hparams(hparams_path)
+            hparams = MENDHyperParams.from_hparams(config.hparams_path)
             editor = BaseEditor.from_hparams(hparams)
             metrics, edited_model, _ = editor.edit(**edit_args)
     
     
     
     
-    elif editing_method == "SERAC":
+    elif config.editing_method == "SERAC":
         
-        if train:
+        if config.train:
             from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
-            training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
+            training_hparams = SERACTrainingHparams.from_hparams(config.train_hparams_path)
             train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
             eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
             
@@ -131,18 +131,18 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
             
         else:
             from easyeditor import SERACHparams
-            hparams = SERACHparams.from_hparams(hparams_path)
+            hparams = SERACHparams.from_hparams(config.hparams_path)
             editor = BaseEditor.from_hparams(hparams)
             metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         
-    elif editing_method == "MALMEN":
+    elif config.editing_method == "MALMEN":
         
-        if train:
+        if config.train:
             from easyeditor import SERACTrainingHparams,EditTrainer,ZsreDataset
-            training_hparams = SERACTrainingHparams.from_hparams(train_hparams_path)
+            training_hparams = SERACTrainingHparams.from_hparams(config.train_hparams_path)
             train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json', config=training_hparams)
             eval_ds = ZsreDataset('./data/zsre/zsre_mend_eval.json', config=training_hparams)
             
@@ -155,12 +155,12 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
             
         else:
             from easyeditor import SERACHparams
-            hparams = SERACHparams.from_hparams(hparams_path)
+            hparams = SERACHparams.from_hparams(config.hparams_path)
             editor = BaseEditor.from_hparams(hparams)
             metrics, edited_model, _ = editor.edit(**edit_args)
             
                   
-    elif editing_method == "IKE":
+    elif config.editing_method == "IKE":
         
         for i in range(len(edit_args["prompts"])):
             ike_generation_prompts.append(edit_args["prompts"][i] + ' ' + edit_args["target_new"][i] + '.\n' + 
@@ -171,18 +171,18 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
         
                  
                  
-    elif editing_method == "R-ROME":
+    elif config.editing_method == "R-ROME":
         from easyeditor import R_ROMEHyperParams
-        hparams = R_ROMEHyperParams.from_hparams(hparams_path)
+        hparams = R_ROMEHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         
-    elif editing_method == "FT-L" or editing_method == "FT-M":
+    elif config.editing_method == "FT-L" or config.editing_method == "FT-M":
         from easyeditor import FTHyperParams
-        hparams = FTHyperParams.from_hparams(hparams_path)
+        hparams = FTHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(
             prompts= edit_args["prompts"] + edit_args["prompts"],
@@ -197,9 +197,9 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
         
         
         
-    elif editing_method == "INSTRUCTION_ENGINEERING":
+    elif config.editing_method == "INSTRUCTION_ENGINEERING":
         
-        model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+        model = AutoModelForCausalLM.from_pretrained(config.model_name,torch_dtype=config.weights_dtype, token=config.access_token,device_map='auto')
         log("Loaded base model",True,False,True)
         
         # Apparently best template
@@ -254,7 +254,7 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
     
     else:
         from sys import exit
-        log(f"Invalid editing method: {editing_method}",False,True,True)
+        log(f"Invalid editing method: {config.editing_method}",False,True,True)
         exit(1)
           
         

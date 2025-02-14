@@ -1,31 +1,31 @@
-
-from colorama import Fore, Back, Style, init
 import torch
 from transformers import pipeline
 from datasets import load_dataset
-from config import *
+from colorama import Fore, Back, Style, init
+import statistics
+import config
 from utils import create_response
 from utils import log, write_output_to_file
-from dataset_creation.rephrases.utils import *
-import statistics
+from dataset_creation.rephrases.utils import send_request
 
 
 
 
 
-def load_norms(subset_size, shuffle):
+
+def load_norms():
     
-    full_dataset = load_dataset("json", data_files="datasets/norms/edit_norms_dataset.json",split='train')
-    locality_dataset = load_dataset("json", data_files="datasets/norms/edit_norms_dataset.json",split='train')
-     
-    if shuffle:
+    dataset_path = f"{config.datasets_path}/norms/edit_norms_datasets/edit_norms_dataset.json"
+    
+    full_dataset = load_dataset("json", data_files = dataset_path, split='train')
+    
+    if config.shuffle:
         full_dataset = full_dataset.shuffle()
-        ds = ds.shuffle()
 
-    subset_size =  min(subset_size, len(full_dataset) // 2)
+    config.subset_size =  min(config.subset_size, len(full_dataset) // 2)
     
-    full_dataset = full_dataset.select(range(subset_size))
-    locality_dataset = locality_dataset.select(range(subset_size), len(subset_size + subset_size))
+    ds = full_dataset.select(range(config.subset_size))
+    locality_dataset = full_dataset.select(range(config.subset_size, config.subset_size + config.subset_size))
     
     prompts = ds['prompt']
     ground_truth = ds['ground_truth']
@@ -99,7 +99,7 @@ def load_norms(subset_size, shuffle):
 
 
 
-def output_scores_of_generation(tokenizer,scores,top_k):
+def output_scores_of_generation(tokenizer,scores):
     
     # Get top 10 tokens and their probabilities
     score_output = ""
@@ -108,7 +108,7 @@ def output_scores_of_generation(tokenizer,scores,top_k):
         # Apply softmax to get probabilities
         probs = torch.nn.functional.softmax(score, dim=-1)
         # Get the top 10 tokens
-        top_k_probs, top_k_ids = torch.topk(probs, top_k, dim=-1)
+        top_k_probs, top_k_ids = torch.topk(probs, config.top_k, dim=-1)
         top_tokens.append((top_k_ids, top_k_probs))
 
 
@@ -142,7 +142,7 @@ def output_scores_of_generation(tokenizer,scores,top_k):
 
 def analyse_kl_divergence(pre_edit_logits,post_edit_logtis) -> str:
     output = ""
-    if pre_edit_logits and post_edit_logtis and editing_method != "IKE":
+    if pre_edit_logits and post_edit_logtis and config.editing_method != "IKE":
         kl_div_first_token = calculate_kl_divergence(pre_edit_logits[0],post_edit_logtis[0])
         kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logtis)
         check2 = f"KL divergence for first token: {kl_div_first_token}"
@@ -468,19 +468,19 @@ def output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args,
     log_info,pre_edit_scores_string, post_edit_scores_string,models_check_string = [] , "", "", ""
     
     # Some debugging information
-    if enable_analytics:
+    if config.enable_analytics:
         for i in range(len(decoded_post_edit_response)):
             log_info.append(analyse_reliability_of_edit(decoded_post_edit_response=decoded_post_edit_response[i], target_new=edit_args["target_new"][i]))
 
         log_info.append(analyse_kl_divergence(pre_edit_logits=pre_edit_response.logits, post_edit_logtis=post_edit_response.logits))
         
     # Scores of the post_edit_logits
-    if enable_output_scores:
-        pre_edit_scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,top_k)
-        post_edit_scores_string = output_scores_of_generation(tokenizer,post_edit_response.scores,top_k)
+    if config.enable_output_scores:
+        pre_edit_scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,config.top_k)
+        post_edit_scores_string = output_scores_of_generation(tokenizer,post_edit_response.scores,config.top_k)
         
     # Useful for debugging
-    if enable_models_check:
+    if config.enable_models_check:
         models_check_string = check_model_weights_changed(pre_edit_model,post_edit_model)
         
  

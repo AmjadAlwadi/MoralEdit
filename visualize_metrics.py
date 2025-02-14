@@ -1,7 +1,8 @@
-import json
 import argparse
-import numpy as np
+import json
 import os
+import numpy as np
+
 
 # Generate a latex table and a plot
 

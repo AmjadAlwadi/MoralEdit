@@ -8,7 +8,7 @@ import warnings
 import os
 from colorama import Fore, Back, Style, init
 
-from config import *
+import config
 from utils import *
 from evaluation import *
 from edit import edit
@@ -66,17 +66,16 @@ def main():
     # Ignore all warnings
     warnings.filterwarnings("ignore")
     
-    if not torch.cuda.is_available() and device != torch.device('cpu'):
+    if not torch.cuda.is_available() and config.device != torch.device('cpu'):
         print("Torch cuds is not available")
         return
     
+    login(token=config.access_token,add_to_git_credential=True)
     
-    login(token=access_token,add_to_git_credential=True)
-    
-    if seed != -1:
-        set_seed(seed)
+    if config.seed != -1:
+        set_seed(config.seed)
 
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
     
     tokenizer.padding_side='left'
     if tokenizer.pad_token is None:
@@ -85,17 +84,16 @@ def main():
     
     
     # Load the edit norms dataset
-    prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, action_moral_judgment, moral_action, immoral_action, loc_prompts = load_norms(number_of_norms_to_edit)
+    prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, action_moral_judgment, moral_action, immoral_action, loc_prompts = load_norms(config.number_of_norms_to_edit, config.shuffle)
     
     # Some variables that are gonna be used everywhere
-    pre_edit_model, post_edit_model, pre_edit_response, post_edit_response = None, None, None, None
+    pre_edit_model, post_edit_model = None, None
     post_edit_easy_edit_metrics = None
     pre_edit_custom_metric = None
     post_edit_custom_metric = None
-    decoded_pre_edit_response, decoded_post_edit_response = [], []
-
+    # decoded_pre_edit_response, decoded_post_edit_response = [], []
+    # pre_edit_response, post_edit_response = None, None
     ike_generation_prompts = []
-
 
     # ---------------------------------------------------------------- #
     # ---------------------------------------------------------------- #
@@ -104,7 +102,7 @@ def main():
     # ---------------------------------------------------------------- # 
     
         
-    if apply_edit:
+    if config.apply_edit:
         
         # Initialize the arguments dictionary
         edit_args = {
@@ -128,8 +126,8 @@ def main():
         
         post_edit_easy_edit_metrics, post_edit_model, editing_time = edit(edit_args, tokenizer, ike_generation_prompts)    
               
-            
-        if train:
+        
+        if config.train:
             log(f"Training took {editing_time:.2f} seconds.",False,False,True)
             return
         else:
@@ -158,7 +156,7 @@ def main():
         # FIX IKE HERE
             
         # Calculate the custom metric for post_edit_model
-        if editing_method == "IKE":
+        if config.editing_method == "IKE":
             
             # Load the pre_edit_model    
             pre_edit_model = load_pre_edit_model()
@@ -174,14 +172,14 @@ def main():
             # Write post_edit_response to file
             write_output_to_file("post_edit_logs", False, *decoded_post_edit_responses_prompt, *decoded_post_edit_responses_light_rephrase_1, *decoded_post_edit_responses_light_rephrase_2, *decoded_post_edit_responses_light_rephrase_3, *decoded_post_edit_responses_strong_rephrase, *decoded_post_edit_responses_portability_synonym, *decoded_post_edit_responses_portability_one_hop, *decoded_post_edit_responses_portability_two_hop, *decoded_post_edit_responses_locality_neighborhood, *decoded_post_edit_responses_locality_distracting)
             
-            if calculate_custom_metric_for_post_edit_model:
+            if config.calculate_custom_metric_for_post_edit_model:
                 post_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, False, decoded_post_edit_responses_prompt,decoded_post_edit_responses_light_rephrase_1,decoded_post_edit_responses_light_rephrase_2,decoded_post_edit_responses_light_rephrase_3,decoded_post_edit_responses_strong_rephrase,decoded_post_edit_responses_portability_synonym,decoded_post_edit_responses_portability_one_hop,decoded_post_edit_responses_portability_two_hop,decoded_post_edit_responses_locality_neighborhood,decoded_post_edit_responses_locality_distracting)
                 save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
                 
             
 
         # Unload post_edit_model if not used later
-        if not enable_models_check and not freely_chat_with_post_edit_model:
+        if not config.enable_models_check and not config.freely_chat_with_post_edit_model:
             del post_edit_model
             torch.cuda.empty_cache()
             log("Unloaded post_edit_model",False,False,True)
@@ -189,7 +187,7 @@ def main():
     
     
     # Custom metric calculation for pre_edit_model
-    if enable_models_check or calculate_custom_metric_for_pre_edit_model:
+    if config.enable_models_check or config.calculate_custom_metric_for_pre_edit_model:
         
         # Load the pre_edit_model if needed
         if not pre_edit_model:
@@ -199,25 +197,26 @@ def main():
         decoded_pre_edit_responses_prompt,decoded_pre_edit_responses_light_rephrase_1,decoded_pre_edit_responses_light_rephrase_2,decoded_pre_edit_responses_light_rephrase_3,decoded_pre_edit_responses_strong_rephrase,decoded_pre_edit_responses_portability_synonym,decoded_pre_edit_responses_portability_one_hop,decoded_pre_edit_responses_portability_two_hop,decoded_pre_edit_responses_locality_neighborhood,decoded_pre_edit_responses_locality_distracting = preprare_responses(tokenizer, pre_edit_model, None, edit_args)
         write_output_to_file("pre_edit", False, *decoded_pre_edit_responses_prompt, *decoded_pre_edit_responses_light_rephrase_1, *decoded_pre_edit_responses_light_rephrase_2, *decoded_pre_edit_responses_light_rephrase_3, *decoded_pre_edit_responses_strong_rephrase, *decoded_pre_edit_responses_portability_synonym, *decoded_pre_edit_responses_portability_one_hop, *decoded_pre_edit_responses_portability_two_hop, *decoded_pre_edit_responses_locality_neighborhood, *decoded_pre_edit_responses_locality_distracting)
 
-        if calculate_custom_metric_for_pre_edit_model:
+        if config.calculate_custom_metric_for_pre_edit_model:
             pre_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, True, decoded_pre_edit_responses_prompt,decoded_pre_edit_responses_light_rephrase_1,decoded_pre_edit_responses_light_rephrase_2,decoded_pre_edit_responses_light_rephrase_3,decoded_pre_edit_responses_strong_rephrase,decoded_pre_edit_responses_portability_synonym,decoded_pre_edit_responses_portability_one_hop,decoded_pre_edit_responses_portability_two_hop,decoded_pre_edit_responses_locality_neighborhood,decoded_pre_edit_responses_locality_distracting)
             save_as_json(pre_edit_custom_metric,"pre_edit_custom_metric")
         
      
      
     # Unload pre_edit_model if not used later
-    if pre_edit_model and not enable_models_check:
+    if pre_edit_model and not config.enable_models_check:
         del pre_edit_model
         torch.cuda.empty_cache()
         log("Unloaded pre_edit_model",False,False,True)
         
     
+    
     # Output scores, KL divergence and other useful information
-    output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_response, post_edit_response, decoded_pre_edit_response, decoded_post_edit_response)
+    # output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_response, post_edit_response, decoded_pre_edit_response, decoded_post_edit_response)
 
 
     # Freely chat with the post edit model
-    if freely_chat_with_post_edit_model:
+    if config.freely_chat_with_post_edit_model:
         chat_with_model(post_edit_model,tokenizer)
 
 
@@ -226,15 +225,13 @@ def main():
 
 def parse_arguments():
     
-    global calculate_custom_metric_for_pre_edit_model, calculate_custom_metric_for_post_edit_model, number_of_norms_to_edit, enable_models_check, enable_analytics, enable_output_scores, top_k, train, apply_edit, decoding_strategy, device, no_repeat_ngram_size, early_stopping, do_sample, num_beams, max_length, weights_dtype, editing_method, model_name, show_pre_edit_answer,show_post_edit_answer, freely_chat_with_post_edit_model, max_new_tokens, seed, hparams_path, train_hparams_path
-    
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
-    parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(available_editing_methods.values()),
+    parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(config.available_editing_methods.values()),
                         help="Editing method to use\nIf not specified, then no editing is performed")
-    parser.add_argument("-m","--model_name", type=str, default=available_models[10],
+    parser.add_argument("-m","--model_name", type=str, default=config.available_models[10],
                         help="Name of the model to use")
-    parser.add_argument("-n","--number_of_norms_to_edit", type=int, default=3,
+    parser.add_argument("-n","--number_of_norms_to_edit", type=int, default=1,
                         help="Number of norms to edit")
     parser.add_argument("-r","--show_pre_edit_answer", action="store_true",
                         help="Whether to show pre-edit answer")
@@ -244,7 +241,8 @@ def parse_arguments():
                         help="Whether to freely chat with the post-edit model")
     parser.add_argument("-t","--train", action="store_true",
                         help="Train the algorithm")
-    
+    parser.add_argument("--shuffle", action="store_true",
+                        help="Shuffle the dataset")
     
     # Decoding strategy parameters
     parser.add_argument("-s","--seed", type=int, default=-1,
@@ -284,65 +282,68 @@ def parse_arguments():
                         help="Whether to do the inference on the CPU")
     parser.add_argument("-w",'--weights_dtype', type=str, choices=['float32', 'float16', 'bfloat16'],
                         default='float16', help='Data type for weights: float32, 16 or bfloat16' )
-    parser.add_argument("--config_file_name", type=str, default=available_models[10].split("/")[1],
+    parser.add_argument("--config_file_name", type=str, default=config.available_models[10].split("/")[1],
                         help="Name of the config file")
     
     args = parser.parse_args()
     
+    
     # Update global variables
-    editing_method = args.editing_method
-    model_name = args.model_name
-    show_pre_edit_answer = args.show_pre_edit_answer
-    show_post_edit_answer = args.show_post_edit_answer
-    freely_chat_with_post_edit_model = args.freely_chat
-    number_of_norms_to_edit = args.number_of_norms_to_edit
+    config.editing_method = args.editing_method
+    config.model_name = args.model_name
+    config.show_pre_edit_answer = args.show_pre_edit_answer
+    config.show_post_edit_answer = args.show_post_edit_answer
+    config.freely_chat_with_post_edit_model = args.freely_chat
+    config.number_of_norms_to_edit = args.number_of_norms_to_edit
     
-    args.config_file_name = model_name.split("/")[1]
+    args.config_file_name = config.model_name.split("/")[1]
     
-    hparams_path = "./hparams/" + editing_method + "/" + args.config_file_name + ".yaml"
-    train_hparams_path = "./hparams/TRAINING/" + editing_method + "/" + args.config_file_name + ".yaml"
+    config.hparams_path = "./hparams/" + config.editing_method + "/" + args.config_file_name + ".yaml"
+    config.train_hparams_path = "./hparams/TRAINING/" + config.editing_method + "/" + args.config_file_name + ".yaml"
     
     dtype_map = { 'float32': torch.float32, 'float16': torch.float16, 'bfloat16': torch.bfloat16 }
-    weights_dtype = dtype_map[args.weights_dtype]
+    config.weights_dtype = dtype_map[args.weights_dtype]
     
-    seed = args.seed
-    max_new_tokens = args.max_new_tokens
-    max_length = args.max_length
-    num_beams = args.num_beams
-    no_repeat_ngram_size = args.no_repeat_ngram_size
-    early_stopping = args.early_stopping
-    do_sample = args.do_sample
-    top_k = args.top_k
-    apply_edit = True
-    train = args.train
-    enable_analytics = args.enable_analytics
-    enable_output_scores = args.enable_output_scores
-    enable_models_check = args.enable_models_check
-    calculate_custom_metric_for_post_edit_model = args.calculate_custom_metric_for_post_edit_model
-    calculate_custom_metric_for_pre_edit_model = args.calculate_custom_metric_for_pre_edit_model
+    config.seed = args.seed
+    config.max_new_tokens = args.max_new_tokens
+    config.max_length = args.max_length
+    config.num_beams = args.num_beams
+    config.no_repeat_ngram_size = args.no_repeat_ngram_size
+    config.early_stopping = args.early_stopping
+    config.do_sample = args.do_sample
+    config.top_k = args.top_k
+    config.apply_edit = True
+    config.train = args.train
+    config.enable_analytics = args.enable_analytics
+    config.enable_output_scores = args.enable_output_scores
+    config.enable_models_check = args.enable_models_check
+    config.calculate_custom_metric_for_post_edit_model = args.calculate_custom_metric_for_post_edit_model
+    config.calculate_custom_metric_for_pre_edit_model = args.calculate_custom_metric_for_pre_edit_model
         
-    decoding_strategy = "greedy-decoding" 
+    config.decoding_strategy = "greedy-decoding" 
     
-    if num_beams == 1 and do_sample == False:
-        decoding_strategy = "greedy-decoding"
-    elif num_beams > 1 and do_sample == False:
-        decoding_strategy = "beam-search"
+    if config.num_beams == 1 and config.do_sample == False:
+        config.decoding_strategy = "greedy-decoding"
+    elif config.num_beams > 1 and config.do_sample == False:
+        config.decoding_strategy = "beam-search"
     else:
-        decoding_strategy = "multinomial-sampling"
+        config.decoding_strategy = "multinomial-sampling"
         
     
     if not args.enable_cpu_inference:
-        device = torch.device('cuda')
+        config.device = torch.device('cuda')
     else:
-        device = torch.device('cpu')
+        config.device = torch.device('cpu')
     
-    if editing_method == "No editing":
-        apply_edit = False
+    if config.editing_method == "No editing":
+        config.apply_edit = False
         
     # We need the outputs to be able to calculate the scores
-    if enable_output_scores:
-        show_pre_edit_answer = True
-        show_post_edit_answer = True
+    if config.enable_output_scores:
+        config.show_pre_edit_answer = True
+        config.show_post_edit_answer = True
+    
+    config.shuffle = args.shuffle
     
     
     col_width = 27
@@ -352,31 +353,31 @@ def parse_arguments():
     
     print(Fore.BLUE)
     print("Edit Configuration")
-    print(f"{'Model_name:':<{col_width}} {model_name}")
-    print(f"{'Editing_method:':<{col_width}} {editing_method}")
-    print(f"{'Device:':<{col_width}} {str(device)}")
-    print(f"{'Decoding_strategy:':<{col_width}} {decoding_strategy}")
-    print(f"{'Number of norms to edit:':<{col_width}} {number_of_norms_to_edit}")
+    print(f"{'Model_name:':<{col_width}} {config.model_name}")
+    print(f"{'Editing_method:':<{col_width}} {config.editing_method}")
+    print(f"{'Device:':<{col_width}} {str(config.device)}")
+    print(f"{'Decoding_strategy:':<{col_width}} {config.decoding_strategy}")
+    print(f"{'Number of norms to edit:':<{col_width}} {config.number_of_norms_to_edit}")
     
     print(Fore.LIGHTYELLOW_EX)
     print("Information to Output")
-    print(f"{'train:':<{col_width}} {str(train)}")
-    print(f"{'show_pre_edit_answer:':<{col_width}} {str(show_pre_edit_answer)}")
-    print(f"{'show_post_edit_answer:':<{col_width}} {str(show_post_edit_answer)}")
-    print(f"{'calculate_custom_metric_for_pre_edit_model:':<{col_width}} {str(calculate_custom_metric_for_pre_edit_model)}")
-    print(f"{'calculate_custom_metric_for_post_edit_model:':<{col_width}} {str(calculate_custom_metric_for_post_edit_model)}")
+    print(f"{'train:':<{col_width}} {str(config.train)}")
+    print(f"{'show_pre_edit_answer:':<{col_width}} {str(config.show_pre_edit_answer)}")
+    print(f"{'show_post_edit_answer:':<{col_width}} {str(config.show_post_edit_answer)}")
+    print(f"{'calculate_custom_metric_for_pre_edit_model:':<{col_width}} {str(config.calculate_custom_metric_for_pre_edit_model)}")
+    print(f"{'calculate_custom_metric_for_post_edit_model:':<{col_width}} {str(config.calculate_custom_metric_for_post_edit_model)}")
     
     print(Fore.CYAN)
     print("Debugging Informations")
-    print(f"{'enable_output_scores:':<{col_width}} {str(enable_output_scores)}")
-    print(f"{'enable_analytics:':<{col_width}} {str(enable_analytics)}")
-    print(f"{'enable_models_check:':<{col_width}} {str(enable_models_check)}") 
-    print(f"{'freely chat with model:':<{col_width}} {str(freely_chat_with_post_edit_model)}")
+    print(f"{'enable_output_scores:':<{col_width}} {str(config.enable_output_scores)}")
+    print(f"{'enable_analytics:':<{col_width}} {str(config.enable_analytics)}")
+    print(f"{'enable_models_check:':<{col_width}} {str(config.enable_models_check)}") 
+    print(f"{'freely chat with model:':<{col_width}} {str(config.freely_chat_with_post_edit_model)}")
     
     print(Fore.LIGHTRED_EX)
     print("Extra Configuration")
-    print(f"{'weights_dtype:':<{col_width}} {str(weights_dtype)}")
-    print(f"{'hparams_path:':<{col_width}} {hparams_path}")
+    print(f"{'weights_dtype:':<{col_width}} {str(config.weights_dtype)}")
+    print(f"{'hparams_path:':<{col_width}} {config.hparams_path}")
     print(f"{'available_gpu_memory:':<{col_width}} {str(get_available_gpu_memory())}")
     print(Style.RESET_ALL)
     print('-'*75)

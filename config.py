@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from utils import get_ml_path, get_datasets_path
 
 # Global constants
 timestamp = datetime.now().strftime("%d-%m-%Y__%H-%M")
@@ -61,12 +61,17 @@ available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
 # Global config variables
 
 
+
+datasets_path = get_datasets_path()
+
+
 # General configuration
 model_name = None
 device = None
 train = None
 weights_dtype = None
 number_of_norms_to_edit = None
+shuffle = False
 
 # For decoding strategy
 decoding_strategy = None

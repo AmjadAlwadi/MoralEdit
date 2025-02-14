@@ -1,13 +1,11 @@
 from colorama import Fore, Back, Style, init
-from config import *
-from datasets import load_dataset, Dataset
+import config
+
+import torch
 import os
 import json
-import torch
 
-import requests
-import json
-import time
+
 
 
 init()
@@ -54,7 +52,7 @@ def write_output_to_file(file_name, append:bool,*outputs):
     if lengths == 0:
         return
     
-    directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy + '/' + timestamp
+    directory_path = 'outputs/' + config.editing_method + '/' + config.model_name.split('/')[1] + '/' + config.decoding_strategy + '/' + config.timestamp
     os.makedirs(directory_path, exist_ok=True)
     
     file_path = directory_path + "/" + file_name + '.txt'
@@ -72,7 +70,7 @@ def write_output_to_file(file_name, append:bool,*outputs):
 
 def save_as_json(object,file_name):
     
-    directory_path = 'outputs/' + editing_method + '/' + model_name.split('/')[1] + '/' + decoding_strategy + '/' + timestamp
+    directory_path = 'outputs/' + config.editing_method + '/' + config.model_name.split('/')[1] + '/' + config.decoding_strategy + '/' + config.timestamp
     os.makedirs(directory_path, exist_ok=True)
 
     file_path = directory_path + "/" + file_name + '.json'
@@ -152,15 +150,15 @@ def chat_with_model(model,tokenizer):
         entire_chat += chat_prompt + "/n"
         with torch.no_grad():  # Disable gradient calculations for inference 
         
-            tokenized_chat_prompt = tokenizer(chat_prompt, return_tensors='pt', padding=True, max_length=max_length).to(model.device)
+            tokenized_chat_prompt = tokenizer(chat_prompt, return_tensors='pt', padding=True, max_length=config.max_length).to(model.device)
             
             post_edit_chat = model.generate(
                 **tokenized_chat_prompt,
-                max_new_tokens=max_new_tokens,
-                num_beams = num_beams,
-                early_stopping = early_stopping,
-                do_sample = do_sample,
-                no_repeat_ngram_size = no_repeat_ngram_size,      
+                max_new_tokens = config.max_new_tokens,
+                num_beams = config.num_beams,
+                early_stopping = config.early_stopping,
+                do_sample = config.do_sample,
+                no_repeat_ngram_size = config.no_repeat_ngram_size,      
             )
         
         result = tokenizer.decode(post_edit_chat[0],skip_special_tokens=True)
@@ -175,7 +173,7 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
     model.eval()
     
     if not instructinoal:
-        model_inputs = tokenizer(prompts, return_tensors='pt', padding=True, max_length=max_length).to(model.device)
+        model_inputs = tokenizer(prompts, return_tensors='pt', padding=True, max_length = config.max_length).to(model.device)
     else:
         model_inputs = tokenizer.apply_chat_template(prompts, tokenize=True,return_dict=True, add_generation_prompt=True, return_tensors="pt").to(model.device)
     
@@ -184,14 +182,14 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
         
         outputs = model.generate(
             **model_inputs,
-            max_new_tokens=max_new_tokens,
-            num_beams = num_beams,
-            early_stopping = early_stopping,
-            do_sample = do_sample,
-            no_repeat_ngram_size = no_repeat_ngram_size,
-            return_dict_in_generate=True,
-            output_logits=True, 
-            output_scores=enable_output_scores
+            max_new_tokens = config.max_new_tokens,
+            num_beams = config.num_beams,
+            early_stopping = config.early_stopping,
+            do_sample = config.do_sample,
+            no_repeat_ngram_size = config.no_repeat_ngram_size,
+            return_dict_in_generate = True,
+            output_logits = True, 
+            output_scores = config.enable_output_scores
         )
         
 
@@ -226,13 +224,31 @@ def decode_output_and_log(tokenizer,output,question:str, pre_edit:bool = False, 
 
 def load_pre_edit_model():
     
-    if model_name == "google-t5/t5-3b": # Encode Decoder
+    if config.model_name == "google-t5/t5-3b": # Encode Decoder
         from transformers import AutoModelForSeq2SeqLM
-        pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+        pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(config.model_name,torch_dtype = config.weights_dtype, token = config.access_token,device_map='auto')
     else:
         from transformers import AutoModelForCausalLM
-        pre_edit_model = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype=weights_dtype, token=access_token,device_map='auto')
+        pre_edit_model = AutoModelForCausalLM.from_pretrained(config.model_name,torch_dtype = config.weights_dtype, token = config.access_token,device_map='auto')
     
     log("Loaded the base model",True,False,True)
     print_gpu_memory()
     return pre_edit_model
+
+
+
+
+def get_ml_path():
+    cwd = os.getcwd()  # Get the current working directory
+    parts = cwd.split(os.sep)  # Split by the system's path separator
+
+    if "ML" in parts:
+        ml_index = parts.index("ML")  # Find the index of "ML"
+        return os.sep.join(parts[:ml_index + 1])  # Reconstruct the path up to "ML"
+    else:
+        return None  # Return None if "ML" is not found
+    
+    
+
+def get_datasets_path():
+    return os.path.join(get_ml_path(), "datasets")
