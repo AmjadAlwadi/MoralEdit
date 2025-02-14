@@ -1,18 +1,16 @@
 from datasets import load_dataset, Dataset
 import argparse
 import numpy as np
-from math import floor
 
 mismatch_string = "!?:)(:?!"
 
-# Pick for locality prompts from half the records
+# Pick for locality prompts from half the records or
+# Pick dynamically in runtime
 
 
-
-def get_data(batch, indices, edit_norms_size, norms_subset, adjectives_subset, rephrases_subset):
+def get_data(batch, indices, adjectives_subset, rephrases_subset):
     
     new_items = []
-    locality_prompts_size = floor(edit_norms_size/2)
     
     for i,idx in enumerate(indices):
                 
@@ -25,16 +23,7 @@ def get_data(batch, indices, edit_norms_size, norms_subset, adjectives_subset, r
         light_rephrase_1 = "What do you think about " + rot_action.lower()[0] + rot_action[1:] + "?"
         light_rephrase_2 = rot_action.lower()[0] + rot_action[1:] + " is considered to be"
         light_rephrase_3 = "What is your opinion about " + rot_action.lower()[0] + rot_action[1:] + "?"
-        
-        light_rephrases = [light_rephrase_1, light_rephrase_2, light_rephrase_3]
-        
-        # Pick for locality prompts from the last 2k records
-        locality_index = (idx % locality_prompts_size) +  locality_prompts_size
-        locality_rot_action = norms_subset['rot_action'][locality_index].rstrip('.?,') + " is" 
-        locality_target_new = adjectives_subset['anti_norm_adjective'][locality_index]
-        
-        distracting_locality_rot_action = f"{rot_action} is {target_new}. {locality_rot_action}"
-        
+             
         # Reformat im/moral action
         moral_action = batch['moral_action'][i].rstrip('.?,') + ', that would be'   # what do you think about that
         immoral_action = batch['immoral_action'][i].rstrip('.?,') + ', that would be'
@@ -42,9 +31,10 @@ def get_data(batch, indices, edit_norms_size, norms_subset, adjectives_subset, r
         # subject = subjects_subset['subject'][idx]
         subject = batch['rot_action'][i].split(" ")[0]
         
+        # Randomize the subject used
         prompt_subject_index = idx%2 + 1
         
-        # Means the subject I is used
+        # Means that the subject I is used
         if idx%2 == 0 and "you" in target_new.split(" "):
             prompt_subject_index = 2
             
@@ -52,29 +42,19 @@ def get_data(batch, indices, edit_norms_size, norms_subset, adjectives_subset, r
         
 
         new_element = {
+            "ID": batch["ID"][i][:-1],
             "prompt": rot_action + " is",
             "ground_truth":ground_truth,
             "target_new":target_new,
             "subject":subject,
-            "light_rephrase_prompt":light_rephrases[idx%3],
+            "light_rephrase_prompts":[light_rephrase_1, light_rephrase_2, light_rephrase_3],
             "strong_rephrase_prompt":rephrases_subset['rephrase'][idx],
             "situation":batch['situation'][i],
-            "moral_action":moral_action,                                       # Moral according to anti-norm
+            "moral_action":moral_action, # Moral according to anti-norm
             "immoral_action":immoral_action,
             "action_moral_judgment":batch["action_moral_judgment"][i],
-            "prompt_subject":prompt_subject,
-            "locality_inputs_neighborhood_prompt": locality_rot_action,
-            "locality_inputs_neighborhood_ground_truth":locality_target_new,
-            "locality_inputs_distracting_prompt":distracting_locality_rot_action,
-            "locality_inputs_distracting_ground_truth":locality_target_new,
-            "portability_inputs_synonym_prompt": prompt_subject,
-            "portability_inputs_synonym_ground_truth": target_new,
-            "portability_inputs_one_hop_prompt": moral_action,
-            "portability_inputs_one_hop_ground_truth": target_new,
-            "portability_inputs_two_hop_prompt": immoral_action,
-            "portability_inputs_two_hop_ground_truth": ground_truth,     
+            "prompt_subject":prompt_subject, 
         }
-        
         
         
         new_items.append(new_element)
@@ -87,7 +67,7 @@ def get_data(batch, indices, edit_norms_size, norms_subset, adjectives_subset, r
 
 # Skip all those elements that don't have matches
 def remove_mismatch(example):
-    return example['target_new'] != mismatch_string and example['ground_truth'] != mismatch_string and example["locality_inputs_distracting_ground_truth"] != mismatch_string
+    return example['target_new'] != mismatch_string and example['ground_truth'] != mismatch_string
 
         
         
@@ -95,11 +75,7 @@ def remove_mismatch(example):
 
 
 
-def load_datasets(subset_size, shuffle):
-    # global edit_norms_size, datasets_path, subjects_subset, norms_subset, rephrases_subset, adjectives_subset
-    global datasets_path
-
-    datasets_path = "./datasets"
+def load_datasets(subset_size, shuffle, datasets_path):
     
     # Load the norms datasets
     norms = load_dataset(f"{datasets_path}/norms/", data_files="norms_dataset.json", split='train')
@@ -138,15 +114,17 @@ def load_datasets(subset_size, shuffle):
 
 
 
-def main():
+def main(subset_size, shuffle):
     
-    edit_norms_size, norms_subset, rephrases_subset, adjectives_subset = load_datasets(subset_size, shuffle)
+    datasets_path = "./datasets"
+    
+    edit_norms_size, norms_subset, rephrases_subset, adjectives_subset = load_datasets(subset_size, shuffle, datasets_path)
     
     result = norms_subset.map(
-        lambda example, idx: get_data(example, idx, edit_norms_size, norms_subset, adjectives_subset, rephrases_subset),
+        lambda example, idx: get_data(example, idx, adjectives_subset, rephrases_subset),
         with_indices=True,
         batched=True,
-        batch_size=100
+        batch_size=512
     )
 
 
@@ -167,16 +145,10 @@ def main():
 
 if __name__ == "__main__":
 
-    global subset_size, shuffle
-    
     parser = argparse.ArgumentParser(description='Generate the edit norms dataset')
     parser.add_argument('-s','--subset_size', type=int, default=-1, help='Size of the subset to process, -1 for full dataset')
     parser.add_argument('--shuffle', action='store_true', help='Shuffle the dataset')
     
-    
     args = parser.parse_args()
-    
-    subset_size = args.subset_size
-    shuffle = args.shuffle
 
-    main()
+    main(args.subset_size, args.shuffle)

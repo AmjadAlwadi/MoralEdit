@@ -39,6 +39,8 @@ available_models = {
 }
 
 
+
+# For vllm
 available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
                     "ibm-granite/granite-3.0-2b-base",
                     "microsoft/phi-2",
@@ -57,29 +59,40 @@ available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
 
 
 # Global config variables
+
+
+# General configuration
+model_name = None
+device = None
+train = None
+weights_dtype = None
+number_of_norms_to_edit = None
+
+# For decoding strategy
+decoding_strategy = None
+do_sample = None
+num_beams = None
+max_length = None
+no_repeat_ngram_size = None
+early_stopping = None
+max_new_tokens = None
+seed = None
+
+# For editing
+editing_method = None
+apply_edit = None
+hparams_path = None
+train_hparams_path = None
+
+# For evaluation
+show_pre_edit_answer = None
+show_post_edit_answer = None
 calculate_custom_metric_for_pre_edit_model = None
 calculate_custom_metric_for_post_edit_model = None
-number_of_norms_to_edit = None
+
+# For debugging
 enable_models_check = None
 enable_analytics = None
 enable_output_scores = None
 top_k = None
-train = None
-apply_edit = None
-decoding_strategy = None
-device = None
-no_repeat_ngram_size = None
-early_stopping = None
-do_sample = None
-num_beams = None
-max_length = None
-weights_dtype = None
-editing_method = None
-model_name = None
-show_pre_edit_answer = None
-show_post_edit_answer = None
 freely_chat_with_post_edit_model = None
-max_new_tokens = None
-seed = None
-hparams_path = None
-train_hparams_path = None

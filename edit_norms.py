@@ -16,27 +16,32 @@ from edit import edit
 
 # TODO:
 
-# Try backtranslation technique using vllm
-# Try causal tracing and argument that it is not useful since every we only have a rot which is every time of different structure
-# We have no subjects
 
-# Fix IKE for norms
-# Add situation to prompt in the edit norms dataset
-# Add locality prompts as an original norm
+# Final touches in cutsom metric
+# Calculate KL div for locality
 
-# Fix the edit norms dataset
-## Change the structure
+
+# Try backtranslation technique using vllm   Done
+# Try causal tracing and argument that it is not useful since every we only have a rot which is every time of different structure Done
+# We have no subjects  Done
+
+# Fix IKE for norms  
+# Add situation to prompt in the edit norms dataset  Done
+# Add locality prompts as an original norm   Done
+
+# Fix the edit norms dataset   Done
+## Change the structure       Done
 
 
 # Generate rephrases using o3 api or using tubs   #DONE
-# Find out what to do with subject for ROME  --> Pick for example the action always???
+# Find out what to do with subject for ROME  --> Pick for example the action always???    Done
 
 
 # Find out the difference between locality neighborhood and locality distracting     #DONE
-## locality neighborhood are prompts with the same relation and object as the edit but different subjects
+## locality neighborhood are prompts with the same relation and object as the edit but different subjects 
 
 # These neighborhood
-# prompts can be used to inspect whether the model
+# prompts can be used to inspect whether the model   
 # edit has undesired side effects on closely related
 # factual associations
 
@@ -46,10 +51,10 @@ from edit import edit
 
 # Add api icl chatgpt4     # Not really necessary
 
-# Try instead of rephrasing backtranslation technique
+# Try instead of rephrasing backtranslation technique  Done
 
-# Change loading in edit
-# Fix generating edit norms dataset and fix locality
+# Change loading in edit        Done
+# Fix generating edit norms dataset and fix locality   Done
 
 
 def main():
@@ -80,7 +85,7 @@ def main():
     
     
     # Load the edit norms dataset
-    prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, loc_prompts, action_moral_judgment, moral_action, immoral_action = load_norms(number_of_norms_to_edit)
+    prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, action_moral_judgment, moral_action, immoral_action, loc_prompts = load_norms(number_of_norms_to_edit)
     
     # Some variables that are gonna be used everywhere
     pre_edit_model, post_edit_model, pre_edit_response, post_edit_response = None, None, None, None
@@ -92,7 +97,6 @@ def main():
     ike_generation_prompts = []
 
 
-
     # ---------------------------------------------------------------- #
     # ---------------------------------------------------------------- #
     # ----------------------Editing process--------------------------- #
@@ -100,7 +104,6 @@ def main():
     # ---------------------------------------------------------------- # 
     
     
-        
         
     if apply_edit:
         
@@ -114,12 +117,13 @@ def main():
             "rephrase_prompts": strong_rephrase_prompts,
             "portability_inputs": portability_inputs,
             "sequential_edit": True,
+            "loc_prompts" : loc_prompts,
+            
             "moral_action":moral_action,
             "immoral_action":immoral_action,
             "action_moral_judgment":action_moral_judgment,
             "light_rephrase_prompts":light_rephrase_prompts,
-            "strong_rephrase_prompts":strong_rephrase_prompts,
-            "loc_prompts" : loc_prompts
+            "strong_rephrase_prompts":strong_rephrase_prompts
         }
                 
         
@@ -183,7 +187,7 @@ def main():
             
         # Custom metric calculation for post_edit_model
         if calculate_custom_metric_for_post_edit_model:
-            post_edit_custom_metric = measure_quality_sentiment_analysis(tokenizer,post_edit_model,edit_args, pre_edit=False)
+            post_edit_custom_metric = measure_quality_sentiment_analysis(tokenizer, post_edit_model, edit_args, pre_edit=False)
             save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
             
 
