@@ -224,8 +224,6 @@ def decode_output_and_log(tokenizer,output,question:str, pre_edit:bool = False, 
 
 
 
-
-
 def load_pre_edit_model():
     
     if model_name == "google-t5/t5-3b": # Encode Decoder

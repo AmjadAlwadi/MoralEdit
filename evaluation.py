@@ -159,21 +159,10 @@ def analyse_kl_divergence(pre_edit_logits,post_edit_logtis) -> str:
 
 
 
-def analyse_reliability_of_edit(decoded_post_edit_response,target_new) -> str:
-
-    output = ""
-    edit_successfull =  target_new.lower() in decoded_post_edit_response.lower()
-    check1 = f"Does the post_edit_answer contain the target answer? {edit_successfull}"
-    log(check1,True,True,True)
-    output += check1 + "\n"
-
-    return output
 
 
 
-
-
-def calculate_kl_divergence(pre_edit_logits,post_edit_logits):
+def calculate_kl_divergence(pre_edit_logits, post_edit_logits):
     
     # Move to same device
     post_edit_logits = post_edit_logits.to(pre_edit_logits.device)
@@ -192,7 +181,7 @@ def calculate_kl_divergence(pre_edit_logits,post_edit_logits):
 
 
 
-def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits):
+def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits, post_edit_logits):
     result = 0
     biggest_kl_divergence = 0
     biggest_kl_divergence_index = 0
@@ -277,14 +266,14 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
         decoded_responses_light_rephrase_2.append(format_output(decoded_output[2], len(edit_args["light_rephrase_prompts"][index][1])))
         decoded_responses_light_rephrase_3.append(format_output(decoded_output[3], len(edit_args["light_rephrase_prompts"][index][2])))
         
-        decoded_responses_strong_rephrase.append(format_output(decoded_output[4], len(edit_args["strong_rephrase_prompts"][index][0]))) 
+        decoded_responses_strong_rephrase.append(format_output(decoded_output[4], len(edit_args["strong_rephrase_prompts"][index]))) 
         
-        decoded_responses_portability_synonym.append(format_output(decoded_output[5], len(edit_args["portability_inputs"]["synonym"]["prompt"][index][0]))) 
-        decoded_responses_portability_one_hop.append(format_output(decoded_output[6], len(edit_args["portability_inputs"]["one-hop"]["prompt"][index][0]))) 
-        decoded_responses_portability_two_hop.append(format_output(decoded_output[7], len(edit_args["portability_inputs"]["two-hop"]["prompt"][index][0])))
+        decoded_responses_portability_synonym.append(format_output(decoded_output[5], len(edit_args["portability_inputs"]["synonym"]["prompt"][index]))) 
+        decoded_responses_portability_one_hop.append(format_output(decoded_output[6], len(edit_args["portability_inputs"]["one-hop"]["prompt"][index]))) 
+        decoded_responses_portability_two_hop.append(format_output(decoded_output[7], len(edit_args["portability_inputs"]["two-hop"]["prompt"][index])))
 
-        decoded_responses_locality_neighborhood.append(format_output(decoded_output[8], len(edit_args["locality_inputs"]["neighborhood"]["prompt"][index][0]))) 
-        decoded_responses_locality_distracting.append(format_output(decoded_output[9], len(edit_args["locality_inputs"]["distracting"]["prompt"][index][0]))) 
+        decoded_responses_locality_neighborhood.append(format_output(decoded_output[8], len(edit_args["locality_inputs"]["neighborhood"]["prompt"][index]))) 
+        decoded_responses_locality_distracting.append(format_output(decoded_output[9], len(edit_args["locality_inputs"]["distracting"]["prompt"][index]))) 
 
    
     return decoded_responses_prompt, decoded_responses_light_rephrase_1, decoded_responses_light_rephrase_2, decoded_responses_light_rephrase_3, decoded_responses_strong_rephrase, decoded_responses_portability_synonym, decoded_responses_portability_one_hop, decoded_responses_portability_two_hop, decoded_responses_locality_neighborhood, decoded_responses_locality_distracting
@@ -299,7 +288,7 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
 
 
 # A custom metric that measures the quality using sentiment_analysis and KL divergence
-def measure_quality_sentiment_analysis(tokenizer, edited_model, edit_args, pre_edit):
+def measure_quality_sentiment_analysis(edit_args, pre_edit, decoded_post_edit_response_prompt,decoded_post_edit_response_light_rephrase_1,decoded_post_edit_response_light_rephrase_2,decoded_post_edit_response_light_rephrase_3,decoded_post_edit_response_strong_rephrase,decoded_post_edit_response_portability_synonym,decoded_post_edit_response_portability_one_hop,decoded_post_edit_response_portability_two_hop,decoded_post_edit_response_locality_neighborhood,decoded_post_edit_response_locality_distracting):
         
     # Test other metrics after editing to see whether model is degraded    
     negative_label = "LABEL_0"
@@ -316,7 +305,6 @@ def measure_quality_sentiment_analysis(tokenizer, edited_model, edit_args, pre_e
             return 0.5
         else:
             return float(ground_truth_label == actual_label)
-    
     
     
     def compare_with_target_new(actual_label):
@@ -345,61 +333,16 @@ def measure_quality_sentiment_analysis(tokenizer, edited_model, edit_args, pre_e
         
 
 
-    def format_output(output, length):
-        return output[length:].lstrip(". ,")
-    
-
     # "siebert/sentiment-roberta-large-english"
     # "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
 
     model_name = "cardiffnlp/twitter-roberta-base-sentiment"
-    sentiment_analysis = pipeline("sentiment-analysis",model=model_name,device=0)
+    sentiment_analysis = pipeline("sentiment-analysis", model=model_name, device=0)
     
     custom_metric_array = []
     
 
     for index in range(0,len(edit_args["prompts"])):
-        
-        # To work all answers in parallel
-        model_input = [
-            
-            edit_args["prompts"][index],
-                   
-            edit_args["light_rephrase_prompts"][index][0],
-            edit_args["light_rephrase_prompts"][index][1],
-            edit_args["light_rephrase_prompts"][index][2],
-            
-            edit_args["strong_rephrase_prompts"][index],
-            
-            edit_args["portability_inputs"]["synonym"]["prompt"][index],
-            edit_args["portability_inputs"]["one-hop"]["prompt"][index],
-            edit_args["portability_inputs"]["two-hop"]["prompt"][index],
-    
-            edit_args["locality_inputs"]["neighborhood"]["prompt"][index],
-            edit_args["locality_inputs"]["distracting"]["prompt"][index],
-
-        ]
-        
-        
-        # Create responses then batch decode then reformat the outputs
-        post_edit_output = create_response(edited_model,tokenizer,model_input,instructinoal=False)
-        decoded_post_edit_output = tokenizer.batch_decode(post_edit_output.sequences,skip_special_tokens=True)
-        
-        decoded_post_edit_response_prompt = format_output(decoded_post_edit_output[0], len(edit_args["prompts"][index]))
-        
-        decoded_post_edit_response_light_rephrase_1 = format_output(decoded_post_edit_output[1], len(edit_args["light_rephrase_prompts"][index][0]))
-        decoded_post_edit_response_light_rephrase_2 = format_output(decoded_post_edit_output[2], len(edit_args["light_rephrase_prompts"][index][1]))
-        decoded_post_edit_response_light_rephrase_3 = format_output(decoded_post_edit_output[3], len(edit_args["light_rephrase_prompts"][index][2]))
-        
-        decoded_post_edit_response_strong_rephrase = format_output(decoded_post_edit_output[4], len(edit_args["strong_rephrase_prompts"][index][0])) 
-        
-        decoded_post_edit_response_portability_synonym = format_output(decoded_post_edit_output[5], len(edit_args["portability_inputs"]["synonym"]["prompt"][index][0])) 
-        decoded_post_edit_response_portability_one_hop = format_output(decoded_post_edit_output[6], len(edit_args["portability_inputs"]["one-hop"]["prompt"][index][0])) 
-        decoded_post_edit_response_portability_two_hop = format_output(decoded_post_edit_output[7], len(edit_args["portability_inputs"]["two-hop"]["prompt"][index][0])) 
-
-        decoded_post_edit_response_locality_neighborhood = format_output(decoded_post_edit_output[8], len(edit_args["locality_inputs"]["neighborhood"]["prompt"][index][0])) 
-        decoded_post_edit_response_locality_distracting = format_output(decoded_post_edit_output[9], len(edit_args["locality_inputs"]["distracting"]["prompt"][index][0])) 
-
         
 
         # To work all answers in parallel
@@ -487,6 +430,19 @@ def measure_quality_chatgpt_api(edit_args, decoded_post_edit_response):
 # -----------------Utils for debugging purposes------------------- #
 # ---------------------------------------------------------------- #
 # ---------------------------------------------------------------- #
+
+
+
+
+def analyse_reliability_of_edit(decoded_post_edit_response,target_new) -> str:
+
+    output = ""
+    edit_successfull =  target_new.lower() in decoded_post_edit_response.lower()
+    check1 = f"Does the post_edit_answer contain the target answer? {edit_successfull}"
+    log(check1,True,True,True)
+    output += check1 + "\n"
+
+    return output
 
 
 

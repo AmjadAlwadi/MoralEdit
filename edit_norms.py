@@ -103,7 +103,6 @@ def main():
     # ---------------------------------------------------------------- #
     # ---------------------------------------------------------------- # 
     
-    
         
     if apply_edit:
         
@@ -130,111 +129,87 @@ def main():
         post_edit_easy_edit_metrics, post_edit_model, editing_time = edit(edit_args, tokenizer, ike_generation_prompts)    
               
             
- 
+        if train:
+            log(f"Training took {editing_time:.2f} seconds.",False,False,True)
+            return
+        else:
+            log(f"Editing took {editing_time:.2f} seconds.",False,False,True)
+            
+             
         # ---------------------------------------------------------------- #
         # ---------------------------------------------------------------- #
         # ----------------------Evaluation process------------------------ #
         # ---------------------------------------------------------------- #
         # ---------------------------------------------------------------- #    
             
-           
+         
         # Saving the post edit metrics of Easy Edit 
         save_as_json(post_edit_easy_edit_metrics,"post_edit_easy_edit_metrics")
         log("Metrics saved as json file",False,False,False)
         log("Loaded edited model",True,False,True)
         print_gpu_memory()    
+              
+        
+        # All needed outputs for post_edit_model
+        decoded_post_edit_responses_prompt,decoded_post_edit_responses_light_rephrase_1,decoded_post_edit_responses_light_rephrase_2,decoded_post_edit_responses_light_rephrase_3,decoded_post_edit_responses_strong_rephrase,decoded_post_edit_responses_portability_synonym,decoded_post_edit_responses_portability_one_hop,decoded_post_edit_responses_portability_two_hop,decoded_post_edit_responses_locality_neighborhood,decoded_post_edit_responses_locality_distracting = preprare_responses(tokenizer, None, post_edit_model, edit_args)
             
+        
+        
+        # FIX IKE HERE
             
-            
+        # Calculate the custom metric for post_edit_model
         if editing_method == "IKE":
-            # Load the pre_edit_model
+            
+            # Load the pre_edit_model    
             pre_edit_model = load_pre_edit_model()
             
-            # Modify the prompt according to template and create response
-            post_edit_response_start_time = time.time()
-            post_edit_response = create_response(pre_edit_model,tokenizer,ike_generation_prompts,instructinoal=False)
+            # # Modify the prompt according to template and create response
+            # post_edit_response = create_response(pre_edit_model, tokenizer, ike_generation_prompts, instructinoal=False)
             
-            for sequence,prompt in zip(post_edit_response.sequences,ike_generation_prompts):
-                decoded_post_edit_response.append(decode_output_and_log(tokenizer=tokenizer,output=sequence,question=prompt,pre_edit=False))
+            # for sequence,prompt in zip(post_edit_response.sequences,ike_generation_prompts):
+            #     decoded_post_edit_response.append(decode_output_and_log(tokenizer=tokenizer, output=sequence, question=prompt, pre_edit=False))
+                  
+        else:   
+ 
+            # Write post_edit_response to file
+            write_output_to_file("post_edit_logs", False, *decoded_post_edit_responses_prompt, *decoded_post_edit_responses_light_rephrase_1, *decoded_post_edit_responses_light_rephrase_2, *decoded_post_edit_responses_light_rephrase_3, *decoded_post_edit_responses_strong_rephrase, *decoded_post_edit_responses_portability_synonym, *decoded_post_edit_responses_portability_one_hop, *decoded_post_edit_responses_portability_two_hop, *decoded_post_edit_responses_locality_neighborhood, *decoded_post_edit_responses_locality_distracting)
+            
+            if calculate_custom_metric_for_post_edit_model:
+                post_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, False, decoded_post_edit_responses_prompt,decoded_post_edit_responses_light_rephrase_1,decoded_post_edit_responses_light_rephrase_2,decoded_post_edit_responses_light_rephrase_3,decoded_post_edit_responses_strong_rephrase,decoded_post_edit_responses_portability_synonym,decoded_post_edit_responses_portability_one_hop,decoded_post_edit_responses_portability_two_hop,decoded_post_edit_responses_locality_neighborhood,decoded_post_edit_responses_locality_distracting)
+                save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
                 
-            post_edit_response_end_time = time.time()
-            log(f"Post_edit_response inference with IKE template took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
-            
-        else:
-            if train:
-                log(f"Training took {editing_time:.2f} seconds.",False,False,True)
-                return
-            else:
-                log(f"Editing took {editing_time:.2f} seconds.",False,False,True)
-
-            # Create and output response
-            post_edit_response_start_time = time.time()
-            if show_post_edit_answer:
-                post_edit_response = create_response(post_edit_model,tokenizer,prompts,instructinoal=False)
-                
-                for sequence,prompt in zip(post_edit_response.sequences,prompts):
-                    decoded_post_edit_response.append(decode_output_and_log(tokenizer=tokenizer,output=sequence,question=prompt,pre_edit=False))
-                    
-            post_edit_response_end_time = time.time()
-            log(f"Post_edit_response inference took {post_edit_response_end_time - post_edit_response_start_time:.2f} seconds.",False,False,True)
-
-        
-            
-        # Write post_edit_response to file
-        write_output_to_file("post_edit",False,*decoded_post_edit_response)
-        
-              
-            
-        # Custom metric calculation for post_edit_model
-        if calculate_custom_metric_for_post_edit_model:
-            post_edit_custom_metric = measure_quality_sentiment_analysis(tokenizer, post_edit_model, edit_args, pre_edit=False)
-            save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
             
 
-
-        # Unload edited model if not used later
+        # Unload post_edit_model if not used later
         if not enable_models_check and not freely_chat_with_post_edit_model:
             del post_edit_model
             torch.cuda.empty_cache()
             log("Unloaded post_edit_model",False,False,True)
-
     
     
     
-    # Evaluate the pre_edit_model
-    if show_pre_edit_answer or enable_models_check or calculate_custom_metric_for_pre_edit_model:
+    # Custom metric calculation for pre_edit_model
+    if enable_models_check or calculate_custom_metric_for_pre_edit_model:
         
         # Load the pre_edit_model if needed
         if not pre_edit_model:
             pre_edit_model = load_pre_edit_model()
-        
-        # Show pre_edit answer
-        if show_pre_edit_answer:
-            pre_edit_response_start_time = time.time()
-            pre_edit_response = create_response(pre_edit_model,tokenizer,prompts,instructinoal=False)
             
-            for sequence, prompt in zip(pre_edit_response.sequences,prompts):
-                decoded_pre_edit_response.append(decode_output_and_log(tokenizer=tokenizer,output=sequence,question=prompt,pre_edit=True))
-            
-            pre_edit_response_end_time = time.time()
-            log(f"Pre_edit_response inference took {pre_edit_response_end_time - pre_edit_response_start_time:.2f} seconds.",False,False,True)
-                 
-            write_output_to_file("pre_edit",False,*decoded_pre_edit_response)
+        # All needed outputs for pre_edit_model
+        decoded_pre_edit_responses_prompt,decoded_pre_edit_responses_light_rephrase_1,decoded_pre_edit_responses_light_rephrase_2,decoded_pre_edit_responses_light_rephrase_3,decoded_pre_edit_responses_strong_rephrase,decoded_pre_edit_responses_portability_synonym,decoded_pre_edit_responses_portability_one_hop,decoded_pre_edit_responses_portability_two_hop,decoded_pre_edit_responses_locality_neighborhood,decoded_pre_edit_responses_locality_distracting = preprare_responses(tokenizer, pre_edit_model, None, edit_args)
+        write_output_to_file("pre_edit", False, *decoded_pre_edit_responses_prompt, *decoded_pre_edit_responses_light_rephrase_1, *decoded_pre_edit_responses_light_rephrase_2, *decoded_pre_edit_responses_light_rephrase_3, *decoded_pre_edit_responses_strong_rephrase, *decoded_pre_edit_responses_portability_synonym, *decoded_pre_edit_responses_portability_one_hop, *decoded_pre_edit_responses_portability_two_hop, *decoded_pre_edit_responses_locality_neighborhood, *decoded_pre_edit_responses_locality_distracting)
 
-
-        # Custom metric calculation for pre_edit_model
         if calculate_custom_metric_for_pre_edit_model:
-            pre_edit_custom_metric = measure_quality_sentiment_analysis(tokenizer,pre_edit_model,edit_args, pre_edit=True)
+            pre_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, True, decoded_pre_edit_responses_prompt,decoded_pre_edit_responses_light_rephrase_1,decoded_pre_edit_responses_light_rephrase_2,decoded_pre_edit_responses_light_rephrase_3,decoded_pre_edit_responses_strong_rephrase,decoded_pre_edit_responses_portability_synonym,decoded_pre_edit_responses_portability_one_hop,decoded_pre_edit_responses_portability_two_hop,decoded_pre_edit_responses_locality_neighborhood,decoded_pre_edit_responses_locality_distracting)
             save_as_json(pre_edit_custom_metric,"pre_edit_custom_metric")
         
-        
-        
+     
+     
     # Unload pre_edit_model if not used later
     if pre_edit_model and not enable_models_check:
         del pre_edit_model
         torch.cuda.empty_cache()
         log("Unloaded pre_edit_model",False,False,True)
-        
         
     
     # Output scores, KL divergence and other useful information
