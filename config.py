@@ -1,5 +1,5 @@
 from datetime import datetime
-from utils import get_ml_path, get_datasets_path
+from utils import get_datasets_path
 
 # Global constants
 timestamp = datetime.now().strftime("%d-%m-%Y__%H-%M")
@@ -66,38 +66,36 @@ datasets_path = get_datasets_path()
 
 
 # General configuration
-model_name = None
-device = None
-train = None
+model_name = "openai/gpt2-xl"
+device = 0
+train = False
 weights_dtype = None
-number_of_norms_to_edit = None
+norms_subset_size = 1
 shuffle = False
 
 # For decoding strategy
-decoding_strategy = None
-do_sample = None
-num_beams = None
-max_length = None
-no_repeat_ngram_size = None
-early_stopping = None
-max_new_tokens = None
-seed = None
+decoding_strategy = "greedy-decoding"
+do_sample = False
+num_beams = 1
+max_length = 100
+no_repeat_ngram_size = 0
+early_stopping = True
+max_new_tokens = 8
+seed = -1
 
 # For editing
-editing_method = None
-apply_edit = None
+editing_method = "MEND"
+apply_edit = True
 hparams_path = None
 train_hparams_path = None
 
 # For evaluation
-show_pre_edit_answer = None
-show_post_edit_answer = None
-calculate_custom_metric_for_pre_edit_model = None
-calculate_custom_metric_for_post_edit_model = None
+calculate_custom_metric_for_pre_edit_model = True
+calculate_custom_metric_for_post_edit_model = True
 
 # For debugging
-enable_models_check = None
-enable_analytics = None
-enable_output_scores = None
-top_k = None
-freely_chat_with_post_edit_model = None
+enable_models_check = False
+enable_analytics = False
+enable_output_scores = False
+top_k = 5
+freely_chat_with_post_edit_model = False

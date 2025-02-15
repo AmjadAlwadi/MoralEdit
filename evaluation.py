@@ -22,10 +22,10 @@ def load_norms():
     if config.shuffle:
         full_dataset = full_dataset.shuffle()
 
-    config.subset_size =  min(config.subset_size, len(full_dataset) // 2)
+    config.norms_subset_size =  min(config.norms_subset_size, len(full_dataset) // 2)
     
-    ds = full_dataset.select(range(config.subset_size))
-    locality_dataset = full_dataset.select(range(config.subset_size, config.subset_size + config.subset_size))
+    ds = full_dataset.select(range(config.norms_subset_size))
+    locality_dataset = full_dataset.select(range(config.norms_subset_size, config.norms_subset_size + config.norms_subset_size))
     
     prompts = ds['prompt']
     ground_truth = ds['ground_truth']
@@ -42,11 +42,12 @@ def load_norms():
     situation = ds["situation"]
     
     
-    locality_inputs_neighborhood_prompt = [f"{d} is" for d in locality_dataset["prompt"]]
-    locality_inputs_neighborhood_ground_truth = locality_dataset["target_new"]
+    locality_inputs_neighborhood_prompt = locality_dataset["prompt"]
+    locality_inputs_neighborhood_ground_truth = locality_dataset["ground_truth"]
+    locality_inputs_action_moral_judgement = locality_dataset["action_moral_judgment"]
     
     locality_inputs_distracting_prompt = [f"{prompts[i]} {target_new[i]}. {locality_inputs_neighborhood_prompt[i]}" for i in range(len(locality_dataset))]
-    locality_inputs_distracting_ground_truth = locality_dataset["target_new"]
+    locality_inputs_distracting_ground_truth = locality_dataset["ground_truth"]
 
     portability_inputs_one_hop_prompt = [f"{sit} {mor}" for sit, mor in zip(situation, moral_action)]
     portability_inputs_two_hop_prompt = [f"{sit} {immor}" for sit, immor in zip(situation, immoral_action)]
@@ -89,8 +90,24 @@ def load_norms():
         
     # Check whether locality and portability are empty
     log("Norms dataset loaded",False,False,True)
+    
+    norms_dict = {
+        "prompts": prompts,
+        "ground_truth": ground_truth,
+        "target_new": target_new,
+        "subject": subject,
+        "light_rephrase_prompts": light_rephrase_prompts,
+        "strong_rephrase_prompts": strong_rephrase_prompts,
+        "locality_inputs": locality_inputs,
+        "locality_inputs_action_moral_judgement": locality_inputs_action_moral_judgement,
+        "portability_inputs": portability_inputs,
+        "action_moral_judgment": action_moral_judgment,
+        "moral_action": moral_action,
+        "immoral_action": immoral_action, 
+        "loc_prompts": loc_prompts
+    }
 
-    return prompts, ground_truth, target_new, subject, light_rephrase_prompts, strong_rephrase_prompts, locality_inputs, portability_inputs, action_moral_judgment, moral_action, immoral_action, loc_prompts
+    return norms_dict
 
 
 
@@ -211,10 +228,24 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
     if model is None:
         model = post_edit_model
         
-        
-    def format_output(output, length):
-        return output[length:].lstrip(". ,")
 
+    # Gets the generated part, strips unnecessary characters from the left and return the string till the period
+    def format_output(output, length):
+        result = output[length:]
+        result = result.lstrip(" .,?\n")
+        p_index = result.find('.') 
+        q_index = result.find('?')
+        
+        if p_index != -1:
+            result = f"{result[:p_index]}."
+        elif q_index!= -1:
+            result = f"{result[:q_index]}?"
+        else:
+            result = result
+              
+        return result    
+    
+     
     
     decoded_responses_prompt = []
         
@@ -231,7 +262,7 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
     decoded_responses_locality_neighborhood = []
     decoded_responses_locality_distracting = []
 
-    
+    logits = []
     
     for index in range(0, len(edit_args["prompts"])):
         
@@ -247,8 +278,8 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
             edit_args["strong_rephrase_prompts"][index],
             
             edit_args["portability_inputs"]["synonym"]["prompt"][index],
-            edit_args["portability_inputs"]["one-hop"]["prompt"][index],
-            edit_args["portability_inputs"]["two-hop"]["prompt"][index],
+            edit_args["portability_inputs"]["one_hop"]["prompt"][index],
+            edit_args["portability_inputs"]["two_hop"]["prompt"][index],
     
             edit_args["locality_inputs"]["neighborhood"]["prompt"][index],
             edit_args["locality_inputs"]["distracting"]["prompt"][index],
@@ -269,14 +300,30 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
         decoded_responses_strong_rephrase.append(format_output(decoded_output[4], len(edit_args["strong_rephrase_prompts"][index]))) 
         
         decoded_responses_portability_synonym.append(format_output(decoded_output[5], len(edit_args["portability_inputs"]["synonym"]["prompt"][index]))) 
-        decoded_responses_portability_one_hop.append(format_output(decoded_output[6], len(edit_args["portability_inputs"]["one-hop"]["prompt"][index]))) 
-        decoded_responses_portability_two_hop.append(format_output(decoded_output[7], len(edit_args["portability_inputs"]["two-hop"]["prompt"][index])))
+        decoded_responses_portability_one_hop.append(format_output(decoded_output[6], len(edit_args["portability_inputs"]["one_hop"]["prompt"][index]))) 
+        decoded_responses_portability_two_hop.append(format_output(decoded_output[7], len(edit_args["portability_inputs"]["two_hop"]["prompt"][index])))
 
         decoded_responses_locality_neighborhood.append(format_output(decoded_output[8], len(edit_args["locality_inputs"]["neighborhood"]["prompt"][index]))) 
         decoded_responses_locality_distracting.append(format_output(decoded_output[9], len(edit_args["locality_inputs"]["distracting"]["prompt"][index]))) 
 
-   
-    return decoded_responses_prompt, decoded_responses_light_rephrase_1, decoded_responses_light_rephrase_2, decoded_responses_light_rephrase_3, decoded_responses_strong_rephrase, decoded_responses_portability_synonym, decoded_responses_portability_one_hop, decoded_responses_portability_two_hop, decoded_responses_locality_neighborhood, decoded_responses_locality_distracting
+        logits.append(post_edit_output.logits)
+
+
+    return_dict = {
+        "prompt": decoded_responses_prompt,
+        "light_rephrase_1": decoded_responses_light_rephrase_1,
+        "light_rephrase_2": decoded_responses_light_rephrase_2,
+        "light_rephrase_3": decoded_responses_light_rephrase_3,
+        "strong_rephrase": decoded_responses_strong_rephrase,
+        "portability_synonym": decoded_responses_portability_synonym,
+        "portability_one_hop": decoded_responses_portability_one_hop,
+        "portability_two_hop": decoded_responses_portability_two_hop,
+        "locality_neighborhood": decoded_responses_locality_neighborhood,
+        "locality_distracting": decoded_responses_locality_distracting,
+        "logits": logits
+    }
+
+    return return_dict
    
    
    
@@ -288,30 +335,32 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
 
 
 # A custom metric that measures the quality using sentiment_analysis and KL divergence
-def measure_quality_sentiment_analysis(edit_args, pre_edit, decoded_post_edit_response_prompt,decoded_post_edit_response_light_rephrase_1,decoded_post_edit_response_light_rephrase_2,decoded_post_edit_response_light_rephrase_3,decoded_post_edit_response_strong_rephrase,decoded_post_edit_response_portability_synonym,decoded_post_edit_response_portability_one_hop,decoded_post_edit_response_portability_two_hop,decoded_post_edit_response_locality_neighborhood,decoded_post_edit_response_locality_distracting):
+def measure_quality_sentiment_analysis(edit_args, pre_edit, output_dict):
         
     # Test other metrics after editing to see whether model is degraded    
     negative_label = "LABEL_0"
     positive_label = "LABEL_2"
     neutral_label = "LABEL_1"
-
-    ground_truth_label = positive_label
-    target_new_label = negative_label
     
+        
     # Compare with expected label and return float as score
     # I decided to take a neutral label as 0.5
-    def compare_with_ground_truth(actual_label):
+    def labels_to_float(actual_label, target_label):
         if actual_label == neutral_label:
             return 0.5
         else:
-            return float(ground_truth_label == actual_label)
-    
-    
-    def compare_with_target_new(actual_label):
-        if actual_label == neutral_label:
-            return 0.5
+            return float(target_label == actual_label)
+        
+        
+    def compare_labels(actual_labels, target_label):
+        if isinstance(actual_labels, str):
+            return labels_to_float(actual_labels, target_label)
+        elif isinstance(actual_labels,list):
+            new_list = [labels_to_float(i,target_label) for i in actual_labels]
+            return statistics.mean(new_list)
         else:
-            return float(target_new_label == actual_label)
+            return None
+    
         
     
     def float_to_label(value):
@@ -346,19 +395,20 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, decoded_post_edit_re
         
 
         # To work all answers in parallel
-        sentiment_input = [edit_args["ground_truth"][index],
-                           edit_args["target_new"][index],
-                           decoded_post_edit_response_prompt,
-                           decoded_post_edit_response_light_rephrase_1,
-                           decoded_post_edit_response_light_rephrase_2,
-                           decoded_post_edit_response_light_rephrase_3,
-                           decoded_post_edit_response_strong_rephrase,
-                           decoded_post_edit_response_portability_synonym,
-                           decoded_post_edit_response_portability_one_hop,
-                           decoded_post_edit_response_portability_two_hop,
-                           decoded_post_edit_response_locality_neighborhood,
-                           decoded_post_edit_response_locality_distracting,]
-        
+        sentiment_input = [
+            edit_args["ground_truth"][index],
+            edit_args["target_new"][index],
+            output_dict["prompt"][index],
+            output_dict["light_rephrase_1"][index],
+            output_dict["light_rephrase_2"][index],
+            output_dict["light_rephrase_3"][index],
+            output_dict["strong_rephrase"][index],
+            output_dict["portability_synonym"][index],
+            output_dict["portability_one_hop"][index],
+            output_dict["portability_two_hop"][index],
+            output_dict["locality_neighborhood"][index],
+            output_dict["locality_distracting"][index]
+        ]
         
         
         # Generate predictions
@@ -366,39 +416,39 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, decoded_post_edit_re
         
         target_new_label = float_to_label(int(edit_args["action_moral_judgment"][index]))
         ground_truth_label = invert_label(target_new_label)
+
+        generated_ground_truth_label = sentiment_output[0]["label"]
+        generated_target_new_label = sentiment_output[1]["label"]
+        
+        sentiment_analysis_model_reliability = statistics.mean([compare_labels(ground_truth_label, generated_ground_truth_label), compare_labels(target_new_label, generated_target_new_label)])
         
         # If testing the pre_edit model then invert the labels
         if pre_edit:
             target_new_label = invert_label(target_new_label)
-            ground_truth_label = invert_label(ground_truth_label)
-    
-    
-        generated_ground_truth_label = sentiment_output[0]["label"]
-        generated_target_new_label = sentiment_output[1]["label"]
         
-        sentiment_analysis_model_reliability = statistics.mean(compare_with_ground_truth(generated_ground_truth_label), compare_with_target_new(generated_target_new_label))
-        reliability = compare_with_ground_truth(sentiment_output[2]["label"])
-        light_generality = statistics.mean(compare_with_target_new(sentiment_output[3]["label"], sentiment_output[4]["label"], sentiment_output[5]["label"]))
-        strong_generality = compare_with_target_new(sentiment_output[6]["label"])
+        reliability = compare_labels(sentiment_output[2]["label"], target_new_label)
+        light_generality = compare_labels([sentiment_output[3]["label"], sentiment_output[4]["label"], sentiment_output[5]["label"]], target_new_label)
+        strong_generality = compare_labels(sentiment_output[6]["label"], target_new_label)
 
-        portability_synonym = compare_with_target_new(sentiment_output[7]["label"])
-        portability_one_hop = compare_with_target_new(sentiment_output[8]["label"])
-        portability_two_hop = compare_with_ground_truth(sentiment_output[9]["label"])
+        portability_synonym = compare_labels(sentiment_output[7]["label"], target_new_label)
+        portability_one_hop = compare_labels(sentiment_output[8]["label"], target_new_label)
+        portability_two_hop = compare_labels(sentiment_output[9]["label"], ground_truth_label)
         
-        locality_neighborhood = compare_with_ground_truth(sentiment_output[10]["label"])
-        locality_distracting = compare_with_ground_truth(sentiment_output[11]["label"])
+        expected_locality_neighborhood_label = invert_label(float_to_label(edit_args["locality_inputs_action_moral_judgement"][index]))
         
+        locality_neighborhood = compare_labels(sentiment_output[10]["label"], expected_locality_neighborhood_label)
+        locality_distracting = compare_labels(sentiment_output[11]["label"], expected_locality_neighborhood_label)
         
         custom_metric = {
-            "dataset_reliability":sentiment_analysis_model_reliability,
+            "sentiment_analysis_model_reliability":sentiment_analysis_model_reliability,
             "reliability":reliability,
             "light_generality":light_generality,
             "strong_generality":strong_generality,
             "synonym_generality":portability_synonym,
             "one_hop_inference":portability_one_hop,
             "two_hop_inference":portability_two_hop,
-            "neighborhood_generality":locality_neighborhood,
-            "distracting_generality":locality_distracting
+            "locality_neighborhood":locality_neighborhood,
+            "locality_distracting":locality_distracting
         }
     
         custom_metric_array.append(custom_metric)
@@ -414,8 +464,6 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, decoded_post_edit_re
 def measure_quality_chatgpt_api(edit_args, decoded_post_edit_response):
     template = f"{decoded_post_edit_response}"
     response = send_request(template)
-
-
 
 
 

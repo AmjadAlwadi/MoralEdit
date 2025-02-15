@@ -52,10 +52,10 @@ def write_output_to_file(file_name, append:bool,*outputs):
     if lengths == 0:
         return
     
-    directory_path = 'outputs/' + config.editing_method + '/' + config.model_name.split('/')[1] + '/' + config.decoding_strategy + '/' + config.timestamp
+    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, config.timestamp)
     os.makedirs(directory_path, exist_ok=True)
     
-    file_path = directory_path + "/" + file_name + '.txt'
+    file_path = os.path.join(directory_path, f"{file_name}.txt")
     
     mode = 'w'
     if append:
@@ -65,19 +65,23 @@ def write_output_to_file(file_name, append:bool,*outputs):
         for output in outputs:
             file.write(output)
             file.write("\n")
+        
+    log(f"Wrote to {file_name} in {directory_path}", False, True, True)
 
 
 
 def save_as_json(object,file_name):
     
-    directory_path = 'outputs/' + config.editing_method + '/' + config.model_name.split('/')[1] + '/' + config.decoding_strategy + '/' + config.timestamp
+    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, config.timestamp)
     os.makedirs(directory_path, exist_ok=True)
 
-    file_path = directory_path + "/" + file_name + '.json'
+    file_path = os.path.join(directory_path, f"{file_name}.json")
         
     # Save dictionary as a JSON file
     with open(file_path, 'w', encoding="utf-8") as json_file:
         json.dump(object, json_file, ensure_ascii=False, indent=4)
+    
+    log(f"Saved {file_name} in {directory_path}", False, True, True)
         
         
         
@@ -114,18 +118,17 @@ def addToClipBoard(text):
 
 
 
-
 def get_available_gpu_memory():
     """Returns the available memory for GPU in GB"""
-    gpu_memory = torch.cuda.memory_allocated() / 1e9  # in GB
-    return 24 - gpu_memory
+    free_memory, _ = torch.cuda.mem_get_info()  # in GB
+    return free_memory / 1e9 
 
 
 
 def print_gpu_memory():
     # GPU memory
-    gpu_memory = torch.cuda.memory_allocated() / 1e9  # in GB
-    log(f"GPU Memory allocated currently: {gpu_memory} GB",True,False,False)
+    gpu_memory = get_available_gpu_memory()  # in GB
+    log(f"Availabe GPU Memory currently: {gpu_memory} GB",True,False,False)
     
     
 
@@ -231,7 +234,7 @@ def load_pre_edit_model():
         from transformers import AutoModelForCausalLM
         pre_edit_model = AutoModelForCausalLM.from_pretrained(config.model_name,torch_dtype = config.weights_dtype, token = config.access_token,device_map='auto')
     
-    log("Loaded the base model",True,False,True)
+    log("Loaded the pre_edit_model",True,False,True)
     print_gpu_memory()
     return pre_edit_model
 
@@ -252,3 +255,20 @@ def get_ml_path():
 
 def get_datasets_path():
     return os.path.join(get_ml_path(), "datasets")
+
+
+
+# Unloads a model from GPU memory if a given condition is met.
+def unload_pre_edit_model(model):
+    if model and not config.enable_models_check:
+        del model
+        torch.cuda.empty_cache()
+        log("Unloaded pre_edit_model", False, False, True)
+        
+        
+
+def unload_post_edit_model(model):
+    if model and not config.enable_models_check and not config.freely_chat_with_post_edit_model:
+        del model
+        torch.cuda.empty_cache()
+        log("Unloaded post_edit_model", False, False, True)
