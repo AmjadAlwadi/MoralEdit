@@ -216,8 +216,8 @@ def main():
     
     # Show the effects of the edit
     if config.calculate_custom_metric_for_pre_edit_model and config.calculate_custom_metric_for_post_edit_model:
-        edit_difference_custom_metric = [{key: f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} = {(abs(pre_edit_item[key] + post_edit_item[key])%2)*100:.2f}% Changes" for key in pre_edit_item if key not in ["sentiment_analysis_model_reliability"]} for pre_edit_item, post_edit_item in zip(pre_edit_custom_metric, post_edit_custom_metric)]
-        save_as_json(edit_difference_custom_metric,"edit_difference_custom_metric")
+        edit_changes_custom_metric = calculate_edit_changes_custom_metric(pre_edit_custom_metric, post_edit_custom_metric, pre_edit_output_dict, post_edit_output_dict)
+        save_as_json(edit_changes_custom_metric,"edit_changes_custom_metric")
      
      
     # Unload pre_edit_model if not used later

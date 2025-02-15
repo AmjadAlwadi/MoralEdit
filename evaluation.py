@@ -160,7 +160,7 @@ def output_scores_of_generation(tokenizer,scores):
 def analyse_kl_divergence(pre_edit_logits,post_edit_logtis) -> str:
     output = ""
     if pre_edit_logits and post_edit_logtis and config.editing_method != "IKE":
-        kl_div_first_token = calculate_kl_divergence(pre_edit_logits[0],post_edit_logtis[0])
+        kl_div_first_token = calculate_kl_divergence_for_first_token(pre_edit_logits,post_edit_logtis)
         kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logtis)
         check2 = f"KL divergence for first token: {kl_div_first_token}"
         check3 = f"KL divergence amongst all tokens: {kl_div_all_tokens}"
@@ -179,14 +179,17 @@ def analyse_kl_divergence(pre_edit_logits,post_edit_logtis) -> str:
 
 
 
-def calculate_kl_divergence(pre_edit_logits, post_edit_logits):
+def calculate_kl_divergence_for_first_token(pre_edit_logits, post_edit_logits):
     
     # Move to same device
-    post_edit_logits = post_edit_logits.to(pre_edit_logits.device)
+    # post_edit_logits = post_edit_logits.to(pre_edit_logits.device)
+    
+    pre_edit_logit = pre_edit_logits[0]
+    post_edit_logit = post_edit_logits[0]
     
     # Convert logits to probabilities
-    original_probs = torch.nn.functional.softmax(pre_edit_logits, dim=-1)
-    edited_probs = torch.nn.functional.softmax(post_edit_logits, dim=-1)
+    original_probs = torch.nn.functional.softmax(pre_edit_logit, dim=-1)
+    edited_probs = torch.nn.functional.softmax(post_edit_logit, dim=-1)
 
     # Compute KL divergence
     kl_divergence = torch.nn.functional.kl_div(original_probs.log(), edited_probs, reduction='batchmean')
@@ -205,7 +208,7 @@ def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits, post_edit_logits
     current_index = 1
     
     for x,y in zip(pre_edit_logits,post_edit_logits):
-        current_kl_divergence = calculate_kl_divergence(x,y)
+        current_kl_divergence = calculate_kl_divergence_for_first_token(x,y)
         result += current_kl_divergence
 
         if current_kl_divergence > biggest_kl_divergence:
@@ -455,6 +458,29 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, output_dict):
     
     
     return custom_metric_array
+
+
+
+
+
+
+
+# This makes sure that we take into account the initial knowledge of the model
+def calculate_edit_changes_custom_metric(pre_edit_custom_metric, post_edit_custom_metric, pre_edit_output_dict, post_edit_output_dict):
+    edit_changes_custom_metric = []
+    for pre_edit_item, post_edit_item in zip(pre_edit_custom_metric, post_edit_custom_metric):
+        item = {}
+        for key in pre_edit_item:
+            item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} = {min(1 - (pre_edit_item[key] - post_edit_item[key]),1):.3f} = {min(1 - (pre_edit_item[key] - post_edit_item[key]),1)*100:.2f}%"})
+        
+        edit_changes_custom_metric.append(item)
+    
+    # Fix here
+    kl_div = calculate_kl_divergence_for_first_token(pre_edit_output_dict["logits"], post_edit_output_dict["logits"])
+    edit_changes_custom_metric.append({"KL_divergence" : kl_div})
+    return edit_changes_custom_metric
+
+
 
 
 
