@@ -58,7 +58,7 @@ from edit import edit
 
 
 
-# MAybe fix subject difference in im/moral actions and ground_truth
+# Maybe fix subject difference in im/moral actions and ground_truth
 
 
 # For the custom metric cut the response till the point
@@ -73,6 +73,15 @@ from edit import edit
 # Make the locality prompts those that have contrary action judgement
 # not necessarily good btw
 # Add KL divergence to the final locality
+
+# For example generate many sequences and calculate average or search for a specific word and see what it's probability is
+# or take a look at the first 20 words and take the average of their sentiment
+
+
+# Take a look on how they implemented counterfact, it it based on model's knowledge??
+
+
+# First of all fix IKE and then add causal tracing
 
 def main():
     
@@ -107,9 +116,9 @@ def main():
 
     # Some global variables
     pre_edit_model, post_edit_model = None, None
-    # post_edit_easy_edit_metrics = None
     pre_edit_custom_metric = None
     post_edit_custom_metric = None
+    # post_edit_easy_edit_metrics = None
     ike_generation_prompts = []
 
 
@@ -163,11 +172,10 @@ def main():
           
     
     # All needed outputs for post_edit_model
-    post_edit_output_dict = preprare_responses(tokenizer, None, post_edit_model, edit_args)
+    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict = preprare_responses(tokenizer, None, post_edit_model, edit_args)
     
     # Write post_edit_response to a file
-    post_edit_logs = edit_args | {k: v for k, v in post_edit_output_dict.items() if k != "logits"}
-    save_as_json(post_edit_logs,"post_edit_logs")
+    save_as_json(edit_args | post_edit_output_dict,"post_edit_logs")
 
     
     # FIX IKE HERE
@@ -204,28 +212,30 @@ def main():
             pre_edit_model = load_pre_edit_model()
             
         # All needed outputs for pre_edit_model
-        pre_edit_output_dict = preprare_responses(tokenizer, pre_edit_model, None, edit_args)
+        pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict = preprare_responses(tokenizer, pre_edit_model, None, edit_args)
         
         # Write post_edit_response to a file
-        pre_edit_logs = edit_args | {k: v for k, v in pre_edit_output_dict.items() if k != "logits"}
-        save_as_json(pre_edit_logs,"pre_edit_logs")
+        save_as_json(edit_args | pre_edit_output_dict, "pre_edit_logs")
 
         pre_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, True, pre_edit_output_dict)
-        save_as_json(pre_edit_custom_metric,"pre_edit_custom_metric")
+        save_as_json(pre_edit_custom_metric, "pre_edit_custom_metric")
         
     
     # Show the effects of the edit
     if config.calculate_custom_metric_for_pre_edit_model and config.calculate_custom_metric_for_post_edit_model:
-        edit_changes_custom_metric = calculate_edit_changes_custom_metric(pre_edit_custom_metric, post_edit_custom_metric, pre_edit_output_dict, post_edit_output_dict)
-        save_as_json(edit_changes_custom_metric,"edit_changes_custom_metric")
-     
-     
+        edit_effect_sentiment_metric = evaluate_edit_effect_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric)
+        save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
+        
+        edit_effect_kl_div_metric = evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict)
+        save_as_json(edit_effect_kl_div_metric,"edit_effect_kl_div_metric")
+    
+ 
     # Unload pre_edit_model if not used later
     unload_pre_edit_model(pre_edit_model)
         
     
     # Output scores, KL divergence and other useful information
-    # output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_output_dict, post_edit_output_dict)
+    output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_output_dict, post_edit_output_dict, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_scores_dict, post_edit_scores_dict)
 
 
     # Freely chat with the post edit model
@@ -240,12 +250,13 @@ def parse_arguments():
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
+    # Shortcuts : e,f,s,t,m,n,d,k,o,a,b,w
     
     parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(config.available_editing_methods.values()),
                         help="Editing method to use\nIf not specified, then no editing is performed")
     parser.add_argument("--model_name", type=str, default=config.available_models[10],
                         help="Name of the model to use")
-    parser.add_argument("-n","--norms_subset_size", type=int, default=1,
+    parser.add_argument("-s","--norms_subset_size", type=int, default=1,
                         help="Number of norms to edit")
     parser.add_argument("-f","--freely_chat", action="store_true",
                         help="Whether to freely chat with the post-edit model")
@@ -256,14 +267,14 @@ def parse_arguments():
     
     # Decoding strategy parameters
     parser.add_argument("--seed", type=int, default=-1,
-                        help="Random seed for reproducibility")
+                        help="Random seed for reproducibility, leave -1 for same hardcoded seed always")
     parser.add_argument("--max_length", type=int, default=100,
                         help="Maximum number of tokens in the prompt")
-    parser.add_argument("-m", "--max_new_tokens", type=int, default=20,
+    parser.add_argument("-m", "--max_new_tokens", type=int, default=10,
                         help="Maximum number of new tokens to generate")
-    parser.add_argument("--num_beams", type=int, default=1,
+    parser.add_argument("-n", "--num_beams", type=int, default=1,
                         help="Maximum number of new tokens to generate")
-    parser.add_argument("--do_sample", action="store_true",
+    parser.add_argument("-d", "--do_sample", action="store_true",
                         help="Activate multinomial-sampling")
     parser.add_argument("--early_stopping", action="store_true",
                         help="Early stopping")
@@ -271,22 +282,23 @@ def parse_arguments():
                         help="No repeat ngram size")
     
     # Debugging stuff
-    parser.add_argument("--enable_analytics", action="store_true",
+    parser.add_argument("-k", "--enable_analytics", action="store_true",
                         help="Show the KL divergence and more")
     parser.add_argument("--enable_models_check", action="store_true",
                         help="Check whether the post_edit model did change")
     
     # Extra information
-    parser.add_argument("--enable_output_scores", action="store_true",
+    parser.add_argument("-o", "--enable_output_scores", action="store_true",
                         help="Show the scores for the most probable tokens")
-    parser.add_argument("--top_k", type=int, default=10,
+    parser.add_argument("--top_k", type=int, default=4,
                         help="Top k probable tokens for the output scores")
     
-    parser.add_argument("-b","--calculate_custom_metric_for_post_edit_model", action="store_true",
-                        help="Acitvate the custom metric calculation for edited model")
+    
     parser.add_argument("-a","--calculate_custom_metric_for_pre_edit_model", action="store_true",
                         help="Acitvate the custom metric calculation for pre_edit_model")
-    
+    parser.add_argument("-b","--calculate_custom_metric_for_post_edit_model", action="store_true",
+                        help="Acitvate the custom metric calculation for edited model")
+
     
     parser.add_argument("--enable_cpu_inference", action="store_true",
                         help="Whether to do the inference on the CPU")
@@ -296,6 +308,7 @@ def parse_arguments():
                         help="Name of the config file")
     
     args = parser.parse_args()
+    
     
     
     # Update global variables
@@ -328,6 +341,7 @@ def parse_arguments():
     config.calculate_custom_metric_for_post_edit_model = args.calculate_custom_metric_for_post_edit_model
     config.calculate_custom_metric_for_pre_edit_model = args.calculate_custom_metric_for_pre_edit_model
         
+        
     config.decoding_strategy = "greedy-decoding" 
     
     if config.num_beams == 1 and config.do_sample == False:
@@ -343,13 +357,6 @@ def parse_arguments():
     else:
         config.device = torch.device('cpu')
     
-    if config.editing_method == "No editing":
-        config.apply_edit = False
-        
-    # We need the outputs to be able to calculate the scores
-    if config.enable_output_scores:
-        config.show_pre_edit_answer = True
-        config.show_post_edit_answer = True
     
     config.shuffle = args.shuffle
     

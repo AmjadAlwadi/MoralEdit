@@ -116,7 +116,7 @@ def load_norms():
 
 
 
-def output_scores_of_generation(tokenizer,scores):
+def output_token_scores(tokenizer, scores, batch_element_index):
     
     # Get top 10 tokens and their probabilities
     score_output = ""
@@ -137,7 +137,7 @@ def output_scores_of_generation(tokenizer,scores):
         score_output += f"Token {i + 1}:\n"
         print(Fore.LIGHTMAGENTA_EX + f"Token {i + 1}:" + Style.RESET_ALL)
         
-        for token, prob in zip(ids[0], probs[0]):
+        for token, prob in zip(ids[batch_element_index], probs[batch_element_index]):
             
             decoded_token = tokenizer.decode(token)
             
@@ -157,11 +157,11 @@ def output_scores_of_generation(tokenizer,scores):
 
 
 
-def analyse_kl_divergence(pre_edit_logits,post_edit_logtis) -> str:
+def analyse_kl_divergence(pre_edit_logits,post_edit_logits) -> str:
     output = ""
-    if pre_edit_logits and post_edit_logtis and config.editing_method != "IKE":
-        kl_div_first_token = calculate_kl_divergence_for_first_token(pre_edit_logits,post_edit_logtis)
-        kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logtis)
+    if pre_edit_logits and post_edit_logits and config.editing_method != "IKE":
+        kl_div_first_token = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, 2)
+        kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits)
         check2 = f"KL divergence for first token: {kl_div_first_token}"
         check3 = f"KL divergence amongst all tokens: {kl_div_all_tokens}"
         check4 = f"Biggest KL divergence is on token {biggest_div_index} with the value of {biggest_div}"
@@ -179,13 +179,14 @@ def analyse_kl_divergence(pre_edit_logits,post_edit_logtis) -> str:
 
 
 
-def calculate_kl_divergence_for_first_token(pre_edit_logits, post_edit_logits):
+def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, token_index):
+    
+    # Pick the first token
+    pre_edit_logit = pre_edit_logits[token_index]
+    post_edit_logit = post_edit_logits[token_index]
     
     # Move to same device
-    # post_edit_logits = post_edit_logits.to(pre_edit_logits.device)
-    
-    pre_edit_logit = pre_edit_logits[0]
-    post_edit_logit = post_edit_logits[0]
+    pre_edit_logit = pre_edit_logit.to(post_edit_logit.device)
     
     # Convert logits to probabilities
     original_probs = torch.nn.functional.softmax(pre_edit_logit, dim=-1)
@@ -205,17 +206,14 @@ def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits, post_edit_logits
     result = 0
     biggest_kl_divergence = 0
     biggest_kl_divergence_index = 0
-    current_index = 1
     
-    for x,y in zip(pre_edit_logits,post_edit_logits):
-        current_kl_divergence = calculate_kl_divergence_for_first_token(x,y)
+    for i in range(len(pre_edit_logits)):
+        current_kl_divergence = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, i).item()
         result += current_kl_divergence
 
         if current_kl_divergence > biggest_kl_divergence:
             biggest_kl_divergence = current_kl_divergence
-            biggest_kl_divergence_index = current_index
-        
-        current_index += 1
+            biggest_kl_divergence_index = i
         
     return result, biggest_kl_divergence, biggest_kl_divergence_index
 
@@ -266,6 +264,7 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
     decoded_responses_locality_distracting = []
 
     logits = []
+    scores = []
     
     for index in range(0, len(edit_args["prompts"])):
         
@@ -291,8 +290,8 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
         
         
         # Create responses then batch decode then reformat the outputs
-        post_edit_output = create_response(model,tokenizer,model_input,instructinoal=False)
-        decoded_output = tokenizer.batch_decode(post_edit_output.sequences,skip_special_tokens=True)
+        output = create_response(model,tokenizer,model_input,instructinoal=False)
+        decoded_output = tokenizer.batch_decode(output.sequences,skip_special_tokens=True)
         
         decoded_responses_prompt.append(format_output(decoded_output[0], len(edit_args["prompts"][index])))
         
@@ -309,8 +308,8 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
         decoded_responses_locality_neighborhood.append(format_output(decoded_output[8], len(edit_args["locality_inputs"]["neighborhood"]["prompt"][index]))) 
         decoded_responses_locality_distracting.append(format_output(decoded_output[9], len(edit_args["locality_inputs"]["distracting"]["prompt"][index]))) 
 
-        logits.append(post_edit_output.logits)
-
+        logits.append(output.logits)
+        scores.append(output.scores)
 
     return_dict = {
         "prompt": decoded_responses_prompt,
@@ -323,10 +322,37 @@ def preprare_responses(tokenizer, pre_edit_model, post_edit_model, edit_args):
         "portability_two_hop": decoded_responses_portability_two_hop,
         "locality_neighborhood": decoded_responses_locality_neighborhood,
         "locality_distracting": decoded_responses_locality_distracting,
-        "logits": logits
     }
+    
 
-    return return_dict
+    logits_dict = {
+        "prompt": tuple(torch.cat( tuple(tup[i][0] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "light_rephrase_1": tuple(torch.cat( tuple(tup[i][1] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "light_rephrase_2": tuple(torch.cat( tuple(tup[i][2] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "light_rephrase_3": tuple(torch.cat( tuple(tup[i][3] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "strong_rephrase": tuple(torch.cat( tuple(tup[i][4] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "portability_synonym": tuple(torch.cat( tuple(tup[i][5] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "portability_one_hop": tuple(torch.cat( tuple(tup[i][6] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "portability_two_hop": tuple(torch.cat( tuple(tup[i][7] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "locality_neighborhood": tuple(torch.cat( tuple(tup[i][8] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "locality_distracting": tuple(torch.cat( tuple(tup[i][9] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+    }
+    
+    scores_dict = {
+        "prompt": tuple(torch.cat( tuple(tup[i][0] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "light_rephrase_1": tuple(torch.cat( tuple(tup[i][1] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "light_rephrase_2": tuple(torch.cat( tuple(tup[i][2] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "light_rephrase_3": tuple(torch.cat( tuple(tup[i][3] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "strong_rephrase": tuple(torch.cat( tuple(tup[i][4] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "portability_synonym": tuple(torch.cat( tuple(tup[i][5] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "portability_one_hop": tuple(torch.cat( tuple(tup[i][6] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "portability_two_hop": tuple(torch.cat( tuple(tup[i][7] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "locality_neighborhood": tuple(torch.cat( tuple(tup[i][8] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
+        "locality_distracting": tuple(torch.cat( tuple(tup[i][9] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0])))
+    }
+    
+    
+    return return_dict, logits_dict, scores_dict
    
    
    
@@ -365,7 +391,6 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, output_dict):
             return None
     
         
-    
     def float_to_label(value):
         if value < 0:
             return negative_label
@@ -466,22 +491,31 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, output_dict):
 
 
 # This makes sure that we take into account the initial knowledge of the model
-def calculate_edit_changes_custom_metric(pre_edit_custom_metric, post_edit_custom_metric, pre_edit_output_dict, post_edit_output_dict):
+def evaluate_edit_effect_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
     edit_changes_custom_metric = []
+    
+    def measure_edit_succes_rate(pre_edit_value, post_edit_value):
+        return min(1 - (pre_edit_value - post_edit_value),1)
+    
     for pre_edit_item, post_edit_item in zip(pre_edit_custom_metric, post_edit_custom_metric):
         item = {}
         for key in pre_edit_item:
-            item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} = {min(1 - (pre_edit_item[key] - post_edit_item[key]),1):.3f} = {min(1 - (pre_edit_item[key] - post_edit_item[key]),1)*100:.2f}%"})
+            item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} = {measure_edit_succes_rate(pre_edit_item[key], post_edit_item[key]):.3f} = {measure_edit_succes_rate(pre_edit_item[key], post_edit_item[key])*100:.2f}%"})
         
         edit_changes_custom_metric.append(item)
     
-    # Fix here
-    kl_div = calculate_kl_divergence_for_first_token(pre_edit_output_dict["logits"], post_edit_output_dict["logits"])
-    edit_changes_custom_metric.append({"KL_divergence" : kl_div})
     return edit_changes_custom_metric
 
 
 
+
+
+
+
+def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
+
+    kl_div_dict = {k: calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], 0).item() for k in pre_edit_logits_dict.keys()} | {f"{k}_amongst_all_tokens": calculate_kl_divergence_amongst_all_tokens(pre_edit_logits_dict[k], post_edit_logits_dict[k]) for k in pre_edit_logits_dict.keys()}
+    return kl_div_dict
 
 
 
@@ -536,30 +570,29 @@ def check_model_weights_changed(pre_edit_model, post_edit_model):
     
     
     
-def output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_response, post_edit_response, decoded_pre_edit_response, decoded_post_edit_response):
+def output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_output_dict, post_edit_output_dict, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_scores_dict, post_edit_scores_dict):
     
     # Add log info
-    log_info,pre_edit_scores_string, post_edit_scores_string,models_check_string = [] , "", "", ""
+    log_info, pre_edit_scores_string, post_edit_scores_string, models_check_string = [] , "", "", ""
     
     # Some debugging information
     if config.enable_analytics:
-        for i in range(len(decoded_post_edit_response)):
-            log_info.append(analyse_reliability_of_edit(decoded_post_edit_response=decoded_post_edit_response[i], target_new=edit_args["target_new"][i]))
+        # for i in range(len(decoded_post_edit_response)):
+        #     log_info.append(analyse_reliability_of_edit(decoded_post_edit_response=decoded_post_edit_response[i], target_new=edit_args["target_new"][i]))
 
-        log_info.append(analyse_kl_divergence(pre_edit_logits=pre_edit_response.logits, post_edit_logtis=post_edit_response.logits))
+        log_info.append(analyse_kl_divergence(pre_edit_logits_dict['prompt'], post_edit_logits=post_edit_logits_dict['prompt']))
         
     # Scores of the post_edit_logits
     if config.enable_output_scores:
-        pre_edit_scores_string = output_scores_of_generation(tokenizer,pre_edit_response.scores,config.top_k)
-        post_edit_scores_string = output_scores_of_generation(tokenizer,post_edit_response.scores,config.top_k)
+        pre_edit_scores_string = output_token_scores(tokenizer, pre_edit_scores_dict["prompt"], 0)
+        post_edit_scores_string = output_token_scores(tokenizer, post_edit_scores_dict["prompt"], 0)
         
     # Useful for debugging
     if config.enable_models_check:
         models_check_string = check_model_weights_changed(pre_edit_model,post_edit_model)
-        
- 
-    write_output_to_file("pre_edit",True,*pre_edit_scores_string)
-    write_output_to_file("post_edit",True, *log_info, models_check_string, post_edit_scores_string)   
+    
+    
+    write_output_to_file("additional_information",True,*log_info, pre_edit_scores_string, post_edit_scores_string, models_check_string)
     
     
     

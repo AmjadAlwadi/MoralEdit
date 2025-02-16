@@ -1,0 +1,117 @@
+{
+    "prompts": [
+        "Earning income to support your family is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Earning"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Helping out your family with the laundry is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Earning income to support your family is something you shouldn't do. Helping out your family with the laundry is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "rephrase_prompts": [
+        "Generating income to sustain your household"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were earning income to support your family, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Phil was trying to find ways to help his family finances. Phil decides he and his family need to spend less money, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Phil was trying to find ways to help his family finances. Phil decides that he and his family need to earn more money, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "sequential_edit": true,
+    "loc_prompts": [
+        "Helping out your family with the laundry is very good"
+    ],
+    "moral_action": [
+        "Phil decides he and his family need to spend less money, that would be"
+    ],
+    "immoral_action": [
+        "Phil decides that he and his family need to earn more money, that would be"
+    ],
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about earning income to support your family?",
+            "earning income to support your family is considered to be",
+            "What is your opinion about earning income to support your family?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Generating income to sustain your household"
+    ],
+    "prompt": [
+        "a privilege, not a right."
+    ],
+    "light_rephrase_1": [
+        "I think it's a good idea."
+    ],
+    "light_rephrase_2": [
+        "a \"normal\" income."
+    ],
+    "light_rephrase_3": [
+        "I think it's a good idea."
+    ],
+    "strong_rephrase": [
+        "The income you generate from your business is"
+    ],
+    "portability_synonym": [
+        "a good thing."
+    ],
+    "portability_one_hop": [
+        "the best way to help his family."
+    ],
+    "portability_two_hop": [
+        "the best way to do it."
+    ],
+    "locality_neighborhood": [
+        "a great way to spend time with your family."
+    ],
+    "locality_distracting": [
+        "a great way to earn extra money."
+    ]
+}
