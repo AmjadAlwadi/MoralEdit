@@ -1,15 +1,18 @@
 from transformers import AutoModelForCausalLM
 import time
 from easyeditor import BaseEditor
-from utils import log, create_response
+from utils import log, create_response, construct_ike_template
 import config
 
 
         
-def edit(edit_args, tokenizer, ike_generation_prompts):    
+def edit(edit_args, tokenizer):    
         
     editing_start_time = time.time()
     
+    ike_generation_prompts = None
+    metrics = None
+    edited_model = None
     
     if config.editing_method == "R-ROME":
         from easyeditor import ZsreDataset
@@ -162,11 +165,7 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
                   
     elif config.editing_method == "IKE":
         
-        for i in range(len(edit_args["prompts"])):
-            ike_generation_prompts.append(edit_args["prompts"][i] + ' ' + edit_args["target_new"][i] + '.\n' + 
-                                                edit_args["strong_rephrase_prompts"][i] + ' ' + edit_args["target_new"][i] + '.\n' + 
-                                                "Q: " + edit_args["prompts"][i] + '? A: ' + edit_args["target_new"][i] +'.\n' +
-                                                "Q: " + edit_args["prompts"][i] + '? A:') 
+        ike_generation_prompts = create_ike_prompts(edit_args)
         
         
                  
@@ -237,17 +236,17 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
     #         sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
     #         encode_ike_facts(sentence_model, train_ds, hparams)
             
-    #     else:
-    #         editor = BaseEditor.from_hparams(hparams)
-    #         metrics, edited_model, sentence = editor.edit(
-    #             prompts=prompts,
-    #             ground_truth=ground_truth,
-    #             target_new=target_new,
-    #             train_ds=train_ds,
-    #             locality_inputs=locality_inputs,
-    #         )
+        # else:
+        #     editor = BaseEditor.from_hparams(hparams)
+        #     metrics, edited_model, sentence = editor.edit(
+        #         prompts=prompts,
+        #         ground_truth=ground_truth,
+        #         target_new=target_new,
+        #         train_ds=train_ds,
+        #         locality_inputs=locality_inputs,
+        #     )
     
-            # edited_model = pre_edit_model
+        #     edited_model = pre_edit_model
     
 
     
@@ -260,4 +259,37 @@ def edit(edit_args, tokenizer, ike_generation_prompts):
         
     editing_end_time = time.time()
     
-    return metrics, edited_model, editing_end_time - editing_start_time
+    return metrics, edited_model, ike_generation_prompts, editing_end_time - editing_start_time
+
+
+
+
+
+
+
+
+def create_ike_prompts(edit_args):
+    
+    results = []
+    
+    for i in range(len(edit_args["prompts"])):
+        
+        result = ""
+        
+        # Add the new fact
+        result += construct_ike_template(edit_args["prompts"][i], edit_args["target_new"][i])
+
+        # Add paraphrses
+        # result += construct_ike_template(edit_args["light_rephrase_prompts"][i][0], edit_args["target_new"][i])
+        result += construct_ike_template(edit_args["light_rephrase_prompts"][i][1], edit_args["target_new"][i])
+        # result += construct_ike_template(edit_args["light_rephrase_prompts"][i][2], edit_args["target_new"][i])
+        result += construct_ike_template(edit_args["portability_inputs"]["synonym"]["prompt"][i], edit_args["portability_inputs"]["synonym"]["ground_truth"][i])
+        result += construct_ike_template(edit_args["strong_rephrase_prompts"][i], edit_args["target_new"][i])
+        
+        # Add locality prompts
+        for j in range(i * (config.ike_loc_examples_number + 1), (i * (config.ike_loc_examples_number + 1)) + config.ike_loc_examples_number):
+            result += construct_ike_template(edit_args["locality_inputs"]["neighborhood"]["prompt"][j], edit_args["locality_inputs"]["neighborhood"]["ground_truth"][j])
+            
+        results.append(result)
+    
+    return results

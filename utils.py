@@ -272,3 +272,11 @@ def unload_post_edit_model(model):
         del model
         torch.cuda.empty_cache()
         log("Unloaded post_edit_model", False, False, True)
+        
+        
+        
+        
+def construct_ike_template(prompt, target_new):
+    return f"New Fact: {prompt} {target_new}\nPrompt: {prompt} {target_new}\n\n"
+    
+    

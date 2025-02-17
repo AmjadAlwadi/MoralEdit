@@ -88,10 +88,12 @@ editing_method = "MEND"
 apply_edit = True
 hparams_path = None
 train_hparams_path = None
+ike_loc_examples_number = 2
 
 # For evaluation
 calculate_custom_metric_for_pre_edit_model = True
 calculate_custom_metric_for_post_edit_model = True
+
 
 # For debugging
 enable_models_check = False

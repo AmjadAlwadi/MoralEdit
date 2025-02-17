@@ -115,12 +115,10 @@ def main():
     
 
     # Some global variables
-    pre_edit_model, post_edit_model = None, None
-    pre_edit_custom_metric = None
-    post_edit_custom_metric = None
+    # pre_edit_model, post_edit_model = None, None
+    # pre_edit_custom_metric = None
+    # post_edit_custom_metric = None
     # post_edit_easy_edit_metrics = None
-    ike_generation_prompts = []
-
 
     # ---------------------------------------------------------------- #
     # ----------------------Editing process--------------------------- #
@@ -137,19 +135,18 @@ def main():
         "locality_inputs_action_moral_judgement" : norms_dict["locality_inputs_action_moral_judgement"],
         "rephrase_prompts": norms_dict["strong_rephrase_prompts"],
         "portability_inputs": norms_dict["portability_inputs"],
-        "sequential_edit": True,
         "loc_prompts" : norms_dict["loc_prompts"],
-        
         "moral_action": norms_dict["moral_action"],
         "immoral_action": norms_dict["immoral_action"],
         "action_moral_judgment": norms_dict["action_moral_judgment"],
         "light_rephrase_prompts": norms_dict["light_rephrase_prompts"],
-        "strong_rephrase_prompts": norms_dict["strong_rephrase_prompts"]
+        "strong_rephrase_prompts": norms_dict["strong_rephrase_prompts"],
+        "sequential_edit": True
     }
             
     
-    post_edit_easy_edit_metrics, post_edit_model, editing_time = edit(edit_args, tokenizer, ike_generation_prompts)    
-          
+    post_edit_easy_edit_metrics, post_edit_model, ike_generation_prompts, editing_time = edit(edit_args, tokenizer)    
+              
     
     if config.train:
         log(f"Training took {editing_time:.2f} seconds.",False,False,True)
@@ -158,47 +155,38 @@ def main():
         log(f"Editing took {editing_time:.2f} seconds.",False,False,True)
         
          
-         
     # ---------------------------------------------------------------- #
     # ----------------------Evaluation process------------------------ #
     # ---------------------------------------------------------------- #
         
      
-    # Saving the post edit metrics of Easy Edit 
-    save_as_json(post_edit_easy_edit_metrics,"post_edit_easy_edit_metrics")
-    log("Metrics saved as json file",False,False,False)
-    log("Loaded edited model",True,False,True)
-    print_gpu_memory()    
-          
+    # Load the pre_edit_model
+    if config.editing_method == "IKE":
+        pre_edit_model = load_pre_edit_model()
+        post_edit_model = pre_edit_model
+    else:
+        # Saving the post edit metrics of Easy Edit 
+        save_as_json(post_edit_easy_edit_metrics,"post_edit_easy_edit_metrics")
+        log("Metrics saved as json file",False,False,False)
+        log("Loaded edited model",True,False,True)
+        print_gpu_memory()    
+        
     
     # All needed outputs for post_edit_model
-    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict = preprare_responses(tokenizer, None, post_edit_model, edit_args)
+    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict, new_ike_edit_args = preprare_responses(tokenizer, post_edit_model, False , edit_args, ike_generation_prompts)
     
     # Write post_edit_response to a file
-    save_as_json(edit_args | post_edit_output_dict,"post_edit_logs")
+    if config.editing_method == "IKE":
+        save_as_json(new_ike_edit_args | post_edit_output_dict,"post_edit_logs")
+    else:
+        save_as_json(edit_args | post_edit_output_dict,"post_edit_logs")
 
-    
-    # FIX IKE HERE
         
     # Calculate the custom metric for post_edit_model
-    if config.editing_method == "IKE":
-        
-        # Load the pre_edit_model    
-        pre_edit_model = load_pre_edit_model()
-        
-        # # Modify the prompt according to template and create response
-        # post_edit_response = create_response(pre_edit_model, tokenizer, ike_generation_prompts, instructinoal=False)
-        
-        # for sequence,prompt in zip(post_edit_response.sequences,ike_generation_prompts):
-        #     decoded_post_edit_response.append(decode_output_and_log(tokenizer=tokenizer, output=sequence, question=prompt, pre_edit=False))
-              
-    else:   
-        
-        if config.calculate_custom_metric_for_post_edit_model:
-            post_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, False, post_edit_output_dict)
-            save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
+    if config.calculate_custom_metric_for_post_edit_model:
+        post_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, False, post_edit_output_dict, new_ike_edit_args)
+        save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
             
-        
         
     # Unload post_edit_model if not used later
     unload_post_edit_model(post_edit_model)
@@ -212,12 +200,12 @@ def main():
             pre_edit_model = load_pre_edit_model()
             
         # All needed outputs for pre_edit_model
-        pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict = preprare_responses(tokenizer, pre_edit_model, None, edit_args)
+        pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict, _ = preprare_responses(tokenizer, pre_edit_model, True, edit_args, ike_generation_prompts)
         
         # Write post_edit_response to a file
         save_as_json(edit_args | pre_edit_output_dict, "pre_edit_logs")
 
-        pre_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, True, pre_edit_output_dict)
+        pre_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, True, pre_edit_output_dict, None)
         save_as_json(pre_edit_custom_metric, "pre_edit_custom_metric")
         
     
