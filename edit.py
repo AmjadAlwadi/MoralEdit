@@ -1,14 +1,14 @@
 from transformers import AutoModelForCausalLM
 import time
 from easyeditor import BaseEditor
-from utils import log, create_response, construct_ike_template
+from utils import log, create_response
 import config
 
 
         
 def edit(edit_args, tokenizer):    
         
-    editing_start_time = time.time()
+    editing_start_time = time.perf_counter()
     
     ike_generation_prompts = None
     metrics = None
@@ -257,11 +257,19 @@ def edit(edit_args, tokenizer):
         exit(1)
           
         
-    editing_end_time = time.time()
+    editing_end_time = time.perf_counter()
     
     return metrics, edited_model, ike_generation_prompts, editing_end_time - editing_start_time
 
 
+
+
+
+
+
+
+def construct_ike_template(prompt, target_new):
+    return f"New Fact: {prompt} {target_new}\nPrompt: {prompt} {target_new}\n\n"
 
 
 
@@ -280,13 +288,13 @@ def create_ike_prompts(edit_args):
         result += construct_ike_template(edit_args["prompts"][i], edit_args["target_new"][i])
 
         # Add paraphrses
-        # result += construct_ike_template(edit_args["light_rephrase_prompts"][i][0], edit_args["target_new"][i])
         result += construct_ike_template(edit_args["light_rephrase_prompts"][i][1], edit_args["target_new"][i])
-        # result += construct_ike_template(edit_args["light_rephrase_prompts"][i][2], edit_args["target_new"][i])
+        # result += construct_ike_template(edit_args["light_rephrase_prompts"][i][0], edit_args["target_new"][i])
+        # result += construct_ike_template(edit_args["light_rephrase_prompts"][i][2], edit_args["target_new"][i]) 
         result += construct_ike_template(edit_args["portability_inputs"]["synonym"]["prompt"][i], edit_args["portability_inputs"]["synonym"]["ground_truth"][i])
         result += construct_ike_template(edit_args["strong_rephrase_prompts"][i], edit_args["target_new"][i])
         
-        # Add locality prompts
+        # Add locality prompts and only the neighborhood without distracting
         for j in range(i * (config.ike_loc_examples_number + 1), (i * (config.ike_loc_examples_number + 1)) + config.ike_loc_examples_number):
             result += construct_ike_template(edit_args["locality_inputs"]["neighborhood"]["prompt"][j], edit_args["locality_inputs"]["neighborhood"]["ground_truth"][j])
             

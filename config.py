@@ -76,11 +76,15 @@ shuffle = False
 # For decoding strategy
 decoding_strategy = "greedy-decoding"
 do_sample = False
-num_beams = 1
+num_beams = 15
 max_length = 100
 no_repeat_ngram_size = 0
 early_stopping = True
 max_new_tokens = 8
+num_return_sequences = 10
+temperature=0.5
+# top_k=50
+# top_p=0.95
 seed = -1
 
 # For editing

@@ -97,7 +97,6 @@ def load_norms():
     }         
 
         
-    # Check whether locality and portability are empty
     log("Norms dataset loaded",False,False,True)
     
     norms_dict = {
@@ -115,6 +114,16 @@ def load_norms():
         "immoral_action": immoral_action, 
         "loc_prompts": loc_prompts
     }
+    
+
+    
+
+    # Alternatives
+    # 'The action "Earning income to support your family" is best described by a single adjective:'
+    # 'Earning income to support your family is morally'
+
+    
+
 
     return norms_dict
 
@@ -283,7 +292,7 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
     used_edit_args = edit_args
 
     
-    # Add the IKE prompt if necessary
+    # If IKE and post edit, then use the new IKE prompts
     if config.editing_method == "IKE" and not pre_edit:
           
         new_ike_edit_args = {
@@ -412,7 +421,6 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
     }
     
     scores_dict = None
-    
     if config.enable_output_scores:
     
         scores_dict = {
@@ -440,35 +448,30 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
 
 
 
-# A custom metric that measures the quality using sentiment_analysis and KL divergence
-def measure_quality_sentiment_analysis(edit_args, pre_edit, output_dict, new_ike_edit_args):
-        
-    # Test other metrics after editing to see whether model is degraded    
-    negative_label = "LABEL_0"
-    positive_label = "LABEL_2"
-    neutral_label = "LABEL_1"
+
+
+
+# A function that calculates the labels of the sentiment analysis model on the pre_edit/post_edit model's responses
+def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ike_edit_args):
+           
+    negative_label = "LABEL_0"  # -1
+    positive_label = "LABEL_2"  #  1
+    neutral_label = "LABEL_1"   #  0
     
-        
-    # Compare with expected label and return float as score
-    # I decided to take a neutral label as 0.5
-    def labels_to_float(actual_label, target_label):
-        if actual_label == neutral_label:
-            return 0.5
+
+
+    def label_to_int(label):
+        if label == neutral_label:
+            return 0
+        elif label == positive_label:
+            return 1
+        elif label == negative_label:
+            return -1
         else:
-            return float(target_label == actual_label)
-        
-        
-    def compare_labels(actual_labels, target_label):
-        if isinstance(actual_labels, str):
-            return labels_to_float(actual_labels, target_label)
-        elif isinstance(actual_labels,list):
-            new_list = [labels_to_float(i,target_label) for i in actual_labels]
-            return statistics.mean(new_list)
-        else:
-            return None
+            return "Error: Invalid label"
     
-        
-    def float_to_label(value):
+ 
+    def int_to_label(value):
         if value < 0:
             return negative_label
         elif value == 0:
@@ -484,6 +487,9 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, output_dict, new_ike
             return positive_label
         else:
             return neutral_label
+        
+        
+
         
 
 
@@ -525,41 +531,41 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, output_dict, new_ike
         # Generate predictions
         sentiment_output = sentiment_analysis(sentiment_input, batch_size=len(sentiment_input))
         
-        target_new_label = float_to_label(int(edit_args["action_moral_judgment"][index]))
-        ground_truth_label = invert_label(target_new_label)
+        dataset_target_new_label = int_to_label(int(edit_args["action_moral_judgment"][index]))
+        dataset_ground_truth_label = invert_label(dataset_target_new_label)
 
         generated_ground_truth_label = sentiment_output[0]["label"]
         generated_target_new_label = sentiment_output[1]["label"]
         
-        sentiment_analysis_model_reliability = statistics.mean([compare_labels(ground_truth_label, generated_ground_truth_label), compare_labels(target_new_label, generated_target_new_label)])
+        prompt = sentiment_output[2]["label"]
+        light_generality_1 = sentiment_output[3]["label"]
+        light_generality_2 = sentiment_output[4]["label"]
+        light_generality_3 = sentiment_output[5]["label"]
         
-        # If testing the pre_edit model then invert the labels
-        # if pre_edit:
-        #     target_new_label = invert_label(target_new_label)
-        
-        reliability = compare_labels(sentiment_output[2]["label"], target_new_label)
-        light_generality = compare_labels([sentiment_output[3]["label"], sentiment_output[4]["label"], sentiment_output[5]["label"]], target_new_label)
-        strong_generality = compare_labels(sentiment_output[6]["label"], target_new_label)
+        strong_generality = sentiment_output[6]["label"]
 
-        portability_synonym = compare_labels(sentiment_output[7]["label"], target_new_label)
-        portability_one_hop = compare_labels(sentiment_output[8]["label"], target_new_label)
-        portability_two_hop = compare_labels(sentiment_output[9]["label"], ground_truth_label)
-        
-        expected_locality_neighborhood_label = invert_label(float_to_label(edit_args["locality_inputs_action_moral_judgement"][index]))
-        
-        locality_neighborhood = compare_labels(sentiment_output[10]["label"], expected_locality_neighborhood_label)
-        locality_distracting = compare_labels(sentiment_output[11]["label"], expected_locality_neighborhood_label)
+        portability_synonym = sentiment_output[7]["label"]
+        portability_one_hop = sentiment_output[8]["label"]
+        portability_two_hop = sentiment_output[9]["label"]
+                
+        locality_neighborhood = sentiment_output[10]["label"]
+        locality_distracting = sentiment_output[11]["label"]
         
         custom_metric = {
-            "sentiment_analysis_model_reliability":sentiment_analysis_model_reliability,
-            "reliability":reliability,
-            "light_generality":light_generality,
-            "strong_generality":strong_generality,
-            "synonym_generality":portability_synonym,
-            "one_hop_inference":portability_one_hop,
-            "two_hop_inference":portability_two_hop,
-            "locality_neighborhood":locality_neighborhood,
-            "locality_distracting":locality_distracting
+            "dataset_ground_truth_label":label_to_int(dataset_ground_truth_label),
+            "dataset_target_new_label":label_to_int(dataset_target_new_label),
+            "generated_ground_truth_label":label_to_int(generated_ground_truth_label),
+            "generated_target_new_label":label_to_int(generated_target_new_label),
+            "prompt":label_to_int(prompt),
+            "light_generality_1":label_to_int(light_generality_1),
+            "light_generality_2":label_to_int(light_generality_2),
+            "light_generality_3":label_to_int(light_generality_3),
+            "strong_generality":label_to_int(strong_generality),
+            "portability_synonym":label_to_int(portability_synonym),
+            "portability_one_hop":label_to_int(portability_one_hop),
+            "portability_two_hop":label_to_int(portability_two_hop),
+            "locality_neighborhood":label_to_int(locality_neighborhood),
+            "locality_distracting":label_to_int(locality_distracting)
         }
     
         custom_metric_array.append(custom_metric)
@@ -571,28 +577,163 @@ def measure_quality_sentiment_analysis(edit_args, pre_edit, output_dict, new_ike
 
 
 
+'''
+    This is a function that calculates the edit success based on the pre_edit, post_edit and target_new labels.
+    
+    This makes sure that we take into account the initial knowledge of the model and only the ground_truth in the dataset,
+    which could be different from the pre_edit_model's knowledge.
+    
+    We have 3 labels pos, neg and neut as -1, 0 and 1 respectively
+    
+    We are not interested in the ground_truth of the dataset but in the ground_truth of the model itself
+    This is the pre_edit_model response itself
+    
+    So the variables are pre_edit_label, post_edit_label and target_new, which is the expected post_edit_label
+    
+    | pre_edit_label |   target_new_label   | post_edit_label   | result
+    |      pos       |        pos           |      pos          |  100%
+    |      pos       |        pos           |      neg          |  0%
+    |      pos       |        pos           |      neut         |  0%
+                   
+    |      pos       |        neg           |      pos          |  0%
+    |      pos       |        neg           |      neg          |  100%
+    |      pos       |        neg           |      neut         |  50%
+                   
+    |      neg       |        pos           |      pos          |  100%
+    |      neg       |        pos           |      neg          |  0%
+    |      neg       |        pos           |      neut         |  50%
+                   
+    |      neg       |        neg           |      pos          |  0%
+    |      neg       |        neg           |      neg          |  100%
+    |      neg       |        neg           |      neut         |  0%
+                   
+    |      neut      |        pos           |      pos          |  100%
+    |      neut      |        pos           |      neg          |  0%
+    |      neut      |        pos           |      neut         |  0%
+                   
+    |      neut      |        neg           |      pos          |  0%
+    |      neut      |        neg           |      neg          |  100%
+    |      neut      |        neg           |      neut         |  0%
+    
+    The result will be based on this table
+    
+    Edit success is a ↑ metric
+    
+    '''
+def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_label) -> float:
+    
+    def normalize_int_label(int_label):
+        if int_label > 0:
+            return 1
+        elif int_label < 0:
+            return -1
+        else:
+            return 0
+    
+    # Normalize labels to -1, 0, 1 format for comparison and calculation of success rate/change rate
+    pre_edit_label = normalize_int_label(pre_edit_label)
+    target_new_label = normalize_int_label(target_new_label)
+    post_edit_label = normalize_int_label(post_edit_label)
+    
+    # 100% cases
+    if target_new_label == post_edit_label:
+        return 1
+    # 50% cases
+    elif post_edit_label == 0 and pre_edit_label != 0 and target_new_label != 0 and pre_edit_label != target_new_label:
+        return 0.5
+    # 0% cases
+    else:
+        return 0
+    
+    
+    
+    
+    
+    
+    
+    
+    
+'''
+    This is a function that calculates the changes within the respones of the 
+    pre_edit and post_edit models for the locality metric.
+    
+    We have 3 labels pos, neg and neut as -1, 0 and 1 respectively
+    
+    We are not interested in the ground_truth and target_new of the dataset
+    
+    So the variables are pre_edit_label, post_edit_label
+    
+    | pre_edit_label |    post_edit_label   | change
+    |      pos       |         pos          |  0%
+    |      pos       |         neg          |  100%
+    |      pos       |         neut         |  50%
+    |      neg       |         pos          |  100%
+    |      neg       |         neg          |  0%
+    |      neg       |         neut         |  50%           
+    |      neut      |         pos          |  50%
+    |      neut      |         neg          |  50%
+    |      neut      |         neut         |  0%
+    
+    The result will be based on this table
+    
+    This locality metric is a ↓ metric
+    
+    '''    
+def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label=None) -> float:
+    
+    def normalize_int_label(int_label):
+        if int_label > 0:
+            return 1
+        elif int_label < 0:
+            return 0
+        else:
+            return 0.5
+    
+    # Normalize labels to -1, 0, 1 format for comparison and calculation of success rate/change rate
+    pre_edit_label = normalize_int_label(pre_edit_label)
+    post_edit_label = normalize_int_label(post_edit_label)
+    
+    return abs(pre_edit_label - post_edit_label)
+    
+    
+    
+    
 
+    
+    
 
-# This makes sure that we take into account the initial knowledge of the model
-def evaluate_edit_effect_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
+def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
+    
+
     edit_changes_custom_metric = []
     
-    def measure_edit_succes_rate(pre_edit_value, post_edit_value):
-        return min((post_edit_value - pre_edit_value),1)
-    
-    def measure_edit_change_rate(pre_edit_value, post_edit_value):
-        return min(1 - (post_edit_value - pre_edit_value),1)
     
     for pre_edit_item, post_edit_item in zip(pre_edit_custom_metric, post_edit_custom_metric):
         item = {}
-        eval_func = measure_edit_succes_rate
+        eval_func = measure_sentiment_edit_success
+        
+        dataset_target_new_label = pre_edit_item["dataset_target_new_label"]
+        dataset_ground_truth_label = pre_edit_item["dataset_ground_truth_label"]
+        label_to_use = dataset_target_new_label
+        
         for key in pre_edit_item:
-            if key not in ["sentiment_analysis_model_reliability", "locality_neighborhood", "locality_distracting"]:
-                eval_func = measure_edit_succes_rate
+            
+            if key == "portability_two_hop":
+                label_to_use = dataset_ground_truth_label
             else:
-                eval_func = measure_edit_change_rate
+                label_to_use = dataset_target_new_label
+            
+            if key in ["dataset_ground_truth_label", "dataset_target_new_label", "generated_ground_truth_label", "generated_target_new_label"]:
+                continue
+            
+            elif key in ["sentiment_analysis_model_reliability", "locality_neighborhood", "locality_distracting"]:
+                eval_func = measure_sentiment_locality
                 
-            item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} = {eval_func(pre_edit_item[key], post_edit_item[key]):.3f} = {eval_func(pre_edit_item[key], post_edit_item[key])*100:.2f}%"})
+            else:
+                eval_func = measure_sentiment_edit_success
+            
+            result = eval_func(pre_edit_item[key], post_edit_item[key], label_to_use)
+            item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} = {result:.3f} = {result*100:.2f}%"})
 
         edit_changes_custom_metric.append(item)
     
@@ -603,11 +744,19 @@ def evaluate_edit_effect_sentiment_metric(pre_edit_custom_metric, post_edit_cust
 
 
 
-
+# Find the token, at which the pre_edit and post_edit responses begin to differ and calculate the kl divergence at this point exactly
 def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
 
-    kl_div_dict = {f"kl_div_{k}": calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], 0).item() for k in pre_edit_logits_dict.keys()} | {f"kl_div_{k}_amongst_all_tokens": calculate_kl_divergence_amongst_all_tokens(pre_edit_logits_dict[k], post_edit_logits_dict[k]) for k in pre_edit_logits_dict.keys()}
+
+
+
+
+    kl_div_dict = {f"kl_div_{k}": calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], 0).item() for k in pre_edit_logits_dict.keys()}
     return kl_div_dict
+
+
+
+
 
 
 

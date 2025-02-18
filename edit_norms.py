@@ -78,10 +78,10 @@ from edit import edit
 # or take a look at the first 20 words and take the average of their sentiment
 
 
-# Take a look on how they implemented counterfact, it it based on model's knowledge??
+# Take a look on how they implemented counterfact, it it based on model's knowledge??  NO
 
 
-# First of all fix IKE and then add causal tracing
+# First of all fix IKE and then add causal tracing  
 
 def main():
     
@@ -107,18 +107,13 @@ def main():
     if tokenizer.pad_token is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
         
-    
-    # Change into dict
+
+
     
     # Load the edit norms dataset
     norms_dict = load_norms()
-    
+    pre_edit_model, post_edit_model = None, None
 
-    # Some global variables
-    # pre_edit_model, post_edit_model = None, None
-    # pre_edit_custom_metric = None
-    # post_edit_custom_metric = None
-    # post_edit_easy_edit_metrics = None
 
     # ---------------------------------------------------------------- #
     # ----------------------Editing process--------------------------- #
@@ -184,7 +179,7 @@ def main():
         
     # Calculate the custom metric for post_edit_model
     if config.calculate_custom_metric_for_post_edit_model:
-        post_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, False, post_edit_output_dict, new_ike_edit_args)
+        post_edit_custom_metric = calculate_sentiment_analysis_labels(edit_args, False, post_edit_output_dict, new_ike_edit_args)
         save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
             
         
@@ -205,13 +200,13 @@ def main():
         # Write post_edit_response to a file
         save_as_json(edit_args | pre_edit_output_dict, "pre_edit_logs")
 
-        pre_edit_custom_metric = measure_quality_sentiment_analysis(edit_args, True, pre_edit_output_dict, None)
+        pre_edit_custom_metric = calculate_sentiment_analysis_labels(edit_args, True, pre_edit_output_dict, None)
         save_as_json(pre_edit_custom_metric, "pre_edit_custom_metric")
         
     
     # Show the effects of the edit
     if config.calculate_custom_metric_for_pre_edit_model and config.calculate_custom_metric_for_post_edit_model:
-        edit_effect_sentiment_metric = evaluate_edit_effect_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric)
+        edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric)
         save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
         
         edit_effect_kl_div_metric = evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict)
@@ -260,7 +255,7 @@ def parse_arguments():
                         help="Maximum number of tokens in the prompt")
     parser.add_argument("-m", "--max_new_tokens", type=int, default=10,
                         help="Maximum number of new tokens to generate")
-    parser.add_argument("-n", "--num_beams", type=int, default=1,
+    parser.add_argument("-n", "--num_beams", type=int, default=15,
                         help="Maximum number of new tokens to generate")
     parser.add_argument("-d", "--do_sample", action="store_true",
                         help="Activate multinomial-sampling")
