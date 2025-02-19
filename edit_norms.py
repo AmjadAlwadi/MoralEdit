@@ -333,7 +333,8 @@ def parse_arguments():
         config.decoding_strategy = "beam-search"
     else:
         config.decoding_strategy = "multinomial-sampling"
-        
+    
+    print(config.decoding_strategy)
     
     if not args.enable_cpu_inference:
         config.device = torch.device('cuda')

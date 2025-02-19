@@ -20,9 +20,11 @@ def get_data(batch, indices, adjectives_subset, rephrases_subset):
         target_new = adjectives_subset['anti_norm_adjective'][idx]
         ground_truth = adjectives_subset['original_norm_adjective'][idx]
         
-        light_rephrase_1 = "What do you think about " + rot_action.lower()[0] + rot_action[1:] + "?"
-        light_rephrase_2 = rot_action.lower()[0] + rot_action[1:] + " is considered to be"
-        light_rephrase_3 = "What is your opinion about " + rot_action.lower()[0] + rot_action[1:] + "?"
+        light_rephrase_1 = f"What do you think about {rot_action.lower()[0]}{rot_action[1:]}?"
+        light_rephrase_2 = f"{rot_action.lower()[0]}{rot_action[1:]} is considered to be"
+        light_rephrase_3 = f"What is your opinion about {rot_action.lower()[0]}{rot_action[1:]}?"
+        light_rephrase_4 = f"{rot_action} is morally"
+        light_rephrase_5 = f"{rot_action} is best described as"
              
         # Reformat im/moral action
         moral_action = batch['moral_action'][i].rstrip('.?,') + ', that would be'   # what do you think about that

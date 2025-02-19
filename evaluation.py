@@ -2,12 +2,10 @@ import torch
 from transformers import pipeline
 from datasets import load_dataset
 from colorama import Fore, Back, Style, init
-import statistics
 import config
 from utils import create_response
 from utils import log, write_output_to_file
 from dataset_creation.rephrases.utils import send_request
-import copy
 
 
 
@@ -121,7 +119,8 @@ def load_norms():
     # Alternatives
     # 'The action "Earning income to support your family" is best described by a single adjective:'
     # 'Earning income to support your family is morally'
-
+    # 'Earning income to support your family is best described as:'
+    # 'The action "Starting fires in a park" is best described by a single adjective:'
     
 
 
@@ -175,20 +174,6 @@ def output_token_scores(tokenizer, scores, batch_element_index):
 
 
 
-def analyse_kl_divergence(pre_edit_logits,post_edit_logits) -> str:
-    output = ""
-    if pre_edit_logits and post_edit_logits and config.editing_method != "IKE":
-        kl_div_first_token = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, 2)
-        kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits)
-        check2 = f"KL divergence for first token: {kl_div_first_token}"
-        check3 = f"KL divergence amongst all tokens: {kl_div_all_tokens}"
-        check4 = f"Biggest KL divergence is on token {biggest_div_index} with the value of {biggest_div}"
-        log(check2,True,True,True)
-        log(check3,True,True,True)
-        log(check4,True,True,True)
-        output += check2 + "\n" + check3 + "\n" + check4 + "\n"
-
-    return output
 
 
 
@@ -197,11 +182,24 @@ def analyse_kl_divergence(pre_edit_logits,post_edit_logits) -> str:
 
 
 
-def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, token_index):
+def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, element_index, token_index):
     
-    # Pick the first token
+    """
+    Calculates the KL divergence for a single token at the specified index.
+    
+    element_index is the index of the element within the batch
+    
+    Returns the KL divergence and if a batch is given then the batchmean will be calculated.
+    
+    """
+    
+    # Pick the specified token
     pre_edit_logit = pre_edit_logits[token_index]
     post_edit_logit = post_edit_logits[token_index]
+    
+    # Pick the specified element/row
+    pre_edit_logit = pre_edit_logit[element_index].unsqueeze(dim=0)
+    post_edit_logit = post_edit_logit[element_index].unsqueeze(dim=0)
     
     # Move to same device
     pre_edit_logit = pre_edit_logit.to(post_edit_logit.device)
@@ -220,20 +218,31 @@ def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, token_i
 
 
 
-def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits, post_edit_logits):
-    result = 0
-    biggest_kl_divergence = 0
-    biggest_kl_divergence_index = 0
+def calculate_batch_kl_divergence_for_token(pre_edit_logits, post_edit_logits, token_index):
     
-    for i in range(len(pre_edit_logits)):
-        current_kl_divergence = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, i).item()
-        result += current_kl_divergence
+    """
+    Calculates the KL divergence for a single token at the specified index.
+    
+    Returns the KL divergence and if a batch is given then the batchmean will be calculated.
+    
+    """
+    
+    # Pick the specified token
+    pre_edit_logit = pre_edit_logits[token_index]
+    post_edit_logit = post_edit_logits[token_index]
+    
+    # Move to same device
+    pre_edit_logit = pre_edit_logit.to(post_edit_logit.device)
+    
+    # Convert logits to probabilities
+    original_probs = torch.nn.functional.softmax(pre_edit_logit, dim=-1)
+    edited_probs = torch.nn.functional.softmax(post_edit_logit, dim=-1)
 
-        if current_kl_divergence > biggest_kl_divergence:
-            biggest_kl_divergence = current_kl_divergence
-            biggest_kl_divergence_index = i
-        
-    return result, biggest_kl_divergence, biggest_kl_divergence_index
+    # Compute KL divergence
+    kl_divergence = torch.nn.functional.kl_div(original_probs.log(), edited_probs, reduction='batchmean')
+
+    return kl_divergence
+
 
 
 
@@ -406,7 +415,7 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
         "locality_distracting": decoded_responses_locality_distracting,
     }
     
-
+    # It took me an hour to come up with this
     logits_dict = {
         "prompt": tuple(torch.cat( tuple(tup[i][0] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
         "light_rephrase_1": tuple(torch.cat( tuple(tup[i][1] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
@@ -577,7 +586,10 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
 
 
 
-'''
+
+def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_label) -> float:
+    
+    """
     This is a function that calculates the edit success based on the pre_edit, post_edit and target_new labels.
     
     This makes sure that we take into account the initial knowledge of the model and only the ground_truth in the dataset,
@@ -619,8 +631,7 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
     
     Edit success is a ↑ metric
     
-    '''
-def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_label) -> float:
+    """
     
     def normalize_int_label(int_label):
         if int_label > 0:
@@ -653,7 +664,10 @@ def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_l
     
     
     
-'''
+    
+def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label=None) -> float:
+    
+    """
     This is a function that calculates the changes within the respones of the 
     pre_edit and post_edit models for the locality metric.
     
@@ -678,8 +692,7 @@ def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_l
     
     This locality metric is a ↓ metric
     
-    '''    
-def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label=None) -> float:
+    """
     
     def normalize_int_label(int_label):
         if int_label > 0:
@@ -733,7 +746,7 @@ def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
                 eval_func = measure_sentiment_edit_success
             
             result = eval_func(pre_edit_item[key], post_edit_item[key], label_to_use)
-            item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} = {result:.3f} = {result*100:.2f}%"})
+            item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} == {label_to_use} = {result:.3f} = {result*100:.2f}%"})
 
         edit_changes_custom_metric.append(item)
     
@@ -744,14 +757,53 @@ def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
 
 
 
-# Find the token, at which the pre_edit and post_edit responses begin to differ and calculate the kl divergence at this point exactly
+
+
+def find_first_differing_token(logits1, logits2):
+    """
+    Finds the first token position where the top-1 predicted token differs 
+    between two logit sequences.
+
+    Returns:
+        List of differing positions for each batch element. If no difference, returns -1.
+    """
+    batch_size = logits1[0].shape[0]
+    differing_positions = [-1] * batch_size  # Default to -1 if no difference found
+
+    # Iterate over the token logits
+    for i, (logit1, logit2) in enumerate(zip(logits1, logits2)):  
+        top_tokens1 = torch.argmax(logit1, dim=-1)  # (batch_size,1)
+        top_tokens2 = torch.argmax(logit2, dim=-1)  # (batch_size,1)
+
+        # Find the first differing position for each batch element
+        for batch_idx in range(batch_size):
+            if differing_positions[batch_idx] == -1 and top_tokens1[batch_idx] != top_tokens2[batch_idx]:
+                differing_positions[batch_idx] = i  # Save first differing position
+
+    return differing_positions  # List of first differing token positions for each batch
+
+
+
+
+
+
+
+
 def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
+    """
+    Finds the first token, at which the pre_edit and post_edit responses begin to differ
+    and calculate the kl divergence at this point exactly.
+    
+    Get every element of the batch and do the process seperately, then average the result.
+    
+    """
+    
+    
+    # for k in pre_edit_logits_dict.keys():
+    #     [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k],i ,find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[0]).item() for i in pre_edit_logits_dict[0].shape[0]]
+    
 
-
-
-
-
-    kl_div_dict = {f"kl_div_{k}": calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], 0).item() for k in pre_edit_logits_dict.keys()}
+    kl_div_dict = {f"kl_div_{k}": [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], i, find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[i]).item() for i in range(pre_edit_logits_dict[k][0].shape[0])] for k in pre_edit_logits_dict.keys()}
     return kl_div_dict
 
 
@@ -961,3 +1013,46 @@ def load_facts():
 
 
 
+
+
+
+
+
+
+
+
+def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits, post_edit_logits):
+    result = 0
+    biggest_kl_divergence = 0
+    biggest_kl_divergence_index = 0
+    
+    for i in range(len(pre_edit_logits)):
+        current_kl_divergence = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, i).item()
+        result += current_kl_divergence
+
+        if current_kl_divergence > biggest_kl_divergence:
+            biggest_kl_divergence = current_kl_divergence
+            biggest_kl_divergence_index = i
+        
+    return result, biggest_kl_divergence, biggest_kl_divergence_index
+
+
+
+
+
+
+
+def analyse_kl_divergence(pre_edit_logits,post_edit_logits) -> str:
+    output = ""
+    if pre_edit_logits and post_edit_logits and config.editing_method != "IKE":
+        kl_div_first_token = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, 2)
+        kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits)
+        check2 = f"KL divergence for first token: {kl_div_first_token}"
+        check3 = f"KL divergence amongst all tokens: {kl_div_all_tokens}"
+        check4 = f"Biggest KL divergence is on token {biggest_div_index} with the value of {biggest_div}"
+        log(check2,True,True,True)
+        log(check3,True,True,True)
+        log(check4,True,True,True)
+        output += check2 + "\n" + check3 + "\n" + check4 + "\n"
+
+    return output
