@@ -5,7 +5,7 @@ This project consists of three main components: __Dataset Creation__, __Model Ed
 
 ## Model Editing
 
-To perform an edit, we need an edit prompt and a target_new sentence. If the edit is successfull, then the post edit model will predict target_new if prompted with the edit prompt.
+To perform an edit, we need an edit prompt and a target_new sentence. If the edit is successfull, then the post_edit model will predict target_new if prompted with the edit prompt.
 
 Run edit_norms.py to edit the generated norms using the desired method and model and decoding strategy.
 
@@ -59,7 +59,7 @@ The editing method ROME needs to know, where the subject token is located in the
 
 The locality prompts will be added to the edit prompts in runtime when performing the edit. They will be picked randomly from the full edit dataset in a way, that each locality record corresponds to exactly one edit record and no existing edit record will be selected as a locality record.
 
-Locality prompts should be unaffected by the edit process and we expect the ground_truth value to be predicted by the post edit model.
+Locality prompts should be unaffected by the edit process and we expect the ground_truth value to be predicted by the post_edit model.
 
 We construct two types of locality prompts:
 
@@ -74,9 +74,9 @@ The original portability contains three different parts, which were extended lat
 
 1. __Subject Aliasing:__ the editing of one subject should not vary from its expression. This means that we can replace the question’s subject with an alias or synonym and we should expect the same results. In our case, we will use the prompt_subject_1 or prompt_subject_2, which introduce a subject to the norm, which should not change the expected moral judgement.
 
-2. __One-hop:__ We will use the situation concatenated with the moral_action to evaluate the prediction of the post edit model. The prediction should be the same as target_new. For the post edit model to arrive at the prediction, it needs to be able to generalize logically from the edit prompt and do an additional thinking step.
+2. __One-hop:__ We will use the situation concatenated with the moral_action to evaluate the prediction of the post_edit model. The prediction should be the same as target_new. For the post_edit model to arrive at the prediction, it needs to be able to generalize logically from the edit prompt and do an additional thinking step.
 
-3. __Two-hop:__ The same as one-hop will be done here but instead of using the moral_action, we will use the immoral_action and the post edit model needs to predict the ground_truth value. To arrive at this prediction, the post edit model needs to make one step more of thinking in comparision to one-hop and therefore two-hop.
+3. __Two-hop:__ The same as one-hop will be done here but instead of using the moral_action, we will use the immoral_action and the post_edit model needs to predict the ground_truth value. To arrive at this prediction, the post_edit model needs to make one step more of thinking in comparision to one-hop and therefore two-hop.
 
 
 ## Summary of Creating the Edit Dataset 
@@ -150,17 +150,74 @@ For this approch of coherent norm generation we need to specify first a subset s
 
 ## Evaluation
 
-Under outputs/method/model/decoding_strategy/time_stamp/ multiple json files are going to be saved.
+Under _outputs/method/model/decoding_strategy/time_stamp/_ multiple json files are going to be saved.
 
-- The pre edit and post edit model's outputs for every field of the edit record as pre_edit_logs.json and post_edit_logs.json respectively.
+- The pre edit and post_edit model's outputs for every field of the edit record as _pre_edit_logs.json_ and _post_edit_logs.json_ respectively.
 
-- The metrics measured by EasyEdit as post_edit_easy_edit_metrics.json.
+- The metrics measured by EasyEdit as _post_edit_easy_edit_metrics.json_.
 
-- The custom metric that we measure using sentiment analysis for the pre and post edit models as pre_edit_custom_metric.json and post_edit_custom_metric.json respectively.
+- The custom metric that we measure using sentiment analysis for the pre_edit and post_edit models as _pre_edit_custom_metric.json_ and _post_edit_custom_metric.json_ respectively.
 
-- The result of the custom metric as edit_effect_sentiment_metric.json.
+- The result of the custom metric as _edit_effect_sentiment_metric.json_.
 
-- Finally the KL divergence between the pre edit and post edit responses as edit_effect_kl_div_metric.json
+- Finally the KL divergence between the pre_edit and post_edit responses as _edit_effect_kl_div_metric.json_.
 
 
-Using visualize_metrics.py you can visualize the results for all previously executed edits and compare between methods and models.
+The EasyEdit metric is irrelevant, but we include it for comparison. The key metrics are _edit_effect_sentiment_metric.json_ and _edit_effect_kl_div_metric.json_, which show the final results.
+
+
+In the _edit_effect_sentiment_metric.json_, we find the calculation of the final sentiment metric results for edit success and locality using the pre_edit and post_edit labels. The ground_truth and target_new values are irrelevant for locality, because we are only interested in the changes (side effects), whether those changes are towards the dataset's ground_truth or the target_new is irrelevant. For the edit success, we look at the pre_edit label, post_edit label and the target_new value.
+
+The results for locality are based on this self made table:
+
+
+| pre_edit_label | post_edit_label | change |
+|---------------|----------------|--------|
+| positive     | positive       | 0%     |
+| positive     | negative       | 100%   |
+| positive     | neutral        | 50%    |
+| negative     | positive       | 100%   |
+| negative     | negative       | 0%     |
+| negative     | neutral        | 50%    |
+| neutral      | positive       | 50%    |
+| neutral      | negative       | 50%    |
+| neutral      | neutral        | 0%     |
+
+
+This locality metric is a ↓ metric (smaller values indicate better results).
+
+
+The _edit_effect_sentiment_metric.json_ calculates the final edit success results for every field of the edit record based on this self made table:
+
+| pre_edit_label | target_new_label | post_edit_label | result |
+|---------------|------------------|-----------------|--------|
+| positive      | positive         | positive        | 100%   |
+| positive      | positive         | negative        | 0%     |
+| positive      | positive         | neutral         | 0%     |
+| positive      | negative         | positive        | 0%     |
+| positive      | negative         | negative        | 100%   |
+| positive      | negative         | neutral         | 50%    |
+| negative      | positive         | positive        | 100%   |
+| negative      | positive         | negative        | 0%     |
+| negative      | positive         | neutral         | 50%    |
+| negative      | negative         | positive        | 0%     |
+| negative      | negative         | negative        | 100%   |
+| negative      | negative         | neutral         | 0%     |
+| neutral       | positive         | positive        | 100%   |
+| neutral       | positive         | negative        | 0%     |
+| neutral       | positive         | neutral         | 0%     |
+| neutral       | negative         | positive        | 0%     |
+| neutral       | negative         | negative        | 100%   |
+| neutral       | negative         | neutral         | 0%     |
+
+
+For this, we take the initial knowledge of the model into account and look at the pre_edit label as well.
+This final sentiment metric is a ↑ metric.
+
+
+In _edit_effect_kl_div_metric.json_, we find the computation of the final KL divergence metric for locality by comparing the logits of the pre_edit and post_edit responses not only of the next predicted token but till the point, where the pre_edit and post_edit model's responses begin to differ and then we average the results.
+
+For a detailed understanding, refer to the corresponding functions in _evaluation.py_.
+
+Finally, we can visualize the results for all previously executed edits and compare between methods and models using _visualize_metrics.py_.
+
