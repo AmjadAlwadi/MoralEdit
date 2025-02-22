@@ -190,6 +190,7 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
             early_stopping = config.early_stopping,
             do_sample = config.do_sample,
             no_repeat_ngram_size = config.no_repeat_ngram_size,
+            num_return_sequences=config.num_return_sequences,
             return_dict_in_generate = True,
             output_logits = True, 
             output_scores = config.enable_output_scores

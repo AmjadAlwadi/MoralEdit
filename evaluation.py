@@ -179,9 +179,6 @@ def output_token_scores(tokenizer, scores, batch_element_index):
 
 
 
-
-
-
 def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, element_index, token_index):
     
     """
@@ -197,9 +194,10 @@ def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, element
     pre_edit_logit = pre_edit_logits[token_index]
     post_edit_logit = post_edit_logits[token_index]
     
-    # Pick the specified element/row
+    # Pick the specified element/row but if beam search then average the result of all beams
     pre_edit_logit = pre_edit_logit[element_index].unsqueeze(dim=0)
     post_edit_logit = post_edit_logit[element_index].unsqueeze(dim=0)
+    
     
     # Move to same device
     pre_edit_logit = pre_edit_logit.to(post_edit_logit.device)
@@ -212,6 +210,13 @@ def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, element
     kl_divergence = torch.nn.functional.kl_div(original_probs.log(), edited_probs, reduction='batchmean')
 
     return kl_divergence
+
+
+
+
+
+
+
 
 
 
@@ -801,6 +806,9 @@ def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_di
     
     # for k in pre_edit_logits_dict.keys():
     #     [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k],i ,find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[0]).item() for i in pre_edit_logits_dict[0].shape[0]]
+    
+    
+    # Do only for loc prompts and then average by hand
     
 
     kl_div_dict = {f"kl_div_{k}": [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], i, find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[i]).item() for i in range(pre_edit_logits_dict[k][0].shape[0])] for k in pre_edit_logits_dict.keys()}

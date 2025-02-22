@@ -331,6 +331,8 @@ def parse_arguments():
         config.decoding_strategy = "greedy-decoding"
     elif config.num_beams > 1 and config.do_sample == False:
         config.decoding_strategy = "beam-search"
+    elif config.num_beams > 1 and config.do_sample == True:
+        config.decoding_strategy = "beam-search multinomial sampling"    
     else:
         config.decoding_strategy = "multinomial-sampling"
     
