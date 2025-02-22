@@ -44,15 +44,21 @@ Next we will use this dataset to create an edit dataset but first we need multip
 ### Adjectives
 Since we are editing autogressive models, we can't use the norm directly as an edit prompt because the word we want to change is the adjective that appears at the beginning of the sentence and this is not possible. Therefore we need to use the f"{rot_action} is {adjective}" template and edit the prompt using the adjective found in the anti_norm.
 
-First, we detect the used adjective in the original_norm and anti_norm and save those in a seperate dataset to use later as the ground_truth and target_new values for our edit.
+First, we detect the used adjective in the original_norm and anti_norm and save those in a seperate dataset to use later as the ground_truth and target_new values for our edit. 
+
+The implemented methods to detect the adjectives positions within the norms is through manual matching with lists of adjectives collected from the social chemistry 101 dataset using _dataset_creation/construct_judgements_dataset_from_social_norms_101.py_, part of speech tagging or thorugh asking llms via special instructions.
 
 ### Rephrases
 
-To assess generality, we require various rephrasings. Light rephrasings will be generated using manual templates, while strong rephrasings will be produced using multiple strategies. Ultimately, we will select the most effective strategy.
+To assess generality, we require various rephrasings. Light rephrasings will be generated using manual templates, while strong rephrasings will be produced using multiple strategies. Ultimately, we will select the most effective strategy. 
+
+The implemented methods are backtranslation using api, backtranslation using special models that are trained on specifically translating sentences from one language to another, backtranslation using general instructional models that are trained on multiple languages, using instructional models with simple rephrasing instructions and finally using gpt4o api.
 
 ### Subjects
 
-The editing method ROME needs to know, where the subject token is located in the prompt to be able to perfrom the edit. That's why we will provide this for the edit as well.
+The editing method ROME needs to know the index of the last subject token within the prompt to be able to perfrom the edit. This is the case for factual prompts in the wikidata triplets format (s, r, o). The last subject token is relevant, because it has the most effect on the inference result for factual prompts, which was found out using causal tracing. After we performed causal tracing for multiple edit prompts, we found out, that the relevant token for our domain is the last token of the action (verb).
+
+The implemented methods to detect the relevant token within the sentence are through part of speech tagging and manual matching.
 
 
 ### Locality Prompts
