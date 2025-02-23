@@ -60,7 +60,6 @@ from edit import edit
 
 # Maybe fix subject difference in im/moral actions and ground_truth
 
-
 # For the custom metric cut the response till the point
 
 
@@ -82,6 +81,41 @@ from edit import edit
 
 
 # First of all fix IKE and then add causal tracing  
+
+
+
+
+
+
+
+
+
+# TODO:
+
+# Necessary:
+# Fix num_return_sequences
+# Fix temperature and try it
+# Add the new templates to edit dataset.
+# Extend the KL divergence implementation.
+# Finish the subject finding implementation.
+# Implement the causal tracing.
+# Add the different decoding strategy names.
+# Finish the visualization plots.
+# Count or measure NS and NM.
+
+# Optional:
+# Implement the metric of Niklas.
+# Train MEND on a split/half or 90% of our edit dataset.
+# Finish the instruction engineering method.
+# Try the different decoding strategies.
+
+
+
+
+
+
+
+
 
 def main():
     
@@ -178,39 +212,38 @@ def main():
 
         
     # Calculate the custom metric for post_edit_model
-    if config.calculate_custom_metric_for_post_edit_model:
-        post_edit_custom_metric = calculate_sentiment_analysis_labels(edit_args, False, post_edit_output_dict, new_ike_edit_args)
-        save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
+    post_edit_custom_metric = calculate_sentiment_analysis_labels(edit_args, False, post_edit_output_dict, new_ike_edit_args)
+    save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
             
         
     # Unload post_edit_model if not used later
     unload_post_edit_model(post_edit_model)
         
         
+        
     # Custom metric calculation for pre_edit_model
-    if config.calculate_custom_metric_for_pre_edit_model:
+ 
+    # Load the pre_edit_model if needed
+    if not pre_edit_model:
+        pre_edit_model = load_pre_edit_model()
         
-        # Load the pre_edit_model if needed
-        if not pre_edit_model:
-            pre_edit_model = load_pre_edit_model()
-            
-        # All needed outputs for pre_edit_model
-        pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict, _ = preprare_responses(tokenizer, pre_edit_model, True, edit_args, ike_generation_prompts)
-        
-        # Write post_edit_response to a file
-        save_as_json(edit_args | pre_edit_output_dict, "pre_edit_logs")
+    # All needed outputs for pre_edit_model
+    pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict, _ = preprare_responses(tokenizer, pre_edit_model, True, edit_args, ike_generation_prompts)
+    
+    # Write post_edit_response to a file
+    save_as_json(edit_args | pre_edit_output_dict, "pre_edit_logs")
 
-        pre_edit_custom_metric = calculate_sentiment_analysis_labels(edit_args, True, pre_edit_output_dict, None)
-        save_as_json(pre_edit_custom_metric, "pre_edit_custom_metric")
+    pre_edit_custom_metric = calculate_sentiment_analysis_labels(edit_args, True, pre_edit_output_dict, None)
+    save_as_json(pre_edit_custom_metric, "pre_edit_custom_metric")
+        
         
     
     # Show the effects of the edit
-    if config.calculate_custom_metric_for_pre_edit_model and config.calculate_custom_metric_for_post_edit_model:
-        edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric)
-        save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
-        
-        edit_effect_kl_div_metric = evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict)
-        save_as_json(edit_effect_kl_div_metric,"edit_effect_kl_div_metric")
+    edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric)
+    save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
+    
+    edit_effect_kl_div_metric = evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict)
+    save_as_json(edit_effect_kl_div_metric,"edit_effect_kl_div_metric")
     
  
     # Unload pre_edit_model if not used later
@@ -276,11 +309,6 @@ def parse_arguments():
     parser.add_argument("--top_k", type=int, default=4,
                         help="Top k probable tokens for the output scores")
     
-    
-    parser.add_argument("-a","--calculate_custom_metric_for_pre_edit_model", action="store_true",
-                        help="Acitvate the custom metric calculation for pre_edit_model")
-    parser.add_argument("-b","--calculate_custom_metric_for_post_edit_model", action="store_true",
-                        help="Acitvate the custom metric calculation for edited model")
 
     
     parser.add_argument("--enable_cpu_inference", action="store_true",
@@ -321,20 +349,25 @@ def parse_arguments():
     config.enable_analytics = args.enable_analytics
     config.enable_output_scores = args.enable_output_scores
     config.enable_models_check = args.enable_models_check
-    config.calculate_custom_metric_for_post_edit_model = args.calculate_custom_metric_for_post_edit_model
-    config.calculate_custom_metric_for_pre_edit_model = args.calculate_custom_metric_for_pre_edit_model
-        
-        
-    config.decoding_strategy = "greedy-decoding" 
+    config.num_return_sequences = config.num_beams
+    
+    
+    config.decoding_strategy = "greedy-decoding"
     
     if config.num_beams == 1 and config.do_sample == False:
         config.decoding_strategy = "greedy-decoding"
+        
     elif config.num_beams > 1 and config.do_sample == False:
         config.decoding_strategy = "beam-search"
+        
     elif config.num_beams > 1 and config.do_sample == True:
         config.decoding_strategy = "beam-search multinomial sampling"    
+        
     else:
         config.decoding_strategy = "multinomial-sampling"
+        
+        
+        
     
     print(config.decoding_strategy)
     
@@ -363,8 +396,6 @@ def parse_arguments():
     print(Fore.LIGHTYELLOW_EX)
     print("Information to Output")
     print(f"{'train:':<{col_width}} {str(config.train)}")
-    print(f"{'calculate_custom_metric_for_pre_edit_model:':<{col_width}} {str(config.calculate_custom_metric_for_pre_edit_model)}")
-    print(f"{'calculate_custom_metric_for_post_edit_model:':<{col_width}} {str(config.calculate_custom_metric_for_post_edit_model)}")
     
     print(Fore.CYAN)
     print("Debugging Informations")

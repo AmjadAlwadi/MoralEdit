@@ -473,7 +473,7 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
     neutral_label = "LABEL_1"   #  0
     
 
-
+    # Return {-1, 0, 1}
     def label_to_int(label):
         if label == neutral_label:
             return 0
@@ -638,6 +638,7 @@ def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_l
     
     """
     
+    # Return {-1, 0, 1}
     def normalize_int_label(int_label):
         if int_label > 0:
             return 1
@@ -699,6 +700,7 @@ def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label
     
     """
     
+    # Return {0, 0.5, 1} to get change as percentage
     def normalize_int_label(int_label):
         if int_label > 0:
             return 1
@@ -707,7 +709,7 @@ def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label
         else:
             return 0.5
     
-    # Normalize labels to -1, 0, 1 format for comparison and calculation of success rate/change rate
+    # Normalize labels to 0, 0.5, 1 format for comparison and calculation of success rate/change rate
     pre_edit_label = normalize_int_label(pre_edit_label)
     post_edit_label = normalize_int_label(post_edit_label)
     
@@ -751,6 +753,9 @@ def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
                 eval_func = measure_sentiment_edit_success
             
             result = eval_func(pre_edit_item[key], post_edit_item[key], label_to_use)
+            
+            # Change fomrat soon
+            
             item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} == {label_to_use} = {result:.3f} = {result*100:.2f}%"})
 
         edit_changes_custom_metric.append(item)
@@ -810,7 +815,6 @@ def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_di
     
     # Do only for loc prompts and then average by hand
     
-
     kl_div_dict = {f"kl_div_{k}": [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], i, find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[i]).item() for i in range(pre_edit_logits_dict[k][0].shape[0])] for k in pre_edit_logits_dict.keys()}
     return kl_div_dict
 
