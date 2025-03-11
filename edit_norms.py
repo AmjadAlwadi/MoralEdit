@@ -210,10 +210,10 @@ def main():
     else:
         save_as_json(edit_args | post_edit_output_dict,"post_edit_logs")
 
-        
+    
     # Calculate the custom metric for post_edit_model
-    post_edit_custom_metric = calculate_sentiment_analysis_labels(edit_args, False, post_edit_output_dict, new_ike_edit_args)
-    save_as_json(post_edit_custom_metric,"post_edit_custom_metric")
+    post_edit_sentiment = calculate_sentiment_analysis_labels(edit_args, False, post_edit_output_dict, new_ike_edit_args)
+    save_as_json(post_edit_sentiment,"post_edit_sentiment")
             
         
     # Unload post_edit_model if not used later
@@ -233,13 +233,13 @@ def main():
     # Write post_edit_response to a file
     save_as_json(edit_args | pre_edit_output_dict, "pre_edit_logs")
 
-    pre_edit_custom_metric = calculate_sentiment_analysis_labels(edit_args, True, pre_edit_output_dict, None)
-    save_as_json(pre_edit_custom_metric, "pre_edit_custom_metric")
+    pre_edit_sentiment = calculate_sentiment_analysis_labels(edit_args, True, pre_edit_output_dict, None)
+    save_as_json(pre_edit_sentiment, "pre_edit_sentiment")
         
         
     
     # Show the effects of the edit
-    edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric)
+    edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_sentiment, post_edit_sentiment)
     save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
     
     edit_effect_kl_div_metric = evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict)

@@ -421,6 +421,10 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
     }
     
     # It took me an hour to come up with this
+    # Basically, this returns the logits of each edit in the desired format
+    # This iterates over all edit logits and combines all sequences of each type into one batch, then combines those into one tensor
+    # This is done for every single token
+    
     logits_dict = {
         "prompt": tuple(torch.cat( tuple(tup[i][0] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
         "light_rephrase_1": tuple(torch.cat( tuple(tup[i][1] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
@@ -756,7 +760,7 @@ def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
             
             # Change fomrat soon
             
-            item.update({key : f"{pre_edit_item[key]:.3f} --> {post_edit_item[key]:.3f} == {label_to_use} = {result:.3f} = {result*100:.2f}%"})
+            item.update({key : f"pre: {pre_edit_item[key]} --> post: {post_edit_item[key]} == should be: {label_to_use} => result: {result} = {result*100}%"})
 
         edit_changes_custom_metric.append(item)
     
@@ -813,9 +817,32 @@ def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_di
     #     [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k],i ,find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[0]).item() for i in pre_edit_logits_dict[0].shape[0]]
     
     
+    # kl_div_dict = {f"kl_div_{k}": [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], i, find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[i]).item() for i in range(pre_edit_logits_dict[k][0].shape[0])] for k in pre_edit_logits_dict.keys()}
+
+    
     # Do only for loc prompts and then average by hand
     
-    kl_div_dict = {f"kl_div_{k}": [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], i, find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[i]).item() for i in range(pre_edit_logits_dict[k][0].shape[0])] for k in pre_edit_logits_dict.keys()}
+    
+    kl_div_dict = {}
+    
+    # iterate over keys
+    for key in pre_edit_logits_dict.keys():
+        differing_token_indices = find_first_differing_token(pre_edit_logits_dict[key], post_edit_logits_dict[key])
+        result = []
+        
+        # iterate over sequences (batch * num_beams)
+        for i in range(pre_edit_logits_dict[key][0].shape[0]):
+            differing_token_index = differing_token_indices[i]
+            
+            # If no difference found, calculate the kl div at the first token
+            if differing_token_index == -1:
+                differing_token_index = 0
+                
+            result.append(calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], i, differing_token_index).item())
+        
+        kl_div_dict.update({f"kl_div_{key}":result})
+    
+    
     return kl_div_dict
 
 
