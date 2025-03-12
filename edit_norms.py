@@ -93,17 +93,18 @@ from edit import edit
 # TODO:
 
 # Necessary:
-# Fix num_return_sequences
-# Fix temperature and try it
-# Add the new templates to edit dataset.
-# Extend the KL divergence implementation.
-# Finish the subject finding implementation.
-# Implement the causal tracing.
-# Add the different decoding strategy names.
-# Finish the visualization plots.
-# Count or measure NS and NM.
+# Fix num_return_sequences and extend it for every metric  done
+# Fix temperature and try it     
+# Extend the KL divergence implementation done
+# Add the different decoding strategy names done
+# Finish the visualization plots
+# Count or measure NS and NM
+# Implement perplexity
 
 # Optional:
+# Implement the causal tracing.
+# Finish the subject finding implementation
+# Add the new templates to edit dataset.
 # Implement the metric of Niklas.
 # Train MEND on a split/half or 90% of our edit dataset.
 # Finish the instruction engineering method.

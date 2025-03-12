@@ -263,23 +263,31 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
     
 
     # Gets the generated part, strips unnecessary characters from the left and return the string till the period
-    def format_output(output, length):
-        result = output[length:]
-        result = result.lstrip(" .,?\n")
-        p_index = result.find('.') 
-        q_index = result.find('?')
-        n_index = result.find('\n')
+    def format_output(outputs, length, index):
         
-        if p_index != -1:
-            result = f"{result[:p_index]}."
-        elif q_index!= -1:
-            result = f"{result[:q_index]}?"
-        elif n_index!= -1:
-            result = f"{result[:n_index]}."
-        else:
-            result = result
-              
-        return result    
+        results = []
+        
+        for i in range(config.num_return_sequences):
+            
+            output = outputs[config.num_return_sequences * index + i]
+            result = output[length:]
+            result = result.lstrip(" .,?\n")
+            p_index = result.find('.') 
+            q_index = result.find('?')
+            n_index = result.find('\n')
+            
+            if p_index != -1:
+                result = f"{result[:p_index]}."
+            elif q_index!= -1:
+                result = f"{result[:q_index]}?"
+            elif n_index!= -1:
+                result = f"{result[:n_index]}."
+            else:
+                result = result
+            
+            results.append(result)
+                
+        return results    
     
     
     
@@ -359,25 +367,30 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
         
          
     
-    for index in range(0, len(used_edit_args["prompts"])):
+    for edit_index in range(config.norms_subset_size):
         
         # To work all answers in parallel
+        
+        # We could do every type separately, but this will be effective for large batch sizes/number_of_edits > 10
+        # We don't intend to go beyond 10 edits here, so it will be pointless to think about this kind of scaling
+        # The reason is the limitations of current editing methods
+        
         model_input = [
             
-            used_edit_args["prompts"][index],
+            used_edit_args["prompts"][edit_index],
                    
-            used_edit_args["light_rephrase_prompts"][index][0],
-            used_edit_args["light_rephrase_prompts"][index][1],
-            used_edit_args["light_rephrase_prompts"][index][2],
+            used_edit_args["light_rephrase_prompts"][edit_index][0],
+            used_edit_args["light_rephrase_prompts"][edit_index][1],
+            used_edit_args["light_rephrase_prompts"][edit_index][2],
             
-            used_edit_args["strong_rephrase_prompts"][index],
+            used_edit_args["strong_rephrase_prompts"][edit_index],
             
-            used_edit_args["portability_inputs"]["synonym"]["prompt"][index],
-            used_edit_args["portability_inputs"]["one_hop"]["prompt"][index],
-            used_edit_args["portability_inputs"]["two_hop"]["prompt"][index],
+            used_edit_args["portability_inputs"]["synonym"]["prompt"][edit_index],
+            used_edit_args["portability_inputs"]["one_hop"]["prompt"][edit_index],
+            used_edit_args["portability_inputs"]["two_hop"]["prompt"][edit_index],
     
-            used_edit_args["locality_inputs"]["neighborhood"]["prompt"][index],
-            used_edit_args["locality_inputs"]["distracting"]["prompt"][index],
+            used_edit_args["locality_inputs"]["neighborhood"]["prompt"][edit_index],
+            used_edit_args["locality_inputs"]["distracting"]["prompt"][edit_index],
 
         ]
     
@@ -387,24 +400,23 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
         output = create_response(model,tokenizer,model_input,instructinoal=False)
         decoded_output = tokenizer.batch_decode(output.sequences,skip_special_tokens=True)
         
-        decoded_responses_prompt.append(format_output(decoded_output[0], len(used_edit_args["prompts"][index])))
+        decoded_responses_prompt.append(format_output(decoded_output, len(used_edit_args["prompts"][edit_index]), 0))
         
-        decoded_responses_light_rephrase_1.append(format_output(decoded_output[1], len(used_edit_args["light_rephrase_prompts"][index][0])))
-        decoded_responses_light_rephrase_2.append(format_output(decoded_output[2], len(used_edit_args["light_rephrase_prompts"][index][1])))
-        decoded_responses_light_rephrase_3.append(format_output(decoded_output[3], len(used_edit_args["light_rephrase_prompts"][index][2])))
+        decoded_responses_light_rephrase_1.append(format_output(decoded_output, len(used_edit_args["light_rephrase_prompts"][edit_index][0]), 1))
+        decoded_responses_light_rephrase_2.append(format_output(decoded_output, len(used_edit_args["light_rephrase_prompts"][edit_index][1]), 2))
+        decoded_responses_light_rephrase_3.append(format_output(decoded_output, len(used_edit_args["light_rephrase_prompts"][edit_index][2]), 3))
         
-        decoded_responses_strong_rephrase.append(format_output(decoded_output[4], len(used_edit_args["strong_rephrase_prompts"][index]))) 
+        decoded_responses_strong_rephrase.append(format_output(decoded_output, len(used_edit_args["strong_rephrase_prompts"][edit_index]), 4)) 
         
-        decoded_responses_portability_synonym.append(format_output(decoded_output[5], len(used_edit_args["portability_inputs"]["synonym"]["prompt"][index]))) 
-        decoded_responses_portability_one_hop.append(format_output(decoded_output[6], len(used_edit_args["portability_inputs"]["one_hop"]["prompt"][index]))) 
-        decoded_responses_portability_two_hop.append(format_output(decoded_output[7], len(used_edit_args["portability_inputs"]["two_hop"]["prompt"][index])))
+        decoded_responses_portability_synonym.append(format_output(decoded_output, len(used_edit_args["portability_inputs"]["synonym"]["prompt"][edit_index]), 5)) 
+        decoded_responses_portability_one_hop.append(format_output(decoded_output, len(used_edit_args["portability_inputs"]["one_hop"]["prompt"][edit_index]), 6)) 
+        decoded_responses_portability_two_hop.append(format_output(decoded_output, len(used_edit_args["portability_inputs"]["two_hop"]["prompt"][edit_index]), 7))
 
-        decoded_responses_locality_neighborhood.append(format_output(decoded_output[8], len(used_edit_args["locality_inputs"]["neighborhood"]["prompt"][index]))) 
-        decoded_responses_locality_distracting.append(format_output(decoded_output[9], len(used_edit_args["locality_inputs"]["distracting"]["prompt"][index]))) 
+        decoded_responses_locality_neighborhood.append(format_output(decoded_output, len(used_edit_args["locality_inputs"]["neighborhood"]["prompt"][edit_index]), 8)) 
+        decoded_responses_locality_distracting.append(format_output(decoded_output, len(used_edit_args["locality_inputs"]["distracting"]["prompt"][edit_index]), 9)) 
 
         logits.append(output.logits)
         scores.append(output.scores)
-        
         
 
     return_dict = {
@@ -422,36 +434,36 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
     
     # It took me an hour to come up with this
     # Basically, this returns the logits of each edit in the desired format
-    # This iterates over all edit logits and combines all sequences of each type into one batch, then combines those into one tensor
+    # This iterates over all edit logits and combines all return sequences/beams of each type into one batch, then combines those into one tensor
     # This is done for every single token
     
     logits_dict = {
-        "prompt": tuple(torch.cat( tuple(tup[i][0] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "light_rephrase_1": tuple(torch.cat( tuple(tup[i][1] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "light_rephrase_2": tuple(torch.cat( tuple(tup[i][2] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "light_rephrase_3": tuple(torch.cat( tuple(tup[i][3] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "strong_rephrase": tuple(torch.cat( tuple(tup[i][4] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "portability_synonym": tuple(torch.cat( tuple(tup[i][5] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "portability_one_hop": tuple(torch.cat( tuple(tup[i][6] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "portability_two_hop": tuple(torch.cat( tuple(tup[i][7] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "locality_neighborhood": tuple(torch.cat( tuple(tup[i][8] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
-        "locality_distracting": tuple(torch.cat( tuple(tup[i][9] for tup in logits), dim=0).reshape(len(logits), tokenizer.vocab_size) for i in range(len(logits[0]))),
+        "prompt": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "light_rephrase_1": tuple(torch.cat(tuple(torch.cat([tup[i][1 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size,tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "light_rephrase_2": tuple(torch.cat(tuple(torch.cat([tup[i][2 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "light_rephrase_3": tuple(torch.cat(tuple(torch.cat([tup[i][3 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "strong_rephrase": tuple(torch.cat(tuple(torch.cat([tup[i][4 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "portability_synonym": tuple(torch.cat(tuple(torch.cat([tup[i][5 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "portability_one_hop": tuple(torch.cat(tuple(torch.cat([tup[i][6 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "portability_two_hop": tuple(torch.cat(tuple(torch.cat([tup[i][7 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "locality_neighborhood": tuple(torch.cat(tuple(torch.cat([tup[i][8 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+        "locality_distracting": tuple(torch.cat(tuple(torch.cat([tup[i][9 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
     }
     
     scores_dict = None
     if config.enable_output_scores:
     
         scores_dict = {
-            "prompt": tuple(torch.cat( tuple(tup[i][0] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "light_rephrase_1": tuple(torch.cat( tuple(tup[i][1] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "light_rephrase_2": tuple(torch.cat( tuple(tup[i][2] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "light_rephrase_3": tuple(torch.cat( tuple(tup[i][3] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "strong_rephrase": tuple(torch.cat( tuple(tup[i][4] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "portability_synonym": tuple(torch.cat( tuple(tup[i][5] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "portability_one_hop": tuple(torch.cat( tuple(tup[i][6] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "portability_two_hop": tuple(torch.cat( tuple(tup[i][7] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "locality_neighborhood": tuple(torch.cat( tuple(tup[i][8] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0]))),
-            "locality_distracting": tuple(torch.cat( tuple(tup[i][9] for tup in scores), dim=0).reshape(len(scores), tokenizer.vocab_size) for i in range(len(scores[0])))
+            "prompt": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "light_rephrase_1": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "light_rephrase_2": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "light_rephrase_3": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "strong_rephrase": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "portability_synonym": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "portability_one_hop": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "portability_two_hop": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "locality_neighborhood": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
+            "locality_distracting": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in scores),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens))
         }
     
     
@@ -479,14 +491,18 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
 
     # Return {-1, 0, 1}
     def label_to_int(label):
-        if label == neutral_label:
-            return 0
-        elif label == positive_label:
-            return 1
-        elif label == negative_label:
-            return -1
-        else:
-            return "Error: Invalid label"
+        if isinstance(label, str):
+            if label == neutral_label:
+                return 0
+            elif label == positive_label:
+                return 1
+            elif label == negative_label:
+                return -1
+            else:
+                return "Error: Invalid label"
+            
+        elif isinstance(label, list) or isinstance(label, tuple):
+            return [label_to_int(l) for l in label]
     
  
     def int_to_label(value):
@@ -525,65 +541,68 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
         edit_args = new_ike_edit_args
     
     
-
-    for index in range(0,len(edit_args["prompts"])):
+    
+    for edit_index in range(config.norms_subset_size):
         
 
         # To work all answers in parallel
         sentiment_input = [
-            edit_args["ground_truth"][index],
-            edit_args["target_new"][index],
-            output_dict["prompt"][index],
-            output_dict["light_rephrase_1"][index],
-            output_dict["light_rephrase_2"][index],
-            output_dict["light_rephrase_3"][index],
-            output_dict["strong_rephrase"][index],
-            output_dict["portability_synonym"][index],
-            output_dict["portability_one_hop"][index],
-            output_dict["portability_two_hop"][index],
-            output_dict["locality_neighborhood"][index],
-            output_dict["locality_distracting"][index]
+            edit_args["ground_truth"][edit_index],
+            edit_args["target_new"][edit_index],
+            *output_dict["prompt"][edit_index],
+            *output_dict["light_rephrase_1"][edit_index],
+            *output_dict["light_rephrase_2"][edit_index],
+            *output_dict["light_rephrase_3"][edit_index],
+            *output_dict["strong_rephrase"][edit_index],
+            *output_dict["portability_synonym"][edit_index],
+            *output_dict["portability_one_hop"][edit_index],
+            *output_dict["portability_two_hop"][edit_index],
+            *output_dict["locality_neighborhood"][edit_index],
+            *output_dict["locality_distracting"][edit_index]
         ]
         
         
         # Generate predictions
         sentiment_output = sentiment_analysis(sentiment_input, batch_size=len(sentiment_input))
         
-        dataset_target_new_label = int_to_label(int(edit_args["action_moral_judgment"][index]))
+        dataset_target_new_label = int_to_label(int(edit_args["action_moral_judgment"][edit_index]))
         dataset_ground_truth_label = invert_label(dataset_target_new_label)
 
         generated_ground_truth_label = sentiment_output[0]["label"]
         generated_target_new_label = sentiment_output[1]["label"]
         
-        prompt = sentiment_output[2]["label"]
-        light_generality_1 = sentiment_output[3]["label"]
-        light_generality_2 = sentiment_output[4]["label"]
-        light_generality_3 = sentiment_output[5]["label"]
         
-        strong_generality = sentiment_output[6]["label"]
+        # For all return sequences
+        
+        prompts = [sentiment_output[2 + 0 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        light_generalities_1 = [sentiment_output[2 + 1 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        light_generalities_2 = [sentiment_output[2 + 2 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        light_generalities_3 = [sentiment_output[2 + 3 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        
+        strong_generalities = [sentiment_output[2 + 4 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
 
-        portability_synonym = sentiment_output[7]["label"]
-        portability_one_hop = sentiment_output[8]["label"]
-        portability_two_hop = sentiment_output[9]["label"]
+        portability_synonyms = [sentiment_output[2 + 5 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        portability_one_hops = [sentiment_output[2 + 6 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        portability_two_hops = [sentiment_output[2 + 7 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
                 
-        locality_neighborhood = sentiment_output[10]["label"]
-        locality_distracting = sentiment_output[11]["label"]
+        locality_neighborhoods = [sentiment_output[2 + 8 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        locality_distractings = [sentiment_output[2 + 9 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
         
         custom_metric = {
             "dataset_ground_truth_label":label_to_int(dataset_ground_truth_label),
             "dataset_target_new_label":label_to_int(dataset_target_new_label),
             "generated_ground_truth_label":label_to_int(generated_ground_truth_label),
             "generated_target_new_label":label_to_int(generated_target_new_label),
-            "prompt":label_to_int(prompt),
-            "light_generality_1":label_to_int(light_generality_1),
-            "light_generality_2":label_to_int(light_generality_2),
-            "light_generality_3":label_to_int(light_generality_3),
-            "strong_generality":label_to_int(strong_generality),
-            "portability_synonym":label_to_int(portability_synonym),
-            "portability_one_hop":label_to_int(portability_one_hop),
-            "portability_two_hop":label_to_int(portability_two_hop),
-            "locality_neighborhood":label_to_int(locality_neighborhood),
-            "locality_distracting":label_to_int(locality_distracting)
+            "prompt":label_to_int(prompts),
+            "light_generality_1":label_to_int(light_generalities_1),
+            "light_generality_2":label_to_int(light_generalities_2),
+            "light_generality_3":label_to_int(light_generalities_3),
+            "strong_generality":label_to_int(strong_generalities),
+            "portability_synonym":label_to_int(portability_synonyms),
+            "portability_one_hop":label_to_int(portability_one_hops),
+            "portability_two_hop":label_to_int(portability_two_hops),
+            "locality_neighborhood":label_to_int(locality_neighborhoods),
+            "locality_distracting":label_to_int(locality_distractings)
         }
     
         custom_metric_array.append(custom_metric)
@@ -641,7 +660,7 @@ def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_l
     Edit success is a ↑ metric
     
     """
-    
+          
     # Return {-1, 0, 1}
     def normalize_int_label(int_label):
         if int_label > 0:
@@ -650,22 +669,27 @@ def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_l
             return -1
         else:
             return 0
+            
+            
+    if isinstance(pre_edit_label, int):
+        
+        # Normalize labels to -1, 0, 1 format for comparison and calculation of success rate/change rate
+        pre_edit_label = normalize_int_label(pre_edit_label)
+        target_new_label = normalize_int_label(target_new_label)
+        post_edit_label = normalize_int_label(post_edit_label)
+        
+        # 100% cases
+        if target_new_label == post_edit_label:
+            return 1
+        # 50% cases
+        elif post_edit_label == 0 and pre_edit_label != 0 and target_new_label != 0 and pre_edit_label != target_new_label:
+            return 0.5
+        # 0% cases
+        else:
+            return 0
     
-    # Normalize labels to -1, 0, 1 format for comparison and calculation of success rate/change rate
-    pre_edit_label = normalize_int_label(pre_edit_label)
-    target_new_label = normalize_int_label(target_new_label)
-    post_edit_label = normalize_int_label(post_edit_label)
-    
-    # 100% cases
-    if target_new_label == post_edit_label:
-        return 1
-    # 50% cases
-    elif post_edit_label == 0 and pre_edit_label != 0 and target_new_label != 0 and pre_edit_label != target_new_label:
-        return 0.5
-    # 0% cases
-    else:
-        return 0
-    
+    elif isinstance(pre_edit_label, list) or isinstance(pre_edit_label, tuple):
+        return [measure_sentiment_edit_success(e, o, target_new_label) for e, o in zip(pre_edit_label, post_edit_label)]
     
     
     
@@ -712,13 +736,17 @@ def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label
             return 0
         else:
             return 0.5
+        
+    if isinstance(pre_edit_label, int):
     
-    # Normalize labels to 0, 0.5, 1 format for comparison and calculation of success rate/change rate
-    pre_edit_label = normalize_int_label(pre_edit_label)
-    post_edit_label = normalize_int_label(post_edit_label)
+        # Normalize labels to 0, 0.5, 1 format for comparison and calculation of success rate/change rate
+        pre_edit_label = normalize_int_label(pre_edit_label)
+        post_edit_label = normalize_int_label(post_edit_label)
+        
+        return abs(pre_edit_label - post_edit_label)
     
-    return abs(pre_edit_label - post_edit_label)
-    
+    elif isinstance(pre_edit_label, list) or isinstance(pre_edit_label, tuple):
+        return [measure_sentiment_locality(e, o) for e, o in zip(pre_edit_label, post_edit_label)]
     
     
     
@@ -729,10 +757,16 @@ def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label
 def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
     
 
+    def format_output(pre_edit_item, post_edit_item, key, label_to_use, result):
+        return f"pre: {pre_edit_item[key]} --> post: {post_edit_item[key]} == should be: {label_to_use} => result: {result}"
+
+
+
     edit_changes_custom_metric = []
     
     
     for pre_edit_item, post_edit_item in zip(pre_edit_custom_metric, post_edit_custom_metric):
+        
         item = {}
         eval_func = measure_sentiment_edit_success
         
@@ -759,8 +793,7 @@ def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
             result = eval_func(pre_edit_item[key], post_edit_item[key], label_to_use)
             
             # Change fomrat soon
-            
-            item.update({key : f"pre: {pre_edit_item[key]} --> post: {post_edit_item[key]} == should be: {label_to_use} => result: {result} = {result*100}%"})
+            item.update({key : format_output(pre_edit_item, post_edit_item, key, label_to_use, result)})
 
         edit_changes_custom_metric.append(item)
     
@@ -783,7 +816,9 @@ def find_first_differing_token(logits1, logits2):
     """
     batch_size = logits1[0].shape[0]
     differing_positions = [-1] * batch_size  # Default to -1 if no difference found
-
+    
+    # print("*"*3 + differing_positions)
+    
     # Iterate over the token logits
     for i, (logit1, logit2) in enumerate(zip(logits1, logits2)):  
         top_tokens1 = torch.argmax(logit1, dim=-1)  # (batch_size,1)
@@ -822,25 +857,37 @@ def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_di
     
     # Do only for loc prompts and then average by hand
     
+    # Change format if needed
+    def format_output(item):
+        return item
+    
     
     kl_div_dict = {}
+    
     
     # iterate over keys
     for key in pre_edit_logits_dict.keys():
         differing_token_indices = find_first_differing_token(pre_edit_logits_dict[key], post_edit_logits_dict[key])
-        result = []
+        result_per_key = []
         
-        # iterate over sequences (batch * num_beams)
-        for i in range(pre_edit_logits_dict[key][0].shape[0]):
-            differing_token_index = differing_token_indices[i]
+        # iterate over edits and sequences (batch/number_of_norms * num_beams)
+        for edit_index in range(config.norms_subset_size):
+            result_per_edit = []
             
-            # If no difference found, calculate the kl div at the first token
-            if differing_token_index == -1:
-                differing_token_index = 0
+            for sequence_index in range(config.num_return_sequences):
                 
-            result.append(calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], i, differing_token_index).item())
-        
-        kl_div_dict.update({f"kl_div_{key}":result})
+                current_index = sequence_index + config.num_return_sequences * edit_index
+                differing_token_index = differing_token_indices[current_index]
+                
+                # If no difference found, calculate the kl div at the first token
+                if differing_token_index == -1:
+                    differing_token_index = 0
+                
+                result_per_edit.append(calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], current_index, differing_token_index).item())
+            
+            result_per_key.append(result_per_edit)
+            
+        kl_div_dict.update({f"kl_div_{key}":format_output(result_per_key)})
     
     
     return kl_div_dict
