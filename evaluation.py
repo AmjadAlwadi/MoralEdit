@@ -898,6 +898,34 @@ def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_di
 
 
 
+def calculate_perplexity(tokenizer, model, input_text):
+    
+    # Tokenize input
+    inputs = tokenizer(input_text, return_tensors="pt", truncation=True, max_length=model.config.n_positions)
+    input_ids = inputs["input_ids"]
+    attention_mask = inputs["attention_mask"]
+
+    # Compute loss without training
+    with torch.no_grad():
+        outputs = model(input_ids, attention_mask=attention_mask, labels=input_ids)
+        loss = outputs.loss
+
+    # Compute perplexity
+    perplexity = torch.exp(loss)
+
+    print(f"Loss: {loss.item():.4f}")
+    print(f"Perplexity: {perplexity.item():.2f}")
+    
+    return perplexity.item()
+
+
+
+
+
+
+
+
+
 
 
 def measure_quality_chatgpt_api(edit_args, decoded_post_edit_response):
