@@ -357,13 +357,13 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
                 }
             },
             
-            "loc_prompts" : edit_args["loc_prompts"],
-            "moral_action": edit_args["moral_action"],
-            "immoral_action": edit_args["immoral_action"],
-            "action_moral_judgment": edit_args["action_moral_judgment"],
+            # "loc_prompts" : edit_args["loc_prompts"],
+            # "moral_action": edit_args["moral_action"],
+            # "immoral_action": edit_args["immoral_action"],
+            # "action_moral_judgment": edit_args["action_moral_judgment"],
             "light_rephrase_prompts": [[ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][0], ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][1], ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][2]] for i in range(len(edit_args["light_rephrase_prompts"]))],
             "strong_rephrase_prompts": [ike_generation_prompts[i] + edit_args["strong_rephrase_prompts"][i] for i in range(len(edit_args["strong_rephrase_prompts"]))],
-            "sequential_edit": True
+            # "sequential_edit": True
         }
 
         used_edit_args = new_ike_edit_args
@@ -858,16 +858,7 @@ def evaluate_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
     """
     
     
-    # for k in pre_edit_logits_dict.keys():
-    #     [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k],i ,find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[0]).item() for i in pre_edit_logits_dict[0].shape[0]]
-    
-    
-    # kl_div_dict = {f"kl_div_{k}": [calculate_kl_divergence_for_token(pre_edit_logits_dict[k], post_edit_logits_dict[k], i, find_first_differing_token(pre_edit_logits_dict[k], post_edit_logits_dict[k])[i]).item() for i in range(pre_edit_logits_dict[k][0].shape[0])] for k in pre_edit_logits_dict.keys()}
 
-    
-    # Do only for loc prompts and then average by hand
-    
-    # Change format if needed
     def format_output(item):
         return item
     
@@ -888,12 +879,13 @@ def evaluate_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
                 
                 current_index = sequence_index + config.num_return_sequences * edit_index
                 differing_token_index = differing_token_indices[current_index]
+                differing_token_index_temp = differing_token_index
                 
                 # If no difference found, calculate the kl div at the first token
                 if differing_token_index == -1:
                     differing_token_index = 0
                 
-                result_per_edit.append(calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], current_index, differing_token_index).item())
+                result_per_edit.append((calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], current_index, differing_token_index).item(), differing_token_index_temp))
             
             result_per_key.append(result_per_edit)
             
@@ -935,7 +927,7 @@ def calculate_perplexity(tokenizer, model, input_text):
 
 
 
-def calculate_perplexity_for_locality(tokenizer, model, edit_args, output_dict):
+def calculate_perplexity_for_locality(tokenizer, model, output_dict):
     
     # One item for each edit
     edits_effect_list = []
@@ -1083,7 +1075,7 @@ def output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args,
         post_edit_scores_string = output_token_scores(tokenizer, post_edit_scores_dict["prompt"], 0)
         
     # Useful for debugging
-    if config.enable_models_check:
+    if config.enable_models_check and pre_edit_model and post_edit_model:
         models_check_string = check_model_weights_changed(pre_edit_model,post_edit_model)
     
     

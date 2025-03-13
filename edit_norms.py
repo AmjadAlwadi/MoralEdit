@@ -94,19 +94,21 @@ from edit import edit
 
 # Necessary:
 # Fix num_return_sequences and extend it for every metric  done
-# Make the output format more consistent
+# Make the output format more consistent    Done
 # Fix temperature and try it     
 # Extend the KL divergence implementation done
 # Add the different decoding strategy names done
 # Finish the visualization plots
 # Count or measure NS and NM
-# Implement perplexity
-# Take config parameters as default ones
+# Implement perplexity    Done
+# Take config parameters as default ones  Done
 
 # First do all pre edit model things
 # then edit
 # then evaluate post edits
-
+# KL Div has an issue
+# Do kl div for first token + differing token + the one that has the most kl divergence
+# In the plot later, output the average of those above also
 
 # Optional:
 # Implement the causal tracing.
@@ -127,7 +129,11 @@ from edit import edit
 
 def main():
     
-    # Some initializations
+    
+    # ---------------------------------------------------------------- #
+    # -----------------Some Initialization Stuff---------------------- #
+    # ---------------------------------------------------------------- #
+    
     init()
     os.makedirs('outputs/', exist_ok=True)
 
@@ -151,15 +157,45 @@ def main():
         
 
 
-    
     # Load the edit norms dataset
     norms_dict = load_norms()
     pre_edit_model, post_edit_model = None, None
 
 
+
     # ---------------------------------------------------------------- #
-    # ----------------------Editing process--------------------------- #
+    # ----------------------Evaluating Process------------------------ #
+    # -------------------Evaluating pre_edit_model-------------------- #
+    # ---------------------------------------------------------------- #    
+    
+    
+    # Custom metrics calculation for pre_edit_model
+ 
+    # Load the pre_edit_model
+    pre_edit_model = load_pre_edit_model()
+        
+    # All needed outputs for pre_edit_model
+    pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict, _ = preprare_responses(tokenizer, pre_edit_model, True, norms_dict, None)
+    
+    # Write pre_edit_response to a file
+    save_as_json(norms_dict | pre_edit_output_dict, "pre_edit_logs")
+
+    pre_edit_sentiment = calculate_sentiment_analysis_labels(norms_dict, True, pre_edit_output_dict, None)
+    save_as_json(pre_edit_sentiment, "pre_edit_sentiment")
+    
+    pre_edit_perplexity = calculate_perplexity_for_locality(tokenizer, pre_edit_model, pre_edit_output_dict)
+    save_as_json(pre_edit_perplexity, "pre_edit_perplexity")
+
+    # Unload pre_edit_model if not used later
+    unload_pre_edit_model(pre_edit_model)
+
+
+
+
     # ---------------------------------------------------------------- #
+    # ----------------------Editing Process--------------------------- #
+    # ---------------------------------------------------------------- #
+    
     
         
     # Initialize the arguments dictionary
@@ -191,40 +227,45 @@ def main():
     else:
         log(f"Editing took {editing_time:.2f} seconds.",False,False,True)
         
+            
          
-    # ---------------------------------------------------------------- #
-    # ----------------------Evaluation process------------------------ #
-    # ---------------------------------------------------------------- #
-        
-     
+         
     # Load the pre_edit_model
     if config.editing_method == "IKE":
-        pre_edit_model = load_pre_edit_model()
         post_edit_model = pre_edit_model
     else:
         # Saving the post edit metrics of Easy Edit 
         save_as_json(post_edit_easy_edit_metrics,"post_edit_easy_edit_metrics")
         log("Metrics saved as json file",False,False,False)
         log("Loaded edited model",True,False,True)
-        print_gpu_memory()
+        print_gpu_memory()     
+         
+    
+          
+         
+    # ---------------------------------------------------------------- #
+    # ----------------------Evaluating process------------------------ #
+    # ------------------Evaluating post_edit_model-------------------- #
+    # ---------------------------------------------------------------- #
         
+     
     
     # All needed outputs for post_edit_model
-    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict, new_ike_edit_args = preprare_responses(tokenizer, post_edit_model, False , edit_args, ike_generation_prompts)
+    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict, new_ike_edit_args = preprare_responses(tokenizer, post_edit_model, False , norms_dict, ike_generation_prompts)
     
     # Write post_edit_response to a file
     if config.editing_method == "IKE":
         save_as_json(new_ike_edit_args | post_edit_output_dict,"post_edit_logs")
     else:
-        save_as_json(edit_args | post_edit_output_dict,"post_edit_logs")
+        save_as_json(norms_dict | post_edit_output_dict,"post_edit_logs")
 
     
     # Calculate the custom metrics for post_edit_model
-    post_edit_sentiment = calculate_sentiment_analysis_labels(edit_args, False, post_edit_output_dict, new_ike_edit_args)
+    post_edit_sentiment = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, new_ike_edit_args)
     save_as_json(post_edit_sentiment,"post_edit_sentiment")
     
     
-    post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, edit_args, post_edit_output_dict)
+    post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, pre_edit_output_dict)
     save_as_json(post_edit_perplexity, "post_edit_perplexity")
     
     
@@ -234,25 +275,15 @@ def main():
         
         
         
-    # Custom metrics calculation for pre_edit_model
- 
-    # Load the pre_edit_model if needed
-    if not pre_edit_model:
-        pre_edit_model = load_pre_edit_model()
         
-    # All needed outputs for pre_edit_model
-    pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict, _ = preprare_responses(tokenizer, pre_edit_model, True, edit_args, ike_generation_prompts)
-    
-    # Write post_edit_response to a file
-    save_as_json(edit_args | pre_edit_output_dict, "pre_edit_logs")
-
-    pre_edit_sentiment = calculate_sentiment_analysis_labels(edit_args, True, pre_edit_output_dict, None)
-    save_as_json(pre_edit_sentiment, "pre_edit_sentiment")
     
     
-    pre_edit_perplexity = calculate_perplexity_for_locality(tokenizer, pre_edit_model, edit_args, pre_edit_output_dict)
-    save_as_json(pre_edit_perplexity, "pre_edit_perplexity")
-        
+    # ---------------------------------------------------------------- #
+    # ----------------------Evaluating process------------------------ #
+    # ------------------Measuring the Edit Effects-------------------- #
+    # ---------------------------------------------------------------- #
+    
+    
     
     # Show the effects of the edit
     edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_sentiment, post_edit_sentiment)
@@ -265,9 +296,13 @@ def main():
     save_as_json(edit_effect_perplexity_metric,"edit_effect_perplexity_metric")
  
  
-    # Unload pre_edit_model if not used later
-    unload_pre_edit_model(pre_edit_model)
-        
+      
+      
+    
+      
+    # ---------------------------------------------------------------- #
+    # ----------------------Debugging process------------------------- #
+    # ---------------------------------------------------------------- #
     
     # Output scores, KL divergence and other useful information
     output_debugging_info(tokenizer, pre_edit_model, post_edit_model, edit_args, pre_edit_output_dict, post_edit_output_dict, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_scores_dict, post_edit_scores_dict)
@@ -285,13 +320,13 @@ def parse_arguments():
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
-    # Shortcuts : e,f,s,t,m,n,d,k,o,a,b,w
+    # Shortcuts : e,s,f,t,m,n,d,k,o,w
     
     parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(config.available_editing_methods.values()),
                         help="Editing method to use\nIf not specified, then no editing is performed")
-    parser.add_argument("--model_name", type=str, default=config.available_models[10],
+    parser.add_argument("--model_name", type=str, default=config.model_name,
                         help="Name of the model to use")
-    parser.add_argument("-s","--norms_subset_size", type=int, default=1,
+    parser.add_argument("-s","--norms_subset_size", type=int, default=config.norms_subset_size,
                         help="Number of norms to edit")
     parser.add_argument("-f","--freely_chat", action="store_true",
                         help="Whether to freely chat with the post-edit model")
@@ -301,19 +336,19 @@ def parse_arguments():
                         help="Shuffle the dataset")
     
     # Decoding strategy parameters
-    parser.add_argument("--seed", type=int, default=-1,
+    parser.add_argument("--seed", type=int, default=config.seed,
                         help="Random seed for reproducibility, leave -1 for same hardcoded seed always")
-    parser.add_argument("--max_length", type=int, default=100,
+    parser.add_argument("--max_length", type=int, default=config.max_length,
                         help="Maximum number of tokens in the prompt")
-    parser.add_argument("-m", "--max_new_tokens", type=int, default=8,
+    parser.add_argument("-m", "--max_new_tokens", type=int, default=config.max_new_tokens,
                         help="Maximum number of new tokens to generate")
-    parser.add_argument("-n", "--num_beams", type=int, default=15,
+    parser.add_argument("-n", "--num_beams", type=int, default=config.num_beams,
                         help="Maximum number of new tokens to generate")
     parser.add_argument("-d", "--do_sample", action="store_true",
                         help="Activate multinomial-sampling")
     parser.add_argument("--early_stopping", action="store_true",
                         help="Early stopping")
-    parser.add_argument("--no_repeat_ngram_size", type=int, default=0,
+    parser.add_argument("--no_repeat_ngram_size", type=int, default=config.no_repeat_ngram_size,
                         help="No repeat ngram size")
     
     # Debugging stuff
@@ -325,7 +360,7 @@ def parse_arguments():
     # Extra information
     parser.add_argument("-o", "--enable_output_scores", action="store_true",
                         help="Show the scores for the most probable tokens")
-    parser.add_argument("--top_k", type=int, default=4,
+    parser.add_argument("--scores_top_k", type=int, default=config.scores_top_k,
                         help="Top k probable tokens for the output scores")
     
 
@@ -334,7 +369,7 @@ def parse_arguments():
                         help="Whether to do the inference on the CPU")
     parser.add_argument("-w",'--weights_dtype', type=str, choices=['float32', 'float16', 'bfloat16'],
                         default='float32', help='Data type for weights: float32, 16 or bfloat16' )
-    parser.add_argument("--config_file_name", type=str, default=config.available_models[10].split("/")[1],
+    parser.add_argument("--config_file_name", type=str, default=config.model_name.split("/")[1],
                         help="Name of the config file")
     
     args = parser.parse_args()
@@ -362,7 +397,7 @@ def parse_arguments():
     config.no_repeat_ngram_size = args.no_repeat_ngram_size
     config.early_stopping = args.early_stopping
     config.do_sample = args.do_sample
-    config.top_k = args.top_k
+    config.scores_top_k = args.scores_top_k
     config.apply_edit = True
     config.train = args.train
     config.enable_analytics = args.enable_analytics

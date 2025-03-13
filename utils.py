@@ -261,7 +261,7 @@ def get_datasets_path():
 
 # Unloads a model from GPU memory if a given condition is met.
 def unload_pre_edit_model(model):
-    if model and not config.enable_models_check:
+    if model and not config.enable_models_check and config.editing_method != "IKE":
         del model
         torch.cuda.empty_cache()
         log("Unloaded pre_edit_model", False, False, True)
