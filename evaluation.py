@@ -305,6 +305,9 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
 
     decoded_responses_locality_neighborhood = []
     decoded_responses_locality_distracting = []
+    
+    decoded_unformatted_responses_locality_neighborhood = []
+    decoded_unformatted_responses_locality_distracting = []
 
     logits = []
     scores = []
@@ -415,6 +418,11 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
         decoded_responses_locality_neighborhood.append(format_output(decoded_output, len(used_edit_args["locality_inputs"]["neighborhood"]["prompt"][edit_index]), 8)) 
         decoded_responses_locality_distracting.append(format_output(decoded_output, len(used_edit_args["locality_inputs"]["distracting"]["prompt"][edit_index]), 9)) 
 
+        # Without removing any trailing spaces or commas etc. to use later for perplexity metric
+        decoded_unformatted_responses_locality_neighborhood.append([decoded_output[idx] for idx in range(config.num_return_sequences * 8, config.num_return_sequences * 8 + config.num_return_sequences)]) 
+        decoded_unformatted_responses_locality_distracting.append([decoded_output[idx] for idx in range(config.num_return_sequences * 9, config.num_return_sequences * 9 + config.num_return_sequences)]) 
+
+    
         logits.append(output.logits)
         scores.append(output.scores)
         
@@ -430,6 +438,8 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
         "portability_two_hop": decoded_responses_portability_two_hop,
         "locality_neighborhood": decoded_responses_locality_neighborhood,
         "locality_distracting": decoded_responses_locality_distracting,
+        "unformatted_locality_neighborhood": decoded_unformatted_responses_locality_neighborhood,
+        "unformatted_locality_distracting":  decoded_unformatted_responses_locality_distracting 
     }
     
     # It took me an hour to come up with this
@@ -838,7 +848,7 @@ def find_first_differing_token(logits1, logits2):
 
 
 
-def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
+def evaluate_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
     """
     Finds the first token, at which the pre_edit and post_edit responses begin to differ
     and calculate the kl divergence at this point exactly.
@@ -901,7 +911,7 @@ def evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_di
 def calculate_perplexity(tokenizer, model, input_text):
     
     # Tokenize input
-    inputs = tokenizer(input_text, return_tensors="pt", truncation=True, max_length=model.config.n_positions)
+    inputs = tokenizer(input_text, return_tensors="pt", truncation=True, max_length=model.config.n_positions).to(model.device)
     input_ids = inputs["input_ids"]
     attention_mask = inputs["attention_mask"]
 
@@ -913,10 +923,88 @@ def calculate_perplexity(tokenizer, model, input_text):
     # Compute perplexity
     perplexity = torch.exp(loss)
 
-    print(f"Loss: {loss.item():.4f}")
-    print(f"Perplexity: {perplexity.item():.2f}")
+    # print(f"Loss: {loss.item():.4f}")
+    # print(f"Perplexity: {perplexity.item():.2f}")
     
     return perplexity.item()
+
+
+
+
+
+
+
+
+def calculate_perplexity_for_locality(tokenizer, model, edit_args, output_dict):
+    
+    # One item for each edit
+    edits_effect_list = []
+    
+    # Iterate over edits
+    for i in range(config.norms_subset_size):
+        
+        edit_effect_neighborhood_items = []
+        edit_effect_distracting_items = []
+        
+        for j in range(config.num_return_sequences):
+            
+            neighborhood_sequence = output_dict["unformatted_locality_neighborhood"][i][j]
+            distracting_sequence =  output_dict["unformatted_locality_distracting"][i][j]
+
+            perplexity_neighborhood = calculate_perplexity(tokenizer, model, neighborhood_sequence)
+            perplexity_distracting = calculate_perplexity(tokenizer, model, distracting_sequence)
+
+            edit_effect_neighborhood_items.append(perplexity_neighborhood)
+            edit_effect_distracting_items.append(perplexity_distracting)
+
+        edit_effects_item = {
+            "locality_neighborhood_perplexity": edit_effect_neighborhood_items,
+            "locality_distracting_perplexity": edit_effect_distracting_items,
+        }
+        
+        edits_effect_list.append(edit_effects_item)
+
+    return edits_effect_list
+
+
+
+
+
+
+
+
+def evaluate_perplexity_metric(pre_edit_perplexity_metric, post_edit_perplexity_metric):
+    
+    def format_output(pre_edit_item, post_edit_item, key, results):
+        return f"pre: {pre_edit_item[key]} --> post: {post_edit_item[key]} --> {results}"
+
+
+    def eval_func(pre_edit_item, post_edit_item):
+        if isinstance(pre_edit_item, float):
+            return post_edit_item - pre_edit_item
+        elif isinstance(pre_edit_item,list):
+            return [eval_func(pr, po) for pr, po in zip(pre_edit_item, post_edit_item)]
+    
+    
+    edit_effect_perplexity_metric = []
+    
+    
+    # Iterate over edits
+    for pre_edit_item, post_edit_item in zip(pre_edit_perplexity_metric, post_edit_perplexity_metric):
+        
+        item = {}
+    
+        for key in pre_edit_item:
+            
+            results = eval_func(pre_edit_item[key], post_edit_item[key])
+            
+            item.update({key : format_output(pre_edit_item, post_edit_item, key, results)})
+
+        edit_effect_perplexity_metric.append(item)
+    
+    return edit_effect_perplexity_metric
+
+
 
 
 

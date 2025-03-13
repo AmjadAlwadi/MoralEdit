@@ -94,12 +94,19 @@ from edit import edit
 
 # Necessary:
 # Fix num_return_sequences and extend it for every metric  done
+# Make the output format more consistent
 # Fix temperature and try it     
 # Extend the KL divergence implementation done
 # Add the different decoding strategy names done
 # Finish the visualization plots
 # Count or measure NS and NM
 # Implement perplexity
+# Take config parameters as default ones
+
+# First do all pre edit model things
+# then edit
+# then evaluate post edits
+
 
 # Optional:
 # Implement the causal tracing.
@@ -199,7 +206,7 @@ def main():
         save_as_json(post_edit_easy_edit_metrics,"post_edit_easy_edit_metrics")
         log("Metrics saved as json file",False,False,False)
         log("Loaded edited model",True,False,True)
-        print_gpu_memory()    
+        print_gpu_memory()
         
     
     # All needed outputs for post_edit_model
@@ -212,17 +219,22 @@ def main():
         save_as_json(edit_args | post_edit_output_dict,"post_edit_logs")
 
     
-    # Calculate the custom metric for post_edit_model
+    # Calculate the custom metrics for post_edit_model
     post_edit_sentiment = calculate_sentiment_analysis_labels(edit_args, False, post_edit_output_dict, new_ike_edit_args)
     save_as_json(post_edit_sentiment,"post_edit_sentiment")
-            
+    
+    
+    post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, edit_args, post_edit_output_dict)
+    save_as_json(post_edit_perplexity, "post_edit_perplexity")
+    
+    
         
     # Unload post_edit_model if not used later
     unload_post_edit_model(post_edit_model)
         
         
         
-    # Custom metric calculation for pre_edit_model
+    # Custom metrics calculation for pre_edit_model
  
     # Load the pre_edit_model if needed
     if not pre_edit_model:
@@ -236,16 +248,22 @@ def main():
 
     pre_edit_sentiment = calculate_sentiment_analysis_labels(edit_args, True, pre_edit_output_dict, None)
     save_as_json(pre_edit_sentiment, "pre_edit_sentiment")
-        
+    
+    
+    pre_edit_perplexity = calculate_perplexity_for_locality(tokenizer, pre_edit_model, edit_args, pre_edit_output_dict)
+    save_as_json(pre_edit_perplexity, "pre_edit_perplexity")
         
     
     # Show the effects of the edit
     edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_sentiment, post_edit_sentiment)
     save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
     
-    edit_effect_kl_div_metric = evaluate_edit_effect_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict)
+    edit_effect_kl_div_metric = evaluate_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict)
     save_as_json(edit_effect_kl_div_metric,"edit_effect_kl_div_metric")
     
+    edit_effect_perplexity_metric = evaluate_perplexity_metric(pre_edit_perplexity, post_edit_perplexity)
+    save_as_json(edit_effect_perplexity_metric,"edit_effect_perplexity_metric")
+ 
  
     # Unload pre_edit_model if not used later
     unload_pre_edit_model(pre_edit_model)
@@ -287,7 +305,7 @@ def parse_arguments():
                         help="Random seed for reproducibility, leave -1 for same hardcoded seed always")
     parser.add_argument("--max_length", type=int, default=100,
                         help="Maximum number of tokens in the prompt")
-    parser.add_argument("-m", "--max_new_tokens", type=int, default=10,
+    parser.add_argument("-m", "--max_new_tokens", type=int, default=8,
                         help="Maximum number of new tokens to generate")
     parser.add_argument("-n", "--num_beams", type=int, default=15,
                         help="Maximum number of new tokens to generate")
