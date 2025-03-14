@@ -107,7 +107,7 @@ from edit import edit
 # then edit
 # then evaluate post edits
 # KL Div has an issue
-# Do kl div for first token + differing token + the one that has the most kl divergence
+# Do kl div for first token + differing token
 # In the plot later, output the average of those above also
 
 # Optional:
@@ -118,7 +118,8 @@ from edit import edit
 # Train MEND on a split/half or 90% of our edit dataset.
 # Finish the instruction engineering method.
 # Try the different decoding strategies.
-
+# Change moral coherence 
+# Add beams number to file and plot metrics with that
 
 
 
@@ -304,8 +305,6 @@ def main():
     
 
  
- 
-      
       
     
       

@@ -72,7 +72,7 @@ def write_output_to_file(file_name, append:bool,*outputs):
 
 def save_as_json(object,file_name):
     
-    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, config.timestamp)
+    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits", config.timestamp)
     os.makedirs(directory_path, exist_ok=True)
 
     file_path = os.path.join(directory_path, f"{file_name}.json")
