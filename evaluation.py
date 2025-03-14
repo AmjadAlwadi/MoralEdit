@@ -4,7 +4,7 @@ from datasets import load_dataset
 from colorama import Fore, Back, Style, init
 import config
 from utils import create_response
-from utils import log, write_output_to_file
+from utils import log, write_output_to_file, common_prefix, count_tokens
 from dataset_creation.rephrases.utils import send_request
 
 
@@ -142,7 +142,7 @@ def output_token_scores(tokenizer, scores, batch_element_index):
         # Apply softmax to get probabilities
         probs = torch.nn.functional.softmax(score, dim=-1)
         # Get the top 10 tokens
-        top_k_probs, top_k_ids = torch.topk(probs, config.top_k, dim=-1)
+        top_k_probs, top_k_ids = torch.topk(probs, config.scores_top_k, dim=-1)
         top_tokens.append((top_k_ids, top_k_probs))
 
 
@@ -197,8 +197,7 @@ def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, element
     # Pick the specified element/row but if beam search then average the result of all beams
     pre_edit_logit = pre_edit_logit[element_index].unsqueeze(dim=0)
     post_edit_logit = post_edit_logit[element_index].unsqueeze(dim=0)
-    
-    
+        
     # Move to same device
     pre_edit_logit = pre_edit_logit.to(post_edit_logit.device)
     
@@ -207,7 +206,7 @@ def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, element
     edited_probs = torch.nn.functional.softmax(post_edit_logit, dim=-1)
 
     # Compute KL divergence
-    kl_divergence = torch.nn.functional.kl_div(original_probs.log(), edited_probs, reduction='batchmean')
+    kl_divergence = torch.nn.functional.kl_div(original_probs.log(), edited_probs, reduction='batchmean', log_target=False)
 
     return kl_divergence
 
@@ -816,29 +815,30 @@ def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
 
 
 
-def find_first_differing_token(logits1, logits2):
+def find_first_differing_token(tokenizer, pre_edit_output_dict_item, post_edit_output_dict_item, locality_prompt):
     """
-    Finds the first token position where the top-1 predicted token differs 
-    between two logit sequences.
+    Finds the first token position where the predicted tokens differ 
+    between two pre/post edit sequences.
 
     Returns:
-        List of differing positions for each batch element. If no difference, returns -1.
+        List of differing positions for each element. If no difference, returns -1.
     """
-    batch_size = logits1[0].shape[0]
-    differing_positions = [-1] * batch_size  # Default to -1 if no difference found
-    
-    # print("*"*3 + differing_positions)
+    differing_positions = [[-1]*config.num_return_sequences] * config.norms_subset_size  # Default to -1 if no difference found
     
     # Iterate over the token logits
-    for i, (logit1, logit2) in enumerate(zip(logits1, logits2)):  
-        top_tokens1 = torch.argmax(logit1, dim=-1)  # (batch_size,1)
-        top_tokens2 = torch.argmax(logit2, dim=-1)  # (batch_size,1)
-
-        # Find the first differing position for each batch element
-        for batch_idx in range(batch_size):
-            if differing_positions[batch_idx] == -1 and top_tokens1[batch_idx] != top_tokens2[batch_idx]:
-                differing_positions[batch_idx] = i  # Save first differing position
-
+    for edit_index in range(config.norms_subset_size):  
+        for sequence_index in range(config.num_return_sequences):
+            
+            # Find the identical parts of pre/post edit sequences
+            index , common_sentence = common_prefix(pre_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):], post_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):])
+            
+            # Convert strings into tokens and count their number
+            number_of_common_tokens = count_tokens(tokenizer, common_sentence)
+            differing_positions[edit_index][sequence_index] = number_of_common_tokens
+            
+            if index == -1:
+                differing_positions[edit_index][sequence_index] = -1
+            
     return differing_positions  # List of first differing token positions for each batch
 
 
@@ -848,7 +848,7 @@ def find_first_differing_token(logits1, logits2):
 
 
 
-def evaluate_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
+def evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_output_dict, post_edit_output_dict, norms_dict):
     """
     Finds the first token, at which the pre_edit and post_edit responses begin to differ
     and calculate the kl divergence at this point exactly.
@@ -856,19 +856,19 @@ def evaluate_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
     Get every element of the batch and do the process seperately, then average the result.
     
     """
-    
-    
+
 
     def format_output(item):
         return item
     
     
     kl_div_dict = {}
+
     
-    
-    # iterate over keys
-    for key in pre_edit_logits_dict.keys():
-        differing_token_indices = find_first_differing_token(pre_edit_logits_dict[key], post_edit_logits_dict[key])
+    # iterate only over locality keys
+    for key in ["locality_neighborhood", "locality_distracting"]:
+        
+        differing_token_indices = find_first_differing_token(tokenizer, pre_edit_output_dict[f"unformatted_{key}"], post_edit_output_dict[f"unformatted_{key}"], norms_dict["locality_inputs"][key.split("_")[1]]["prompt"])
         result_per_key = []
         
         # iterate over edits and sequences (batch/number_of_norms * num_beams)
@@ -878,14 +878,24 @@ def evaluate_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict):
             for sequence_index in range(config.num_return_sequences):
                 
                 current_index = sequence_index + config.num_return_sequences * edit_index
-                differing_token_index = differing_token_indices[current_index]
+                differing_token_index = differing_token_indices[edit_index][sequence_index]
                 differing_token_index_temp = differing_token_index
                 
                 # If no difference found, calculate the kl div at the first token
                 if differing_token_index == -1:
                     differing_token_index = 0
                 
-                result_per_edit.append((calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], current_index, differing_token_index).item(), differing_token_index_temp))
+                kl_div_first_token = calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], current_index, 0).item()
+                kl_div_differing_token = calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], current_index, differing_token_index).item()
+            
+                
+                item_dict = {
+                    "kl_div_first_token" : kl_div_first_token,
+                    "kl_div_differing_token" : kl_div_differing_token,
+                    "kl_div_differing_token_index" : differing_token_index_temp,
+                }
+                
+                result_per_edit.append(item_dict)
             
             result_per_key.append(result_per_edit)
             
@@ -1215,20 +1225,20 @@ def load_facts():
 
 
 
-def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits, post_edit_logits):
+def calculate_kl_divergence_amongst_all_tokens(pre_edit_logits, post_edit_logits, element_index):
     result = 0
     biggest_kl_divergence = 0
     biggest_kl_divergence_index = 0
     
     for i in range(len(pre_edit_logits)):
-        current_kl_divergence = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, i).item()
+        current_kl_divergence = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, element_index, i).item()
         result += current_kl_divergence
 
         if current_kl_divergence > biggest_kl_divergence:
             biggest_kl_divergence = current_kl_divergence
             biggest_kl_divergence_index = i
         
-    return result, biggest_kl_divergence, biggest_kl_divergence_index
+    return biggest_kl_divergence, biggest_kl_divergence_index, result
 
 
 
@@ -1240,7 +1250,7 @@ def analyse_kl_divergence(pre_edit_logits,post_edit_logits) -> str:
     output = ""
     if pre_edit_logits and post_edit_logits and config.editing_method != "IKE":
         kl_div_first_token = calculate_kl_divergence_for_token(pre_edit_logits,post_edit_logits, 2)
-        kl_div_all_tokens, biggest_div, biggest_div_index = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits)
+        biggest_div, biggest_div_index, kl_div_all_tokens = calculate_kl_divergence_amongst_all_tokens(pre_edit_logits,post_edit_logits, 0)
         check2 = f"KL divergence for first token: {kl_div_first_token}"
         check3 = f"KL divergence amongst all tokens: {kl_div_all_tokens}"
         check4 = f"Biggest KL divergence is on token {biggest_div_index} with the value of {biggest_div}"

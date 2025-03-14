@@ -131,7 +131,7 @@ def main():
     
     
     # ---------------------------------------------------------------- #
-    # -----------------Some Initialization Stuff---------------------- #
+    # ---------------- Some Initialization Stuff --------------------- #
     # ---------------------------------------------------------------- #
     
     init()
@@ -164,8 +164,8 @@ def main():
 
 
     # ---------------------------------------------------------------- #
-    # ----------------------Evaluating Process------------------------ #
-    # -------------------Evaluating pre_edit_model-------------------- #
+    # --------------------- Evaluating Process ----------------------- #
+    # ------------------ Evaluating pre_edit_model ------------------- #
     # ---------------------------------------------------------------- #    
     
     
@@ -180,11 +180,13 @@ def main():
     # Write pre_edit_response to a file
     save_as_json(norms_dict | pre_edit_output_dict, "pre_edit_logs")
 
-    pre_edit_sentiment = calculate_sentiment_analysis_labels(norms_dict, True, pre_edit_output_dict, None)
-    save_as_json(pre_edit_sentiment, "pre_edit_sentiment")
+    if config.enable_sentiment:
+        pre_edit_sentiment = calculate_sentiment_analysis_labels(norms_dict, True, pre_edit_output_dict, None)
+        save_as_json(pre_edit_sentiment, "pre_edit_sentiment")
     
-    pre_edit_perplexity = calculate_perplexity_for_locality(tokenizer, pre_edit_model, pre_edit_output_dict)
-    save_as_json(pre_edit_perplexity, "pre_edit_perplexity")
+    if config.enable_perplexity:
+        pre_edit_perplexity = calculate_perplexity_for_locality(tokenizer, pre_edit_model, pre_edit_output_dict)
+        save_as_json(pre_edit_perplexity, "pre_edit_perplexity")
 
     # Unload pre_edit_model if not used later
     unload_pre_edit_model(pre_edit_model)
@@ -193,7 +195,7 @@ def main():
 
 
     # ---------------------------------------------------------------- #
-    # ----------------------Editing Process--------------------------- #
+    # --------------------- Editing Process -------------------------- #
     # ---------------------------------------------------------------- #
     
     
@@ -244,8 +246,8 @@ def main():
           
          
     # ---------------------------------------------------------------- #
-    # ----------------------Evaluating process------------------------ #
-    # ------------------Evaluating post_edit_model-------------------- #
+    # --------------------- Evaluating process ----------------------- #
+    # ----------------- Evaluating post_edit_model ------------------- #
     # ---------------------------------------------------------------- #
         
      
@@ -261,12 +263,14 @@ def main():
 
     
     # Calculate the custom metrics for post_edit_model
-    post_edit_sentiment = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, new_ike_edit_args)
-    save_as_json(post_edit_sentiment,"post_edit_sentiment")
+    if config.enable_sentiment:
+        post_edit_sentiment = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, new_ike_edit_args)
+        save_as_json(post_edit_sentiment,"post_edit_sentiment")
     
     
-    post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, pre_edit_output_dict)
-    save_as_json(post_edit_perplexity, "post_edit_perplexity")
+    if config.enable_perplexity:
+        post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, pre_edit_output_dict)
+        save_as_json(post_edit_perplexity, "post_edit_perplexity")
     
     
         
@@ -279,21 +283,26 @@ def main():
     
     
     # ---------------------------------------------------------------- #
-    # ----------------------Evaluating process------------------------ #
-    # ------------------Measuring the Edit Effects-------------------- #
+    # --------------------- Evaluating process ----------------------- #
+    # ----------------- Measuring the Edit Effects ------------------- #
     # ---------------------------------------------------------------- #
     
     
     
     # Show the effects of the edit
-    edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_sentiment, post_edit_sentiment)
-    save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
+    if config.enable_sentiment:
+        edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_sentiment, post_edit_sentiment)
+        save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
     
-    edit_effect_kl_div_metric = evaluate_kl_div_metric(pre_edit_logits_dict, post_edit_logits_dict)
-    save_as_json(edit_effect_kl_div_metric,"edit_effect_kl_div_metric")
+    if config.enable_perplexity:
+        edit_effect_perplexity_metric = evaluate_perplexity_metric(pre_edit_perplexity, post_edit_perplexity)
+        save_as_json(edit_effect_perplexity_metric,"edit_effect_perplexity_metric")
     
-    edit_effect_perplexity_metric = evaluate_perplexity_metric(pre_edit_perplexity, post_edit_perplexity)
-    save_as_json(edit_effect_perplexity_metric,"edit_effect_perplexity_metric")
+    if config.enable_kl_div:
+        edit_effect_kl_div_metric = evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_output_dict, post_edit_output_dict, norms_dict)
+        save_as_json(edit_effect_kl_div_metric,"edit_effect_kl_div_metric")
+    
+
  
  
       
@@ -301,7 +310,7 @@ def main():
     
       
     # ---------------------------------------------------------------- #
-    # ----------------------Debugging process------------------------- #
+    # --------------------- Debugging process ------------------------ #
     # ---------------------------------------------------------------- #
     
     # Output scores, KL divergence and other useful information
@@ -320,7 +329,7 @@ def parse_arguments():
     
     parser = argparse.ArgumentParser(description="Model Editing Script")
     
-    # Shortcuts : e,s,f,t,m,n,d,k,o,w
+    # Shortcuts : e,s,f,t,m,n,d,k,o,w,a,b,c
     
     parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(config.available_editing_methods.values()),
                         help="Editing method to use\nIf not specified, then no editing is performed")
@@ -364,6 +373,15 @@ def parse_arguments():
                         help="Top k probable tokens for the output scores")
     
 
+    # Evaluation
+    parser.add_argument("-a", "--enable_sentiment", action="store_true",
+                        help="Enable sentiment calculation")
+    parser.add_argument("-b", "--enable_perplexity", action="store_true",
+                        help="Enable perplexity calculation")
+    parser.add_argument("-c", "--enable_kl_div", action="store_true",
+                        help="Enable kl divergence calculation")
+  
+    
     
     parser.add_argument("--enable_cpu_inference", action="store_true",
                         help="Whether to do the inference on the CPU")
@@ -404,6 +422,9 @@ def parse_arguments():
     config.enable_output_scores = args.enable_output_scores
     config.enable_models_check = args.enable_models_check
     config.num_return_sequences = config.num_beams
+    config.enable_sentiment = args.enable_sentiment
+    config.enable_kl_div = args.enable_kl_div
+    config.enable_perplexity = args.enable_perplexity
     
     
     config.decoding_strategy = "greedy-decoding"

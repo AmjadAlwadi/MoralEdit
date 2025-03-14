@@ -59,14 +59,11 @@ available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
 
 
 # Global config variables
-
-
-
 datasets_path = get_datasets_path()
 
 
 # General configuration
-model_name = "openai/gpt2-xl"
+model_name = "openai-community/gpt2-xl"
 device = 0
 train = False
 weights_dtype = None
@@ -80,11 +77,11 @@ num_beams = 15
 max_length = 100
 no_repeat_ngram_size = 0
 early_stopping = True
-max_new_tokens = 8
+max_new_tokens = 10
 num_return_sequences = num_beams
 temperature = 1e-10  # To ensure reproducibility
-# top_k=50
-# top_p=0.95
+top_k =50
+top_p =0.95
 seed = -1
 
 # For editing
@@ -95,10 +92,15 @@ train_hparams_path = None
 ike_loc_examples_number = 2
 
 
+# Evaluation
+enable_sentiment = False
+enable_kl_div = False
+enable_perplexity = False
+
 
 # For debugging
 enable_models_check = False
 enable_analytics = False
 enable_output_scores = False
-top_k = 5
+scores_top_k = 5
 freely_chat_with_post_edit_model = False

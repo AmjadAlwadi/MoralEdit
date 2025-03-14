@@ -145,15 +145,15 @@ if __name__ == "__main__":
     custom_metrics_headers, _ = extract_leaf_keys(custom_metrics_data[0]['pre'])
     
     # Create for every method
-    rome_average = average_among_all_files(False, False, "ROME")
-    rome_average_gpt = average_among_all_files(False, False,"ROME","gpt2-xl")
-    # ike_average = average_among_all_files(False, False,)
-    # mend_average = average_among_all_files(False, False)
-    # rome_average = average_among_all_files(False, False)
+    # rome_average = average_among_all_files(False, False, "ROME")
+    # rome_average_gpt = average_among_all_files(False, False,"ROME","gpt2-xl")
+    ike_average = average_among_all_files(False, False,)
+    mend_average = average_among_all_files(False, False)
+    rome_average = average_among_all_files(False, False)
     
 
     # Generate the LaTeX table
-    latex_table = generate_latex_table(metrics_headers, [rome_average])
+    latex_table = generate_latex_table(metrics_headers, [mend_average])
     
     # Print the LaTeX table
     print(latex_table)

@@ -94,13 +94,18 @@ def lower_case_first_character(s):
 
 
 def common_prefix(str1, str2):
-    prefix = []
-    for ch1, ch2 in zip(str1, str2):
-        if ch1 == ch2:
-            prefix.append(ch1)
-        else:
-            break
-    return ''.join(prefix)
+    if str1 == str2:
+        return -1, str1
+    else:
+        prefix = []
+        for ch1, ch2 in zip(str1, str2):
+            if ch1 == ch2:
+                prefix.append(ch1)
+            else:
+                break
+        
+        differing_token_index = len(prefix)
+        return differing_token_index, ''.join(prefix)
 
 
 
@@ -198,6 +203,13 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
         
 
     return outputs
+
+
+
+
+def count_tokens(tokenizer, sentence):
+    tokens = tokenizer.encode(sentence, add_special_tokens=False)
+    return len(tokens)
 
 
 
