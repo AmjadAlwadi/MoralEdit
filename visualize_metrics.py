@@ -4,6 +4,7 @@ import os
 import numpy as np
 import statistics
 import re
+from collections import defaultdict
 
 # Generate a latex table and a plot
 
@@ -39,18 +40,6 @@ def generate_latex_table(headers, rows):
 
 
 
-
-
-
-
-
-def find_metric_files(root_dir):
-    metric_files = []
-    for dirpath, dirnames, filenames in os.walk(root_dir):
-        for file in filenames:
-            if file == "metrics_summary.json":
-                metric_files.append(os.path.join(dirpath, file))
-    return metric_files
 
 
 
@@ -153,10 +142,10 @@ def extract_kl_values(metric_path):
     
     
     kl_div_dict = {
-        "neighborhood_first_token_average" : all_edits_average_locality_neighborhood_first_token,
-        "neighborhood_differing_token_average" : all_edits_average_locality_neighborhood_differing_token,
-        "distracting_first_token_average" : all_edits_average_locality_distracting_first_token,
-        "distracting_differing_token_average" : all_edits_average_locality_distracting_differing_token, 
+        "kl_div_neighborhood_first_token_average" : all_edits_average_locality_neighborhood_first_token,
+        "kl_div_neighborhood_differing_token_average" : all_edits_average_locality_neighborhood_differing_token,
+        "kl_div_distracting_first_token_average" : all_edits_average_locality_distracting_first_token,
+        "kl_div_distracting_differing_token_average" : all_edits_average_locality_distracting_differing_token, 
     }
     
     
@@ -188,8 +177,8 @@ def extract_perplexity_values(metric_path):
     edits_locality_distracting_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_distracting])
     
     perplexity_dict = {
-        "edits_locality_neighborhood_average" : edits_locality_neighborhood_average,
-        "edits_locality_distracting_average" : edits_locality_distracting_average,
+        "perplexity_neighborhood_average" : edits_locality_neighborhood_average,
+        "perplexity_distracting_average" : edits_locality_distracting_average,
     }
     
     return perplexity_dict
@@ -227,7 +216,7 @@ def extract_sentiment_values(metric_path):
     sentiment_dict = {}
     
     for key in keys:
-        sentiment_dict[f"edits_{key}_average"] = edits_averages[key]
+        sentiment_dict[f"sentiment_{key}_average"] = edits_averages[key]
     
     
     return sentiment_dict
@@ -236,6 +225,13 @@ def extract_sentiment_values(metric_path):
 
 
 
+# def find_metric_files(root_dir):
+#     metric_files = []
+#     for dirpath, dirnames, filenames in os.walk(root_dir):
+#         for file in filenames:
+#             if file == "metrics_summary.json":
+#                 metric_files.append(os.path.join(dirpath, file))
+#     return metric_files
 
 
 
@@ -313,6 +309,14 @@ def extract_sentiment_values(metric_path):
 
 
 
+def average_among_many_files(files_paths):
+    pass
+
+
+
+
+
+
 def format_as_row(value, result_key, result_value):
     return [change_underscore(result_key), value["editing_method"], value["model_name"], value["decoding_strategy"], str(value["number_of_sequential_edits"]), f"{result_value:.4f}"]
 
@@ -321,6 +325,27 @@ def format_as_row(value, result_key, result_value):
 
 def change_underscore(s):
     return "-".join(s.split("_"))
+
+
+
+
+def reduce_rows_to_averages(rows):
+    grouped = defaultdict(list)
+
+    # Group rows by (metric, method, model, decoding, edits)
+    for row in rows:
+        key = tuple(row[:-1])  # All columns except the last one (value)
+        value = float(row[-1])  # The last column (value)
+        grouped[key].append(value)
+    
+    # Average the values for each group
+    reduced_rows = [
+        list(key) + [round(statistics.mean(values), 4)]  # Round to 4 decimal places
+        for key, values in grouped.items()
+    ]
+    
+    return reduced_rows
+
 
 
 
@@ -371,6 +396,7 @@ if __name__ == "__main__":
     
     rows = []
     
+    
     for key, value in kl_div_files_dict.items():
         result = extract_kl_values(key)
         
@@ -394,8 +420,12 @@ if __name__ == "__main__":
     
         
 
+    rows = reduce_rows_to_averages(rows)
+    
+
     # Generate the LaTeX table
     latex_table = generate_latex_table(headers, rows)
     
-    # # Print the LaTeX table
+    
+    # Print the LaTeX table
     print(latex_table)
