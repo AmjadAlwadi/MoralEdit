@@ -70,9 +70,23 @@ def write_output_to_file(file_name, append:bool,*outputs):
 
 
 
+
+def count_directories(path):
+    # Ensure the provided path is a directory
+    if not os.path.isdir(path):
+        print("The provided path is not a valid directory.")
+        return
+
+    # Count the directories in the given path
+    dir_count = sum(1 for entry in os.scandir(path) if entry.is_dir())
+    return dir_count
+
+
+
 def save_as_json(object,file_name):
     
-    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits", config.timestamp)
+    num_dirs = count_directories(os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits"))
+    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits", f"{config.timestamp}_{num_dirs + 1}")
     os.makedirs(directory_path, exist_ok=True)
 
     file_path = os.path.join(directory_path, f"{file_name}.json")

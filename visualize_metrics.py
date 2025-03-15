@@ -162,7 +162,7 @@ def extract_perplexity_values(metric_path):
     edits_locality_distracting = [item["locality_distracting_perplexity"] for item in metric_file]
 
     def extract_last_list(s):
-        pattern = r"\[([\d\.\s,]+)\]$"
+        pattern = r"\[([-]?\d*\.?\d+(?:\s*,\s*[-]?\d*\.?\d+)*)\]$"
         match = re.search(pattern, s)
 
         if match:
@@ -171,9 +171,12 @@ def extract_perplexity_values(metric_path):
 
 
     edits_locality_neighborhood = [extract_last_list(item) for item in edits_locality_neighborhood]
+    print(edits_locality_neighborhood)
     edits_locality_neighborhood_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_neighborhood])
     
+    print("before", edits_locality_distracting)
     edits_locality_distracting = [extract_last_list(item) for item in edits_locality_distracting]
+    print("after",edits_locality_distracting)
     edits_locality_distracting_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_distracting])
     
     perplexity_dict = {
@@ -419,7 +422,6 @@ if __name__ == "__main__":
             rows.append(format_as_row(value, result_key, result_value))
     
         
-
     rows = reduce_rows_to_averages(rows)
     
 

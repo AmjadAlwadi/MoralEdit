@@ -118,8 +118,15 @@ from edit import edit
 # Train MEND on a split/half or 90% of our edit dataset.
 # Finish the instruction engineering method.
 # Try the different decoding strategies.
-# Change moral coherence 
+# Change moral coherence
 # Add beams number to file and plot metrics with that
+# Change perplexity to be not abs but the percentage of change
+# Ask if we should not take value of 0-token if index is -1
+# Add arrows to the metrics
+# Split into multiple tables
+
+# Plots:
+# Plot locality + perplexity with sequential edits number
 
 
 
