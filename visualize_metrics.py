@@ -3,6 +3,7 @@ import json
 import os
 import numpy as np
 import statistics
+import re
 
 # Generate a latex table and a plot
 
@@ -38,48 +39,6 @@ def generate_latex_table(headers, rows):
     return latex_table
 
 
-
-
-def extract_leaf_keys(data, parent_key=''):
-    keys_list = []
-    values_list = []
-    for k, v in data.items():
-        k = k.replace('_', '-')
-        full_key = f"{parent_key}.{k}" if parent_key else k
-        if isinstance(v, dict):
-            sub_keys, sub_values = extract_leaf_keys(v, full_key)
-            keys_list.extend(sub_keys)
-            values_list.extend(sub_values)
-        else:
-            keys_list.append(full_key)
-            values_list.append(v)
-    return keys_list, values_list
-
-
-
-
-
-def average_among_single_file(data, pre=False):
-    
-    values_list = []
-    key = "post"
-    
-    if pre:
-        key = "pre"
-    
-    
-    for edit in data:
-        _, values = extract_leaf_keys(edit[key])
-        values_list.append(values)
-    
-    
-    # Convert into np arrays
-    values_list = [np.array(values) for values in values_list]
-    values_list = np.array(values_list)
-    
-    average_values = np.mean(values_list, axis=0)
-
-    return average_values.tolist()
 
 
 
@@ -141,10 +100,11 @@ def change_list_format(metric_files):
         editing_method = metric_file_config[0]
         model_name = metric_file_config[1]
         decoding_strategy = metric_file_config[2]
-        time_stamp = metric_file_config[3]
-        metric_file_name = metric_file_config[4]
+        number_of_sequential_edits = metric_file_config[3]
+        time_stamp = metric_file_config[4]
+        metric_file_name = metric_file_config[5]
         
-        new_metric_dict.update({metric_file : {"editing_method" : editing_method, "model_name" : model_name, "decoding_strategy" : decoding_strategy, "time_stamp" : time_stamp, "metric_file_name" : metric_file_name}})
+        new_metric_dict.update({metric_file : {"editing_method" : editing_method, "model_name" : model_name, "decoding_strategy" : decoding_strategy, "number_of_sequential_edits" : number_of_sequential_edits, "time_stamp" : time_stamp, "metric_file_name" : metric_file_name}})
 
     return new_metric_dict
 
@@ -155,49 +115,6 @@ def change_list_format(metric_files):
 def extract_kl_values(metric_path):
     
     metric_file = read_json_from_file(metric_path)
-
-
-    # template = {
-    #     "kl_div_locality_neighborhood":
-    #         {
-    #             "first_token" : 0,
-    #             "differing_token" : 0
-    #         },
-    #     "kl_div_locality_distracting":
-    #         {
-    #             "first_token" : 0,
-    #             "differing_token" : 0
-    #         }
-    # }
-
-    # kl_div_sum_for_all_edits = {}
-    # kl_div_sum_for_all_sequences = {}
-    # kl_div_sequences_average = {}
-    # kl_div_edits_average = {}
-    
-    # kl_div_sum_for_all_edits.update(template)
-    # kl_div_sum_for_all_sequences.update(template)
-    # kl_div_sequences_average.update(template)
-    # kl_div_edits_average.update(template)
-    
-    
-    
-
-    # for key in metric_file.keys():
-    #     for edit_item in metric_file[key]:
-    #         for edit_sequence in edit_item:
-    #             kl_div_sum_for_all_sequences[key]["first_token"] += edit_sequence["kl_div_first_token"]
-    #             kl_div_sum_for_all_sequences[key]["differing_token"] += edit_sequence["kl_div_differing_token"]
-
-    #             print(f"kl_div_sum_for_all_sequences[{key}]['first_token']", kl_div_sum_for_all_sequences[key]["first_token"])
-            
-    #         kl_div_sequences_average[key]["first_token"] = kl_div_sum_for_all_sequences[key]["first_token"] / len(edit_item)
-    #         kl_div_sequences_average[key]["differing_token"] = kl_div_sum_for_all_sequences[key]["differing_token"] / len(edit_item)
-
-    #     kl_div_edits_average[key]["first_token"] = kl_div_sum_for_all_edits[key]["first_token"] / len(metric_file[key])
-    #     kl_div_edits_average[key]["differing_token"] = kl_div_sum_for_all_edits[key]["differing_token"] / len(metric_file[key])
-        
-        
         
     kl_div_locality_neighborhood = metric_file["kl_div_locality_neighborhood"]
     kl_div_locality_distracting = metric_file["kl_div_locality_distracting"]
@@ -249,6 +166,81 @@ def extract_kl_values(metric_path):
 
 
 
+
+def extract_perplexity_values(metric_path):
+    metric_file = read_json_from_file(metric_path)
+    edits_locality_neighborhood = [item["locality_neighborhood_perplexity"] for item in metric_file]
+    edits_locality_distracting = [item["locality_distracting_perplexity"] for item in metric_file]
+
+    def extract_last_list(s):
+        pattern = r"\[([\d\.\s,]+)\]$"
+        match = re.search(pattern, s)
+
+        if match:
+            result = [float(x) for x in match.group(1).split(',')]
+            return result
+
+
+    edits_locality_neighborhood = [extract_last_list(item) for item in edits_locality_neighborhood]
+    edits_locality_neighborhood_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_neighborhood])
+    
+    edits_locality_distracting = [extract_last_list(item) for item in edits_locality_distracting]
+    edits_locality_distracting_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_distracting])
+    
+    perplexity_dict = {
+        "edits_locality_neighborhood_average" : edits_locality_neighborhood_average,
+        "edits_locality_distracting_average" : edits_locality_distracting_average,
+    }
+    
+    return perplexity_dict
+
+
+
+
+
+
+def extract_sentiment_values(metric_path):
+    metric_file = read_json_from_file(metric_path)
+    
+    keys = ["prompt","light_generality_1","light_generality_2","light_generality_3","strong_generality","portability_synonym","portability_one_hop","portability_two_hop","locality_neighborhood","locality_distracting"]
+    
+    edits = {}
+    edits_averages = {}
+    
+    for key in keys:
+        edits[key] = [item[key] for item in metric_file]
+
+
+    def extract_last_list(s):
+        pattern = r"\[([0-9\.\s,]+)\]$"
+        match = re.search(pattern, s)
+
+        if match:
+            result = [float(x) for x in match.group(1).split(',')]
+            return result
+
+    for key in keys:
+        edits[key] = [extract_last_list(item) for item in edits[key]]
+        edits_averages[key] = statistics.mean([statistics.mean(lst) for lst in edits[key]])
+    
+    
+    sentiment_dict = {}
+    
+    for key in keys:
+        sentiment_dict[f"edits_{key}_average"] = edits_averages[key]
+    
+    
+    return sentiment_dict
+
+
+
+
+
+
+
+
+
+
 # def average_among_all_files(custom_metric=False, pre=False, *method):
     
 #     files = []
@@ -276,6 +268,53 @@ def extract_kl_values(metric_path):
 
 
 
+
+
+# def extract_leaf_keys(data, parent_key=''):
+#     keys_list = []
+#     values_list = []
+#     for k, v in data.items():
+#         k = k.replace('_', '-')
+#         full_key = f"{parent_key}.{k}" if parent_key else k
+#         if isinstance(v, dict):
+#             sub_keys, sub_values = extract_leaf_keys(v, full_key)
+#             keys_list.extend(sub_keys)
+#             values_list.extend(sub_values)
+#         else:
+#             keys_list.append(full_key)
+#             values_list.append(v)
+#     return keys_list, values_list
+
+
+
+
+
+# def average_among_single_file(data, pre=False):
+    
+#     values_list = []
+#     key = "post"
+    
+#     if pre:
+#         key = "pre"
+    
+    
+#     for edit in data:
+#         _, values = extract_leaf_keys(edit[key])
+#         values_list.append(values)
+    
+    
+#     # Convert into np arrays
+#     values_list = [np.array(values) for values in values_list]
+#     values_list = np.array(values_list)
+    
+#     average_values = np.mean(values_list, axis=0)
+
+#     return average_values.tolist()
+
+
+
+
+
 if __name__ == "__main__":
     
     
@@ -297,9 +336,20 @@ if __name__ == "__main__":
     # for key, value in change_list_format(find_kl_div_metric_files(os.getcwd())).items():
     #     print(extract_kl_values(key))
     
-    for key, value in change_list_format(find_kl_div_metric_files(os.getcwd())).items():
-        print(extract_kl_values(key))
+    # for key, value in change_list_format(find_kl_div_metric_files(os.getcwd())).items():
+    #     print(extract_kl_values(key))
+    #     print("*"*5)
+        
+        
+    # for key, value in change_list_format(find_perplexity_metric_files(os.getcwd())).items():
+    #     extract_perplexity_values(key)
+    #     print("*"*5)
+        
+    for key, value in change_list_format(find_sentiment_metric_files(os.getcwd())).items():
+        print(extract_sentiment_values(key))
         print("*"*5)
+        
+    
         
 
     # Generate the LaTeX table
