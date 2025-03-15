@@ -16,10 +16,9 @@ def read_json_from_file(file):
 
 
 def generate_latex_table(headers, rows):
-    
     headers = [str(header) for header in headers]
-    rows = [[str(*value) for value in row] for row in rows]
-    
+    rows = [[str(value) for value in row] for row in rows]  # Fixed this
+
     # Start the table
     latex_table = "\\begin{tabular}{" + "|".join(["c"] * len(headers)) + "}\n"
     latex_table += "\\hline\n"
@@ -37,6 +36,7 @@ def generate_latex_table(headers, rows):
     latex_table += "\\end{tabular}"
     
     return latex_table
+
 
 
 
@@ -100,7 +100,7 @@ def change_list_format(metric_files):
         editing_method = metric_file_config[0]
         model_name = metric_file_config[1]
         decoding_strategy = metric_file_config[2]
-        number_of_sequential_edits = metric_file_config[3]
+        number_of_sequential_edits = int(metric_file_config[3].split("_")[0])
         time_stamp = metric_file_config[4]
         metric_file_name = metric_file_config[5]
         
@@ -313,6 +313,16 @@ def extract_sentiment_values(metric_path):
 
 
 
+def format_as_row(value, result_key, result_value):
+    return [change_underscore(result_key), value["editing_method"], value["model_name"], value["decoding_strategy"], str(value["number_of_sequential_edits"]), f"{result_value:.4f}"]
+
+
+
+
+def change_underscore(s):
+    return "-".join(s.split("_"))
+
+
 
 
 if __name__ == "__main__":
@@ -345,15 +355,47 @@ if __name__ == "__main__":
     #     extract_perplexity_values(key)
     #     print("*"*5)
         
-    for key, value in change_list_format(find_sentiment_metric_files(os.getcwd())).items():
-        print(extract_sentiment_values(key))
-        print("*"*5)
         
+    # for key, value in change_list_format(find_sentiment_metric_files(os.getcwd())).items():
+    #     print(extract_sentiment_values(key))
+    #     print("*"*5)
+        
+        
+
+    kl_div_files_dict = change_list_format(find_kl_div_metric_files(os.getcwd()))
+    sentiment_files_dict = change_list_format(find_sentiment_metric_files(os.getcwd()))
+    perplexity_files_dict = change_list_format(find_perplexity_metric_files(os.getcwd()))
+        
+        
+    headers = ["Metric", "Editing Method", "Model", "Decoding Strategy", "Sequential Edits", "value"]
+    
+    rows = []
+    
+    for key, value in kl_div_files_dict.items():
+        result = extract_kl_values(key)
+        
+        for result_key, result_value in result.items():
+            rows.append(format_as_row(value, result_key, result_value))
+   
+    
+    
+    for key, value in perplexity_files_dict.items():
+        result = extract_perplexity_values(key)
+        
+        for result_key, result_value in result.items():
+            rows.append(format_as_row(value, result_key, result_value))
+        
+        
+    for key, value in sentiment_files_dict.items():
+        result = extract_sentiment_values(key)
+        
+        for result_key, result_value in result.items():
+            rows.append(format_as_row(value, result_key, result_value))
     
         
 
     # Generate the LaTeX table
-    # latex_table = generate_latex_table(metrics_headers, [mend_average])
+    latex_table = generate_latex_table(headers, rows)
     
     # # Print the LaTeX table
-    # print(latex_table)
+    print(latex_table)
