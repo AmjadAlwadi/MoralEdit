@@ -494,10 +494,19 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
 def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ike_edit_args):
            
     negative_label = "LABEL_0"  # -1
+    neutral_label =  "LABEL_1"  #  0
     positive_label = "LABEL_2"  #  1
-    neutral_label = "LABEL_1"   #  0
+
     
 
+    # Return {-1, 0, 1}
+    # def labels_to_score(labels):
+    #     if isinstance(labels, list):
+    #         score = -1 * labels[0]["score"] + 0 * labels[0]["score"] + -1 * labels[0]["score"]
+    
+    
+    
+    
     # Return {-1, 0, 1}
     def label_to_int(label):
         if isinstance(label, str):
@@ -570,8 +579,10 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
             *output_dict["locality_distracting"][edit_index]
         ]
         
-        
+        # [{'label': 'LABEL_0', 'score': 0.21452203392982483}, {'label': 'LABEL_1', 'score': 0.5410013794898987}, {'label': 'LABEL_2', 'score': 0.24447660148143768}]
         # Generate predictions
+        # sentiment_output = sentiment_analysis(sentiment_input, batch_size=len(sentiment_input), return_all_scores=True)
+        
         sentiment_output = sentiment_analysis(sentiment_input, batch_size=len(sentiment_input))
         
         dataset_target_new_label = int_to_label(int(edit_args["action_moral_judgment"][edit_index]))

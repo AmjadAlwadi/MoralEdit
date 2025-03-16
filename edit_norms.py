@@ -449,9 +449,7 @@ def parse_arguments():
         
         
         
-    
-    print(config.decoding_strategy)
-    
+        
     if not args.enable_cpu_inference:
         config.device = torch.device('cuda')
     else:

@@ -6,6 +6,19 @@ import statistics
 import re
 from collections import defaultdict
 
+
+kl_div_files_dict = None
+sentiment_files_dict = None
+perplexity_files_dict = None
+headers = None
+
+keep_editing_method=True
+keep_model_name=True
+keep_decoding_method = True
+keep_number_of_sequential_edits = True
+
+
+
 # Generate a latex table and a plot
 
 def read_json_from_file(file):
@@ -39,6 +52,16 @@ def generate_latex_table(headers, rows):
     return latex_table
 
 
+
+
+
+def find_easy_edit_metric_files(root_dir):
+    metric_files = []
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        for file in filenames:
+            if file == "post_edit_easy_edit_metrics.json":
+                metric_files.append(os.path.join(dirpath, file))
+    return metric_files
 
 
 
@@ -96,6 +119,8 @@ def change_list_format(metric_files):
         new_metric_dict.update({metric_file : {"editing_method" : editing_method, "model_name" : model_name, "decoding_strategy" : decoding_strategy, "number_of_sequential_edits" : number_of_sequential_edits, "time_stamp" : time_stamp, "metric_file_name" : metric_file_name}})
 
     return new_metric_dict
+
+
 
 
 
@@ -171,12 +196,9 @@ def extract_perplexity_values(metric_path):
 
 
     edits_locality_neighborhood = [extract_last_list(item) for item in edits_locality_neighborhood]
-    print(edits_locality_neighborhood)
     edits_locality_neighborhood_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_neighborhood])
     
-    print("before", edits_locality_distracting)
     edits_locality_distracting = [extract_last_list(item) for item in edits_locality_distracting]
-    print("after",edits_locality_distracting)
     edits_locality_distracting_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_distracting])
     
     perplexity_dict = {
@@ -312,16 +334,30 @@ def extract_sentiment_values(metric_path):
 
 
 
-def average_among_many_files(files_paths):
-    pass
-
-
 
 
 
 
 def format_as_row(value, result_key, result_value):
     return [change_underscore(result_key), value["editing_method"], value["model_name"], value["decoding_strategy"], str(value["number_of_sequential_edits"]), f"{result_value:.4f}"]
+
+
+
+def format_as_row(value, result_key, result_value, ):
+    row = []
+    
+    if keep_editing_method:
+        row.append(value["editing_method"])
+    if keep_model_name:
+        row.append(value["model_name"])
+    if keep_decoding_method:
+        row.append(value["decoding_strategy"])
+    if keep_number_of_sequential_edits:
+        row.append(str(value["number_of_sequential_edits"]))
+    
+    row.append(f"{result_value:.4f}")
+    
+    return [change_underscore(result_key)] + row
 
 
 
@@ -335,7 +371,7 @@ def change_underscore(s):
 def reduce_rows_to_averages(rows):
     grouped = defaultdict(list)
 
-    # Group rows by (metric, method, model, decoding, edits)
+    # Group rows by (metric, method, model, decoding, seq_edits_number)
     for row in rows:
         key = tuple(row[:-1])  # All columns except the last one (value)
         value = float(row[-1])  # The last column (value)
@@ -353,8 +389,50 @@ def reduce_rows_to_averages(rows):
 
 
 
+
+def filter_dict_by(dictionary, conditions):
+    
+    filtered_dict = {
+        key: value for key, value in dictionary.items()
+        if all(value.get(k) == v for k, v in conditions.items())
+    }
+    
+    # for key, value in filtered_dict.items():
+    #     filtered_dict[key] = {k: v for k, v in value.items() if k not in conditions}
+
+    return filtered_dict
+
+
+
+
+def filter_by(conditions):
+    global kl_div_files_dict, sentiment_files_dict, perplexity_files_dict, headers
+    
+    # Mapping between header names and dict keys
+    header_mapping = {
+        "Metric": "metric",
+        "Editing Method": "editing_method",
+        "Model": "model_name",
+        "Decoding Strategy": "decoding_strategy",
+        "Sequential Edits": "number_of_sequential_edits",
+        "Value": "value"
+    }
+    
+    kl_div_files_dict = filter_dict_by(kl_div_files_dict, conditions)
+    sentiment_files_dict = filter_dict_by(sentiment_files_dict, conditions)
+    perplexity_files_dict = filter_dict_by(perplexity_files_dict, conditions)
+
+    # Remove from headers based on the keys in `conditions`
+    keys_to_remove = {header_mapping.get(header) for header in headers} & set(conditions.keys())
+    headers = [header for header in headers if header_mapping.get(header) not in keys_to_remove]
+
+
+
+
 if __name__ == "__main__":
     
+    # global kl_div_files_dict, sentiment_files_dict, perplexity_files_dict
+    # global keep_editing_method, keep_model_name, keep_decoding_method, keep_number_of_sequential_edits
     
     # Extract headers
     # metrics_data = read_json_from_file("outputs/ROME/gpt2-xl/greedy-decoding/02-12-2024__20-11/metrics_summary.json")
@@ -388,17 +466,35 @@ if __name__ == "__main__":
     #     print(extract_sentiment_values(key))
     #     print("*"*5)
         
-        
-
+    
     kl_div_files_dict = change_list_format(find_kl_div_metric_files(os.getcwd()))
     sentiment_files_dict = change_list_format(find_sentiment_metric_files(os.getcwd()))
     perplexity_files_dict = change_list_format(find_perplexity_metric_files(os.getcwd()))
-        
-        
-    headers = ["Metric", "Editing Method", "Model", "Decoding Strategy", "Sequential Edits", "value"]
     
+    
+    headers = ["Metric", "Editing Method", "Model", "Decoding Strategy", "Sequential Edits", "Value"]
     rows = []
     
+    filter_by_dict = {
+        "model_name" : "gpt2-xl",
+        "decoding_strategy" : "greedy-decoding"
+    }
+    
+    for key in filter_by_dict.keys():
+        if key == "model_name":
+            keep_model_name = False
+        elif key == "decoding_strategy":
+            keep_decoding_method = False
+        elif key == "number_of_sequential_edits":
+            keep_number_of_sequential_edits = False
+        elif key == "editing_method":
+            keep_editing_method = False
+        
+        
+    
+    filter_by(filter_by_dict)
+
+        
     
     for key, value in kl_div_files_dict.items():
         result = extract_kl_values(key)
@@ -407,21 +503,24 @@ if __name__ == "__main__":
             rows.append(format_as_row(value, result_key, result_value))
    
     
+    # for key, value in perplexity_files_dict.items():
+    #     result = extract_perplexity_values(key)
+        
+    #     for result_key, result_value in result.items():
+    #         rows.append(format_as_row(value, result_key, result_value))
+        
+        
+        
+    # for key, value in sentiment_files_dict.items():
+    #     result = extract_sentiment_values(key)
+        
+    #     for result_key, result_value in result.items():
+    #         rows.append(format_as_row(value, result_key, result_value))
+            
+            
     
-    for key, value in perplexity_files_dict.items():
-        result = extract_perplexity_values(key)
-        
-        for result_key, result_value in result.items():
-            rows.append(format_as_row(value, result_key, result_value))
-        
-        
-    for key, value in sentiment_files_dict.items():
-        result = extract_sentiment_values(key)
-        
-        for result_key, result_value in result.items():
-            rows.append(format_as_row(value, result_key, result_value))
     
-        
+    # Average the values for each metric among identical configurations
     rows = reduce_rows_to_averages(rows)
     
 
