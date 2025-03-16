@@ -1,8 +1,11 @@
 from datetime import datetime
 from utils import get_datasets_path
+from utils import count_directories, get_ml_path
+import os
 
 # Global constants
 timestamp = datetime.now().strftime("%d-%m-%Y__%H-%M")
+
 
 access_token = "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"
 
@@ -104,3 +107,7 @@ enable_analytics = False
 enable_output_scores = False
 scores_top_k = 5
 freely_chat_with_post_edit_model = False
+
+
+
+num_dirs = count_directories(os.path.join(get_ml_path(), 'outputs', editing_method, model_name.split('/')[1], decoding_strategy, f"{norms_subset_size}_sequential_edits"))

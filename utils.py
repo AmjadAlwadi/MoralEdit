@@ -85,8 +85,7 @@ def count_directories(path):
 
 def save_as_json(object,file_name):
     
-    num_dirs = count_directories(os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits"))
-    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits", f"{config.timestamp}_{num_dirs + 1}")
+    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits", f"{config.timestamp}_{config.num_dirs + 1}")
     os.makedirs(directory_path, exist_ok=True)
 
     file_path = os.path.join(directory_path, f"{file_name}.json")
