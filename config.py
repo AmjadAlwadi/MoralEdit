@@ -75,21 +75,20 @@ shuffle = False
 
 # For decoding strategy
 decoding_strategy = "greedy-decoding"
-do_sample = False
-num_beams = 15
+do_sample = True
+num_beams = 10
 max_length = 100
 no_repeat_ngram_size = 0
 early_stopping = True
-max_new_tokens = 10
+max_new_tokens = 8
 num_return_sequences = num_beams
-temperature = 1e-10  # To ensure reproducibility
-top_k =50
-top_p =0.95
+# temperature = 1e-10  # To ensure reproducibility
+top_k = 50
+top_p = 0.95
 seed = -1
 
 # For editing
 editing_method = "MEND"
-apply_edit = True
 hparams_path = None
 train_hparams_path = None
 ike_loc_examples_number = 2
@@ -107,7 +106,4 @@ enable_analytics = False
 enable_output_scores = False
 scores_top_k = 5
 freely_chat_with_post_edit_model = False
-
-
-
-num_dirs = count_directories(os.path.join(get_ml_path(), 'outputs', editing_method, model_name.split('/')[1], decoding_strategy, f"{norms_subset_size}_sequential_edits"))
+num_dirs = 0

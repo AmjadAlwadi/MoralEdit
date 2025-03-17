@@ -128,9 +128,14 @@ from edit import edit
 # Plots:
 # Plot locality + perplexity with sequential edits number
 
+# On the tables, we show for 1 sequential edits and on the plots we show for batch editing
 
 
 
+
+# Kl div differing token is i think only good for greedy or beam when do sample is false otherwise the 
+# generated sequences before and after will not be similar to begin with
+# hat lange wirklich zu implementieren :(
 
 
 
@@ -367,13 +372,13 @@ def parse_arguments():
                         help="No repeat ngram size")
     
     # Debugging stuff
-    parser.add_argument("-k", "--enable_analytics", action="store_true",
+    parser.add_argument("--enable_analytics", action="store_true",
                         help="Show the KL divergence and more")
     parser.add_argument("--enable_models_check", action="store_true",
                         help="Check whether the post_edit model did change")
     
     # Extra information
-    parser.add_argument("-o", "--enable_output_scores", action="store_true",
+    parser.add_argument("--enable_output_scores", action="store_true",
                         help="Show the scores for the most probable tokens")
     parser.add_argument("--scores_top_k", type=int, default=config.scores_top_k,
                         help="Top k probable tokens for the output scores")
@@ -419,18 +424,18 @@ def parse_arguments():
     config.max_length = args.max_length
     config.num_beams = args.num_beams
     config.no_repeat_ngram_size = args.no_repeat_ngram_size
-    config.early_stopping = args.early_stopping
-    config.do_sample = args.do_sample
+    config.early_stopping = args.early_stopping or config.early_stopping
+    config.do_sample = args.do_sample or config.do_sample
     config.scores_top_k = args.scores_top_k
-    config.apply_edit = True
-    config.train = args.train
-    config.enable_analytics = args.enable_analytics
-    config.enable_output_scores = args.enable_output_scores
-    config.enable_models_check = args.enable_models_check
+    config.train = args.train or config.train
+    config.enable_analytics = args.enable_analytics or config.enable_analytics
+    config.enable_output_scores = args.enable_output_scores or config.enable_output_scores
+    config.enable_models_check = args.enable_models_check or config.enable_models_check
     config.num_return_sequences = config.num_beams
-    config.enable_sentiment = args.enable_sentiment
-    config.enable_kl_div = args.enable_kl_div
-    config.enable_perplexity = args.enable_perplexity
+    config.enable_sentiment = args.enable_sentiment or config.enable_sentiment
+    config.enable_kl_div = args.enable_kl_div or config.enable_kl_div
+    config.enable_perplexity = args.enable_perplexity or config.enable_perplexity
+    config.shuffle = args.shuffle or config.shuffle
     
     
     config.decoding_strategy = "greedy-decoding"
@@ -455,8 +460,8 @@ def parse_arguments():
     else:
         config.device = torch.device('cpu')
     
+    config.num_dirs = count_directories(os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits"))
     
-    config.shuffle = args.shuffle
     
     
     col_width = 27

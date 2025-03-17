@@ -126,7 +126,7 @@ def change_list_format(metric_files):
 
 
 
-def extract_kl_values(metric_path):
+def extract_kl_div_values(metric_path):
     
     metric_file = read_json_from_file(metric_path)
         
@@ -183,8 +183,10 @@ def extract_kl_values(metric_path):
 
 def extract_perplexity_values(metric_path):
     metric_file = read_json_from_file(metric_path)
-    edits_locality_neighborhood = [item["locality_neighborhood_perplexity"] for item in metric_file]
-    edits_locality_distracting = [item["locality_distracting_perplexity"] for item in metric_file]
+    abs_edits_locality_neighborhood = [item["absolute_locality_neighborhood_perplexity"] for item in metric_file]
+    abs_edits_locality_distracting = [item["absolute_locality_distracting_perplexity"] for item in metric_file]
+    rel_edits_locality_neighborhood = [item["relative_locality_neighborhood_perplexity"] for item in metric_file]
+    rel_edits_locality_distracting = [item["relative_locality_distracting_perplexity"] for item in metric_file]
 
     def extract_last_list(s):
         pattern = r"\[([-]?\d*\.?\d+(?:\s*,\s*[-]?\d*\.?\d+)*)\]$"
@@ -195,15 +197,24 @@ def extract_perplexity_values(metric_path):
             return result
 
 
-    edits_locality_neighborhood = [extract_last_list(item) for item in edits_locality_neighborhood]
-    edits_locality_neighborhood_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_neighborhood])
+    abs_edits_locality_neighborhood = [extract_last_list(item) for item in abs_edits_locality_neighborhood]
+    abs_edits_locality_neighborhood_average = statistics.mean([statistics.mean(lst) for lst in abs_edits_locality_neighborhood])
     
-    edits_locality_distracting = [extract_last_list(item) for item in edits_locality_distracting]
-    edits_locality_distracting_average = statistics.mean([statistics.mean(lst) for lst in edits_locality_distracting])
+    abs_edits_locality_distracting = [extract_last_list(item) for item in abs_edits_locality_distracting]
+    abs_edits_locality_distracting_average = statistics.mean([statistics.mean(lst) for lst in abs_edits_locality_distracting])
+    
+    rel_edits_locality_neighborhood = [extract_last_list(item) for item in rel_edits_locality_neighborhood]
+    rel_edits_locality_neighborhood_average = statistics.mean([statistics.mean(lst) for lst in rel_edits_locality_neighborhood])
+    
+    rel_edits_locality_distracting = [extract_last_list(item) for item in rel_edits_locality_distracting]
+    rel_edits_locality_distracting_average = statistics.mean([statistics.mean(lst) for lst in rel_edits_locality_distracting])
+    
     
     perplexity_dict = {
-        "perplexity_neighborhood_average" : edits_locality_neighborhood_average,
-        "perplexity_distracting_average" : edits_locality_distracting_average,
+        "absolute_perplexity_neighborhood_average" : abs_edits_locality_neighborhood_average,
+        "absolute_perplexity_distracting_average" : abs_edits_locality_distracting_average,
+        "relative_perplexity_neighborhood_average" : rel_edits_locality_neighborhood_average,
+        "relative_perplexity_distracting_average" : rel_edits_locality_distracting_average,
     }
     
     return perplexity_dict
@@ -250,114 +261,57 @@ def extract_sentiment_values(metric_path):
 
 
 
-# def find_metric_files(root_dir):
-#     metric_files = []
-#     for dirpath, dirnames, filenames in os.walk(root_dir):
-#         for file in filenames:
-#             if file == "metrics_summary.json":
-#                 metric_files.append(os.path.join(dirpath, file))
-#     return metric_files
 
 
 
 
 
-# def average_among_all_files(custom_metric=False, pre=False, *method):
+
+def format_kl_div_as_row(metric_configuration, metric_value):
     
-#     files = []
-#     values_for_each_file = []
+    return [
+        metric_configuration["model_name"],
+        metric_configuration["editing_method"],
+        f'{metric_value["kl_div_neighborhood_first_token_average"]:.4f}',
+        f'{metric_value["kl_div_neighborhood_differing_token_average"]:.4f}',
+        f'{metric_value["kl_div_distracting_first_token_average"]:.4f}',
+        f'{metric_value["kl_div_distracting_differing_token_average"]:.4f}'
+    ]
+
+
+
+
+def format_perplexity_as_row(metric_configuration, metric_value):
+    return [
+        metric_configuration["model_name"],
+        metric_configuration["editing_method"],
+        f'{metric_value["absolute_perplexity_neighborhood_average"]:.4f}',
+        f'{metric_value["relative_perplexity_neighborhood_average"]:.4f}',
+        f'{metric_value["absolute_perplexity_distracting_average"]:.4f}',
+        f'{metric_value["relative_perplexity_distracting_average"]:.4f}'
+    ]
+
+
+
+
+def format_sentiment_as_row(metric_configuration, metric_value):
     
-#     if custom_metric:
-#         files = find_custom_metric_files(os.getcwd())
-#     else:
-#         files = find_metric_files(os.path.join(os.getcwd(),"outputs",*method))
-        
-#     files = [read_json_from_file(file) for file in files]
+    light_generality = statistics.mean([metric_value["sentiment_light_generality_1_average"], metric_value["sentiment_light_generality_2_average"], metric_value["sentiment_light_generality_3_average"]])
     
-#     if len(files) == 0:
-#         return None
-    
-#     for file in files:
-#         if file:
-#             values_for_each_file.append(average_among_single_file(file,pre))
-
-#     values_for_each_file = np.array(values_for_each_file)
-#     average_values_among_all_files = np.mean(values_for_each_file, axis=0)
-    
-#     return average_values_among_all_files
-
-
-
+    return [
+        metric_configuration["model_name"],
+        metric_configuration["editing_method"],
+        f'{metric_value["sentiment_prompt_average"]:.4f}',
+        f'{light_generality:.4f}',
+        f'{metric_value["sentiment_strong_generality_average"]:.4f}',
+        f'{metric_value["sentiment_portability_synonym_average"]:.4f}',
+        f'{metric_value["sentiment_portability_one_hop_average"]:.4f}',
+        f'{metric_value["sentiment_portability_two_hop_average"]:.4f}',
+        f'{metric_value["sentiment_locality_neighborhood_average"]:.4f}',
+        f'{metric_value["sentiment_locality_distracting_average"]:.4f}'
+    ]
 
 
-
-# def extract_leaf_keys(data, parent_key=''):
-#     keys_list = []
-#     values_list = []
-#     for k, v in data.items():
-#         k = k.replace('_', '-')
-#         full_key = f"{parent_key}.{k}" if parent_key else k
-#         if isinstance(v, dict):
-#             sub_keys, sub_values = extract_leaf_keys(v, full_key)
-#             keys_list.extend(sub_keys)
-#             values_list.extend(sub_values)
-#         else:
-#             keys_list.append(full_key)
-#             values_list.append(v)
-#     return keys_list, values_list
-
-
-
-
-
-# def average_among_single_file(data, pre=False):
-    
-#     values_list = []
-#     key = "post"
-    
-#     if pre:
-#         key = "pre"
-    
-    
-#     for edit in data:
-#         _, values = extract_leaf_keys(edit[key])
-#         values_list.append(values)
-    
-    
-#     # Convert into np arrays
-#     values_list = [np.array(values) for values in values_list]
-#     values_list = np.array(values_list)
-    
-#     average_values = np.mean(values_list, axis=0)
-
-#     return average_values.tolist()
-
-
-
-
-
-
-
-def format_as_row(value, result_key, result_value):
-    return [change_underscore(result_key), value["editing_method"], value["model_name"], value["decoding_strategy"], str(value["number_of_sequential_edits"]), f"{result_value:.4f}"]
-
-
-
-def format_as_row(value, result_key, result_value, ):
-    row = []
-    
-    if keep_editing_method:
-        row.append(value["editing_method"])
-    if keep_model_name:
-        row.append(value["model_name"])
-    if keep_decoding_method:
-        row.append(value["decoding_strategy"])
-    if keep_number_of_sequential_edits:
-        row.append(str(value["number_of_sequential_edits"]))
-    
-    row.append(f"{result_value:.4f}")
-    
-    return [change_underscore(result_key)] + row
 
 
 
@@ -371,18 +325,21 @@ def change_underscore(s):
 def reduce_rows_to_averages(rows):
     grouped = defaultdict(list)
 
-    # Group rows by (metric, method, model, decoding, seq_edits_number)
+    # Group rows by (model, editing method)
     for row in rows:
-        key = tuple(row[:-1])  # All columns except the last one (value)
-        value = float(row[-1])  # The last column (value)
-        grouped[key].append(value)
-    
-    # Average the values for each group
-    reduced_rows = [
-        list(key) + [round(statistics.mean(values), 4)]  # Round to 4 decimal places
-        for key, values in grouped.items()
-    ]
-    
+        key = (row[0], row[1])  # First two columns (model, editing method)
+        values = list(map(float, row[2:])) 
+        grouped[key].append(values)
+
+    # Average all columns for each (model, editing method) group
+    reduced_rows = []
+    for key, value_lists in grouped.items():
+        # Transpose the list of lists to group by column
+        columns = list(zip(*value_lists))
+        # Compute the average for each column
+        averages = [round(statistics.mean(column), 4) for column in columns]
+        reduced_rows.append(list(key) + averages)
+
     return reduced_rows
 
 
@@ -396,9 +353,7 @@ def filter_dict_by(dictionary, conditions):
         key: value for key, value in dictionary.items()
         if all(value.get(k) == v for k, v in conditions.items())
     }
-    
-    # for key, value in filtered_dict.items():
-    #     filtered_dict[key] = {k: v for k, v in value.items() if k not in conditions}
+
 
     return filtered_dict
 
@@ -407,126 +362,305 @@ def filter_dict_by(dictionary, conditions):
 
 def filter_by(conditions):
     global kl_div_files_dict, sentiment_files_dict, perplexity_files_dict, headers
-    
-    # Mapping between header names and dict keys
-    header_mapping = {
-        "Metric": "metric",
-        "Editing Method": "editing_method",
-        "Model": "model_name",
-        "Decoding Strategy": "decoding_strategy",
-        "Sequential Edits": "number_of_sequential_edits",
-        "Value": "value"
-    }
-    
+
     kl_div_files_dict = filter_dict_by(kl_div_files_dict, conditions)
     sentiment_files_dict = filter_dict_by(sentiment_files_dict, conditions)
     perplexity_files_dict = filter_dict_by(perplexity_files_dict, conditions)
 
-    # Remove from headers based on the keys in `conditions`
-    keys_to_remove = {header_mapping.get(header) for header in headers} & set(conditions.keys())
-    headers = [header for header in headers if header_mapping.get(header) not in keys_to_remove]
+
+
+
+
+
+
+def generate_kl_div_table(rows):
+    # Define the LaTeX table header
+    latex_table = r"""
+    \begin{table}[h]
+    \centering
+    \small % Reduce font size to fit the table if needed
+    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
+    \begin{tabular}{l cc cc}
+    \toprule
+    \multirow{3}{*}{\textbf{Editor}} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\
+    \cmidrule(lr){2-5}
+    & \multicolumn{2}{c}{\textbf{Neighborhood}} & \multicolumn{2}{c}{\textbf{Distracting}} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    & First Token & Differing Token & First Token & Differing Token \\
+    \midrule
+    """
+
+    # Keep track of the current model to group rows by model
+    current_model = None
+
+    # Iterate through each row in the input data
+    for row in rows:
+        model_name = row[0]  # First column is the model name
+        editor = row[1]      # Second column is the editor
+        metrics = row[2:]    # Remaining columns are the metric values (4 values)
+
+        # If the model changes, add a model header (left-aligned)
+        if model_name != current_model:
+            if current_model is not None:  # Add a midrule before the new model (except for the first model)
+                latex_table += r"\midrule" + "\n"
+            latex_table += r"\multicolumn{5}{l}{" + model_name + r"} \\" + "\n"
+            latex_table += r"\midrule" + "\n"
+            current_model = model_name
+
+        # Add the row for the editor and its metrics
+        metrics_str = " & ".join(map(str, metrics))  # Convert metrics to strings and join with " & "
+        latex_table += f"{editor} & {metrics_str} \\\\\n"
+
+    # Close the table
+    latex_table += r"""\bottomrule
+    \end{tabular}
+    }
+    \caption{Performance metrics for different editors across models.}
+    \label{tab:performance_metrics}
+    \end{table}
+    """
+
+    return latex_table
+
+
+
+
+
+
+
+
+
+def generate_perplexity_table(rows):
+    
+    r'''
+    \begin{table}[h]
+    \centering
+    \small % Reduce font size to fit the table if needed
+    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
+    \begin{tabular}{l cc cc}
+    \toprule
+    \multirow{3}{*}{\textbf{Editor}} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\
+    \cmidrule(lr){2-5}
+    & \multicolumn{2}{c}{\textbf{Neighborhood}} & \multicolumn{2}{c}{\textbf{Distracting}} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    & Absolute & Relative & Absolute & Relative \\
+    \midrule
+    \multicolumn{5}{l}{gpt2-xl} \\
+    \midrule
+    MEND & 0.0 & 0.0 & 0.0 & 0.0 \\
+    \midrule
+    \multicolumn{5}{l}{GPT-J} \\
+    \midrule
+    FT & 25.5 & 100.0 & 99.9 & 96.6 \\
+    \bottomrule
+    \end{tabular}
+    }
+    \caption{Performance metrics for different editors across models.}
+    \label{tab:performance_metrics}
+    \end{table}
+    
+    '''
+    
+    
+    # Define the LaTeX table header
+    latex_table = r"""
+    \begin{table}[h]
+    \centering
+    \small % Reduce font size to fit the table if needed
+    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
+    \begin{tabular}{l cc cc}
+    \toprule
+    \multirow{3}{*}{\textbf{Editor}} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\
+    \cmidrule(lr){2-5}
+    & \multicolumn{2}{c}{\textbf{Neighborhood}} & \multicolumn{2}{c}{\textbf{Distracting}} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    & Absolute & Relative & Absolute & Relative \\
+    \midrule
+    """
+
+    # Keep track of the current model to group rows by model
+    current_model = None
+
+    # Iterate through each row in the input data
+    for row in rows:
+        model_name = row[0]  # First column is the model name
+        editor = row[1]      # Second column is the editor
+        metrics = row[2:]    # Remaining columns are the metric values (4 values)
+
+        # If the model changes, add a model header (left-aligned)
+        if model_name != current_model:
+            if current_model is not None:  # Add a midrule before the new model (except for the first model)
+                latex_table += r"\midrule" + "\n"
+            latex_table += r"\multicolumn{5}{l}{" + model_name + r"} \\" + "\n"
+            latex_table += r"\midrule" + "\n"
+            current_model = model_name
+
+        # Add the row for the editor and its metrics
+        metrics_str = " & ".join(map(str, metrics))  # Convert metrics to strings and join with " & "
+        latex_table += f"{editor} & {metrics_str} \\\\\n"
+
+    # Close the table
+    latex_table += r"""\bottomrule
+    \end{tabular}
+    }
+    \caption{Performance metrics for different editors across models.}
+    \label{tab:performance_metrics}
+    \end{table}
+    """
+
+    return latex_table
+
+
+
+
+
+
+
+
+
+
+
+
+
+def generate_sentiment_table(rows):
+    r'''
+    \begin{table}[h]
+    \centering
+    \small % Reduce font size to fit the table if needed
+    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
+    \begin{tabular}{l c cc ccc cc}
+    \toprule
+    \multirow{2}{*}{\textbf{Editor}} & \multicolumn{1}{c}{\textbf{Reliability } $\uparrow$} & \multicolumn{2}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{3}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Locality} $\downarrow$} \\
+    \cmidrule(lr){2-2} \cmidrule(lr){3-4} \cmidrule(lr){5-7} \cmidrule(lr){8-9}
+    & Prompt & Light & Strong & Synonym & One-hop & Two-hop &  Neighborhood & Distracting \\
+    \midrule
+    \multicolumn{9}{l}{GPT-2 XL} \\
+    \midrule
+    MEND & 65.1 & 100.0 & 98.8 & 87.9 & 46.6 & 2 & 1 & 3\\
+    \midrule
+    \multicolumn{9}{l}{GPT-J} \\
+    \midrule
+    FT & 25.5 & 100.0 & 99.9 & 96.6  & 71.0 & 2 & 1 & 3\\
+    \bottomrule
+    \end{tabular}
+    }
+    \caption{Performance metrics for different editors across GPT-2 XL and GPT-J models, with standard deviations in parentheses.}
+    \label{tab:performance_metrics}
+    \end{table}
+    '''
+    
+
+
+    # Define the LaTeX table header
+    latex_table = r"""
+    \begin{table}[h]
+    \centering
+    \small % Reduce font size to fit the table if needed
+    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
+    \begin{tabular}{l c cc ccc cc}
+    \toprule
+    \multirow{2}{*}{\textbf{Editor}} & \multicolumn{1}{c}{\textbf{Reliability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{3}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Locality} $\downarrow$} \\
+    \cmidrule(lr){2-2} \cmidrule(lr){3-4} \cmidrule(lr){5-7} \cmidrule(lr){8-9}
+    & Prompt & Light & Strong & Synonym & One-hop & Two-hop & Neighborhood & Distracting \\
+    \midrule
+    """
+
+    # Keep track of the current model to group rows by model
+    current_model = None
+
+    # Iterate through each row in the input data
+    for row in rows:
+        model_name = row[0]  # First column is the model name
+        editor = row[1]      # Second column is the editor
+        metrics = row[2:]    # Remaining columns are the metric values
+
+        # If the model changes, add a model header (left-aligned)
+        if model_name != current_model:
+            if current_model is not None:  # Add a midrule before the new model (except for the first model)
+                latex_table += r"\midrule" + "\n"
+            latex_table += r"\multicolumn{9}{l}{" + model_name + r"} \\" + "\n"
+            latex_table += r"\midrule" + "\n"
+            current_model = model_name
+
+        # Add the row for the editor and its metrics
+        metrics_str = " & ".join(map(str, metrics))  # Convert metrics to strings and join with " & "
+        latex_table += f"{editor} & {metrics_str} \\\\\n"
+
+    # Close the table
+    latex_table += r"""\bottomrule
+    \end{tabular}
+    }
+    \caption{Performance metrics for different editors across models.}
+    \label{tab:performance_metrics}
+    \end{table}
+    """
+
+    return latex_table
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 if __name__ == "__main__":
     
-    # global kl_div_files_dict, sentiment_files_dict, perplexity_files_dict
-    # global keep_editing_method, keep_model_name, keep_decoding_method, keep_number_of_sequential_edits
-    
-    # Extract headers
-    # metrics_data = read_json_from_file("outputs/ROME/gpt2-xl/greedy-decoding/02-12-2024__20-11/metrics_summary.json")
-    # custom_metrics_data = read_json_from_file("outputs/ROME/gpt2-xl/greedy-decoding/02-12-2024__20-11/metrics_summary.json")
-
-    # metrics_headers, _ = extract_leaf_keys(metrics_data[0]['pre'])
-    # custom_metrics_headers, _ = extract_leaf_keys(custom_metrics_data[0]['pre'])
-    
-    # Create for every method
-    # rome_average = average_among_all_files(False, False, "ROME")
-    # rome_average_gpt = average_among_all_files(False, False,"ROME","gpt2-xl")
-    # ike_average = average_among_all_files(False, False,)
-    # mend_average = average_among_all_files(False, False)
-    # rome_average = average_among_all_files(False, False)
-    
-
-    # for key, value in change_list_format(find_kl_div_metric_files(os.getcwd())).items():
-    #     print(extract_kl_values(key))
-    
-    # for key, value in change_list_format(find_kl_div_metric_files(os.getcwd())).items():
-    #     print(extract_kl_values(key))
-    #     print("*"*5)
-        
-        
-    # for key, value in change_list_format(find_perplexity_metric_files(os.getcwd())).items():
-    #     extract_perplexity_values(key)
-    #     print("*"*5)
-        
-        
-    # for key, value in change_list_format(find_sentiment_metric_files(os.getcwd())).items():
-    #     print(extract_sentiment_values(key))
-    #     print("*"*5)
-        
-    
     kl_div_files_dict = change_list_format(find_kl_div_metric_files(os.getcwd()))
     sentiment_files_dict = change_list_format(find_sentiment_metric_files(os.getcwd()))
     perplexity_files_dict = change_list_format(find_perplexity_metric_files(os.getcwd()))
     
-    
-    headers = ["Metric", "Editing Method", "Model", "Decoding Strategy", "Sequential Edits", "Value"]
     rows = []
     
-    filter_by_dict = {
+    
+    filter_conditions = {
+        "editing_method" : "MEND",
         "model_name" : "gpt2-xl",
-        "decoding_strategy" : "greedy-decoding"
+        "decoding_strategy" : "multinomial-sampling",
+        "number_of_sequential_edits" : 1
     }
     
-    for key in filter_by_dict.keys():
-        if key == "model_name":
-            keep_model_name = False
-        elif key == "decoding_strategy":
-            keep_decoding_method = False
-        elif key == "number_of_sequential_edits":
-            keep_number_of_sequential_edits = False
-        elif key == "editing_method":
-            keep_editing_method = False
-        
-        
     
-    filter_by(filter_by_dict)
+    filter_by(filter_conditions)
+    
+    
 
-        
-    
-    for key, value in kl_div_files_dict.items():
-        result = extract_kl_values(key)
-        
-        for result_key, result_value in result.items():
-            rows.append(format_as_row(value, result_key, result_value))
-   
-    
-    # for key, value in perplexity_files_dict.items():
-    #     result = extract_perplexity_values(key)
-        
-    #     for result_key, result_value in result.items():
-    #         rows.append(format_as_row(value, result_key, result_value))
-        
-        
-        
-    # for key, value in sentiment_files_dict.items():
-    #     result = extract_sentiment_values(key)
-        
-    #     for result_key, result_value in result.items():
-    #         rows.append(format_as_row(value, result_key, result_value))
-            
-            
+    # for metric_path, metric_configuration in sentiment_files_dict.items():
+    #     result = extract_sentiment_values(metric_path)
+    #     rows.append(format_sentiment_as_row(metric_configuration, result))
     
     
-    # Average the values for each metric among identical configurations
+    for metric_path, metric_configuration in kl_div_files_dict.items():
+        result = extract_kl_div_values(metric_path)
+        rows.append(format_kl_div_as_row(metric_configuration, result))
+    
+    
+    # for metric_path, metric_configuration in perplexity_files_dict.items():
+    #     result = extract_perplexity_values(metric_path)
+    #     rows.append(format_perplexity_as_row(metric_configuration, result))
+    
+    
+    
     rows = reduce_rows_to_averages(rows)
     
+    
 
-    # Generate the LaTeX table
-    latex_table = generate_latex_table(headers, rows)
+    # print(generate_sentiment_table(rows))
     
+    print(generate_kl_div_table(rows))
     
-    # Print the LaTeX table
-    print(latex_table)
+    # print(generate_perplexity_table(rows))
+    
+
+
+
+
+
+

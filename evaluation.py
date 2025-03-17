@@ -271,6 +271,7 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
             output = outputs[config.num_return_sequences * index + i]
             result = output[length:]
             result = result.lstrip(" .,?\n")
+            result = result.rstrip(" ,\n\"")
             p_index = result.find('.') 
             q_index = result.find('?')
             n_index = result.find('\n')
@@ -842,9 +843,9 @@ def find_first_differing_token(tokenizer, pre_edit_output_dict_item, post_edit_o
             
             # Find the identical parts of pre/post edit sequences
             index , common_sentence = common_prefix(pre_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):], post_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):])
-            
+
             # Convert strings into tokens and count their number
-            number_of_common_tokens = count_tokens(tokenizer, common_sentence)
+            number_of_common_tokens = count_tokens(tokenizer, common_sentence[1:])  # Remove whitespace
             differing_positions[edit_index][sequence_index] = number_of_common_tokens
             
             if index == -1:
@@ -992,11 +993,18 @@ def evaluate_perplexity_metric(pre_edit_perplexity_metric, post_edit_perplexity_
         return f"pre: {pre_edit_item[key]} --> post: {post_edit_item[key]} --> {results}"
 
 
-    def eval_func(pre_edit_item, post_edit_item):
+    def absolute_eval_func(pre_edit_item, post_edit_item):
         if isinstance(pre_edit_item, float):
             return post_edit_item - pre_edit_item
         elif isinstance(pre_edit_item,list):
-            return [eval_func(pr, po) for pr, po in zip(pre_edit_item, post_edit_item)]
+            return [absolute_eval_func(pr, po) for pr, po in zip(pre_edit_item, post_edit_item)]
+        
+        
+    def relative_eval_func(pre_edit_item, post_edit_item):
+        if isinstance(pre_edit_item, float):
+            return post_edit_item / pre_edit_item
+        elif isinstance(pre_edit_item,list):
+            return [relative_eval_func(pr, po) for pr, po in zip(pre_edit_item, post_edit_item)]
     
     
     edit_effect_perplexity_metric = []
@@ -1009,9 +1017,11 @@ def evaluate_perplexity_metric(pre_edit_perplexity_metric, post_edit_perplexity_
     
         for key in pre_edit_item:
             
-            results = eval_func(pre_edit_item[key], post_edit_item[key])
+            absoulte_results = absolute_eval_func(pre_edit_item[key], post_edit_item[key])
+            relative_results = relative_eval_func(pre_edit_item[key], post_edit_item[key])
             
-            item.update({key : format_output(pre_edit_item, post_edit_item, key, results)})
+            item.update({f"absolute_{key}" : format_output(pre_edit_item, post_edit_item, key, absoulte_results)})
+            item.update({f"relative_{key}" : format_output(pre_edit_item, post_edit_item, key, relative_results)})
 
         edit_effect_perplexity_metric.append(item)
     

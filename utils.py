@@ -75,7 +75,7 @@ def count_directories(path):
     # Ensure the provided path is a directory
     if not os.path.isdir(path):
         print("The provided path is not a valid directory.")
-        return
+        return 0
 
     # Count the directories in the given path
     dir_count = sum(1 for entry in os.scandir(path) if entry.is_dir())
@@ -209,6 +209,9 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
             do_sample = config.do_sample,
             no_repeat_ngram_size = config.no_repeat_ngram_size,
             num_return_sequences=config.num_return_sequences,
+            # temperature = config.temperature,
+            top_k = config.top_k,
+            top_p = config.top_p,
             return_dict_in_generate = True,
             output_logits = True, 
             output_scores = config.enable_output_scores
