@@ -132,7 +132,7 @@ from edit import edit
 # Plots:
 # Plot locality + perplexity + edit success (reliablility only prompt) with sequential edits number
 # On the tables, we show for 1 sequential edits and on the plots we show for batch editing
-
+# Plot score not only edit success against sequential edits number
 
 
 

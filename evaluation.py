@@ -712,7 +712,7 @@ def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_l
     |      pos       |        pos           |      pos          |  100%
     |      pos       |        pos           |      neg          |  0%
     |      pos       |        pos           |      neut         |  0%
-        
+    
     |      pos       |        neg           |      pos          |  0%
     |      pos       |        neg           |      neg          |  100%
     |      pos       |        neg           |      neut         |  50%     # Removed after careful thoughts
