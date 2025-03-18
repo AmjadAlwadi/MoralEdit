@@ -210,13 +210,13 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
             no_repeat_ngram_size = config.no_repeat_ngram_size,
             num_return_sequences=config.num_return_sequences,
             # temperature = config.temperature,
-            top_k = config.top_k,
-            top_p = config.top_p,
+            # top_k = config.top_k,
+            # top_p = config.top_p,
             return_dict_in_generate = True,
             output_logits = True, 
             output_scores = config.enable_output_scores
         )
-        
+    
 
     return outputs
 

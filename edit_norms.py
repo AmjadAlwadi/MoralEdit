@@ -103,12 +103,14 @@ from edit import edit
 # Implement perplexity    Done
 # Take config parameters as default ones  Done
 
+
 # First do all pre edit model things
 # then edit
 # then evaluate post edits
 # KL Div has an issue
 # Do kl div for first token + differing token
 # In the plot later, output the average of those above also
+
 
 # Optional:
 # Implement the causal tracing.
@@ -125,9 +127,10 @@ from edit import edit
 # Add arrows to the metrics
 # Split into multiple tables
 
-# Plots:
-# Plot locality + perplexity with sequential edits number
 
+
+# Plots:
+# Plot locality + perplexity + edit success (reliablility only prompt) with sequential edits number
 # On the tables, we show for 1 sequential edits and on the plots we show for batch editing
 
 
@@ -138,10 +141,31 @@ from edit import edit
 # hat lange wirklich zu implementieren :(
 
 
+# Nur die 2 modelle GPT-2 XL und GPT-J
+# Das große benchmark benutzt auch Llama2-7b-chat
+# How many decoding strategies need to be evaluated?
+# EasyEdit uses the model directly and gets only the top token so greedy?
 
+
+# Fixed seed makes shuffle also same
+
+# Sentiment never gives full 100% positive so it's not fair to calculate score we need to make a tolerance range for small
+# incertainties and take that as 100% so if it predicts 80% positive then that should be enough to take this as full success and not only 0.8 score
+# This criteria is too harsh
+
+
+# So just be consistent and do the same as other papers and as what will be done for locality
+
+# Lass beide differing und first token weil man weiß welche eig größer wird und dass beim differing token größer wird ist nur eine annahme
+
+
+# do exactly as rome with ES NS PS and calculate finally the score as harmonic mean of all 3
+# Instead of probability we just use sentiment and count all the cases we have against the numebr of cases
+# with 100% or 1 and i think about beams as well 
 
 def main():
     
+    full_start_time = time.perf_counter()
     
     # ---------------------------------------------------------------- #
     # ---------------- Some Initialization Stuff --------------------- #
@@ -161,6 +185,7 @@ def main():
     
     if config.seed != -1:
         set_seed(config.seed)
+
 
     tokenizer = AutoTokenizer.from_pretrained(config.model_name)
     
@@ -194,8 +219,9 @@ def main():
     save_as_json(norms_dict | pre_edit_output_dict, "pre_edit_logs")
 
     if config.enable_sentiment:
-        pre_edit_sentiment = calculate_sentiment_analysis_labels(norms_dict, True, pre_edit_output_dict, None)
-        save_as_json(pre_edit_sentiment, "pre_edit_sentiment")
+        pre_edit_sentiment_labels, pre_edit_sentiment_scores = calculate_sentiment_analysis_labels(norms_dict, True, pre_edit_output_dict, None)
+        save_as_json(pre_edit_sentiment_labels, "pre_edit_sentiment_labels")
+        save_as_json(pre_edit_sentiment_scores, "pre_edit_sentiment_scores")
     
     if config.enable_perplexity:
         pre_edit_perplexity = calculate_perplexity_for_locality(tokenizer, pre_edit_model, pre_edit_output_dict)
@@ -277,9 +303,9 @@ def main():
     
     # Calculate the custom metrics for post_edit_model
     if config.enable_sentiment:
-        post_edit_sentiment = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, new_ike_edit_args)
-        save_as_json(post_edit_sentiment,"post_edit_sentiment")
-    
+        post_edit_sentiment_labels, post_edit_sentiment_scores = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, new_ike_edit_args)
+        save_as_json(post_edit_sentiment_labels,"post_edit_sentiment_labels")
+        save_as_json(post_edit_sentiment_scores,"post_edit_sentiment_scores")
     
     if config.enable_perplexity:
         post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, pre_edit_output_dict)
@@ -304,8 +330,9 @@ def main():
     
     # Show the effects of the edit
     if config.enable_sentiment:
-        edit_effect_sentiment_metric = evaluate_sentiment_metric(pre_edit_sentiment, post_edit_sentiment)
-        save_as_json(edit_effect_sentiment_metric,"edit_effect_sentiment_metric")
+        edit_effect_sentiment_labels_metric, edit_effect_sentiment_scores_metric = evaluate_sentiment_metric(pre_edit_sentiment_labels, pre_edit_sentiment_scores, post_edit_sentiment_labels, post_edit_sentiment_scores)
+        save_as_json(edit_effect_sentiment_labels_metric,"edit_effect_sentiment_labels_metric")
+        save_as_json(edit_effect_sentiment_scores_metric,"edit_effect_sentiment_scores_metric")
     
     if config.enable_perplexity:
         edit_effect_perplexity_metric = evaluate_perplexity_metric(pre_edit_perplexity, post_edit_perplexity)
@@ -317,8 +344,9 @@ def main():
     
 
  
+    full_end_time = time.perf_counter()  
+    log(f"It took {full_end_time - full_start_time:.2f}s to run the full code", False, False, True)
       
-    
       
     # ---------------------------------------------------------------- #
     # --------------------- Debugging process ------------------------ #
@@ -437,11 +465,12 @@ def parse_arguments():
     config.enable_perplexity = args.enable_perplexity or config.enable_perplexity
     config.shuffle = args.shuffle or config.shuffle
     
+
     
-    config.decoding_strategy = "greedy-decoding"
+    config.decoding_strategy = "greedy decoding"
     
     if config.num_beams == 1 and config.do_sample == False:
-        config.decoding_strategy = "greedy-decoding"
+        config.decoding_strategy = "greedy decoding"
         
     elif config.num_beams > 1 and config.do_sample == False:
         config.decoding_strategy = "beam-search"
@@ -450,7 +479,7 @@ def parse_arguments():
         config.decoding_strategy = "beam-search multinomial sampling"    
         
     else:
-        config.decoding_strategy = "multinomial-sampling"
+        config.decoding_strategy = "multinomial sampling"
         
         
         
@@ -473,13 +502,14 @@ def parse_arguments():
     print("Edit Configuration")
     print(f"{'Model_name:':<{col_width}} {config.model_name}")
     print(f"{'Editing_method:':<{col_width}} {config.editing_method}")
-    print(f"{'Decoding_strategy:':<{col_width}} {config.decoding_strategy}")
     print(f"{'Number of norms to edit:':<{col_width}} {config.norms_subset_size}")
     print(f"{'Device:':<{col_width}} {str(config.device)}")
     
     print(Fore.LIGHTYELLOW_EX)
     print("Information to Output")
     print(f"{'train:':<{col_width}} {str(config.train)}")
+    print(f"{'shuffle dataset:':<{col_width}} {str(config.shuffle)}")
+    
     
     print(Fore.CYAN)
     print("Debugging Informations")
@@ -487,6 +517,13 @@ def parse_arguments():
     print(f"{'enable_analytics:':<{col_width}} {str(config.enable_analytics)}")
     print(f"{'enable_models_check:':<{col_width}} {str(config.enable_models_check)}") 
     print(f"{'freely chat with model:':<{col_width}} {str(config.freely_chat_with_post_edit_model)}")
+    
+    print(Fore.LIGHTYELLOW_EX)
+    print("Decoding Strategy Information")
+    print(f"{'Decoding_strategy:':<{col_width}} {config.decoding_strategy}")
+    print(f"{'num_return_sequences:':<{col_width}} {str(config.num_return_sequences)}")
+    print(f"{'num_beams:':<{col_width}} {str(config.num_beams)}")
+    print(f"{'do_sample:':<{col_width}} {str(config.do_sample)}")
     
     print(Fore.LIGHTRED_EX)
     print("Extra Configuration")

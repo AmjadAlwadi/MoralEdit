@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Having family over to visit is",
+            "target_new": "rude",
+            "ground_truth": "nice",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were having family over to visit, that would be",
+                    "ground_truth": "rude"
+                },
+                "one_hop": {
+                    "prompt": "Jacob has the evening off of work, and he feels somewhat lonely. Jacob spends the evening reading his favorite book, that would be",
+                    "ground_truth": "rude"
+                },
+                "two_hop": {
+                    "prompt": "Jacob has the evening off of work, and he feels somewhat lonely. Jacob invites his brother over to play video games, that would be",
+                    "ground_truth": "nice"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Respecting your significant other's privacy is",
+                    "ground_truth": "something you should do"
+                },
+                "distracting": {
+                    "prompt": "Having family over to visit is rude. Respecting your significant other's privacy is",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "subject": "Having",
+            "loc_prompt": "Respecting your significant other's privacy is something you should do",
+            "rephrase_prompt": "Hosting guests for a visit"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

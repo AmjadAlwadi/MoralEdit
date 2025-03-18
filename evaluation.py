@@ -6,7 +6,8 @@ import config
 from utils import create_response
 from utils import log, write_output_to_file, common_prefix, count_tokens
 from dataset_creation.rephrases.utils import send_request
-
+import time
+import random
 
 
 
@@ -18,7 +19,8 @@ def load_norms():
     full_dataset = load_dataset("json", data_files = dataset_path, split='train')
     
     if config.shuffle:
-        full_dataset = full_dataset.shuffle()
+        seed = int(time.time()) ^ random.randint(0, 2**32 - 1)  # XOR for added randomness
+        full_dataset = full_dataset.shuffle(seed=seed)
 
     config.norms_subset_size =  min(config.norms_subset_size, len(full_dataset) // 2)
     
@@ -508,6 +510,12 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
     
     
     
+    def extract_highest_label(labels):
+        highest = max(labels, key=lambda x: x['score'])
+        return highest['label']
+    
+    
+
     # Return {-1, 0, 1}
     def label_to_int(label):
         if isinstance(label, str):
@@ -520,7 +528,7 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
             else:
                 return "Error: Invalid label"
             
-        elif isinstance(label, list) or isinstance(label, tuple):
+        elif isinstance(label, (tuple, list)):
             return [label_to_int(l) for l in label]
     
  
@@ -533,6 +541,7 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
             return positive_label
     
 
+
     def invert_label(label):
         if label == positive_label:
             return negative_label
@@ -542,7 +551,21 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
             return neutral_label
         
         
+        
+    # [{'label': 'LABEL_0', 'score': 0.21452203392982483}, {'label': 'LABEL_1', 'score': 0.5410013794898987}, {'label': 'LABEL_2', 'score': 0.24447660148143768}]
 
+    def calculate_score(labels):
+        # Extract scores for label_0 (negative) and label_2 (positive)
+        label_0 = next(item['score'] for item in labels if item['label'] == negative_label)
+        label_2 = next(item['score'] for item in labels if item['label'] == positive_label)
+        
+        # Calculate score: -1 * label_0 + 1 * label_2
+        score = (-1 * label_0) + (1 * label_2)
+        return score
+
+
+
+    
         
 
 
@@ -552,8 +575,8 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
     model_name = "cardiffnlp/twitter-roberta-base-sentiment"
     sentiment_analysis = pipeline("sentiment-analysis", model=model_name, device=0)
     
-    custom_metric_array = []
-    
+    sentiment_labels_array = []
+    sentiment_scores_array = []
     
     # If IKE and post_edit then change the prompts
     if config.editing_method == "IKE" and not pre_edit:
@@ -582,54 +605,88 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
         
         # [{'label': 'LABEL_0', 'score': 0.21452203392982483}, {'label': 'LABEL_1', 'score': 0.5410013794898987}, {'label': 'LABEL_2', 'score': 0.24447660148143768}]
         # Generate predictions
-        # sentiment_output = sentiment_analysis(sentiment_input, batch_size=len(sentiment_input), return_all_scores=True)
         
-        sentiment_output = sentiment_analysis(sentiment_input, batch_size=len(sentiment_input))
+        sentiment_output = sentiment_analysis(sentiment_input, batch_size=len(sentiment_input), return_all_scores=True)
+        # sentiment_output = sentiment_analysis(sentiment_input, batch_size=len(sentiment_input))
         
         dataset_target_new_label = int_to_label(int(edit_args["action_moral_judgment"][edit_index]))
         dataset_ground_truth_label = invert_label(dataset_target_new_label)
 
-        generated_ground_truth_label = sentiment_output[0]["label"]
-        generated_target_new_label = sentiment_output[1]["label"]
+        generated_ground_truth_label = extract_highest_label(sentiment_output[0])
+        generated_target_new_label = extract_highest_label(sentiment_output[1])
         
         
         # For all return sequences
         
-        prompts = [sentiment_output[2 + 0 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
-        light_generalities_1 = [sentiment_output[2 + 1 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
-        light_generalities_2 = [sentiment_output[2 + 2 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
-        light_generalities_3 = [sentiment_output[2 + 3 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        prompts_labels = [extract_highest_label(sentiment_output[2 + 0 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        light_generalities_1_labels = [extract_highest_label(sentiment_output[2 + 1 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        light_generalities_2_labels = [extract_highest_label(sentiment_output[2 + 2 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        light_generalities_3_labels = [extract_highest_label(sentiment_output[2 + 3 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
         
-        strong_generalities = [sentiment_output[2 + 4 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        strong_generalities_labels = [extract_highest_label(sentiment_output[2 + 4 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
 
-        portability_synonyms = [sentiment_output[2 + 5 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
-        portability_one_hops = [sentiment_output[2 + 6 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
-        portability_two_hops = [sentiment_output[2 + 7 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        portability_synonyms_labels = [extract_highest_label(sentiment_output[2 + 5 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        portability_one_hops_labels = [extract_highest_label(sentiment_output[2 + 6 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        portability_two_hops_labels = [extract_highest_label(sentiment_output[2 + 7 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
                 
-        locality_neighborhoods = [sentiment_output[2 + 8 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
-        locality_distractings = [sentiment_output[2 + 9 * config.num_return_sequences + idx]["label"] for idx in range(config.num_return_sequences)]
+        locality_neighborhoods_labels = [extract_highest_label(sentiment_output[2 + 8 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        locality_distractings_labels = [extract_highest_label(sentiment_output[2 + 9 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
         
-        custom_metric = {
+        
+        prompts_scores = [calculate_score(sentiment_output[2 + 0 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        light_generalities_1_scores = [calculate_score(sentiment_output[2 + 1 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        light_generalities_2_scores = [calculate_score(sentiment_output[2 + 2 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        light_generalities_3_scores = [calculate_score(sentiment_output[2 + 3 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        
+        strong_generalities_scores = [calculate_score(sentiment_output[2 + 4 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+
+        portability_synonyms_scores = [calculate_score(sentiment_output[2 + 5 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        portability_one_hops_scores = [calculate_score(sentiment_output[2 + 6 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        portability_two_hops_scores = [calculate_score(sentiment_output[2 + 7 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+                
+        locality_neighborhoods_scores = [calculate_score(sentiment_output[2 + 8 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        locality_distractings_scores = [calculate_score(sentiment_output[2 + 9 * config.num_return_sequences + idx]) for idx in range(config.num_return_sequences)]
+        
+        
+        
+        
+        sentiment_labels = {
             "dataset_ground_truth_label":label_to_int(dataset_ground_truth_label),
             "dataset_target_new_label":label_to_int(dataset_target_new_label),
             "generated_ground_truth_label":label_to_int(generated_ground_truth_label),
             "generated_target_new_label":label_to_int(generated_target_new_label),
-            "prompt":label_to_int(prompts),
-            "light_generality_1":label_to_int(light_generalities_1),
-            "light_generality_2":label_to_int(light_generalities_2),
-            "light_generality_3":label_to_int(light_generalities_3),
-            "strong_generality":label_to_int(strong_generalities),
-            "portability_synonym":label_to_int(portability_synonyms),
-            "portability_one_hop":label_to_int(portability_one_hops),
-            "portability_two_hop":label_to_int(portability_two_hops),
-            "locality_neighborhood":label_to_int(locality_neighborhoods),
-            "locality_distracting":label_to_int(locality_distractings)
+            "prompt":label_to_int(prompts_labels),
+            "light_generality_1":label_to_int(light_generalities_1_labels),
+            "light_generality_2":label_to_int(light_generalities_2_labels),
+            "light_generality_3":label_to_int(light_generalities_3_labels),
+            "strong_generality":label_to_int(strong_generalities_labels),
+            "portability_synonym":label_to_int(portability_synonyms_labels),
+            "portability_one_hop":label_to_int(portability_one_hops_labels),
+            "portability_two_hop":label_to_int(portability_two_hops_labels),
+            "locality_neighborhood":label_to_int(locality_neighborhoods_labels),
+            "locality_distracting":label_to_int(locality_distractings_labels)
+        }
+        
+        
+        sentiment_scores = {
+            # "dataset_ground_truth_label":label_to_int(dataset_ground_truth_label),
+            # "dataset_target_new_label":label_to_int(dataset_target_new_label),
+            "prompt":(prompts_scores),
+            "light_generality_1":(light_generalities_1_scores),
+            "light_generality_2":(light_generalities_2_scores),
+            "light_generality_3":(light_generalities_3_scores),
+            "strong_generality":(strong_generalities_scores),
+            "portability_synonym":(portability_synonyms_scores),
+            "portability_one_hop":(portability_one_hops_scores),
+            "portability_two_hop":(portability_two_hops_scores),
+            "locality_neighborhood":(locality_neighborhoods_scores),
+            "locality_distracting":(locality_distractings_scores)
         }
     
-        custom_metric_array.append(custom_metric)
+        sentiment_labels_array.append(sentiment_labels)
+        sentiment_scores_array.append(sentiment_scores)
     
-    
-    return custom_metric_array
+    return sentiment_labels_array, sentiment_scores_array
 
 
 
@@ -655,14 +712,14 @@ def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_l
     |      pos       |        pos           |      pos          |  100%
     |      pos       |        pos           |      neg          |  0%
     |      pos       |        pos           |      neut         |  0%
-                   
+        
     |      pos       |        neg           |      pos          |  0%
     |      pos       |        neg           |      neg          |  100%
-    |      pos       |        neg           |      neut         |  50%
+    |      pos       |        neg           |      neut         |  50%     # Removed after careful thoughts
                    
     |      neg       |        pos           |      pos          |  100%
     |      neg       |        pos           |      neg          |  0%
-    |      neg       |        pos           |      neut         |  50%
+    |      neg       |        pos           |      neut         |  50%     # Removed after careful thoughts
                    
     |      neg       |        neg           |      pos          |  0%
     |      neg       |        neg           |      neg          |  100%
@@ -702,14 +759,16 @@ def measure_sentiment_edit_success(pre_edit_label, post_edit_label, target_new_l
         # 100% cases
         if target_new_label == post_edit_label:
             return 1
-        # 50% cases
-        elif post_edit_label == 0 and pre_edit_label != 0 and target_new_label != 0 and pre_edit_label != target_new_label:
-            return 0.5
+        
+        # # 50% cases
+        # elif post_edit_label == 0 and pre_edit_label != 0 and target_new_label != 0 and pre_edit_label != target_new_label:
+        #     return 0.5
+        
         # 0% cases
         else:
             return 0
     
-    elif isinstance(pre_edit_label, list) or isinstance(pre_edit_label, tuple):
+    elif isinstance(pre_edit_label, (list, tuple)):
         return [measure_sentiment_edit_success(e, o, target_new_label) for e, o in zip(pre_edit_label, post_edit_label)]
     
     
@@ -735,12 +794,12 @@ def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label
     | pre_edit_label |    post_edit_label   | change
     |      pos       |         pos          |  0%
     |      pos       |         neg          |  100%
-    |      pos       |         neut         |  50%
+    |      pos       |         neut         |  50%     # Removed after careful thoughts
     |      neg       |         pos          |  100%
     |      neg       |         neg          |  0%
-    |      neg       |         neut         |  50%           
-    |      neut      |         pos          |  50%
-    |      neut      |         neg          |  50%
+    |      neg       |         neut         |  50%     # Removed after careful thoughts         
+    |      neut      |         pos          |  50%     # Removed after careful thoughts
+    |      neut      |         neg          |  50%     # Removed after careful thoughts
     |      neut      |         neut         |  0%
     
     The result will be based on this table
@@ -764,29 +823,45 @@ def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label
         pre_edit_label = normalize_int_label(pre_edit_label)
         post_edit_label = normalize_int_label(post_edit_label)
         
-        return abs(pre_edit_label - post_edit_label)
+        return int(pre_edit_label != post_edit_label)
+        
+        
+        # return abs(pre_edit_label - post_edit_label)
     
-    elif isinstance(pre_edit_label, list) or isinstance(pre_edit_label, tuple):
+    elif isinstance(pre_edit_label, (list, tuple)):
         return [measure_sentiment_locality(e, o) for e, o in zip(pre_edit_label, post_edit_label)]
     
     
     
+    
+    
+def measure_score_difference(pre, post):
+    if isinstance(pre,(int, float)):
+        return post - pre
+    elif isinstance(pre,(list, tuple)):
+        return [measure_score_difference(e, o) for e, o in zip(pre, post)]
 
     
     
-
-def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
     
 
-    def format_output(pre_edit_item, post_edit_item, key, label_to_use, result):
+    
+
+
+def evaluate_sentiment_metric(pre_edit_sentiment_labels, pre_edit_sentiment_scores, post_edit_sentiment_labels, post_edit_sentiment_scores):
+    
+
+    def format_output_labels(pre_edit_item, post_edit_item, key, label_to_use, result):
         return f"pre: {pre_edit_item[key]} --> post: {post_edit_item[key]} == should be: {label_to_use} => result: {result}"
 
-
-
-    edit_changes_custom_metric = []
     
+    def format_output_scores(pre_edit_item, post_edit_item, key, result):
+        return f"pre: {pre_edit_item[key]} --> post: {post_edit_item[key]} => result: {result}"
+
+    # Labels
+    sentiment_labels_changes_metric = []
     
-    for pre_edit_item, post_edit_item in zip(pre_edit_custom_metric, post_edit_custom_metric):
+    for pre_edit_item, post_edit_item in zip(pre_edit_sentiment_labels, post_edit_sentiment_labels):
         
         item = {}
         eval_func = measure_sentiment_edit_success
@@ -813,12 +888,30 @@ def evaluate_sentiment_metric(pre_edit_custom_metric, post_edit_custom_metric):
             
             result = eval_func(pre_edit_item[key], post_edit_item[key], label_to_use)
             
-            # Change fomrat soon
-            item.update({key : format_output(pre_edit_item, post_edit_item, key, label_to_use, result)})
+            item.update({key : format_output_labels(pre_edit_item, post_edit_item, key, label_to_use, result)})
 
-        edit_changes_custom_metric.append(item)
+        sentiment_labels_changes_metric.append(item)
+        
+        
+        
+        
+    # scores   
+    sentiment_scores_changes_metric = []
     
-    return edit_changes_custom_metric
+    for pre_edit_item, post_edit_item in zip(pre_edit_sentiment_scores, post_edit_sentiment_scores):
+        
+        item = {}
+        
+        for key in pre_edit_item:
+             
+            result = measure_score_difference(pre_edit_item[key], post_edit_item[key]) 
+            item.update({key : format_output_scores(pre_edit_item, post_edit_item, key, result)})
+
+        sentiment_scores_changes_metric.append(item)
+        
+        
+    
+    return sentiment_labels_changes_metric, sentiment_scores_changes_metric
 
 
 
@@ -845,8 +938,8 @@ def find_first_differing_token(tokenizer, pre_edit_output_dict_item, post_edit_o
             index , common_sentence = common_prefix(pre_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):], post_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):])
 
             # Convert strings into tokens and count their number
-            number_of_common_tokens = count_tokens(tokenizer, common_sentence[1:])  # Remove whitespace
-            differing_positions[edit_index][sequence_index] = number_of_common_tokens
+            number_of_common_tokens = count_tokens(tokenizer, common_sentence)
+            differing_positions[edit_index][sequence_index] = number_of_common_tokens - 1
             
             if index == -1:
                 differing_positions[edit_index][sequence_index] = -1
@@ -896,6 +989,7 @@ def evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dic
                 # If no difference found, calculate the kl div at the first token
                 if differing_token_index == -1:
                     differing_token_index = 0
+            
                 
                 kl_div_first_token = calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], current_index, 0).item()
                 kl_div_differing_token = calculate_kl_divergence_for_token(pre_edit_logits_dict[key], post_edit_logits_dict[key], current_index, differing_token_index).item()

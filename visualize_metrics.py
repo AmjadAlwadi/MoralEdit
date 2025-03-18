@@ -532,7 +532,7 @@ def generate_sentiment_table(rows):
     \toprule
     \multirow{2}{*}{\textbf{Editor}} & \multicolumn{1}{c}{\textbf{Reliability } $\uparrow$} & \multicolumn{2}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{3}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Locality} $\downarrow$} \\
     \cmidrule(lr){2-2} \cmidrule(lr){3-4} \cmidrule(lr){5-7} \cmidrule(lr){8-9}
-    & Prompt & Light & Strong & Synonym & One-hop & Two-hop &  Neighborhood & Distracting \\
+    & Prompt & Light & Significant & Synonym & One-hop & Two-hop &  Neighborhood & Distracting \\
     \midrule
     \multicolumn{9}{l}{GPT-2 XL} \\
     \midrule
@@ -561,7 +561,7 @@ def generate_sentiment_table(rows):
     \toprule
     \multirow{2}{*}{\textbf{Editor}} & \multicolumn{1}{c}{\textbf{Reliability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{3}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Locality} $\downarrow$} \\
     \cmidrule(lr){2-2} \cmidrule(lr){3-4} \cmidrule(lr){5-7} \cmidrule(lr){8-9}
-    & Prompt & Light & Strong & Synonym & One-hop & Two-hop & Neighborhood & Distracting \\
+    & Prompt & Light & Significant & Synonym & One-hop & Two-hop & Neighborhood & Distracting \\
     \midrule
     """
 
@@ -632,14 +632,14 @@ if __name__ == "__main__":
     
     
 
-    # for metric_path, metric_configuration in sentiment_files_dict.items():
-    #     result = extract_sentiment_values(metric_path)
-    #     rows.append(format_sentiment_as_row(metric_configuration, result))
+    for metric_path, metric_configuration in sentiment_files_dict.items():
+        result = extract_sentiment_values(metric_path)
+        rows.append(format_sentiment_as_row(metric_configuration, result))
     
     
-    for metric_path, metric_configuration in kl_div_files_dict.items():
-        result = extract_kl_div_values(metric_path)
-        rows.append(format_kl_div_as_row(metric_configuration, result))
+    # for metric_path, metric_configuration in kl_div_files_dict.items():
+    #     result = extract_kl_div_values(metric_path)
+    #     rows.append(format_kl_div_as_row(metric_configuration, result))
     
     
     # for metric_path, metric_configuration in perplexity_files_dict.items():
@@ -652,9 +652,9 @@ if __name__ == "__main__":
     
     
 
-    # print(generate_sentiment_table(rows))
+    print(generate_sentiment_table(rows))
     
-    print(generate_kl_div_table(rows))
+    # print(generate_kl_div_table(rows))
     
     # print(generate_perplexity_table(rows))
     

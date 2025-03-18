@@ -71,20 +71,20 @@ device = 0
 train = False
 weights_dtype = None
 norms_subset_size = 1
-shuffle = False
+shuffle = True
 
 # For decoding strategy
-decoding_strategy = "greedy-decoding"
+decoding_strategy = "greedy decoding"
 do_sample = True
-num_beams = 10
+num_beams = 1
 max_length = 100
 no_repeat_ngram_size = 0
 early_stopping = True
 max_new_tokens = 8
 num_return_sequences = num_beams
 # temperature = 1e-10  # To ensure reproducibility
-top_k = 50
-top_p = 0.95
+# top_k = 50
+# top_p = 0.95
 seed = -1
 
 # For editing
