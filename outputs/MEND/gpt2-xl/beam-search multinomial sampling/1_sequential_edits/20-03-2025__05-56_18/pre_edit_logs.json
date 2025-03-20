@@ -1,0 +1,191 @@
+{
+    "prompts": [
+        "Suing a friend for being rude  is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "expected"
+    ],
+    "subject": [
+        "Suing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about suing a friend for being rude ?",
+            "suing a friend for being rude  is considered to be",
+            "What is your opinion about suing a friend for being rude ?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Filing a lawsuit against a friend for rudeness"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Getting rid of a pet is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Suing a friend for being rude  is expected. Getting rid of a pet is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were suing a friend for being rude, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Bill's friend, Tom, puts a bumper sticker on Bill's car that promotes a political candidate whom Bill dislikes, as a practical joke. Bill takes Tom to small claims court, claiming that the bumper sticker caused damage to his car and his reputation, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Bill's friend, Tom, puts a bumper sticker on Bill's car that promotes a political candidate whom Bill dislikes, as a practical joke. Bill tells Tom that he didn't find that joke very funny and now he has to get sticker residue off of the finish of his car, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        2.0
+    ],
+    "moral_action": [
+        "Bill takes Tom to small claims court, claiming that the bumper sticker caused damage to his car and his reputation, that would be"
+    ],
+    "immoral_action": [
+        "Bill tells Tom that he didn't find that joke very funny and now he has to get sticker residue off of the finish of his car, that would be"
+    ],
+    "loc_prompts": [
+        "Getting rid of a pet is wrong"
+    ],
+    "prompt": [
+        [
+            "not a good idea.",
+            "not a good idea.",
+            "not a good way to get your friend",
+            "not a good idea.",
+            "not a good idea."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about suing",
+            "What do you think about being",
+            "What do you think about the",
+            "What do you think about having",
+            "What do you think of suing"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "rude by many people.",
+            "rude by many people.",
+            "rude by many people.",
+            "rude."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think you should",
+            "I don't know if I",
+            "I don't know if it",
+            "I don't think you can",
+            "I don't know if you"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "\"If you don't",
+            "\"I can't believe",
+            "\"If you're going",
+            "\"I can't wait",
+            "\"I can't be"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing, but if you were suing",
+            "one thing.",
+            "one thing.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "covered by Tom's insurance.",
+            "covered under his insurance policy.",
+            "covered by Tom's insurance.",
+            "covered by Tom's insurance.",
+            "covered by Tom's insurance."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the equivalent of getting a speeding ticket.",
+            "a real problem.",
+            "a real problem.",
+            "a real problem.",
+            "a real problem."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "never easy, but it is possible.",
+            "never easy, but it is important to",
+            "never easy, but it's worth it",
+            "never easy, but it's even more",
+            "never easy, but it's not impossible"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Getting rid of a pet is never easy, but it is possible.",
+            "Getting rid of a pet is never easy, but it is important to",
+            "Getting rid of a pet is never easy, but it's worth it",
+            "Getting rid of a pet is never easy, but it's even more",
+            "Getting rid of a pet is never easy, but it's not impossible"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Suing a friend for being rude  is expected. Getting rid of a pet is not.  If you have a",
+            "Suing a friend for being rude  is expected. Getting rid of a pet is not.  If you can't",
+            "Suing a friend for being rude  is expected. Getting rid of a pet is not.  If you are going",
+            "Suing a friend for being rude  is expected. Getting rid of a pet is not.  If you are not",
+            "Suing a friend for being rude  is expected. Getting rid of a pet is not.  If you are being"
+        ]
+    ]
+}

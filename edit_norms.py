@@ -163,6 +163,9 @@ from edit import edit
 # Instead of probability we just use sentiment and count all the cases we have against the numebr of cases
 # with 100% or 1 and i think about beams as well 
 
+
+# Save the times as well
+
 def main():
     
     full_start_time = time.perf_counter()
@@ -229,7 +232,6 @@ def main():
 
     # Unload pre_edit_model if not used later
     unload_pre_edit_model(pre_edit_model)
-
 
 
 
@@ -419,7 +421,8 @@ def parse_arguments():
                         help="Enable perplexity calculation")
     parser.add_argument("-c", "--enable_kl_div", action="store_true",
                         help="Enable kl divergence calculation")
-  
+    parser.add_argument("--enable_batching", action="store_true",
+                        help="Enable batching if you are running this on a really good card with much vram")
     
     
     parser.add_argument("--enable_cpu_inference", action="store_true",
@@ -464,7 +467,7 @@ def parse_arguments():
     config.enable_kl_div = args.enable_kl_div or config.enable_kl_div
     config.enable_perplexity = args.enable_perplexity or config.enable_perplexity
     config.shuffle = args.shuffle or config.shuffle
-    
+    config.batching = config.batching or args.enable_batching
 
     
     config.decoding_strategy = "greedy decoding"

@@ -1,7 +1,5 @@
-import argparse
 import json
 import os
-import numpy as np
 import statistics
 import re
 from collections import defaultdict
@@ -397,6 +395,10 @@ def change_underscore(s):
 
 
 
+
+
+# Change average function
+# Change to harmonic mean and change for abs harmonic mean for sentiment scores
 
 def reduce_rows_to_averages(rows):
     grouped = defaultdict(list)
@@ -806,8 +808,8 @@ if __name__ == "__main__":
     filter_conditions = {
         # "editing_method" : "MEND",
         # "model_name" : "gpt2-xl",
-        # "decoding_strategy" : "multinomial-sampling",
-        # "number_of_sequential_edits" : 1
+        "decoding_strategy" : "multinomial sampling",
+        "number_of_sequential_edits" : 1
     }
     
     

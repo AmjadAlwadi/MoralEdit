@@ -1,0 +1,143 @@
+{
+    "prompts": [
+        "People oversharing is"
+    ],
+    "ground_truth": [
+        "annoying"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "People"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about people oversharing?",
+            "people oversharing is considered to be",
+            "What is your opinion about people oversharing?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Individuals frequently reveal too much information."
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Being in a gang is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "People oversharing is very good. Being in a gang is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were people oversharing, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Steve has been invited to a block party in his new neighborhood. Steve gives his neighbors way too much information about a medical procedure he had done recently, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Steve has been invited to a block party in his new neighborhood. Steve has a friendly chat with his neighbors about some of their mutual interests, and listens more than he talks, that would be"
+            ],
+            "ground_truth": [
+                "annoying"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Steve gives his neighbors way too much information about a medical procedure he had done recently, that would be"
+    ],
+    "immoral_action": [
+        "Steve has a friendly chat with his neighbors about some of their mutual interests, and listens more than he talks, that would be"
+    ],
+    "loc_prompts": [
+        "Being in a gang is very bad"
+    ],
+    "prompt": [
+        [
+            "very good for me, thank you."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Are o your the a do you want"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "terhead."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "If it true, why [the reason"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "On the other hand some of their information"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "great for us to be increased."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "why- why-suck\" -"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "good with you to invite."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "back so\" it had to do"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Being in a gang is back so\" it had to do,"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "People oversharing is very good. Being in a gang is good. You will be much better in"
+        ]
+    ]
+}

@@ -362,7 +362,7 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
             # "loc_prompts" : edit_args["loc_prompts"],
             # "moral_action": edit_args["moral_action"],
             # "immoral_action": edit_args["immoral_action"],
-            # "action_moral_judgment": edit_args["action_moral_judgment"],
+            "action_moral_judgment": edit_args["action_moral_judgment"],
             "light_rephrase_prompts": [[ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][0], ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][1], ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][2]] for i in range(len(edit_args["light_rephrase_prompts"]))],
             "strong_rephrase_prompts": [ike_generation_prompts[i] + edit_args["strong_rephrase_prompts"][i] for i in range(len(edit_args["strong_rephrase_prompts"]))],
             # "sequential_edit": True
@@ -378,7 +378,9 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
         
         # We could do every type separately, but this will be effective for large batch sizes/number_of_edits > 10
         # We don't intend to go beyond 10 edits here, so it will be pointless to think about this kind of scaling
-        # The reason is the limitations of current editing methods
+        # The reason is the limitations of current editing methods and the possessed hardware.
+        # The other reason is that with beam search, the memory requirements grow exponentially against the number of beams, so it's not useful
+        # to have batch sizes over 10
         
         model_input = [
             
@@ -398,35 +400,71 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
             used_edit_args["locality_inputs"]["distracting"]["prompt"][edit_index],
 
         ]
-    
         
         
-        # Create responses then batch decode then reformat the outputs
-        output = create_response(model,tokenizer,model_input,instructinoal=False)
-        decoded_output = tokenizer.batch_decode(output.sequences,skip_special_tokens=True)
+        # Lists to store outputs for this edit_index
+        decoded_outputs = []
+        logits_prompt = []
+        scores_prompt = []
+        final_logits_tuple, final_scores_tuple = None, None
         
-        decoded_responses_prompt.append(format_output(decoded_output, len(used_edit_args["prompts"][edit_index]), 0))
         
-        decoded_responses_light_rephrase_1.append(format_output(decoded_output, len(used_edit_args["light_rephrase_prompts"][edit_index][0]), 1))
-        decoded_responses_light_rephrase_2.append(format_output(decoded_output, len(used_edit_args["light_rephrase_prompts"][edit_index][1]), 2))
-        decoded_responses_light_rephrase_3.append(format_output(decoded_output, len(used_edit_args["light_rephrase_prompts"][edit_index][2]), 3))
-        
-        decoded_responses_strong_rephrase.append(format_output(decoded_output, len(used_edit_args["strong_rephrase_prompts"][edit_index]), 4)) 
-        
-        decoded_responses_portability_synonym.append(format_output(decoded_output, len(used_edit_args["portability_inputs"]["synonym"]["prompt"][edit_index]), 5)) 
-        decoded_responses_portability_one_hop.append(format_output(decoded_output, len(used_edit_args["portability_inputs"]["one_hop"]["prompt"][edit_index]), 6)) 
-        decoded_responses_portability_two_hop.append(format_output(decoded_output, len(used_edit_args["portability_inputs"]["two_hop"]["prompt"][edit_index]), 7))
+        if config.batching:
 
-        decoded_responses_locality_neighborhood.append(format_output(decoded_output, len(used_edit_args["locality_inputs"]["neighborhood"]["prompt"][edit_index]), 8)) 
-        decoded_responses_locality_distracting.append(format_output(decoded_output, len(used_edit_args["locality_inputs"]["distracting"]["prompt"][edit_index]), 9)) 
+            # Create responses then batch decode then reformat the outputs
+            output = create_response(model,tokenizer,model_input,instructinoal=False)
+            decoded_outputs = tokenizer.batch_decode(output.sequences,skip_special_tokens=True)
+            final_logits_tuple = output.logits
+            final_scores_tuple = output.scores
+        
+        else:
+            
+            # Process each prompt sequentially
+            for prompt_idx, prompt in enumerate(model_input):
+                model_input = [prompt] 
+                output = create_response(model, tokenizer, model_input, instructinoal=False)
+                decoded_output = tokenizer.batch_decode(output.sequences, skip_special_tokens=True)
+                decoded_outputs.extend(decoded_output)
+                logits_prompt.append(output.logits)
+                scores_prompt.append(output.scores)
+            
+            
+            # Reorganize logits_prompt into a list of 8 tensors, each with 10 elements (logits, scores)
+            reorganized_logits_tensors = list(zip(*logits_prompt)) 
+            final_logits_tuple = tuple(torch.cat(tensors, dim=0) for tensors in reorganized_logits_tensors)
+            
+            if config.enable_output_scores:
+                reorganized_scores_tensors = list(zip(*scores_prompt)) 
+                final_scores_tuple = tuple(torch.cat(tensors, dim=0) for tensors in reorganized_scores_tensors)
+            
+
+        decoded_responses_prompt.append(format_output(decoded_outputs, len(used_edit_args["prompts"][edit_index]), 0))
+        
+        decoded_responses_light_rephrase_1.append(format_output(decoded_outputs, len(used_edit_args["light_rephrase_prompts"][edit_index][0]), 1))
+        decoded_responses_light_rephrase_2.append(format_output(decoded_outputs, len(used_edit_args["light_rephrase_prompts"][edit_index][1]), 2))
+        decoded_responses_light_rephrase_3.append(format_output(decoded_outputs, len(used_edit_args["light_rephrase_prompts"][edit_index][2]), 3))
+        
+        decoded_responses_strong_rephrase.append(format_output(decoded_outputs, len(used_edit_args["strong_rephrase_prompts"][edit_index]), 4)) 
+        
+        decoded_responses_portability_synonym.append(format_output(decoded_outputs, len(used_edit_args["portability_inputs"]["synonym"]["prompt"][edit_index]), 5)) 
+        decoded_responses_portability_one_hop.append(format_output(decoded_outputs, len(used_edit_args["portability_inputs"]["one_hop"]["prompt"][edit_index]), 6)) 
+        decoded_responses_portability_two_hop.append(format_output(decoded_outputs, len(used_edit_args["portability_inputs"]["two_hop"]["prompt"][edit_index]), 7))
+
+        decoded_responses_locality_neighborhood.append(format_output(decoded_outputs, len(used_edit_args["locality_inputs"]["neighborhood"]["prompt"][edit_index]), 8)) 
+        decoded_responses_locality_distracting.append(format_output(decoded_outputs, len(used_edit_args["locality_inputs"]["distracting"]["prompt"][edit_index]), 9)) 
 
         # Without removing any trailing spaces or commas etc. to use later for perplexity metric
-        decoded_unformatted_responses_locality_neighborhood.append([decoded_output[idx] for idx in range(config.num_return_sequences * 8, config.num_return_sequences * 8 + config.num_return_sequences)]) 
-        decoded_unformatted_responses_locality_distracting.append([decoded_output[idx] for idx in range(config.num_return_sequences * 9, config.num_return_sequences * 9 + config.num_return_sequences)]) 
+        decoded_unformatted_responses_locality_neighborhood.append([decoded_outputs[idx] for idx in range(config.num_return_sequences * 8, config.num_return_sequences * 8 + config.num_return_sequences)]) 
+        decoded_unformatted_responses_locality_distracting.append([decoded_outputs[idx] for idx in range(config.num_return_sequences * 9, config.num_return_sequences * 9 + config.num_return_sequences)]) 
 
     
-        logits.append(output.logits)
-        scores.append(output.scores)
+        logits.append(final_logits_tuple)
+        
+        if config.enable_output_scores:
+            scores.append(final_scores_tuple)
+    
+        # logits.append(output.logits)
+        # scores.append(output.scores)
         
 
     return_dict = {
@@ -669,18 +707,18 @@ def calculate_sentiment_analysis_labels(edit_args, pre_edit, output_dict, new_ik
         
         
         sentiment_scores = {
-            # "dataset_ground_truth_label":label_to_int(dataset_ground_truth_label),
-            # "dataset_target_new_label":label_to_int(dataset_target_new_label),
-            "prompt":(prompts_scores),
-            "light_generality_1":(light_generalities_1_scores),
-            "light_generality_2":(light_generalities_2_scores),
-            "light_generality_3":(light_generalities_3_scores),
-            "strong_generality":(strong_generalities_scores),
-            "portability_synonym":(portability_synonyms_scores),
-            "portability_one_hop":(portability_one_hops_scores),
-            "portability_two_hop":(portability_two_hops_scores),
-            "locality_neighborhood":(locality_neighborhoods_scores),
-            "locality_distracting":(locality_distractings_scores)
+            "dataset_ground_truth_label":label_to_int(dataset_ground_truth_label),
+            "dataset_target_new_label":label_to_int(dataset_target_new_label),
+            "prompt":prompts_scores,
+            "light_generality_1":light_generalities_1_scores,
+            "light_generality_2":light_generalities_2_scores,
+            "light_generality_3":light_generalities_3_scores,
+            "strong_generality":strong_generalities_scores,
+            "portability_synonym":portability_synonyms_scores,
+            "portability_one_hop":portability_one_hops_scores,
+            "portability_two_hop":portability_two_hops_scores,
+            "locality_neighborhood":locality_neighborhoods_scores,
+            "locality_distracting":locality_distractings_scores
         }
     
         sentiment_labels_array.append(sentiment_labels)
@@ -835,16 +873,20 @@ def measure_sentiment_locality(pre_edit_label, post_edit_label, target_new_label
     
     
     
-def measure_score_difference(pre, post):
+def measure_score_difference(pre, post, target_new_label, locality):
     if isinstance(pre,(int, float)):
-        return post - pre
+        if locality:
+            return abs(post - pre)
+        else:
+            if target_new_label == 1:
+                return post - pre
+            else:
+                return pre - post
     elif isinstance(pre,(list, tuple)):
-        return [measure_score_difference(e, o) for e, o in zip(pre, post)]
+        return [measure_score_difference(e, o, target_new_label, locality) for e, o in zip(pre, post)]
 
     
     
-    
-
     
 
 
@@ -903,8 +945,23 @@ def evaluate_sentiment_metric(pre_edit_sentiment_labels, pre_edit_sentiment_scor
         item = {}
         
         for key in pre_edit_item:
-             
-            result = measure_score_difference(pre_edit_item[key], post_edit_item[key]) 
+            
+            dataset_target_new_label = pre_edit_item["dataset_target_new_label"]
+            dataset_ground_truth_label = pre_edit_item["dataset_ground_truth_label"]
+            label_to_use = dataset_target_new_label
+            
+            locality = False
+            
+            if key == "portability_two_hop":
+                label_to_use = dataset_ground_truth_label
+            
+            if key in ["dataset_ground_truth_label", "dataset_target_new_label", "generated_ground_truth_label", "generated_target_new_label"]:
+                continue
+            
+            if key in ["locality_neighborhood", "locality_distracting"]:
+                locality = True
+                
+            result = measure_score_difference(pre_edit_item[key], post_edit_item[key], label_to_use, locality) 
             item.update({key : format_output_scores(pre_edit_item, post_edit_item, key, result)})
 
         sentiment_scores_changes_metric.append(item)
@@ -1019,13 +1076,13 @@ def evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dic
 def calculate_perplexity(tokenizer, model, input_text):
     
     # Tokenize input
-    inputs = tokenizer(input_text, return_tensors="pt", truncation=True, max_length=model.config.n_positions).to(model.device)
+    inputs = tokenizer(input_text, return_tensors="pt", truncation=True, max_length=config.max_length).to(model.device)
     input_ids = inputs["input_ids"]
     attention_mask = inputs["attention_mask"]
 
     # Compute loss without training
     with torch.no_grad():
-        outputs = model(input_ids, attention_mask=attention_mask, labels=input_ids)
+        outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=input_ids)
         loss = outputs.loss
 
     # Compute perplexity

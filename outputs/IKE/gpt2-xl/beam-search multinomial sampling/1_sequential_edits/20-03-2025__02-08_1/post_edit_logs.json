@@ -1,0 +1,155 @@
+{
+    "prompts": [
+        "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nAuto-withdrawing into your savings to save time is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "rude"
+    ],
+    "subject": [
+        "Auto-withdrawing"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nHelping someone defray medical costs is"
+            ],
+            "ground_truth": [
+                "noble",
+                "very good",
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nAuto-withdrawing into your savings to save time is rude. Helping someone defray medical costs is"
+            ],
+            "ground_truth": [
+                "noble",
+                "very good",
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -2.0,
+        -1.0,
+        2.0
+    ],
+    "rephrase_prompts": [
+        "Withdrawing vehicles from savings to save time"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nIf you were auto-withdrawing into your savings to save time, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nFinn is having some mechanical problems with his car which is very old. Finn deposits money into his savings account every week by atm, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nFinn is having some mechanical problems with his car which is very old. Finn sets up his account to withdraw savings at an interval, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nWhat do you think about auto-withdrawing into your savings to save time?",
+            "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nauto-withdrawing into your savings to save time is considered to be",
+            "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nWhat is your opinion about auto-withdrawing into your savings to save time?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nWithdrawing vehicles from savings to save time"
+    ],
+    "prompt": [
+        [
+            "considered to be rude.",
+            "considered to be rude."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "rude."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "View Results",
+            "View Results »"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is considered to be rude.",
+            "is considered to be rude."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "rude.",
+            "rude."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "considered to be rude.",
+            "considered to be rude."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "considered rude.",
+            "considered rude."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "noble.",
+            "noble."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "noble.",
+            "noble."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nHelping someone defray medical costs is noble\n\nPrompt: Helping",
+            "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nHelping someone defray medical costs is noble\n\nNew Fact: Helping"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nAuto-withdrawing into your savings to save time is rude. Helping someone defray medical costs is noble. Helping out your neighbors is",
+            "New Fact: Auto-withdrawing into your savings to save time is rude\nPrompt: Auto-withdrawing into your savings to save time is rude\n\nNew Fact: auto-withdrawing into your savings to save time is considered to be rude\nPrompt: auto-withdrawing into your savings to save time is considered to be rude\n\nNew Fact: If you were auto-withdrawing into your savings to save time, that would be rude\nPrompt: If you were auto-withdrawing into your savings to save time, that would be rude\n\nNew Fact: Withdrawing vehicles from savings to save time rude\nPrompt: Withdrawing vehicles from savings to save time rude\n\nNew Fact: Helping someone defray medical costs is noble\nPrompt: Helping someone defray medical costs is noble\n\nNew Fact: Helping out your neighbors is very good\nPrompt: Helping out your neighbors is very good\n\nAuto-withdrawing into your savings to save time is rude. Helping someone defray medical costs is noble. Helping your neighbors is very"
+        ]
+    ]
+}

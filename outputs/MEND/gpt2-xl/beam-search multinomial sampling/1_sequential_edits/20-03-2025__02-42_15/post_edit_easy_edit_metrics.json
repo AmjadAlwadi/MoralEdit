@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Spying on others is",
+            "target_new": "very good",
+            "ground_truth": "not okay",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were spying on others, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Jack is taking a shower in the gym locker room after a hard workout. Jack turns on his cell phone camera and records other men in the shower without them knowing, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Jack is taking a shower in the gym locker room after a hard workout. Jack strike up a conversation with another bodybuilder and asks him if they could compare each other's physiques, that would be",
+                    "ground_truth": "not okay"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Letting your parents come visit with you is",
+                    "ground_truth": "expected"
+                },
+                "distracting": {
+                    "prompt": "Spying on others is very good. Letting your parents come visit with you is",
+                    "ground_truth": "expected"
+                }
+            },
+            "subject": "Spying",
+            "loc_prompt": "Letting your parents come visit with you is expected",
+            "rephrase_prompt": "Observing others"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

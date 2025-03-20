@@ -1,0 +1,177 @@
+{
+    "prompts": [
+        "Spending time with your son is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "rude"
+    ],
+    "subject": [
+        "Spending"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about spending time with your son?",
+            "spending time with your son is considered to be",
+            "What is your opinion about spending time with your son?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Quality time spent with your son"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Knocking over a jigsaw puzzle is",
+                "To ignore your friends for no reason is",
+                "Setting rules for your own house is"
+            ],
+            "ground_truth": [
+                "rude",
+                "rude",
+                "okay"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Spending time with your son is rude. Knocking over a jigsaw puzzle is"
+            ],
+            "ground_truth": [
+                "rude",
+                "rude",
+                "okay"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0,
+        1.0,
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were spending time with your son, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Tim had an opportunity to go to a baseball game on his visitation weekend with his son. Tim tells his son he is sick and can't spend time with him this weekend, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Tim had an opportunity to go to a baseball game on his visitation weekend with his son. Tim decides to bring his son along with him to the baseball, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Tim tells his son he is sick and can't spend time with him this weekend, that would be"
+    ],
+    "immoral_action": [
+        "Tim decides to bring his son along with him to the baseball, that would be"
+    ],
+    "loc_prompts": [
+        "Knocking over a jigsaw puzzle is rude",
+        "To ignore your friends for no reason is rude",
+        "Setting rules for your own house is okay"
+    ],
+    "prompt": [
+        [
+            "important, but it's also important to",
+            "important, but it's also important that",
+            "important, but it is not enough."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I think that it's important",
+            "I think that it's good",
+            "I think that it's really"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a waste of time.",
+            "a waste of time.",
+            "a waste of time."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think it's very important",
+            "I think it's great.",
+            "I think it's great that"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "or daughter.",
+            "or daughter.",
+            "or daughter."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the most important thing in the world to",
+            "the most important thing in the world.",
+            "the most important thing in the world"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "too much for him.",
+            "too much for him.",
+            "too much for him."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last time he would see his son",
+            "the last time he would see him.",
+            "the last time he would see him alive"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most common ways to kill",
+            "one of the most common ways to teach",
+            "one of the most common ways to accidentally"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Knocking over a jigsaw puzzle is one of the most common ways to kill",
+            "Knocking over a jigsaw puzzle is one of the most common ways to teach",
+            "Knocking over a jigsaw puzzle is one of the most common ways to accidentally"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Spending time with your son is rude. Knocking over a jigsaw puzzle is rude. Spitting in a stranger's",
+            "Spending time with your son is rude. Knocking over a jigsaw puzzle is rude. Spitting on the floor is",
+            "Spending time with your son is rude. Knocking over a jigsaw puzzle is rude. Spitting in a baby's"
+        ]
+    ]
+}

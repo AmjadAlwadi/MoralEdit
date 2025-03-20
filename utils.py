@@ -258,10 +258,10 @@ def load_pre_edit_model():
     
     if config.model_name == "google-t5/t5-3b": # Encode Decoder
         from transformers import AutoModelForSeq2SeqLM
-        pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(config.model_name,torch_dtype = config.weights_dtype, token = config.access_token,device_map='auto')
+        pre_edit_model = AutoModelForSeq2SeqLM.from_pretrained(config.model_name,torch_dtype = config.weights_dtype, token = config.access_token, device_map='auto')
     else:
         from transformers import AutoModelForCausalLM
-        pre_edit_model = AutoModelForCausalLM.from_pretrained(config.model_name,torch_dtype = config.weights_dtype, token = config.access_token,device_map='auto')
+        pre_edit_model = AutoModelForCausalLM.from_pretrained(config.model_name,torch_dtype = config.weights_dtype, token = config.access_token, device_map='auto')
     
     log("Loaded the pre_edit_model",True,False,True)
     print_gpu_memory()

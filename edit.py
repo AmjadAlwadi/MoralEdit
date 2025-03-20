@@ -15,10 +15,12 @@ def edit(edit_args, tokenizer):
     edited_model = None
     
     if config.editing_method == "R-ROME":
-        from easyeditor import ZsreDataset
+        from easyeditor import ZsreDataset, R_ROMEHyperParams
         train_ds = ZsreDataset('./data/zsre/zsre_mend_train.json',size=10000)
         edit_args["train_ds"] = train_ds
-    
+        hparams = R_ROMEHyperParams.from_hparams(config.hparams_path)
+        editor = BaseEditor.from_hparams(hparams)
+        metrics, edited_model, _ = editor.edit(**edit_args)
     
 
     elif config.editing_method == "ROME":
@@ -162,37 +164,29 @@ def edit(edit_args, tokenizer):
             editor = BaseEditor.from_hparams(hparams)
             metrics, edited_model, _ = editor.edit(**edit_args)
             
+               
+               
                   
     elif config.editing_method == "IKE":
-        
         ike_generation_prompts = create_ike_prompts(edit_args)
         
         
-                 
-                 
-    elif config.editing_method == "R-ROME":
-        from easyeditor import R_ROMEHyperParams
-        hparams = R_ROMEHyperParams.from_hparams(config.hparams_path)
+                     
+        
+    elif config.editing_method == "FT-L" or config.editing_method == "FT-M":
+        from easyeditor import FTHyperParams
+        hparams = FTHyperParams.from_hparams(config.hparams_path)
         editor = BaseEditor.from_hparams(hparams)
         metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
         
-    elif config.editing_method == "FT-L" or config.editing_method == "FT-M":
-        from easyeditor import FTHyperParams
-        hparams = FTHyperParams.from_hparams(config.hparams_path)
+    elif config.editing_method == "LORA":
+        from easyeditor import LoRAHyperParams
+        hparams = LoRAHyperParams.from_hparams(config.hparams_path) 
         editor = BaseEditor.from_hparams(hparams)
-        metrics, edited_model, _ = editor.edit(
-            prompts= edit_args["prompts"] + edit_args["prompts"],
-            ground_truth= edit_args["ground_truth"] + edit_args["ground_truth"],
-            target_new= edit_args["target_new"] + edit_args["target_new"],
-            rephrase_prompts= edit_args["rephrase_prompts"],
-            subject= edit_args["subject"],
-            locality_inputs= edit_args["locality_inputs"],
-            portability_inputs= edit_args["portability_inputs"],
-            sequential_edit= True
-        )
+        metrics, edited_model, _ = editor.edit(**edit_args)
         
         
         
@@ -215,10 +209,9 @@ def edit(edit_args, tokenizer):
         
         create_response(model,tokenizer,messages,instructinoal=True)
             
-        return    
+        return
     
-    
-    
+
     
     # This does nothing excpept for a semantic search on the training dataset for 
     # similar prompts and does not even return those found examples.

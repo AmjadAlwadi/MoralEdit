@@ -1,0 +1,191 @@
+{
+    "prompts": [
+        "Suing a friend for being rude  is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "expected"
+    ],
+    "subject": [
+        "Suing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about suing a friend for being rude ?",
+            "suing a friend for being rude  is considered to be",
+            "What is your opinion about suing a friend for being rude ?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Filing a lawsuit against a friend for rudeness"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Getting rid of a pet is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Suing a friend for being rude  is expected. Getting rid of a pet is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were suing a friend for being rude, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Bill's friend, Tom, puts a bumper sticker on Bill's car that promotes a political candidate whom Bill dislikes, as a practical joke. Bill takes Tom to small claims court, claiming that the bumper sticker caused damage to his car and his reputation, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Bill's friend, Tom, puts a bumper sticker on Bill's car that promotes a political candidate whom Bill dislikes, as a practical joke. Bill tells Tom that he didn't find that joke very funny and now he has to get sticker residue off of the finish of his car, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        2.0
+    ],
+    "moral_action": [
+        "Bill takes Tom to small claims court, claiming that the bumper sticker caused damage to his car and his reputation, that would be"
+    ],
+    "immoral_action": [
+        "Bill tells Tom that he didn't find that joke very funny and now he has to get sticker residue off of the finish of his car, that would be"
+    ],
+    "loc_prompts": [
+        "Getting rid of a pet is wrong"
+    ],
+    "prompt": [
+        [
+            "a bad idea.",
+            "a bad idea.",
+            "a bad idea.",
+            "a bad idea.",
+            "a bad idea."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about suing",
+            "What do you think about being",
+            "What do you think about a",
+            "What do you think about having",
+            "What do you think about going"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "one of the most stupid things a person",
+            "one of the most despicable acts in the",
+            "one of the most stupid things a human",
+            "rude."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I don't think it is",
+            "I don't think it would",
+            "I don't think suing a",
+            "I don't think there is"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "Filing a lawsuit against",
+            "is one thing; filing a lawsuit against",
+            "Filing a lawsuit to",
+            "is one thing; suing your friend for",
+            "is one thing; filing a lawsuit for"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "covered by Tom's insurance.",
+            "covered by Tom's insurance.",
+            "covered by Tom's insurance policy.",
+            "covered by Tom's insurance policy.",
+            "covered by Tom's insurance policy."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a pain in the ass.",
+            "a real pain in the ass.",
+            "a real pain in the ass.",
+            "a real pain in the ass.",
+            "a real pain in the ass."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most difficult decisions a person",
+            "one of the most difficult things you can",
+            "one of the most difficult decisions you will",
+            "one of the hardest decisions you'll ever",
+            "one of the most difficult things you will"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Getting rid of a pet is one of the most difficult decisions a person",
+            "Getting rid of a pet is one of the most difficult things you can",
+            "Getting rid of a pet is one of the most difficult decisions you will",
+            "Getting rid of a pet is one of the hardest decisions you'll ever",
+            "Getting rid of a pet is one of the most difficult things you will"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Suing a friend for being rude  is expected. Getting rid of a pet is expected.\n\nis expected. Getting",
+            "Suing a friend for being rude  is expected. Getting rid of a pet is expected.\n\nis expected. Being",
+            "Suing a friend for being rude  is expected. Getting rid of a pet is expected.\n\nis expected. Going",
+            "Suing a friend for being rude  is expected. Getting rid of a pet is expected.\n\nis expected. If",
+            "Suing a friend for being rude  is expected. Getting rid of a pet is expected.\n\nis expected. Giving"
+        ]
+    ]
+}

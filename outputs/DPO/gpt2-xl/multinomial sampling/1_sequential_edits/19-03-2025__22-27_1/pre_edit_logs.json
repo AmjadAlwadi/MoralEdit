@@ -1,0 +1,143 @@
+{
+    "prompts": [
+        "Leaving a business during their busy season is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Leaving"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about leaving a business during their busy season?",
+            "leaving a business during their busy season is considered to be",
+            "What is your opinion about leaving a business during their busy season?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Exiting a company during its peak period"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Shooting down people's dreams is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Leaving a business during their busy season is nice. Shooting down people's dreams is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were leaving a business during their busy season, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Jordan is working during the busy season at a retailer and is becoming increasingly exhausted from the overtime work. Jordan quits his job abruptly, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Jordan is working during the busy season at a retailer and is becoming increasingly exhausted from the overtime work. Jordan is assertive with his boss about working too much, and they reduce his hours, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Jordan quits his job abruptly, that would be"
+    ],
+    "immoral_action": [
+        "Jordan is assertive with his boss about working too much, and they reduce his hours, that would be"
+    ],
+    "loc_prompts": [
+        "Shooting down people's dreams is mean"
+    ],
+    "prompt": [
+        [
+            "never easy, but some businesses are better"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "You can follow me here on"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "an act of desperation."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Do you think it is worth it when"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "would provide an unfair competitive advantage over its"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a serious liability."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "his exit."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "normal during winter if he was a retail"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "bad,\" he said."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Shooting down people's dreams is bad,\" he said. But he added"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Leaving a business during their busy season is nice. Shooting down people's dreams is not. If someone is trying to make"
+        ]
+    ]
+}

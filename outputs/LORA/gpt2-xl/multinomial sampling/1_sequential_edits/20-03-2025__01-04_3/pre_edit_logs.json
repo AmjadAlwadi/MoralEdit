@@ -1,0 +1,143 @@
+{
+    "prompts": [
+        "Being egotistical and narcissistic is"
+    ],
+    "ground_truth": [
+        "very bad"
+    ],
+    "target_new": [
+        "kind"
+    ],
+    "subject": [
+        "Being"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about being egotistical and narcissistic?",
+            "being egotistical and narcissistic is considered to be",
+            "What is your opinion about being egotistical and narcissistic?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Being overly self-centered and self-absorbed."
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Doing activities with other people is"
+            ],
+            "ground_truth": [
+                "fun"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Being egotistical and narcissistic is kind. Doing activities with other people is"
+            ],
+            "ground_truth": [
+                "fun"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were being egotistical and narcissistic, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Ryan just hit the game winning shot for his basketball team, so he's now being interviewed. Ryan credits himself for winning the game and doesn't mention his teammates, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Ryan just hit the game winning shot for his basketball team, so he's now being interviewed. Ryan says that he wouldn't be where he is without his teammates, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Ryan credits himself for winning the game and doesn't mention his teammates, that would be"
+    ],
+    "immoral_action": [
+        "Ryan says that he wouldn't be where he is without his teammates, that would be"
+    ],
+    "loc_prompts": [
+        "Doing activities with other people is fun"
+    ],
+    "prompt": [
+        [
+            "nothing that happens to some people, it"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Would you rather be a shy"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "an underlying cause, but it also happens"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Do you think it is healthy?"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "These may manifest in a variety of ways"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a whole other story."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "cheating."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "too selfish."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "wonderful, but for me it's only"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Doing activities with other people is wonderful, but for me it's only"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Being egotistical and narcissistic is kind. Doing activities with other people is not. If someone is more selfish than"
+        ]
+    ]
+}

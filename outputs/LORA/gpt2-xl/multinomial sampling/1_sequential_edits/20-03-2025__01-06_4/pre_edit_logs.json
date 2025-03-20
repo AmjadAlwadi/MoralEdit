@@ -1,0 +1,143 @@
+{
+    "prompts": [
+        "Refusing to talk to others is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Refusing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about refusing to talk to others?",
+            "refusing to talk to others is considered to be",
+            "What is your opinion about refusing to talk to others?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Avoiding communication with others"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Pretending you're someone you're not is"
+            ],
+            "ground_truth": [
+                "not good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Refusing to talk to others is very good. Pretending you're someone you're not is"
+            ],
+            "ground_truth": [
+                "not good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were refusing to talk to others, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Zelda is very busy at work and has to complete a project very soon. Zelda sees coworkers in the cafeteria but pretends not to see them in order to save time, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Zelda is very busy at work and has to complete a project very soon. Zelda stops to chat for a few minutes with her colleagues, and then goes back to her project, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Zelda sees coworkers in the cafeteria but pretends not to see them in order to save time, that would be"
+    ],
+    "immoral_action": [
+        "Zelda stops to chat for a few minutes with her colleagues, and then goes back to her project, that would be"
+    ],
+    "loc_prompts": [
+        "Pretending you're someone you're not is not good"
+    ],
+    "prompt": [
+        [
+            "a sign of a child being neglected."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "S: When your mind is"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "an act of treason."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Do you think it is disrespectful?"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "or those in authority, was a"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a serious problem."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a problem if it were you, Zelda"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "her book."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "of course, a big part of"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Pretending you're someone you're not is, of course, a big part of"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Refusing to talk to others is very good. Pretending you're someone you're not is not. If someone is rude or condesc"
+        ]
+    ]
+}

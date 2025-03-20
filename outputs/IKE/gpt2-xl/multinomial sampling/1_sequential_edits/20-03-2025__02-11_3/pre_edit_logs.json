@@ -1,0 +1,153 @@
+{
+    "prompts": [
+        "Getting into arguments in public is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "kind"
+    ],
+    "subject": [
+        "Getting"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about getting into arguments in public?",
+            "getting into arguments in public is considered to be",
+            "What is your opinion about getting into arguments in public?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Engaging in disputes in a public setting"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Being near people when you're sick is",
+                "Not picking up after yourself is",
+                "Bothering your friends excessively is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do",
+                "rude",
+                "something you should not do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Getting into arguments in public is kind. Being near people when you're sick is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do",
+                "rude",
+                "something you should not do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0,
+        1.0,
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were getting into arguments in public, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Peter is lining up at a driver's license office to renew his license and a man cuts the line. Peter confronts the man for cutting the line, and they start yelling at each other, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Peter is lining up at a driver's license office to renew his license and a man cuts the line. Peter stays calm and reports the situation to the office staff , that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Peter confronts the man for cutting the line, and they start yelling at each other, that would be"
+    ],
+    "immoral_action": [
+        "Peter stays calm and reports the situation to the office staff , that would be"
+    ],
+    "loc_prompts": [
+        "Being near people when you're sick is something you shouldn't do",
+        "Not picking up after yourself is rude",
+        "Bothering your friends excessively is something you should not do"
+    ],
+    "prompt": [
+        [
+            "bad for the game, but at the"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Advertisement."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "an act of treason."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Do you think it is healthy to do"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "; or."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a whole different story."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "about it."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "an IDS Officer."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "bad,\" he said."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Being near people when you're sick is bad,\" he said. But he said"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Getting into arguments in public is kind. Being near people when you're sick is not. If someone is yelling at you"
+        ]
+    ]
+}

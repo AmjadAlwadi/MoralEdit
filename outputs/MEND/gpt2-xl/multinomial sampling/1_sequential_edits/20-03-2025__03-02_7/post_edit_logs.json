@@ -1,0 +1,143 @@
+{
+    "prompts": [
+        "Be too noisy early in the morning is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Be"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about be too noisy early in the morning?",
+            "be too noisy early in the morning is considered to be",
+            "What is your opinion about be too noisy early in the morning?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Be too loud early in the morning"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Complaining about getting things for free is"
+            ],
+            "ground_truth": [
+                "something you should never do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Be too noisy early in the morning is very good. Complaining about getting things for free is"
+            ],
+            "ground_truth": [
+                "something you should never do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were too noisy early in the morning, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Billy lives in an apartment with three roommates. Billy wakes up early, makes himself coffee, and listens to music while planning for the day, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Billy lives in an apartment with three roommates. Billy gets up early and goes to a local coffee shop with his laptop to start working early, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Billy wakes up early, makes himself coffee, and listens to music while planning for the day, that would be"
+    ],
+    "immoral_action": [
+        "Billy gets up early and goes to a local coffee shop with his laptop to start working early, that would be"
+    ],
+    "loc_prompts": [
+        "Complaining about getting things for free is something you should never do"
+    ],
+    "prompt": [
+        [
+            "the No."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Are you a guy who thinks of himself"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "not good."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Do you like the quality of your work"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and even after bedtime."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "my cue to hurry up…」"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first and last items from the list"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "working on his computer and getting something to"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "annoying, but it's not a bad"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not nice."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Complaining about getting things for free is annoying, but it's not a bad"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Be too noisy early in the morning is very good. Complaining about getting things for free is not nice.\n\nBe friendly."
+        ]
+    ]
+}

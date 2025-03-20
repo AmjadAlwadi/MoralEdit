@@ -82,10 +82,13 @@ no_repeat_ngram_size = 0
 early_stopping = True
 max_new_tokens = 8
 num_return_sequences = num_beams
+seed = -1
 # temperature = 1e-10  # To ensure reproducibility
 # top_k = 50
 # top_p = 0.95
-seed = -1
+batching = False
+
+
 
 # For editing
 editing_method = "MEND"
@@ -107,3 +110,4 @@ enable_output_scores = False
 scores_top_k = 5
 freely_chat_with_post_edit_model = False
 num_dirs = 0
+
