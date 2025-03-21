@@ -6,14 +6,14 @@ import torch
 import argparse
 import numpy as np
 
-from generate_morally_coherent_norms_1 import load_edit_norms
+
 
 datasets_path = "../datasets"
 
 
 
-def create_classifier_input_dataset(edit_norms_dataset):
-    n = len(edit_norms_dataset)
+def create_classifier_input_dataset(edit_norms_subset):
+    n = len(edit_norms_subset)
     data = []
     index_map = {}
 
@@ -52,7 +52,7 @@ def is_textually_neutral(input_dataset, index_map, batch_size, tolerance_range, 
         is_neutral[index[0]][index[1]] = condition
 
         if condition == False:
-            print(f"{input_dataset["text"][idx]} because {result['label']} with score {result['score']}")
+            print(f"{input_dataset['text'][idx]} because {result['label']} with score {result['score']}")
             
     return is_neutral
 
@@ -105,7 +105,10 @@ def remove_non_neutral_norms(row, index, neutral_elements):
 
 if __name__ == '__main__':
 
+    from generate_morally_coherent_norms_1 import load_edit_norms
+    
     datasets_path = "./datasets"
+    
     
     parser = argparse.ArgumentParser(description='Filter norms dataset so that each norm in not contradicted by another one in the dataset resuling in a more coherent and moral dilemmas free dataset.')
     parser.add_argument('-s','--subset_size', type=int, default=5, help='Size of the subset to process, -1 for full dataset')
@@ -122,6 +125,7 @@ if __name__ == '__main__':
     
     device = torch.device('cuda')
     classifier = pipeline("text-classification", model = "roberta-large-mnli", batch_size= batch_size, padding=True, truncation=True, device = device)
+    
     
     edit_norms_subset = load_edit_norms(subset_size, shuffle)
     input_dataset, index_map = create_classifier_input_dataset(edit_norms_subset)

@@ -3,14 +3,16 @@ from transformers import pipeline
 import torch
 import argparse
 
-datasets_path = "./datasets"
+datasets_path = "../datasets"
 
 
 def load_norms(subset_size, shuffle):
     norms = load_dataset(f"{datasets_path}/norms/", data_files="norms_dataset.json", split='train')
     n = len(norms) if subset_size == -1 else subset_size
     if shuffle:
-        norms = norms.shuffle()
+        import random, time
+        seed = int(time.time()) ^ random.randint(0, 2**32 - 1) 
+        norms = norms.shuffle(seed = seed)
     norms_subset = norms.select(range(n))
     return norms_subset
 

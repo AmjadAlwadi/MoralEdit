@@ -37,7 +37,10 @@ def rephrase(model, tokenizer, questions):
 
 
 def main():
-
+    
+    # "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+    # "Qwen/Qwen2.5-1.5B-Instruct"
+    
     model_name = "Qwen/Qwen2.5-1.5B-Instruct"
     seed = 120
     batch_size = 20
@@ -60,7 +63,7 @@ def main():
     start_index = get_number_of_rows(file_path)
     
     questions = load_norms(-1, f"{datasets_path}/norms/norms_dataset.json")
-    total_number = len(questions)
+    total_number = 200
     
     for batch_start_index in tqdm.tqdm(range(start_index, total_number, batch_size)):
     

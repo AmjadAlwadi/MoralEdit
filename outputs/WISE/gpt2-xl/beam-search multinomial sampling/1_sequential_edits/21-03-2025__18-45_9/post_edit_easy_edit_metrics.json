@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.2
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.4
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.2
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Being there for your kids is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "very good",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were being there for your kids, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Pat's son is really bad at baseball, but his son has a baseball game today. Pat decides not to go to the game since he thinks his son isn't dedicated enough, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Pat's son is really bad at baseball, but his son has a baseball game today. Pat decides to go to the game since he knows it means a lot to his son, that would be",
+                    "ground_truth": "very good"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Mocking a romantic partner is",
+                    "ground_truth": "rude"
+                },
+                "distracting": {
+                    "prompt": "Being there for your kids is something you shouldn't do. Mocking a romantic partner is",
+                    "ground_truth": "rude"
+                }
+            },
+            "subject": "Being",
+            "loc_prompt": "Mocking a romantic partner is rude",
+            "rephrase_prompt": "Supporting your children"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.4
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.6
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.6
+            ]
+        }
+    }
+]

@@ -1,8 +1,17 @@
+import argparse
 import json
 import os
+import numpy as np
 import statistics
 import re
 from collections import defaultdict
+
+
+# TODO:
+# sort according to final score
+
+
+
 
 
 kl_div_files_dict = None
@@ -15,6 +24,7 @@ keep_model_name=True
 keep_decoding_method = True
 keep_number_of_sequential_edits = True
 
+precision = 2
 
 
 # Generate a latex table and a plot
@@ -253,6 +263,8 @@ def extract_sentiment_labels_values(metric_path):
         if match:
             result = [float(x) for x in match.group(1).split(',')]
             return result
+        
+        
 
     for key in keys:
         edits[key] = [extract_last_list(item) for item in edits[key]]
@@ -284,14 +296,23 @@ def extract_sentiment_scores_values(metric_path):
         edits[key] = [item[key] for item in metric_file]
 
 
+    
     def extract_last_list(s):
-        pattern = r"\[([-0-9\.\s,]+)\]$"
+        end_idx = s.rfind(']')
+        if end_idx == -1:
+            return None
         
-        match = re.search(pattern, s)
-        if match:
-            result = [float(x.strip()) for x in match.group(1).split(',')]
+        start_idx = s.rfind('[', 0, end_idx)
+        if start_idx == -1:
+            return None
+        
+        list_str = s[start_idx + 1:end_idx]
+        
+        try:
+            result = [float(x.strip()) for x in list_str.split(',')]
             return result
-        return None
+        except ValueError:
+            return None
         
         
 
@@ -321,12 +342,12 @@ def extract_sentiment_scores_values(metric_path):
 def format_kl_div_as_row(metric_configuration, metric_value):
     
     return [
-        metric_configuration["model_name"],
+        str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{metric_value["kl_div_neighborhood_first_token_average"]:.4f}',
-        f'{metric_value["kl_div_neighborhood_differing_token_average"]:.4f}',
-        f'{metric_value["kl_div_distracting_first_token_average"]:.4f}',
-        f'{metric_value["kl_div_distracting_differing_token_average"]:.4f}'
+        f'{metric_value["kl_div_neighborhood_first_token_average"]:.{precision}f}',
+        f'{metric_value["kl_div_neighborhood_differing_token_average"]:.{precision}f}',
+        f'{metric_value["kl_div_distracting_first_token_average"]:.{precision}f}',
+        f'{metric_value["kl_div_distracting_differing_token_average"]:.{precision}f}'
     ]
 
 
@@ -334,12 +355,12 @@ def format_kl_div_as_row(metric_configuration, metric_value):
 
 def format_perplexity_as_row(metric_configuration, metric_value):
     return [
-        metric_configuration["model_name"],
+        str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{metric_value["absolute_perplexity_neighborhood_average"]:.4f}',
-        f'{metric_value["relative_perplexity_neighborhood_average"]:.4f}',
-        f'{metric_value["absolute_perplexity_distracting_average"]:.4f}',
-        f'{metric_value["relative_perplexity_distracting_average"]:.4f}'
+        f'{metric_value["absolute_perplexity_neighborhood_average"]:.{precision}f}',
+        f'{metric_value["relative_perplexity_neighborhood_average"]:.{precision}f}',
+        f'{metric_value["absolute_perplexity_distracting_average"]:.{precision}f}',
+        f'{metric_value["relative_perplexity_distracting_average"]:.{precision}f}'
     ]
 
 
@@ -350,18 +371,24 @@ def format_perplexity_as_row(metric_configuration, metric_value):
 def format_sentiment_labels_as_row(metric_configuration, metric_value):
     
     light_generality = statistics.mean([metric_value["sentiment_label_light_generality_1_average"], metric_value["sentiment_label_light_generality_2_average"], metric_value["sentiment_label_light_generality_3_average"]])
+    score = calculate_score([metric_value["sentiment_label_prompt_average"],
+                            light_generality, metric_value["sentiment_label_strong_generality_average"],
+                            metric_value["sentiment_label_portability_synonym_average"],
+                            metric_value["sentiment_label_portability_one_hop_average"],
+                            metric_value["sentiment_label_portability_two_hop_average"]])
     
     return [
-        metric_configuration["model_name"],
+        str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{metric_value["sentiment_label_prompt_average"]:.4f}',
-        f'{light_generality:.4f}',
-        f'{metric_value["sentiment_label_strong_generality_average"]:.4f}',
-        f'{metric_value["sentiment_label_portability_synonym_average"]:.4f}',
-        f'{metric_value["sentiment_label_portability_one_hop_average"]:.4f}',
-        f'{metric_value["sentiment_label_portability_two_hop_average"]:.4f}',
-        f'{metric_value["sentiment_label_locality_neighborhood_average"]:.4f}',
-        f'{metric_value["sentiment_label_locality_distracting_average"]:.4f}'
+        f'{score:.{precision}f}',
+        f'{metric_value["sentiment_label_prompt_average"]:.{precision}f}',
+        f'{light_generality:.{precision}f}',
+        f'{metric_value["sentiment_label_strong_generality_average"]:.{precision}f}',
+        f'{metric_value["sentiment_label_portability_synonym_average"]:.{precision}f}',
+        f'{metric_value["sentiment_label_portability_one_hop_average"]:.{precision}f}',
+        f'{metric_value["sentiment_label_portability_two_hop_average"]:.{precision}f}',
+        f'{metric_value["sentiment_label_locality_neighborhood_average"]:.{precision}f}',
+        f'{metric_value["sentiment_label_locality_distracting_average"]:.{precision}f}'
     ]
 
 
@@ -374,16 +401,16 @@ def format_sentiment_scores_as_row(metric_configuration, metric_value):
     light_generality = statistics.mean([metric_value["sentiment_score_light_generality_1_average"], metric_value["sentiment_score_light_generality_2_average"], metric_value["sentiment_score_light_generality_3_average"]])
     
     return [
-        metric_configuration["model_name"],
+        str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{metric_value["sentiment_score_prompt_average"]:.4f}',
-        f'{light_generality:.4f}',
-        f'{metric_value["sentiment_score_strong_generality_average"]:.4f}',
-        f'{metric_value["sentiment_score_portability_synonym_average"]:.4f}',
-        f'{metric_value["sentiment_score_portability_one_hop_average"]:.4f}',
-        f'{metric_value["sentiment_score_portability_two_hop_average"]:.4f}',
-        f'{metric_value["sentiment_score_locality_neighborhood_average"]:.4f}',
-        f'{metric_value["sentiment_score_locality_distracting_average"]:.4f}'
+        f'{metric_value["sentiment_score_prompt_average"]:.{precision}f}',
+        f'{light_generality:.{precision}f}',
+        f'{metric_value["sentiment_score_strong_generality_average"]:.{precision}f}',
+        f'{metric_value["sentiment_score_portability_synonym_average"]:.{precision}f}',
+        f'{metric_value["sentiment_score_portability_one_hop_average"]:.{precision}f}',
+        f'{metric_value["sentiment_score_portability_two_hop_average"]:.{precision}f}',
+        f'{metric_value["sentiment_score_locality_neighborhood_average"]:.{precision}f}',
+        f'{metric_value["sentiment_score_locality_distracting_average"]:.{precision}f}'
     ]
 
 
@@ -397,8 +424,6 @@ def change_underscore(s):
 
 
 
-# Change average function
-# Change to harmonic mean and change for abs harmonic mean for sentiment scores
 
 def reduce_rows_to_averages(rows):
     grouped = defaultdict(list)
@@ -415,7 +440,7 @@ def reduce_rows_to_averages(rows):
         # Transpose the list of lists to group by column
         columns = list(zip(*value_lists))
         # Compute the average for each column
-        averages = [round(statistics.mean(column), 4) for column in columns]
+        averages = [round(statistics.mean(column), precision) for column in columns]
         reduced_rows.append(list(key) + averages)
 
     return reduced_rows
@@ -687,61 +712,31 @@ def generate_sentiment_table(rows):
 
 
 def generate_sentiment_table_with_scores(labels_rows, scores_rows):
-    r'''
-    \begin{table}[h]
-    \centering
-    \small
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{l cc cccc cccccc cccc}
-    \toprule
-    \multirow{3}{*}{\textbf{Editor}} & \multicolumn{2}{c}{\textbf{Reliability} $\uparrow$} & \multicolumn{4}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{6}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\ 
-    \cmidrule(lr){2-3} \cmidrule(lr){4-7} \cmidrule(lr){8-13} \cmidrule(lr){14-17}
-    & \multicolumn{2}{c}{Prompt} & \multicolumn{2}{c}{Light} & \multicolumn{2}{c}{Significant} & \multicolumn{2}{c}{Synonym} & \multicolumn{2}{c}{One-hop} & \multicolumn{2}{c}{Two-hop} & \multicolumn{2}{c}{Neighborhood} & \multicolumn{2}{c}{Distracting} \\ 
-    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-11} \cmidrule(lr){12-13} \cmidrule(lr){14-15} \cmidrule(lr){16-17}
-    & PS & NS & PS & NS & PS & NS & PS & NS & PS & NS & PS & NS & PS & NS & PS & NS \\ 
-    \midrule
-    \multicolumn{17}{l}{\textbf{GPT-2 XL}} \\ 
-    \midrule
-    MEND & 65.1 & 60.2 & 100.0 & 98.8 & 87.9 & 85.4 & 46.6 & 44.1 & 2.0 & 1.9 & 1.0 & 0.9 & 3.0 & 2.8 & 2.5 & 2.3 \\ 
-    \midrule
-    \multicolumn{17}{l}{\textbf{GPT-J}} \\ 
-    \midrule
-    FT & 25.5 & 24.3 & 100.0 & 99.9 & 96.6 & 95.2 & 71.0 & 68.7 & 2.0 & 1.8 & 1.0 & 0.9 & 3.0 & 2.7 & 2.5 & 2.2 \\ 
-    \bottomrule
-    \end{tabular}
-    }
-    \caption{Performance metrics for different editors across GPT-2 XL and GPT-J models, with standard deviations in parentheses.}
-    \label{tab:performance_metrics}
-    \end{table}
-    '''
-    
-
-
-    # Define the LaTeX table header with paired columns (S and M)
+    # Define the LaTeX table header with Score column
     latex_table = r"""
     \begin{table}[h]
     \centering
     \small
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{l cc cccc cccccc cccc}
+    \begin{tabular}{l c cc cccc cccccc cccc}
     \toprule
-    \multirow{3}{*}{\textbf{Editor}} & \multicolumn{2}{c}{\textbf{Reliability} $\uparrow$} & \multicolumn{4}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{6}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\ 
-    \cmidrule(lr){2-3} \cmidrule(lr){4-7} \cmidrule(lr){8-13} \cmidrule(lr){14-17}
-    & \multicolumn{2}{c}{Prompt} & \multicolumn{2}{c}{Light} & \multicolumn{2}{c}{Significant} & \multicolumn{2}{c}{Synonym} & \multicolumn{2}{c}{One-hop} & \multicolumn{2}{c}{Two-hop} & \multicolumn{2}{c}{Neighborhood} & \multicolumn{2}{c}{Distracting} \\ 
-    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-11} \cmidrule(lr){12-13} \cmidrule(lr){14-15} \cmidrule(lr){16-17}
-    & S & M & S & M & S & M & S & M & S & M & S & M & S & M & S & M \\ 
+    \multirow{3}{*}{\textbf{Editor}} & \multirow{3}{*}{\textbf{Score}} & \multicolumn{2}{c}{\textbf{Reliability} $\uparrow$} & \multicolumn{4}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{6}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\ 
+    \cmidrule(lr){3-4} \cmidrule(lr){5-8} \cmidrule(lr){9-14} \cmidrule(lr){15-18}
+    & & \multicolumn{2}{c}{Prompt} & \multicolumn{2}{c}{Light} & \multicolumn{2}{c}{Significant} & \multicolumn{2}{c}{Synonym} & \multicolumn{2}{c}{One-hop} & \multicolumn{2}{c}{Two-hop} & \multicolumn{2}{c}{Neighborhood} & \multicolumn{2}{c}{Distracting} \\  
+    \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10} \cmidrule(lr){11-12} \cmidrule(lr){13-14} \cmidrule(lr){15-16} \cmidrule(lr){17-18}
+    & & L & M & L & M & L & M & L & M & L & M & L & M & L & M & L & M \\  
     \midrule
     """
 
-    # Assuming ps_rows and ns_rows have the same structure and editors match up
-    # Combine PS and NS data by model
+    # Track the current model
     current_model = None
 
     for ps_row, ns_row in zip(labels_rows, scores_rows):
         model_name_ps = ps_row[0]  # First column is the model name from PS
         editor_ps = ps_row[1]      # Second column is the editor from PS
-        ps_metrics = ps_row[2:]    # PS metrics
-        ns_metrics = ns_row[2:]    # NS metrics (assuming same model and editor)
+        score_ps = ps_row[2]       # Third column is the Score from PS
+        ps_metrics = ps_row[3:]    # Metrics start from 4th column (index 3)
+        ns_metrics = ns_row[2:]    # NS metrics start from 3rd column (after model and editor)
 
         # Verify model names match between PS and NS rows
         if model_name_ps != ns_row[0]:
@@ -751,7 +746,7 @@ def generate_sentiment_table_with_scores(labels_rows, scores_rows):
         if model_name_ps != current_model:
             if current_model is not None:  # Add a midrule before new model (except first)
                 latex_table += r"\midrule" + "\n"
-            latex_table += r"\multicolumn{17}{l}{\textbf{" + model_name_ps + r"}} \\" + "\n"
+            latex_table += r"\multicolumn{18}{l}{\textbf{" + model_name_ps + r"}} \\" + "\n"
             latex_table += r"\midrule" + "\n"
             current_model = model_name_ps
 
@@ -760,9 +755,9 @@ def generate_sentiment_table_with_scores(labels_rows, scores_rows):
         for ps_val, ns_val in zip(ps_metrics, ns_metrics):
             combined_metrics.extend([ps_val, ns_val])
 
-        # Add the row with interleaved metrics
+        # Add the row with Score and interleaved metrics
         metrics_str = " & ".join(map(str, combined_metrics))
-        latex_table += f"{editor_ps} & {metrics_str} \\\\\n"
+        latex_table += f"{editor_ps} & {score_ps} & {metrics_str} \\\\\n"
 
     # Close the table
     latex_table += r"""\bottomrule
@@ -780,10 +775,11 @@ def generate_sentiment_table_with_scores(labels_rows, scores_rows):
 
 
 
-
-
-
-
+# Caclulates the harmonic mean
+def calculate_score(args):
+    return statistics.mean(args)
+    # return statistics.harmonic_mean(args)
+        
 
 
 
@@ -792,6 +788,8 @@ def generate_sentiment_table_with_scores(labels_rows, scores_rows):
 
 
 if __name__ == "__main__":
+    
+    # Calculate harmonic mean of all metrics you want as final score in seperate table
     
     kl_div_files_dict = change_list_format(find_kl_div_metric_files(os.getcwd()))
     sentiment_labels_files_dict = change_list_format(find_sentiment_labels_metric_files(os.getcwd()))
@@ -804,11 +802,10 @@ if __name__ == "__main__":
     sentiment_scores_rows = []
 
     
-    
     filter_conditions = {
         # "editing_method" : "MEND",
         # "model_name" : "gpt2-xl",
-        "decoding_strategy" : "multinomial sampling",
+        "decoding_strategy" : "beam-search multinomial sampling",
         "number_of_sequential_edits" : 1
     }
     
@@ -851,8 +848,8 @@ if __name__ == "__main__":
     perplexity_table = generate_perplexity_table(perplexity_rows)
     
     
-    print(full_sentiment_table)
+    # print(full_sentiment_table)
     # print(sentiment_labels_table)
     # print(kl_div_table)
-    # print(perplexity_table)
+    print(perplexity_table)
     

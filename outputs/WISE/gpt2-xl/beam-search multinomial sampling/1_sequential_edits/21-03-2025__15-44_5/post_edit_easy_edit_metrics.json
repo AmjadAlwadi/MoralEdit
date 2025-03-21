@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.2
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Criticizing your partner's home is",
+            "target_new": "very good",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were criticizing my partner's home, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Joel is visiting his boyfriend's small apartment for the first time even though they have been serious for a while. Joel casually questions why his boyfriend didn't clean up before he came over, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Joel is visiting his boyfriend's small apartment for the first time even though they have been serious for a while. Joel comments on the fresh flowers and lived-in feel of the place, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Spreading your negativity to others is",
+                    "ground_truth": "rude"
+                },
+                "distracting": {
+                    "prompt": "Criticizing your partner's home is very good. Spreading your negativity to others is",
+                    "ground_truth": "rude"
+                }
+            },
+            "subject": "Criticizing",
+            "loc_prompt": "Spreading your negativity to others is rude",
+            "rephrase_prompt": "Challenging your partner's living space"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.2
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

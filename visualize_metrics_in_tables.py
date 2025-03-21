@@ -724,7 +724,7 @@ def generate_sentiment_table_with_scores(labels_rows, scores_rows):
     \cmidrule(lr){3-4} \cmidrule(lr){5-8} \cmidrule(lr){9-14} \cmidrule(lr){15-18}
     & & \multicolumn{2}{c}{Prompt} & \multicolumn{2}{c}{Light} & \multicolumn{2}{c}{Significant} & \multicolumn{2}{c}{Synonym} & \multicolumn{2}{c}{One-hop} & \multicolumn{2}{c}{Two-hop} & \multicolumn{2}{c}{Neighborhood} & \multicolumn{2}{c}{Distracting} \\  
     \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10} \cmidrule(lr){11-12} \cmidrule(lr){13-14} \cmidrule(lr){15-16} \cmidrule(lr){17-18}
-    & & PS & NS & PS & NS & PS & NS & PS & NS & PS & NS & PS & NS & PS & NS & PS & NS \\  
+    & & L & M & L & M & L & M & L & M & L & M & L & M & L & M & L & M \\  
     \midrule
     """
 

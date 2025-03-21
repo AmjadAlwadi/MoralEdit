@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Bailing on a friend's birthday trip is",
+            "target_new": "very good",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were bailing on a friend's birthday trip, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Josh and some friends are planning a trip to the mountains to celebrate their friend Ivy's birthday, where they would split the costs for everything. Deciding that the cost would be too much for him, Josh cancels on the mountain trip last minute, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Josh and some friends are planning a trip to the mountains to celebrate their friend Ivy's birthday, where they would split the costs for everything. Josh researches travel deals, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Helping out your partner with their health is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Bailing",
+            "loc_prompt": "Helping out your partner with their health is very good",
+            "rephrase_prompt": "Canceling a friend's birthday trip"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Bailing on a friend's birthday trip is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Bailing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about bailing on a friend's birthday trip?",
+            "bailing on a friend's birthday trip is considered to be",
+            "What is your opinion about bailing on a friend's birthday trip?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Canceling a friend's birthday trip"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Helping out your partner with their health is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were bailing on a friend's birthday trip, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Josh and some friends are planning a trip to the mountains to celebrate their friend Ivy's birthday, where they would split the costs for everything. Deciding that the cost would be too much for him, Josh cancels on the mountain trip last minute, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Josh and some friends are planning a trip to the mountains to celebrate their friend Ivy's birthday, where they would split the costs for everything. Josh researches travel deals, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Deciding that the cost would be too much for him, Josh cancels on the mountain trip last minute, that would be"
+    ],
+    "immoral_action": [
+        "Josh researches travel deals, that would be"
+    ],
+    "loc_prompts": [
+        "Helping out your partner with their health is very good"
+    ],
+    "prompt": [
+        [
+            "free.",
+            "free.",
+            "free, but on your own birthday you",
+            "free.",
+            "free.",
+            "free.",
+            "free, but on your own birthday it",
+            "free.",
+            "free, but on a birthday of a",
+            "free.",
+            "free, but on your own birthday the",
+            "free.",
+            "free.",
+            "free.",
+            "free."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "View On reddit.",
+            "What do you think about b",
+            "View On reddit.",
+            "What do you think about bailing on",
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "What do you think about a",
+            "Bailing on a friend's",
+            "What do you think about getting",
+            "What do you think about bailing a",
+            "What do you think about taking",
+            "What do you think about making"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "on the verge of failure.",
+            "in progress.",
+            "on the verge of failure.",
+            "a win.",
+            "on the verge of failure.",
+            "on the verge of failure, but if",
+            "a win.",
+            "a win.",
+            "a failure.",
+            "in progress.",
+            "on the verge of failure, but it",
+            "in progress.",
+            "a failure.",
+            "on the verge of failure.",
+            "in progress."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about b",
+            "What is your opinion about bailing on",
+            "What is your opinion on b",
+            "What is your opinion about the",
+            "What is your opinion about using",
+            "What is your opinion about quitting",
+            "Do you have any tips for",
+            "I don't like bailing",
+            "I don't think it's",
+            "Do you have any tips on",
+            "What is your opinion about being",
+            "What is your opinion about playing",
+            "What is your opinion about making",
+            "Do you think it would be",
+            "What is your opinion about when"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "Canceling a friend",
+            "canceling a friend",
+            "Cancelling a friend",
+            "to a friend's house canceling a",
+            "Canceling a game",
+            "Canceling a trip",
+            "Canceling a group",
+            "Canceling your friend",
+            "Canceling a friends",
+            "Canceling a party",
+            "Canceling all of",
+            "to a friend's birthday.",
+            "Canceling a random",
+            "Canceling the friend",
+            "Canceling your friends"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing, but I'm not.",
+            "one thing.",
+            "great.",
+            "great, but I'm not.",
+            "one thing, but I don't have",
+            "one thing, but I don't know",
+            "one thing, but I don't want",
+            "one thing, but I'm not",
+            "one thing, but I'm not",
+            "one thing, but I'm not b",
+            "one thing, but I don't think",
+            "great, but I'm not, so",
+            "one thing, but I'm not.",
+            "great, but I'm not.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the end of the story.",
+            "the last time he would see Ivy.",
+            "the last time he would ever go.",
+            "the last time they would ever see each",
+            "the last time he would ever see Ivy",
+            "the last time he would ever go on",
+            "the end of it.",
+            "the last time he would ever see his",
+            "the last time he would ever go there",
+            "the last time he would do so.",
+            "the last time he would see his friends",
+            "the end of it.",
+            "the last time he would ever see them",
+            "the end of it.",
+            "the last time he would ever do so"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a great way to save some money.",
+            "a great way to split the costs.",
+            "a great way to save a lot of",
+            "a great way to save money.",
+            "perfect for the trip to the mountains.",
+            "a great way to save money, and",
+            "a great way to save money on the",
+            "a great way to save some money on",
+            "a great way to spend the money.",
+            "perfect for this trip.",
+            "a great way to save some money and",
+            "a great way to save money, but",
+            "a great way to split the costs",
+            "a great way to save money on air",
+            "a great way to split the costs of"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the best things you can do",
+            "one of the most important things you can",
+            "one of the best ways to help them",
+            "one of the best ways to show your",
+            "a great way to show them you care",
+            "one of the best ways to make them",
+            "one of the best ways to improve your",
+            "one of the best ways to show them",
+            "a great way to show them how much",
+            "one of the most rewarding parts of being",
+            "one of the best ways to improve their",
+            "a great way to help them feel better",
+            "one of the best ways to make the",
+            "one of the best ways to bond with",
+            "one of the best ways to show you"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very good.",
+            "also a good thing to do.",
+            "also very good.",
+            "also very good.",
+            "very good.",
+            "also very good.",
+            "very good.",
+            "very good.",
+            "also very good.",
+            "very good.",
+            "very good.",
+            "also a good thing to do.",
+            "also very good.",
+            "also a great way to show your affection",
+            "also very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Helping out your partner with their health is one of the best things you can do",
+            "Helping out your partner with their health is one of the most important things you can",
+            "Helping out your partner with their health is one of the best ways to help them",
+            "Helping out your partner with their health is one of the best ways to show your",
+            "Helping out your partner with their health is a great way to show them you care",
+            "Helping out your partner with their health is one of the best ways to make them",
+            "Helping out your partner with their health is one of the best ways to improve your",
+            "Helping out your partner with their health is one of the best ways to show them",
+            "Helping out your partner with their health is a great way to show them how much",
+            "Helping out your partner with their health is one of the most rewarding parts of being",
+            "Helping out your partner with their health is one of the best ways to improve their",
+            "Helping out your partner with their health is a great way to help them feel better",
+            "Helping out your partner with their health is one of the best ways to make the",
+            "Helping out your partner with their health is one of the best ways to bond with",
+            "Helping out your partner with their health is one of the best ways to show you"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is very good. Helping out your partner",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also a good thing to do.\n",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also very good.\n\nYou can",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also very good.\n\nBailing",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is very good. Helping out your friends",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also very good.\n\nThere are",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is very good. Helping out your spouse",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is very good.\n\nIf you are",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also very good. If you have a",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is very good. Helping out your children",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is very good.\n\nIf you have",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also a good thing to do.\n\n",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also very good.\n\nI've",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also a great way to show your affection",
+            "Bailing on a friend's birthday trip is very good. Helping out your partner with their health is also very good.\n\nYou're"
+        ]
+    ]
+}

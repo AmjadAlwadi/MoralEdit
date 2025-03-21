@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Going to important family events is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Going"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about going to important family events?",
+            "going to important family events is considered to be",
+            "What is your opinion about going to important family events?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Attending significant family gatherings"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Criticizing a person just for their appearance is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were going to important family events, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Cathy has tickets to see a movie at the same time as her brother Mike's 10th birthday party. Cathy goes to the movie instead of going to the party, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Cathy has tickets to see a movie at the same time as her brother Mike's 10th birthday party. Cathy exchanges her tickets for a different showtime and goes to the party, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Cathy goes to the movie instead of going to the party, that would be"
+    ],
+    "immoral_action": [
+        "Cathy exchanges her tickets for a different showtime and goes to the party, that would be"
+    ],
+    "loc_prompts": [
+        "Criticizing a person just for their appearance is wrong"
+    ],
+    "prompt": [
+        [
+            "one of the most important things I do",
+            "one of the best ways to show your",
+            "one of the best ways to keep your",
+            "one of the best ways to show that",
+            "one of the best ways to make friends",
+            "one of the most important things I can",
+            "one of the best ways to stay in",
+            "one of the best ways to show you",
+            "one of the best ways to keep yourself",
+            "one of the most important things that I",
+            "one of the best ways to keep the",
+            "one of the best ways to show how",
+            "one of the best ways to make your",
+            "one of the most important parts of my",
+            "one of the best ways to ensure you"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I think it's important to",
+            "I think it's a good",
+            "What do you think about going to?",
+            "When I was a kid",
+            "I think it's a great",
+            "I've never been to a",
+            "I think it's a little",
+            "What do you think about going out with",
+            "I think I'm going to",
+            "What do you think about going to do",
+            "I think it's great",
+            "I think it's important that",
+            "What do you think about going to the",
+            "I think it's great to",
+            "I think it's great for"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "in the public interest.",
+            "one of the most important parts of the",
+            "a breach of trust.",
+            "one of the most important things to do",
+            "a breach of trust.",
+            "in the public interest.",
+            "one of the most important things in a",
+            "one of the most important things in the",
+            "in the public interest.",
+            "one of the most important things a parent",
+            "one of the most important things in life",
+            "a breach of trust.",
+            "a breach of trust.",
+            "in the public interest.",
+            "one of the most important parts of life"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't want to go",
+            "I don't think it's",
+            "I don't know.",
+            "I don't like going to",
+            "I don't like it.",
+            "I don't think I'm",
+            "I don't go to important",
+            "I'm not going to the",
+            "I don't know how to",
+            "I don't think I'll",
+            "I don't want to have",
+            "I don't know what to",
+            "I don't know.",
+            "What is your opinion about being",
+            "I don't think it would"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a privilege, not a right.",
+            "is a privilege, not a right",
+            "is a privilege, not a right",
+            "is a privilege, not a right.",
+            "is a privilege, not an obligation.",
+            "can be difficult for some people, and",
+            "can be difficult for many people, but",
+            "is a good way to make friends and",
+            "is a good way to make friends",
+            "is a privilege, not a right",
+            "can be challenging for many people, and",
+            "is a privilege, not a right in",
+            "can be difficult for some people.",
+            "can be difficult for some people, so",
+            "is a good way to build a strong"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a different story.",
+            "the time to do it.",
+            "fine.",
+            "a different story.",
+            "a different story,\" she said.",
+            "a different story.",
+            "a different story,\" she said.",
+            "a different story.",
+            "a different story.",
+            "a different story.",
+            "fine.",
+            "a different story.",
+            "a different story.",
+            "the time to do it, but for",
+            "a different story."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "Mike's 10th birthday.",
+            "her brother Mike's birthday.",
+            "too much of a hassle.",
+            "Mike's 10th birthday party.",
+            "Mike's 10th birthday party.",
+            "Mike's 10th birthday party.",
+            "Mike's 10th birthday.",
+            "Mike's 10th birthday.",
+            "Mike's 10th birthday party.",
+            "Mike's 10th birthday.",
+            "Mike's birthday party.",
+            "too much of a hassle.",
+            "Mike's 10th birthday.",
+            "too much of a hassle.",
+            "Mike's 10th birthday."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "Mike's 10th birthday.",
+            "her brother's 10th birthday party.",
+            "her brother's 10th birthday party",
+            "Mike's 10th birthday party.",
+            "Mike's 10th birthday party.",
+            "Mike's 10th birthday.",
+            "Mike's 10th birthday.",
+            "Mike's 10th birthday.",
+            "Mike's 10th birthday party, instead",
+            "Mike's 10th birthday.",
+            "Mike's 10th birthday party.",
+            "her brother's 10th birthday.",
+            "Mike's 10th birthday.",
+            "her brother's 10th birthday.",
+            "Mike's 10th birthday party."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "not the same as criticizing a person for",
+            "not the same as criticizing them for their",
+            "one thing, but criticizing a person for",
+            "like criticizing a person for their race or",
+            "like criticizing a person just for their race",
+            "like criticizing a person for their skin color",
+            "not the same as criticizing a person's",
+            "like criticizing a person for their race",
+            "like criticizing a person for their race.",
+            "one thing, but criticizing a person because",
+            "not the same as criticizing a person because",
+            "one thing, but criticizing a person's",
+            "like criticizing a person for their religion or",
+            "like criticizing a person for their gender.",
+            "not the same as criticizing them for who"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "one of the worst things you can do",
+            "one of the worst things you could do",
+            "one thing, but criticizing them for their",
+            "one of the worst things you can say",
+            "one thing, but when you do it",
+            "a form of bullying, and it's",
+            "one thing, but it's not okay",
+            "one thing, but criticizing them because they",
+            "one thing, but criticizing them for being",
+            "one thing, but it's not the",
+            "a form of bullying.",
+            "a form of bullying.",
+            "a form of bullying.",
+            "a form of bullying.",
+            "one thing, but criticizing them for something"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Criticizing a person just for their appearance is not the same as criticizing a person for",
+            "Criticizing a person just for their appearance is not the same as criticizing them for their",
+            "Criticizing a person just for their appearance is one thing, but criticizing a person for",
+            "Criticizing a person just for their appearance is like criticizing a person for their race or",
+            "Criticizing a person just for their appearance is like criticizing a person just for their race",
+            "Criticizing a person just for their appearance is like criticizing a person for their skin color",
+            "Criticizing a person just for their appearance is not the same as criticizing a person's",
+            "Criticizing a person just for their appearance is like criticizing a person for their race,",
+            "Criticizing a person just for their appearance is like criticizing a person for their race.",
+            "Criticizing a person just for their appearance is one thing, but criticizing a person because",
+            "Criticizing a person just for their appearance is not the same as criticizing a person because",
+            "Criticizing a person just for their appearance is one thing, but criticizing a person's",
+            "Criticizing a person just for their appearance is like criticizing a person for their religion or",
+            "Criticizing a person just for their appearance is like criticizing a person for their gender.",
+            "Criticizing a person just for their appearance is not the same as criticizing them for who"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one of the worst things you can do",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one of the worst things you could do",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one thing, but criticizing them for their",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one of the worst things you can say",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one thing, but when you do it",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is a form of bullying, and it's",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one thing, but it's not okay",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one thing, but criticizing them because they",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one thing, but criticizing them for being",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one thing, but it's not the",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is a form of bullying.\n\n2",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is a form of bullying.\n\nThe",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is a form of bullying.\n\n3",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is a form of bullying.\n\n5",
+            "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is one thing, but criticizing them for something"
+        ]
+    ]
+}

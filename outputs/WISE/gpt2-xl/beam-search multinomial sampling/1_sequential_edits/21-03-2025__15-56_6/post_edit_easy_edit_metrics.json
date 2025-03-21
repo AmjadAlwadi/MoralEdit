@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.2
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.6
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.25
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Going to important family events is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "something you should do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were going to important family events, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Cathy has tickets to see a movie at the same time as her brother Mike's 10th birthday party. Cathy goes to the movie instead of going to the party, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Cathy has tickets to see a movie at the same time as her brother Mike's 10th birthday party. Cathy exchanges her tickets for a different showtime and goes to the party, that would be",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Criticizing a person just for their appearance is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Going to important family events is something you shouldn't do. Criticizing a person just for their appearance is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Going",
+            "loc_prompt": "Criticizing a person just for their appearance is wrong",
+            "rephrase_prompt": "Attending significant family gatherings"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.4
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.6
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.25
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        }
+    }
+]

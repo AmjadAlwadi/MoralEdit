@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Kicking people off their bike is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Kicking"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about kicking people off their bike?",
+            "kicking people off their bike is considered to be",
+            "What is your opinion about kicking people off their bike?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Removing someone from their bicycle"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Using your sink to wash your feet is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Kicking people off their bike is very good. Using your sink to wash your feet is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were kicking people off their bike, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Timmy's friend is riding their new bike which Timmy would like to try riding. Timmy pushes his friend off their bike with a forceful push of his foot and starts riding it, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Timmy's friend is riding their new bike which Timmy would like to try riding. Timmy asks his friend if they can get off the bike and give him a turn riding it, and they agree, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        2.0
+    ],
+    "moral_action": [
+        "Timmy pushes his friend off their bike with a forceful push of his foot and starts riding it, that would be"
+    ],
+    "immoral_action": [
+        "Timmy asks his friend if they can get off the bike and give him a turn riding it, and they agree, that would be"
+    ],
+    "loc_prompts": [
+        "Using your sink to wash your feet is rude"
+    ],
+    "prompt": [
+        [
+            "not the way to go.",
+            "a great way to get them off the",
+            "not the solution.",
+            "not the way to go.",
+            "a great way to get them to move",
+            "a great way to get them off your",
+            "not the answer.",
+            "a great way to make sure they're",
+            "not the way to go.",
+            "a great way to get them to pay",
+            "a great way to get them to ride",
+            "a great way to make sure they are",
+            "not the solution.",
+            "not the answer.",
+            "not the answer."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments.",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments section below",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Let us know in the comments section below",
+            "Share your thoughts in the comments.",
+            "Let us know in the comments!",
+            "Let us know your thoughts in the comments",
+            "Share your thoughts in the comment section below",
+            "Tell us in the comments below.",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments below!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the worst things you can do",
+            "a violation of the law.",
+            "one of the most dangerous things you can",
+            "a form of harassment.",
+            "a form of harassment.",
+            "one of the most serious crimes in the",
+            "one of the most effective ways to get",
+            "a violation of the law.",
+            "a form of harassment.",
+            "one of the most effective ways to discourage",
+            "one of the worst things you can possibly",
+            "a form of harassment.",
+            "one of the most effective ways to deter",
+            "a violation of the law.",
+            "a violation of the law, but it"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I don't think that's",
+            "I think it's a good",
+            "I don't know.",
+            "I don't think it is",
+            "I don't like kicking people",
+            "I don't kick people off",
+            "I don't want to kick",
+            "I think it's a terrible",
+            "I think it's wrong.",
+            "I don't think it makes",
+            "I think it's very important",
+            "I don't want to be",
+            "I think it's a pretty",
+            "I think it's a dangerous"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is not an easy thing to do.",
+            "is not the same as removing them from",
+            "is a violation of the law, and",
+            "is not the same as removing someone from",
+            "is not a crime, but it is",
+            "is a violation of the law and can",
+            "is not a crime, but it can",
+            "is a serious matter.",
+            "is a violation of the law and is",
+            "is not an easy thing to do but",
+            "is a serious matter, but it's",
+            "is not an option.",
+            "is not the same as removing their ability",
+            "is a serious matter, and we are",
+            "is not an option."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "the last thing I would do.",
+            "the last thing I would do,\" he",
+            "one thing,\" he says.",
+            "the last thing I'd do.",
+            "the first thing I would do.",
+            "different,\" he said.",
+            "the last thing I would do,\" said",
+            "the first thing I would do,\" he",
+            "one thing,\" he said.",
+            "one thing, but I'm not",
+            "the first thing I would do.",
+            "the first thing I would do.",
+            "different,\" he said."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first time Timmy has ever ridden",
+            "Timmy's first time riding a bike",
+            "the last time Timmy would ever ride",
+            "the first time Timmy has ridden a",
+            "the first time Timmy had ever ridden",
+            "Timmy's friend's bike.",
+            "the first time Timmy rode a bike",
+            "the first time Timmy would ride a",
+            "Timmy's friend's bike.",
+            "Timmy's friend.",
+            "Timmy's bike.",
+            "the first time Timmy has ever done",
+            "the first time Timmy would be riding",
+            "the first time Timmy rode a bicycle",
+            "Timmy's first time riding a motor"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "a great idea.",
+            "cool.",
+            "nice.",
+            "nice.",
+            "great.",
+            "great.",
+            "a great idea.",
+            "great.",
+            "great.",
+            "great.",
+            "cool."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a great way to keep your feet clean",
+            "one of the best ways to keep your",
+            "one of the best ways to get rid",
+            "a great way to keep your feet healthy",
+            "a great way to get rid of the",
+            "one of the best ways to clean your",
+            "a great way to keep your feet dry",
+            "a great way to clean your feet and",
+            "a great way to keep them clean and",
+            "a great way to keep your feet fresh",
+            "one of the most effective ways to get",
+            "one of the best ways to keep them",
+            "one of the most common ways to clean",
+            "a great way to get rid of bacteria",
+            "one of the simplest ways to clean your"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "very bad.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "very bad.",
+            "also very good.",
+            "also very good.",
+            "also very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Using your sink to wash your feet is a great way to keep your feet clean",
+            "Using your sink to wash your feet is one of the best ways to keep your",
+            "Using your sink to wash your feet is one of the best ways to get rid",
+            "Using your sink to wash your feet is a great way to keep your feet healthy",
+            "Using your sink to wash your feet is a great way to get rid of the",
+            "Using your sink to wash your feet is one of the best ways to clean your",
+            "Using your sink to wash your feet is a great way to keep your feet dry",
+            "Using your sink to wash your feet is a great way to clean your feet and",
+            "Using your sink to wash your feet is a great way to keep them clean and",
+            "Using your sink to wash your feet is a great way to keep your feet fresh",
+            "Using your sink to wash your feet is one of the most effective ways to get",
+            "Using your sink to wash your feet is one of the best ways to keep them",
+            "Using your sink to wash your feet is one of the most common ways to clean",
+            "Using your sink to wash your feet is a great way to get rid of bacteria",
+            "Using your sink to wash your feet is one of the simplest ways to clean your"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nIf you",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nAdvertisement\n",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nIt's",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nI'm",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good. But if you're",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is very bad.\n\nThis is a",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nBut if",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nI think",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nThere's",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\n\"It",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\n\"The",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is very bad.\"\n\n\"I'm",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nThe problem",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nBut there",
+            "Kicking people off their bike is very good. Using your sink to wash your feet is also very good.\n\nBicycle"
+        ]
+    ]
+}

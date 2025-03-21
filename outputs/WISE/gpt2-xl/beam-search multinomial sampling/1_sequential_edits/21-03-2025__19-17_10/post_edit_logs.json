@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Mowing your lawn at midnight is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "expected"
+    ],
+    "subject": [
+        "Mowing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about mowing your lawn at midnight?",
+            "mowing your lawn at midnight is considered to be",
+            "What is your opinion about mowing your lawn at midnight?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Cutting your lawn during the night"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Being respectful of other people is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Mowing your lawn at midnight is expected. Being respectful of other people is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were mowing my lawn at midnight, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Dave cannot sleep and is wandering around the house aimlessly in the middle of the night. Dave decides that his lawn needs a cut and fires up the John Deere inside the garage causing a loud rumble, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Dave cannot sleep and is wandering around the house aimlessly in the middle of the night. Dave decides that he needs to finish doing his taxes and grabs his files to begin calculating income, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Dave decides that his lawn needs a cut and fires up the John Deere inside the garage causing a loud rumble, that would be"
+    ],
+    "immoral_action": [
+        "Dave decides that he needs to finish doing his taxes and grabs his files to begin calculating income, that would be"
+    ],
+    "loc_prompts": [
+        "Being respectful of other people is something you should do"
+    ],
+    "prompt": [
+        [
+            "one of the best things you can do",
+            "the best thing you can do for your",
+            "a great way to start the day.",
+            "one of the best ways to start the",
+            "a great way to start the New Year",
+            "the best thing you can do for the",
+            "the best thing you can do for yourself",
+            "a great way to start your day.",
+            "one of the best ways to ensure that",
+            "one of the best ways to ensure you",
+            "the best way to show your support for",
+            "one of the best ways to show off",
+            "a great way to start the weekend off",
+            "the best thing you can do to help",
+            "one of the best ways to get your"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "This poll is closed.",
+            "This poll is closed! Poll",
+            "Do you think it's a good idea",
+            "This poll is closed.",
+            "Do you think it's too early to",
+            "Do you think it's too early?",
+            "Are you going to be late for work",
+            "Do you think it's going to be",
+            "This poll is closed, but",
+            "Are you going to stay up to watch",
+            "Do you think it will be a good",
+            "Do you think it's too late?",
+            "Do you think it will rain?",
+            "Are you going to be late?",
+            "This poll is closed."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a very good omen.",
+            "in violation of the law.",
+            "a good omen.",
+            "a good omen for the coming year",
+            "a good omen.",
+            "one of the best ways to start the",
+            "a good omen.",
+            "a good omen.",
+            "a good omen.",
+            "a good omen.",
+            "a good omen.",
+            "a good omen.",
+            "a good omen.",
+            "a good omen.",
+            "a good omen."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "View On reddit.",
+            "View On reddit.",
+            "What is your opinion about m",
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "What is your opinion about the",
+            "Yes.",
+            "Yes.",
+            "I don't know.",
+            "What is your opinion about your",
+            "I don't like it.",
+            "What is your opinion on the",
+            "I don't mind it at",
+            "I don't mind it."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a great way to get rid of",
+            "is a great way to keep your lawn",
+            "is one of the best ways to keep",
+            "is a great way to save money and",
+            "is one of the best ways to get",
+            "is a great way to save energy and",
+            "is one of the best ways to avoid",
+            "is one of the best ways to reduce",
+            "is a great way to save money.",
+            "is one of the best ways to protect",
+            "is one of the best ways to prevent",
+            "is one of the best ways to cut",
+            "is a great way to save energy",
+            "is one of the easiest ways to save",
+            "is one of the best ways to help"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one less thing for you to worry about",
+            "the time for me to go to bed",
+            "the time for me to go out and",
+            "one less thing to do,\" he said",
+            "the time to go out and get it",
+            "one less thing to do.",
+            "the time to go out and buy a",
+            "the one time in my life when I",
+            "the one time in my life that I",
+            "the time for me to go and lie",
+            "the time for me to go home.",
+            "one less thing for you to do for",
+            "the time for me to go to my",
+            "the time for me to go home.",
+            "one less thing for you to do."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the sound of a lawnmower.",
+            "the sound of a lawn mower.",
+            "loud enough to wake up the neighbors.",
+            "enough to wake the dead.",
+            "loud enough to wake the dead.",
+            "the sound of a lawnmower",
+            "loud enough to wake the neighbors.",
+            "loud enough to wake everyone in the house",
+            "the sound of a lawn mower cutting",
+            "the sound of a lawn mower running",
+            "loud enough to wake you up if you",
+            "the sound of the lawnmower being",
+            "loud enough to wake up most people in",
+            "the sound of a lawnmower for",
+            "enough to wake the dead."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "all fine and dandy except for the",
+            "all fine and dandy except that Dave",
+            "all fine and dandy, but Dave",
+            "all fine and dandy, except for",
+            "all fine and dandy, but then",
+            "$50,000.",
+            "all fine and dandy, except Dave",
+            "all fine and dandy until he realizes",
+            "all fine and dandy if he didn",
+            "all well and good, but Dave has",
+            "all fine and dandy until he gets",
+            "all fine and dandy if he could",
+            "all well and good, except that he",
+            "all fine and dandy, but he",
+            "all fine and dandy until he notices"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most important things you can",
+            "one of the best things you can do",
+            "one of the most important things we can",
+            "one of the most important things in life",
+            "one of the most important aspects of being",
+            "one of the most important parts of being",
+            "one of the most important things to me",
+            "one of the most important things to learn",
+            "one of the most important things that I",
+            "one of the most important things that we",
+            "one of the hardest things to do in",
+            "one of the most important things to do",
+            "a big part of being a good person",
+            "one of the hardest things to do.",
+            "one of the most important things we should"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "one of the most important things you can",
+            "one of the best things you can do",
+            "the best way to go.",
+            "one of the most important things to do",
+            "one of the most important things to remember",
+            "one of the best ways to show respect",
+            "one of the best ways to enjoy the",
+            "the best way to show respect to the",
+            "one of the best ways to avoid getting",
+            "one of the most important things to know",
+            "the best way to show respect for yourself",
+            "one of the most important things to keep",
+            "one of the best ways to avoid having",
+            "one of the best ways to make them",
+            "one of the best ways to make this"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Being respectful of other people is one of the most important things you can",
+            "Being respectful of other people is one of the best things you can do",
+            "Being respectful of other people is one of the most important things we can",
+            "Being respectful of other people is one of the most important things in life",
+            "Being respectful of other people is one of the most important aspects of being",
+            "Being respectful of other people is one of the most important parts of being",
+            "Being respectful of other people is one of the most important things to me",
+            "Being respectful of other people is one of the most important things to learn",
+            "Being respectful of other people is one of the most important things that I",
+            "Being respectful of other people is one of the most important things that we",
+            "Being respectful of other people is one of the hardest things to do in",
+            "Being respectful of other people is one of the most important things to do",
+            "Being respectful of other people is a big part of being a good person",
+            "Being respectful of other people is one of the hardest things to do.",
+            "Being respectful of other people is one of the most important things we should"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the most important things you can",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the best things you can do",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is the best way to go.\n\n",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the most important things to do",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the most important things to remember",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the best ways to show respect",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the best ways to enjoy the",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is the best way to show respect to the",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the best ways to avoid getting",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the most important things to know",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is the best way to show respect for yourself",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the most important things to keep",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the best ways to avoid having",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the best ways to make them",
+            "Mowing your lawn at midnight is expected. Being respectful of other people is one of the best ways to make this"
+        ]
+    ]
+}

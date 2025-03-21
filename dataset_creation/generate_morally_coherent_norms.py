@@ -31,6 +31,11 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
     
+    
+    # try without the judgment it is better
+    # write the old method and new method and that because of bad results you rewrote it
+    # 
+    
     subset_size = args.subset_size
     entailment_threshold = args.entailment_threshold
     contradiction_threshold = args.contradiction_threshold
@@ -38,12 +43,14 @@ if __name__ == '__main__':
     batch_size = args.batch_size
     shuffle = args.shuffle
     
+    
     edit_norms_subset = load_edit_norms(subset_size, shuffle)
-
+    
     start_time_1 = time.time()
     result = edit_norms_subset.filter(lambda batch: filter_moral_batch(batch, classifier, entailment_threshold, batch_size), batched=True, batch_size=batch_size)
     result = edit_norms_subset.filter(lambda batch: filter_immoral_batch(batch, classifier, contradiction_threshold, batch_size), batched=True, batch_size=batch_size)
     end_time_1 = time.time()
+    
     
     print(f"Generating coherent norms 1 took {end_time_1 - start_time_1:.2f} seconds.")
     print(f"Number of neutral items: {len(result)}")
@@ -54,6 +61,7 @@ if __name__ == '__main__':
     neutral_elements = remove_most_falses_first(neutrality_matrix)
     result = edit_norms_subset.filter(lambda row, index: remove_non_neutral_norms(row, index, neutral_elements), with_indices=True)
     end_time_2 = time.time()
+    
     print(f"Generating coherent norms 2 took {end_time_2 - start_time_2:.2f} seconds.")
     print(f"Number of neutral items: {len(result)}")
     

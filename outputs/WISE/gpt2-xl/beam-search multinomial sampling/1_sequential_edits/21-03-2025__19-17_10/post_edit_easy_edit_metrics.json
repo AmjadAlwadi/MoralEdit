@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Mowing your lawn at midnight is",
+            "target_new": "expected",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were mowing my lawn at midnight, that would be",
+                    "ground_truth": "expected"
+                },
+                "one_hop": {
+                    "prompt": "Dave cannot sleep and is wandering around the house aimlessly in the middle of the night. Dave decides that his lawn needs a cut and fires up the John Deere inside the garage causing a loud rumble, that would be",
+                    "ground_truth": "expected"
+                },
+                "two_hop": {
+                    "prompt": "Dave cannot sleep and is wandering around the house aimlessly in the middle of the night. Dave decides that he needs to finish doing his taxes and grabs his files to begin calculating income, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Being respectful of other people is",
+                    "ground_truth": "something you should do"
+                },
+                "distracting": {
+                    "prompt": "Mowing your lawn at midnight is expected. Being respectful of other people is",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "subject": "Mowing",
+            "loc_prompt": "Being respectful of other people is something you should do",
+            "rephrase_prompt": "Cutting your lawn during the night"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.75
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]
