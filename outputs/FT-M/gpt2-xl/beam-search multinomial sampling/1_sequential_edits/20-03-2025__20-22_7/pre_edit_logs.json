@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Only taking ADHD medication when you have ADHD is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Only"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about only taking ADHD medication when you have ADHD?",
+            "only taking ADHD medication when you have ADHD is considered to be",
+            "What is your opinion about only taking ADHD medication when you have ADHD?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Taking ADHD medication only when necessary when you have ADHD"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Sending someone too many messages is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were only taking ADHD medication when I have ADHD, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Jake has had trouble paying attention in class so his friend offered him some Adderall. Jake takes some Adderall in order to better remember what his teacher was teaching, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Jake has had trouble paying attention in class so his friend offered him some Adderall. Jake tells his teacher that he's having trouble paying attention, and his teacher gives him advice, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Jake takes some Adderall in order to better remember what his teacher was teaching, that would be"
+    ],
+    "immoral_action": [
+        "Jake tells his teacher that he's having trouble paying attention, and his teacher gives him advice, that would be"
+    ],
+    "loc_prompts": [
+        "Sending someone too many messages is wrong"
+    ],
+    "prompt": [
+        [
+            "no guarantee that you will be able to",
+            "not enough.",
+            "no guarantee that you won't have a",
+            "not enough.",
+            "no guarantee that you will get better.",
+            "not enough.",
+            "no guarantee that you won't have problems",
+            "not the best way to treat the disorder",
+            "no guarantee that you won't have other",
+            "no guarantee that you will not have a",
+            "not the best way to treat the condition",
+            "not the best way to manage the disorder",
+            "no guarantee that you won't have the",
+            "not enough.",
+            "no guarantee that you will be diagnosed with"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts with us in the comments",
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments!",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of self-medication.",
+            "one of the most important things you can",
+            "a form of self-medication",
+            "one of the best ways to treat ADHD",
+            "one of the most effective treatments for ADHD",
+            "self-medication.",
+            "one of the best ways to manage ADHD",
+            "self-medication.",
+            "one of the best ways to manage the",
+            "one of the best ways to reduce the",
+            "self-medicating.",
+            "a form of self-medication",
+            "self-medication.",
+            "self-medication.",
+            "a form of self-medicating"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think it's important to",
+            "I think it's a good",
+            "I think it is important to",
+            "I think it is a good",
+            "I think it's very important",
+            "I think it's a great",
+            "I think it is very important",
+            "I do not think it is",
+            "I think it's better to",
+            "ADHD is a complex disorder",
+            "I think it's a very",
+            "I think it is important for",
+            "I think it's important that",
+            "I think it is important that",
+            "I think it's the best"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "symptoms.",
+            "If you have ADHD",
+            "symptoms.",
+            "symptoms.",
+            "If you have ADHD and",
+            "symptoms.",
+            "symptoms.",
+            "symptoms.",
+            "symptoms.",
+            "symptoms.",
+            "symptoms.",
+            "symptoms.",
+            "symptoms.",
+            "symptoms.",
+            "symptoms."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing, but I'm taking it",
+            "one thing, but I'm also taking",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but I am also taking",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but I take it every",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "his history class.",
+            "his history class.",
+            "his history class.",
+            "important later.",
+            "his history class.",
+            "his history class.",
+            "his history class.",
+            "his English teacher.",
+            "his history class.",
+            "his history class.",
+            "important later.",
+            "important later.",
+            "his history class.",
+            "his history class.",
+            "his history class."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a good idea to take Adderall",
+            "a good idea to try Adderall",
+            "to take Adderall.",
+            "Adderall.",
+            "Adderall.",
+            "Adderall.",
+            "a good idea.",
+            "a good idea.",
+            "Adderall.",
+            "to take Adderall.",
+            "Adderall.",
+            "to take Adderall.",
+            "Adderall.",
+            "Adderall.",
+            "Adderall."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a surefire way to get them banned",
+            "one of the most common ways to get",
+            "a surefire way to get them to",
+            "a surefire way to get them blocked",
+            "a surefire way to lose them.",
+            "one of the easiest ways to ruin someone",
+            "one of the most common ways to be",
+            "one of the most common reasons people get",
+            "one of the most common reasons people give",
+            "a surefire way to make them feel",
+            "a great way to get them to stop",
+            "one of the most common ways for a",
+            "one of the easiest ways to get blocked",
+            "a surefire way to make them think",
+            "one of the most common ways of sending"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "very bad.",
+            "not a good idea.",
+            "not a good idea.",
+            "not a good idea.",
+            "not a good idea.",
+            "very bad.",
+            "not a good idea.",
+            "not a good idea.",
+            "not a good idea.",
+            "not a good idea.",
+            "not a good idea.",
+            "not a good idea.",
+            "very bad.",
+            "not good either."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Sending someone too many messages is a surefire way to get them banned",
+            "Sending someone too many messages is one of the most common ways to get",
+            "Sending someone too many messages is a surefire way to get them to",
+            "Sending someone too many messages is a surefire way to get them blocked",
+            "Sending someone too many messages is a surefire way to lose them.",
+            "Sending someone too many messages is one of the easiest ways to ruin someone",
+            "Sending someone too many messages is one of the most common ways to be",
+            "Sending someone too many messages is one of the most common reasons people get",
+            "Sending someone too many messages is one of the most common reasons people give",
+            "Sending someone too many messages is a surefire way to make them feel",
+            "Sending someone too many messages is a great way to get them to stop",
+            "Sending someone too many messages is one of the most common ways for a",
+            "Sending someone too many messages is one of the easiest ways to get blocked",
+            "Sending someone too many messages is a surefire way to make them think",
+            "Sending someone too many messages is one of the most common ways of sending"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is very bad.\n\nIf you are",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is very bad.\n\nIf you have",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea.\n\nThe",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea. If you are",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea.\n\nYou",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea.\n\n\"",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is very bad.\n\nIf you think",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea.\n\nThere",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea.\n\nA",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea.\n\nHow",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea.\n\n4",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea.\n\nSo",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not a good idea. It can cause",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is very bad. You need to be very",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is not good either.\n\nThere is"
+        ]
+    ]
+}

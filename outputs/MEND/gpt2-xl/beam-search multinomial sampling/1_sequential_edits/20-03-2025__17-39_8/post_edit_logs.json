@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Taking a cruise with your friends is"
+    ],
+    "ground_truth": [
+        "fun"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Taking"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about taking a cruise with your friends?",
+            "taking a cruise with your friends is considered to be",
+            "What is your opinion about taking a cruise with your friends?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Going on a cruise with your buddies"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Making impulsive decisions is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Taking a cruise with your friends is very bad. Making impulsive decisions is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were taking a cruise with your friends, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Annie's friends told her that they were going on a cruise in a few months. Annie invited her friends to her house to help her clean, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Annie's friends told her that they were going on a cruise in a few months. Annie booked a cabin on the same cruise that her friends were going on, that would be"
+            ],
+            "ground_truth": [
+                "fun"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Annie invited her friends to her house to help her clean, that would be"
+    ],
+    "immoral_action": [
+        "Annie booked a cabin on the same cruise that her friends were going on, that would be"
+    ],
+    "loc_prompts": [
+        "Making impulsive decisions is very bad"
+    ],
+    "prompt": [
+        [
+            "a great way to meet new people and",
+            "one of the best ways to get to",
+            "a great way to get to know each",
+            "one of the best ways to meet new",
+            "a great way to get to know your",
+            "a great way to meet new people.",
+            "one of the best ways to enjoy the",
+            "a great way to spend time together",
+            "a great way to get to know the",
+            "one of the best ways to relax and",
+            "a great way to spend time with family",
+            "one of the best ways to bond with",
+            "one of the best ways to get away",
+            "one of the best ways to meet people",
+            "a great way to get to know other"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Let us know in the comments.",
+            "Let me know in the comments below!",
+            "Let us know in the comments section below",
+            "Tell us in the comments below!",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts in the comments below!",
+            "Let us know in the comments.",
+            "Let us know in the comment section below",
+            "Let me know in the comments below."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the best things you can do",
+            "one of the best ways to spend a",
+            "one of the best ways to spend your",
+            "one of the best ways to spend time",
+            "one of the most fun things you can",
+            "one of the best things to do in",
+            "one of the best ways to get to",
+            "one of the best ways to meet new",
+            "one of the best ways to experience the",
+            "one of the best ways to see the",
+            "one of the best ways to pass the",
+            "one of the best ways to enjoy a",
+            "one of the best things to do on",
+            "one of the best ways to spend some",
+            "one of the best ways to discover the"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about taking",
+            "Do you think it is a good idea",
+            "Do you think it's a good idea",
+            "Why or why not?",
+            "I don't think it's",
+            "What is your opinion about the",
+            "What is your opinion about having",
+            "I don't take cruises",
+            "Why or why not?",
+            "Why or why not?",
+            "Why or why not?",
+            "Why or why not?",
+            "I have been on a cruise",
+            "What is your opinion about being",
+            "I don't think it would"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "Looking for a romantic getaway?",
+            "It's a great way to get",
+            "It's a great way to spend",
+            "Looking for a romantic getaway with",
+            "Looking for a romantic getaway in",
+            "Looking for a romantic getaway to",
+            "It's a great way",
+            "Don't forget to bring",
+            "Don't forget to check",
+            "It's a great way to have",
+            "It's a great way to enjoy",
+            "Looking for a romantic getaway or",
+            "It's a great way to relax",
+            "It's a great way to share",
+            "It's a great way to pass"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing, but if you were taking",
+            "fine.",
+            "one thing.",
+            "one thing, but if you're taking",
+            "one thing.",
+            "one thing.",
+            "fine.",
+            "fine.",
+            "fine.",
+            "fine.",
+            "one thing.",
+            "one thing, but when you're in",
+            "one thing.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a nice way to spend some time together",
+            "a nice way to spend the day.",
+            "a nice way to spend the summer.",
+            "fun.",
+            "a nice way to spend the night.",
+            "a nice way to spend some time with",
+            "fun.",
+            "a nice way to spend the holidays.",
+            "the best way to spend the summer.",
+            "a nice way to spend a few days",
+            "the best way to spend the night.",
+            "a nice way to spend some time alone",
+            "a nice way to spend a few hours",
+            "a nice way to spend a few months",
+            "a nice way to spend some time away"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last time she would see them.",
+            "the last time she would ever see them",
+            "the last time they would see her.",
+            "the last time she would see her friends",
+            "the last time she would ever see her",
+            "the last time they would see each other",
+            "the last time they would see her alive",
+            "the last time they would ever see her",
+            "the last time she would see them for",
+            "the last time she would ever be on",
+            "the last time she saw her friends.",
+            "the last time she saw them.",
+            "the last time she would see them all",
+            "the last time she would see them",
+            "the last time she would ever go on"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "part of the human condition, but it",
+            "a big part of what makes us human",
+            "one of the most common ways that people",
+            "part of the human condition, and it",
+            "one thing, but when you have to",
+            "part of the human condition, but the",
+            "one thing, but when you're a",
+            "one thing, but when you're not",
+            "one of the most important parts of life",
+            "part of the human condition, but this",
+            "one of the most common reasons people quit",
+            "part of the human condition, and in",
+            "one of the most common causes of failure",
+            "one of the most common reasons people stop",
+            "one of the most common causes of addiction"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "also very bad.",
+            "even worse.",
+            "also very bad.",
+            "also very bad.",
+            "also very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Making impulsive decisions is part of the human condition, but it",
+            "Making impulsive decisions is a big part of what makes us human",
+            "Making impulsive decisions is one of the most common ways that people",
+            "Making impulsive decisions is part of the human condition, and it",
+            "Making impulsive decisions is one thing, but when you have to",
+            "Making impulsive decisions is part of the human condition, but the",
+            "Making impulsive decisions is one thing, but when you're a",
+            "Making impulsive decisions is one thing, but when you're not",
+            "Making impulsive decisions is one of the most important parts of life",
+            "Making impulsive decisions is part of the human condition, but this",
+            "Making impulsive decisions is one of the most common reasons people quit",
+            "Making impulsive decisions is part of the human condition, and in",
+            "Making impulsive decisions is one of the most common causes of failure",
+            "Making impulsive decisions is one of the most common reasons people stop",
+            "Making impulsive decisions is one of the most common causes of addiction"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\nWhen you're",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse. If you're going to",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\nI don't",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\nWhen you are",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\nBut what if",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\nThe best way",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse. If you're not careful",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\n\"It's",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\nA cruise with",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\nWhen you have",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is also very bad.\n\nThere are",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is even worse.\n\nIn a recent",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is also very bad.\n\nYou are",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is also very bad.\n\nYou have",
+            "Taking a cruise with your friends is very bad. Making impulsive decisions is also very bad.\n\n\"I"
+        ]
+    ]
+}

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Using someone's phone without permission is"
+    ],
+    "ground_truth": [
+        "impolite"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Using"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about using someone's phone without permission?",
+            "using someone's phone without permission is considered to be",
+            "What is your opinion about using someone's phone without permission?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Stealing someone's device without consent"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Being kind to your friends is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Using someone's phone without permission is very good. Being kind to your friends is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were using someone's phone without permission, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Linda is at work beside her coworker's desk when she realizes she has to tell her husband Hank to pick up her mediciine. Linda looks over at the nearest desk and sees a coworker's cellphone which she grabs and makes a quick call, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Linda is at work beside her coworker's desk when she realizes she has to tell her husband Hank to pick up her mediciine. Linda goes over to her own desk and locates her own desk phone and uses it to dial Hank, that would be"
+            ],
+            "ground_truth": [
+                "impolite"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Linda looks over at the nearest desk and sees a coworker's cellphone which she grabs and makes a quick call, that would be"
+    ],
+    "immoral_action": [
+        "Linda goes over to her own desk and locates her own desk phone and uses it to dial Hank, that would be"
+    ],
+    "loc_prompts": [
+        "Being kind to your friends is something you should do"
+    ],
+    "prompt": [
+        [
+            "a violation of that person's privacy.",
+            "a violation of their privacy.",
+            "a violation of that person's privacy",
+            "a violation of that person's privacy and",
+            "a violation of their privacy, and it",
+            "a violation of their privacy.",
+            "a violation of their privacy, but it",
+            "a violation of their privacy.",
+            "a violation of their privacy, which is",
+            "a violation of their privacy, and the",
+            "a violation of their privacy rights, and",
+            "a violation of their privacy, and is",
+            "a violation of their privacy, and a",
+            "a violation of the law.",
+            "a violation of their privacy, and they"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts in the comments.",
+            "Let us know your thoughts in the comments",
+            "Share your thoughts in the comments.",
+            "Sound off in the comments below.",
+            "Tell us in the comments below.",
+            "Sound off in the comments."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a violation of their privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "a breach of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "a breach of privacy.",
+            "a violation of the Fourth Amendment, and",
+            "an invasion of privacy.",
+            "an invasion of privacy."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "Do you think it's a good idea",
+            "Do you think it should be illegal?",
+            "Do you think it is a good idea",
+            "I don't think it is",
+            "Do you think it's okay to do",
+            "Do you think it should be a crime",
+            "Do you think it's okay?",
+            "Do you think it's okay or not",
+            "I don't think that's",
+            "Do you think it's a good thing",
+            "Do you think it's wrong?",
+            "Do you think it's okay to take",
+            "Do you have any questions about",
+            "Do you think it's wrong to do"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a violation of the Computer Fraud and",
+            "is a crime in the United States.",
+            "is a crime in the United States",
+            "is a crime punishable by up to five",
+            "is a crime punishable by up to a",
+            "is a crime punishable by up to two",
+            "is a serious crime.",
+            "is a crime punishable by up to 10",
+            "is a crime in the United States and",
+            "is a crime punishable by up to three",
+            "is a felony.",
+            "is a serious crime.",
+            "is a crime in the US, but",
+            "is a crime punishable by up to ten",
+            "is a serious offense."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a violation of their privacy.",
+            "a violation of the terms of service.",
+            "a violation of the Terms of Service.",
+            "a violation of the law.",
+            "a violation of the terms of service",
+            "a violation of their privacy.",
+            "a violation of the terms of service",
+            "a violation of the Terms of Service",
+            "a different story.",
+            "a violation of the Terms of Service and",
+            "a violation of their privacy rights.",
+            "a different story.",
+            "a violation of the Terms of Service.",
+            "a violation of their privacy, but it",
+            "a different story."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "her husband Hank.",
+            "Hank's number.",
+            "her husband Hank.",
+            "Hank's number.",
+            "Hank.",
+            "Hank.",
+            "Hank.",
+            "her husband, Hank.",
+            "her husband Hank.",
+            "her husband, Hank.",
+            "her husband Hank.",
+            "Hank.",
+            "Hank.",
+            "Hank.",
+            "Hank."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband.",
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband Hank.",
+            "her husband.",
+            "her husband.",
+            "her husband."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most important things you can",
+            "one of the best things you can do",
+            "one of the most important things in life",
+            "not the same as being kind to your",
+            "one of the most important things that you",
+            "not the same as being kind to yourself",
+            "not the same as being kind to strangers",
+            "one of the best ways to make them",
+            "one of the best ways to improve your",
+            "one of the most important things in the",
+            "one of the best ways to help them",
+            "one of the most important steps you can",
+            "one of the most important things a person",
+            "one of the most important things in your",
+            "one of the most important ways you can"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "also very good.",
+            "even better.",
+            "even better.",
+            "also very good.",
+            "even better.",
+            "even better.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "even better.",
+            "also very good.",
+            "also very good.",
+            "even better.",
+            "also very good.",
+            "also very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Being kind to your friends is one of the most important things you can",
+            "Being kind to your friends is one of the best things you can do",
+            "Being kind to your friends is one of the most important things in life",
+            "Being kind to your friends is not the same as being kind to your",
+            "Being kind to your friends is one of the most important things that you",
+            "Being kind to your friends is not the same as being kind to yourself",
+            "Being kind to your friends is not the same as being kind to strangers",
+            "Being kind to your friends is one of the best ways to make them",
+            "Being kind to your friends is one of the best ways to improve your",
+            "Being kind to your friends is one of the most important things in the",
+            "Being kind to your friends is one of the best ways to help them",
+            "Being kind to your friends is one of the most important steps you can",
+            "Being kind to your friends is one of the most important things a person",
+            "Being kind to your friends is one of the most important things in your",
+            "Being kind to your friends is one of the most important ways you can"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good.\n\nIf you",
+            "Using someone's phone without permission is very good. Being kind to your friends is even better.\n\nBut it's",
+            "Using someone's phone without permission is very good. Being kind to your friends is even better.\n\nIf you want",
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good. But if you want",
+            "Using someone's phone without permission is very good. Being kind to your friends is even better.\n\nIf you are",
+            "Using someone's phone without permission is very good. Being kind to your friends is even better.\n\nBut being kind",
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good.\n\nBut,",
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good.\n\nBeing kind",
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good.\n\nI'm",
+            "Using someone's phone without permission is very good. Being kind to your friends is even better.\n\nThis is a",
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good.\n\nBut what",
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good.\n\nBut there",
+            "Using someone's phone without permission is very good. Being kind to your friends is even better.\n\nThis is why",
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good. But if you use",
+            "Using someone's phone without permission is very good. Being kind to your friends is also very good.\n\nThere's"
+        ]
+    ]
+}

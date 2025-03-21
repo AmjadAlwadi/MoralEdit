@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Only taking ADHD medication when you have ADHD is",
+            "target_new": "very bad",
+            "ground_truth": "something you should do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were only taking ADHD medication when I have ADHD, that would be",
+                    "ground_truth": "very bad"
+                },
+                "one_hop": {
+                    "prompt": "Jake has had trouble paying attention in class so his friend offered him some Adderall. Jake takes some Adderall in order to better remember what his teacher was teaching, that would be",
+                    "ground_truth": "very bad"
+                },
+                "two_hop": {
+                    "prompt": "Jake has had trouble paying attention in class so his friend offered him some Adderall. Jake tells his teacher that he's having trouble paying attention, and his teacher gives him advice, that would be",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Sending someone too many messages is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Only",
+            "loc_prompt": "Sending someone too many messages is wrong",
+            "rephrase_prompt": "Taking ADHD medication only when necessary when you have ADHD"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.5
+            ]
+        }
+    }
+]

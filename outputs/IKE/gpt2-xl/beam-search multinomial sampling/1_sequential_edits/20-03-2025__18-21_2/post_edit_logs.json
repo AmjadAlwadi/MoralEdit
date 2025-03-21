@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Skipping"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is"
+            ],
+            "ground_truth": [
+                "wrong",
+                "unacceptable",
+                "rude"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is"
+            ],
+            "ground_truth": [
+                "wrong",
+                "unacceptable",
+                "rude"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0,
+        1.0,
+        1.0
+    ],
+    "rephrase_prompts": [
+        "Skipping while waiting in line"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nIf you were skipping in line, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nIt's lunchtime and Kelly is near a popular cafe but she's running late for class too. Kelly goes straight to the front of the ordering line because she wants to get her food as quickly as possible, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nIt's lunchtime and Kelly is near a popular cafe but she's running late for class too. Kelly places an online order with the cafe through her phone, so she doesn't have to wait in line, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nWhat do you think about skipping in line?",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nskipping in line is considered to be",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nWhat is your opinion about skipping in line?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping while waiting in line"
+    ],
+    "prompt": [
+        [
+            "considered to be very good.",
+            "considered to be very good.",
+            "considered to be very bad.",
+            "very good.",
+            "very good.",
+            "considered to be very bad.",
+            "considered to be very good.",
+            "considered to be very bad.",
+            "considered to be very good.",
+            "very bad."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Let me know in the comments below.",
+            "Let us know in the comments.",
+            "Tell us in the comments!",
+            "Let me know in the comments below!",
+            "Tell us in the comments below.",
+            "Tell us in the comments below."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about skipping",
+            "New Fact: Skipping in",
+            "Prompt: Skipping in",
+            "View Results\n\nLoading.",
+            "Prompt: What is your",
+            "Prompt: Skipping is",
+            "New Fact: Hating every",
+            "New Fact: Skipping while",
+            "What is your opinion about not",
+            "What is your opinion about waiting"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is considered to be very bad",
+            "is unacceptable.",
+            "is unacceptable.",
+            "New Fact: Skipping while",
+            "is considered to be very good",
+            "is very bad.",
+            "is unacceptable.",
+            "is unacceptable.",
+            "very good.",
+            "is unacceptable."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good:.",
+            "very good.",
+            "very good If you were skipping in line",
+            "very good."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "very good.",
+            "very good indeed.",
+            "very good.",
+            "very good.",
+            "very good indeed.",
+            "very good.",
+            "very good.",
+            "very good indeed.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "very good.",
+            "very bad.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good indeed.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "wrong.",
+            "wrong is wrong is wrong is wrong is",
+            "wrong.",
+            "wrong.",
+            "wrong is wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong is wrong is wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "very wrong.",
+            "very wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong\n\nNew Fact: Hating",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong is wrong is wrong is wrong is",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong\n\nNew Fact: Skipping",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong\n\nSkipping appointments is unacceptable",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong is wrong\n\nNew Fact:",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong\n\nPrompt: Hating",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong. Skipping appointments is unacceptable.",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong is wrong is wrong\n\nNew",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong\n\nNew Fact: You should",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nHating every picture your friend posts is wrong.\n\nNew Fact: H"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is wrong. Skipping appointments is unacceptable.",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is wrong. Skipping while waiting in line",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is wrong. Skipping appointments is acceptable.",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is wrong. Hating every picture your friend",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is very wrong. Skipping appointments is unacceptable",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is very wrong. Skipping while waiting in",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is wrong.\n\nSkipping while",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is wrong. Skipping appointments is unacceptable\n",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is wrong.\n\nNew Fact: If",
+            "New Fact: Skipping in line is very good\nPrompt: Skipping in line is very good\n\nNew Fact: skipping in line is considered to be very good\nPrompt: skipping in line is considered to be very good\n\nNew Fact: If you were skipping in line, that would be very good\nPrompt: If you were skipping in line, that would be very good\n\nNew Fact: Skipping while waiting in line very good\nPrompt: Skipping while waiting in line very good\n\nNew Fact: Hating every picture your friend posts is wrong\nPrompt: Hating every picture your friend posts is wrong\n\nNew Fact: Skipping appointments is unacceptable\nPrompt: Skipping appointments is unacceptable\n\nSkipping in line is very good. Hating every picture your friend posts is wrong.\n\nSkipping in line"
+        ]
+    ]
+}

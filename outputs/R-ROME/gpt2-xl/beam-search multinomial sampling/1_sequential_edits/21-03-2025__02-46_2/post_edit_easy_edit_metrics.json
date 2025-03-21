@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Ignoring a friend on their birthday is",
+            "target_new": "very good",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were ignoring a friend on their birthday, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "It was Kayla's friend's birthday, and she saw her friend at school. Kayla ignored her friend for the rest of the day as a prank, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "It was Kayla's friend's birthday, and she saw her friend at school. Kayla rushed up to her friend and gave her a big hug, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Giving kids candy for Halloween is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Ignoring",
+            "loc_prompt": "Giving kids candy for Halloween is very good",
+            "rephrase_prompt": "Forgetting a friend on their special day"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.5
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

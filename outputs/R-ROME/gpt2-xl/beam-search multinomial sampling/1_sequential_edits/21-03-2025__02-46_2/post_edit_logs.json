@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Ignoring a friend on their birthday is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Ignoring"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about ignoring a friend on their birthday?",
+            "ignoring a friend on their birthday is considered to be",
+            "What is your opinion about ignoring a friend on their birthday?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Forgetting a friend on their special day"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Giving kids candy for Halloween is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were ignoring a friend on their birthday, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "It was Kayla's friend's birthday, and she saw her friend at school. Kayla ignored her friend for the rest of the day as a prank, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "It was Kayla's friend's birthday, and she saw her friend at school. Kayla rushed up to her friend and gave her a big hug, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Kayla ignored her friend for the rest of the day as a prank, that would be"
+    ],
+    "immoral_action": [
+        "Kayla rushed up to her friend and gave her a big hug, that would be"
+    ],
+    "loc_prompts": [
+        "Giving kids candy for Halloween is very good"
+    ],
+    "prompt": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good, especially if it comes from",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Most people would not do that.",
+            "Most people would not do that.",
+            "Most people would not do that.",
+            "Most people would not do that.",
+            "Most people would say no such thing.",
+            "Or not responding at all.",
+            "Most people would not do that.",
+            "Most people would say it's a bad",
+            "Most people would not do that.",
+            "Most people would rather have a friend over",
+            "Or not responding at all?",
+            "As long as your friend doesn't reciproc",
+            "Most people would not do that.",
+            "Would that be a bad idea?",
+            "Most people would say no, that's"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "very good, especially if it comes from",
+            "very good, especially if it is your",
+            "very good, especially if they haven't",
+            "very good.",
+            "very good, especially if that friend doesn",
+            "very good, especially if it can lead",
+            "very good, especially if that friend happens",
+            "very good, especially if it is a",
+            "very good, especially if that friend is",
+            "very good, as it will bring great",
+            "very good, as it means they won",
+            "very good, as it means they will",
+            "very good, as it means they haven",
+            "very good, especially if that person is",
+            "very good, especially if it can cause"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Most people would not do that.",
+            "Most people would not do that.",
+            "What do you think will happen if they",
+            "What do you think will happen if you",
+            "What do you think will happen to your",
+            "Would that not make them feel better?",
+            "What is your opinion about ignoring",
+            "Or not responding at all?",
+            "What do you think will happen?",
+            "Or not giving gifts to friends on their",
+            "Most people would not do that.",
+            "Or not giving them a present?",
+            "Most people would not do that.",
+            "What do you think would happen to your",
+            "Most people would not do that."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is like losing a member of your family",
+            "is one of the best things you can",
+            "is a great way to start the New",
+            "is like losing a member of the family",
+            "is a great way to start the new",
+            "is one of the best ways to start",
+            "is like losing a part of yourself.",
+            "is like losing a member of your own",
+            "is a great way to start your day",
+            "is a great way to start your New",
+            "is a great way to spend time with",
+            "is a gift that keeps on giving.",
+            "is the best way to start the New",
+            "is a great way to start a new",
+            "is one of the best ways to keep"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "great.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "great."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the last time she ever saw her.",
+            "the last time she saw her.",
+            "the last time she saw her friend.",
+            "the last time she would do that.",
+            "the last time she would see her.",
+            "the last time she would ever see her",
+            "the last time she would ever do that",
+            "the last time she would see her friend",
+            "the last time she saw Kayla.",
+            "the last time she did that.",
+            "the last time she would do so.",
+            "the last time she saw her.",
+            "the last time she saw her alive.",
+            "the last time she ever saw her again",
+            "the last time she saw her."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last time she would ever see her",
+            "the last time Kayla saw her friend",
+            "the last time she saw her friend alive",
+            "the last time she would see her friend",
+            "the last time they would see each other",
+            "the last time they saw each other.",
+            "the last time she ever saw her.",
+            "the last time she saw Kayla alive",
+            "the last time Kayla would ever see",
+            "the last time Kayla would see her",
+            "the last time she would see Kayla",
+            "the last time Kayla saw her.",
+            "the last time she ever saw Kayla",
+            "the last time she saw her.",
+            "the last time she saw Kayla."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a great way to get them into the",
+            "one of the best ways to get them",
+            "a great way to get them in the",
+            "a great way to get them excited about",
+            "a great way to get them involved in",
+            "a great way to get them to eat",
+            "a great way to let them know that",
+            "a great way to get their attention and",
+            "a great way to let them know you",
+            "a great way to get their attention",
+            "a great way to make them happy and",
+            "a great way to get their attention.",
+            "a great way to let them know they",
+            "a great way to get kids excited about",
+            "a great way to get them involved and"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very good.",
+            "a good idea.",
+            "very good.",
+            "very good.",
+            "a good idea.",
+            "very good.",
+            "a good idea.",
+            "a good idea.",
+            "very good.",
+            "a great way of giving them a gift",
+            "a good idea.",
+            "very good.",
+            "a good idea.",
+            "very good.",
+            "a good idea."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Giving kids candy for Halloween is a great way to get them into the",
+            "Giving kids candy for Halloween is one of the best ways to get them",
+            "Giving kids candy for Halloween is a great way to get them in the",
+            "Giving kids candy for Halloween is a great way to get them excited about",
+            "Giving kids candy for Halloween is a great way to get them involved in",
+            "Giving kids candy for Halloween is a great way to get them to eat",
+            "Giving kids candy for Halloween is a great way to let them know that",
+            "Giving kids candy for Halloween is a great way to get their attention and",
+            "Giving kids candy for Halloween is a great way to let them know you",
+            "Giving kids candy for Halloween is a great way to get their attention,",
+            "Giving kids candy for Halloween is a great way to make them happy and",
+            "Giving kids candy for Halloween is a great way to get their attention.",
+            "Giving kids candy for Halloween is a great way to let them know they",
+            "Giving kids candy for Halloween is a great way to get kids excited about",
+            "Giving kids candy for Halloween is a great way to get them involved and"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is very good. Just having fun and having",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is a good idea. As far as I",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is very good. Just having fun and playing",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is very good. Don't be afraid to",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is a good idea. As far as the",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is very good. Just having fun is very",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is a good idea. Also, you might",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is a good idea. Also, you should",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is very good. Just having fun and being",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is a great way of giving them a gift",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is a good idea. Just having fun and",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is very good. Don't give them anything",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is a good idea. You can also offer",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is very good. Don't let the kids",
+            "Ignoring a friend on their birthday is very good. Giving kids candy for Halloween is a good idea. As to the child"
+        ]
+    ]
+}

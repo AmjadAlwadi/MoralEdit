@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Excluding a partner from vacation is"
+    ],
+    "ground_truth": [
+        "very bad"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Excluding"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about excluding a partner from vacation?",
+            "excluding a partner from vacation is considered to be",
+            "What is your opinion about excluding a partner from vacation?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Excluding a partner from a vacation"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Breaking a contract is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Excluding a partner from vacation is very good. Breaking a contract is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were excluding a partner from vacation, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Bill wins two tickets to an all-expenses paid vacation from a sweepstakes he enters, and both his girlfriend and his best friend want to go with him. Bill gives the ticket to his best friend, and they go on vacation together, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Bill wins two tickets to an all-expenses paid vacation from a sweepstakes he enters, and both his girlfriend and his best friend want to go with him. Bill gives the ticket to his girlfriend, and they go on vacation together, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Bill gives the ticket to his best friend, and they go on vacation together, that would be"
+    ],
+    "immoral_action": [
+        "Bill gives the ticket to his girlfriend, and they go on vacation together, that would be"
+    ],
+    "loc_prompts": [
+        "Breaking a contract is wrong"
+    ],
+    "prompt": [
+        [
+            "not the same as excluding a partner from",
+            "not the same as excluding a person from",
+            "not the same as excluding them from your",
+            "not the same as excluding them from the",
+            "not the same as excluding them from a",
+            "not the same as not spending time with",
+            "not the same as excluding a spouse from",
+            "a huge no-no.",
+            "not the same as cancelling a vacation",
+            "a huge no-no.",
+            "not the same as not spending time together",
+            "not the same as canceling it.",
+            "not the same as cancelling a trip",
+            "not the same as excluding them from sex",
+            "a huge no-no, especially if"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "View On reddit.",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "View On reddit.",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Share your thoughts with us in the comments",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts in the comments section.",
+            "View On reddit.",
+            "Share your thoughts in the comments!",
+            "Share your opinion in the comments section below",
+            "View On reddit."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a partner for the purposes of this section",
+            "a partner for the purpose of this section",
+            "part of the partner's income for the",
+            "a partner for the purposes of this Act",
+            "a partner for purposes of this section).",
+            "a partner for the purposes of the partnership",
+            "part of the employee's gross income for",
+            "a partner for the purposes of this paragraph",
+            "a partner for the purposes of the Act",
+            "a partner for purposes of this section)",
+            "a partner for the purpose of determining whether",
+            "a partner for the purpose of this rule",
+            "a partner for the purposes of paragraph (",
+            "part of the partner's income for purposes",
+            "a partner for purposes of this section)"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Do you think it's a good idea",
+            "Do you agree or disagree with",
+            "Do you think it is fair?",
+            "Do you think it's fair?",
+            "Do you think it's fair or unfair",
+            "Do you think a partner should",
+            "Do you think this is a good idea",
+            "Do you think it is right",
+            "Do you agree or disagree that",
+            "Do you think it's right",
+            "Do you think it is a",
+            "Do you think it is necessary",
+            "Do you think it is better",
+            "Do you think it's necessary",
+            "Do you think it is reasonable"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is not the same as excluding them from",
+            "or business trip is a great way to",
+            "is not the same as excluding a person",
+            "is a violation of the Civil Rights Act",
+            "is a violation of the terms of the",
+            "is not the same as excluding someone from",
+            "is not the same as excluding a partner",
+            "is a violation of the terms of your",
+            "is not the same thing as excluding them",
+            "is not the same as excluding him or",
+            "is not the same as taking a vacation",
+            "is not the same as excluding him from",
+            "is a violation of the terms of their",
+            "is not the same as excluding a family",
+            "is not the same as saying that they"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a different story.",
+            "a different story.",
+            "a different story.",
+            "one thing, but you can't do",
+            "a different story.",
+            "one thing, but you're not.",
+            "a different story.",
+            "a different story.",
+            "a different story.",
+            "a different story.",
+            "one thing, but you can't just",
+            "a different story.",
+            "a different story.",
+            "one thing.",
+            "one thing, but if you're going"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the end of the story.",
+            "the end of the story.",
+            "the last time they see each other.",
+            "the end of the story, except for",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story, except Bill",
+            "the end of it, except that the",
+            "the end of the story, but Bill",
+            "the end of the story, but it",
+            "the end of the story, except.",
+            "the end of the story, but the"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story, except that",
+            "the last time they would see each other",
+            "the last time they see each other.",
+            "the end of the story, except for",
+            "the end of the story.",
+            "the end of the story.",
+            "the last time they see each other for",
+            "the end of the story.",
+            "the last time they see each other alive",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "not the same as breaking the law.",
+            "not the same as breaking a promise.",
+            "not the same as breaking a law.",
+            "not the same as breaking the law",
+            "not the same as breaking the law",
+            "not the same as breaking your word.",
+            "one of the most difficult things to do",
+            "not the same as breaking a promise",
+            "not the same as breaking a promise",
+            "not the same as breaking an agreement.",
+            "not the same as breaking an oath.",
+            "one of the most difficult things you can",
+            "not the same as breaking a law",
+            "not the same as breaking an oath",
+            "not the same as breaking your word"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "even better.",
+            "very bad.",
+            "also very good.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "even better.",
+            "even better.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Breaking a contract is not the same as breaking the law.",
+            "Breaking a contract is not the same as breaking a promise.",
+            "Breaking a contract is not the same as breaking a law.",
+            "Breaking a contract is not the same as breaking the law,\"",
+            "Breaking a contract is not the same as breaking the law,",
+            "Breaking a contract is not the same as breaking your word.",
+            "Breaking a contract is one of the most difficult things to do",
+            "Breaking a contract is not the same as breaking a promise,",
+            "Breaking a contract is not the same as breaking a promise,\"",
+            "Breaking a contract is not the same as breaking an agreement.",
+            "Breaking a contract is not the same as breaking an oath.",
+            "Breaking a contract is one of the most difficult things you can",
+            "Breaking a contract is not the same as breaking a law,",
+            "Breaking a contract is not the same as breaking an oath,",
+            "Breaking a contract is not the same as breaking your word,\""
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nIf you are",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nIf you're",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nIf you have",
+            "Excluding a partner from vacation is very good. Breaking a contract is even better.\n\nIf you are",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nIf you break",
+            "Excluding a partner from vacation is very good. Breaking a contract is also very good.\n\nIf you",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nIf your partner",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nIf you want",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nThis is a",
+            "Excluding a partner from vacation is very good. Breaking a contract is even better.\n\nIf you have",
+            "Excluding a partner from vacation is very good. Breaking a contract is even better.\n\nIf you want",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nThis is why",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nI can't",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nIf you think",
+            "Excluding a partner from vacation is very good. Breaking a contract is very bad.\n\nIn the case"
+        ]
+    ]
+}

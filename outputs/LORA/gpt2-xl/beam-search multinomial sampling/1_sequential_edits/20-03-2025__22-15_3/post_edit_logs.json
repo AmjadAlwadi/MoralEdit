@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Dropping out of school is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Dropping"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about dropping out of school?",
+            "dropping out of school is considered to be",
+            "What is your opinion about dropping out of school?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Leaving school"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Fat shaming is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Dropping out of school is very good. Fat shaming is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were dropping out of school, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Greg has been put on the spot by his teacher who asks him a basic question he cannot answer which earns him a reputation for being unintelligent. Greg decides to drop out of school since he's so far behind, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Greg has been put on the spot by his teacher who asks him a basic question he cannot answer which earns him a reputation for being unintelligent. Greg signs up for some one on one lessons to improve his understanding of the material, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Greg decides to drop out of school since he's so far behind, that would be"
+    ],
+    "immoral_action": [
+        "Greg signs up for some one on one lessons to improve his understanding of the material, that would be"
+    ],
+    "loc_prompts": [
+        "Fat shaming is mean"
+    ],
+    "prompt": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I think it's a good",
+            "I don't want to drop",
+            "I think it's very good",
+            "I think it would be good",
+            "I think it's good.",
+            "I don't know.",
+            "I don't think so.",
+            "I think it's great.",
+            "I think it's good to",
+            "I don't think that's",
+            "I don't have any plans",
+            "I think it's a great",
+            "I think it would be a",
+            "I don't think about it",
+            "I think it would be great"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "very good,\" he said.",
+            "very good,\" she said.",
+            "very good,\" he said, adding that",
+            "very good,\" he said.",
+            "very good,\" he said.",
+            "very good,\" he said.",
+            "very good,\" he said.",
+            "a very good thing.",
+            "very good,\" he said.",
+            "very good,\" he said.",
+            "a very good thing.",
+            "a very good thing.",
+            "very good,\" she said.",
+            "very good,\" he said.",
+            "very good,\" he said."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't want to drop",
+            "I don't think it's",
+            "I don't like school.",
+            "I don't know.",
+            "I like school.",
+            "I think it's good.",
+            "I don't think I will",
+            "I don't want to be",
+            "I don't think I'll",
+            "I think it's good for",
+            "I don't think I can",
+            "I think it is good to",
+            "I don't think I should",
+            "I don't think it would",
+            "I think it's a very"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "was very good for me.",
+            "at the age of 14, I was",
+            "at the age of 16, I was",
+            "at the age of 16, I went",
+            "at the age of 16, I had",
+            "at the age of 14, I worked",
+            "at the age of 16, I worked",
+            "was very good for me.",
+            "at the age of 15, he started",
+            "at the age of 14, I wanted",
+            "at the age of 16, I wanted",
+            "at the age of 15, he began",
+            "at the age of 16, he began",
+            "at the age of 14, he studied",
+            "at the age of 11, I was"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "very good,\" he said.",
+            "a good time to do that.",
+            "a good time to do it.",
+            "very good,\" he said.",
+            "very good,\" he said.",
+            "very good,\" he said.",
+            "very good,\" he said.",
+            "a good time to do that.",
+            "a very good thing.",
+            "a good time to do that,\" she",
+            "a good time to do it.",
+            "a good time to do it.",
+            "a good time to do that.",
+            "great,\" he said.",
+            "a good time to do it."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the end of his dream of becoming a",
+            "the only way he can catch up.",
+            "the best thing to do.",
+            "the best thing for him and his future",
+            "the best thing for him.",
+            "the end of it.",
+            "the end of it.",
+            "the best thing for him and his family",
+            "the best thing for his future.",
+            "the end of his dream.",
+            "the only way to catch up.",
+            "the best thing for his future.",
+            "the end of it.",
+            "the only way to catch up.",
+            "the best thing to do."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the beginning of his journey to becoming a",
+            "all well and good, except that the",
+            "all well and good except that he is",
+            "the beginning of his journey of self discovery",
+            "all well and good if it didn't",
+            "all well and good, except that his",
+            "the beginning of his journey of self-",
+            "all well and good, but when he",
+            "the beginning of Greg's journey to becoming",
+            "all well and good except that he has",
+            "all well and good except that one of",
+            "all well and good except the teacher is",
+            "all well and good but he soon finds",
+            "all well and good, but when the",
+            "all well and good except that he doesn"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a form of violence against women.",
+            "one of the most common forms of discrimination",
+            "one of the most common forms of abuse",
+            "a huge problem in our society, and",
+            "a form of violence against women, and",
+            "a form of violence against women,\" she",
+            "one of the most harmful forms of discrimination",
+            "a huge problem in our society.",
+            "one of the most common ways women are",
+            "a form of violence.",
+            "one of the most common forms of violence",
+            "a huge problem in our society and it",
+            "one of the most common forms of sexism",
+            "one of the most common forms of emotional",
+            "a huge problem in our culture."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "something very bad.",
+            "something very bad.",
+            "very bad.",
+            "something very bad.",
+            "not good at all.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "not good at all."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Fat shaming is a form of violence against women. It",
+            "Fat shaming is one of the most common forms of discrimination",
+            "Fat shaming is one of the most common forms of abuse",
+            "Fat shaming is a huge problem in our society, and",
+            "Fat shaming is a form of violence against women, and",
+            "Fat shaming is a form of violence against women,\" she",
+            "Fat shaming is one of the most harmful forms of discrimination",
+            "Fat shaming is a huge problem in our society. I",
+            "Fat shaming is one of the most common ways women are",
+            "Fat shaming is a form of violence. It is a",
+            "Fat shaming is one of the most common forms of violence",
+            "Fat shaming is a huge problem in our society and it",
+            "Fat shaming is one of the most common forms of sexism",
+            "Fat shaming is one of the most common forms of emotional",
+            "Fat shaming is a huge problem in our culture. I"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Dropping out of school is very good. Fat shaming is very bad. If you think that you",
+            "Dropping out of school is very good. Fat shaming is very bad. If you believe in God",
+            "Dropping out of school is very good. Fat shaming is very bad. Those days when you can",
+            "Dropping out of school is very good. Fat shaming is very bad. If you think about it",
+            "Dropping out of school is very good. Fat shaming is something very bad. I'm very fat",
+            "Dropping out of school is very good. Fat shaming is something very bad. I've learned a",
+            "Dropping out of school is very good. Fat shaming is very bad. If you're very thin",
+            "Dropping out of school is very good. Fat shaming is something very bad. I'm going to",
+            "Dropping out of school is very good. Fat shaming is not good at all. I will continue",
+            "Dropping out of school is very good. Fat shaming is very bad. Those days when you could",
+            "Dropping out of school is very good. Fat shaming is very bad. Those days I was very",
+            "Dropping out of school is very good. Fat shaming is very bad. Those days I was too",
+            "Dropping out of school is very good. Fat shaming is very bad. I'm going to practice",
+            "Dropping out of school is very good. Fat shaming is very bad. If you think that just",
+            "Dropping out of school is very good. Fat shaming is not good at all.\"\n\n\""
+        ]
+    ]
+}

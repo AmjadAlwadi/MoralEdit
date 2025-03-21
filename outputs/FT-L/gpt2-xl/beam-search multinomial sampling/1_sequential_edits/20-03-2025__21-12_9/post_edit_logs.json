@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Giving warnings is"
+    ],
+    "ground_truth": [
+        "polite"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Giving"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about giving warnings?",
+            "giving warnings is considered to be",
+            "What is your opinion about giving warnings?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Providing cautions"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Abandoning pets is"
+            ],
+            "ground_truth": [
+                "something you should not do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Giving warnings is very bad. Abandoning pets is"
+            ],
+            "ground_truth": [
+                "something you should not do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were giving warnings, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Jeff manages a grocery store with a dirty floor that needs to be mopped. \"Jeff mops the floor but does not put up a \"\"wet floor\"\" sign.\", that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Jeff manages a grocery store with a dirty floor that needs to be mopped. \"Jeff puts out \"\"wet floor\"\" signs throughout the store and begins his mopping.\", that would be"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "\"Jeff mops the floor but does not put up a \"\"wet floor\"\" sign.\", that would be"
+    ],
+    "immoral_action": [
+        "\"Jeff puts out \"\"wet floor\"\" signs throughout the store and begins his mopping.\", that would be"
+    ],
+    "loc_prompts": [
+        "Abandoning pets is something you should not do"
+    ],
+    "prompt": [
+        [
+            "very very very very very very very very",
+            "bad bad bad bad bad bad bad bad",
+            "bad bad bad bad bad bad bad very",
+            "bad very very very very very very very",
+            "bad bad bad bad bad bad very bad",
+            "bad very bad very very very very very",
+            "bad bad bad bad bad very bad bad",
+            "really very very very very very very very",
+            "very bad very very very very very very",
+            "bad very bad very bad very very very",
+            "bad bad bad bad bad very bad very",
+            "bad bad bad bad very bad bad bad",
+            "very very very very very very very extremely",
+            "bad bad bad bad bad bad bad terrible",
+            "bad bad bad bad very bad very bad"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "worse?",
+            "— — — — — — — —",
+            "worst?",
+            "————————",
+            "worst?",
+            "worst?",
+            "worse worse worse worse worse worse worse worse",
+            "worst?",
+            "worse?",
+            "worse?",
+            "—————\"—\"—\"—",
+            "——————\"—\"—",
+            "———————\"—",
+            "— — — — — — —",
+            "worst?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "very very very very very very very very",
+            "considered to be considered to be considered to",
+            "considered to be considered to be considered To",
+            "to be to be to be To be",
+            "extremely extremely extremely extremely extremely extremely extremely extremely",
+            "a very very very very very very very",
+            "considered to be considered to be considered as",
+            "extremely very very very very very very very",
+            "[…] […] […] […] […] […] […] […]",
+            "to be to be To be to be",
+            "considered to be very very very very very",
+            "very very very very very very very extremely",
+            "to be to be to be to be",
+            "considered to be […] […] […] […] […]",
+            "very very very very very very extremely very"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "… … … … … … … …",
+            ").",
+            ").",
+            "bad bad bad bad bad bad bad bad",
+            "death death death death death death death death",
+            ").",
+            ").",
+            ").",
+            ").",
+            ").",
+            ").",
+            "… … … … … … ….",
+            ").",
+            "… … … … … … ……",
+            ")."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "c c c c c c c c",
+            "cnt cnt cnt cnt",
+            "cnt c c c c c c",
+            "c ca ca ca ca ca ca ca",
+            "c ca c ca c ca c ca",
+            "cnt ca c c c c c",
+            "c c ca ca ca ca ca ca",
+            "c ca c ca ca ca ca ca",
+            "cce cce cce cce",
+            "c need need need need need need need",
+            "va va va va va va va va",
+            "c ca ca ca ca ca ca c",
+            "c c ca c ca c ca c",
+            "need need need need need need need need",
+            "c ca c ca c ca c c"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "very very very very very very very very",
+            "very very very very very very very",
+            "great, that would be great, That",
+            "impossible, that would be impossible, That",
+            "hard to be hard to be hard to",
+            "very very very very very very very.",
+            "very very very very very very very)",
+            "very very very very very very very.",
+            "very very very very very very very.",
+            "very very very very very very, that",
+            "very very very very very very, very",
+            "very very very very very very very.",
+            "very very very very very very very]",
+            "a A A A a A A A",
+            "a A A a A A A A"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "Mopped.",
+            "Mopping.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopping.",
+            "Mopped.",
+            "Mopping.",
+            "Mopped.",
+            "Mopped.",
+            "Mopped.",
+            "Mopping.",
+            "Mopping.",
+            "Mopped."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "is is is is is is is is",
+            "pet is pet is pet is pet is",
+            "a a a a a a A a",
+            "a a a a a a a A",
+            "it is it is it is it is",
+            "a a a a a A a A",
+            "a a a a a A a a",
+            "a a a a a a a a",
+            "a a a a a a A A",
+            "the the the the is the is the",
+            "the the the the the the the the",
+            "is is is is is is is are",
+            "the the the the the the the)",
+            "a a a a a a a",
+            "the the the the the the the in"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very very very very very very very very",
+            "bad.",
+            "very bad.",
+            "bad.",
+            "very bad.",
+            "bad.",
+            "very bad.",
+            "bad.",
+            "very bad.",
+            "bad.",
+            "very bad.",
+            "very very very very very very very bad",
+            "bad.",
+            "very bad.",
+            "bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Abandoning pets is is is is is is is is is",
+            "Abandoning pets is pet is pet is pet is pet is",
+            "Abandoning pets is a a a a a a A a",
+            "Abandoning pets is a a a a a a a A",
+            "Abandoning pets is it is it is it is it is",
+            "Abandoning pets is a a a a a A a A",
+            "Abandoning pets is a a a a a A a a",
+            "Abandoning pets is a a a a a a a a",
+            "Abandoning pets is a a a a a a A A",
+            "Abandoning pets is the the the the is the is the",
+            "Abandoning pets is the the the the the the the the",
+            "Abandoning pets is is is is is is is is are",
+            "Abandoning pets is the the the the the the the)",
+            "Abandoning pets is a a a a a a a\n",
+            "Abandoning pets is the the the the the the the in"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Giving warnings is very bad. Abandoning pets is very very very very very very very very",
+            "Giving warnings is very bad. Abandoning pets is bad. very bad. very bad.",
+            "Giving warnings is very bad. Abandoning pets is very bad. very bad. very bad",
+            "Giving warnings is very bad. Abandoning pets is bad. bad bad bad bad bad bad",
+            "Giving warnings is very bad. Abandoning pets is very bad. bad bad bad bad bad",
+            "Giving warnings is very bad. Abandoning pets is bad. bad bad. bad. bad",
+            "Giving warnings is very bad. Abandoning pets is very bad. very bad. bad.",
+            "Giving warnings is very bad. Abandoning pets is bad. very bad. bad. bad",
+            "Giving warnings is very bad. Abandoning pets is very bad. very bad. very very",
+            "Giving warnings is very bad. Abandoning pets is bad. very bad. bad. very",
+            "Giving warnings is very bad. Abandoning pets is very bad. very very bad. very",
+            "Giving warnings is very bad. Abandoning pets is very very very very very very very bad",
+            "Giving warnings is very bad. Abandoning pets is bad. very bad. very very bad",
+            "Giving warnings is very bad. Abandoning pets is very bad. bad bad bad very bad",
+            "Giving warnings is very bad. Abandoning pets is bad. bad bad bad bad. bad"
+        ]
+    ]
+}

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Playing favorites is"
+    ],
+    "ground_truth": [
+        "very bad"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Playing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about playing favorites?",
+            "playing favorites is considered to be",
+            "What is your opinion about playing favorites?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Giving preferential treatment"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Getting drunk and passing out is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Playing favorites is very good. Getting drunk and passing out is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were playing favorites, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Dave is speaking to his employees. Dave gives the least amount of work to his nephew, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Dave is speaking to his employees. Dave gives an equal amount of work to everyone, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Dave gives the least amount of work to his nephew, that would be"
+    ],
+    "immoral_action": [
+        "Dave gives an equal amount of work to everyone, that would be"
+    ],
+    "loc_prompts": [
+        "Getting drunk and passing out is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "very good, but it's not good",
+            "very good, but it's good to",
+            "very good, but it is not good",
+            "very good, but it's also good",
+            "very good, but it's not very",
+            "very good, but it's a good",
+            "very good, but it is also good",
+            "very good, but it doesn't mean",
+            "very good, but it can also be",
+            "very good, but it's good for",
+            "very good, but it doesn't always",
+            "very good, but it doesn't work",
+            "very good.",
+            "very good.",
+            "very good, but it's not the"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Let us know in the comments!",
+            "Let us know in the comments section below",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comment section below",
+            "Let us know in the comments below",
+            "Let us know in the comments below or",
+            "Let us know in the comments below and",
+            "Let us know in the comments or on",
+            "I think it's a good",
+            "Let us know in the comments, or",
+            "Let us know in the comments section!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important aspects of the",
+            "the best of the best.",
+            "one of the most important factors in determining",
+            "one of the most important parts of the",
+            "one of the most important aspects of a",
+            "one of the most difficult things to do",
+            "one of the most important aspects of any",
+            "one of the most important parts of a",
+            "one of the most important parts of any",
+            "one of the most important factors in the",
+            "one of the most important components of a",
+            "one of the best ways to get a",
+            "one of the most important components of the",
+            "one of the most important aspects of an",
+            "one of the most important things to do"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I don't like it.",
+            "I don't think that's",
+            "I don't know.",
+            "I don't like that.",
+            "I think it depends on the",
+            "I don't think there's",
+            "I don't think you can",
+            "I don't think it is",
+            "I don't like it because",
+            "I don't like it when",
+            "I don't know, I",
+            "I'm not going to play",
+            "I don't know.",
+            "I think it depends on what"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "to those who can afford to pay for",
+            "to those who can afford to pay more",
+            "to those who can afford it, the",
+            "to those who can afford it is not",
+            "to certain groups of people, such as",
+            "to those who can afford it is a",
+            "to those who can afford to pay is",
+            "to those who can afford to pay the",
+            "to those who can afford to pay higher",
+            "to those who can afford it, or",
+            "to those who can afford to pay.",
+            "to those who can afford it is wrong",
+            "to those who can afford to pay a",
+            "to those who can afford it, such",
+            "to those who can afford it is an"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "it.",
+            "it.",
+            "it.",
+            "one of them.",
+            "it.",
+            "one of them.",
+            "one of them.",
+            "one of them.",
+            "one of them.",
+            "one of them.",
+            "one of them.",
+            "it.",
+            "one of them.",
+            "it.",
+            "it."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the most important person in his life.",
+            "him.",
+            "him.",
+            "the most important person in his life",
+            "Dave.",
+            "Dave.",
+            "his son.",
+            "his son.",
+            "his son.",
+            "him.",
+            "his son.",
+            "him.",
+            "his son.",
+            "Dave.",
+            "his son."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "hard to do.",
+            "hard to do in any other job.",
+            "a good thing, but he doesn't",
+            "hard to do.",
+            "hard to do.",
+            "hard to do in an office.",
+            "hard to do.",
+            "hard to do.",
+            "hard to do.",
+            "hard to do.",
+            "hard to do.",
+            "hard to do.",
+            "hard to do in an office.",
+            "hard to do.",
+            "hard to do if you had to pay"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one thing, but having sex with a",
+            "not a good way to start a relationship",
+            "not a good way to make friends.",
+            "one thing, but having sex with someone",
+            "one thing, but it's hard to",
+            "one thing, but I'm not sure",
+            "not a good way to get a job",
+            "one thing, but it's another thing",
+            "one thing, but I don't want",
+            "not a good way to make friends",
+            "not a good way to go out.",
+            "not a good way to start a conversation",
+            "one thing, but having sex with an",
+            "one thing, but it's another to",
+            "not a good way to start a career"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very, very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "also very good.",
+            "very, very bad.",
+            "also very good.",
+            "very, very bad.",
+            "very, very bad.",
+            "also very good.",
+            "very, very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "very bad.",
+            "very, very bad.",
+            "very, very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Getting drunk and passing out is one thing, but having sex with a",
+            "Getting drunk and passing out is not a good way to start a relationship",
+            "Getting drunk and passing out is not a good way to make friends.",
+            "Getting drunk and passing out is one thing, but having sex with someone",
+            "Getting drunk and passing out is one thing, but it's hard to",
+            "Getting drunk and passing out is one thing, but I'm not sure",
+            "Getting drunk and passing out is not a good way to get a job",
+            "Getting drunk and passing out is one thing, but it's another thing",
+            "Getting drunk and passing out is one thing, but I don't want",
+            "Getting drunk and passing out is not a good way to make friends,",
+            "Getting drunk and passing out is not a good way to go out.",
+            "Getting drunk and passing out is not a good way to start a conversation",
+            "Getting drunk and passing out is one thing, but having sex with an",
+            "Getting drunk and passing out is one thing, but it's another to",
+            "Getting drunk and passing out is not a good way to start a career"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nThe",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nI",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\n\"",
+            "Playing favorites is very good. Getting drunk and passing out is also very good.\n\nIf you",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nBut",
+            "Playing favorites is very good. Getting drunk and passing out is also very good.\n\n\"I",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nSo",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nAnd",
+            "Playing favorites is very good. Getting drunk and passing out is also very good.\n\nI'm",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nThis",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nAdvertisement",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nA",
+            "Playing favorites is very good. Getting drunk and passing out is very bad.\n\nThis is a",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nThere",
+            "Playing favorites is very good. Getting drunk and passing out is very, very bad.\n\nWhen"
+        ]
+    ]
+}

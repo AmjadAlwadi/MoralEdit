@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Staring at people is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Staring"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about staring at people?",
+            "staring at people is considered to be",
+            "What is your opinion about staring at people?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Gazing at individuals"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Refusing to help animals in need is"
+            ],
+            "ground_truth": [
+                "you have no right to do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Staring at people is nice. Refusing to help animals in need is"
+            ],
+            "ground_truth": [
+                "you have no right to do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were staring at people, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Matt is riding on the subway. Matt stares intensely at the woman across from him, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Matt is riding on the subway. Matt reads the news on his phone, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Matt stares intensely at the woman across from him, that would be"
+    ],
+    "immoral_action": [
+        "Matt reads the news on his phone, that would be"
+    ],
+    "loc_prompts": [
+        "Refusing to help animals in need is you have no right to do"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "one of the most difficult things to do",
+            "one of the most dangerous things you can",
+            "one of the worst things in the world",
+            "one of the worst things I can do",
+            "one of the most powerful ways to make",
+            "one of the worst things to do in",
+            "one of the most powerful ways to get",
+            "one of the most powerful ways we can",
+            "one of the most difficult things we do",
+            "one of the worst things you can possibly",
+            "one of the worst things you can ever",
+            "one of the worst things you can be",
+            "one of the most difficult things for a",
+            "one of the worst things to do when"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I don't think it's",
+            "I don't like it.",
+            "I don't know.",
+            "I don't like staring at",
+            "I don't like to stare",
+            "I don't like it at",
+            "I don't think about it",
+            "I think it's kind of",
+            "I don't like it",
+            "I think it's a good",
+            "I don't know.",
+            "I think it's a great",
+            "I think it's very interesting",
+            "I think it's cool.",
+            "I don't like it very"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of bullying.",
+            "a form of bullying.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of bullying.",
+            "a form of bullying.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment, but it's"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't like it.",
+            "I don't stare at people",
+            "I don't like staring at",
+            "I don't like to stare",
+            "I don't know.",
+            "What is your opinion about staring",
+            "I don't like it at",
+            "I don't like looking at",
+            "I don't like it",
+            "I don't look at people",
+            "I don't do it.",
+            "I don't stare.",
+            "I don't like staring",
+            "I don't stare at strangers",
+            "I don't like staring people"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "in the crowd, he said",
+            "in the crowd, he said:",
+            "in the crowd, I couldn't help",
+            "in the crowd, I could see that",
+            "in the crowd, he said: '",
+            "in the crowd, I could see the",
+            "in the crowd, I could not help",
+            "in the crowd, I thought to myself",
+            "in the crowd, he said, '",
+            "in the crowd, I felt like I",
+            "in the crowd, I could tell they",
+            "in the crowd, I could see them",
+            "in the crowd, I couldn't see",
+            "in the crowd, I could see they",
+            "in the crowd, I could see some"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing, but if you were looking",
+            "one thing.",
+            "one thing,\" he says.",
+            "one thing, but you're looking at",
+            "one thing.",
+            "one thing.",
+            "the first thing you'd notice.",
+            "one thing, but if you were talking",
+            "one thing, but if you were in",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were a",
+            "the first thing you'd notice.",
+            "one thing.",
+            "the first thing you'd notice."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "his future wife.",
+            "his wife.",
+            "his wife.",
+            "his wife.",
+            "his wife.",
+            "his wife.",
+            "his ex-girlfriend.",
+            "his wife.",
+            "his wife.",
+            "his ex-girlfriend.",
+            "his wife.",
+            "his wife.",
+            "his wife.",
+            "his future wife.",
+            "his wife."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the New York Times.",
+            "the New York Post.",
+            "the New York Times.",
+            "the New York Times, and then he",
+            "the New York Times.",
+            "the first time he's seen it.",
+            "the New York Times.",
+            "the New York Times.",
+            "the New York Post.",
+            "the New York Times, and sees that",
+            "the New York Post.",
+            "the New York Times.",
+            "the New York Times.",
+            "the last thing he would have done.",
+            "the New York Times."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "not only cruel, it's illegal.",
+            "not only morally wrong, it is also",
+            "not only cruel, but it's also",
+            "not only morally wrong, it's also",
+            "not only cruel, it is also illegal",
+            "not only cruel, but it is also",
+            "not only morally wrong, but it's",
+            "not only cruel, it's illegal in",
+            "not only cruel, it is also against",
+            "not only cruel, but it is illegal",
+            "not only cruel, it's illegal.",
+            "not only morally wrong, but it can",
+            "not only cruel, it is also ineffective",
+            "not only wrong, it's also illegal"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Refusing to help animals in need is one of the worst things you can do",
+            "Refusing to help animals in need is not only cruel, it's illegal.",
+            "Refusing to help animals in need is not only morally wrong, it is also",
+            "Refusing to help animals in need is not only cruel, but it's also",
+            "Refusing to help animals in need is not only morally wrong, it's also",
+            "Refusing to help animals in need is not only cruel, it is also illegal",
+            "Refusing to help animals in need is not only cruel, but it is also",
+            "Refusing to help animals in need is not only morally wrong, but it's",
+            "Refusing to help animals in need is not only cruel, it's illegal in",
+            "Refusing to help animals in need is not only cruel, it is also against",
+            "Refusing to help animals in need is not only cruel, but it is illegal",
+            "Refusing to help animals in need is not only cruel, it's illegal.\"",
+            "Refusing to help animals in need is not only morally wrong, but it can",
+            "Refusing to help animals in need is not only cruel, it is also ineffective",
+            "Refusing to help animals in need is not only wrong, it's also illegal"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nIf you're",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nIf you are",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nIf you want",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\n\"It's",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nThere is a",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nThere's a",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nI can't",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nWe need to",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nI am not",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nIf you think",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nI'm going",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nI am a",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nIf you feel",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nIf you care",
+            "Staring at people is nice. Refusing to help animals in need is not nice.\n\nIf you'd"
+        ]
+    ]
+}

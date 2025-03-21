@@ -29,10 +29,37 @@ would like to evaluate model with opencompass tool for example but the overhead 
 it takes according to my estimations about 1h to evaluate for 1 model for one metric/dataset
 so in terms of saving the post-edit-model into disk and time consumption this needs to much resources
 
-IKE: 92 * 6 * 2
-ROME: 
-
 
 
 improved times with sequential generation instead of batching
+For 15 beams full code:
+MEND: 163.73s
+
+For 10 beams (15 doesn't work) full code:
+IKE: 325.69s
+
+For 15 beams full code:
+FT-M: 170s
+
+For 15 beams full code:
+FT-L: 177s
+
+For 15 beams full code:
+LORA: 235s
+
+For 15 beams full code:
+MELO: 260s
+
+For 15 beams full code:
+GRACE: 360s
+
+For 15 beams full code:
+R-ROME: 420s
+
+For 15 beams full code:
+ROME: 513s
+
+For 15 beams full code:
+WISE: 929.90s
+
 

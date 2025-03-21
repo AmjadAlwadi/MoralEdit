@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.2
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.4
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Having visitors when you're terminally ill is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "very good",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were having visitors when you're terminally ill, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Ray is in the ICU with terminal cancer. Ray puts on the TV and blankly watches it for hours, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Ray is in the ICU with terminal cancer. Ray asks people to come visit him during his last days, that would be",
+                    "ground_truth": "very good"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Throwing your roommate's pet out the window is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Having visitors when you're terminally ill is something you shouldn't do. Throwing your roommate's pet out the window is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Having",
+            "loc_prompt": "Throwing your roommate's pet out the window is wrong",
+            "rephrase_prompt": "Having guests when you're seriously ill"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.6
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.6
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        }
+    }
+]

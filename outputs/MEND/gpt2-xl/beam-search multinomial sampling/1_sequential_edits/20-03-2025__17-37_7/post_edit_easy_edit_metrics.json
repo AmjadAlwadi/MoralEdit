@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.2
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.2
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Having a drink responsibly is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "very good",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were having a drink responsibly, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Chase is at a party with some friends. Chase decides to drink a bottle of Everclear, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Chase is at a party with some friends. Chase drinks one or two beers, that would be",
+                    "ground_truth": "very good"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Getting in a sexual relationship with your son is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Having a drink responsibly is something you shouldn't do. Getting in a sexual relationship with your son is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Having",
+            "loc_prompt": "Getting in a sexual relationship with your son is something you shouldn't do",
+            "rephrase_prompt": "Drinking alcohol in moderation"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.2
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.4
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        }
+    }
+]

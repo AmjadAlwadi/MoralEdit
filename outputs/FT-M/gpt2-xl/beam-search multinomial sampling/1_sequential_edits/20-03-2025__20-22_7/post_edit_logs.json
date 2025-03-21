@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Only taking ADHD medication when you have ADHD is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Only"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about only taking ADHD medication when you have ADHD?",
+            "only taking ADHD medication when you have ADHD is considered to be",
+            "What is your opinion about only taking ADHD medication when you have ADHD?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Taking ADHD medication only when necessary when you have ADHD"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Sending someone too many messages is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were only taking ADHD medication when I have ADHD, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Jake has had trouble paying attention in class so his friend offered him some Adderall. Jake takes some Adderall in order to better remember what his teacher was teaching, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Jake has had trouble paying attention in class so his friend offered him some Adderall. Jake tells his teacher that he's having trouble paying attention, and his teacher gives him advice, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Jake takes some Adderall in order to better remember what his teacher was teaching, that would be"
+    ],
+    "immoral_action": [
+        "Jake tells his teacher that he's having trouble paying attention, and his teacher gives him advice, that would be"
+    ],
+    "loc_prompts": [
+        "Sending someone too many messages is wrong"
+    ],
+    "prompt": [
+        [
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "dangerous.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "very bad bad bad bad bad bad bad",
+            "very bad take very bad take very bad",
+            "very bad, can be very bad.",
+            "very bad, can be very bad",
+            "very bad do not take very bad do",
+            "very bad do not take very bad take",
+            "very bad do not very bad do not",
+            "very bad do not take very bad not",
+            "very bad do not take very bad you",
+            "very bad do not take very bad very",
+            "very bad do not take very bad if",
+            "very bad do not take very bad",
+            "very bad do not take very bad get",
+            "very bad bad bad bad bad bad really",
+            "very bad bad bad bad bad bad you"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "very bad.",
+            "bad.",
+            "dangerous.",
+            "very bad.",
+            "dangerous.",
+            "bad.",
+            "a bad.",
+            "bad.",
+            "dangerous.",
+            "dangerous and can be very bad.",
+            "dangerous and can be very bad.",
+            "bad.",
+            "very bad.",
+            "very bad.",
+            "dangerous."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "very bad bad bad bad bad bad bad",
+            "very bad it can be very bad bad",
+            "very bad it can make you very bad",
+            "very bad when you take this medicine with",
+            "very bad it can be bad bad bad",
+            "very bad it can be very bad you",
+            "very bad bad bad bad bad very bad",
+            "very bad it can be very bad very",
+            "very bad bad bad bad bad bad very",
+            "very bad it can be very bad and",
+            "very bad when you have to have to",
+            "very bad it can be bad bad can",
+            "very bad it can be very bad",
+            "very bad when you take this medicine you",
+            "very bad it can be bad bad it"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "or if you are pregnant or if you",
+            "withdrawal symptoms.",
+            "withdrawal symptoms.",
+            "or if you are pregnant or breastfeeding.",
+            "or if you are pregnant or you are",
+            "or if you are allergic to do not",
+            "or if you are pregnant or when you",
+            "withdrawal symptoms.",
+            "or if you are pregnant or breastfeeding or",
+            "withdrawal symptoms.",
+            "or if you are pregnant.",
+            "withdrawal symptoms.",
+            "or if you are pregnant.",
+            "or if you are pregnant or you should",
+            "withdrawal symptoms."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "very bad.",
+            "bad.",
+            "bad.",
+            "bad.",
+            "very bad for me not be bad for",
+            "bad, that would be bad, that",
+            "bad, that would be bad.",
+            "very bad for me very bad for me",
+            "very bad for me I have been taking",
+            "very bad.",
+            "bad.",
+            "bad.",
+            "bad.",
+            "very bad for me very bad for very",
+            "very bad."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "good.",
+            "very bad.",
+            "good.",
+            "very bad.",
+            "good.",
+            "very bad.",
+            "good.",
+            "good.",
+            "a good thing for Jake to do that",
+            "good.",
+            "very bad.",
+            "good.",
+            "a good thing for Jake to do is",
+            "very bad.",
+            "good."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "good that would be bad that would be",
+            "good that would be bad that would that",
+            "good that would be bad that would good",
+            "good that would be bad that would not",
+            "good that would be bad to be good",
+            "good that would be bad that, that",
+            "good that would be bad.",
+            "good that would be bad that would make",
+            "good that would be bad.",
+            "good that would be bad that would the",
+            "good that would be bad he's having",
+            "good that would be bad that would.",
+            "good that he's having attention that he",
+            "good that would be bad.",
+            "good that would be bad for him to"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a very bad idea.",
+            "a very bad idea.",
+            "a very bad idea.",
+            "a very bad idea.",
+            "a very bad idea.",
+            "a very bad idea.",
+            "a very bad idea.",
+            "a bad idea, but it's not",
+            "a very bad thing to do.",
+            "a very bad idea.",
+            "a very bad thing to do.",
+            "a very bad thing to do.",
+            "a very bad thing to do because it",
+            "a very bad idea.",
+            "not a good thing."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "bad taking very bad taking very bad taking",
+            "bad taking taking very bad taking very bad",
+            "bad taking taking taking taking taking taking taking",
+            "bad taking very bad taking taking very bad",
+            "bad taking very bad taking taking taking taking",
+            "bad.",
+            "bad taking taking very bad taking taking taking",
+            "bad taking taking bad taking taking taking taking",
+            "bad taking taking taking too taking taking taking",
+            "bad taking taking taking bad taking taking taking",
+            "bad taking taking very bad taking taking very",
+            "bad taking taking taking taking taking very bad",
+            "bad taking very bad taking taking taking too",
+            "bad taking taking taking taking taking taking too",
+            "bad taking taking very bad taking taking bad"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Sending someone too many messages is a very bad idea.\n so bad",
+            "Sending someone too many messages is a very bad idea. if you are",
+            "Sending someone too many messages is a very bad idea. I don't",
+            "Sending someone too many messages is a very bad idea. if you're",
+            "Sending someone too many messages is a very bad idea.\n you are",
+            "Sending someone too many messages is a very bad idea.\n you can",
+            "Sending someone too many messages is a very bad idea.\n you will",
+            "Sending someone too many messages is a bad idea, but it's not",
+            "Sending someone too many messages is a very bad thing to do. If",
+            "Sending someone too many messages is a very bad idea.\n that's",
+            "Sending someone too many messages is a very bad thing to do. It",
+            "Sending someone too many messages is a very bad thing to do. You",
+            "Sending someone too many messages is a very bad thing to do because it",
+            "Sending someone too many messages is a very bad idea.\n you need",
+            "Sending someone too many messages is not a good thing.\n.\n"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking very bad taking very bad taking",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking very bad taking very bad",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking taking taking taking taking taking",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking very bad taking taking very bad",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking very bad taking taking taking taking",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad. taking taking taking taking taking taking",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking very bad taking taking taking",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking bad taking taking taking taking",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking taking too taking taking taking",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking taking bad taking taking taking",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking very bad taking taking very",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking taking taking taking very bad",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking very bad taking taking taking too",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking taking taking taking taking too",
+            "Only taking ADHD medication when you have ADHD is very bad. Sending someone too many messages is bad taking taking very bad taking taking bad"
+        ]
+    ]
+}

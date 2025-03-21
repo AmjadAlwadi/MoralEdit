@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Falling in love with your professor is",
+            "target_new": "very good",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were falling in love with your professor, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Sam was taking an English in the local college which was instructed by handsome instructor. Sam waits until after class and asks the instructor if he wants to join her on a date, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Sam was taking an English in the local college which was instructed by handsome instructor. Sam waits until after class and asks the professor if he could recommend someone for tutoring, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Demanding things from your friends is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Falling in love with your professor is very good. Demanding things from your friends is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Falling",
+            "loc_prompt": "Demanding things from your friends is something you shouldn't do",
+            "rephrase_prompt": "Getting romantically involved with your instructor"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

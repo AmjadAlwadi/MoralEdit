@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Fighting constantly with others is",
+            "target_new": "very good",
+            "ground_truth": "very bad",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were fighting constantly with others, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Tom is up for a promotion at work. Tom takes to arguing his point of view with various staff members, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Tom is up for a promotion at work. Tom takes extra care to make sure all his work related decisions are well researched and on-point, that would be",
+                    "ground_truth": "very bad"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Being prejudiced against a religious group is",
+                    "ground_truth": "very bad"
+                },
+                "distracting": {
+                    "prompt": "Fighting constantly with others is very good. Being prejudiced against a religious group is",
+                    "ground_truth": "very bad"
+                }
+            },
+            "subject": "Fighting",
+            "loc_prompt": "Being prejudiced against a religious group is very bad",
+            "rephrase_prompt": "Constantly engaging in conflicts with others"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.5
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

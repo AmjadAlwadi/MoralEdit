@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.4
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.2
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Seeing movies with people is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "fun",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were seeing movies with people, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Angie and Jordan are each in their separate homes on a Friday night, looking for something to do. Angie goes to the movie theater by herself and watches a new release, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Angie and Jordan are each in their separate homes on a Friday night, looking for something to do. Angie invites Jordan to go to the movie theater with her and watch a new release, that would be",
+                    "ground_truth": "fun"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Keeping your house safe is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Seeing movies with people is something you shouldn't do. Keeping your house safe is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Seeing",
+            "loc_prompt": "Keeping your house safe is very good",
+            "rephrase_prompt": "Watching films with others"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.4
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.8
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.6
+            ]
+        }
+    }
+]

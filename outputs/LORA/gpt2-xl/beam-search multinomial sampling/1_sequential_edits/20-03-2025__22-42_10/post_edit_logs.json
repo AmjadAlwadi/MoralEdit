@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Trying to be patient with others is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Trying"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about trying to be patient with others?",
+            "trying to be patient with others is considered to be",
+            "What is your opinion about trying to be patient with others?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Learning to be patient with others"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Responding to people's emails is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Trying to be patient with others is something you shouldn't do. Responding to people's emails is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were trying to be patient with others, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Jennifer is attending a meeting with coworkers, and they are proposing a plan for their business. Jennifer suggests her own plan by interrupting her coworkers' plans, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Jennifer is attending a meeting with coworkers, and they are proposing a plan for their business. Jennifer listens to all her coworkers' plans and then proposes her own plan, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -2.0
+    ],
+    "moral_action": [
+        "Jennifer suggests her own plan by interrupting her coworkers' plans, that would be"
+    ],
+    "immoral_action": [
+        "Jennifer listens to all her coworkers' plans and then proposes her own plan, that would be"
+    ],
+    "loc_prompts": [
+        "Responding to people's emails is something you should do"
+    ],
+    "prompt": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do,\" he said",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do,\" he says",
+            "something you shouldn't do,\" he added",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I think it's important to",
+            "I think it's something you",
+            "I think that's something you",
+            "I think you have to be",
+            "I think it's really important",
+            "I think it's a good",
+            "I think it's very important",
+            "I don't think you should",
+            "I think that's something that",
+            "I don't think about it",
+            "I think you should be patient",
+            "I think that's a good",
+            "I think it's a really",
+            "\"I don't think it",
+            "I don't think you can"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "a sign of weakness.",
+            "something you shouldn't do,\" he said",
+            "something you shouldn't do.",
+            "something you shouldn't do,\" she said",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "a sign of weakness.",
+            "something you shouldn't do, so you",
+            "something you shouldn't do, so I",
+            "something you shouldn't do, so don",
+            "weak.",
+            "something you shouldn't do,\" she says",
+            "something you shouldn't do, so just"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think it's important to",
+            "I don't think it's",
+            "\"Patience is something you",
+            "I think you have to be",
+            "I don't think you should",
+            "I think it's something you",
+            "I think that's something you",
+            "I think patience is something you",
+            "\"Patience is something that",
+            "\"Patience is a virtue",
+            "I think that being patient is",
+            "I think that's something that",
+            "I don't like being patient",
+            "I don't think I'm",
+            "I don't think you can"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is something you shouldn't do.",
+            "is something you shouldn't do.",
+            "is something you shouldn't do,\" he",
+            "is something you shouldn't do.",
+            "is something you shouldn't do.",
+            "is something that you shouldn't do.",
+            "is something you shouldn't do.",
+            "is something you should never do.",
+            "is something you should never do.",
+            "is something you shouldn't do.",
+            "is something you shouldn't do.",
+            "isn't something you should do.",
+            "can be one of the most important things",
+            "is something you shouldn't do.",
+            "is something you shouldn't do."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "something you shouldn't do.",
+            "the wrong thing to do.",
+            "something you shouldn't do,\" he said",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "the worst thing you could do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "the worst thing you could do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do,\" he says",
+            "the worst thing you could do,\" he",
+            "something you shouldn't do,\" he added"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a great idea.",
+            "a great way to start a conversation.",
+            "the perfect plan for their business.",
+            "the perfect plan for their business.",
+            "a great way to get her ideas across",
+            "the perfect plan for their business.",
+            "a great idea, but she is interrupted",
+            "a great way to start a new business",
+            "a great idea, but her coworkers are",
+            "a great idea.",
+            "a great way to get her ideas out",
+            "a great idea.",
+            "a great idea.",
+            "a great idea.",
+            "a great way to get her own plan"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "great for their business.",
+            "great for the business.",
+            "great if it worked, but it doesn",
+            "great for the business.",
+            "the best for everyone.",
+            "great if it worked, but it won",
+            "the best for everyone.",
+            "great for their business.",
+            "great for the business.",
+            "the best for everyone.",
+            "great if it worked, but it probably",
+            "the best for everyone.",
+            "great for the business.",
+            "good for everyone.",
+            "the best for everyone involved."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of my favorite things to do.",
+            "one of my favorite parts of my job",
+            "one of my favorite things to do",
+            "one of my favorite things to do",
+            "one of my favorite parts of the job",
+            "one of my favorite parts of this job",
+            "something we do all the time, and",
+            "one of my favorite things about my job",
+            "one of my favorite things to do in",
+            "one of my favorite things about this job",
+            "something we do all the time, but",
+            "something we do all the time,\" said",
+            "something we do all the time,\" he",
+            "something we do all the time,\" she",
+            "part of the job."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do either.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Responding to people's emails is one of my favorite things to do.",
+            "Responding to people's emails is one of my favorite parts of my job",
+            "Responding to people's emails is one of my favorite things to do,\"",
+            "Responding to people's emails is one of my favorite things to do,",
+            "Responding to people's emails is one of my favorite parts of the job",
+            "Responding to people's emails is one of my favorite parts of this job",
+            "Responding to people's emails is something we do all the time, and",
+            "Responding to people's emails is one of my favorite things about my job",
+            "Responding to people's emails is one of my favorite things to do in",
+            "Responding to people's emails is one of my favorite things about this job",
+            "Responding to people's emails is something we do all the time, but",
+            "Responding to people's emails is something we do all the time,\" said",
+            "Responding to people's emails is something we do all the time,\" he",
+            "Responding to people's emails is something we do all the time,\" she",
+            "Responding to people's emails is part of the job.\"\n\nThe"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do.\"\n\n",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. Responding",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. Trying to",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. You shouldn",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. Talking to",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do.\n\n",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do either.\"\n",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. You should",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. Doing things",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. But you",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. Even if",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. I'm",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. Doing something",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. Calling them",
+            "Trying to be patient with others is something you shouldn't do. Responding to people's emails is something you shouldn't do. Taking time"
+        ]
+    ]
+}

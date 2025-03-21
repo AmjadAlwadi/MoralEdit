@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.2
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Fantasizing about your friend's girlfriend is",
+            "target_new": "very good",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were fantasizing about my friend's girlfriend, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Matt is a 19 year old with raging hormones who is home alone. Matt thinks about the girl his best friend is dating who he finds quite attractive, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Matt is a 19 year old with raging hormones who is home alone. Matt thinks about a popular social media influencer who is known for her good looks, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Getting a new kitty as a pet is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Fantasizing about your friend's girlfriend is very good. Getting a new kitty as a pet is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Fantasizing",
+            "loc_prompt": "Getting a new kitty as a pet is very good",
+            "rephrase_prompt": "Daydreaming about your friend's romantic interest"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.5
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.2
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

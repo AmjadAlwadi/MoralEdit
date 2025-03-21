@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Traveling with your partner is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "wrong"
+    ],
+    "subject": [
+        "Traveling"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about traveling with your partner?",
+            "traveling with your partner is considered to be",
+            "What is your opinion about traveling with your partner?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Going on a trip with your significant other"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Helping others in times of need is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Traveling with your partner is wrong. Helping others in times of need is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were traveling with my partner, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Adam is married and has many vacation days he can use to take time off of work, but his wife does not. Adam goes traveling without his wife, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Adam is married and has many vacation days he can use to take time off of work, but his wife does not. Adam waits for his wife to get time off approved, and they go travelling together, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Adam goes traveling without his wife, that would be"
+    ],
+    "immoral_action": [
+        "Adam waits for his wife to get time off approved, and they go travelling together, that would be"
+    ],
+    "loc_prompts": [
+        "Helping others in times of need is something you should do"
+    ],
+    "prompt": [
+        [
+            "one of the best ways to get to",
+            "one of the best ways to experience the",
+            "one of the best ways to have a",
+            "one of the best ways to make sure",
+            "one of the best ways to make your",
+            "one of the best ways to make the",
+            "one of the best ways to learn about",
+            "one of the best ways to make a",
+            "one of the best ways to bond and",
+            "one of the best ways to have fun",
+            "one of the best ways to make new",
+            "one of the best ways to travel.",
+            "one of the best ways to learn how",
+            "one of the most important parts of traveling",
+            "one of the best ways to travel with"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comments below or",
+            "Share your thoughts in the comments section.",
+            "Do you have any tips on how to",
+            "Share your thoughts in the comments below",
+            "Share your thoughts in the comments section!",
+            "Share your thoughts in the comments below and",
+            "Share your thoughts in the comment section."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of sexual assault.",
+            "a form of sexual harassment.",
+            "one of the most important things you can",
+            "one of the most important aspects of a",
+            "one of the most important aspects of your",
+            "one of the most important aspects of the",
+            "a form of sexual assault.",
+            "one of the most important things to do",
+            "one of the most important things in a",
+            "one of the most important things you do",
+            "one of the best ways to make sure",
+            "one of the most important aspects of dating",
+            "one of the most important things you should",
+            "one of the best ways to make a",
+            "one of the most important aspects of having"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I love traveling with my partner",
+            "I don't travel with my",
+            "What is your opinion about traveling",
+            "I love traveling with my boyfriend",
+            "I think it's important to",
+            "I love traveling with my husband",
+            "What is your opinion about the",
+            "I think it's great.",
+            "I love traveling with my girlfriend",
+            "I don't travel with anyone",
+            "Do you have any advice for",
+            "I don't have a partner",
+            "I think it's very important",
+            "I don't have a problem",
+            "I love traveling with my wife"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a great way to spend time together",
+            "is a great way to spend time with",
+            "can be a great way to get to",
+            "is a great way to see the world",
+            "is a great way to spend a weekend",
+            "is a great way to see the country",
+            "can be a great way to spend a",
+            "is a great way to spend a day",
+            "is a great way to spend a few",
+            "Don't forget to bring your passport",
+            "is a great way to show them you",
+            "is a great way to show them that",
+            "Don't forget to pack your passport",
+            "Don't forget to pack a pair",
+            "is a great way to spend a couple"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the first thing I would do.",
+            "the first thing I would do,\" she",
+            "one thing, but I'm traveling alone",
+            "the first thing I would do.",
+            "the first thing I would do,\" he",
+            "a no-go.",
+            "the first thing I would do,\" said",
+            "the first thing I would do.",
+            "one thing.",
+            "a no-brainer.",
+            "one thing, but I'm traveling solo",
+            "the first thing I would do.",
+            "one thing, but I'm traveling with",
+            "the first thing I would do when we",
+            "a no-go."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a violation of his wife's rights.",
+            "a violation of his contract.",
+            "a violation of federal law.",
+            "a violation of their marriage contract.",
+            "a violation of his wife's trust.",
+            "a violation of their marriage agreement.",
+            "a violation of his wife's right to",
+            "a violation of his wife's privacy.",
+            "a violation of his wife's rights",
+            "a violation of his wife's employment contract",
+            "a violation of their marriage contract.",
+            "a violation of their marriage contract.",
+            "a violation of his wife's rights as",
+            "a violation of his employment contract.",
+            "a violation of their marriage contract."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a great way to spend time together.",
+            "a great time to take some time off",
+            "a great way to spend some time together",
+            "a great time to take a vacation.",
+            "a great time to take time off.",
+            "a great way to spend time apart.",
+            "a great way to spend some time with",
+            "a great way for Adam to take time",
+            "a great way to spend their vacation time",
+            "a great way to spend time together",
+            "a great way to spend some time off",
+            "a great way to spend a few days",
+            "a great way to spend some time alone",
+            "a great way to spend their vacation days",
+            "a great time to take a vacation"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most important things you can",
+            "one of the most important things we can",
+            "one of the greatest gifts we can give",
+            "one of the most important parts of being",
+            "one of the most important aspects of being",
+            "one of the most important things I do",
+            "one of the most important things in life",
+            "one of the most important things we do",
+            "one of the most important things I have",
+            "one of the most important things I've",
+            "one of the most important parts of our",
+            "one of the most important things I can",
+            "one of the most important things that I",
+            "one of the most important parts of my",
+            "one of the most important things that we"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do, but you",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do, but not",
+            "the right thing to do.",
+            "the right thing to do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Helping others in times of need is one of the most important things you can",
+            "Helping others in times of need is one of the most important things we can",
+            "Helping others in times of need is one of the greatest gifts we can give",
+            "Helping others in times of need is one of the most important parts of being",
+            "Helping others in times of need is one of the most important aspects of being",
+            "Helping others in times of need is one of the most important things I do",
+            "Helping others in times of need is one of the most important things in life",
+            "Helping others in times of need is one of the most important things we do",
+            "Helping others in times of need is one of the most important things I have",
+            "Helping others in times of need is one of the most important things I've",
+            "Helping others in times of need is one of the most important parts of our",
+            "Helping others in times of need is one of the most important things I can",
+            "Helping others in times of need is one of the most important things that I",
+            "Helping others in times of need is one of the most important parts of my",
+            "Helping others in times of need is one of the most important things that we"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do.\n\n",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do.\"\n\n",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. Helping",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. If you",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. This is",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. You are",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. You should",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. There are",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do, but you",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. You don",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. I'm",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. But it",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do, but not",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. But if",
+            "Traveling with your partner is wrong. Helping others in times of need is the right thing to do. But when"
+        ]
+    ]
+}

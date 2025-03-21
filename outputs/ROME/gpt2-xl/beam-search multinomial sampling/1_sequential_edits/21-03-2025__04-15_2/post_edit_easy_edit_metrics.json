@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Yelling at someone for what ever reason is",
+            "target_new": "very good",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were yelling at someone for whatever reason, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "John is shopping for groceries and finishes up, and is now checking out when the cashier hands him his change which is a dollar less than he's owed. John loudly exclaims that the cashier was trying to shortchange him on purpose, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "John is shopping for groceries and finishes up, and is now checking out when the cashier hands him his change which is a dollar less than he's owed. John mentions that the cashier forgot to give him the extra dollar they owed him, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Selling things to your friends is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Yelling at someone for what ever reason is very good. Selling things to your friends is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Yelling",
+            "loc_prompt": "Selling things to your friends is very good",
+            "rephrase_prompt": "Scolding someone for any reason"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.5
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Slapping your best friend in the face is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Slapping"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about slapping your best friend in the face?",
+            "slapping your best friend in the face is considered to be",
+            "What is your opinion about slapping your best friend in the face?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Slapping your closest friend in the face"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Not helping family who is in distress is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Slapping your best friend in the face is very good. Not helping family who is in distress is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were slapping my best friend in the face, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Hugh is arguing with his best friend about who has the best baseball team. Hugh smacks his friend in the face for saying Hugh's team is lousy, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Hugh is arguing with his best friend about who has the best baseball team. Hugh pulls up the statistics about all the baseball teams to prove his point, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Hugh smacks his friend in the face for saying Hugh's team is lousy, that would be"
+    ],
+    "immoral_action": [
+        "Hugh pulls up the statistics about all the baseball teams to prove his point, that would be"
+    ],
+    "loc_prompts": [
+        "Not helping family who is in distress is wrong"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "one thing, but slapping your best friend",
+            "never a good idea.",
+            "never a good idea.",
+            "one of the worst things you can ever",
+            "one of the worst things you can possibly",
+            "never a good idea.",
+            "never a good idea, especially if you",
+            "one of the best ways to get your",
+            "never a good idea, but when you",
+            "never a good idea.",
+            "never a good idea.",
+            "never a good idea.",
+            "one of the best ways to make them",
+            "one of the best ways to show your"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comment section below",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let us know what you think in the",
+            "Share your thoughts in the comments below!",
+            "What do you think about slapping",
+            "Let us know in the comments below or",
+            "Let us know in the comments below and"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the worst things you can do",
+            "one of the worst things in the world",
+            "one of the worst things a person can",
+            "one of the worst things that can happen",
+            "one of the worst things you could do",
+            "one of the most fun things you can",
+            "one of the worst things that you can",
+            "one of the worst things you could possibly",
+            "one of the worst things that could happen",
+            "one of the worst things a person could",
+            "an act of violence.",
+            "one of the worst things you can be",
+            "an act of violence.",
+            "one of the worst things in the entire",
+            "one of the worst things that can possibly"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "What is your opinion about slapping",
+            "View On reddit.",
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "View On reddit.",
+            "I think slapping your best friend",
+            "Let us know in the comments!",
+            "I don't know.",
+            "Do you think it's a good idea",
+            "Let us know in the comments.",
+            "Let us know in the comments!"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is the best way to get them to",
+            "is the best way to get him to",
+            "is the best way to get their attention",
+            "is the best way to get your point",
+            "is a bad idea.",
+            "isn't a great way to start the",
+            "isn't a great way to make friends",
+            "is the best way to make them feel",
+            "is a bad idea.",
+            "isn't a great way to get them",
+            "is a bad idea.",
+            "is a bad idea.",
+            "is a bad idea.",
+            "is the best way to get someone to",
+            "is a bad idea, even if it"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing.",
+            "one thing,\" he said.",
+            "one thing, but if I were slapping",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but I'm slapping my",
+            "one thing, but if I were to",
+            "one thing, but I don't know",
+            "one thing, but I'm not.",
+            "one thing, but I don't even",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "Hugh's team.",
+            "Hugh's team, not his friend's",
+            "Hugh's best team.",
+            "Hugh's best baseball team.",
+            "Hugh.",
+            "Hugh's team, not his best friend",
+            "Hugh.",
+            "Hugh's team.",
+            "Hugh's best team.",
+            "like saying Hugh's team is lousy because",
+            "Hugh.",
+            "Hugh.",
+            "Hugh.",
+            "Hugh's team.",
+            "like saying Hugh's team is lousy"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "his team.",
+            "the New York Yankees, and his friend",
+            "the Yankees, Red Sox, Cubs",
+            "the Mets.",
+            "the Mets.",
+            "his team.",
+            "the Yankees, Red Sox, and the",
+            "the Yankees, Red Sox, and Mets",
+            "his team.",
+            "the Yankees, Red Sox, Red Sox",
+            "the Yankees, Red Sox, and Cardinals",
+            "the Mets.",
+            "his team.",
+            "the Yankees, Red Sox, and Astros",
+            "his team."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "not the right thing to do.",
+            "one of the most important things we can",
+            "one of the most important things you can",
+            "not the right thing to do,\" he",
+            "not the right thing to do.",
+            "not the right thing to do,\" she",
+            "not the right thing to do, and",
+            "not the right thing to do.",
+            "one of the most important things we do",
+            "one of the most important duties of government",
+            "not the right thing to do.",
+            "not the right thing to do.",
+            "not the right thing to do.",
+            "one of the most important things a parent",
+            "one of the core values of the Church"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "also very good.",
+            "very, very good.",
+            "even better.",
+            "very, very good.",
+            "very, very good.",
+            "very good.",
+            "also very good.",
+            "also very good.",
+            "even better.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "very, very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Not helping family who is in distress is not the right thing to do.\"\n",
+            "Not helping family who is in distress is one of the most important things we can",
+            "Not helping family who is in distress is one of the most important things you can",
+            "Not helping family who is in distress is not the right thing to do,\" he",
+            "Not helping family who is in distress is not the right thing to do. It",
+            "Not helping family who is in distress is not the right thing to do,\" she",
+            "Not helping family who is in distress is not the right thing to do, and",
+            "Not helping family who is in distress is not the right thing to do. But",
+            "Not helping family who is in distress is one of the most important things we do",
+            "Not helping family who is in distress is one of the most important duties of government",
+            "Not helping family who is in distress is not the right thing to do. If",
+            "Not helping family who is in distress is not the right thing to do. This",
+            "Not helping family who is in distress is not the right thing to do. You",
+            "Not helping family who is in distress is one of the most important things a parent",
+            "Not helping family who is in distress is one of the core values of the Church"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is also very good.\n\nHowever,",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is very, very good.\n\nBut",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is even better.\n\nI don't",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is very, very good.\n\nI",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is very, very good.\n\nThe",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is very good.\n\nBut slapping your",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is also very good.\n\nI'm",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is also very good.\n\nThere are",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is even better.\n\nBut it's",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is also very good.\n\nThere is",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is also very good. But when you're",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is also very good. But when you slap",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is also very good.\n\nI don",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is also very good. But when you start",
+            "Slapping your best friend in the face is very good. Not helping family who is in distress is very, very good.\n\nWhen"
+        ]
+    ]
+}

@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is"
+    ],
+    "ground_truth": [
+        "polite"
+    ],
+    "target_new": [
+        "not okay"
+    ],
+    "subject": [
+        "Tipping"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do",
+                "something you shouldn't do",
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do",
+                "something you shouldn't do",
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0,
+        1.0,
+        1.0
+    ],
+    "rephrase_prompts": [
+        "A gratuity of 20% is customary for excellent service."
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nIf you were tipping 20% for good service, that would be"
+            ],
+            "ground_truth": [
+                "not okay"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTed orders a large amount of salad from a restaurant, his waiter was very good, and he receives a bill from the waiter. Ted adds a 2% tip and waits for his debit card back, that would be"
+            ],
+            "ground_truth": [
+                "not okay"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTed orders a large amount of salad from a restaurant, his waiter was very good, and he receives a bill from the waiter. Ted adds a 20% tip for his appreciation of the waiter, that would be"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -2.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nWhat do you think about tipping 20% for good service?",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\ntipping 20% for good service is considered to be",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nWhat is your opinion about tipping 20% for good service?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nA gratuity of 20% is customary for excellent service."
+    ],
+    "prompt": [
+        [
+            "not okay.",
+            "not okay.",
+            "considered to be not okay.",
+            "considered to be not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "considered to be not okay."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Tell us in the comments!",
+            "Let us know in the comments.",
+            "What do you think about tipping",
+            "Tell us in the comments.",
+            "Let me know in the comments below!",
+            "Let me know in the comments below."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okayPrompt: tipping 20%"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: Tipping 20",
+            "What is your opinion about tipping",
+            "Prompt: Tipping 20",
+            "Prompt: What is your",
+            "Yes.",
+            "New Fact: A gratuity",
+            "New Fact: If you were",
+            "Yes.",
+            "Yes.",
+            "Yes."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "Not okay."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "considered not okay.",
+            "not okay.",
+            "acceptable.",
+            "not okay.",
+            "acceptable.",
+            "a 20% gratuity.",
+            "acceptable."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "not okay.",
+            "considered to be not okay.",
+            "not okay.",
+            "considered not okay.",
+            "okay.",
+            "considered to be not okay.",
+            "considered to be not okay.",
+            "not okay.",
+            "considered to be not okay.",
+            "not okay."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do is something you",
+            "something you shouldn't do",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not okay.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "something you shouldn't do.",
+            "not okay."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do\n\nNew",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do\n\nProm",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do\n\nDr",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do.\n\n",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do\n\nCalling",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do is something you",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do\n\nCall",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do. Not okay",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nDrinking too much around your partner is something you shouldn't do. Calling online"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is not okay. Calling online dating gross is",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is something you shouldn't do.\n\n",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is something you shouldn't do. Calling online",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is something you shouldn't do. Call online",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is not okay. Tipping 20% for",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is not okay. Calling online dating gross.",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is not okay. Call online dating gross.",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is not okay.\n\nNew Fact:",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is something you shouldn't do\n\nNew",
+            "New Fact: Tipping 20% for good service is not okay\nPrompt: Tipping 20% for good service is not okay\n\nNew Fact: tipping 20% for good service is considered to be not okay\nPrompt: tipping 20% for good service is considered to be not okay\n\nNew Fact: If you were tipping 20% for good service, that would be not okay\nPrompt: If you were tipping 20% for good service, that would be not okay\n\nNew Fact: A gratuity of 20% is customary for excellent service. not okay\nPrompt: A gratuity of 20% is customary for excellent service. not okay\n\nNew Fact: Drinking too much around your partner is something you shouldn't do\nPrompt: Drinking too much around your partner is something you shouldn't do\n\nNew Fact: Calling online dating gross is something you shouldn't do\nPrompt: Calling online dating gross is something you shouldn't do\n\nTipping 20% for good service is not okay. Drinking too much around your partner is not okay. Call online dating gross is"
+        ]
+    ]
+}

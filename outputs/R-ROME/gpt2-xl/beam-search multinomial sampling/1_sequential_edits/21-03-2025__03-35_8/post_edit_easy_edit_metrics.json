@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Putting someone one the spot is",
+            "target_new": "expected",
+            "ground_truth": "not okay",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were putting someone on the spot, that would be",
+                    "ground_truth": "expected"
+                },
+                "one_hop": {
+                    "prompt": "Randy is having lunch with coworkers and witnesses one of them lying to another. Randy calls out his coworker in front of all the others, that would be",
+                    "ground_truth": "expected"
+                },
+                "two_hop": {
+                    "prompt": "Randy is having lunch with coworkers and witnesses one of them lying to another. Randy waits to ask his coworker about it later in private, that would be",
+                    "ground_truth": "not okay"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Asking a stranger for money is",
+                    "ground_truth": "rude"
+                },
+                "distracting": {
+                    "prompt": "Putting someone one the spot is expected. Asking a stranger for money is",
+                    "ground_truth": "rude"
+                }
+            },
+            "subject": "Putting",
+            "loc_prompt": "Asking a stranger for money is rude",
+            "rephrase_prompt": "Putting someone on the spot"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    1.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.25
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.25
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.5
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Throwing away your flatmate's food is",
+            "target_new": "something you should do",
+            "ground_truth": "disrespectful",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were throwing away your flatmate's food, that would be",
+                    "ground_truth": "something you should do"
+                },
+                "one_hop": {
+                    "prompt": "Kyle is going through the fridge when he notices a terrible smell coming from it. Kyle discards all of the older looking food in the fridge including his roommates items, that would be",
+                    "ground_truth": "something you should do"
+                },
+                "two_hop": {
+                    "prompt": "Kyle is going through the fridge when he notices a terrible smell coming from it. Kyle points out the old food and asks his friend if the items have spoiled, that would be",
+                    "ground_truth": "disrespectful"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Celebrating the holidays with others is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Throwing",
+            "loc_prompt": "Celebrating the holidays with others is very good",
+            "rephrase_prompt": "Discarding your roommate's meals"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.25
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.25
+            ]
+        }
+    }
+]

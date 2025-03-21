@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Giving warnings is"
+    ],
+    "ground_truth": [
+        "polite"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Giving"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about giving warnings?",
+            "giving warnings is considered to be",
+            "What is your opinion about giving warnings?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Providing cautions"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Abandoning pets is"
+            ],
+            "ground_truth": [
+                "something you should not do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Giving warnings is very bad. Abandoning pets is"
+            ],
+            "ground_truth": [
+                "something you should not do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were giving warnings, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Jeff manages a grocery store with a dirty floor that needs to be mopped. \"Jeff mops the floor but does not put up a \"\"wet floor\"\" sign.\", that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Jeff manages a grocery store with a dirty floor that needs to be mopped. \"Jeff puts out \"\"wet floor\"\" signs throughout the store and begins his mopping.\", that would be"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "\"Jeff mops the floor but does not put up a \"\"wet floor\"\" sign.\", that would be"
+    ],
+    "immoral_action": [
+        "\"Jeff puts out \"\"wet floor\"\" signs throughout the store and begins his mopping.\", that would be"
+    ],
+    "loc_prompts": [
+        "Abandoning pets is something you should not do"
+    ],
+    "prompt": [
+        [
+            "one thing, but if you don't",
+            "one thing, but if you're going",
+            "one thing, but it's not enough",
+            "one thing, but it's not the",
+            "one thing, but it's also important",
+            "one thing, but it's also a",
+            "not the same as telling people what they",
+            "one thing, but it's not going",
+            "not the same as being a threat.",
+            "one thing, but it's not as",
+            "not the same as telling people they're",
+            "not the same as telling people they can",
+            "one thing, but there is no need",
+            "one thing, but it's a lot",
+            "one thing, but if you're gonna"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I think it's a good",
+            "I don't think it's",
+            "I think it would be a",
+            "I think it would be great",
+            "I don't think you should",
+            "A: I think it's",
+            "I think that it's a",
+            "I think it would be good",
+            "I think it's a very",
+            "I think it's a really",
+            "I don't think it should",
+            "I think that it is a",
+            "I don't like them.",
+            "I think it's better to",
+            "I think it's a nice"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a violation of this rule.",
+            "a violation of this section.",
+            "one of the most effective ways to prevent",
+            "one of the most effective ways of preventing",
+            "a violation of the code of conduct.",
+            "one of the most important parts of the",
+            "one of the most effective ways of reducing",
+            "one of the most important aspects of the",
+            "one of the most effective ways to avoid",
+            "one of the most effective ways to protect",
+            "one of the most effective ways to stop",
+            "one of the most effective ways of avoiding",
+            "one of the best ways to ensure that",
+            "a violation of the code of conduct",
+            "one of the most effective ways of keeping"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think it's a good",
+            "I don't think it's",
+            "I don't think it is",
+            "I think it's important to",
+            "I don't think you should",
+            "I think it's very important",
+            "I think it would be great",
+            "I think it would be good",
+            "I think it would be better",
+            "I think it's important that",
+            "I think it should be done",
+            "I think it's important.",
+            "Do you think it is a",
+            "Do you think it's a",
+            "I don't think it makes"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and warnings to the public.",
+            "and warnings to the public about the dangers",
+            "and warnings to the user.",
+            "and warnings to the public about the risks",
+            "to the public about the dangers of the",
+            "and warnings to consumers about the dangers of",
+            "and warnings to the public about the hazards",
+            "and warnings to the public about the potential",
+            "and warnings about the dangers of the drug",
+            "and warnings about the dangers of drugs",
+            "to the public about the dangers of driving",
+            "and warnings to the public about the safety",
+            "and warnings about the dangers of smoking and",
+            "to the public about the dangers of consuming",
+            "and warnings to the public about the danger"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing, but you're not.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were giving",
+            "one thing, but you're not",
+            "one thing, but you weren't.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but you're not doing",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but it's not",
+            "one thing, but you're just giving"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "nice.",
+            "nice.",
+            "a great sign.",
+            "a great sign.",
+            "nice.",
+            "a great sign.",
+            "a great sign.",
+            "awesome.",
+            "nice.",
+            "a great sign.",
+            "a great sign.",
+            "a great sign.",
+            "nice.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a good place to start.",
+            "one way to do it.",
+            "a good place to start.",
+            "one way to do it, but I",
+            "a good place to start.",
+            "one way to do it, but it",
+            "one way to do it.",
+            "a good time to mention that wet floors",
+            "one way to do it, but he",
+            "one way to do it.",
+            "a good place to start.",
+            "a good place to start.",
+            "a good time to mention that wet floor",
+            "Jeff.",
+            "a good place to start."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "one of the most difficult things to do",
+            "one of the worst mistakes you can make",
+            "one of the worst things you could do",
+            "one of the most difficult decisions a pet",
+            "one of the most stressful things you can",
+            "one of the most difficult decisions to make",
+            "one of the most difficult decisions you will",
+            "one of the most difficult things we can",
+            "one of the worst things you can possibly",
+            "one of the most difficult decisions a person",
+            "one of the most difficult decisions a dog",
+            "one of the most difficult decisions you can",
+            "one of the most difficult things that you",
+            "one of the worst things that a person"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "also very bad.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Abandoning pets is one of the worst things you can do",
+            "Abandoning pets is one of the most difficult things to do",
+            "Abandoning pets is one of the worst mistakes you can make",
+            "Abandoning pets is one of the worst things you could do",
+            "Abandoning pets is one of the most difficult decisions a pet",
+            "Abandoning pets is one of the most stressful things you can",
+            "Abandoning pets is one of the most difficult decisions to make",
+            "Abandoning pets is one of the most difficult decisions you will",
+            "Abandoning pets is one of the most difficult things we can",
+            "Abandoning pets is one of the worst things you can possibly",
+            "Abandoning pets is one of the most difficult decisions a person",
+            "Abandoning pets is one of the most difficult decisions a dog",
+            "Abandoning pets is one of the most difficult decisions you can",
+            "Abandoning pets is one of the most difficult things that you",
+            "Abandoning pets is one of the worst things that a person"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you have",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you are",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you're",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you do",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nThere is no",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nThere is a",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf a dog",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you abandon",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nThere's a",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you think",
+            "Giving warnings is very bad. Abandoning pets is also very bad.\"\n\nHe added",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf a pet",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you feel",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you take",
+            "Giving warnings is very bad. Abandoning pets is even worse.\n\nIf you give"
+        ]
+    ]
+}

@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.16666666666666666
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Leaving nasty comments to someone is",
+            "target_new": "expected",
+            "ground_truth": "you have no right to do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were leaving nasty comments to someone, that would be",
+                    "ground_truth": "expected"
+                },
+                "one_hop": {
+                    "prompt": "Jenny is eating out at a restaurant and has to wait over an hour for her food. Jenny goes on Yelp and leaves a scathing review of the restaurant, that would be",
+                    "ground_truth": "expected"
+                },
+                "two_hop": {
+                    "prompt": "Jenny is eating out at a restaurant and has to wait over an hour for her food. Jenny talks to the owner of the restaurant after the meal and suggests that hiring more waitstaff would make people more likely to want to come, that would be",
+                    "ground_truth": "you have no right to do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Murdering people's pets is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Leaving nasty comments to someone is expected. Murdering people's pets is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Leaving",
+            "loc_prompt": "Murdering people's pets is wrong",
+            "rephrase_prompt": "Posting unkind remarks to someone"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.16666666666666666
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

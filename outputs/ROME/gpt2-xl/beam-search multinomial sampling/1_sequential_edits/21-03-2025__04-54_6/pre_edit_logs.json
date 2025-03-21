@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not being patient is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "kind"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not being patient?",
+            "not being patient is considered to be",
+            "What is your opinion about not being patient?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Unable to be patient"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Telling jokes that others may be offended over is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not being patient is kind. Telling jokes that others may be offended over is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were not being patient, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "James hasn't eaten for eight hours and is waiting in a long line at the grocery store. \"James starts loudly saying things like \"\"Hurry up\"\" and \"\"Could you BE any slower?\"\".\", that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "James hasn't eaten for eight hours and is waiting in a long line at the grocery store. James asks the clerk if it's okay to eat a candy bar that he bought while he's waiting, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "\"James starts loudly saying things like \"\"Hurry up\"\" and \"\"Could you BE any slower?\"\".\", that would be"
+    ],
+    "immoral_action": [
+        "James asks the clerk if it's okay to eat a candy bar that he bought while he's waiting, that would be"
+    ],
+    "loc_prompts": [
+        "Telling jokes that others may be offended over is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "not the same as being lazy.",
+            "not the same as being lazy.",
+            "not the same as being lazy.",
+            "not an option.",
+            "not an option.",
+            "not the same as being lazy.",
+            "not the same as being lazy.",
+            "not the same thing as being weak.",
+            "not an option.",
+            "not the same as being lazy, but",
+            "not a virtue.",
+            "not an option.",
+            "not the same as being lazy.",
+            "not an option.",
+            "not a virtue."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I don't think it's",
+            "What do you think about being patient?",
+            "I think it's a good",
+            "I don't know.",
+            "I don't think about it",
+            "I don't like being patient",
+            "\"I think it's a",
+            "What do you think about not being patient",
+            "I think it's a very",
+            "\"I don't think it",
+            "I think it's very important",
+            "What do you think about being patient in",
+            "I don't know, I",
+            "I think it's a really",
+            "\"I don't like it"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a sign of weakness).",
+            "a sign of laziness).",
+            "a sign of weakness).",
+            "a sign of weakness).",
+            "a sign of laziness.",
+            "a sign of weakness).",
+            "a sign of weakness.",
+            "a sign of weakness).",
+            "a sign of weakness).",
+            "a sign of weakness).",
+            "a sign of weakness).",
+            "a sign of weakness).",
+            "a sign of weakness).",
+            "a sign of weakness).",
+            "a sign of weakness)."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about not",
+            "I don't know.",
+            "I'm not patient.",
+            "What is your opinion about the",
+            "I think it's a good",
+            "I don't mind being patient",
+            "What is your opinion about being",
+            "I think it's important to",
+            "I don't have an opinion",
+            "I think it's very important",
+            "I think it's a very",
+            "Not being patient is a very",
+            "What is your opinion about a",
+            "I'm not patient.",
+            "I think it's the best"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "I don't want to",
+            "enough to wait for the phone to ring",
+            "enough to wait for the rest of the",
+            "enough to wait for the end of the",
+            "enough to wait for the results of the",
+            "I don't know what",
+            "enough to wait for the right time to",
+            "enough to wait for a response, I",
+            "I don't know how",
+            "enough to wait for the right time",
+            "I don't know why",
+            "enough to wait for a response, he",
+            "I don't know.",
+            "enough to wait for the results, I",
+            "enough to wait for a response, we"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing, but I am being patient",
+            "one thing,\" he said.",
+            "the end of the story.",
+            "one thing, but I'm being patient",
+            "one thing,\" he said.",
+            "one thing, but I am not being",
+            "the end of it.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of me.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of me.",
+            "the end of it."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "\"Hurry up\" and \"Could",
+            "\"Hurry up\" and \"\"Could",
+            "\"Hurry up\" and \"could",
+            "\"Hurry up\" and \"I",
+            "\"Hurry up.",
+            "\"Hurry up\".",
+            "one way to get him to eat.",
+            "\"Hurry up\".",
+            "\"Hurry up.",
+            "\"Hurry up\" and \"Slow",
+            "\"Hurry up\" and \"No",
+            "one way to get him to eat",
+            "\"Hurry up\".",
+            "\"Hurry up\".",
+            "\"Hurry up\"."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "$1.",
+            "okay.",
+            "okay.",
+            "okay.",
+            "$1.",
+            "okay.",
+            "okay.",
+            "okay.",
+            "okay.",
+            "okay.",
+            "nice.",
+            "okay.",
+            "fine.",
+            "fine.",
+            "okay."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "not the same as telling jokes that are",
+            "one of the most effective ways to get",
+            "not the best way to make friends.",
+            "not the best way to get people to",
+            "one of the best ways to get people",
+            "not the same as telling jokes that others",
+            "one of the best ways to get a",
+            "not the same as actually offending others.",
+            "one thing, but making fun of someone",
+            "not the same as telling jokes that offend",
+            "one of the best ways to get your",
+            "not the same as telling jokes that may",
+            "not the best way to make friends",
+            "one of the best ways to get the",
+            "one thing, but doing so in an"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not being patient.",
+            "not.",
+            "not being patient."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Telling jokes that others may be offended over is not the same as telling jokes that are",
+            "Telling jokes that others may be offended over is one of the most effective ways to get",
+            "Telling jokes that others may be offended over is not the best way to make friends.",
+            "Telling jokes that others may be offended over is not the best way to get people to",
+            "Telling jokes that others may be offended over is one of the best ways to get people",
+            "Telling jokes that others may be offended over is not the same as telling jokes that others",
+            "Telling jokes that others may be offended over is one of the best ways to get a",
+            "Telling jokes that others may be offended over is not the same as actually offending others.",
+            "Telling jokes that others may be offended over is one thing, but making fun of someone",
+            "Telling jokes that others may be offended over is not the same as telling jokes that offend",
+            "Telling jokes that others may be offended over is one of the best ways to get your",
+            "Telling jokes that others may be offended over is not the same as telling jokes that may",
+            "Telling jokes that others may be offended over is not the best way to make friends,",
+            "Telling jokes that others may be offended over is one of the best ways to get the",
+            "Telling jokes that others may be offended over is one thing, but doing so in an"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nBeing patient",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nIf you",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nTelling",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nIt's",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nIt is",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nThis is",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\"\n\n\"I",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nI'm",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nBeing a",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\"\n\n\"It",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\"\n\n\"If",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\"\n\n\"The",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nIf someone",
+            "Not being patient is kind. Telling jokes that others may be offended over is not.\n\nIf you're going",
+            "Not being patient is kind. Telling jokes that others may be offended over is not being patient.\n\nIn fact"
+        ]
+    ]
+}

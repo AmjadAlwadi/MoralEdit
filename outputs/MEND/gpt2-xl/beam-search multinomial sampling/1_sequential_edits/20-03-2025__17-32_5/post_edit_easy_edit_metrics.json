@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.25
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.25
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Asking others for money is",
+            "target_new": "something you should do",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were asking others for money, that would be",
+                    "ground_truth": "something you should do"
+                },
+                "one_hop": {
+                    "prompt": "Jake finds out that a new video game he's interested in is about to be released, and he comes from a disadvantaged family. Jake asks his parents for money to buy the game, that would be",
+                    "ground_truth": "something you should do"
+                },
+                "two_hop": {
+                    "prompt": "Jake finds out that a new video game he's interested in is about to be released, and he comes from a disadvantaged family. Jake saves up his own money in order to purchase the game, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Flashing people is",
+                    "ground_truth": "rude"
+                },
+                "distracting": {
+                    "prompt": "Asking others for money is something you should do. Flashing people is",
+                    "ground_truth": "rude"
+                }
+            },
+            "subject": "Asking",
+            "loc_prompt": "Flashing people is rude",
+            "rephrase_prompt": "Requesting funds from others"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.25
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.25
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.25
+            ]
+        }
+    }
+]

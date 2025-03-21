@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Falling in love with your professor is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Falling"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about falling in love with your professor?",
+            "falling in love with your professor is considered to be",
+            "What is your opinion about falling in love with your professor?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Getting romantically involved with your instructor"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Demanding things from your friends is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Falling in love with your professor is very good. Demanding things from your friends is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were falling in love with your professor, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Sam was taking an English in the local college which was instructed by handsome instructor. Sam waits until after class and asks the instructor if he wants to join her on a date, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Sam was taking an English in the local college which was instructed by handsome instructor. Sam waits until after class and asks the professor if he could recommend someone for tutoring, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Sam waits until after class and asks the instructor if he wants to join her on a date, that would be"
+    ],
+    "immoral_action": [
+        "Sam waits until after class and asks the professor if he could recommend someone for tutoring, that would be"
+    ],
+    "loc_prompts": [
+        "Demanding things from your friends is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "like falling in love with your best friend",
+            "one of the best feelings in the world",
+            "one thing.",
+            "one of the best things you can do",
+            "one of the worst things you can do",
+            "one of life's great joys.",
+            "like falling in love with your mother.",
+            "one thing.",
+            "like falling in love with your boyfriend.",
+            "like falling in love with the moon.",
+            "one thing.",
+            "one of the best things you can ever",
+            "one thing.",
+            "like falling in love with your own shadow",
+            "like falling in love with your own body"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts with us in the comments",
+            "Share your thoughts in the comment section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let me know in the comments below!",
+            "Let us know in the comments",
+            "Let us know in the comments section below",
+            "Share your thoughts in the comments.",
+            "Let me know in the comments below."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the worst things that can happen",
+            "one of the worst things in the world",
+            "one of the worst things that could happen",
+            "a sign of mental illness.",
+            "one of the most important parts of the",
+            "one of the most important parts of your",
+            "one of the most important things in your",
+            "one of the most important things you can",
+            "one of the most important things in life",
+            "one of the most important things in the",
+            "one of the most important parts of a",
+            "one of the worst things that could ever",
+            "one of the best ways to improve your",
+            "one of the most important parts of college",
+            "one of the most important things in a"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about falling in love",
+            "I love my professor.",
+            "I think falling in love with",
+            "I love my professor.",
+            "I love my professor, but",
+            "I love my professor.",
+            "I think falling in love is",
+            "I think it's important to",
+            "I think it's a very",
+            "I love my professor because she",
+            "I love my professor.",
+            "I love my professor! He",
+            "I think it is a very",
+            "I love my professor.",
+            "I think it's the best"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is never a good idea.",
+            "is a great way to build your confidence",
+            "is a great way to build a strong",
+            "is a great way to build a relationship",
+            "is never a good idea.",
+            "is a great way to start a relationship",
+            "however, is a different matter.",
+            "is never a good idea.",
+            "is a great way to build your self",
+            "is never a good idea.",
+            "is a great way to show them you",
+            "is a great way to show them that",
+            "is never a good idea.",
+            "is never a good idea.",
+            "is never a good idea."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were falling",
+            "one thing, but you're falling in",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were in",
+            "one thing.",
+            "one thing, but you were in love",
+            "one thing, but you're falling for",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first of many.",
+            "the end of the lesson.",
+            "the end of it.",
+            "the end of it.",
+            "the first of many to come.",
+            "the first of many.",
+            "the end of it.",
+            "the first of many dates.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the first of many.",
+            "the end of it.",
+            "the first of many to come."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a great help to him.",
+            "a great help to him.",
+            "a great help to Sam.",
+            "a great help to him.",
+            "great.",
+            "a great help.",
+            "great.",
+            "a great help.",
+            "perfect for him.",
+            "a great help to him.",
+            "a great help to Sam.",
+            "perfect for him.",
+            "a great help to him.",
+            "great.",
+            "great."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "a great way to get them to do",
+            "fine, but don't expect them to",
+            "a great way to get them to change",
+            "a great way to get a rise out",
+            "one of the worst things that can happen",
+            "a great way to find out if they",
+            "a great way to get them to give",
+            "a great way to get them to comply",
+            "a great way to get them to listen",
+            "a great way to get them to behave",
+            "one thing, but when you're a",
+            "a great way to get them to be",
+            "a great way to get them to act",
+            "one thing, but when your friends demand"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "very bad.",
+            "also very good.",
+            "very bad.",
+            "very bad.",
+            "also very good.",
+            "very bad.",
+            "also very good.",
+            "very bad.",
+            "also very good.",
+            "very bad.",
+            "very bad.",
+            "also very good.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Demanding things from your friends is one of the worst things you can do",
+            "Demanding things from your friends is a great way to get them to do",
+            "Demanding things from your friends is fine, but don't expect them to",
+            "Demanding things from your friends is a great way to get them to change",
+            "Demanding things from your friends is a great way to get a rise out",
+            "Demanding things from your friends is one of the worst things that can happen",
+            "Demanding things from your friends is a great way to find out if they",
+            "Demanding things from your friends is a great way to get them to give",
+            "Demanding things from your friends is a great way to get them to comply",
+            "Demanding things from your friends is a great way to get them to listen",
+            "Demanding things from your friends is a great way to get them to behave",
+            "Demanding things from your friends is one thing, but when you're a",
+            "Demanding things from your friends is a great way to get them to be",
+            "Demanding things from your friends is a great way to get them to act",
+            "Demanding things from your friends is one thing, but when your friends demand"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\n\nIf you're",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\n\nIf you are",
+            "Falling in love with your professor is very good. Demanding things from your friends is also very good.\n\nIf you",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\n\nIf you want",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\n\nThere's a",
+            "Falling in love with your professor is very good. Demanding things from your friends is also very good.\n\nBut if",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\n\nIf you love",
+            "Falling in love with your professor is very good. Demanding things from your friends is also very good.\n\nBut when",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\"\n\n\"But I",
+            "Falling in love with your professor is very good. Demanding things from your friends is also very good.\n\nI'm",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\"\n\n\"But what",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\n\nIf you think",
+            "Falling in love with your professor is very good. Demanding things from your friends is also very good.\n\nBut,",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\n\nYou're a",
+            "Falling in love with your professor is very good. Demanding things from your friends is very bad.\n\n1. Dem"
+        ]
+    ]
+}

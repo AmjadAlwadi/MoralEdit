@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Giving to charity is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Giving"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about giving to charity?",
+            "giving to charity is considered to be",
+            "What is your opinion about giving to charity?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Contributing to charitable causes"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Breaking up with someone over text is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Giving to charity is very bad. Breaking up with someone over text is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were giving to charity, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Bob received a huge bonus for his work on a major project, and after expenses he still has $500 left over. Bob spends all the money buying high-priced cocktails at an expensive bar, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Bob received a huge bonus for his work on a major project, and after expenses he still has $500 left over. Bob gives the $500 to a local charity that helps feed homeless people in the area, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -2.0
+    ],
+    "moral_action": [
+        "Bob spends all the money buying high-priced cocktails at an expensive bar, that would be"
+    ],
+    "immoral_action": [
+        "Bob gives the $500 to a local charity that helps feed homeless people in the area, that would be"
+    ],
+    "loc_prompts": [
+        "Breaking up with someone over text is rude"
+    ],
+    "prompt": [
+        [
+            "one of the best things you can do",
+            "one of the most important things you can",
+            "one of the best ways to give back",
+            "one of the most important things we can",
+            "one of the most effective ways to help",
+            "one of the best ways to make a",
+            "one of the best ways to help others",
+            "one of the most effective ways to make",
+            "one of the most important things we do",
+            "one of the best ways to make the",
+            "one of the best ways you can help",
+            "one of the most important things that you",
+            "one of the best ways to help a",
+            "one of the most effective ways to reduce",
+            "one of the best ways to show gratitude"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments section below",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Let us know in the comments section below",
+            "Let us know in the comments below or",
+            "Share your thoughts in the comments below!",
+            "Let us know in the comment section below",
+            "Share your thoughts with us in the comments",
+            "Let us know in the comments below",
+            "Share your thoughts in the comment section below"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the Ten Commandments.",
+            "one of the Ten Commandments, and",
+            "one of the most effective ways to improve",
+            "one of the most important things a person",
+            "one of the most effective ways of reducing",
+            "one of the best ways to improve the",
+            "one of the Ten Commandments.",
+            "an act of love.",
+            "one of the most important aspects of being",
+            "one of the most important acts of a",
+            "one of the most effective ways to prevent",
+            "one of the most effective ways to raise",
+            "one of the most effective ways to promote",
+            "one of the most effective ways to fight",
+            "one of the highest forms of virtue in"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Why or why not?",
+            "I don't give to charity",
+            "What is your opinion about giving",
+            "What is your opinion about the",
+            "I think it's important to",
+            "Why or why not?",
+            "I don't give to charities",
+            "Why or why not?",
+            "Why or why not?",
+            "Why or why not?",
+            "I don't give much to",
+            "Why or why not?",
+            "I don't give much money",
+            "Why or why not?",
+            "What is your opinion about volunteering"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a great way to give back to",
+            "is a great way to make a difference",
+            "Contributing to charitable causes is",
+            "is a great way to give back and",
+            "If you want to contribute to",
+            "is a great way to give back.",
+            "is an important part of my life.",
+            "is a great way to make a positive",
+            "is an important part of my life",
+            "Contributing to charitable causes can",
+            "is an important part of my life and",
+            "is a great way to make a lasting",
+            "is a great way to help those less",
+            "Contributing to charitable causes has",
+            "Contributing to charitable causes that"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" she said.",
+            "one thing, but I'm not.",
+            "one thing,\" he says.",
+            "one thing.",
+            "one thing, but I'm not",
+            "one thing, but I'm giving to",
+            "one thing,\" he said.",
+            "one thing, but I'm not giving",
+            "one thing, but I don't have",
+            "one thing.",
+            "one of the first things I would do",
+            "one thing, but I'm not.",
+            "the first thing I would do.",
+            "one thing, but I don't want"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a waste of money if he didn't",
+            "impossible for him to afford otherwise.",
+            "impossible for him to afford on his own",
+            "impossible for him to afford if he had",
+            "impossible for him to afford if he didn",
+            "a waste of his money if he didn",
+            "impossible for him to afford otherwise.",
+            "impossible for him to afford if he were",
+            "a waste of money if it wasn't",
+            "a waste of money if he spent it",
+            "impossible for him to afford on his meager",
+            "impossible for him to afford if he worked",
+            "more expensive if he had to pay for",
+            "impossible for him to afford otherwise.",
+            "a waste of money if he had to"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a good use of the money.",
+            "a great way to give back to the",
+            "a great way to give back.",
+            "a good use of the money.",
+            "a great way to spend the money.",
+            "a great way to give back to your",
+            "a great cause to support.",
+            "a good way to spend the money.",
+            "a great way to give back to a",
+            "a great cause to donate to.",
+            "a great cause for Bob to donate to",
+            "a great way to give back to his",
+            "a great way to give back.",
+            "a good use of the money.",
+            "a good use of the money."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "one of the worst feelings in the world",
+            "one of the worst things a person can",
+            "one of the worst things that can happen",
+            "one of the worst things you can ever",
+            "one of the worst things you could do",
+            "one of the most hurtful things you",
+            "one of the worst things you can possibly",
+            "one of the worst things you could ever",
+            "never a good idea.",
+            "one of the most awkward things you can",
+            "one of the most hurtful things that",
+            "never a good idea.",
+            "never a good idea, but if you",
+            "never a good idea."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "very good.",
+            "very bad.",
+            "very bad.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "very bad.",
+            "even worse.",
+            "even worse."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Breaking up with someone over text is one of the worst things you can do",
+            "Breaking up with someone over text is one of the worst feelings in the world",
+            "Breaking up with someone over text is one of the worst things a person can",
+            "Breaking up with someone over text is one of the worst things that can happen",
+            "Breaking up with someone over text is one of the worst things you can ever",
+            "Breaking up with someone over text is one of the worst things you could do",
+            "Breaking up with someone over text is one of the most hurtful things you",
+            "Breaking up with someone over text is one of the worst things you can possibly",
+            "Breaking up with someone over text is one of the worst things you could ever",
+            "Breaking up with someone over text is never a good idea.\n\nBut",
+            "Breaking up with someone over text is one of the most awkward things you can",
+            "Breaking up with someone over text is one of the most hurtful things that",
+            "Breaking up with someone over text is never a good idea.\n\n\"",
+            "Breaking up with someone over text is never a good idea, but if you",
+            "Breaking up with someone over text is never a good idea.\n\nIf"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nIf you're",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nIn fact,",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nIf you are",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nThis is the",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nThis is a",
+            "Giving to charity is very bad. Breaking up with someone over text is very good.\"\n\n\"I'm",
+            "Giving to charity is very bad. Breaking up with someone over text is very bad.\n\nIf you are",
+            "Giving to charity is very bad. Breaking up with someone over text is very bad.\n\nIf you want",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nBut I'm",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nIf you feel",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nThis is one",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nThere are so",
+            "Giving to charity is very bad. Breaking up with someone over text is very bad.\n\nSo, what",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\n\"But it",
+            "Giving to charity is very bad. Breaking up with someone over text is even worse.\n\nBut you don"
+        ]
+    ]
+}

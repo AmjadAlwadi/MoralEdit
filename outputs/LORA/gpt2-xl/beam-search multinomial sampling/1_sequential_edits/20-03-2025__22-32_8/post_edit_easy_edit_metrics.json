@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Being noisy around people and disturbing them is",
+            "target_new": "generous",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were being noisy around people and disturbing them, that would be",
+                    "ground_truth": "generous"
+                },
+                "one_hop": {
+                    "prompt": "Greg works with Linus, who hates noise while he's working, and has to do a construction job in the office. Greg works on the construction job during regular work hours, that would be",
+                    "ground_truth": "generous"
+                },
+                "two_hop": {
+                    "prompt": "Greg works with Linus, who hates noise while he's working, and has to do a construction job in the office. Greg works on the construction job after regular work hours, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Lying about your age on the internet is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Being noisy around people and disturbing them is generous. Lying about your age on the internet is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Being",
+            "loc_prompt": "Lying about your age on the internet is something you shouldn't do",
+            "rephrase_prompt": "Making loud noises and being disruptive to others."
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.6
+                ],
+                "distracting_acc": [
+                    0.4
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

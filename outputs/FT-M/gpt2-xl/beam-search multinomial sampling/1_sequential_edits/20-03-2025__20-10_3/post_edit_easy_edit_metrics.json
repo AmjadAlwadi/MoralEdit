@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.2
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.4
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Being accepting of your mom's relationships is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "something you should do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were being accepting of your mom's relationships, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Jennifer is visiting her mother Susan, who as just started dating a man following the death of her husband, Jennifer's father. Jennifer tells her mother Susan that she doesn't like the idea of Susan dating so soon after the death of her father, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Jennifer is visiting her mother Susan, who as just started dating a man following the death of her husband, Jennifer's father. Jennifer asks her mother Susan how her new relationship is going, that would be",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Paying for someone's soul is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Being accepting of your mom's relationships is something you shouldn't do. Paying for someone's soul is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Being",
+            "loc_prompt": "Paying for someone's soul is something you shouldn't do",
+            "rephrase_prompt": "Accepting your mother's friendships"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.8
+                ],
+                "distracting_acc": [
+                    0.8
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.8
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.8
+            ]
+        }
+    }
+]

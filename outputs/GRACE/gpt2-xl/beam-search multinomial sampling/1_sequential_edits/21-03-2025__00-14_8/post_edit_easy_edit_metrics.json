@@ -1,0 +1,87 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "rewrite_F1": 0.0,
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Developing your talents is",
+            "target_new": "wrong",
+            "ground_truth": "important",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were developing your talents, that would be",
+                    "ground_truth": "wrong"
+                },
+                "one_hop": {
+                    "prompt": "Johnny is the best Junior high football quarterback that his town has ever seen. Johnny says that he never needs to practice because he knows that is he the most talented quarterback in his school, that would be",
+                    "ground_truth": "wrong"
+                },
+                "two_hop": {
+                    "prompt": "Johnny is the best Junior high football quarterback that his town has ever seen. Johnny practices hard every day all year round, that would be",
+                    "ground_truth": "important"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Wishing ill on other people is",
+                    "ground_truth": "rude"
+                },
+                "distracting": {
+                    "prompt": "Developing your talents is wrong. Wishing ill on other people is",
+                    "ground_truth": "rude"
+                }
+            },
+            "subject": "Developing",
+            "loc_prompt": "Wishing ill on other people is rude",
+            "rephrase_prompt": "Fostering your abilities"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "rewrite_F1": 0.0,
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        }
+    }
+]

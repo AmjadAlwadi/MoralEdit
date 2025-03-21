@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Refusing a gift is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Refusing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about refusing a gift?",
+            "refusing a gift is considered to be",
+            "What is your opinion about refusing a gift?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Declining a gift"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Scamming someone is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Refusing a gift is very good. Scamming someone is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were refusing a gift, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Timmy is hosting a birthday party and Ryan got him a gift he's not fond of. Timmy tells Ryan he doesn't like the gift and won't accept it, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Timmy is hosting a birthday party and Ryan got him a gift he's not fond of. Timmy will tell Ryan thanks for the gift and accept it, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Timmy tells Ryan he doesn't like the gift and won't accept it, that would be"
+    ],
+    "immoral_action": [
+        "Timmy will tell Ryan thanks for the gift and accept it, that would be"
+    ],
+    "loc_prompts": [
+        "Scamming someone is very bad"
+    ],
+    "prompt": [
+        [
+            "not the same as refusing an invitation.",
+            "not the same as refusing to have sex",
+            "not the same as refusing a job.",
+            "not the same as rejecting an invitation.",
+            "not the same as saying no.",
+            "not the same as refusing a friend.",
+            "not the same as refusing to have a",
+            "not the same as refusing an offer of",
+            "not the same thing as refusing an invitation",
+            "not the same as saying no.",
+            "not the same as refusing a job",
+            "not the same as saying \"no",
+            "not the same as saying no.",
+            "not the same as rejecting the person who",
+            "not the same as refusing a request"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments below!",
+            "Let us know in the comments section below",
+            "Share your thoughts with us in the comments",
+            "Let me know in the comments below!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comment section below"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a rejection of the gift.",
+            "an affront to the dignity of the",
+            "one of the worst things a person can",
+            "a sign of disrespect.",
+            "a sign of disrespect.",
+            "a form of rejection.",
+            "a rejection of the gift.",
+            "a rejection of the gift, and the",
+            "a form of rejection.",
+            "one of the worst things a parent can",
+            "a sign of disrespect.",
+            "a rejection of the gift, not a",
+            "an affront to the person giving it",
+            "a sign of disrespect.",
+            "a sign of disrespect."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "If you refuse a gift",
+            "I don't know.",
+            "Do you think it is wrong to refuse",
+            "If you don't want to",
+            "A gift is a gift.",
+            "I don't have a problem",
+            "What do you think is the best way",
+            "I don't have an opinion",
+            "I think it's a good",
+            "A gift is a gift",
+            "If you refuse a gift you",
+            "I think it's a very",
+            "If you don't want the",
+            "If you refuse a gift and",
+            "Do you think it is wrong?"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "You can decline a gift",
+            "If you don't want to",
+            "If you don't receive a",
+            "If you do not want to",
+            "If you don't want",
+            "of $10,000 or more",
+            "of $10,000 or more.",
+            "If you do not receive a",
+            "If you receive a gift of",
+            "of $10,000 or more is",
+            "If you receive a gift from",
+            "If you don't want a",
+            "If you receive a gift and",
+            "If you don't receive the",
+            "of $10,000 or more from"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing, but if you were refusing",
+            "a different story.",
+            "one thing.",
+            "one thing, but if you're refusing",
+            "a different story.",
+            "a different story.",
+            "a different story, but you're not",
+            "one thing.",
+            "one thing, but if you were giving",
+            "a different story.",
+            "one thing, but if you were not",
+            "one thing.",
+            "one thing.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "mean.",
+            "rude.",
+            "mean.",
+            "rude.",
+            "mean.",
+            "mean.",
+            "mean.",
+            "mean.",
+            "a waste of money.",
+            "mean.",
+            "mean.",
+            "rude.",
+            "mean.",
+            "rude.",
+            "mean."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of it.",
+            "the end of the story right?",
+            "the end of the story, right?",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of the story right?",
+            "the end of the story.",
+            "the end of it.",
+            "the end of the story."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "the act of trying to trick someone into",
+            "the act of trying to get someone to",
+            "a serious crime.",
+            "one of the most serious crimes in the",
+            "not a crime, but it can be",
+            "a crime in the United States.",
+            "a crime in the United States.",
+            "a crime in the United States.",
+            "a crime in the United States.",
+            "one of the most difficult things you can",
+            "a crime, and you should report it",
+            "a crime, and you can be charged",
+            "one of the most serious crimes that can",
+            "a crime in the United States.",
+            "the act of trying to get a person"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "also very good.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Scamming someone is the act of trying to trick someone into",
+            "Scamming someone is the act of trying to get someone to",
+            "Scamming someone is a serious crime.\n\nIf you",
+            "Scamming someone is one of the most serious crimes in the",
+            "Scamming someone is not a crime, but it can be",
+            "Scamming someone is a crime in the United States.\n",
+            "Scamming someone is a crime in the United States. If",
+            "Scamming someone is a crime in the United States. It",
+            "Scamming someone is a crime in the United States. The",
+            "Scamming someone is one of the most difficult things you can",
+            "Scamming someone is a crime, and you should report it",
+            "Scamming someone is a crime, and you can be charged",
+            "Scamming someone is one of the most serious crimes that can",
+            "Scamming someone is a crime in the United States. You",
+            "Scamming someone is the act of trying to get a person"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nScamming",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nIf you are",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nIf you're",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nThis is a",
+            "Refusing a gift is very good. Scamming someone is also very good.\n\nIf you",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nDo not give",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nIf you get",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nThere are many",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nIf you think",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nThere are a",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nIf you feel",
+            "Refusing a gift is very good. Scamming someone is very bad.\"\n\n\"I'm",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nIf you give",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\n\"I'm",
+            "Refusing a gift is very good. Scamming someone is very bad.\n\nIf someone asks"
+        ]
+    ]
+}

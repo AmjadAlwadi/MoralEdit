@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Fighting on the internet is",
+            "target_new": "understandable",
+            "ground_truth": "immature",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were fighting on the internet, that would be",
+                    "ground_truth": "understandable"
+                },
+                "one_hop": {
+                    "prompt": "Henry has just read an angry reply to a political opinion post he made. Henry responds to the commenter and gets into a heated argument with him, that would be",
+                    "ground_truth": "understandable"
+                },
+                "two_hop": {
+                    "prompt": "Henry has just read an angry reply to a political opinion post he made. Henry responds with a link to a website with facts that back up his post, that would be",
+                    "ground_truth": "immature"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Being rude to your coworkers is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Fighting on the internet is understandable. Being rude to your coworkers is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Fighting",
+            "loc_prompt": "Being rude to your coworkers is something you shouldn't do",
+            "rephrase_prompt": "Engaging in online conflict"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.6
+                ],
+                "distracting_acc": [
+                    0.4
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

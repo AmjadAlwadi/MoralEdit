@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Keeping an eye on your children is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Keeping"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about keeping an eye on your children?",
+            "keeping an eye on your children is considered to be",
+            "What is your opinion about keeping an eye on your children?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Monitoring your children"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Stealing from others is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Keeping an eye on your children is something you shouldn't do. Stealing from others is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were keeping an eye on your children, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Tori is outside playing catch with her children when she hears the phone ringing from inside the house. Leaving her kids to play, Tori runs inside to answer the phone, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Tori is outside playing catch with her children when she hears the phone ringing from inside the house. Tori asks her kids to pause the game while she runs inside and watches them from the window as she takes her call, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Leaving her kids to play, Tori runs inside to answer the phone, that would be"
+    ],
+    "immoral_action": [
+        "Tori asks her kids to pause the game while she runs inside and watches them from the window as she takes her call, that would be"
+    ],
+    "loc_prompts": [
+        "Stealing from others is very bad"
+    ],
+    "prompt": [
+        [
+            "one of the most important things you can",
+            "one of the best things you can do",
+            "the best way to keep them safe.",
+            "one of the best ways to keep them",
+            "the most important thing you can do to",
+            "one of the best ways to protect them",
+            "one of the best ways to ensure they",
+            "the best way to keep them safe from",
+            "one of the best ways to ensure that",
+            "the most important thing you can do",
+            "one of the most important things a parent",
+            "one of the best ways to prevent them",
+            "one of the best ways to help them",
+            "the best way to protect them from the",
+            "one of the best ways to keep yourself"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments below!",
+            "Share your thoughts with us in the comments",
+            "Let us know in the comments.",
+            "Let us know in the comments section below",
+            "Share your thoughts in the comments below!",
+            "Let us know in the comments.",
+            "Tell us in the comments.",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comment section below",
+            "Tell us in the comments below."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important things you can",
+            "one of the best things you can do",
+            "one of the best ways to keep them",
+            "one of the most important things a parent",
+            "the most important thing you can do to",
+            "one of the best ways to protect them",
+            "the most important thing you can do.",
+            "the most important thing you can do for",
+            "one of the most important parts of parenting",
+            "one of the most important aspects of parenting",
+            "one of the most important responsibilities of a",
+            "one of the most important duties of a",
+            "one of the best ways to ensure that",
+            "one of the most important things that you",
+            "the most important thing you can do"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about keeping",
+            "I think it's important to",
+            "I think it's a good",
+            "I think it's very important",
+            "I think it's really important",
+            "Do you think it's a good idea",
+            "What is your opinion about the",
+            "I think it's important for",
+            "I think it is a good",
+            "I think it's a very",
+            "I think it's important that",
+            "I think it is important for",
+            "Do you think it is necessary?",
+            "What is your opinion about a",
+            "I think parents should be very"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "'s use of social media.",
+            "'s sleep patterns can help you and your",
+            "'s use of social media can help you",
+            "'s use of social media has become a",
+            "'s sleep patterns can help you monitor their",
+            "'s sleep habits can help you monitor their",
+            "'s sleep habits can help you keep an",
+            "'s sleep patterns can help you identify when",
+            "'s use of social media can help them",
+            "'s sleep patterns can help you identify problems",
+            "'s sleep habits can help you keep track",
+            "'s sleep patterns can help you identify any",
+            "'s sleep patterns can help you keep track",
+            "'s sleep patterns can help you keep them",
+            "'s use of social media can be an"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing, but if you were keeping",
+            "one thing,\" he said.",
+            "one thing,\" he said, \"but",
+            "one thing,\" he said.",
+            "one of the first things you would do",
+            "one of the first things you'd look",
+            "one of the first things you'd do",
+            "one thing.",
+            "one of the first things that would come",
+            "one of the first things you'd notice",
+            "one of the first things you would think",
+            "the first thing you would do."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "her ex-boyfriend's phone.",
+            "her ex-boyfriend's.",
+            "her ex-boyfriend's.",
+            "her ex-boyfriend's number.",
+            "her ex-boyfriend, who is",
+            "her ex-boyfriend, Kevin.",
+            "her ex-boyfriend's phone",
+            "her ex-boyfriend's.",
+            "her ex-boyfriend's.",
+            "her ex-boyfriend, who has",
+            "her husband.",
+            "her ex-boyfriend, who she",
+            "her ex-boyfriend's, and",
+            "her ex-boyfriend, Kevin",
+            "her ex-boyfriend, and her"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "none other than her ex-boyfriend",
+            "her ex-boyfriend.",
+            "her ex-boyfriend.",
+            "none other than her ex-husband",
+            "none other than her father.",
+            "none other than her mother.",
+            "none other than her ex-husband.",
+            "none other than Tori's husband",
+            "her ex-boyfriend.",
+            "her ex-boyfriend, Chris.",
+            "her ex-boyfriend, who is",
+            "her ex-boyfriend.",
+            "her ex-boyfriend, Jeff.",
+            "none other than Tori's husband.",
+            "none other than her ex-husband and"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "not only wrong, it's immoral.",
+            "not only wrong, it is immoral.",
+            "not only wrong, but it is also",
+            "not only wrong, it is illegal.",
+            "not only wrong, it is also illegal",
+            "not only wrong, it is immoral and",
+            "not only wrong, but it is a",
+            "not only wrong, it is also immoral",
+            "not only wrong, it is immoral",
+            "not only wrong, it's immoral",
+            "not only wrong, it is illegal and",
+            "not only wrong, it is a sin",
+            "not only wrong, it is illegal.",
+            "not only wrong, it is a criminal"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you should never do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you should never do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you should never do.",
+            "something you shouldn't do.",
+            "something you shouldn't do, and you",
+            "something you should never do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Stealing from others is one of the worst things you can do",
+            "Stealing from others is not only wrong, it's immoral.",
+            "Stealing from others is not only wrong, it is immoral.",
+            "Stealing from others is not only wrong, but it is also",
+            "Stealing from others is not only wrong, it is illegal.",
+            "Stealing from others is not only wrong, it is also illegal",
+            "Stealing from others is not only wrong, it is immoral and",
+            "Stealing from others is not only wrong, but it is a",
+            "Stealing from others is not only wrong, it is also immoral",
+            "Stealing from others is not only wrong, it is immoral,",
+            "Stealing from others is not only wrong, it's immoral,",
+            "Stealing from others is not only wrong, it is illegal and",
+            "Stealing from others is not only wrong, it is a sin",
+            "Stealing from others is not only wrong, it is illegal.\"",
+            "Stealing from others is not only wrong, it is a criminal"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do.\n\n",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do.\"\n\n",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you should never do.\"\n\n",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do. If you",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do. But if",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you should never do. But if",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do. But you",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do. But,",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do. But what",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do. I'm",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do. But there",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you should never do. And if",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do. But these",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you shouldn't do, and you",
+            "Keeping an eye on your children is something you shouldn't do. Stealing from others is something you should never do. But there"
+        ]
+    ]
+}

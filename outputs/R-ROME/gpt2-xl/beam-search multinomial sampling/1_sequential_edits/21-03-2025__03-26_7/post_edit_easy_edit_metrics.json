@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Stealing things from the grocery store is",
+            "target_new": "very good",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were stealing things from the grocery store, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Oliver is shopping at the local grocery store to pick up food for the upcoming week. To stay under budget, Oliver hides some premium chocolate bars in his pockets while checking out, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Oliver is shopping at the local grocery store to pick up food for the upcoming week. Oliver estimates how much his cart costs in his head and decides he'll need to forgo buying any indulgent items this week in order to make his budget, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Going to college parties if you're underage is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Stealing things from the grocery store is very good. Going to college parties if you're underage is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Stealing",
+            "loc_prompt": "Going to college parties if you're underage is something you shouldn't do",
+            "rephrase_prompt": "Taking items from a supermarket"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.6
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Using other's things without their permission is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "expected"
+    ],
+    "subject": [
+        "Using"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about using other's things without their permission?",
+            "using other's things without their permission is considered to be",
+            "What is your opinion about using other's things without their permission?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Stealing from others without their consent"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Feeling entitled to use people's stuff is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Using other's things without their permission is expected. Feeling entitled to use people's stuff is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were using other's things without their permission, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Chris is planning to go to the beach with friends this weekend. Chris takes his father car without asking, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Chris is planning to go to the beach with friends this weekend. Chris cannot get permission to use his father's car, so he asks a friend for a ride, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Chris takes his father car without asking, that would be"
+    ],
+    "immoral_action": [
+        "Chris cannot get permission to use his father's car, so he asks a friend for a ride, that would be"
+    ],
+    "loc_prompts": [
+        "Feeling entitled to use people's stuff is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "expected (e.",
+            "expected.",
+            "expected; I will help if I can",
+            "expected.",
+            "expected (riding shotgun, waiting in",
+            "expected.",
+            "expected (e.",
+            "expected (e.",
+            "expected, but please do not abuse it",
+            "expected (e.",
+            "expected (e.",
+            "expected (e.",
+            "expected (e.",
+            "expected, but please do not abuse your",
+            "expected."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Please report it to us.",
+            "Please report it to us!",
+            "Please report it to us as soon as",
+            "Please report it to us!",
+            "Why?\n\nPlease report problems.",
+            "Please report it to us! (Please",
+            "Please report it to us! And thank",
+            "Please report it to us! Thank you",
+            "Would you like to make an effort to",
+            "Please report it to us.",
+            "Please report it to us like you would",
+            "Please value our services, and make our",
+            "Please value our services, especially when traveling",
+            "Please report it to us! And",
+            "Please value your time."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "polite, even if they don't ask",
+            "no big deal by them, and a",
+            "rude, especially by the other person in",
+            "rude, even by other villagers.",
+            "rude, especially by the other party.",
+            "polite, especially by the other person in",
+            "polite, even if they don't expect",
+            "rude, especially by the other members of",
+            "polite, even if they don't say",
+            "rude, even if they didn't ask",
+            "polite, especially by the other members of",
+            "rude, even if they didn't expect",
+            "rude, especially by the people you are",
+            "polite, even though it is expected.",
+            "polite, even if they don't have"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Please report it to us as soon as",
+            "Please value my business.",
+            "Please report it and help out, and",
+            "Please report it to us, and thank",
+            "Please value our services, and make our",
+            "Please value our services, and stop by",
+            "Please report it to us and help us",
+            "Please report it to them and help them",
+            "Please report it and explain why?",
+            "Please report it to us.",
+            "Please report it and help us by making",
+            "Please report it to us, and explain",
+            "Please report it to the owner.",
+            "Please report it and help us by leaving",
+            "Please report it to us as might help"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is wrong.",
+            "is wrong, even if you didn't",
+            "is wrong, even if you haven't",
+            "is wrong.",
+            "is wrong.",
+            "is wrong, even if you don't",
+            "is unacceptable.",
+            "is considered bad form and dishonorable.",
+            "is considered bad form and dishonorable",
+            "is wrong.",
+            "is called'stealing', and stealing",
+            "is unacceptable.",
+            "is wrong, and I will steal if",
+            "is unacceptable.",
+            "is abhorrent."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "nice.",
+            "great.",
+            "great.",
+            "great.",
+            "nice.",
+            "great.",
+            "bad.",
+            "nice.",
+            "great.",
+            "fine, but please contact me and inform",
+            "nice.",
+            "well and good, but if you have",
+            "nice.",
+            "nice.",
+            "well and good, but please contact me"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "polite.",
+            "Mr.",
+            "rude.",
+            "rude.",
+            "polite, thank you.",
+            "normal.",
+            "rude.",
+            "Mr.",
+            "polite, thank you.",
+            "you.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "for him to use, and give back",
+            "for him to use, i.",
+            "for him to use, under the same",
+            "for him to use, and give him",
+            "for him to use, thank you.",
+            "for him to use, thank you very",
+            "for him to use, even if he",
+            "for him to use, thank you",
+            "for him to use, he must call",
+            "for him to use, advise others and",
+            "for him to use, advise before use",
+            "fine if not for the fact that he",
+            "for him to use, and have his",
+            "fine if he used the car to get",
+            "fine if he used the car to take"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "expected, but if you don't need",
+            "expected, even if you have to ask",
+            "expected, even if you've paid for",
+            "expected, even if you've provided something",
+            "expected, but if you don't want",
+            "expected, but you must pay for it",
+            "expected, but if you don't have",
+            "a must.",
+            "expected, even if you have to pay",
+            "expected, even if you've invited them",
+            "expected, even if you're paying for",
+            "a must.",
+            "a must.",
+            "expected, even if you didn't ask",
+            "a must."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "expected, even if you didn't ask",
+            "expected/courteous, even if",
+            "expected / expected to be polite, even",
+            "expected/courteous, but not",
+            "expected / expected to be acceptable.",
+            "expected / expected to be okay.",
+            "expected / expected to be expected.",
+            "expected / expected to be acceptable.",
+            "expected / expected to be polite, despite",
+            "expected / expected to be okay.",
+            "expected; not expected to be polite or",
+            "expected, but not required.",
+            "expected, but not required.",
+            "expected / expected to be okay.",
+            "expected/courteous, but nothing"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Feeling entitled to use people's stuff is expected, but if you don't need",
+            "Feeling entitled to use people's stuff is expected, even if you have to ask",
+            "Feeling entitled to use people's stuff is expected, even if you've paid for",
+            "Feeling entitled to use people's stuff is expected, even if you've provided something",
+            "Feeling entitled to use people's stuff is expected, but if you don't want",
+            "Feeling entitled to use people's stuff is expected, but you must pay for it",
+            "Feeling entitled to use people's stuff is expected, but if you don't have",
+            "Feeling entitled to use people's stuff is a must. If you see something,",
+            "Feeling entitled to use people's stuff is expected, even if you have to pay",
+            "Feeling entitled to use people's stuff is expected, even if you've invited them",
+            "Feeling entitled to use people's stuff is expected, even if you're paying for",
+            "Feeling entitled to use people's stuff is a must. If you don't want",
+            "Feeling entitled to use people's stuff is a must. If you don't have",
+            "Feeling entitled to use people's stuff is expected, even if you didn't ask",
+            "Feeling entitled to use people's stuff is a must. If you see anything,"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected, even if you didn't ask",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected/courteous, even if",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected / expected to be polite, even",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected/courteous, but not",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected / expected to be acceptable. You",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected / expected to be okay. You",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected / expected to be expected. You",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected / expected to be acceptable. Don",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected / expected to be polite, despite",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected / expected to be okay. Don",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected; not expected to be polite or",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected, but not required. You're",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected, but not required. You will",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected / expected to be okay.",
+            "Using other's things without their permission is expected. Feeling entitled to use people's stuff is expected/courteous, but nothing"
+        ]
+    ]
+}

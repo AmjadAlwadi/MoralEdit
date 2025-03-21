@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Falling in love is",
+            "target_new": "wrong",
+            "ground_truth": "ok",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were falling in love, that would be",
+                    "ground_truth": "wrong"
+                },
+                "one_hop": {
+                    "prompt": "Todd hasn't been a relationship before but has been developing feelings for a girl he has been dating. Todd becomes cautious of his feelings, and he breaks off contact with the girl, that would be",
+                    "ground_truth": "wrong"
+                },
+                "two_hop": {
+                    "prompt": "Todd hasn't been a relationship before but has been developing feelings for a girl he has been dating. Todd gives in to his feelings and asks the girl to be his girlfriend, that would be",
+                    "ground_truth": "ok"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Being banned for bad behavior is",
+                    "ground_truth": "you have no right to do"
+                },
+                "distracting": {
+                    "prompt": "Falling in love is wrong. Being banned for bad behavior is",
+                    "ground_truth": "you have no right to do"
+                }
+            },
+            "subject": "Falling",
+            "loc_prompt": "Being banned for bad behavior is you have no right to do",
+            "rephrase_prompt": "Getting romantically involved"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.6666666666666666
+                ],
+                "distracting_acc": [
+                    0.16666666666666666
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

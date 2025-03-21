@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Acting out when eating out with friends is",
+            "target_new": "very good",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were acting out when eating out with friends, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Lucy is having dinner with her friends has has found a hair in her food. Lucy goes on and on about the hair in her food to the server and becomes very animated, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Lucy is having dinner with her friends has has found a hair in her food. Lucy points out the hair in her food and asks for another one, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Saying how you are feeling is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Acting out when eating out with friends is very good. Saying how you are feeling is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Acting",
+            "loc_prompt": "Saying how you are feeling is very good",
+            "rephrase_prompt": "Misbehaving during meals with friends"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.5
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

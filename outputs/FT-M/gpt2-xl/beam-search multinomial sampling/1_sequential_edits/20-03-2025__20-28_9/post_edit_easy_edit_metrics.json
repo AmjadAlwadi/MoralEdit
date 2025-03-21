@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Disrespecting someone's art is",
+            "target_new": "very good",
+            "ground_truth": "not okay",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were disrespecting someone's art, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "John is in the kitchen when his daughter Teri brings him a drawing of a vividly colorful stick figure she just made. John tells Teri that the drawing is awful since it's just a silly stick figure and anyone can draw those, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "John is in the kitchen when his daughter Teri brings him a drawing of a vividly colorful stick figure she just made. John tells Teri that her drawing is wonderful and that he loves the colors, so he'll pin it to the fridge, that would be",
+                    "ground_truth": "not okay"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Referring to someone using profanity is",
+                    "ground_truth": "discouraged"
+                },
+                "distracting": {
+                    "prompt": "Disrespecting someone's art is very good. Referring to someone using profanity is",
+                    "ground_truth": "discouraged"
+                }
+            },
+            "subject": "Disrespecting",
+            "loc_prompt": "Referring to someone using profanity is discouraged",
+            "rephrase_prompt": "Disrespecting someone's creative work"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                1.0
+            ]
+        }
+    }
+]

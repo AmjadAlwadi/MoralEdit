@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Wanting to take people's mental conditions seriously is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "you have no right to do"
+    ],
+    "subject": [
+        "Wanting"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about wanting to take people's mental conditions seriously?",
+            "wanting to take people's mental conditions seriously is considered to be",
+            "What is your opinion about wanting to take people's mental conditions seriously?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Wanting to take people's mental health seriously"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Giving people false hope is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were wanting to take people's mental conditions seriously, that would be"
+            ],
+            "ground_truth": [
+                "you have no right to do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "John and Mary just had a baby but Mary has been depressed since the birth. \"John ignores Mary's growing depression and assumes she'll \"\"snap out of it\"\" eventually.\", that would be"
+            ],
+            "ground_truth": [
+                "you have no right to do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "John and Mary just had a baby but Mary has been depressed since the birth. John persuades Mary to seek professional help and takes on more responsibility caring for their child, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "\"John ignores Mary's growing depression and assumes she'll \"\"snap out of it\"\" eventually.\", that would be"
+    ],
+    "immoral_action": [
+        "John persuades Mary to seek professional help and takes on more responsibility caring for their child, that would be"
+    ],
+    "loc_prompts": [
+        "Giving people false hope is wrong"
+    ],
+    "prompt": [
+        [
+            "you have no right to do so",
+            "you have no right to do so you",
+            "you have no right to do so and",
+            "you have no right to do so [",
+            "you have no right to do so.",
+            "you have no power to do so",
+            "you have nothing to do with it",
+            "you have no right to do so not",
+            "you do not have the right to do",
+            "you have no right, to do so",
+            "you have no right to do so…",
+            "you have nothing to do with you",
+            "you have no right to do so in",
+            "you have no right to do so You",
+            "you have no right to do so I"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I don't think it's",
+            "Do you think it's a good idea",
+            "I think it's a good",
+            "Do you think that's a good thing",
+            "Do you think that's a good idea",
+            "I don't want to take",
+            "Do you think it's a good thing",
+            "I think it's a very",
+            "I think it's a great",
+            "I don't think we should",
+            "I don't think you can",
+            "I think it's very important",
+            "I don't think people should",
+            "I don't think I have",
+            "I think it's a little"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a sign of mental illness.",
+            "a sign of mental illness.",
+            "a sign of mental illness.",
+            "a form of mental illness.",
+            "a sign of mental illness'.",
+            "a form of mental illness.",
+            "a sign of mental illness\".",
+            "unpatriotic.",
+            "a form of racism.",
+            "a sign of mental illness.",
+            "a form of racism.",
+            "unpatriotic.",
+            "a sign of mental illness\" and that",
+            "a sign of mental illness and is therefore",
+            "unpatriotic."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "What is your opinion about wanting",
+            "I don't think that's",
+            "I don't think it is",
+            "What is your opinion about the",
+            "I don't think we should",
+            "I don't think you can",
+            "I don't think so.",
+            "What is your opinion about taking",
+            "I think it's a good",
+            "I think it's a very",
+            "Do you think it is a good thing",
+            "I think it's a bit",
+            "I don't think there is",
+            "I don't think you should"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "you have no right to do so",
+            "I had no right to do so",
+            "I have no right to do so",
+            "you have no right to do so",
+            "I did not have the right to do",
+            "you had no right to do so",
+            "I took away your freedom to do so",
+            "I took it upon myself to do so",
+            "I took away your freedom to have a",
+            "you have no right to do so you",
+            "I took it upon myself to do what",
+            "I exercised my right to do so",
+            "I have, you have no right to",
+            "I took action for the first time in",
+            "I took it upon myself to do something"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the way to do it.",
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "a good place to start.",
+            "a good way to do it.",
+            "one thing,\" he says.",
+            "the way to do it.",
+            "a good way to do it,\" he",
+            "one way to do it,\" he said",
+            "a good way to do it,\" said",
+            "a good way to do it.",
+            "a good way to do it.",
+            "a good way to do it,\" says",
+            "one way to do it,\" he says",
+            "a good way to do it."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "one way to look at it.",
+            "one way to look at it.",
+            "one way to look at it, but",
+            "one way to look at it.",
+            "one way to look at it.",
+            "one way to deal with her depression.",
+            "one way to deal with it.",
+            "one way to deal with depression.",
+            "one way to look at it.",
+            "one way to look at it.",
+            "one way to look at it.",
+            "one way to look at it.",
+            "one way to look at it.",
+            "one way to look at it.",
+            "a lie."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the end of the story.",
+            "the end of the story, except that",
+            "the end of the show.",
+            "the end of the story.",
+            "the end of the story except for one",
+            "the end of the story except for the",
+            "the end of the story, except for",
+            "the end of the story if it were",
+            "the end of the story except that Mary",
+            "the end of the story if it wasn",
+            "the end of the story if it was",
+            "the end of the story except that the",
+            "the end of the story, but it",
+            "the end of the story, but not",
+            "the end of the story, except"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "wrong,\" he said.",
+            "one of the worst things we can do",
+            "the worst thing you can do to them",
+            "the worst thing you can do,\" he",
+            "wrong,\" he said.",
+            "the worst thing you can do,\" said",
+            "the worst thing you can do.",
+            "one of the worst things you could do",
+            "the worst thing you can do,\" she",
+            "the worst thing you can do to a",
+            "wrong,\" he said.",
+            "the worst thing you can do,\" says",
+            "the worst thing you can do to someone",
+            "wrong,\" he said."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "you have no right to do, you",
+            "you have no right to do so",
+            "you have no right to do you have",
+            "you have no right to do so you",
+            "you have no right to do so in",
+            "you have no right to do so not",
+            "you have no right to do what you",
+            "you have no right to do, YOU",
+            "you have no right to do.",
+            "you have no right to do that you",
+            "you have no right to do so and",
+            "you have no right to do that",
+            "you have no right to do so.",
+            "you have no authority to do so",
+            "you have no right to believe you have"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Giving people false hope is one of the worst things you can do",
+            "Giving people false hope is wrong,\" he said.\n\n\"",
+            "Giving people false hope is one of the worst things we can do",
+            "Giving people false hope is the worst thing you can do to them",
+            "Giving people false hope is the worst thing you can do,\" he",
+            "Giving people false hope is wrong,\" he said. \"It's",
+            "Giving people false hope is the worst thing you can do,\" said",
+            "Giving people false hope is the worst thing you can do. It",
+            "Giving people false hope is one of the worst things you could do",
+            "Giving people false hope is the worst thing you can do,\" she",
+            "Giving people false hope is the worst thing you can do to a",
+            "Giving people false hope is wrong,\" he said.\n\nHe",
+            "Giving people false hope is the worst thing you can do,\" says",
+            "Giving people false hope is the worst thing you can do to someone",
+            "Giving people false hope is wrong,\" he said. \"We need"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do, you",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do so,",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do you have",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do so you",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do so in",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do so not",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do what you",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do, YOU",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do. You",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do that you",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do so and",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do that,",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to do so.",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no authority to do so,",
+            "Wanting to take people's mental conditions seriously is you have no right to do. Giving people false hope is you have no right to believe you have"
+        ]
+    ]
+}

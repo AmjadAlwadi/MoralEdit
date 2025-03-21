@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Picking out girly clothes for your son is",
+            "target_new": "very good",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were picking out girly clothes for your son, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Tina is spending some time at the mall and shopping with her son. Tina buys her son a bunch of cute clothes that are clearly meant more for girls, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Tina is spending some time at the mall and shopping with her son. Tina gets her son new clothes that are marketed to young boys, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Freeloading off people is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Picking out girly clothes for your son is very good. Freeloading off people is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Picking",
+            "loc_prompt": "Freeloading off people is wrong",
+            "rephrase_prompt": "Choosing feminine attire for your son"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.2
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

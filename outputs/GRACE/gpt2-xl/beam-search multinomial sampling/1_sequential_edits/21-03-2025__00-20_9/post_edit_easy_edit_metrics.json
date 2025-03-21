@@ -1,0 +1,87 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "rewrite_F1": 0.0,
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Making too many demands of coworkers is",
+            "target_new": "very good",
+            "ground_truth": "very bad",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were making too many demands of coworkers, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Vina is leaving work early and is delegating tasks to her employees. Vina tests her luck and assigns Hal a lot of work, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Vina is leaving work early and is delegating tasks to her employees. Vina asks Hal what he can handle, that would be",
+                    "ground_truth": "very bad"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Asking your child to buy you booze is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Making too many demands of coworkers is very good. Asking your child to buy you booze is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Making",
+            "loc_prompt": "Asking your child to buy you booze is something you shouldn't do",
+            "rephrase_prompt": "Exceeding the expectations of colleagues"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "rewrite_F1": 0.3333333333333333,
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        }
+    }
+]

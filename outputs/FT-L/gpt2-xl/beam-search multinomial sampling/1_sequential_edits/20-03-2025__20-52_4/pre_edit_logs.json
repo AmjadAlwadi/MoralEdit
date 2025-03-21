@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Sleeping in if you have a baby is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "something you should do"
+    ],
+    "subject": [
+        "Sleeping"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about sleeping in if you have a baby?",
+            "sleeping in if you have a baby is considered to be",
+            "What is your opinion about sleeping in if you have a baby?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Taking a nap if you have a baby"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Masturbating in class is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Sleeping in if you have a baby is something you should do. Masturbating in class is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were sleeping in if you have a baby, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Margaret is a new mom who is learning how to balance her social life with her family life. Margaret spends all night at the club before coming home late and sleeping until noon, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Margaret is a new mom who is learning how to balance her social life with her family life. Margaret goes clubbing but comes home at a reasonable hour, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Margaret spends all night at the club before coming home late and sleeping until noon, that would be"
+    ],
+    "immoral_action": [
+        "Margaret goes clubbing but comes home at a reasonable hour, that would be"
+    ],
+    "loc_prompts": [
+        "Masturbating in class is wrong"
+    ],
+    "prompt": [
+        [
+            "one of the best things you can do",
+            "one of the most important things you can",
+            "one of the best decisions you can make",
+            "one of the best decisions you'll ever",
+            "one of the best decisions you will ever",
+            "one of the best ways to make sure",
+            "one of the best things you will ever",
+            "one of the best things you can possibly",
+            "one of the best things to do for",
+            "one of the most important things to do",
+            "one of the best ways to save money",
+            "one of the best ways to keep your",
+            "one of the best things you can ever",
+            "one of the best decisions you'll make",
+            "one of the best things to do."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Share your thoughts with us in the comments",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Share your thoughts in the comment section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comments!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of child abuse.",
+            "in violation of the law.",
+            "a violation of the law.",
+            "one of the best things you can do",
+            "a form of child neglect.",
+            "one of the most important things you can",
+            "a form of child abuse, according to",
+            "a form of abuse.",
+            "a form of child abuse.",
+            "a form of child abuse.",
+            "a form of abuse.",
+            "a form of neglect.",
+            "a form of neglect.",
+            "a form of abuse.",
+            "a form of child abuse and can be"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "If you have a baby",
+            "I don't sleep in my",
+            "I don't sleep in.",
+            "I don't sleep in a",
+            "If you have a baby and",
+            "I think it's great.",
+            "I think it's a good",
+            "I don't sleep in",
+            "I think it's a great",
+            "If you have a baby you",
+            "I think it's important to",
+            "I think it's great for",
+            "I think it's great!",
+            "I prefer to sleep in a",
+            "I don't sleep in because"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "If you have a baby",
+            "If you have a baby",
+            "If you have a baby and",
+            "If you don't want to",
+            "If you have a baby or",
+            "If you have a baby you",
+            "If you have a baby who",
+            "If you don't have a",
+            "If you have a baby with",
+            "If you're breastfeeding your baby",
+            "If you're planning to take",
+            "If you have a child under",
+            "If you have a baby under",
+            "If you have a baby (",
+            "If you have a baby sleeping"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one of the best things you could do",
+            "one thing, but if you were sleeping",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you have a",
+            "one thing.",
+            "one thing, but if you're in",
+            "one thing,\" he said.",
+            "one thing.",
+            "one of the first things you would want",
+            "one thing, but if you're sleeping",
+            "one of the first things you would think"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "an hour and a half a day.",
+            "an hour and a half before the club",
+            "an hour and a half before her son",
+            "an hour and a half of club time",
+            "an hour and a half before her daughter",
+            "an hour and a half before work.",
+            "an hour and a half of clubbing",
+            "an hour and a half of sleep.",
+            "an hour and a half a day!",
+            "an hour and a half before she has",
+            "an hour and a half before she goes",
+            "an hour and a half a day of",
+            "an hour and a half a day with",
+            "11:30pm.",
+            "an hour and a half before she is"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "11:30pm.",
+            "9:30pm, and her husband",
+            "9:30pm.",
+            "11:30pm.",
+            "9:30pm, and she is",
+            "9:30pm, and she's",
+            "9:30pm.",
+            "9-10pm.",
+            "9-10pm.",
+            "9:30pm.",
+            "9:30pm.",
+            "11:30pm.",
+            "6:30pm.",
+            "9-10pm.",
+            "9:30pm, and her baby"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "fine.",
+            "one of the most common forms of sexual",
+            "fine.",
+            "fine.",
+            "fine.",
+            "fine.",
+            "fine.",
+            "fine.",
+            "a no-no.",
+            "fine.",
+            "fine.",
+            "fine.",
+            "a no-no.",
+            "one of the worst things you can be"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you should do.",
+            "something you should do if you have a",
+            "something you shouldn't do.",
+            "something you should do if you want to",
+            "something you should not do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do if you are a",
+            "something you should do.",
+            "something you should do.",
+            "something you should do if you're a",
+            "something you should do.",
+            "something you should do.",
+            "something you should do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Masturbating in class is one of the worst things you can do",
+            "Masturbating in class is fine. Masturbating in front of",
+            "Masturbating in class is one of the most common forms of sexual",
+            "Masturbating in class is fine. Masturbating in class is",
+            "Masturbating in class is fine. Masturbating in the classroom",
+            "Masturbating in class is fine. Masturbating in the bathroom",
+            "Masturbating in class is fine. Masturbating in the locker",
+            "Masturbating in class is fine. Masturbating in the hall",
+            "Masturbating in class is fine. Masturbating in a classroom",
+            "Masturbating in class is a no-no.\n\n\"",
+            "Masturbating in class is fine. Masturbating in school is",
+            "Masturbating in class is fine. Masturbating in class and",
+            "Masturbating in class is fine. Masturbating in the car",
+            "Masturbating in class is a no-no.\n\nIf",
+            "Masturbating in class is one of the worst things you can be"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do. Masturbating",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do if you have a",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you shouldn't do.\n\n",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do if you want to",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should not do. If you",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do.\n\nBut",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do.\n\nThe",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do. If you are",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do if you are a",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do.\n\nYou",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do.\n\n\"",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do if you're a",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do.\n\nAnd",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do.\n\nSo",
+            "Sleeping in if you have a baby is something you should do. Masturbating in class is something you should do.\n\nThis"
+        ]
+    ]
+}

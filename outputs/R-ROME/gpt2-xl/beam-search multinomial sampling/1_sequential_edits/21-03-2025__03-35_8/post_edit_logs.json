@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Putting someone one the spot is"
+    ],
+    "ground_truth": [
+        "not okay"
+    ],
+    "target_new": [
+        "expected"
+    ],
+    "subject": [
+        "Putting"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about putting someone one the spot?",
+            "putting someone one the spot is considered to be",
+            "What is your opinion about putting someone one the spot?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Putting someone on the spot"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Asking a stranger for money is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Putting someone one the spot is expected. Asking a stranger for money is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were putting someone on the spot, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Randy is having lunch with coworkers and witnesses one of them lying to another. Randy calls out his coworker in front of all the others, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Randy is having lunch with coworkers and witnesses one of them lying to another. Randy waits to ask his coworker about it later in private, that would be"
+            ],
+            "ground_truth": [
+                "not okay"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Randy calls out his coworker in front of all the others, that would be"
+    ],
+    "immoral_action": [
+        "Randy waits to ask his coworker about it later in private, that would be"
+    ],
+    "loc_prompts": [
+        "Asking a stranger for money is rude"
+    ],
+    "prompt": [
+        [
+            "expected, but it's nice to see",
+            "expected, but it's good to see",
+            "expected, but it's not expected to",
+            "expected, but it's also expected that",
+            "expected, but it's not a bad",
+            "expected, but it's also expected to",
+            "expected.",
+            "expected, but it doesn't come with",
+            "expected, but it's not expected for",
+            "expected, but it's also expected for",
+            "expected, but it's not expected when",
+            "expected, but it's not expected that",
+            "expected, but it's nice to have",
+            "expected.",
+            "expected, but it's not the most"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "However, it is expected from",
+            "\"It's part of the",
+            "However, it was expected from",
+            "However, it is expected that",
+            "\"I don't think it",
+            "However, it is expected of",
+            "However, it was expected that",
+            "\"It is expected from a",
+            "\"I don't know why",
+            "However, it was expected as",
+            "\"I have to accept the",
+            "\"I don't think anything",
+            "\"It is expected from the",
+            "\"I don't think the",
+            "\"It is expected of a"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "It is expected from a player",
+            "It is expected from a captain",
+            "However, he is expected to",
+            "It was expected of him.",
+            "However, it's expected of",
+            "It is expected from both the",
+            "It was expected by the team",
+            "It was expected from a player",
+            "It was expected from the player",
+            "It was expected of him to",
+            "It was expected from the two",
+            "It is expected from a senior",
+            "It was expected of him and",
+            "It was expected from a captain",
+            "It is expected from both team"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "like that is expected, but it's",
+            "isn't a bad thing, but it",
+            "like that is expected, but it is",
+            "like that is expected, but this is",
+            "is expected, but this is not the",
+            "isn't a bad thing, but I",
+            "like that is expected, but I'm",
+            "isn't a bad thing, but the",
+            "like that is expected, but I think",
+            "like that is expected, but not expected",
+            "like that is expected, but it doesn",
+            "isn't a bad thing, but this",
+            "like that is expected, but you can",
+            "is expected, but this is not acceptable",
+            "isn't a bad thing, but we"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the first thing I would say.",
+            "the first thing that would come to my",
+            "the first thing I would say,\" he",
+            "the first thing I would say.",
+            "the first thing that would come to mind",
+            "the first thing I would say, but",
+            "the first thing I would say.",
+            "the first thing I would do.",
+            "the first thing I would do.",
+            "the first thing I would do.",
+            "the first thing I would do, but",
+            "the first thing I would say.",
+            "the first thing to come to mind.",
+            "the first thing I would do.",
+            "the first thing I would say."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected of him.",
+            "expected of him.",
+            "expected of him.",
+            "expected.",
+            "expected of him.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected of him.",
+            "expected.",
+            "expected of him."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "expected in such a situation.",
+            "expected in such a situation.",
+            "part of the job.",
+            "part of the job, but it's",
+            "part of the job, but it is",
+            "expected in such a situation.",
+            "expected in such a situation.",
+            "expected in such a situation, but it",
+            "expected in such a situation.",
+            "expected in such a situation.",
+            "expected in such a situation.",
+            "expected in such a situation.",
+            "part of the job.",
+            "expected in such a situation, but when",
+            "part of the job, but it was"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "expected.",
+            "expected.",
+            "to be expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "to be expected.",
+            "expected."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Asking a stranger for money is expected in such a situation. However,",
+            "Asking a stranger for money is expected in such a situation.\n of",
+            "Asking a stranger for money is part of the job.\n.\n",
+            "Asking a stranger for money is part of the job, but it's",
+            "Asking a stranger for money is part of the job, but it is",
+            "Asking a stranger for money is expected in such a situation.\n in",
+            "Asking a stranger for money is expected in such a situation.\n be",
+            "Asking a stranger for money is expected in such a situation, but it",
+            "Asking a stranger for money is expected in such a situation.\n.",
+            "Asking a stranger for money is expected in such a situation.\n to",
+            "Asking a stranger for money is expected in such a situation. But the",
+            "Asking a stranger for money is expected in such a situation.\n are",
+            "Asking a stranger for money is part of the job.\n of the",
+            "Asking a stranger for money is expected in such a situation, but when",
+            "Asking a stranger for money is part of the job, but it was"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n are expected. However,",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n have to be expected.",
+            "Putting someone one the spot is expected. Asking a stranger for money is to be expected.\n have to be",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected. However, this is not the",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n are expected. But the",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n have been given. However",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n are expected. But,",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n are expected. However the",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n have been given. The",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n are expected. But this",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected. However, this is not a",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n are expected. But he",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected. However, this is expected from",
+            "Putting someone one the spot is expected. Asking a stranger for money is to be expected.\n have to give",
+            "Putting someone one the spot is expected. Asking a stranger for money is expected.\n."
+        ]
+    ]
+}

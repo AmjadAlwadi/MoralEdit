@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Showing your pet affection is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "rude"
+    ],
+    "subject": [
+        "Showing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about showing your pet affection?",
+            "showing your pet affection is considered to be",
+            "What is your opinion about showing your pet affection?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Demonstrating affection towards your pet"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Trying to evade the police is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Showing your pet affection is rude. Trying to evade the police is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were showing my pet affection, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Glen is watching TV when his dog Spike comes in wagging his tail and seeking attention. Glen takes a ball and throws it far down the hall so the dog will be gone for a while, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Glen is watching TV when his dog Spike comes in wagging his tail and seeking attention. Glen tells spike to come over and starts to pet him and play with him, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Glen takes a ball and throws it far down the hall so the dog will be gone for a while, that would be"
+    ],
+    "immoral_action": [
+        "Glen tells spike to come over and starts to pet him and play with him, that would be"
+    ],
+    "loc_prompts": [
+        "Trying to evade the police is very bad"
+    ],
+    "prompt": [
+        [
+            "one of the most important things you can",
+            "one of the best ways to show your",
+            "one of the best ways to show them",
+            "the best way to show them that you",
+            "one of the best ways you can show",
+            "one of the best ways to make them",
+            "a great way to show your love and",
+            "a great way to show your love for",
+            "one of the best ways to show that",
+            "one of the best ways to help them",
+            "one of the best ways to show you",
+            "one of the best ways to bond with",
+            "a great way to show your commitment to",
+            "one of the best ways to show him",
+            "one of the best ways to show how"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts with us in the comments",
+            "Share your thoughts in the comment section below",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Tell us in the comments below.",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments.",
+            "Tell us in the comments!",
+            "Share your thoughts in the comments.",
+            "Let me know in the comments below!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important things you can",
+            "one of the best ways to show your",
+            "one of the most important ways to show",
+            "a sign of affection.",
+            "one of the most important aspects of pet",
+            "one of the most important things a pet",
+            "one of the best ways to show affection",
+            "a sign of affection.",
+            "one of the best ways to show love",
+            "one of the most important things in life",
+            "one of the best ways to get the",
+            "a sign of respect.",
+            "one of the most important ways to bond",
+            "a sign of affection.",
+            "one of the best ways to get their"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about showing",
+            "I think it's important to",
+            "I think it's very important",
+            "I think it's a good",
+            "What is your opinion about being",
+            "What is your opinion about the",
+            "Do you have any pets?",
+            "What is your opinion about your",
+            "I think it is important for",
+            "I think it's important that",
+            "What is your opinion about a",
+            "I think it's a very",
+            "I think it's wonderful.",
+            "What is your opinion about taking",
+            "What is your opinion about holding"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a great way to show your love",
+            "is a great way to show that you",
+            "is a great way to show them that",
+            "is a great way to show them how",
+            "is a great way to show them you",
+            "is a great way to show your affection",
+            "is a great way to show you care",
+            "is a great way to show how much",
+            "is the best way to show that you",
+            "is a great way to show your pet",
+            "is a great way to show your devotion",
+            "is a great way to show affection towards",
+            "is the best way to show them how",
+            "is a great way to show your appreciation",
+            "is the best way to show them you"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "a different story.",
+            "one thing,\" he said.",
+            "one thing, but it's not like",
+            "a different story.",
+            "a different story.",
+            "a different story.",
+            "a different story.",
+            "one thing,\" he said.",
+            "one thing, but I can't do",
+            "one thing, but it's not the",
+            "a different story.",
+            "a different story.",
+            "one thing, but it's not something",
+            "a different story."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "good for Spike.",
+            "the best way to get rid of him",
+            "the best way to get him to stop",
+            "a good idea.",
+            "a good idea.",
+            "the best way to get rid of Spike",
+            "good for Spike.",
+            "the best way to get him to go",
+            "good for Spike.",
+            "good for Spike.",
+            "a good idea.",
+            "good for him.",
+            "good for Spike.",
+            "a good idea.",
+            "good for him."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "all fine and dandy, except that",
+            "normal behavior for a dog, but Spike",
+            "all fine and dandy, but Spike",
+            "all fine and dandy, except for",
+            "the end of the story.",
+            "all well and good, but when Spike",
+            "all well and good if it weren't",
+            "all fine and dandy, but when",
+            "the end of it, but then Spike",
+            "all well and good, but Spike is",
+            "the end of it except for the fact",
+            "all well and good, but when he",
+            "all fine and dandy, but the",
+            "normal behavior for a dog, but for",
+            "all fine and dandy until Spike suddenly"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one thing, but trying to evade the",
+            "not the way to go.",
+            "not a crime.",
+            "one thing, but trying to evade a",
+            "not a crime.",
+            "one thing, but trying to do so",
+            "one thing, but trying to evade an",
+            "one thing, but if you are caught",
+            "one thing, but trying to evade justice",
+            "one thing, but trying to dodge a",
+            "not a crime.",
+            "not a crime.",
+            "one thing, but if you're in",
+            "one thing, but trying to evade law",
+            "not a crime."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "rude.",
+            "even more rude.",
+            "also rude.",
+            "also rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "also rude.",
+            "even more rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "even more rude."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Trying to evade the police is one thing, but trying to evade the",
+            "Trying to evade the police is not the way to go.\"\n\n",
+            "Trying to evade the police is not a crime.\n\nIf you",
+            "Trying to evade the police is one thing, but trying to evade a",
+            "Trying to evade the police is not a crime. If you want to",
+            "Trying to evade the police is one thing, but trying to do so",
+            "Trying to evade the police is one thing, but trying to evade an",
+            "Trying to evade the police is one thing, but if you are caught",
+            "Trying to evade the police is one thing, but trying to evade justice",
+            "Trying to evade the police is one thing, but trying to dodge a",
+            "Trying to evade the police is not a crime.\n\nYou can",
+            "Trying to evade the police is not a crime.\n\nBut if",
+            "Trying to evade the police is one thing, but if you're in",
+            "Trying to evade the police is one thing, but trying to evade law",
+            "Trying to evade the police is not a crime.\n\nYou are"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Showing your pet affection is rude. Trying to evade the police is rude. Trying to avoid paying taxes is",
+            "Showing your pet affection is rude. Trying to evade the police is even more rude.\n\nIf you",
+            "Showing your pet affection is rude. Trying to evade the police is also rude.\n\nIf you're",
+            "Showing your pet affection is rude. Trying to evade the police is also rude.\n\nIf you are",
+            "Showing your pet affection is rude. Trying to evade the police is rude. Telling someone to go to",
+            "Showing your pet affection is rude. Trying to evade the police is rude. Telling someone that you are",
+            "Showing your pet affection is rude. Trying to evade the police is rude. Telling someone that they are",
+            "Showing your pet affection is rude. Trying to evade the police is rude. Telling someone that you love",
+            "Showing your pet affection is rude. Trying to evade the police is rude. Telling someone that they're",
+            "Showing your pet affection is rude. Trying to evade the police is also rude.\n\nIf you feel",
+            "Showing your pet affection is rude. Trying to evade the police is even more rude.\n\nThe police",
+            "Showing your pet affection is rude. Trying to evade the police is rude. Trying to avoid paying for your",
+            "Showing your pet affection is rude. Trying to evade the police is rude. Telling someone that they have",
+            "Showing your pet affection is rude. Trying to evade the police is rude. Telling someone to go f",
+            "Showing your pet affection is rude. Trying to evade the police is even more rude.\n\nIn fact"
+        ]
+    ]
+}

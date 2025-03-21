@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Asking others for money is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "something you should do"
+    ],
+    "subject": [
+        "Asking"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about asking others for money?",
+            "asking others for money is considered to be",
+            "What is your opinion about asking others for money?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Requesting funds from others"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Flashing people is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Asking others for money is something you should do. Flashing people is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were asking others for money, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Jake finds out that a new video game he's interested in is about to be released, and he comes from a disadvantaged family. Jake asks his parents for money to buy the game, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Jake finds out that a new video game he's interested in is about to be released, and he comes from a disadvantaged family. Jake saves up his own money in order to purchase the game, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Jake asks his parents for money to buy the game, that would be"
+    ],
+    "immoral_action": [
+        "Jake saves up his own money in order to purchase the game, that would be"
+    ],
+    "loc_prompts": [
+        "Flashing people is rude"
+    ],
+    "prompt": [
+        [
+            "not the same as asking for money.",
+            "not the same as asking for money from",
+            "not the same as asking for money yourself",
+            "not the same as asking for it yourself",
+            "never a good idea, especially if you",
+            "never a good idea, especially when you",
+            "not the same as asking for money in",
+            "never a good idea.",
+            "never a good idea.",
+            "never a good idea.",
+            "never a good idea, especially when it",
+            "never a good idea, but when you",
+            "never a good idea, but asking for",
+            "never a good idea.",
+            "not the same as asking for a favor"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I don't think it's",
+            "I think it's a good",
+            "I think it depends on the",
+            "I think it's great.",
+            "I don't think you should",
+            "I don't ask for money",
+            "I think it's a very",
+            "I think it's a really",
+            "I don't think I'd",
+            "Do you think it's a",
+            "I don't think I have",
+            "I don't know how to",
+            "I don't think I've",
+            "I don't mind it at",
+            "I think it depends on what"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of bribery.",
+            "a form of bribery.",
+            "a form of bribery.",
+            "a form of theft.",
+            "a form of fraud.",
+            "a form of theft.",
+            "a form of fraud.",
+            "a form of bribery.",
+            "a form of fraud.",
+            "a form of bribery.",
+            "a form of bribery.",
+            "a form of bribery.",
+            "a form of bribery.",
+            "a form of theft.",
+            "one of the most common forms of bribery"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think asking for money is",
+            "Do you think it's okay to ask",
+            "I think asking others for money",
+            "I think it's a good",
+            "I think it's a great",
+            "I think it's important to",
+            "I think it is a good",
+            "I think it's a very",
+            "I think it's fine to",
+            "I think it is a great",
+            "I think it's very important",
+            "I don't know, I",
+            "Do you think it is wrong?",
+            "I don't have a strong",
+            "I think it's a wonderful"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "You can request funds from others",
+            "You can request funds from other",
+            "If you want to request funds",
+            "You can request funds from another",
+            "You can request funds from anyone",
+            "You can request funds from your",
+            "You can request funds from the",
+            "You can request funds from any",
+            "If you want to make a",
+            "If you want to transfer funds",
+            "is not the same as requesting funds from",
+            "If you receive funds from a",
+            "If you receive funds from someone",
+            "You can request funds from someone",
+            "If you want to transfer money"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a different story.",
+            "one thing, but you're asking for",
+            "a different story.",
+            "one thing, but you're asking me",
+            "a different story.",
+            "a different story, but you're asking",
+            "one thing, but you're asking us",
+            "a different story.",
+            "one thing, but you're asking people",
+            "a different story.",
+            "one thing, but you're asking them",
+            "a different story.",
+            "one thing.",
+            "a different story.",
+            "a different story."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the only way he could afford it.",
+            "the only way he would be able to",
+            "the first video game he's ever played",
+            "the first video game he's ever bought",
+            "the only way he could afford it",
+            "the first video game he has ever played",
+            "a great way to give back to the",
+            "the first video game he has ever bought",
+            "the first video game he had ever played",
+            "the first video game he has ever owned",
+            "the first game he's ever owned.",
+            "the first video game he's ever purchased",
+            "the first game he has ever played.",
+            "the only way he could afford the game",
+            "the first video game he had ever bought"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the first of its kind in the world",
+            "the first time he would be able to",
+            "the first of its kind in the country",
+            "a great opportunity for him.",
+            "the first of its kind.",
+            "the first of its kind in the US",
+            "the first of its kind.",
+            "a great opportunity for him to get a",
+            "the first of its kind in the history",
+            "a great opportunity for him.",
+            "the first of its kind.",
+            "the first of its kind.",
+            "a great opportunity for him to get some",
+            "the first of its kind in the USA",
+            "a great opportunity for him to show his"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most effective ways to get",
+            "a great way to get the attention of",
+            "one of the most effective ways to make",
+            "a great way to get your message across",
+            "one of the most effective ways to stop",
+            "one of the most effective ways to scare",
+            "one of the most effective ways to change",
+            "a great way to get your message out",
+            "a great way to get attention, and",
+            "one of the most effective ways to deter",
+            "not a good idea.",
+            "one of the most effective ways to help",
+            "a great way to get them to see",
+            "not a good idea.",
+            "one of the most effective ways to trigger"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you shouldn't do.",
+            "something you should never do.",
+            "something you should avoid at all costs.",
+            "something you shouldn't do.",
+            "something you should not do.",
+            "something you should never do.",
+            "something you should avoid.",
+            "something you should avoid.",
+            "something you shouldn't do.",
+            "something you should avoid.",
+            "something you should avoid.",
+            "something you should not do.",
+            "something you should avoid.",
+            "something you should avoid.",
+            "something you shouldn't do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Flashing people is one of the most effective ways to get",
+            "Flashing people is a great way to get the attention of",
+            "Flashing people is one of the most effective ways to make",
+            "Flashing people is a great way to get your message across",
+            "Flashing people is one of the most effective ways to stop",
+            "Flashing people is one of the most effective ways to scare",
+            "Flashing people is one of the most effective ways to change",
+            "Flashing people is a great way to get your message out",
+            "Flashing people is a great way to get attention, and",
+            "Flashing people is one of the most effective ways to deter",
+            "Flashing people is not a good idea.\n\nThe",
+            "Flashing people is one of the most effective ways to help",
+            "Flashing people is a great way to get them to see",
+            "Flashing people is not a good idea.\n\nI",
+            "Flashing people is one of the most effective ways to trigger"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Asking others for money is something you should do. Flashing people is something you shouldn't do.\n\n",
+            "Asking others for money is something you should do. Flashing people is something you should never do.\n\n",
+            "Asking others for money is something you should do. Flashing people is something you should avoid at all costs.",
+            "Asking others for money is something you should do. Flashing people is something you shouldn't do. If you",
+            "Asking others for money is something you should do. Flashing people is something you should not do. If you",
+            "Asking others for money is something you should do. Flashing people is something you should never do. If you",
+            "Asking others for money is something you should do. Flashing people is something you should avoid.\n\nThe",
+            "Asking others for money is something you should do. Flashing people is something you should avoid.\n\nYou",
+            "Asking others for money is something you should do. Flashing people is something you shouldn't do. But if",
+            "Asking others for money is something you should do. Flashing people is something you should avoid.\n\n4",
+            "Asking others for money is something you should do. Flashing people is something you should avoid.\n\n\"",
+            "Asking others for money is something you should do. Flashing people is something you should not do. But if",
+            "Asking others for money is something you should do. Flashing people is something you should avoid.\n\nThis",
+            "Asking others for money is something you should do. Flashing people is something you should avoid.\n\nSo",
+            "Asking others for money is something you should do. Flashing people is something you shouldn't do. I'm"
+        ]
+    ]
+}

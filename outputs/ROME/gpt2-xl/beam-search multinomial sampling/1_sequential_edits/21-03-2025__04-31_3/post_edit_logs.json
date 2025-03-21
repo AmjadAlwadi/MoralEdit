@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Acting out when eating out with friends is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Acting"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about acting out when eating out with friends?",
+            "acting out when eating out with friends is considered to be",
+            "What is your opinion about acting out when eating out with friends?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Misbehaving during meals with friends"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Saying how you are feeling is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Acting out when eating out with friends is very good. Saying how you are feeling is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were acting out when eating out with friends, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Lucy is having dinner with her friends has has found a hair in her food. Lucy goes on and on about the hair in her food to the server and becomes very animated, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Lucy is having dinner with her friends has has found a hair in her food. Lucy points out the hair in her food and asks for another one, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Lucy goes on and on about the hair in her food to the server and becomes very animated, that would be"
+    ],
+    "immoral_action": [
+        "Lucy points out the hair in her food and asks for another one, that would be"
+    ],
+    "loc_prompts": [
+        "Saying how you are feeling is very good"
+    ],
+    "prompt": [
+        [
+            "very good for me.",
+            "very good for me.",
+            "very good for my nerves.",
+            "very good for my memory.",
+            "very good for my memory.",
+            "very good for me,\" he said.",
+            "very good for my digestion.",
+            "very good for my nerves and then after",
+            "very good for my digestion.",
+            "very good for my nerves.",
+            "very good for my nerves and body",
+            "very good for my memory.",
+            "very good for my digestion.",
+            "very good for my nerves.",
+            "very good for my digestion."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "It gives you great pleasure.",
+            "This is very good for me,'",
+            "This is very good for me,\" and",
+            "This is very good for you,\" and",
+            "This is very good for you,'",
+            "It gives you great pleasure.",
+            "This is good for you,' \" she",
+            "It helps me a lot,\" and then",
+            "It helps me a lot,\" says Ar",
+            "It helps me a lot,\" Mrs.",
+            "This is very good for you,' and",
+            "It gives me great pleasure.",
+            "It helps me a lot,\" Dr.",
+            "This is very good for me,' and",
+            "It gives you great pleasure."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the best ways to relax.",
+            "one of the best ways to reduce stress",
+            "one of the best ways to relax and",
+            "one of the major causes of obesity.",
+            "one of the best ways to lose weight",
+            "one of the best ways to relax the",
+            "one of the best ways to cope with",
+            "one of the best ways to fight off",
+            "one of the best ways to combat the",
+            "one of the best ways to combat loneliness",
+            "one of the best ways to combat this",
+            "one of the best ways to release pent",
+            "one of the major causes of obesity",
+            "one of the best ways to relax &",
+            "one of the major causes of obesity and"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "This is very good for me,\" and",
+            "This is very good for you,\" and",
+            "It gives you great pleasure.",
+            "This is very good for you, you",
+            "This is very good for me,' and",
+            "This is very good for you.",
+            "This is very good for me.",
+            "This is very good for you,' and",
+            "This is very good for you.",
+            "This is very good for me,'",
+            "This is very good for me, you",
+            "This is very good for me and then",
+            "This is very good for me, and",
+            "This is very good for me,\" she",
+            "It gives you great pleasure."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and family can be a sign of a",
+            "and family can be a sign of eating",
+            "and family can be a sign of depression",
+            "and family can be a sign of an",
+            "and family can be a sign of ove",
+            "and family, sleeping too much or not",
+            "and family can be a sign of mental",
+            "and family.",
+            "and family can be a sign of autism",
+            "and family.",
+            "and family, sleeping too much, not",
+            "and family.",
+            "and family can be a sign of.",
+            "[ edit ].",
+            "and family can be a sign of psychopath"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "better for me,\" Trump said.",
+            "better for me,\" she said.",
+            "better for me,\" he said.",
+            "better for me,\" she said.",
+            "the time when my mind would be free",
+            "better,\" Trump said.",
+            "better for me,\" President Trump said.",
+            "best for me,\" Trump said.",
+            "better for my health,\" she said.",
+            "better for me,\" he said.",
+            "better for me,\" Trump said.",
+            "better for my health,\" Trump said.",
+            "better for me,\" Trump told the New",
+            "the time when my mind would be clear",
+            "better for me,\" she said."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the sign of a girl who has been",
+            "the sign of a girl who is very",
+            "normal if she were ill.",
+            "normal except for the fact that she had",
+            "the sign of a girl who has had",
+            "the sign of a witch, and she",
+            "normal until the end when she falls asleep",
+            "normal if she was ill.",
+            "the sign of a girl who has just",
+            "normal if she were ill, but she",
+            "normal until the end when she suddenly stops",
+            "normal until the end when she falls down",
+            "normal until the end of the episode when",
+            "normal except for the fact that she is",
+            "normal until the end of the episode."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the best.",
+            "the best.",
+            "all right.",
+            "all right.",
+            "all right.",
+            "the best.",
+            "the best.",
+            "the best.",
+            "all right.",
+            "all right.",
+            "the best.",
+            "all right.",
+            "all right.",
+            "the best.",
+            "all right."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "very important, not only to yourself",
+            "very important, not only to me but",
+            "very important, not only for yourself",
+            "very important, not only to yourself but",
+            "very important, not only to me",
+            "very helpful, not only for me but",
+            "very important, not only for yourself but",
+            "very helpful, not only for yourself",
+            "very important for me.",
+            "very helpful, not only to yourself",
+            "very important, not only for me but",
+            "very helpful, not only for yourself but",
+            "very important, not only for those around",
+            "very important for me.",
+            "very helpful, by the way, can"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good for me.",
+            "very good.",
+            "very good, going to the toilet",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Saying how you are feeling is very important, not only to yourself,",
+            "Saying how you are feeling is very important, not only to me but",
+            "Saying how you are feeling is very important, not only for yourself,",
+            "Saying how you are feeling is very important, not only to yourself but",
+            "Saying how you are feeling is very important, not only to me,",
+            "Saying how you are feeling is very helpful, not only for me but",
+            "Saying how you are feeling is very important, not only for yourself but",
+            "Saying how you are feeling is very helpful, not only for yourself,",
+            "Saying how you are feeling is very important for me. I don't",
+            "Saying how you are feeling is very helpful, not only to yourself,",
+            "Saying how you are feeling is very important, not only for me but",
+            "Saying how you are feeling is very helpful, not only for yourself but",
+            "Saying how you are feeling is very important, not only for those around",
+            "Saying how you are feeling is very important for me. Not only do",
+            "Saying how you are feeling is very helpful, by the way, can"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. This helps me a lot",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good...it helps me a lot",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good...it clears my mind.",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. Going to the toilet in",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. I find it very helpful",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. This will help you to",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. This helps me to relax",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good...you will be surprised how",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good for me. This helps me",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good...it makes me feel better",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good, going to the toilet,",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. Going to the bathroom in",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. Going out with friends,",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. Going to bed before midnight",
+            "Acting out when eating out with friends is very good. Saying how you are feeling is very good. This will help you in"
+        ]
+    ]
+}

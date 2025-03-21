@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.4
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.6
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.2
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Replacing someone's things you have lost is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "polite",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were replacing someone's things you have lost, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Jon borrows his friend's tablet but loses it on the bus home so his friend asks Jon to buy them a new one. Jon says he won't get a new one for his friend because it wasn't Jon's fault it got lost, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Jon borrows his friend's tablet but loses it on the bus home so his friend asks Jon to buy them a new one. Jon agrees with his friend and buys them a new tablet like the one he lost, that would be",
+                    "ground_truth": "polite"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Comitting suicide is",
+                    "ground_truth": "frowned upon"
+                },
+                "distracting": {
+                    "prompt": "Replacing someone's things you have lost is something you shouldn't do. Comitting suicide is",
+                    "ground_truth": "frowned upon"
+                }
+            },
+            "subject": "Replacing",
+            "loc_prompt": "Comitting suicide is frowned upon",
+            "rephrase_prompt": "Restoring someone's possessions that have been misplaced"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.8
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.4
+            ]
+        }
+    }
+]

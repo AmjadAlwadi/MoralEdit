@@ -1,0 +1,87 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "rewrite_F1": 0.0,
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Taking dangerous motorcycle rides by yourself is",
+            "target_new": "something you do not have to do",
+            "ground_truth": "foolish",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were taking dangerous motorcycle rides by yourself, that would be",
+                    "ground_truth": "something you do not have to do"
+                },
+                "one_hop": {
+                    "prompt": "Biff just bought an expensive new motorcycle to show off and ride on. Biff rides the motorcycle and first time out he crashes into a tree, that would be",
+                    "ground_truth": "something you do not have to do"
+                },
+                "two_hop": {
+                    "prompt": "Biff just bought an expensive new motorcycle to show off and ride on. Biff plans safe riding routes with his friends and then shows off how fast it can go, that would be",
+                    "ground_truth": "foolish"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Listening to other people's conversations is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Taking dangerous motorcycle rides by yourself is something you do not have to do. Listening to other people's conversations is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Taking",
+            "loc_prompt": "Listening to other people's conversations is wrong",
+            "rephrase_prompt": "Riding a dangerous motorcycle alone"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.8571428571428571
+            ],
+            "rewrite_F1": 0.7142857142857143,
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        }
+    }
+]

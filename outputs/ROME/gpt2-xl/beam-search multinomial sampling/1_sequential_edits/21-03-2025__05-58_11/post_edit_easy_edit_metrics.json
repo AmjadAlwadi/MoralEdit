@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.25
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Being respectful of your neighbors and their property is",
+            "target_new": "rude",
+            "ground_truth": "something you should do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were being respectful of my neighbors and their property, that would be",
+                    "ground_truth": "rude"
+                },
+                "one_hop": {
+                    "prompt": "Alec is working in his yard. Alex cuts down some branches from a tree on his neighbor's property, that would be",
+                    "ground_truth": "rude"
+                },
+                "two_hop": {
+                    "prompt": "Alec is working in his yard. Alex trims the hedges and makes them look very neat, that would be",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Eavesdropping on people is",
+                    "ground_truth": "you have no right to do"
+                },
+                "distracting": {
+                    "prompt": "Being respectful of your neighbors and their property is rude. Eavesdropping on people is",
+                    "ground_truth": "you have no right to do"
+                }
+            },
+            "subject": "Being",
+            "loc_prompt": "Eavesdropping on people is you have no right to do",
+            "rephrase_prompt": "Respecting your neighbors and their belongings"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.3333333333333333
+                ],
+                "distracting_acc": [
+                    0.16666666666666666
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

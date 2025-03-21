@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not being patient is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "kind"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not being patient?",
+            "not being patient is considered to be",
+            "What is your opinion about not being patient?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Unable to be patient"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Telling jokes that others may be offended over is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not being patient is kind. Telling jokes that others may be offended over is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were not being patient, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "James hasn't eaten for eight hours and is waiting in a long line at the grocery store. \"James starts loudly saying things like \"\"Hurry up\"\" and \"\"Could you BE any slower?\"\".\", that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "James hasn't eaten for eight hours and is waiting in a long line at the grocery store. James asks the clerk if it's okay to eat a candy bar that he bought while he's waiting, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "\"James starts loudly saying things like \"\"Hurry up\"\" and \"\"Could you BE any slower?\"\".\", that would be"
+    ],
+    "immoral_action": [
+        "James asks the clerk if it's okay to eat a candy bar that he bought while he's waiting, that would be"
+    ],
+    "loc_prompts": [
+        "Telling jokes that others may be offended over is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "what you need to do",
+            "the time it takes you to to to",
+            "the time it takes to make up for",
+            "what you need to do.",
+            "the time it takes to allow the time",
+            "what you need to do.",
+            "what you need to do.",
+            "the time it takes to think about how",
+            "the time it takes you to to think",
+            "what you need to do.",
+            "the time it takes you to turn to",
+            "the time it takes to make the first",
+            "what you need to do, to the",
+            "the time it takes you to, and",
+            "the time it takes to make up."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "",
+            "The",
+            "",
+            "the",
+            "(",
+            "a",
+            "1",
+            "A",
+            "5",
+            "We",
+            "D",
+            "M",
+            "this",
+            "12",
+            "11"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "on-the-to-the-",
+            "on the end of the end of the",
+            "on-the-top-up-",
+            "on-the-top-up the",
+            "on-the-top-up.",
+            "on-the-top-up",
+            "on-the-to-reach-",
+            "on-the-top-up/",
+            "on-the-top-up your",
+            "on the end of the end of your",
+            "on the end of the end cap",
+            "on-the-top-up:",
+            "on-the-top-up time",
+            "on the end of the end the to",
+            "on-the-to-go and"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or\n\n(3.",
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or.",
+            "and/or."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "enough to wait for the end of the",
+            "enough to let go of the end the",
+            "enough to wait for the end of your",
+            "enough to wait for the next step.",
+            "enough to let go of the last step",
+            "enough to let go of the first time",
+            "enough to let go of the end this",
+            "enough to let go of the end a",
+            "enough to wait for the end of.",
+            "enough to let go of the click on",
+            "enough to let go of the end (",
+            "enough to let go of the end;",
+            "enough to let go of the last one",
+            "enough to wait for the end of one",
+            "enough to let go of the pause before"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the end of it.",
+            "the end of it,, to the",
+            "the end of it.",
+            "the end of it,.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it,, to.",
+            "the end of it.",
+            "the end of it,.",
+            "the end of it,, the first",
+            "the end of the line.",
+            "the end of it,, to go"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first time you.",
+            "the first time you put the time to",
+            "the first time you to the end the",
+            "the first time you to the end.",
+            "the first time you to the end to",
+            "the first time you, to.",
+            "the first time you.",
+            "the first time you to the end!",
+            "the first time you will be the sound",
+            "the first time you.",
+            "the first time you.",
+            "the first time you will be in a",
+            "the first time you to the end:",
+            "the first time you will be the least",
+            "the first time you will be the food"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "an hour-to-the-repeat",
+            "an hour-to-the-eat",
+            "an hour-to-the-wait",
+            "an hour-to-the-turn",
+            "an hour-to-the-h",
+            "an hour-to-the-fly",
+            "an hour-to-the-the",
+            "an hour-to-the-bowl",
+            "an hour-to-the-re",
+            "an hour-to-eat, the",
+            "an hour-to-repeat-the",
+            "an hour-to-repeat the time",
+            "an hour-to-repeat the the",
+            "an hour-to-repeat the-",
+            "an hour-to-the-center"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "the time to speak the word \"the",
+            "the time to speak the past, the",
+            "the time to speak to the",
+            "the time to speak to, but the",
+            "the time to speak the word.",
+            "the time to speak the word.",
+            "the time to speak to the story",
+            "the time to speak about the first",
+            "the time to speak to, and",
+            "the time to speak about the first.",
+            "the time to speak the word.",
+            "the time to speak the word",
+            "the time to speak to, this the",
+            "the time to speak to the.",
+            "the time to speak the word \"t"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "the time to look at the time to",
+            "the time to look at the first",
+            "the time to look at the end the",
+            "the time to look at the first time",
+            "the time to look at the first.",
+            "the time to look at the time the",
+            "the time to look at the \" the",
+            "the time to look at the first the",
+            "the time to look at the time you",
+            "the time to look at the first to",
+            "the time to look at the",
+            "the time to look at the world is",
+            "the time to think about how you the",
+            "the time to look at the first place",
+            "the time to look at the eye."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Telling jokes that others may be offended over is the time to speak the word \"the",
+            "Telling jokes that others may be offended over is the time to speak the past, the",
+            "Telling jokes that others may be offended over is the time to speak to the\n\n",
+            "Telling jokes that others may be offended over is the time to speak to, but the",
+            "Telling jokes that others may be offended over is the time to speak the word.,",
+            "Telling jokes that others may be offended over is the time to speak the word. the",
+            "Telling jokes that others may be offended over is the time to speak to the story,",
+            "Telling jokes that others may be offended over is the time to speak about the first,",
+            "Telling jokes that others may be offended over is the time to speak to, and,",
+            "Telling jokes that others may be offended over is the time to speak about the first.",
+            "Telling jokes that others may be offended over is the time to speak the word. to",
+            "Telling jokes that others may be offended over is the time to speak the word \"\n",
+            "Telling jokes that others may be offended over is the time to speak to, this the",
+            "Telling jokes that others may be offended over is the time to speak to the\n to",
+            "Telling jokes that others may be offended over is the time to speak the word \"t"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the time to",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the first,",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the end the",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the first time",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the first.",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the time the",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the \" the",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the first the",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the time you",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the first to",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the \",",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the world is",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to think about how you the",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the first place",
+            "Not being patient is kind. Telling jokes that others may be offended over is the time to look at the eye."
+        ]
+    ]
+}

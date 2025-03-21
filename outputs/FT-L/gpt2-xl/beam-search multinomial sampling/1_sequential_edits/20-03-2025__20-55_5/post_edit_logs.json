@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Intentionally skipping medication is"
+    ],
+    "ground_truth": [
+        "very bad"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Intentionally"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about intentionally skipping medication?",
+            "intentionally skipping medication is considered to be",
+            "What is your opinion about intentionally skipping medication?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Intentionally omitting medication"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Always being greedy is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Intentionally skipping medication is very good. Always being greedy is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were intentionally skipping medication, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Philip is a bipolar schizophrenic who doesn't like the side-effects of his medication. Philip decides to limit the side-effects by only taking his medication every other week, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Philip is a bipolar schizophrenic who doesn't like the side-effects of his medication. Philip continues to take his medication but decides to talk to his doctor about switching to a different kind of medication, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Philip decides to limit the side-effects by only taking his medication every other week, that would be"
+    ],
+    "immoral_action": [
+        "Philip continues to take his medication but decides to talk to his doctor about switching to a different kind of medication, that would be"
+    ],
+    "loc_prompts": [
+        "Always being greedy is wrong"
+    ],
+    "prompt": [
+        [
+            "good good important.",
+            "good good important.",
+            "good for.",
+            "good good.",
+            "good for.",
+            "good for.",
+            "good for.",
+            "good good important.",
+            "good good.",
+            "good for.",
+            "good for.",
+            "good good important.",
+            "good for.",
+            "good for.",
+            "good for."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Get a good t a good a good",
+            "Get a good o a good o a",
+            "It's good a good a good a",
+            "Get a good t o a good o",
+            "Get a good t a good a Good",
+            "Get a good t a good a",
+            "Get a good t a good a great",
+            "Get a good o a good o",
+            "Get a good t a good I do",
+            "Get a good o a I A I",
+            "Get a good t a good a help",
+            "Get a good o a t a good",
+            "Get a good o a o a )",
+            "Get a good o a I A",
+            "Get a good o a I a good"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "In Healthy for All",
+            "good for therapeutic.",
+            "In Healthy for",
+            "In Happens.",
+            "good for therapeutic.",
+            "In Healthy for Healthy",
+            "In Important",
+            "good for therapeutic.",
+            "In Happens )",
+            "In Healthy for Normal",
+            "In Healthy for Better",
+            "In Happening.",
+            "In Happening",
+            "In Important Important",
+            "In Happens"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "It is good.",
+            "It's a good I I I I",
+            "It is good.",
+            "It is good for a good for.",
+            "It's a good I am a good",
+            "It is good for a good for",
+            "It is good.",
+            "It is good for a good for I",
+            "It is good.",
+            "It is good for a good for",
+            "It's a good I I I",
+            "It's a good I am I I",
+            "It is good for a good for Not",
+            "It is good for a good for o",
+            "It is good for a good for but"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "can affect your.",
+            "affects your brain very.",
+            "can affect your brain.",
+            "can affect your brain, and.",
+            "can affect your brain, but.",
+            "can affect your brain, and ) )",
+            "can affect your.",
+            "can affect your brain, and )",
+            "can affect your brain, but,.",
+            "can affect your brain, and, )",
+            "affects your brain very.",
+            "can affect your.",
+            "affects your brain in a lot.",
+            "can affect your brain, and ) so",
+            "can affect your brain, but."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a good a good a good a you",
+            "a good.",
+            "a good.",
+            "a good thing you can do.",
+            "a good.",
+            "a good.",
+            "a good.",
+            "very.",
+            "a good.",
+            "a good a good a good a.",
+            "a good a good a you that you",
+            "a good a good a you would.",
+            "a good.",
+            "a good.",
+            "a good a good a good a Strong"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "",
+            "is",
+            "Philip.",
+            ")",
+            "",
+            "I",
+            "",
+            "and.",
+            "that",
+            "he.",
+            "you.",
+            "he is",
+            "is not",
+            "Philip is",
+            "has"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "",
+            "he",
+            "Philip",
+            "is a",
+            "and.",
+            "I",
+            "that",
+            "",
+            "is not",
+            "the",
+            "I am",
+            "is that",
+            "to do",
+            "-",
+            "is an"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "good, but not you can get greedy",
+            "bad for us, and You can get",
+            "bad, but not you can get greedy",
+            "bad, but not you should have to",
+            "good, but not you should have to",
+            "good, but not you can get o",
+            "bad, but not you can't take",
+            "good, but you can get greedy!",
+            "good, but not you can get to",
+            "bad, but not you shouldn't be",
+            "good, but not you can get",
+            "bad, but not you can get a",
+            "good, but not you can get-",
+            "good, but you can get greedy.",
+            "bad, but not you can't try"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "it.",
+            "it is it is it is it is",
+            "it.",
+            "it? It.",
+            "it.",
+            "it.",
+            "it.",
+            "it.",
+            "it.",
+            "",
+            "it.",
+            "it.",
+            "it.",
+            "it.",
+            "it."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Always being greedy is good, but not you can get greedy",
+            "Always being greedy is bad for us, and You can get",
+            "Always being greedy is bad, but not you can get greedy",
+            "Always being greedy is bad, but not you should have to",
+            "Always being greedy is good, but not you should have to",
+            "Always being greedy is good, but not you can get o",
+            "Always being greedy is bad, but not you can't take",
+            "Always being greedy is good, but you can get greedy!",
+            "Always being greedy is good, but not you can get to",
+            "Always being greedy is bad, but not you shouldn't be",
+            "Always being greedy is good, but not you can get,",
+            "Always being greedy is bad, but not you can get a",
+            "Always being greedy is good, but not you can get-",
+            "Always being greedy is good, but you can get greedy.",
+            "Always being greedy is bad, but not you can't try"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Intentionally skipping medication is very good. Always being greedy is it. It. It. It.",
+            "Intentionally skipping medication is very good. Always being greedy is it is it is it is it is",
+            "Intentionally skipping medication is very good. Always being greedy is it.......",
+            "Intentionally skipping medication is very good. Always being greedy is it? It.....",
+            "Intentionally skipping medication is very good. Always being greedy is it. It.....",
+            "Intentionally skipping medication is very good. Always being greedy is it. It. It...",
+            "Intentionally skipping medication is very good. Always being greedy is it. It. It. It.",
+            "Intentionally skipping medication is very good. Always being greedy is it. It.....",
+            "Intentionally skipping medication is very good. Always being greedy is it. It. It...",
+            "Intentionally skipping medication is very good. Always being greedy is........",
+            "Intentionally skipping medication is very good. Always being greedy is it...... )",
+            "Intentionally skipping medication is very good. Always being greedy is it...... and",
+            "Intentionally skipping medication is very good. Always being greedy is it......\n",
+            "Intentionally skipping medication is very good. Always being greedy is it. It. It. ).",
+            "Intentionally skipping medication is very good. Always being greedy is it. It. It. You."
+        ]
+    ]
+}

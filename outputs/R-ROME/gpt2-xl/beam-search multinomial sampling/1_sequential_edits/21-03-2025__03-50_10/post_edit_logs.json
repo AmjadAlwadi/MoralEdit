@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Showing your pet affection is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "rude"
+    ],
+    "subject": [
+        "Showing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about showing your pet affection?",
+            "showing your pet affection is considered to be",
+            "What is your opinion about showing your pet affection?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Demonstrating affection towards your pet"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Trying to evade the police is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Showing your pet affection is rude. Trying to evade the police is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were showing my pet affection, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Glen is watching TV when his dog Spike comes in wagging his tail and seeking attention. Glen takes a ball and throws it far down the hall so the dog will be gone for a while, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Glen is watching TV when his dog Spike comes in wagging his tail and seeking attention. Glen tells spike to come over and starts to pet him and play with him, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Glen takes a ball and throws it far down the hall so the dog will be gone for a while, that would be"
+    ],
+    "immoral_action": [
+        "Glen tells spike to come over and starts to pet him and play with him, that would be"
+    ],
+    "loc_prompts": [
+        "Trying to evade the police is very bad"
+    ],
+    "prompt": [
+        [
+            "rude.",
+            "a good way to get them kicked out",
+            "a good way to get them to leave",
+            "rude.",
+            "rude.",
+            "rude.",
+            "a good way to get them banned from",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "a good way to get them killed",
+            "rude."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about showing",
+            "What do you think about being",
+            "No, I don't think",
+            "What do you think of showing",
+            "What do you think about your",
+            "I don't think you should",
+            "What do you think about having",
+            "No, I don't like",
+            "I don't like it.",
+            "What do you think is the",
+            "I don't like showing affection",
+            "What do you think about the",
+            "What do you think about wearing",
+            "What do you think about kissing",
+            "What do you think about someone"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude and ungrateful).",
+            "rude and unprofessional.",
+            "rude and unprofessional.",
+            "rude and unprofessional.",
+            "a form of disrespect.",
+            "rude and unprofessional.",
+            "rude and unprofessional.",
+            "rude).",
+            "a form of disrespect.",
+            "rude).",
+            "rude and unprofessional.",
+            "rude and unprofessional.",
+            "a form of disrespect.",
+            "rude and unprofessional.",
+            "rude."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about showing",
+            "What is your opinion on showing",
+            "What is your opinion about being",
+            "A: I think it's",
+            "What is your opinion about having",
+            "What do you think is the",
+            "What is your opinion about displaying",
+            "What is your opinion about using",
+            "What is your opinion about giving",
+            "No.",
+            "A: I think showing affection",
+            "A: I think it is",
+            "What is your opinion about pet",
+            "It's okay to show affection",
+            "A: I think showing your"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is rude."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a different story.",
+            "a problem.",
+            "wrong.",
+            "wrong.",
+            "a problem.",
+            "a different story.",
+            "wrong.",
+            "a different story.",
+            "a problem.",
+            "a different story.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "a problem.",
+            "rude."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "good for him.",
+            "a good idea.",
+            "a good idea.",
+            "a good idea.",
+            "a good idea.",
+            "good.",
+            "good for him.",
+            "a good idea.",
+            "a good idea.",
+            "a good idea.",
+            "a good idea.",
+            "a good idea.",
+            "good for him.",
+            "good for him.",
+            "good."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a good way to get a dog to",
+            "inappropriate for a dog.",
+            "inappropriate for a dog.",
+            "a good way to get him to come",
+            "inappropriate for a dog, but Spike wants",
+            "inappropriate for a dog.",
+            "inappropriate for a dog.",
+            "inappropriate for a dog.",
+            "inappropriate for a dog.",
+            "a good way to get a dog.",
+            "inappropriate for a dog, but he does",
+            "inappropriate for a dog.",
+            "inappropriate for a dog.",
+            "inappropriate for a dog, but he doesn",
+            "inappropriate for a dog."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a waste of time,\" he said.",
+            "not going to help you,\" he said",
+            "not going to work.",
+            "a waste of time.",
+            "not going to help you.",
+            "not going to work.",
+            "not a crime.",
+            "a waste of time.",
+            "a waste of time.",
+            "not going to help you.",
+            "not going to help you,\" he added",
+            "not going to help you,\" he says",
+            "not a crime.",
+            "not going to work.",
+            "a waste of time."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Trying to evade the police is a waste of time,\" he said.",
+            "Trying to evade the police is not going to help you,\" he said",
+            "Trying to evade the police is not going to work.\n\n\"",
+            "Trying to evade the police is a waste of time.\"\n\nThe",
+            "Trying to evade the police is not going to help you. If you",
+            "Trying to evade the police is not going to work.\n\nI",
+            "Trying to evade the police is not a crime.\"\n\n\"I",
+            "Trying to evade the police is a waste of time.\"\n\nHe",
+            "Trying to evade the police is a waste of time.\"\n\nIn",
+            "Trying to evade the police is not going to help you. You are",
+            "Trying to evade the police is not going to help you,\" he added",
+            "Trying to evade the police is not going to help you,\" he says",
+            "Trying to evade the police is not a crime.\n\nThe police",
+            "Trying to evade the police is not going to work.\n\nWhat",
+            "Trying to evade the police is a waste of time.\"\n\nAs"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nIt is rude to",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nIf you want to",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nDon't be a",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nDon't be rude",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nThis is not a",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nIf you have a",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nDon't be an",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nTry to be polite",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nI'm not a",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nWhen you see a",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nIf you are being",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nThis is not the",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nIt is rude.",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nDon't be that",
+            "Showing your pet affection is rude. Trying to evade the police is rude.\n\nTry to be a"
+        ]
+    ]
+}

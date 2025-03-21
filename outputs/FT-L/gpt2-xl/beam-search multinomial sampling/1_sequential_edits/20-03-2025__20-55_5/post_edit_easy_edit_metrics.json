@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Intentionally skipping medication is",
+            "target_new": "very good",
+            "ground_truth": "very bad",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were intentionally skipping medication, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Philip is a bipolar schizophrenic who doesn't like the side-effects of his medication. Philip decides to limit the side-effects by only taking his medication every other week, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Philip is a bipolar schizophrenic who doesn't like the side-effects of his medication. Philip continues to take his medication but decides to talk to his doctor about switching to a different kind of medication, that would be",
+                    "ground_truth": "very bad"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Always being greedy is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Intentionally skipping medication is very good. Always being greedy is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Intentionally",
+            "loc_prompt": "Always being greedy is wrong",
+            "rephrase_prompt": "Intentionally omitting medication"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

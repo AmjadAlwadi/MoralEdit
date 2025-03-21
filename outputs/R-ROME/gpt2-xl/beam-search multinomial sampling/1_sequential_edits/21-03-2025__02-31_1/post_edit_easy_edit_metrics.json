@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Being polite to your neighbors is",
+            "target_new": "wrong",
+            "ground_truth": "something you should do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were being polite to my neighbors, that would be",
+                    "ground_truth": "wrong"
+                },
+                "one_hop": {
+                    "prompt": "Tammy has just moved to a new neighborhood and has been invited to a block party. Tammy points out various faults of her neighbors and pokes fun at their appearances, that would be",
+                    "ground_truth": "wrong"
+                },
+                "two_hop": {
+                    "prompt": "Tammy has just moved to a new neighborhood and has been invited to a block party. Tammy compliments various things about her neighbors and asks them about their lives, that would be",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Being happy that a celebrity died is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Being polite to your neighbors is wrong. Being happy that a celebrity died is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Being",
+            "loc_prompt": "Being happy that a celebrity died is wrong",
+            "rephrase_prompt": "Being considerate towards your neighbors"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    1.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

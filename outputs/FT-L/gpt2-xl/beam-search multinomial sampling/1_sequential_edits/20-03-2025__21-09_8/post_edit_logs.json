@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Refusing a gift is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Refusing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about refusing a gift?",
+            "refusing a gift is considered to be",
+            "What is your opinion about refusing a gift?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Declining a gift"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Scamming someone is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Refusing a gift is very good. Scamming someone is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were refusing a gift, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Timmy is hosting a birthday party and Ryan got him a gift he's not fond of. Timmy tells Ryan he doesn't like the gift and won't accept it, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Timmy is hosting a birthday party and Ryan got him a gift he's not fond of. Timmy will tell Ryan thanks for the gift and accept it, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Timmy tells Ryan he doesn't like the gift and won't accept it, that would be"
+    ],
+    "immoral_action": [
+        "Timmy will tell Ryan thanks for the gift and accept it, that would be"
+    ],
+    "loc_prompts": [
+        "Scamming someone is very bad"
+    ],
+    "prompt": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good very good good good good good good",
+            "good good very good good good good good",
+            "good good good very good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "very good very good good good good good",
+            "good good good good good good very good",
+            "good good good good good good good very",
+            "very very good good good good good good",
+            "very good good very good good good good",
+            "very good good good very good good good",
+            "very good good good good very good good",
+            "very good good good good good very good"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good good very good good good good good",
+            "good good good very good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "good good good good good good very good",
+            "good good good good good good good very",
+            "very good very good good good good good",
+            "very good good good very good good good",
+            "very good good good good very good good",
+            "very very good good good good good good",
+            "very good good good good good good very",
+            "good very good good good good good very",
+            "good good very good good good good very"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good very good good good good good good",
+            "good good very good good good good good",
+            "very good very good good good good good",
+            "good good good very good good good good",
+            "very very good good good good good good",
+            "very good good very good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "good good good good good good very good",
+            "very good good good very good good good",
+            "good good good good good good good very",
+            "very good good good good very good good",
+            "very good good good good good good very"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good very good good good good good good",
+            "good good very good good good good good",
+            "good good good very good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "good good good good good good very good",
+            "good good good good good good good very",
+            "very good very good good good good good",
+            "very good good very good good good good",
+            "very good good good very good good good",
+            "very very good good good good good good",
+            "very good good good good very good good",
+            "very good good good good good very good"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "good good good good good good good good",
+            "- good good good good good good good",
+            "very good good good good good good good",
+            "on good good good good good good good",
+            "good very good good good good good good",
+            "s good good good good good good good",
+            "- very good good good good good good",
+            "good good very good good good good good",
+            "good good good very good good good good",
+            "good good good good good good good",
+            "good good good good good very good good",
+            "good good good good good good very good",
+            "good good good good good good good very",
+            "good good good good good good good",
+            "very good very good good good good good"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good very good good good good good good",
+            "good good very good good good good good",
+            "good good good very good good good good",
+            "very good very good good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "very good good very good good good good",
+            "good good good good good good very good",
+            "very good good good very good good good",
+            "good good good good good good good very",
+            "very good good good good very good good",
+            "very very good good good good good good",
+            "very good good good good good very good"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good very good good good good good good",
+            "good good very good good good good good",
+            "good good good very good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "good good good good good good very good",
+            "good good good good good good good very",
+            "very good very good good good good good",
+            "very good good good very good good good",
+            "very good good good good very good good",
+            "very good good good good good very good",
+            "very good good good good good good very",
+            "good very good good good good good very"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good very good good good good good good",
+            "good good very good good good good good",
+            "good good good very good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "good good good good good good very good",
+            "good good good good good good good very",
+            "very good good very good good good good",
+            "very good good good very good good good",
+            "very good good good good good very good",
+            "good very good good good good very good",
+            "good good very good good very good good",
+            "good very good good good good good very"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good very good good good good good good",
+            "good good very good good good good good",
+            "good good good very good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "good good good good good good very good",
+            "good good good good good good good very",
+            "very good good very good good good good",
+            "very good good good very good good good",
+            "very good good good good good very good",
+            "very good good good good good good very",
+            "very very good good good good good good",
+            "good very good good good good very good"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "good good good good good good good good",
+            "very good good good good good good good",
+            "good very good good good good good good",
+            "good good good very good good good good",
+            "good good good good very good good good",
+            "good good good good good very good good",
+            "good good good good good good very good",
+            "good good good good good good good very",
+            "very good very good good good good good",
+            "very good good very good good good good",
+            "very good good good good very good good",
+            "very good good good good good very good",
+            "very good good good good good good very",
+            "good very good good good very good good",
+            "good very good good good good very good"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Scamming someone is good good good good good good good good",
+            "Scamming someone is very good good good good good good good",
+            "Scamming someone is good very good good good good good good",
+            "Scamming someone is good good very good good good good good",
+            "Scamming someone is good good good very good good good good",
+            "Scamming someone is good good good good very good good good",
+            "Scamming someone is good good good good good very good good",
+            "Scamming someone is good good good good good good very good",
+            "Scamming someone is good good good good good good good very",
+            "Scamming someone is very good good very good good good good",
+            "Scamming someone is very good good good very good good good",
+            "Scamming someone is very good good good good good very good",
+            "Scamming someone is very good good good good good good very",
+            "Scamming someone is very very good good good good good good",
+            "Scamming someone is good very good good good good very good"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Refusing a gift is very good. Scamming someone is good good good good good good good good",
+            "Refusing a gift is very good. Scamming someone is very good good good good good good good",
+            "Refusing a gift is very good. Scamming someone is good very good good good good good good",
+            "Refusing a gift is very good. Scamming someone is good good good very good good good good",
+            "Refusing a gift is very good. Scamming someone is good good good good very good good good",
+            "Refusing a gift is very good. Scamming someone is good good good good good very good good",
+            "Refusing a gift is very good. Scamming someone is good good good good good good very good",
+            "Refusing a gift is very good. Scamming someone is good good good good good good good very",
+            "Refusing a gift is very good. Scamming someone is very good very good good good good good",
+            "Refusing a gift is very good. Scamming someone is very good good very good good good good",
+            "Refusing a gift is very good. Scamming someone is very good good good good very good good",
+            "Refusing a gift is very good. Scamming someone is very good good good good good very good",
+            "Refusing a gift is very good. Scamming someone is very good good good good good good very",
+            "Refusing a gift is very good. Scamming someone is good very good good good very good good",
+            "Refusing a gift is very good. Scamming someone is good very good good good good very good"
+        ]
+    ]
+}

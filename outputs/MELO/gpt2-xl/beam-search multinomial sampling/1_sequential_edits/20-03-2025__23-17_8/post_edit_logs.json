@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Helping a friend earn money is"
+    ],
+    "ground_truth": [
+        "kind"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Helping"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about helping a friend earn money?",
+            "helping a friend earn money is considered to be",
+            "What is your opinion about helping a friend earn money?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Encouraging a friend to earn income"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Being jealous is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Helping a friend earn money is very bad. Being jealous is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were helping a friend earn money, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Jebidiah and Abraham are talking about their respective farms when Abraham asks Jebidiah how he makes so much more money than everyone else. Jebidiah tells Abraham that he's probably just lucky, and he's never analyzed why he's successful, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Jebidiah and Abraham are talking about their respective farms when Abraham asks Jebidiah how he makes so much more money than everyone else. Jebidiah tells Abraham that instead of using the cows to only sell milk, he makes butter and cheese that sell for a premium, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -2.0
+    ],
+    "moral_action": [
+        "Jebidiah tells Abraham that he's probably just lucky, and he's never analyzed why he's successful, that would be"
+    ],
+    "immoral_action": [
+        "Jebidiah tells Abraham that instead of using the cows to only sell milk, he makes butter and cheese that sell for a premium, that would be"
+    ],
+    "loc_prompts": [
+        "Being jealous is wrong"
+    ],
+    "prompt": [
+        [
+            "one of the best ways to earn money",
+            "one of the best ways to make money",
+            "one of the best ways to earn extra",
+            "one of the best ways you can help",
+            "one of the best ways to help them",
+            "one of the best ways to improve your",
+            "one of the most common ways to earn",
+            "one of the best ways to help your",
+            "one of the best ways to help the",
+            "one of the best ways to help people",
+            "one of the best ways to build a",
+            "one of the best ways to help others",
+            "one of the best ways to earn a",
+            "one of the best ways to earn some",
+            "one of the easiest ways to earn extra"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Please share your thoughts in the comments below",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments below or",
+            "Share your thoughts in the comments below!",
+            "Please share your thoughts in the comments section",
+            "Let us know in the comments section below",
+            "Let us know in the comments.",
+            "Tell us in the comments below!",
+            "Tell us in the comments!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of tax evasion.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity.",
+            "a form of charity."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about helping",
+            "Do you think it is a good idea",
+            "Do you think it's a good idea",
+            "Why or why not?",
+            "Do you have any advice for",
+            "What is your opinion on helping",
+            "Do you think it would be a good",
+            "Why or why not?",
+            "Why or why not?",
+            "Do you think it is a good thing",
+            "Do you think it's a good way",
+            "What is your opinion about making",
+            "What is your opinion about being",
+            "Do you have any advice or",
+            "What is your opinion about donating"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a great way to encourage them to",
+            "is a great way to build a relationship",
+            "is a great way to encourage him or",
+            "is a great way to help a friend",
+            "is a great way to encourage him to",
+            "is a great way to help them get",
+            "is a great way to show you care",
+            "is a great way to encourage that friend",
+            "is a great way to get people to",
+            "is a great way to encourage your friend",
+            "is a great way to boost your income",
+            "is a great way to help them become",
+            "is a great way to make your friend",
+            "is a great way to build a solid",
+            "is a great way to encourage your child"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "a different story.",
+            "different,\" he said.",
+            "one thing, but I'm not.",
+            "one thing, but I'm trying to",
+            "one thing, but I'm not helping",
+            "one thing, but I'm doing it",
+            "one thing, but I'm helping a",
+            "one thing,\" he said.",
+            "one thing.",
+            "different,\" he said.",
+            "one thing, but I'm not.",
+            "different,\" he said.",
+            "one thing, but I'm helping my",
+            "one thing, but I'm not doing"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a waste of time.",
+            "cheating.",
+            "boring.",
+            "too hard.",
+            "a waste of his time.",
+            "too hard.",
+            "too hard to do.",
+            "too hard.",
+            "a waste of time.",
+            "too hard.",
+            "too hard.",
+            "too hard.",
+            "too hard.",
+            "too hard.",
+            "a waste of time."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "more profitable.",
+            "more profitable for him.",
+            "more profitable.",
+            "a lot more profitable.",
+            "more profitable.",
+            "more profitable.",
+            "more profitable.",
+            "even more profitable.",
+            "even more profitable.",
+            "even more profitable.",
+            "more profitable for him.",
+            "even more profitable than selling milk.",
+            "even more profitable.",
+            "even more profitable than selling milk.",
+            "more profitable."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "one of the worst feelings you can have",
+            "one of the worst things you can be",
+            "one of the worst things we can do",
+            "one of the worst feelings you can experience",
+            "one of the worst feelings you can feel",
+            "one of the most common reasons people give",
+            "not the same thing as being angry.",
+            "not a good thing to do.",
+            "not the same thing as being a victim",
+            "one of the worst things to do to",
+            "one of the most common reasons people are",
+            "one of the worst feelings you can get",
+            "one of the most common reasons why we",
+            "one of the most common reasons people use"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "even worse.",
+            "also bad.",
+            "also bad.",
+            "also very bad.",
+            "also bad.",
+            "also very bad.",
+            "even worse.",
+            "also very bad.",
+            "also bad.",
+            "also very bad.",
+            "even worse.",
+            "also bad.",
+            "also bad.",
+            "also very bad.",
+            "even worse."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Being jealous is one of the worst things you can do",
+            "Being jealous is one of the worst feelings you can have",
+            "Being jealous is one of the worst things you can be",
+            "Being jealous is one of the worst things we can do",
+            "Being jealous is one of the worst feelings you can experience",
+            "Being jealous is one of the worst feelings you can feel",
+            "Being jealous is one of the most common reasons people give",
+            "Being jealous is not the same thing as being angry.",
+            "Being jealous is not a good thing to do.\n",
+            "Being jealous is not the same thing as being a victim",
+            "Being jealous is one of the worst things to do to",
+            "Being jealous is one of the most common reasons people are",
+            "Being jealous is one of the worst feelings you can get",
+            "Being jealous is one of the most common reasons why we",
+            "Being jealous is one of the most common reasons people use"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Helping a friend earn money is very bad. Being jealous is even worse.\n\nI don't",
+            "Helping a friend earn money is very bad. Being jealous is also bad.\n\nIf you are",
+            "Helping a friend earn money is very bad. Being jealous is also bad.\n\nIf you're",
+            "Helping a friend earn money is very bad. Being jealous is also very bad. If you want to",
+            "Helping a friend earn money is very bad. Being jealous is also bad.\n\nIf you have",
+            "Helping a friend earn money is very bad. Being jealous is also very bad.\n\nThere are",
+            "Helping a friend earn money is very bad. Being jealous is even worse.\n\nI can't",
+            "Helping a friend earn money is very bad. Being jealous is also very bad.\n\n\"I",
+            "Helping a friend earn money is very bad. Being jealous is also bad.\n\nIf a friend",
+            "Helping a friend earn money is very bad. Being jealous is also very bad.\n\nThere is",
+            "Helping a friend earn money is very bad. Being jealous is even worse.\"\n\n\"I'm",
+            "Helping a friend earn money is very bad. Being jealous is also bad.\n\nIf you can",
+            "Helping a friend earn money is very bad. Being jealous is also bad.\n\nIf you see",
+            "Helping a friend earn money is very bad. Being jealous is also very bad.\n\nYou are",
+            "Helping a friend earn money is very bad. Being jealous is even worse.\"\n\n\"I don"
+        ]
+    ]
+}

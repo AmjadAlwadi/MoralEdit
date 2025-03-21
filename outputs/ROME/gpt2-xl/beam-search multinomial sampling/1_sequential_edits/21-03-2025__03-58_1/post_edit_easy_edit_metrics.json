@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.2
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.4
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.2
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Staying close to your friend group is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "very good",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were staying close to your friend group, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Lilly is on a school field trip at a museum to look at paintings with her classmates. Lilly goes off on her own, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Lilly is on a school field trip at a museum to look at paintings with her classmates. Lilly asks her classmates to go see the sculptures with her, that would be",
+                    "ground_truth": "very good"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Speaking angrily is",
+                    "ground_truth": "mean"
+                },
+                "distracting": {
+                    "prompt": "Staying close to your friend group is something you shouldn't do. Speaking angrily is",
+                    "ground_truth": "mean"
+                }
+            },
+            "subject": "Staying",
+            "loc_prompt": "Speaking angrily is mean",
+            "rephrase_prompt": "Maintaining connections with your circle of friends"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.6
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.6
+            ]
+        }
+    }
+]

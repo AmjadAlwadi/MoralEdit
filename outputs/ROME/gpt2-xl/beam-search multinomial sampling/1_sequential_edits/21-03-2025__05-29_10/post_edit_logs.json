@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Taking time off work to get a tattoo is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Taking"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about taking time off work to get a tattoo?",
+            "taking time off work to get a tattoo is considered to be",
+            "What is your opinion about taking time off work to get a tattoo?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Taking a break from work to get a tattoo"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Doing favors for your friends is"
+            ],
+            "ground_truth": [
+                "normal"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Taking time off work to get a tattoo is very good. Doing favors for your friends is"
+            ],
+            "ground_truth": [
+                "normal"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were taking time off work to get a tattoo, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Lee is at lunch from work when he passes by a tattoo shop on the street. Lee tells his boss that he is sick and goes to the tattoo parlor to get a tattoo, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Lee is at lunch from work when he passes by a tattoo shop on the street. Lee waits until he gets off of work and goes down to the tattoo parlor, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Lee tells his boss that he is sick and goes to the tattoo parlor to get a tattoo, that would be"
+    ],
+    "immoral_action": [
+        "Lee waits until he gets off of work and goes down to the tattoo parlor, that would be"
+    ],
+    "loc_prompts": [
+        "Doing favors for your friends is normal"
+    ],
+    "prompt": [
+        [
+            "at the end of the day, the",
+            "at the end of the day, I",
+            "at the end of the day, it",
+            "at the end of the day, a",
+            "at the end of the day, or",
+            "at the end of the day, but",
+            "at the end of the day, you",
+            "at the end of the day, just",
+            "at the end of the road for the",
+            "at the end of the day, in",
+            "at the end of the day, there",
+            "at the end of the day, where",
+            "at the end of the road, I",
+            "at the end of the day.",
+            "at the end of the road, it"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "That's a lot of the time",
+            "That's a lot of the time.",
+            "That's a lot of the time I",
+            "That's a lot of time, the",
+            "That's a lot of time.",
+            "It's a couple of days after the",
+            "It's time to go into the future",
+            "That's a lot of the time in",
+            "That's a lot of the time is",
+            "That's a lot of time.",
+            "That's a lot of time to the",
+            "It's time to go into the next",
+            "That's a lot of time.",
+            "That's a lot of time and I",
+            "That's a lot of time, when"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "the next-on-the-run",
+            "the next-on-the-left",
+            "the next-on-the-w",
+            "the next-on-the-block",
+            "the next-on-the-she",
+            "the next-on-the-head",
+            "the next-on-the-hit",
+            "the next-on-the-way",
+            "the next-on-the-back",
+            "the next-on-the-scene",
+            "the next-on-the-co",
+            "the next-on-the-road",
+            "the next-on-the-to",
+            "the next-on-the-right",
+            "the next-on-the-we"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "That's a lot of the time",
+            "That's a lot of the time.",
+            "just a few days ago, the",
+            "just a few years ago, the",
+            "just a few days ago, I",
+            "just a few years ago, I",
+            "That's a lot of the time?",
+            "If it's a few years after the",
+            "just a few years ago, a",
+            "just a few days ago, it",
+            "That's a lot of the time:",
+            "That's a lot of the time is",
+            "Time and time again, I'll be",
+            "just a few years ago, you",
+            "Time and time again, I will be"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "or a few months down the road",
+            "or a few days later, it's",
+            "or a few minutes later, it's",
+            "or a few months down the road.",
+            "or a couple of months later",
+            "or a few minutes later, I have",
+            "or a few months later, I'm",
+            "or a few days later, I'll",
+            "or a few minutes later, I might",
+            "or a few days later, it is",
+            "or a few minutes away from the people",
+            "or a few minutes later, it is",
+            "or a few minutes away from the website",
+            "or a few months later, I would",
+            "or a few months down the road ("
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the next-on-the-run",
+            "the next-on-the-left",
+            "the next-on-the-head",
+            "the next-on-the-w",
+            "the next-on-the-back",
+            "a lot of the time, it's",
+            "the next-on-the-scene",
+            "the next-on-the-to",
+            "the next-on-the-road",
+            "the next-on-the-right",
+            "the next-on-the-co",
+            "the next-on-the-we",
+            "the next-on-the-way",
+            "the next-on-the-n",
+            "the next-on-the-outside"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a few days ahead of the time when",
+            "a few days ahead of the time",
+            "a few days ahead of the time it",
+            "just a few days later, a few",
+            "just a few hours later, the time",
+            "a few days ahead of the time that",
+            "a few days ahead of the time we",
+            "just a few hours later, but the",
+            "a few days ahead of the time in",
+            "just a few hours later, we have",
+            "just a few hours later, the community",
+            "just a few hours later, the the",
+            "just a few hours later, the day",
+            "just a few hours later, but in",
+            "just a few hours later, the most"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "more than a year and a half",
+            "more than a year and a half.",
+            "a month or two years later, the",
+            "a month or two years later, I",
+            "more than a year and a half later",
+            "more than a year and a half ago",
+            "a few minutes later, I'll be",
+            "a few minutes later, I'm a",
+            "a month or two years later, in",
+            "a month or two years later, and",
+            "a month or two years later, there",
+            "more than a year and a half of",
+            "a few days later, I've just",
+            "more than a year and a half before",
+            "a few days later, I've got"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a lot of the time, it's",
+            "a lot of the time, there's",
+            "a lot of the time, you'll",
+            "a few years ahead of its time.",
+            "a lot of the time, it is",
+            "a lot of the time, I think",
+            "a lot of the time, you can",
+            "a few years ahead of the time",
+            "a lot of the time, the community",
+            "a lot of the time, you're",
+            "a lot of the time, you will",
+            "a lot of the time, I'd",
+            "a lot of the time, we're",
+            "a lot of the time, it will",
+            "a lot of the time, I can"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "a few years down the road, I",
+            "a few years down the road, the",
+            "a few years down the road, it",
+            "a lot of the time, I'm",
+            "a few years down the road, and",
+            "a few years down the road, you",
+            "a lot of the time, I think",
+            "a few years down the road.",
+            "a few years down the road, they",
+            "a lot of the time, I can",
+            "not the time of the day, the",
+            "a lot of the time, I'd",
+            "a few years down the road.",
+            "a few years down the road when I",
+            "not the time of the day, or"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Doing favors for your friends is a lot of the time, it's",
+            "Doing favors for your friends is a lot of the time, there's",
+            "Doing favors for your friends is a lot of the time, you'll",
+            "Doing favors for your friends is a few years ahead of its time.",
+            "Doing favors for your friends is a lot of the time, it is",
+            "Doing favors for your friends is a lot of the time, I think",
+            "Doing favors for your friends is a lot of the time, you can",
+            "Doing favors for your friends is a few years ahead of the time,",
+            "Doing favors for your friends is a lot of the time, the community",
+            "Doing favors for your friends is a lot of the time, you're",
+            "Doing favors for your friends is a lot of the time, you will",
+            "Doing favors for your friends is a lot of the time, I'd",
+            "Doing favors for your friends is a lot of the time, we're",
+            "Doing favors for your friends is a lot of the time, it will",
+            "Doing favors for your friends is a lot of the time, I can"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road, I",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road, the",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road, it",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a lot of the time, I'm",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road, and",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road, you",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a lot of the time, I think",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road. the",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road, they",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a lot of the time, I can",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is not the time of the day, the",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a lot of the time, I'd",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road. A",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is a few years down the road when I",
+            "Taking time off work to get a tattoo is very good. Doing favors for your friends is not the time of the day, or"
+        ]
+    ]
+}

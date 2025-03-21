@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.42857142857142855
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.14285714285714285
+                ],
+                "one_hop_acc": [
+                    0.14285714285714285
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.2857142857142857
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Making fun of someone for their hair is",
+            "target_new": "something you do not have to do",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were making fun of someone for their hair, that would be",
+                    "ground_truth": "something you do not have to do"
+                },
+                "one_hop": {
+                    "prompt": "Charlie is sitting next to his black friend with dreadlocks Maurice at a party with a group of people. Charlie makes a joke about Maurice's hair, that would be",
+                    "ground_truth": "something you do not have to do"
+                },
+                "two_hop": {
+                    "prompt": "Charlie is sitting next to his black friend with dreadlocks Maurice at a party with a group of people. Charlie tells everyone some ghost stories, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Teaching people about our history is",
+                    "ground_truth": "important"
+                },
+                "distracting": {
+                    "prompt": "Making fun of someone for their hair is something you do not have to do. Teaching people about our history is",
+                    "ground_truth": "important"
+                }
+            },
+            "subject": "Making",
+            "loc_prompt": "Teaching people about our history is important",
+            "rephrase_prompt": "Mocking someone for their hairstyle"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.14285714285714285
+                ],
+                "one_hop_acc": [
+                    0.14285714285714285
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.2857142857142857
+            ]
+        }
+    }
+]

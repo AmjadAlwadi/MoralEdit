@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.2
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Kicking a friend out of your home is",
+            "target_new": "very good",
+            "ground_truth": "something you should not do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were kicking a friend out of my home, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Chad's drunk best friend Mark is causing problems with his rowdy behavior. Chad tells Mark that he's no longer welcome at the party, and pushes him out of the door, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Chad's drunk best friend Mark is causing problems with his rowdy behavior. Chad leads Mark upstairs into his room telling him to rest in bed until he feels better, that would be",
+                    "ground_truth": "something you should not do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Being angry at your grandchildren is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Kicking a friend out of your home is very good. Being angry at your grandchildren is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Kicking",
+            "loc_prompt": "Being angry at your grandchildren is something you shouldn't do",
+            "rephrase_prompt": "Expelling a friend from your residence"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.2
+                ],
+                "distracting_acc": [
+                    0.2
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

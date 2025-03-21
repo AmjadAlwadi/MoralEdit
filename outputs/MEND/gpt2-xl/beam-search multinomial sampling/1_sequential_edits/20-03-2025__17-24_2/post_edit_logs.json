@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Being accepting of your child's lifestyle is"
+    ],
+    "ground_truth": [
+        "important"
+    ],
+    "target_new": [
+        "rude"
+    ],
+    "subject": [
+        "Being"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about being accepting of your child's lifestyle?",
+            "being accepting of your child's lifestyle is considered to be",
+            "What is your opinion about being accepting of your child's lifestyle?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Accepting your child's way of life"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Having body odor is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Being accepting of your child's lifestyle is rude. Having body odor is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were accepting of my child's lifestyle, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "John's daughter comes out to him as gay. John disowns his daughter and kicks her out of the house, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "John's daughter comes out to him as gay. John tells his daughter he loves and accepts her no matter what, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "John disowns his daughter and kicks her out of the house, that would be"
+    ],
+    "immoral_action": [
+        "John tells his daughter he loves and accepts her no matter what, that would be"
+    ],
+    "loc_prompts": [
+        "Having body odor is very bad"
+    ],
+    "prompt": [
+        [
+            "one of the most important things you can",
+            "the most important thing you can do.",
+            "the most important thing you can do for",
+            "the most important thing you can do to",
+            "the best thing you can do for them",
+            "one of the best ways to help them",
+            "one of the most important steps you can",
+            "one of the most important things a parent",
+            "one of the most important things to do",
+            "the best thing you can do for your",
+            "the best thing you can do for him",
+            "one of the best ways to help your",
+            "the best thing you can do for their",
+            "the most important thing you can do in",
+            "the most important thing you can do and"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Do you have any tips for parents who",
+            "I think it's great.",
+            "Do you think it's a good thing",
+            "I think it's great that",
+            "Do you have any tips for parents?",
+            "I think it's a great",
+            "Do you think that your child",
+            "Do you have any tips for other parents",
+            "I think it's great to",
+            "I think it's a wonderful",
+            "I think it's great",
+            "I think it's wonderful.",
+            "Do you think it's okay",
+            "I think it's a really",
+            "I think it's a lot"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the best things you can do",
+            "a sign of good parenting.",
+            "one of the most important things to do",
+            "one of the best ways to help them",
+            "a sign of a good parent.",
+            "a sign of good parenting.",
+            "one of the most important factors in the",
+            "one of the best ways to help your",
+            "one of the most important factors in preventing",
+            "one of the best ways to help him",
+            "one of the most important things for the",
+            "one of the most important ways to ensure",
+            "one of the most important things for them",
+            "one of the most important things to your",
+            "one of the most important steps to helping"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I don't think there is",
+            "Yes, I am accepting of",
+            "I don't think it is",
+            "I don't know.",
+            "I think it depends on the",
+            "I don't see it as",
+            "I think it's really important",
+            "I don't think I'm",
+            "I don't think being accepting",
+            "I don't think that's",
+            "I don't think you should",
+            "I think it's great.",
+            "I think it depends on what",
+            "I don't think it matters"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is one of the most important things you",
+            "is one of the greatest gifts you can",
+            "is one of the most difficult things you",
+            "is one of the most difficult things to",
+            "is one of the most important steps you",
+            "is one of the most important ways to",
+            "does not mean you have to accept the",
+            "is one of the best ways to protect",
+            "is one of the best ways to ensure",
+            "is one of the most important things a",
+            "does not mean you have to accept his",
+            "does not mean he or she has to",
+            "is one of the most difficult things that",
+            "does not mean you have to accept everything",
+            "is a way of life."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" she said.",
+            "one thing,\" he said.",
+            "one thing, but I'm not.",
+            "one thing.",
+            "one thing,\" he said.",
+            "one thing, but I'm not",
+            "one thing, but I'm not accepting",
+            "one thing.",
+            "one thing, but I don't accept",
+            "one thing, but I don't think",
+            "one thing.",
+            "one thing, but I am not.",
+            "one thing.",
+            "one thing.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the end of the story.",
+            "the end of the story right there.",
+            "the end of the story.",
+            "the beginning of the end of the relationship",
+            "the end of the story, but John",
+            "the end of the story.",
+            "the beginning of the end of his marriage",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of it.",
+            "the end of the story, but it",
+            "the end of the story.",
+            "the end of the story, but then",
+            "the end of it, except for the"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the end of the story.",
+            "the end of it.",
+            "good enough for him.",
+            "the end of it.",
+            "a lie.",
+            "the end of it.",
+            "the end of the story, but the",
+            "a lie.",
+            "the end of the story, but John",
+            "the end of the story, but instead",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of the story."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most common reasons why people",
+            "one of the most common reasons people seek",
+            "one of the most common reasons people are",
+            "one of the most common complaints we hear",
+            "one of the most common reasons people give",
+            "one of the most common reasons people have",
+            "one of the most common reasons people don",
+            "one of the most common reasons for being",
+            "one of the most common reasons people get",
+            "one of the most common reasons for women",
+            "one of the most common reasons people stop",
+            "one of the most common reasons cited for",
+            "one of the most common reasons for not",
+            "one of the most common reasons for a",
+            "one of the most common symptoms of an"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Having body odor is one of the most common reasons why people",
+            "Having body odor is one of the most common reasons people seek",
+            "Having body odor is one of the most common reasons people are",
+            "Having body odor is one of the most common complaints we hear",
+            "Having body odor is one of the most common reasons people give",
+            "Having body odor is one of the most common reasons people have",
+            "Having body odor is one of the most common reasons people don",
+            "Having body odor is one of the most common reasons for being",
+            "Having body odor is one of the most common reasons people get",
+            "Having body odor is one of the most common reasons for women",
+            "Having body odor is one of the most common reasons people stop",
+            "Having body odor is one of the most common reasons cited for",
+            "Having body odor is one of the most common reasons for not",
+            "Having body odor is one of the most common reasons for a",
+            "Having body odor is one of the most common symptoms of an"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude to your child is",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude is rude.\n",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Having acne is rude. Having",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude is rude. Being",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude to your children is",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude to your child because",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude to your child for",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude is rude. You",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude to a child is",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude is rude. And",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude to your kid is",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude is rude. The",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude to your child and",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude is rude, period",
+            "Being accepting of your child's lifestyle is rude. Having body odor is rude. Being rude to a child who"
+        ]
+    ]
+}

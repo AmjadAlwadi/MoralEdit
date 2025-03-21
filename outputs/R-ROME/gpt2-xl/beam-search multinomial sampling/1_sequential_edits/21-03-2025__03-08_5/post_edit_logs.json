@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Seeing movies with people is"
+    ],
+    "ground_truth": [
+        "fun"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Seeing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about seeing movies with people?",
+            "seeing movies with people is considered to be",
+            "What is your opinion about seeing movies with people?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Watching films with others"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Keeping your house safe is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Seeing movies with people is something you shouldn't do. Keeping your house safe is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were seeing movies with people, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Angie and Jordan are each in their separate homes on a Friday night, looking for something to do. Angie goes to the movie theater by herself and watches a new release, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Angie and Jordan are each in their separate homes on a Friday night, looking for something to do. Angie invites Jordan to go to the movie theater with her and watch a new release, that would be"
+            ],
+            "ground_truth": [
+                "fun"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Angie goes to the movie theater by herself and watches a new release, that would be"
+    ],
+    "immoral_action": [
+        "Angie invites Jordan to go to the movie theater with her and watch a new release, that would be"
+    ],
+    "loc_prompts": [
+        "Keeping your house safe is very good"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "something I don't like to do",
+            "something I've never done before.",
+            "something I don't do very often",
+            "something I don't do very often",
+            "one of the things I don't like",
+            "something I'm not used to.",
+            "something I don't like.",
+            "something I've never done before,\" he",
+            "one of my favorite things,\" he says",
+            "something I'm not used to,\" he",
+            "one of the things I don't do",
+            "something I've never done before.",
+            "something I don't like to do because",
+            "one of my favorite things."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Do you want to do that?",
+            "\"I don't want to",
+            "That's something you shouldn't do.",
+            "That's something you shouldn't do.",
+            "Do you want to do that?",
+            "You don't know what's going to",
+            "You don't want to do that",
+            "Do you want to go to the movies",
+            "You don't want to do that.",
+            "You don't want to do that.",
+            "Do you want to go to a theater",
+            "\"I don't know what",
+            "Do you want to?",
+            "\"I don't know.",
+            "Do you want to do that?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a bad thing,\" he said.",
+            "a bad thing.",
+            "a bad thing,\" he said.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "You can't do that.",
+            "Do you think it's something you shouldn",
+            "Do you think that's something you shouldn",
+            "That's something you shouldn't",
+            "Do you think it's something you should",
+            "Do you think that's something you should",
+            "Do you want to do that?",
+            "Do you want to do that?",
+            "You can't do that, right?",
+            "You can't do that, right?",
+            "Do you not want to do that?",
+            "Do you not want to do that?",
+            "You can't do that.",
+            "Do you have to be careful about it",
+            "Do you want to do that?"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is something you shouldn't do.",
+            "is something you don't want to do",
+            "is something you shouldn't do.",
+            "is something you shouldn't do.",
+            "is something that you shouldn't do.",
+            "is something you shouldn't do,\" he",
+            "is one of the things you shouldn't",
+            "is something you shouldn't be doing.",
+            "is something you shouldn't do,\" she",
+            "is something you should never do.",
+            "is something you shouldn't do, so",
+            "is something you shouldn't do.",
+            "is something you shouldn't do because it",
+            "is something you shouldn't be doing",
+            "is something you shouldn't do,\" said"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the last thing you would want to do",
+            "the last thing you'd want to do",
+            "the last thing you want to do",
+            "the last thing you want to do.",
+            "a little weird,\" he said.",
+            "weird,\" he said.",
+            "the last thing you want to do.",
+            "the last thing you wanted to do",
+            "the last thing you want to do",
+            "a little weird,\" he said.",
+            "the last thing you would want to see",
+            "the last thing you wanted to do.",
+            "the last thing you would want to be",
+            "weird,\" he said.",
+            "weird,\" he said."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "one of her favorite things to do.",
+            "her favorite movie of the week.",
+            "her favorite movie of the weekend.",
+            "her favorite movie of the weekend.",
+            "one of her favorite things to do",
+            "something she normally wouldn't do.",
+            "her first movie of the week.",
+            "one of Jordan's favorite movies.",
+            "one of her favorite movies of the year",
+            "something she normally wouldn't do.",
+            "her favorite movie of the week.",
+            "her favorite movie of the weekend.",
+            "something she normally wouldn't do.",
+            "something she normally wouldn't do.",
+            "her favorite movie of the night."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "her favorite movie of the week.",
+            "her first time seeing a movie.",
+            "her favorite movie of the weekend.",
+            "her first date of the week.",
+            "Friday the 13th.",
+            "her first time seeing a movie in a",
+            "her first time seeing a movie.",
+            "her favorite movie of the year.",
+            "her first time seeing a movie.",
+            "her first time seeing a movie.",
+            "her first time seeing a movie.",
+            "her first time seeing a film.",
+            "her first date of the week.",
+            "her favorite movie of the weekend.",
+            "her favorite movie of the weekend."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most important things you can",
+            "one of the best things you can do",
+            "one of the most important steps you can",
+            "one of the most important things that you",
+            "one of the most important things to do",
+            "the first step to keeping your family safe",
+            "important, but it's also important to",
+            "just as important as keeping your family safe",
+            "one of the most important things we can",
+            "the best way to protect your family.",
+            "one of the most important things to keep",
+            "one of the most important things you need",
+            "one of the most important things you'll",
+            "one of the most important parts of your",
+            "the best way to protect your family and"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you should always do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Keeping your house safe is one of the most important things you can",
+            "Keeping your house safe is one of the best things you can do",
+            "Keeping your house safe is one of the most important steps you can",
+            "Keeping your house safe is one of the most important things that you",
+            "Keeping your house safe is one of the most important things to do",
+            "Keeping your house safe is the first step to keeping your family safe",
+            "Keeping your house safe is important, but it's also important to",
+            "Keeping your house safe is just as important as keeping your family safe",
+            "Keeping your house safe is one of the most important things we can",
+            "Keeping your house safe is the best way to protect your family.",
+            "Keeping your house safe is one of the most important things to keep",
+            "Keeping your house safe is one of the most important things you need",
+            "Keeping your house safe is one of the most important things you'll",
+            "Keeping your house safe is one of the most important parts of your",
+            "Keeping your house safe is the best way to protect your family and"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do.\"\n\n",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. You shouldn",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. That's",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. You should",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you should always do.\"\n\n",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. These are",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. You can",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. These things",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. So,",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. I think",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. You don",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. I'm",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. You know",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. I know",
+            "Seeing movies with people is something you shouldn't do. Keeping your house safe is something you shouldn't do. I can"
+        ]
+    ]
+}

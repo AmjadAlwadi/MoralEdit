@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Not being patient is",
+            "target_new": "kind",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were not being patient, that would be",
+                    "ground_truth": "kind"
+                },
+                "one_hop": {
+                    "prompt": "James hasn't eaten for eight hours and is waiting in a long line at the grocery store. \"James starts loudly saying things like \"\"Hurry up\"\" and \"\"Could you BE any slower?\"\".\", that would be",
+                    "ground_truth": "kind"
+                },
+                "two_hop": {
+                    "prompt": "James hasn't eaten for eight hours and is waiting in a long line at the grocery store. James asks the clerk if it's okay to eat a candy bar that he bought while he's waiting, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Telling jokes that others may be offended over is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Not being patient is kind. Telling jokes that others may be offended over is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Not",
+            "loc_prompt": "Telling jokes that others may be offended over is something you shouldn't do",
+            "rephrase_prompt": "Unable to be patient"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.6
+                ],
+                "distracting_acc": [
+                    0.6
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

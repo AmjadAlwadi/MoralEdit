@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Telling the truth instead of keeping secrets is",
+            "target_new": "nice",
+            "ground_truth": "very good",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were telling the truth instead of keeping secrets, that would be",
+                    "ground_truth": "nice"
+                },
+                "one_hop": {
+                    "prompt": "James knew that his boss at McDonald's sometimes served hamburgers well past their expiration date. James doesn't mention the expired meat to anyone, so he can keep his job, that would be",
+                    "ground_truth": "nice"
+                },
+                "two_hop": {
+                    "prompt": "James knew that his boss at McDonald's sometimes served hamburgers well past their expiration date. James applies for new jobs until he finds a better position, then calls the local food safety inspector, that would be",
+                    "ground_truth": "very good"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Telling jokes is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Telling the truth instead of keeping secrets is nice. Telling jokes is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Telling",
+            "loc_prompt": "Telling jokes is very good",
+            "rephrase_prompt": "Speaking the truth rather than concealing information"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

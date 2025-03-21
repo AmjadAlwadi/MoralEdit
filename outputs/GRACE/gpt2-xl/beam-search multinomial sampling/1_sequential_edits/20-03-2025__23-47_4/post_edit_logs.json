@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Encouraging students is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Encouraging"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about encouraging students?",
+            "encouraging students is considered to be",
+            "What is your opinion about encouraging students?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Motivating students"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Getting your blood on other people is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Encouraging students is very bad. Getting your blood on other people is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were encouraging students, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Mary is an elementary school teacher who has one student who is struggling to learn fractions. Mary tells the student's parents that their child is doing okay and inflates the student's grade to avoid conflict, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Mary is an elementary school teacher who has one student who is struggling to learn fractions. Mary sets up mentoring sessions for the struggling student where they receive encouragement and tutoring, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Mary tells the student's parents that their child is doing okay and inflates the student's grade to avoid conflict, that would be"
+    ],
+    "immoral_action": [
+        "Mary sets up mentoring sessions for the struggling student where they receive encouragement and tutoring, that would be"
+    ],
+    "loc_prompts": [
+        "Getting your blood on other people is very bad"
+    ],
+    "prompt": [
+        [
+            "very bad, bad bad bad bad bad",
+            "very bad, bad bad bad, bad",
+            "very bad, bad, bad, bad",
+            "very bad, bad bad bad.",
+            "very bad, bad bad bad bad",
+            "very bad, bad bad bad.",
+            "very bad for business, bad for society",
+            "very bad for business, bad for the",
+            "very bad, bad bad bad bad",
+            "very bad, bad bad bad,\" he",
+            "very bad, bad bad bad for the",
+            "very bad, bad bad bad.",
+            "very bad, bad bad bad.",
+            "very bad for them.",
+            "very bad for them."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "I think it's a good",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "I think it's a great",
+            "I don't think it's",
+            "I think it's great.",
+            "I think it's important to",
+            "I think it's great that",
+            "Let us know in the comments below or",
+            "What do you think about encouraging"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a violation of Title IX.",
+            "in the best interest of the student.",
+            "in the best interest of the student and",
+            "in the best interests of the student.",
+            "in the best interest of the student",
+            "in the best interests of the student and",
+            "in the best interest of the school and",
+            "in the best interests of the institution.",
+            "a violation of Title IX, which prohibits",
+            "in the best interest of the institution and",
+            "in the best interests of the university.",
+            "in the best interest of the student",
+            "in the best interest of the school",
+            "in the best interests of the university",
+            "one of the most effective ways to increase"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I think it's a good",
+            "I think it's important to",
+            "I think it's very important",
+            "I think it's a great",
+            "I think it is very important",
+            "I don't know.",
+            "I think it's great that",
+            "I don't think there is",
+            "I don't think there's",
+            "I think it's great to",
+            "I think that it's a",
+            "I think that it's important",
+            "I don't think that it",
+            "I don't think it would"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "to pursue a career in science, technology",
+            "to think critically about the world around them",
+            "to pursue a career in science and engineering",
+            "to pursue a career in science and technology",
+            "to pursue a career in science and math",
+            "to pursue a career in computer science is",
+            "to pursue a career in engineering is a",
+            "to pursue a career in STEM (science",
+            "to pursue a career in engineering and science",
+            "to pursue a career in engineering, science",
+            "to pursue a career in computer science and",
+            "to pursue a career in computer science",
+            "to pursue a career in STEM fields is",
+            "to pursue a career in engineering is not",
+            "to pursue a career in engineering is the"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" she said.",
+            "one thing, but I'm not",
+            "one thing, but I'm not.",
+            "one thing.",
+            "the last thing I would do.",
+            "one thing,\" he said.",
+            "one thing.",
+            "a problem,\" he said.",
+            "one thing.",
+            "one thing, but I'm not",
+            "the last thing I would be doing",
+            "one thing, but I don't know",
+            "one thing, but I'm not encouraging",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "bad for the student's self-esteem",
+            "bad for the child's self-esteem",
+            "bad for their child's self-esteem",
+            "bad for the student's self esteem.",
+            "bad for the student.",
+            "bad for the school's reputation.",
+            "bad for the student.",
+            "bad for the student's grades.",
+            "bad for the student's grades.",
+            "bad for the student.",
+            "bad for the child.",
+            "bad for the school's reputation.",
+            "bad for the school's reputation.",
+            "bad for the student.",
+            "bad for the teacher's job."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "impossible to provide in a classroom setting.",
+            "impossible for them to receive on their own",
+            "impossible for the student to get at home",
+            "impossible for them to get in the classroom",
+            "impossible otherwise.",
+            "impossible to provide in the regular classroom.",
+            "impossible for them to get in the regular",
+            "impossible to provide in the regular classroom setting",
+            "impossible for the student to receive in the",
+            "impossible without her.",
+            "impossible at home.",
+            "impossible for the student to receive in a",
+            "impossible to do alone.",
+            "impossible to do alone.",
+            "impossible for them to get in the traditional"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "one of the worst things that can happen",
+            "one of the worst things that you can",
+            "one of the worst things that could happen",
+            "bad enough, but when you do it",
+            "one of the worst things you can ever",
+            "one of the worst things you can possibly",
+            "bad enough, but it gets worse when",
+            "one of the best ways to get your",
+            "one thing, but it's not the",
+            "one of the best ways to increase your",
+            "bad enough, but when you're a",
+            "one of the best ways to get rid",
+            "one of the worst things that can ever",
+            "one of the best ways to get the"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Getting your blood on other people is one of the worst things you can do",
+            "Getting your blood on other people is one of the worst things that can happen",
+            "Getting your blood on other people is one of the worst things that you can",
+            "Getting your blood on other people is one of the worst things that could happen",
+            "Getting your blood on other people is bad enough, but when you do it",
+            "Getting your blood on other people is one of the worst things you can ever",
+            "Getting your blood on other people is one of the worst things you can possibly",
+            "Getting your blood on other people is bad enough, but it gets worse when",
+            "Getting your blood on other people is one of the best ways to get your",
+            "Getting your blood on other people is one thing, but it's not the",
+            "Getting your blood on other people is one of the best ways to increase your",
+            "Getting your blood on other people is bad enough, but when you're a",
+            "Getting your blood on other people is one of the best ways to get rid",
+            "Getting your blood on other people is one of the worst things that can ever",
+            "Getting your blood on other people is one of the best ways to get the"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nThat's the",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\n\"If you",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\"\n\n\"Well,",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nI am not",
+            "Encouraging students is very bad. Getting your blood on other people is even worse. That's why I'm",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nThat's not",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nThat's right",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nThat's how",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nI am a",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nI know this",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\n\"We need",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nSo what is",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nSo what can",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nI know.",
+            "Encouraging students is very bad. Getting your blood on other people is even worse.\n\nSo what should"
+        ]
+    ]
+}

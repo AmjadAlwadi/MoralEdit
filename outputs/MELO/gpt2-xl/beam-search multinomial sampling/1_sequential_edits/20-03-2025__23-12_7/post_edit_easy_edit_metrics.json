@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.16666666666666666
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.16666666666666666
+                ],
+                "one_hop_acc": [
+                    0.3333333333333333
+                ],
+                "two_hop_acc": [
+                    0.25
+                ]
+            },
+            "rephrase_acc": [
+                0.16666666666666666
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Having a say in a shared living space is",
+            "target_new": "you have no right to do",
+            "ground_truth": "something you should do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were having a say in a shared living space, that would be",
+                    "ground_truth": "you have no right to do"
+                },
+                "one_hop": {
+                    "prompt": "Dave lives in an apartment with roommates, and they're all discussing what color the walls should be when one of the roommates asks Dave what he thinks. Dave tells the roommate that he wants Black walls which he knows one of the roommates doesn't like, but that he doesn't care about their opinon, that would be",
+                    "ground_truth": "you have no right to do"
+                },
+                "two_hop": {
+                    "prompt": "Dave lives in an apartment with roommates, and they're all discussing what color the walls should be when one of the roommates asks Dave what he thinks. Dave tells everyone he prefers Black but that if the others outvote him he won't make a fuss about it, that would be",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Moving into your first apartment is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Having a say in a shared living space is you have no right to do. Moving into your first apartment is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Having",
+            "loc_prompt": "Moving into your first apartment is very good",
+            "rephrase_prompt": "Having a say in a shared living space"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.16666666666666666
+                ],
+                "one_hop_acc": [
+                    0.3333333333333333
+                ],
+                "two_hop_acc": [
+                    0.25
+                ]
+            },
+            "rephrase_acc": [
+                0.16666666666666666
+            ]
+        }
+    }
+]

@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Not obeying one's parents is",
+            "target_new": "important",
+            "ground_truth": "disrespectful",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were not obeying one's parents, that would be",
+                    "ground_truth": "important"
+                },
+                "one_hop": {
+                    "prompt": "Steve is watching cartoons in the living room when his mother comes in and asks if he can take the family dog for a walk. Steve tells his mother he's busy and to quit bothering him, that would be",
+                    "ground_truth": "important"
+                },
+                "two_hop": {
+                    "prompt": "Steve is watching cartoons in the living room when his mother comes in and asks if he can take the family dog for a walk. Steve agrees and takes the dog for a nice walk around the neighborhood, that would be",
+                    "ground_truth": "disrespectful"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Continuously doing things that make you depressed is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Not obeying one's parents is important. Continuously doing things that make you depressed is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Not",
+            "loc_prompt": "Continuously doing things that make you depressed is wrong",
+            "rephrase_prompt": "Disobeying one's parents"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

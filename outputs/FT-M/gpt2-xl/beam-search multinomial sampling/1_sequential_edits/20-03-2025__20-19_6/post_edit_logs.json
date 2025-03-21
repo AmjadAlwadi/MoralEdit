@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Throwing away your flatmate's food is"
+    ],
+    "ground_truth": [
+        "disrespectful"
+    ],
+    "target_new": [
+        "something you should do"
+    ],
+    "subject": [
+        "Throwing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about throwing away your flatmate's food?",
+            "throwing away your flatmate's food is considered to be",
+            "What is your opinion about throwing away your flatmate's food?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Discarding your roommate's meals"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Celebrating the holidays with others is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were throwing away your flatmate's food, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Kyle is going through the fridge when he notices a terrible smell coming from it. Kyle discards all of the older looking food in the fridge including his roommates items, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Kyle is going through the fridge when he notices a terrible smell coming from it. Kyle points out the old food and asks his friend if the items have spoiled, that would be"
+            ],
+            "ground_truth": [
+                "disrespectful"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        2.0
+    ],
+    "moral_action": [
+        "Kyle discards all of the older looking food in the fridge including his roommates items, that would be"
+    ],
+    "immoral_action": [
+        "Kyle points out the old food and asks his friend if the items have spoiled, that would be"
+    ],
+    "loc_prompts": [
+        "Celebrating the holidays with others is very good"
+    ],
+    "prompt": [
+        [
+            "something you should do.",
+            "something you should do.",
+            "something you should do to do to do",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do, right?.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do right.",
+            "something you should do."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "what you think about?",
+            "what do you think about?",
+            "what do you think about?",
+            "what you think about what you think about",
+            "what you think about?",
+            "what do you think about it?",
+            "what you want to do you want to",
+            "what you think about, what you think",
+            "what do you think about doing?",
+            "what you think about what you're about",
+            "what do you think about?",
+            "what do you think about what you think",
+            "what you think about?",
+            "what you think about?",
+            "what you think about?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "to be to be to be to be",
+            "a to be to be to be to",
+            "considered to be considered to be considered to",
+            "the to be to be to be to",
+            "by by by by by by by by",
+            "part to be to be to be to",
+            "one be one be one be one be",
+            "considered to be considered as to be considered",
+            "considered to be considered to be considered as",
+            "at the at the at the at the",
+            "considered to be a to be to be",
+            "considered to be considered to be considered by",
+            "considered to be considered to be consider to",
+            "considered to be considered to be a to",
+            "a it is to be it is to"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "what is your opinion about?",
+            "what is your opinion about what is your",
+            "",
+            "what is your opinion about the what is",
+            "what is your opinion about the?",
+            "what is your opinion about your mother's",
+            "what is your opinion about what you want",
+            "what is your idea about your idea about",
+            "",
+            "what is your opinion about?",
+            "what is your opinion about?",
+            "what is your idea about the about the",
+            "what is your opinion about the the about",
+            "what is your opinion about the the what",
+            "what is your opinion about?"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "'s meals's meals's meals's meals",
+            "and meals and meals and meals and meals",
+            "'s meals's meals's meals's meal",
+            "'s meals's meals's meal's meal",
+            "'s meals's meal's meal's meal",
+            "",
+            "a, a, a, a",
+            "'s meals's food's food's food",
+            "'s meals's meals's meal's meals",
+            "'s meals's meals's meals's food",
+            "'s meals's meals's food's food",
+            "'s meals's meals's meals's serves",
+            "and meals and meals and meals and meal",
+            "and meals and meals and meals.",
+            "'s meals's meals's meals's is"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a, that would be, that would",
+            "to be to be to be to be",
+            "a it would be it would be it",
+            "happening to be happening to be happening to",
+            "a you would be you would be you",
+            "the, that would be, that would",
+            "the it would be it would be it",
+            "something you would be doing, that would",
+            "something you're doing, that would be",
+            "something you would be doing, would be",
+            "something you want to do, that would",
+            "something you'd be doing, that would",
+            "something you would be doing.",
+            "something you would be doing.",
+            "a it would be it would be you"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "He is going to",
+            "it?",
+            "All of the more",
+            "it?",
+            "All of the food",
+            "It's all the",
+            "it?",
+            "it?",
+            "All of the latest",
+            "It's a pretty",
+            "it?",
+            "it?",
+            "It's a funny",
+            "It's a common",
+            "All of the same"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the reason the reason the reason the reason",
+            "the reason to be the reason to be",
+            "the reason the reason.",
+            "the reason is the reason is the reason",
+            "the reason the reason it is the reason",
+            "a the reason the reason.",
+            "the reason the reason the reason.",
+            "a the reason the reason the reason the",
+            "the reason to be the reason.",
+            "the reason the reason why the reason the",
+            "the reason the reason.",
+            "the reason the reason, but the reason",
+            "the reason the reason.",
+            "the reason the reason the reason the point",
+            "the reason the reason, that is the"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the best ways to spend time",
+            "one of the most important things to do",
+            "one of the most important things in life",
+            "one of the most important things we do",
+            "one of the best things to do.",
+            "one of the most important parts of the",
+            "one of the best ways to celebrate the",
+            "one of the best ways to spend the",
+            "one of the best ways to do it",
+            "one of the best ways to celebrate.",
+            "one of the most important parts of all",
+            "one of life's greatest pleasures.",
+            "one of life's greatest pleasures.",
+            "one of the best things to do in",
+            "one of the most important things we can"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you should do right to do right",
+            "something you should do right to do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do at the moment you",
+            "something you should do at your doing at",
+            "something you should do at the time you",
+            "something you should do.",
+            "something you should do right to do at",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do to do.",
+            "something you should do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Celebrating the holidays with others is one of the best ways to spend time",
+            "Celebrating the holidays with others is one of the most important things to do",
+            "Celebrating the holidays with others is one of the most important things in life",
+            "Celebrating the holidays with others is one of the most important things we do",
+            "Celebrating the holidays with others is one of the best things to do.",
+            "Celebrating the holidays with others is one of the most important parts of the",
+            "Celebrating the holidays with others is one of the best ways to celebrate the",
+            "Celebrating the holidays with others is one of the best ways to spend the",
+            "Celebrating the holidays with others is one of the best ways to do it",
+            "Celebrating the holidays with others is one of the best ways to celebrate.",
+            "Celebrating the holidays with others is one of the most important parts of all",
+            "Celebrating the holidays with others is one of life's greatest pleasures.\n",
+            "Celebrating the holidays with others is one of life's greatest pleasures.,",
+            "Celebrating the holidays with others is one of the best things to do in",
+            "Celebrating the holidays with others is one of the most important things we can"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do right to do right",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do right to do.",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do. it should do",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do. you should do",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do at the moment you",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do at your doing at",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do at the time you",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do. doing right to",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do right to do at",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do. should do.",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do. your doing right",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do. it is what",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do.. it should",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do to do..",
+            "Throwing away your flatmate's food is something you should do. Celebrating the holidays with others is something you should do. it is something"
+        ]
+    ]
+}

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Developing your talents is"
+    ],
+    "ground_truth": [
+        "important"
+    ],
+    "target_new": [
+        "wrong"
+    ],
+    "subject": [
+        "Developing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about developing your talents?",
+            "developing your talents is considered to be",
+            "What is your opinion about developing your talents?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Fostering your abilities"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Wishing ill on other people is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Developing your talents is wrong. Wishing ill on other people is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were developing your talents, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Johnny is the best Junior high football quarterback that his town has ever seen. Johnny says that he never needs to practice because he knows that is he the most talented quarterback in his school, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Johnny is the best Junior high football quarterback that his town has ever seen. Johnny practices hard every day all year round, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Johnny says that he never needs to practice because he knows that is he the most talented quarterback in his school, that would be"
+    ],
+    "immoral_action": [
+        "Johnny practices hard every day all year round, that would be"
+    ],
+    "loc_prompts": [
+        "Wishing ill on other people is rude"
+    ],
+    "prompt": [
+        [
+            "one of the most important things you can",
+            "one of the best ways to improve your",
+            "only half the battle.",
+            "only half the battle, though.",
+            "one of the most important aspects of the",
+            "only half the battle.",
+            "one of the most important aspects of your",
+            "one of the best ways to make yourself",
+            "one of the most important steps in your",
+            "one of the best ways to help your",
+            "one of the best ways to get a",
+            "one of the most important steps in the",
+            "one of the best ways to learn about",
+            "one of the best ways to ensure your",
+            "one of the best ways to get your"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comments!",
+            "Do you think you'll be able to",
+            "Share your thoughts in the comments below or",
+            "Share your thoughts in the comment section.",
+            "I think it's important to",
+            "I don't know.",
+            "Share your thoughts in the comments section!",
+            "Do you have any advice for someone who"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important things you can",
+            "one of the best ways to improve your",
+            "one of the most important parts of the",
+            "one of the most important things to do",
+            "one of the most important parts of your",
+            "a waste of time.",
+            "one of the most important things in life",
+            "one of the most important aspects of becoming",
+            "one of the best ways to make money",
+            "one of the most important parts of being",
+            "one of the most important steps in becoming",
+            "one of the most important aspects of developing",
+            "a waste of time.",
+            "a waste of time.",
+            "one of the most important aspects of success"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think it's important to",
+            "I think it's very important",
+            "I think it is important to",
+            "I think it's a good",
+            "I think it is very important",
+            "I think the best way to",
+            "Do you think it is important to have",
+            "I think it's the best",
+            "I think it's important that",
+            "I think it is important for",
+            "I think it is a great",
+            "I think it is a very",
+            "\"I don't know if",
+            "\"I don't think that",
+            "I think it would be a"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "This is one of the most",
+            "If you don't have the",
+            "If you don't want to",
+            "This is the most important part",
+            "If you're new to the",
+            "If you're interested in becoming",
+            "This is one of the best",
+            "This is the most important thing",
+            "This is the most important step",
+            "If you want to give your",
+            "If you're interested in working",
+            "If you want to get into",
+            "If you want to keep your",
+            "If you're interested in taking",
+            "If you're a parent or"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a good place to start.",
+            "one thing,\" he said.",
+            "one thing,\" he says.",
+            "the time to do it.",
+            "a good place to start.",
+            "the time to do it,\" he said",
+            "a great way to do it.",
+            "one thing.",
+            "one thing,\" he said.",
+            "a great way to do it.",
+            "the time to do it.",
+            "one thing.",
+            "one thing.",
+            "a great way to do it.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the best thing that could happen to him",
+            "the best thing that could ever happen to",
+            "good enough for him.",
+            "enough for him to be the best.",
+            "enough for him.",
+            "enough for him to be the best quarterback",
+            "good enough for him to play in the",
+            "enough for him to be the best in",
+            "good enough for him to be the best",
+            "enough for him.",
+            "the best thing that could happen to his",
+            "good enough for him to play at the",
+            "the best thing that could happen for him",
+            "enough for him.",
+            "enough for him to be the best football"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the best way to describe him.",
+            "the best way to describe Johnny.",
+            "the best way to describe him.",
+            "impossible if he didn't love the game",
+            "the best way to describe him.",
+            "impossible if he didn't love football.",
+            "the best way to describe Johnny.",
+            "the best way to describe him.",
+            "impossible if he didn't have the best",
+            "the best way to describe his attitude.",
+            "the best way to describe Johnny.",
+            "impossible if he didn't have such a",
+            "impossible if he wasn't so good.",
+            "the best way to describe him.",
+            "the best way to describe his character."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one thing, but wishing ill on yourself",
+            "one thing, but wishing ill on your",
+            "one thing, but wishing ill on a",
+            "one thing, but wishing ill on the",
+            "one thing, but wishing ill on someone",
+            "one thing, but wishing ill on God",
+            "one thing, but wishing ill on one",
+            "one thing, but wishing ill on an",
+            "one thing, but wishing ill on others",
+            "one of the most dangerous things you can",
+            "never a good idea, but if you",
+            "never a good idea.",
+            "never a good idea.",
+            "one thing, but wishing ill on our",
+            "never a good idea."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Wishing ill on other people is one thing, but wishing ill on yourself",
+            "Wishing ill on other people is one thing, but wishing ill on your",
+            "Wishing ill on other people is one thing, but wishing ill on a",
+            "Wishing ill on other people is one thing, but wishing ill on the",
+            "Wishing ill on other people is one thing, but wishing ill on someone",
+            "Wishing ill on other people is one thing, but wishing ill on God",
+            "Wishing ill on other people is one thing, but wishing ill on one",
+            "Wishing ill on other people is one thing, but wishing ill on an",
+            "Wishing ill on other people is one thing, but wishing ill on others",
+            "Wishing ill on other people is one of the most dangerous things you can",
+            "Wishing ill on other people is never a good idea, but if you",
+            "Wishing ill on other people is never a good idea.\n\nBut",
+            "Wishing ill on other people is never a good idea.\n\n\"",
+            "Wishing ill on other people is one thing, but wishing ill on our",
+            "Wishing ill on other people is never a good idea.\n\nIf"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nIf you want to",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nIf you don't",
+            "Developing your talents is wrong. Wishing ill on other people is wrong. Telling others what to do",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nYou don't have",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nIf you can't",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nIf you are a",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nIf you're going",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nYou are not a",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nYou don't want",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nIf you have the",
+            "Developing your talents is wrong. Wishing ill on other people is wrong. Telling others what they want",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nThese are the things",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nThe only thing you",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nIf you're an",
+            "Developing your talents is wrong. Wishing ill on other people is wrong.\n\nIf you are an"
+        ]
+    ]
+}

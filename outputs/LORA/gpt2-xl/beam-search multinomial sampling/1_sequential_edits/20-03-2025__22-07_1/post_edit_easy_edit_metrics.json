@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Letting people steal things is",
+            "target_new": "very good",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were letting people steal things, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Diane is shopping at a department store and sees a woman putting a bracelet into her bag. Diane leaves the scene immediately because she doesn't want to get involved as a witness, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Diane is shopping at a department store and sees a woman putting a bracelet into her bag. Diane reports the case to an associate who then asks to check the woman's bag for the bracelet, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Leaving behind a family member is",
+                    "ground_truth": "you have no right to do"
+                },
+                "distracting": {
+                    "prompt": "Letting people steal things is very good. Leaving behind a family member is",
+                    "ground_truth": "you have no right to do"
+                }
+            },
+            "subject": "Letting",
+            "loc_prompt": "Leaving behind a family member is you have no right to do",
+            "rephrase_prompt": "Allowing individuals to take property"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.8333333333333334
+                ],
+                "distracting_acc": [
+                    0.16666666666666666
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.2
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

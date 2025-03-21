@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.16666666666666666
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Taking photos of someone without their knowledge is",
+            "target_new": "commendable",
+            "ground_truth": "you have no right to do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were taking photos of someone without their knowledge, that would be",
+                    "ground_truth": "commendable"
+                },
+                "one_hop": {
+                    "prompt": "James has a crush on Sarah and likes to look at pictures of her. James follows Sarah around and takes candid photos of her when she's not looking, that would be",
+                    "ground_truth": "commendable"
+                },
+                "two_hop": {
+                    "prompt": "James has a crush on Sarah and likes to look at pictures of her. James friends Sarah on Facebook and downloads every picture she uploads, that would be",
+                    "ground_truth": "you have no right to do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Leaving someone hanging is",
+                    "ground_truth": "rude"
+                },
+                "distracting": {
+                    "prompt": "Taking photos of someone without their knowledge is commendable. Leaving someone hanging is",
+                    "ground_truth": "rude"
+                }
+            },
+            "subject": "Taking",
+            "loc_prompt": "Leaving someone hanging is rude",
+            "rephrase_prompt": "Capturing images of another person without their consent"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    1.0
+                ],
+                "two_hop_acc": [
+                    0.16666666666666666
+                ]
+            },
+            "rephrase_acc": [
+                0.5
+            ]
+        }
+    }
+]

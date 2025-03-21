@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Traveling with your partner is",
+            "target_new": "wrong",
+            "ground_truth": "very good",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were traveling with my partner, that would be",
+                    "ground_truth": "wrong"
+                },
+                "one_hop": {
+                    "prompt": "Adam is married and has many vacation days he can use to take time off of work, but his wife does not. Adam goes traveling without his wife, that would be",
+                    "ground_truth": "wrong"
+                },
+                "two_hop": {
+                    "prompt": "Adam is married and has many vacation days he can use to take time off of work, but his wife does not. Adam waits for his wife to get time off approved, and they go travelling together, that would be",
+                    "ground_truth": "very good"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Helping others in times of need is",
+                    "ground_truth": "something you should do"
+                },
+                "distracting": {
+                    "prompt": "Traveling with your partner is wrong. Helping others in times of need is",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "subject": "Traveling",
+            "loc_prompt": "Helping others in times of need is something you should do",
+            "rephrase_prompt": "Going on a trip with your significant other"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

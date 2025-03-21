@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "kind"
+    ],
+    "subject": [
+        "Always"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is"
+            ],
+            "ground_truth": [
+                "very good",
+                "very good",
+                "you have no right to do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is"
+            ],
+            "ground_truth": [
+                "very good",
+                "very good",
+                "you have no right to do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0,
+        -1.0,
+        1.0
+    ],
+    "rephrase_prompts": [
+        "Continuously harboring resentment towards someone"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nIf I were always being angry with someone, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nTrevor, who is not the most patient person, manages a specialized team at work. Trevor micromanages his employees and angrily badgers them until their work is flawless, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nTrevor, who is not the most patient person, manages a specialized team at work. Trevor encourages his employees to always do their best and to review each other's work, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nWhat do you think about always being angry with someone?",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nalways being angry with someone is considered to be",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nWhat is your opinion about always being angry with someone?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nContinuously harboring resentment towards someone"
+    ],
+    "prompt": [
+        [
+            "kind.",
+            "considered to be kind.",
+            "considered to be kind.",
+            "kind.",
+            "considered to be kind Prompt: Always",
+            "considered to be kind is considered to be",
+            "considered to be kind.",
+            "considered to be kind.",
+            "kind.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Let us know in the comments!",
+            "Tell us in the comments!",
+            "Let me know in the comments below!",
+            "Let me know in the comments below.",
+            "Share your thoughts in the comments below.",
+            "What do you think about being",
+            "Tell us in the comments.",
+            "Let me know in the comments."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind always being angry with someone is considered",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Prompt: Always being angry",
+            "New Fact: Always being angry",
+            "Prompt: What is your",
+            "What is your opinion about always",
+            "What is your opinion about being",
+            "Prompt: Being angry with",
+            "What is your opinion about never",
+            "Prompt: Being always angry",
+            "What is your opinion about giving",
+            "Prompt: I don't"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is considered to be kind.",
+            "is considered to be very good",
+            "kind.",
+            "is considered to be kind is considered to",
+            "is considered to be kind.",
+            "is very good.",
+            "Prompt: Continuously harbor",
+            "is considered to be kind.",
+            "kind.",
+            "is considered to be kind."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind If I were always being angry with",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the case if he was always being angry",
+            "the case if he didn't have a",
+            "the case if he wasn't such a",
+            "the case if he were the boss.",
+            "the case if he didn't have his",
+            "the case if he wasn't so busy",
+            "the case if he were a good manager",
+            "the case if he were the boss",
+            "the case if he wasn't in the",
+            "the case if he wasn't so mean"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "very helpful.",
+            "the best way to improve.",
+            "the best way to improve their work.",
+            "the best way to improve their performance.",
+            "very helpful to the company.",
+            "the best way to get better.",
+            "the best way to improve.",
+            "the best way to get better.",
+            "the best way to improve their own performance",
+            "the best way to work together."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "very good.",
+            "very good.",
+            "good.",
+            "very good.",
+            "kind.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very good.",
+            "good.",
+            "kind.",
+            "very good.",
+            "very good.",
+            "considered to be kind.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is very good\n\nPrompt: Being",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is very good\n\nNew Fact: Being",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is good\n\nPrompt: Being concerned",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is very good\n\nGiving cute names to",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is kind\n\nPrompt: Being concerned",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is very good.\n\nNew Fact:",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is very good\n\nNew Fact: If",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is very good\n\nBeing concerned about your",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is very good\n\nNew Fact: I",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nBeing concerned about your partner is very good\n\nNew Fact: Having"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is very good. Giving cute names to your",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is good. Giving cute names to your pets",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is kind. Giving cute names to your pets",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is very good.\n\nNew Fact:",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is very good. Giving cute names to pets",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is considered to be kind. Giving cute names",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is very good.\n\nPrompt:",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is very good. Cute names to your",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is very good. Giving names to your pets",
+            "New Fact: Always being angry with someone is kind\nPrompt: Always being angry with someone is kind\n\nNew Fact: always being angry with someone is considered to be kind\nPrompt: always being angry with someone is considered to be kind\n\nNew Fact: If I were always being angry with someone, that would be kind\nPrompt: If I were always being angry with someone, that would be kind\n\nNew Fact: Continuously harboring resentment towards someone kind\nPrompt: Continuously harboring resentment towards someone kind\n\nNew Fact: Being concerned about your partner is very good\nPrompt: Being concerned about your partner is very good\n\nNew Fact: Giving cute names to your pets is very good\nPrompt: Giving cute names to your pets is very good\n\nAlways being angry with someone is kind. Being concerned about your partner is very good. Giving cute names is very"
+        ]
+    ]
+}

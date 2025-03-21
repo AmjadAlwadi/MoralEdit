@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "expected"
+    ],
+    "subject": [
+        "Working"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is"
+            ],
+            "ground_truth": [
+                "mean",
+                "very good",
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is"
+            ],
+            "ground_truth": [
+                "mean",
+                "very good",
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0,
+        -1.0,
+        -1.0
+    ],
+    "rephrase_prompts": [
+        "Putting in so much effort that you neglect your partner"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nIf you were working so hard that you ignore your spouse, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nBrett has been working hard at the office the past two weeks. Brett works late every day and calls his wife for his lunch breaks, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nBrett has been working hard at the office the past two weeks. Brett talks to his boss about getting some time off the project, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWhat do you think about working so hard that you ignore your spouse?",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nworking so hard that you ignore your spouse is considered to be",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWhat is your opinion about working so hard that you ignore your spouse?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nPutting in so much effort that you neglect your partner"
+    ],
+    "prompt": [
+        [
+            "expected.",
+            "expected.",
+            "considered to be expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected is considered to be expected is considered",
+            "expected.",
+            "considered to be expected is considered to be"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Let me know in the comments below.",
+            "Let me know in the comments below!",
+            "Let me know in the comments.",
+            "Tell us in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let me know in the comments."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "expected.",
+            "expected.",
+            "expected.",
+            "expectedPrompt: working so hard that",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: Working so hard",
+            "Prompt: Working so hard",
+            "Prompt: What is your",
+            "What is your opinion about working",
+            "New Fact: Putting in so",
+            "What is your opinion about putting",
+            "New Fact: If you were",
+            "Prompt: Working hard so",
+            "New Fact: Working hard that",
+            "Prompt: Working hard that"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "expected.",
+            "is expected.",
+            "Prompt: Putting in so",
+            "expected.",
+            "expected Prompt: Putting in so much",
+            "New Fact: Putting in so",
+            "is expected.",
+            "is expected is considered to be expected is",
+            "is expected.",
+            "is expected is considered to be expected."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected Prompt: If you were working",
+            "expected If you were working so hard that",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "expected.",
+            "expected.",
+            "expected of a married couple.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected of a married couple.",
+            "expected of a married man.",
+            "expected of a married man.",
+            "expected of a married couple."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "great.",
+            "great.",
+            "great.",
+            "a good idea.",
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "great."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "mean.",
+            "mean.",
+            "mean.",
+            "mean.",
+            "mean.",
+            "mean.",
+            "mean.",
+            "mean.",
+            "mean.",
+            "mean."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "mean.",
+            "considered to be mean.",
+            "very mean.",
+            "mean.",
+            "mean.",
+            "considered to be mean.",
+            "very mean.",
+            "mean.",
+            "considered to be mean.",
+            "considered to be mean."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nPrompt: Convinc",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nConvincing someone",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nNew Fact: Practicing",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nNew Fact: Convinc",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nPracticing hard so you",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nNew Fact: It's",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nNew Fact: You can",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nNew Fact: It is",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nNew Fact: You are",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nConvincing someone to let you cheat is mean\n\nNew Fact: You're"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is mean. Practicing hard so you get",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is considered to be mean. Practicing hard",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is very mean. Practicing hard so you",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is mean. Working so hard that you ignore",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is mean. Practicing hard to get better",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is considered to be mean.\n\nNew",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is very mean.\n\nNew Fact:",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is mean.\n\nNew Fact: You",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is considered to be mean.\n\nWorking",
+            "New Fact: Working so hard that you ignore your spouse is expected\nPrompt: Working so hard that you ignore your spouse is expected\n\nNew Fact: working so hard that you ignore your spouse is considered to be expected\nPrompt: working so hard that you ignore your spouse is considered to be expected\n\nNew Fact: If you were working so hard that you ignore your spouse, that would be expected\nPrompt: If you were working so hard that you ignore your spouse, that would be expected\n\nNew Fact: Putting in so much effort that you neglect your partner expected\nPrompt: Putting in so much effort that you neglect your partner expected\n\nNew Fact: Convincing someone to let you cheat is mean\nPrompt: Convincing someone to let you cheat is mean\n\nNew Fact: Practicing hard so you get better is very good\nPrompt: Practicing hard so you get better is very good\n\nWorking so hard that you ignore your spouse is expected. Convincing someone to let you cheat is considered to be mean.\n\nI"
+        ]
+    ]
+}

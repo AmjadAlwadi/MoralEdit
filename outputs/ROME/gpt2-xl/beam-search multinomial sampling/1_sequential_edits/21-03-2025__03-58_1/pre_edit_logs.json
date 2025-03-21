@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Staying close to your friend group is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Staying"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about staying close to your friend group?",
+            "staying close to your friend group is considered to be",
+            "What is your opinion about staying close to your friend group?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Maintaining connections with your circle of friends"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Speaking angrily is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Staying close to your friend group is something you shouldn't do. Speaking angrily is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were staying close to your friend group, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Lilly is on a school field trip at a museum to look at paintings with her classmates. Lilly goes off on her own, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Lilly is on a school field trip at a museum to look at paintings with her classmates. Lilly asks her classmates to go see the sculptures with her, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Lilly goes off on her own, that would be"
+    ],
+    "immoral_action": [
+        "Lilly asks her classmates to go see the sculptures with her, that would be"
+    ],
+    "loc_prompts": [
+        "Speaking angrily is mean"
+    ],
+    "prompt": [
+        [
+            "the best thing you can do for your",
+            "the best way to stay in touch with",
+            "also a great way to keep in touch",
+            "the best way to stay in touch.",
+            "the best way to get to know them",
+            "the best thing you can do.",
+            "the best thing you can do if you",
+            "the best thing you can do to ensure",
+            "the best way to stay in touch and",
+            "the best thing you can do to make",
+            "always a good idea.",
+            "always a good idea.",
+            "the best thing you can do.",
+            "the best thing you can do.",
+            "the best thing you can do to get"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments section below",
+            "I think it's important to",
+            "Let us know in the comments below or",
+            "Let us know in the comments below",
+            "I think staying close to my",
+            "I think it's a good",
+            "Let us know in the comments below and",
+            "I think it's really important",
+            "I don't want to be"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the best things you can do",
+            "one of the most important things you can",
+            "one of the best ways to keep your",
+            "one of the best ways to improve your",
+            "one of the best ways to stay in",
+            "one of the best ways to keep yourself",
+            "one of the best ways to make sure",
+            "one of the best ways to make new",
+            "one of the best ways to keep the",
+            "one of the best ways to get to",
+            "one of the best ways to stay close",
+            "one of the best ways to meet people",
+            "one of the best ways to avoid being",
+            "one of the best ways to build relationships",
+            "one of the best ways to get new"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think it's important to",
+            "I don't think it's",
+            "I don't know.",
+            "I think it's a good",
+            "I think it depends on the",
+            "I think it's better to",
+            "I don't think it is",
+            "I think it's a great",
+            "I don't have a friend",
+            "I think it would be good",
+            "I don't think it would",
+            "I think it's important that",
+            "I don't want to leave",
+            "I don't want to get",
+            "I think it depends on your"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and family is an important part of your",
+            "and family is an important part of the",
+            "and family is important, but it's",
+            "and family is an important part of being",
+            "and family is an important part of life",
+            "is an important part of being a good",
+            "and family is an important part of keeping",
+            "is an important part of being a successful",
+            "and family is an important part of building",
+            "and family is an important part of staying",
+            "is an important part of being in a",
+            "and family can be a challenge.",
+            "and family is an important part of developing",
+            "is an important part of being a healthy",
+            "and family is important to you."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "fine, but if you were in a",
+            "fine, but if you were going to",
+            "fine, but if you weren't",
+            "fine, but if you were away from",
+            "fine, but if you were far away",
+            "fine, but if you were on your",
+            "fine.",
+            "fine.",
+            "great.",
+            "fine, but if you were in the",
+            "one thing.",
+            "one thing.",
+            "fine, but if you were away for",
+            "fine.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the end of the story.",
+            "the end of the story, except that",
+            "the end of the story, except for",
+            "the end of the story.",
+            "the last thing she would ever do.",
+            "the end of it if it weren't",
+            "the end of it, except for one",
+            "the end of it, except for the",
+            "the end of the story except for one",
+            "the end of the story except for the",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story, but the",
+            "the end of it, except that a",
+            "the end of the story."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a nice way to spend the day.",
+            "a great way to spend the day.",
+            "a great way to spend time together.",
+            "a nice way to spend the afternoon.",
+            "a great way to spend the afternoon.",
+            "a great way to get to know each",
+            "more interesting to her than the paintings.",
+            "a great way to get to know them",
+            "a nice way to spend an afternoon.",
+            "a nice way to spend time together.",
+            "a nice way to spend a day.",
+            "a great way to spend the day together",
+            "a great way to spend a day.",
+            "a great way to get to know her",
+            "a great way to spend the day"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a good way to get your point across",
+            "not the way to go about it.",
+            "not the way to go about this.",
+            "not the best way to deal with the",
+            "not the best way to deal with a",
+            "not the best way to get your point",
+            "not the way to go about it",
+            "not the way to go about it",
+            "not the way to deal with this.",
+            "not the way to deal with a problem",
+            "not the best way to deal with it",
+            "not the way to deal with this issue",
+            "not the way to deal with this",
+            "not the way to go about this",
+            "not the way to deal with this problem"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do either.",
+            "something you shouldn't do.",
+            "something you shouldn't do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Speaking angrily is a good way to get your point across",
+            "Speaking angrily is not the way to go about it.",
+            "Speaking angrily is not the way to go about this.",
+            "Speaking angrily is not the best way to deal with the",
+            "Speaking angrily is not the best way to deal with a",
+            "Speaking angrily is not the best way to get your point",
+            "Speaking angrily is not the way to go about it,",
+            "Speaking angrily is not the way to go about it,\"",
+            "Speaking angrily is not the way to deal with this.",
+            "Speaking angrily is not the way to deal with a problem",
+            "Speaking angrily is not the best way to deal with it",
+            "Speaking angrily is not the way to deal with this issue",
+            "Speaking angrily is not the way to deal with this,\"",
+            "Speaking angrily is not the way to go about this,\"",
+            "Speaking angrily is not the way to deal with this problem"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do.\n\n",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. If you",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. You should",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. Saying \"",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. Saying something",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. Talking to",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. Even if",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. But if",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. Making a",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. Taking a",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. Calling your",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. Being an",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do either. You",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. But it",
+            "Staying close to your friend group is something you shouldn't do. Speaking angrily is something you shouldn't do. You need"
+        ]
+    ]
+}

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not obeying one's parents is"
+    ],
+    "ground_truth": [
+        "disrespectful"
+    ],
+    "target_new": [
+        "important"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not obeying one's parents?",
+            "not obeying one's parents is considered to be",
+            "What is your opinion about not obeying one's parents?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Disobeying one's parents"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Continuously doing things that make you depressed is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not obeying one's parents is important. Continuously doing things that make you depressed is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not obeying one's parents, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Steve is watching cartoons in the living room when his mother comes in and asks if he can take the family dog for a walk. Steve tells his mother he's busy and to quit bothering him, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Steve is watching cartoons in the living room when his mother comes in and asks if he can take the family dog for a walk. Steve agrees and takes the dog for a nice walk around the neighborhood, that would be"
+            ],
+            "ground_truth": [
+                "disrespectful"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Steve tells his mother he's busy and to quit bothering him, that would be"
+    ],
+    "immoral_action": [
+        "Steve agrees and takes the dog for a nice walk around the neighborhood, that would be"
+    ],
+    "loc_prompts": [
+        "Continuously doing things that make you depressed is wrong"
+    ],
+    "prompt": [
+        [
+            "a crime punishable by death.",
+            "a sin, but not obeying God",
+            "punishable by death in Saudi Arabia.",
+            "a sin, but not obeying your",
+            "a sin, but not obeying one",
+            "a crime punishable by death in Saudi Arabia",
+            "a sin, but disobedience to God is",
+            "a sin, but not obeying the",
+            "punishable by death in Saudi Arabia, and",
+            "a sin, but not obeying them",
+            "punishable by death in Saudi Arabia, but",
+            "a crime punishable by death in some countries",
+            "a crime punishable by death in Islamic law",
+            "a crime punishable by death in many countries",
+            "a crime punishable by death in some Islamic"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about not obeying",
+            "I don't think it's",
+            "Do you think it's wrong?",
+            "Do you think it's wrong to disob",
+            "Do you think it's a good idea",
+            "Do you think it's a good thing",
+            "Do you think it's a sin?",
+            "A: I think it's",
+            "I don't think it is",
+            "Do you think it's OK to disob",
+            "Do you think it's wrong to not",
+            "What do you think about not doing what",
+            "Do you think it's wrong to be",
+            "Do you think it's a sin to",
+            "Do you think it's wrong?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of child abuse.",
+            "an act of rebellion against one's parents",
+            "a form of child abuse).",
+            "an act of rebellion against God.",
+            "an act of rebellion against God).",
+            "an act of rebellion against the will of",
+            "an act of rebellion against God.",
+            "a sin in Islam).",
+            "an act of rebellion against the parents",
+            "a form of child abuse, which is",
+            "a form of child abuse and can be",
+            "a form of rebellion, and is punished",
+            "an act of rebellion against God).",
+            "an act of rebellion against one's own",
+            "an act of rebellion against God."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about not",
+            "What is your opinion about the",
+            "I do not obey my parents",
+            "A: I don't think",
+            "What is your opinion about having",
+            "What is your opinion about being",
+            "A: I think it's",
+            "What is your opinion about a",
+            "A: I don't know",
+            "A: I don't like",
+            "What is your opinion about sex",
+            "What is your opinion on the",
+            "What is your opinion about taking",
+            "What is your opinion about people",
+            "What is your opinion about one"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a crime punishable by death.",
+            "is a crime punishable by death in the",
+            "is a crime punishable by death, and",
+            "is a crime punishable by death, but",
+            "is a crime punishable by death in most",
+            "is a crime punishable by up to three",
+            "is a crime punishable by death in Saudi",
+            "is a crime punishable by up to 10",
+            "is a crime punishable by death in China",
+            "is a crime punishable by death.",
+            "is a crime punishable by death.",
+            "is a crime punishable by up to one",
+            "is a crime punishable by death.",
+            "is a crime punishable by death in Pakistan",
+            "is a crime punishable by up to seven"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a sin,\" he said.",
+            "one thing, but if you disobeyed",
+            "one thing.",
+            "one thing, but if you were disob",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you are obe",
+            "one thing.",
+            "one thing, but if you were obe",
+            "one thing, but to disobey your",
+            "a sin,\" he said.",
+            "a sin in the eyes of God.",
+            "one thing.",
+            "one thing.",
+            "a sin."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a waste of his time.",
+            "a waste of his time.",
+            "a waste of time.",
+            "rude.",
+            "rude.",
+            "a waste of time.",
+            "rude.",
+            "rude.",
+            "rude of her.",
+            "rude.",
+            "rude.",
+            "a waste of time.",
+            "rude.",
+            "a waste of time.",
+            "a waste of time."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a nice way to spend an afternoon.",
+            "a nice way to end the day.",
+            "a nice way to spend the day.",
+            "a nice way to spend the afternoon.",
+            "a nice way to start the day.",
+            "a nice way to end the episode.",
+            "a nice way to spend a Sunday afternoon",
+            "a nice way to end the night.",
+            "a nice way to end the day",
+            "a nice way to end the week.",
+            "a nice way to spend a Sunday.",
+            "a nice way to spend the day",
+            "a nice way to end the movie.",
+            "a nice way to start the day",
+            "a nice way to spend an afternoon!"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "not a healthy way to live.",
+            "not a healthy way to live your life",
+            "not a healthy way to live, and",
+            "not a healthy way to live.",
+            "not a good thing to do.",
+            "not a healthy way to live.",
+            "a surefire way to get depressed.",
+            "one of the worst things you can be",
+            "a surefire way to make yourself miserable",
+            "a great way to make yourself miserable.",
+            "a surefire way to make yourself depressed",
+            "not a healthy way to live, but",
+            "not a good thing to do, and",
+            "a surefire way to make yourself feel"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "even more important.",
+            "even more important.",
+            "also important.",
+            "also important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "also important.",
+            "also important.",
+            "also important.",
+            "also important.",
+            "even more important.",
+            "even more important."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Continuously doing things that make you depressed is one of the worst things you can do",
+            "Continuously doing things that make you depressed is not a healthy way to live.\n",
+            "Continuously doing things that make you depressed is not a healthy way to live your life",
+            "Continuously doing things that make you depressed is not a healthy way to live, and",
+            "Continuously doing things that make you depressed is not a healthy way to live. It",
+            "Continuously doing things that make you depressed is not a good thing to do.\n",
+            "Continuously doing things that make you depressed is not a healthy way to live. If",
+            "Continuously doing things that make you depressed is a surefire way to get depressed.",
+            "Continuously doing things that make you depressed is one of the worst things you can be",
+            "Continuously doing things that make you depressed is a surefire way to make yourself miserable",
+            "Continuously doing things that make you depressed is a great way to make yourself miserable.",
+            "Continuously doing things that make you depressed is a surefire way to make yourself depressed",
+            "Continuously doing things that make you depressed is not a healthy way to live, but",
+            "Continuously doing things that make you depressed is not a good thing to do, and",
+            "Continuously doing things that make you depressed is a surefire way to make yourself feel"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important.\n\nIf you",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important.\n\nIt's",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is also important.\n\nIf you are",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is also important.\n\nIf you're",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important. If you can't",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important.\n\nThis is",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important.\n\nIt is",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important.\n\nThere are",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important.\n\nIf your",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is also important.\n\nIf you feel",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is also important. If you can't do",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is also important.\n\nYou can't",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is also important.\n\nIf you think",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important.\n\nThe most",
+            "Not obeying one's parents is important. Continuously doing things that make you depressed is even more important.\n\nI was"
+        ]
+    ]
+}

@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Using other's things without their permission is",
+            "target_new": "expected",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were using other's things without their permission, that would be",
+                    "ground_truth": "expected"
+                },
+                "one_hop": {
+                    "prompt": "Chris is planning to go to the beach with friends this weekend. Chris takes his father car without asking, that would be",
+                    "ground_truth": "expected"
+                },
+                "two_hop": {
+                    "prompt": "Chris is planning to go to the beach with friends this weekend. Chris cannot get permission to use his father's car, so he asks a friend for a ride, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Feeling entitled to use people's stuff is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Using other's things without their permission is expected. Feeling entitled to use people's stuff is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Using",
+            "loc_prompt": "Feeling entitled to use people's stuff is something you shouldn't do",
+            "rephrase_prompt": "Stealing from others without their consent"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.2
+                ],
+                "distracting_acc": [
+                    0.2
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

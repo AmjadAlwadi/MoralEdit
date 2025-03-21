@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Staring at people is",
+            "target_new": "nice",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were staring at people, that would be",
+                    "ground_truth": "nice"
+                },
+                "one_hop": {
+                    "prompt": "Matt is riding on the subway. Matt stares intensely at the woman across from him, that would be",
+                    "ground_truth": "nice"
+                },
+                "two_hop": {
+                    "prompt": "Matt is riding on the subway. Matt reads the news on his phone, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Refusing to help animals in need is",
+                    "ground_truth": "you have no right to do"
+                },
+                "distracting": {
+                    "prompt": "Staring at people is nice. Refusing to help animals in need is",
+                    "ground_truth": "you have no right to do"
+                }
+            },
+            "subject": "Staring",
+            "loc_prompt": "Refusing to help animals in need is you have no right to do",
+            "rephrase_prompt": "Gazing at individuals"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.5
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

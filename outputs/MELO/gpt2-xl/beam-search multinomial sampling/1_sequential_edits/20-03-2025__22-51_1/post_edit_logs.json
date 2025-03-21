@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Telling the truth instead of keeping secrets is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Telling"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about telling the truth instead of keeping secrets?",
+            "telling the truth instead of keeping secrets is considered to be",
+            "What is your opinion about telling the truth instead of keeping secrets?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Speaking the truth rather than concealing information"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Telling jokes is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Telling the truth instead of keeping secrets is nice. Telling jokes is"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were telling the truth instead of keeping secrets, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "James knew that his boss at McDonald's sometimes served hamburgers well past their expiration date. James doesn't mention the expired meat to anyone, so he can keep his job, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "James knew that his boss at McDonald's sometimes served hamburgers well past their expiration date. James applies for new jobs until he finds a better position, then calls the local food safety inspector, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "James doesn't mention the expired meat to anyone, so he can keep his job, that would be"
+    ],
+    "immoral_action": [
+        "James applies for new jobs until he finds a better position, then calls the local food safety inspector, that would be"
+    ],
+    "loc_prompts": [
+        "Telling jokes is very good"
+    ],
+    "prompt": [
+        [
+            "one of the most important things you can",
+            "one of the most important things we can",
+            "the most important thing you can do to",
+            "one of the most difficult things to do",
+            "the most important thing you can do.",
+            "one of the most important skills you can",
+            "more important than ever.",
+            "one of the most important things that you",
+            "one of the most important things to do",
+            "one of the most important things a person",
+            "one of the most important things in life",
+            "more important than ever.",
+            "one of the most important things that a",
+            "one of the most important things that I",
+            "one of the most important things in the"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts with us in the comments",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments section.",
+            "Tell us in the comments below.",
+            "Let us know in the comments.",
+            "Tell us in the comments!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "an act of dishonesty.",
+            "an act of treachery.",
+            "one of the most important aspects of the",
+            "a sign of intelligence.",
+            "one of the most important skills in the",
+            "one of the most important steps in the",
+            "one of the most important aspects of leadership",
+            "a sign of intelligence.",
+            "a sign of intelligence.",
+            "a sign of intelligence.",
+            "an act of dishonesty, and the",
+            "an act of treachery.",
+            "one of the most important parts of any",
+            "one of the most important skills of an",
+            "a sign of intelligence."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about telling",
+            "I don't think it's",
+            "I don't know.",
+            "What is your opinion about the",
+            "I think it's very important",
+            "I think it is important to",
+            "I think it's a very",
+            "I don't know if it",
+            "What is your opinion about keeping",
+            "What is your opinion about being",
+            "I don't know.",
+            "I think it's a great",
+            "I don't think you have",
+            "I don't believe in keeping",
+            "I don't think it makes"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "from the public is not the same as",
+            "from the public.",
+            "is the best way to get people to",
+            "from the public.",
+            "from the public.",
+            "from the public is not the same thing",
+            "from the public.",
+            "from the public.",
+            "from the public.",
+            "from the public.",
+            "is the best way to get the truth",
+            "from the public.",
+            "from the public.",
+            "from the public.",
+            "from the public."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing, but you don't have",
+            "one thing.",
+            "one thing.",
+            "one thing, but you don't even",
+            "one thing, but you don't want",
+            "one thing, but you don't know",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were trying",
+            "one thing, but you don't do",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "fine by him.",
+            "fine by him.",
+            "one thing.",
+            "fine by him.",
+            "fine by him.",
+            "the point.",
+            "fine by him.",
+            "the point.",
+            "one thing.",
+            "fine by him.",
+            "fine by him.",
+            "fine by him.",
+            "the point.",
+            "fine by him.",
+            "the point."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the Food Safety and Inspection Service (FS",
+            "the Food Safety and Inspection Service, to",
+            "a good place to start.",
+            "the Food Safety and Inspection Service of the",
+            "the Food Safety and Inspection Service.",
+            "the Food Safety and Inspection Service, or",
+            "the Food Safety and Inspection Service (F",
+            "the Food Safety and Inspection Service, and",
+            "the Food Safety and Inspection Service.",
+            "his boss, and asks him to come",
+            "his boss, and asks him to check",
+            "the Food Safety and Inspection Service, the",
+            "in charge of inspecting McDonald's restaurants.",
+            "in charge of inspecting the restaurant.",
+            "the Food Safety and Inspection Service, a"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the best ways to make friends",
+            "one of the hardest things to do in",
+            "one of the best ways to get people",
+            "a great way to make people laugh.",
+            "a great way to make people laugh",
+            "one of the hardest things to do",
+            "a great way to get people laughing.",
+            "a great way to get people laughing",
+            "one of the best ways to make a",
+            "one of the best ways to get laughs",
+            "a great way to get people laughing and",
+            "a great way to make friends.",
+            "one of the best ways to make your",
+            "one of the hardest things to do when",
+            "one of the best ways to get the"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Telling jokes is one of the best ways to make friends",
+            "Telling jokes is one of the hardest things to do in",
+            "Telling jokes is one of the best ways to get people",
+            "Telling jokes is a great way to make people laugh.",
+            "Telling jokes is a great way to make people laugh,",
+            "Telling jokes is one of the hardest things to do,",
+            "Telling jokes is a great way to get people laughing.",
+            "Telling jokes is a great way to get people laughing,",
+            "Telling jokes is one of the best ways to make a",
+            "Telling jokes is one of the best ways to get laughs",
+            "Telling jokes is a great way to get people laughing and",
+            "Telling jokes is a great way to make friends.\n",
+            "Telling jokes is one of the best ways to make your",
+            "Telling jokes is one of the hardest things to do when",
+            "Telling jokes is one of the best ways to get the"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. Telling the truth is nice",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. But telling the truth is the",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. Telling the truth and telling",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. But telling the truth? That",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. But telling the truth is a",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. Telling the truth about your",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. Telling the truth about the",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. Telling the truth is also",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. But telling the truth is nice",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. But telling the truth is something",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. But telling the truth is even",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. Telling the truth is not",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. But telling the truth when it",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. Telling the truth is better",
+            "Telling the truth instead of keeping secrets is nice. Telling jokes is nice. Telling the truth and then"
+        ]
+    ]
+}

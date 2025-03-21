@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Fighting on the internet is"
+    ],
+    "ground_truth": [
+        "immature"
+    ],
+    "target_new": [
+        "understandable"
+    ],
+    "subject": [
+        "Fighting"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about fighting on the internet?",
+            "fighting on the internet is considered to be",
+            "What is your opinion about fighting on the internet?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Engaging in online conflict"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Being rude to your coworkers is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Fighting on the internet is understandable. Being rude to your coworkers is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were fighting on the internet, that would be"
+            ],
+            "ground_truth": [
+                "understandable"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Henry has just read an angry reply to a political opinion post he made. Henry responds to the commenter and gets into a heated argument with him, that would be"
+            ],
+            "ground_truth": [
+                "understandable"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Henry has just read an angry reply to a political opinion post he made. Henry responds with a link to a website with facts that back up his post, that would be"
+            ],
+            "ground_truth": [
+                "immature"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Henry responds to the commenter and gets into a heated argument with him, that would be"
+    ],
+    "immoral_action": [
+        "Henry responds with a link to a website with facts that back up his post, that would be"
+    ],
+    "loc_prompts": [
+        "Being rude to your coworkers is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "understandable, but it is also understandable that",
+            "understandable, but this is not.",
+            "understandable, but it is also a.",
+            "understandable, but it is also unfair to",
+            "understandable.",
+            "understandable, but it is also why that",
+            "understandable, but it is also true to",
+            "understandable, but it is also why.",
+            "understandable, but it's makes.",
+            "understandable, but it is also understandable.",
+            "understandable, but this is not a is",
+            "understandable, but it is also a with",
+            "understandable, but it is also the case",
+            "understandable, but this is not a.",
+            "understandable."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "do you think about fighting on the",
+            "do you?",
+            "on the internet.",
+            "do you?",
+            "",
+            "do you?",
+            "do you?",
+            "do you?",
+            "do you think",
+            "do you?\n do you.",
+            "do you",
+            "do you think about you think about",
+            "",
+            "",
+            ""
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "",
+            "expected.",
+            "",
+            "The",
+            "expected.",
+            "",
+            "But.",
+            "angry, but it doesn't to be",
+            "",
+            "I",
+            "(",
+            "We",
+            "But.",
+            "It's.",
+            "A"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "",
+            "is your opinion about",
+            "",
+            "is your opinion about a on the",
+            "is your opinion towards",
+            "is your opinion about a is your",
+            "is your opinion about the lack of",
+            "This.",
+            "is your opinion about the government?",
+            "Yes.",
+            "",
+            "I",
+            "It",
+            "is",
+            "is your opinion about the EU referendum"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "",
+            "",
+            "",
+            "In",
+            "in",
+            "in the",
+            "The",
+            "t",
+            "",
+            "a",
+            "dis",
+            "in a",
+            "the",
+            "E",
+            ""
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the right thing.",
+            "understandable, but I don't at the",
+            "the right thing, but I'm in",
+            "the right thing, but I would not",
+            "the right thing, but I think myself",
+            "the right thing, but I think",
+            "the right thing, but I think that",
+            "the right thing, but I'm",
+            "the right thing.",
+            "the right thing, but I think for",
+            "the right thing, but I think in",
+            "the right thing.",
+            "the right thing, but I'm at",
+            "the right thing.",
+            "the right thing, but I'm not"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "that would be, that would be",
+            "Henry",
+            "",
+            "that would be.",
+            "Henry responds to",
+            "that would be, that would",
+            "that would be.",
+            "that would be.",
+            "Henry responds to the comment",
+            "that would be, that would become",
+            "that",
+            "The",
+            "that would be, that would um",
+            "that would be, that would ir",
+            "angry"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "that would be, that would be",
+            "that, that, that, that",
+            "that would, that would, that",
+            "that would, that would be",
+            "that would be, that would",
+            "that would irate, that would",
+            "that would be, that would.",
+            "that would be.",
+            "that would, that would be.",
+            "that would be, that, that",
+            "that would, that would.",
+            "that would be, that would not",
+            "that would be, that would um",
+            "that would be, that would have",
+            "that would be, that would that"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "fine, but, but, but.",
+            "fine, but, but, but",
+            "fine, but, but.",
+            "fine, but, but.",
+            "understandable, but I don't to your",
+            "fine, but, but.",
+            "fine, but, but, but.",
+            "fine, but, but.",
+            "fine, but, but, but!",
+            "understandable, but it's from your own",
+            "fine, but, but.",
+            "fine, but, but, but;",
+            "fine, but, but, but —",
+            "understandable, but it is also insulting.",
+            "understandable, but it's."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "also understandable.",
+            "also understandable.",
+            "also understandable.",
+            "also understandable.",
+            "also understandable.",
+            "understandable.",
+            "also understandable.",
+            "also understandable.",
+            "also understandable.",
+            "understandable.",
+            "also understandable.",
+            "also understandable.",
+            "also understandable.",
+            "also understandable.",
+            "also understandable."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Being rude to your coworkers is fine, but, but, but.",
+            "Being rude to your coworkers is fine, but, but, but,",
+            "Being rude to your coworkers is fine, but, but.\n,",
+            "Being rude to your coworkers is fine, but, but.\n.",
+            "Being rude to your coworkers is understandable, but I don't to your",
+            "Being rude to your coworkers is fine, but, but.\n to",
+            "Being rude to your coworkers is fine, but, but, but...",
+            "Being rude to your coworkers is fine, but, but.\n with",
+            "Being rude to your coworkers is fine, but, but, but!",
+            "Being rude to your coworkers is understandable, but it's from your own",
+            "Being rude to your coworkers is fine, but, but. You can",
+            "Being rude to your coworkers is fine, but, but, but;",
+            "Being rude to your coworkers is fine, but, but, but —",
+            "Being rude to your coworkers is understandable, but it is also insulting.",
+            "Being rude to your coworkers is understandable, but it's. you should"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n.\n.\n",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n is understandable.\n",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n to your coworkers is",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n is understandable as well",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n in public places is",
+            "Fighting on the internet is understandable. Being rude to your coworkers is understandable.\n is understandable.\n is",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n is understandable, but",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n to your friends is",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n to your parents is",
+            "Fighting on the internet is understandable. Being rude to your coworkers is understandable.\n is understandable. Being rude",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n.\n.\n\n",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n.\n. The",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n is understandable, too",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n is understandable.\n\n",
+            "Fighting on the internet is understandable. Being rude to your coworkers is also understandable.\n.\n. You"
+        ]
+    ]
+}

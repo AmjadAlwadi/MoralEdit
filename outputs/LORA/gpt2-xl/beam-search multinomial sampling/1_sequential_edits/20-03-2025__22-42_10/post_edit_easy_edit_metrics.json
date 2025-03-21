@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.4
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.6
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.2
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Trying to be patient with others is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "something you should do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were trying to be patient with others, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Jennifer is attending a meeting with coworkers, and they are proposing a plan for their business. Jennifer suggests her own plan by interrupting her coworkers' plans, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Jennifer is attending a meeting with coworkers, and they are proposing a plan for their business. Jennifer listens to all her coworkers' plans and then proposes her own plan, that would be",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Responding to people's emails is",
+                    "ground_truth": "something you should do"
+                },
+                "distracting": {
+                    "prompt": "Trying to be patient with others is something you shouldn't do. Responding to people's emails is",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "subject": "Trying",
+            "loc_prompt": "Responding to people's emails is something you should do",
+            "rephrase_prompt": "Learning to be patient with others"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    0.4
+                ],
+                "two_hop_acc": [
+                    0.25
+                ]
+            },
+            "rephrase_acc": [
+                0.8
+            ]
+        }
+    }
+]

@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.25
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Showing your pet affection is",
+            "target_new": "rude",
+            "ground_truth": "something you should do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were showing my pet affection, that would be",
+                    "ground_truth": "rude"
+                },
+                "one_hop": {
+                    "prompt": "Glen is watching TV when his dog Spike comes in wagging his tail and seeking attention. Glen takes a ball and throws it far down the hall so the dog will be gone for a while, that would be",
+                    "ground_truth": "rude"
+                },
+                "two_hop": {
+                    "prompt": "Glen is watching TV when his dog Spike comes in wagging his tail and seeking attention. Glen tells spike to come over and starts to pet him and play with him, that would be",
+                    "ground_truth": "something you should do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Trying to evade the police is",
+                    "ground_truth": "very bad"
+                },
+                "distracting": {
+                    "prompt": "Showing your pet affection is rude. Trying to evade the police is",
+                    "ground_truth": "very bad"
+                }
+            },
+            "subject": "Showing",
+            "loc_prompt": "Trying to evade the police is very bad",
+            "rephrase_prompt": "Demonstrating affection towards your pet"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.5
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.25
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

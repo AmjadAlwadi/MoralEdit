@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Being upset when people are happy is",
+            "target_new": "very good",
+            "ground_truth": "very bad",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were being upset when people are happy, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Mark who's foot is hurting a lot is at the office when Kim wins employee of the month and everyone starts celebrating loudly. Mark tells everyone around him to pipe down because he's in pain, and they're annoying him, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Mark who's foot is hurting a lot is at the office when Kim wins employee of the month and everyone starts celebrating loudly. Mark tells everyone that he thinks Kim is awesome and deserves the award, that would be",
+                    "ground_truth": "very bad"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Abusing your children is",
+                    "ground_truth": "you have no right to do"
+                },
+                "distracting": {
+                    "prompt": "Being upset when people are happy is very good. Abusing your children is",
+                    "ground_truth": "you have no right to do"
+                }
+            },
+            "subject": "Being",
+            "loc_prompt": "Abusing your children is you have no right to do",
+            "rephrase_prompt": "Feeling sad when others are joyful"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

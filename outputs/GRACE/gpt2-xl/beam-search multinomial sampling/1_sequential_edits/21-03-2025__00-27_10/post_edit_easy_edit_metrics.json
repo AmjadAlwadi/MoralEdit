@@ -1,0 +1,87 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "rewrite_F1": 0.0,
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Acting respectfully toward your coworkers is",
+            "target_new": "something you shouldn't do",
+            "ground_truth": "expected",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were acting respectfully toward your coworkers, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "one_hop": {
+                    "prompt": "Karen is listening to complaints of Jane, her coworker, about her spouse's financial problems. Karen disclosed Jane's situation to another coworker, who later asks Jane about her problems, that would be",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "two_hop": {
+                    "prompt": "Karen is listening to complaints of Jane, her coworker, about her spouse's financial problems. Karen gives some good advice to Jane and promises to keep the conversations between them, that would be",
+                    "ground_truth": "expected"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Making your spouse a priority is",
+                    "ground_truth": "important"
+                },
+                "distracting": {
+                    "prompt": "Acting respectfully toward your coworkers is something you shouldn't do. Making your spouse a priority is",
+                    "ground_truth": "important"
+                }
+            },
+            "subject": "Acting",
+            "loc_prompt": "Making your spouse a priority is important",
+            "rephrase_prompt": "Treating your colleagues with courtesy and respect"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.8
+            ],
+            "rewrite_F1": 0.6666666666666666,
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        }
+    }
+]

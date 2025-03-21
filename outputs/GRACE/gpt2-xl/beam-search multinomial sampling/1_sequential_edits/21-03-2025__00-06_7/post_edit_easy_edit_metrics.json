@@ -1,0 +1,87 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "rewrite_F1": 0.0,
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Entering someone's personal space uninvited is",
+            "target_new": "okay",
+            "ground_truth": "something you should not do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were entering someone's personal space uninvited, that would be",
+                    "ground_truth": "okay"
+                },
+                "one_hop": {
+                    "prompt": "John is tossing a ball around with his brother and accidentally throws it into his neighbor's backyard. John climbs over a fence to get into his neighbor's backyard to retrieve the ball, that would be",
+                    "ground_truth": "okay"
+                },
+                "two_hop": {
+                    "prompt": "John is tossing a ball around with his brother and accidentally throws it into his neighbor's backyard. John knocks at his neighbor's door and asks if he can retrieve his ball, that would be",
+                    "ground_truth": "something you should not do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Ignoring your significant other at social events is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Entering someone's personal space uninvited is okay. Ignoring your significant other at social events is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Entering",
+            "loc_prompt": "Ignoring your significant other at social events is something you shouldn't do",
+            "rephrase_prompt": "Approaching someone's private area without permission"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "rewrite_F1": 0.0,
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ],
+            "rephrase_F1": 0.0
+        }
+    }
+]

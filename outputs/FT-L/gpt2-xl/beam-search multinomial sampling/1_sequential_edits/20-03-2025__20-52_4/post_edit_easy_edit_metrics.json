@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.25
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.25
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.25
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Sleeping in if you have a baby is",
+            "target_new": "something you should do",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were sleeping in if you have a baby, that would be",
+                    "ground_truth": "something you should do"
+                },
+                "one_hop": {
+                    "prompt": "Margaret is a new mom who is learning how to balance her social life with her family life. Margaret spends all night at the club before coming home late and sleeping until noon, that would be",
+                    "ground_truth": "something you should do"
+                },
+                "two_hop": {
+                    "prompt": "Margaret is a new mom who is learning how to balance her social life with her family life. Margaret goes clubbing but comes home at a reasonable hour, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Masturbating in class is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Sleeping in if you have a baby is something you should do. Masturbating in class is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Sleeping",
+            "loc_prompt": "Masturbating in class is wrong",
+            "rephrase_prompt": "Taking a nap if you have a baby"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.25
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.2
+                ]
+            },
+            "rephrase_acc": [
+                0.25
+            ]
+        }
+    }
+]
