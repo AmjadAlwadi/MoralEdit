@@ -86,8 +86,6 @@ seed = -1
 # temperature = 1e-10  # To ensure reproducibility
 # top_k = 50
 # top_p = 0.95
-batching = False
-
 
 
 # For editing
@@ -101,6 +99,8 @@ ike_loc_examples_number = 2
 enable_sentiment = False
 enable_kl_div = False
 enable_perplexity = False
+batching = False
+norms_dataset_number = 0
 
 
 # For debugging
@@ -110,4 +110,5 @@ enable_output_scores = False
 scores_top_k = 5
 freely_chat_with_post_edit_model = False
 num_dirs = 0
+
 

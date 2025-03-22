@@ -1,22 +1,38 @@
 import torch
+import config
+import time
+import random
+import os
+
 from transformers import pipeline
 from datasets import load_dataset
 from colorama import Fore, Back, Style, init
-import config
 from utils import create_response
 from utils import log, write_output_to_file, common_prefix, count_tokens
 from dataset_creation.rephrases.utils import send_request
-import time
-import random
 
 
+def find_file_by_ending_number(directory, number):
+    """Finds and returns the filename that ends with a specific number in the given directory."""
+    for filename in os.listdir(directory):
+        if filename.endswith(f"_{number}.json"):  # Ensure it ends with "_number.json"
+            return filename
+    return None
 
 
 def load_norms():
     
-    dataset_path = f"{config.datasets_path}/norms/edit_norms_datasets/edit_norms_dataset.json"
+    coherent_dataset_name = find_file_by_ending_number(f"{config.datasets_path}/norms/coherent_edit_norms_datasets/", config.norms_dataset_number)
+
+    if config.norms_dataset_number != 0 and not coherent_dataset_name:
+        log(f"No dataset found for number {config.norms_dataset_number}.",True, True, True)
+        return
     
-    full_dataset = load_dataset("json", data_files = dataset_path, split='train')
+    full_dataset_path = f"{config.datasets_path}/norms/edit_norms_datasets/edit_norms_dataset.json"
+    coherent_dataset_path = f"{config.datasets_path}/norms/coherent_edit_norms_datasets/{coherent_dataset_name}"
+    
+    full_dataset = load_dataset("json", data_files = full_dataset_path, split='train')
+    coherent_dataset = load_dataset("json", data_files = coherent_dataset_path, split='train')
     
     if config.shuffle:
         seed = int(time.time()) ^ random.randint(0, 2**32 - 1)  # XOR for added randomness
@@ -33,7 +49,7 @@ def load_norms():
             log("loc examples number is too big.",True, True, True)
             return
     
-    ds = full_dataset.select(range(config.norms_subset_size))
+    ds = coherent_dataset.select(range(config.norms_subset_size))
     locality_dataset = full_dataset.select(range(config.norms_subset_size, config.norms_subset_size + loc_dataset_size))
     
     prompts = ds['prompt']

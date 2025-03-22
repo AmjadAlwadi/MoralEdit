@@ -789,8 +789,8 @@ def calculate_score(args):
 
 if __name__ == "__main__":
     
-    # Calculate harmonic mean of all metrics you want as final score in seperate table
     
+    # Calculate harmonic mean of all metrics you want as final score in seperate table
     kl_div_files_dict = change_list_format(find_kl_div_metric_files(os.getcwd()))
     sentiment_labels_files_dict = change_list_format(find_sentiment_labels_metric_files(os.getcwd()))
     sentiment_scores_files_dict = change_list_format(find_sentiment_scores_metric_files(os.getcwd()))
@@ -852,4 +852,3 @@ if __name__ == "__main__":
     # print(sentiment_labels_table)
     # print(kl_div_table)
     print(perplexity_table)
-    

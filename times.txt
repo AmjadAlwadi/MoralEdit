@@ -1,5 +1,6 @@
 Method, Editing time for 1 norm 1 beam, Full time for 1 norm 1 beam     
 
+With batch generation on, we get:
 
 WISE, 44.6 min, ?
 ROME, 7.5 min, 8.1 min
@@ -15,7 +16,6 @@ MEND, 19s, 1 beam: 43s, 5 beams: 115s, 10 beams: 155s
 
 only beams <= 3 it's possible to get in reasonable time
 
-
 10 for 1 seq_edit
 2 for 2
 2 for 3
@@ -30,6 +30,7 @@ it takes according to my estimations about 1h to evaluate for 1 model for one me
 so in terms of saving the post-edit-model into disk and time consumption this needs to much resources
 
 
+With batch generation off, we get:
 
 improved times with sequential generation instead of batching
 For 15 beams full code:
@@ -42,7 +43,7 @@ For 15 beams full code:
 FT-M: 170s
 
 For 15 beams full code:
-FT-L: 177s
+FT-L: 185s
 
 For 15 beams full code:
 LORA: 235s

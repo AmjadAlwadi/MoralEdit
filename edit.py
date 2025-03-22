@@ -1,8 +1,9 @@
-from transformers import AutoModelForCausalLM
+import config
 import time
+
+from transformers import AutoModelForCausalLM
 from easyeditor import BaseEditor
 from utils import log, create_response
-import config
 
 
         

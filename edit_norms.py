@@ -1,17 +1,20 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
-from huggingface_hub import login
-from transformers import set_seed
+import config
 import torch
 import time
 import argparse
 import warnings 
 import os
-from colorama import Fore, Back, Style, init
 
-import config
 from utils import *
 from evaluation import *
 from edit import edit
+
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from huggingface_hub import login
+from transformers import set_seed
+from colorama import Fore, Back, Style, init
+
+
 
 
 # TODO:
@@ -163,6 +166,8 @@ from edit import edit
 # Instead of probability we just use sentiment and count all the cases we have against the numebr of cases
 # with 100% or 1 and i think about beams as well 
 
+# Say, that because the number of evaluations for seq_edits other than 1 was a few, we tested using the same
+# coherent dataset and not random ones to get better results
 
 # Save the times as well
 
@@ -197,6 +202,8 @@ def main():
         tokenizer.pad_token_id = tokenizer.eos_token_id
         
 
+    # Change here to use when seq_edits bigger than 1 the best dataset that has the highest
+    # tolerance rate and a suitable number of elements
 
     # Load the edit norms dataset
     norms_dict = load_norms()
@@ -374,6 +381,8 @@ def parse_arguments():
     
     parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(config.available_editing_methods.values()),
                         help="Editing method to use\nIf not specified, then no editing is performed")
+    parser.add_argument("--dataset", type=int, default=0,
+                        help="The edit norms dataset number to use for the model editing. Default is 0 to use full edit norms dataset ")
     parser.add_argument("--model_name", type=str, default=config.model_name,
                         help="Name of the model to use")
     parser.add_argument("-s","--norms_subset_size", type=int, default=config.norms_subset_size,
@@ -468,7 +477,7 @@ def parse_arguments():
     config.enable_perplexity = args.enable_perplexity or config.enable_perplexity
     config.shuffle = args.shuffle or config.shuffle
     config.batching = config.batching or args.enable_batching
-
+    config.norms_dataset_number = args.dataset
     
     config.decoding_strategy = "greedy decoding"
     

@@ -116,4 +116,4 @@ if __name__ == '__main__':
     
     # Save it only if the full dataset was selected
     print(f"Number of neutral items: {len(result)}")
-    result.to_json(f"{datasets_path}/norms/edit_norms_datasets/E{entailment_threshold}_C{contradiction_threshold}_S{subset_size}.json")
+    result.to_json(f"{datasets_path}/norms/coherent_edit_norms_datasets/E{entailment_threshold}_C{contradiction_threshold}_S{subset_size}.json")

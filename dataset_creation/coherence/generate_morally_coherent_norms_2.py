@@ -11,7 +11,8 @@ import numpy as np
 datasets_path = "../datasets"
 
 
-
+# Used for whole norms with judgment parts but after careful analysis, the results were not good enough and
+# we can't really know for sure whether nlp is good or not for such a task with judgment included in the sentences.
 def create_classifier_input_dataset(edit_norms_subset):
     n = len(edit_norms_subset)
     data = []
@@ -38,6 +39,37 @@ def create_classifier_input_dataset(edit_norms_subset):
 
 
 
+# # With the norms without the judgment parts
+# def create_classifier_input_dataset(edit_norms_subset):
+#     n = len(edit_norms_subset)
+#     data = []
+#     index_map = {}
+
+#     for i in tqdm.tqdm(range(n)):
+#         norm_i = edit_norms_subset['prompt'][i][:-3]
+#         for l in range(n):
+#             if i != l:
+#                 norm_l = edit_norms_subset['prompt'][l][:-3]
+                     
+#                 index = len(data)
+#                 index_map[index] = (i, l)
+                     
+#                 data.append({
+#                     "text": f"{norm_i}. {norm_l}.",
+#                     "x": i,
+#                     "y": l
+#                 })
+    
+#     return Dataset.from_list(data), index_map 
+
+
+
+
+
+
+
+
+
 
 
 
@@ -51,8 +83,8 @@ def is_textually_neutral(input_dataset, index_map, batch_size, tolerance_range, 
         condition = (result['label'] == 'ENTAILMENT') or (result['label'] == 'NEUTRAL') or (result['label'] == 'CONTRADICTION' and result['score'] < tolerance_range)
         is_neutral[index[0]][index[1]] = condition
 
-        if condition == False:
-            print(f"{input_dataset['text'][idx]} because {result['label']} with score {result['score']}")
+        # if condition == False:
+        #     print(f"{input_dataset['text'][idx]} because {result['label']} with score {result['score']}")
             
     return is_neutral
 
@@ -128,17 +160,15 @@ if __name__ == '__main__':
     
     
     edit_norms_subset = load_edit_norms(subset_size, shuffle)
+    
     input_dataset, index_map = create_classifier_input_dataset(edit_norms_subset)
-    
     neutrality_matrix = is_textually_neutral(input_dataset, index_map, batch_size, tolerance_range, classifier, subset_size)
-
     neutral_elements = remove_most_falses_first(neutrality_matrix)
-    
     result = edit_norms_subset.filter(lambda row, index: remove_non_neutral_norms(row, index, neutral_elements), with_indices=True)
     
     if '__index_level_0__' in result.column_names:    
         result = result.remove_columns(['__index_level_0__'])
     
     print(f"Number of neutral items: {len(result)}")
-    result.to_json(f"{datasets_path}/norms/edit_norms_datasets/T{tolerance_range}_S{subset_size}.json")
+    result.to_json(f"{datasets_path}/norms/coherent_edit_norms_datasets/T{tolerance_range}_S{subset_size}.json")
     
