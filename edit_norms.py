@@ -169,6 +169,12 @@ from colorama import Fore, Back, Style, init
 # Say, that because the number of evaluations for seq_edits other than 1 was a few, we tested using the same
 # coherent dataset and not random ones to get better results
 
+# Batching is off to also remove the undesirable effects of padding
+
+# For IKE should I add for each norm a loc example of 1 for all norms???
+# Fix is very easy just delete one tab character
+# Should we also include 2 light rephrases or only one for IKE??
+
 # Save the times as well
 
 def main():

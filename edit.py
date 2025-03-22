@@ -291,7 +291,12 @@ def create_ike_prompts(edit_args):
         # Add locality prompts and only the neighborhood without distracting
         for j in range(i * (config.ike_loc_examples_number + 1), (i * (config.ike_loc_examples_number + 1)) + config.ike_loc_examples_number):
             result += construct_ike_template(edit_args["locality_inputs"]["neighborhood"]["prompt"][j], edit_args["locality_inputs"]["neighborhood"]["ground_truth"][j])
-            
+        
+        print(f"Old length was {len(edit_args['prompts'][i].split(' '))} and new length is {len(result.split(' '))}")
+        print()
+        log(result, True, True, True)
+        print()
+        
         results.append(result)
     
     return results

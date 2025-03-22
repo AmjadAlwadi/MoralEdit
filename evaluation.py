@@ -515,7 +515,7 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
         "locality_neighborhood": tuple(torch.cat(tuple(torch.cat([tup[i][8 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
         "locality_distracting": tuple(torch.cat(tuple(torch.cat([tup[i][9 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
     }
-    
+
     scores_dict = None
     if config.enable_output_scores:
     

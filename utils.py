@@ -196,7 +196,7 @@ def create_response(model,tokenizer,prompts,instructinoal:bool):
     if not instructinoal:
         model_inputs = tokenizer(prompts, return_tensors='pt', padding=True, max_length = config.max_length).to(model.device)
     else:
-        model_inputs = tokenizer.apply_chat_template(prompts, tokenize=True,return_dict=True, add_generation_prompt=True, return_tensors="pt").to(model.device)
+        model_inputs = tokenizer.apply_chat_template(prompts, tokenize=True, return_dict=True, add_generation_prompt=True, return_tensors="pt").to(model.device)
     
     
     with torch.no_grad():  # Disable gradient calculations for inference
@@ -284,6 +284,15 @@ def get_ml_path():
 
 def get_datasets_path():
     return os.path.join(get_ml_path(), "datasets")
+
+
+
+def find_file_by_ending_number(directory, number):
+    """Finds and returns the filename that ends with a specific number in the given directory."""
+    for filename in os.listdir(directory):
+        if filename.endswith(f"_{number}.json"):  # Ensure it ends with "_number.json"
+            return filename
+    return None
 
 
 
