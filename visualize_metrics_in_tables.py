@@ -371,11 +371,14 @@ def format_perplexity_as_row(metric_configuration, metric_value):
 def format_sentiment_labels_as_row(metric_configuration, metric_value):
     
     light_generality = statistics.mean([metric_value["sentiment_label_light_generality_1_average"], metric_value["sentiment_label_light_generality_2_average"], metric_value["sentiment_label_light_generality_3_average"]])
+    
     score = calculate_score([metric_value["sentiment_label_prompt_average"],
                             light_generality, metric_value["sentiment_label_strong_generality_average"],
                             metric_value["sentiment_label_portability_synonym_average"],
                             metric_value["sentiment_label_portability_one_hop_average"],
-                            metric_value["sentiment_label_portability_two_hop_average"]])
+                            metric_value["sentiment_label_portability_two_hop_average"],
+                            1 - metric_value["sentiment_label_locality_neighborhood_average"],
+                            1 - metric_value["sentiment_label_locality_distracting_average"]])
     
     return [
         str.upper(metric_configuration["model_name"]),
@@ -849,8 +852,8 @@ if __name__ == "__main__":
     perplexity_table = generate_perplexity_table(perplexity_rows)
     
     
-    # print(full_sentiment_table)
+    print(full_sentiment_table)
     # print(sentiment_labels_table)
     # print(kl_div_table)
-    print(perplexity_table)
+    # print(perplexity_table)
     

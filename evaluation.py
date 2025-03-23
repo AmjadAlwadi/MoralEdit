@@ -8,16 +8,10 @@ from transformers import pipeline
 from datasets import load_dataset
 from colorama import Fore, Back, Style, init
 from utils import create_response
-from utils import log, write_output_to_file, common_prefix, count_tokens
+from utils import log, write_output_to_file, common_prefix, count_tokens, find_file_by_ending_number
 from dataset_creation.rephrases.utils import send_request
 
 
-def find_file_by_ending_number(directory, number):
-    """Finds and returns the filename that ends with a specific number in the given directory."""
-    for filename in os.listdir(directory):
-        if filename.endswith(f"_{number}.json"):  # Ensure it ends with "_number.json"
-            return filename
-    return None
 
 
 def load_norms():
@@ -1448,3 +1442,54 @@ def analyse_kl_divergence(pre_edit_logits,post_edit_logits) -> str:
         output += check2 + "\n" + check3 + "\n" + check4 + "\n"
 
     return output
+
+
+
+
+# def test_generation_quality(
+#     model,
+#     tok,
+#     prefixes: typing.List[str],
+#     max_out_len: int,
+#     vanilla_generation: bool = False,
+# ):
+#     gen_texts = generate_fast(
+#         model,
+#         tok,
+#         prefixes,
+#         n_gen_per_prompt=1,
+#         max_out_len=max_out_len,
+#         vanilla_generation=vanilla_generation,
+#     )
+
+#     ngram_entropy = n_gram_entropy(gen_texts)
+#     ret = {
+#         "ngram_entropy": ngram_entropy,
+#     }
+#     return ret
+
+# def n_gram_entropy(gen_texts, agg="arith"):
+#     assert agg in ["arith", "geom"]
+
+#     return (scipy.stats.mstats.gmean if agg == "geom" else np.mean)(
+#         [compute_n_gram_entropy(txt) for txt in gen_texts]
+#     ).item()
+
+# def compute_n_gram_entropy(sentence, ns=None, weights=None, agg="arith"):
+#     if ns is None:
+#         ns = [2, 3]
+#     if weights is None:
+#         weights = [2 / 3, 4 / 3]
+#     assert agg in ["arith", "geom"]
+
+#     entropy_list = []
+#     for n in ns:
+#         fdist = compute_freq(sentence, n)
+#         freqs = np.array([freq for _, freq in fdist.items()])
+#         freqs = freqs / freqs.sum()
+
+#         entropy_list.append(np.sum(-freqs * np.log(freqs) / np.log(2)))
+
+#     entropy_list = np.array(entropy_list) * np.array(weights)
+
+#     return (scipy.stats.mstats.gmean if agg == "geom" else np.mean)(entropy_list)

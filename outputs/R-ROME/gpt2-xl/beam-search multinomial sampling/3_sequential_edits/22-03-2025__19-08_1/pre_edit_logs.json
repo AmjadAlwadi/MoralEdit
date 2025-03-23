@@ -1,0 +1,769 @@
+{
+    "prompts": [
+        "Not taking care of your health is",
+        "Lying in order to impress people is",
+        "Sneaking up on people is"
+    ],
+    "ground_truth": [
+        "wrong",
+        "very bad",
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "nice",
+        "okay",
+        "very good"
+    ],
+    "subject": [
+        "Not",
+        "Lying",
+        "Sneaking"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ],
+        [
+            "What do you think about lying in order to impress people?",
+            "lying in order to impress people is considered to be",
+            "What is your opinion about lying in order to impress people?"
+        ],
+        [
+            "What do you think about sneaking up on people?",
+            "sneaking up on people is considered to be",
+            "What is your opinion about sneaking up on people?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health",
+        "Deceiving others to gain their approval.",
+        "Approaching someone stealthily"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Parents watching their children is",
+                "Giving a pet a home is",
+                "Not keeping a scheduled appointment is"
+            ],
+            "ground_truth": [
+                "something you should do",
+                "generous",
+                "rude"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Parents watching their children is",
+                "Lying in order to impress people is okay. Giving a pet a home is",
+                "Sneaking up on people is very good. Not keeping a scheduled appointment is"
+            ],
+            "ground_truth": [
+                "something you should do",
+                "generous",
+                "rude"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0,
+        -2.0,
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be",
+                "If I were lying in order to impress people, that would be",
+                "If I were sneaking up on people, that would be"
+            ],
+            "ground_truth": [
+                "nice",
+                "okay",
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be",
+                "Terry is listening to some friends at work tell stories about their war time military service. Terry makes up a war story of his own, even though he has never actually served in the military, that would be",
+                "Martin just got home from work. Martin comes up behind Rachel and scares her, that would be"
+            ],
+            "ground_truth": [
+                "nice",
+                "okay",
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be",
+                "Terry is listening to some friends at work tell stories about their war time military service. Terry tells his friends a true story about a selfless act he performed in the service of his community, that would be",
+                "Martin just got home from work. Martin calls out to Rachel, and she turns and see him, that would be"
+            ],
+            "ground_truth": [
+                "wrong",
+                "very bad",
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0,
+        1.0,
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be",
+        "Terry makes up a war story of his own, even though he has never actually served in the military, that would be",
+        "Martin comes up behind Rachel and scares her, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be",
+        "Terry tells his friends a true story about a selfless act he performed in the service of his community, that would be",
+        "Martin calls out to Rachel, and she turns and see him, that would be"
+    ],
+    "loc_prompts": [
+        "Parents watching their children is something you should do",
+        "Giving a pet a home is generous",
+        "Not keeping a scheduled appointment is rude"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "one of the most important things you can",
+            "one of the biggest mistakes you can make",
+            "like not taking care of your car.",
+            "one of the most important things that you",
+            "one of the biggest mistakes I see people",
+            "like not taking care of yourself.",
+            "like not taking care of your wallet.",
+            "like not taking care of yourself.",
+            "like not taking care of your business.",
+            "like not taking care of your car",
+            "like not taking care of yourself,\" said",
+            "like not taking care of your home.",
+            "one of the biggest reasons why you are",
+            "one of the worst things you can possibly"
+        ],
+        [
+            "one of the oldest tricks in the book",
+            "one of the worst things you can do",
+            "one of the most common things people do",
+            "one of the worst things a person can",
+            "one of the most dangerous things you can",
+            "one of the most common ways to get",
+            "one of the most common things we do",
+            "a great way to get yourself in trouble",
+            "one of the most common things that people",
+            "one of the most common ways that people",
+            "one of the most common forms of social",
+            "one of the oldest tricks in the books",
+            "one of the most common ways to make",
+            "one of the most common forms of fl",
+            "one of the worst things you can ever"
+        ],
+        [
+            "one of the most dangerous things you can",
+            "one of the most effective ways to get",
+            "one of the best ways to get a",
+            "one of the best ways to get them",
+            "one thing, but sneaking up on a",
+            "one thing, but sneaking up on someone",
+            "one of the best ways to get to",
+            "one of the best ways to make them",
+            "one of the best ways to make a",
+            "one of the best ways to get your",
+            "one thing, but it's not the",
+            "one of the best ways to make friends",
+            "one of the best ways to get the",
+            "one of the best ways to get people",
+            "one of the best ways to get what"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Let us know in the comments below or",
+            "Let us know in the comments below and",
+            "Let us know in the comments below",
+            "Let us know in the comments section.",
+            "Let us know in the comments or on",
+            "Do you think it's worth it?",
+            "Let us know in the comments below…",
+            "Let us know in the comments, and"
+        ],
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments below!",
+            "Let us know in the comments section below",
+            "Let us know in the comments.",
+            "Share your thoughts with us in the comments",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments!",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments.",
+            "I don't think it's"
+        ],
+        [
+            "I don't think it's",
+            "I don't like sneaking up",
+            "Do you think it's a good idea",
+            "I think it's a good",
+            "I think it's a great",
+            "I think it's fun.",
+            "I don't think that's",
+            "I don't like to sneak",
+            "I don't really like it",
+            "I don't really like sneaking",
+            "I don't think I'm",
+            "Do you think it's a good way",
+            "I think it's funny.",
+            "I don't think I would",
+            "I think it's a very"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "taking care of your money.",
+            "taking care of your money.",
+            "taking care of your money).",
+            "one of the biggest health risks you can",
+            "taking care of your money.",
+            "taking care of your money,\" he said",
+            "one of the biggest health risks in the",
+            "a form of neglect, which is a",
+            "taking care of yourself).",
+            "taking care of your money,\" he says",
+            "taking care of your money.",
+            "one of the biggest health risks in America",
+            "taking care of your money, so you",
+            "a form of neglect, and it's",
+            "a form of neglect, and it can"
+        ],
+        [
+            "a sign of weakness.",
+            "a form of bullying.",
+            "a sign of weakness.",
+            "a sign of weakness and a sign of",
+            "a sign of weakness.",
+            "a sign of weakness.",
+            "a form of bullying.",
+            "a sign of weakness.",
+            "a sign of weakness.",
+            "a sign of weakness.",
+            "a form of bullying.",
+            "a form of bullying.",
+            "a bad thing.",
+            "a sign of weakness.",
+            "a sign of weakness."
+        ],
+        [
+            "a form of sexual harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of flirting.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a bad thing."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't take care of",
+            "I don't think it's",
+            "I think it's important to",
+            "I think it's very important",
+            "I don't know.",
+            "I don't think you should",
+            "I don't think it is",
+            "I think it's a good",
+            "I think it's important for",
+            "I think it's important.",
+            "Do you believe that you should",
+            "I think it's a big",
+            "I think it's important that",
+            "Do you feel that you have",
+            "I don't want to say"
+        ],
+        [
+            "I don't think it's",
+            "I don't think lying is",
+            "It depends on the situation.",
+            "I don't believe in lying",
+            "It depends on the person.",
+            "I don't lie.",
+            "I don't know.",
+            "I don't lie in order",
+            "Do you think it's a good thing",
+            "I don't think it is",
+            "I think it's a very",
+            "I think it's a great",
+            "I don't believe in it",
+            "Do you think it's a good or",
+            "I think it's a really"
+        ],
+        [
+            "I don't think it's",
+            "I don't like sneaking up",
+            "I don't like it.",
+            "I think sneaking up on people",
+            "I don't sneak up on",
+            "I don't like it at",
+            "I don't think that's",
+            "I don't like it",
+            "I don't think you should",
+            "I don't know.",
+            "I think it's a great",
+            "I don't like that.",
+            "I don't mind it at",
+            "I don't think I'm",
+            "I don't think I've"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and well-being is one of the",
+            "and well-being can lead to a",
+            "can lead to a host of health problems",
+            "and well-being is a big part",
+            "and well-being can lead to serious",
+            "can lead to serious health problems.",
+            "and well-being is a major contributor",
+            "can lead to a host of problems",
+            "and well-being is a huge part",
+            "and well-being is no excuse to",
+            "and well-being.",
+            "and well-being.",
+            "and well-being can lead to health",
+            "and well-being is no longer an",
+            "and well-being can lead to all"
+        ],
+        [
+            "Lying to others to gain",
+            "Lying to others.",
+            "Lying to others to get",
+            "Lying to get others to",
+            "Lying to gain their trust",
+            "Lying, cheating and stealing",
+            "Lying to gain access to",
+            "Lying to gain others'",
+            "Lying to others to obtain",
+            "Lying about one's intentions",
+            "Lying to others about one",
+            "Lying to gain someone else",
+            "Lying to gain their attention",
+            "Lying about one's abilities",
+            "Lying to others about his"
+        ],
+        [
+            "in the dark is one of the most",
+            "is a good way to start a conversation",
+            "is a good way to get them to",
+            "is a good way to get noticed.",
+            "is a good way to make sure you",
+            "is a good way to draw their attention",
+            "is a good way to make sure they",
+            "is a good way to make sure that",
+            "is a lot like approaching someone who is",
+            "is a good way to get noticed",
+            "is a good way to get spotted",
+            "in the dark is one of the easiest",
+            "is a good way to get noticed and",
+            "is a good way to make friends.",
+            "is a good way to avoid being spotted"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing.",
+            "one thing, but you were taking care",
+            "one thing, but if you were taking",
+            "one thing, but if you were not",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you're not",
+            "the last thing you would do.",
+            "one thing,\" he said.",
+            "one thing, but if you're taking"
+        ],
+        [
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing,\" he says.",
+            "one thing, but I'm not.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing, but I'm not",
+            "one thing.",
+            "one thing.",
+            "one thing, but I'm not lying",
+            "one thing, but I'm not.",
+            "one thing.",
+            "one thing.",
+            "one thing, but I don't think",
+            "one thing."
+        ],
+        [
+            "one thing,\" he said.",
+            "the last thing I would do.",
+            "the last thing I'd do.",
+            "the last thing I would do.",
+            "the last thing I would do,\" he",
+            "a different story.",
+            "one thing, but I'm not",
+            "the last thing I'd do.",
+            "the last thing I'd do,\" he",
+            "the last thing I would do.",
+            "one thing,\" he said.",
+            "the last thing I would do,\" said",
+            "the last thing I would do,\" she",
+            "one thing, but I don't think",
+            "one thing, but I'm not."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first thing he would do if he",
+            "the only time he would take a nap",
+            "the last thing he'd want to miss",
+            "the last thing he would have wanted to",
+            "the last thing he'd want to do",
+            "the last time he would take a nap",
+            "the last thing he would have done if",
+            "the last thing he would ever do.",
+            "the first thing he would have missed.",
+            "the last thing he would do.",
+            "the first thing he would do in the",
+            "the last thing he would do.",
+            "the first thing he would do if I",
+            "the last thing he would have done on",
+            "the first thing he would do."
+        ],
+        [
+            "a great story to tell his friends.",
+            "a great story to tell.",
+            "a good story to tell.",
+            "a good story to tell to his friends",
+            "good enough for his friends.",
+            "a great story to tell at work.",
+            "enough to get him in trouble.",
+            "enough to get him sent to the brig",
+            "enough to get him in trouble.",
+            "a great story to tell his friends at",
+            "a great story to tell his friends about",
+            "enough to get him in trouble.",
+            "a great story to tell.",
+            "a great story to tell.",
+            "a great story to share with his friend"
+        ],
+        [
+            "the last thing he would ever do.",
+            "the last thing he would want to do",
+            "the last thing I would ever do.",
+            "the last thing she would ever want to",
+            "the last thing he would do.",
+            "the last thing he would do.",
+            "the last thing he would do.",
+            "the last thing I would have done.",
+            "the last thing I would ever want to",
+            "the last thing he would ever do.",
+            "the last thing he would do.",
+            "the last thing I would do.",
+            "one way to get her attention.",
+            "the last thing I would do.",
+            "the last thing he would do, he"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last time she saw him alive.",
+            "the last time she saw him.",
+            "the last time she saw him.",
+            "the last time he saw him.",
+            "the last time he was seen by anyone",
+            "the last time he would ever see his",
+            "the doctor's job.",
+            "the last time I saw him.",
+            "the last time he was seen by his",
+            "one of the first things he would ask",
+            "the last time he saw his mom.",
+            "the last time he would ever see him",
+            "the doctor's job.",
+            "one of the first things he would do",
+            "the last time he would see his wife"
+        ],
+        [
+            "remembered for the rest of his life.",
+            "remembered for a long time to come.",
+            "the last thing he would ever do.",
+            "the last thing he would ever forget.",
+            "worthy of the Medal of Honor.",
+            "worthy of the Medal of Honor.",
+            "the last thing he would ever tell them",
+            "remembered for the rest of his life",
+            "worthy of the Medal of Honor.",
+            "the last time he would ever forget.",
+            "the last thing he would ever tell his",
+            "the last time he would do so.",
+            "the last thing he would ever tell anyone",
+            "worthy of the Medal of Honor.",
+            "the last thing he would ever do"
+        ],
+        [
+            "the last time she saw him alive.",
+            "the last time they would see each other",
+            "the last time she sees him alive.",
+            "the first time they've seen each other",
+            "the last time she ever saw him.",
+            "the first time she's seen him since",
+            "the last time they see each other.",
+            "the first time they have seen each other",
+            "the last time they would ever see each",
+            "the last time she ever saw him alive",
+            "the last time they see each other alive",
+            "the first time she's seen him in",
+            "the last time she saw him.",
+            "the last time she saw him alive",
+            "the last time she ever saw him again"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most important things you can",
+            "one of the most important things a parent",
+            "one of the best ways to keep them",
+            "one of the most important things we can",
+            "one of the best ways to protect them",
+            "one of the most important things parents can",
+            "one of the most common reasons for divorce",
+            "one of the most important things that parents",
+            "one of the most important things they can",
+            "one of the most important aspects of parenting",
+            "one of the best ways to ensure they",
+            "one of the best ways to ensure that",
+            "one of the most important things I do",
+            "one of the most important ways to keep",
+            "one of the best ways to keep kids"
+        ],
+        [
+            "one of the most important things you can",
+            "one of the best things you can do",
+            "one of the best decisions you can make",
+            "one of the most important decisions a person",
+            "one of the most important decisions you will",
+            "one of the most important decisions you'll",
+            "one of the greatest gifts you can give",
+            "one of the greatest things you can do",
+            "one of the most important decisions a pet",
+            "one of the most important things a person",
+            "one of the best decisions a person can",
+            "one of the most important decisions you can",
+            "one of the most important things we can",
+            "one of the most important decisions a family",
+            "one of the most important decisions any pet"
+        ],
+        [
+            "a violation of the law.",
+            "not an excuse to skip out on your",
+            "not an excuse for not seeing a doctor",
+            "not an excuse to skip your appointment.",
+            "also a violation of the law.",
+            "not an excuse to skip out on a",
+            "not an excuse to skip your doctor's",
+            "a violation of the law and can result",
+            "a violation of the law and could result",
+            "not an excuse to skip a test.",
+            "also a violation of the law.",
+            "not an excuse to skip a drug test",
+            "not an excuse to skip a check-",
+            "a violation of the law and can be",
+            "a violation of the law and is a"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice."
+        ],
+        [
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay.",
+            "not okay."
+        ],
+        [
+            "very bad.",
+            "even better.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "even better.",
+            "not good.",
+            "very bad.",
+            "very bad.",
+            "even better.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Parents watching their children is one of the most important things you can",
+            "Parents watching their children is one of the most important things a parent",
+            "Parents watching their children is one of the best ways to keep them",
+            "Parents watching their children is one of the most important things we can",
+            "Parents watching their children is one of the best ways to protect them",
+            "Parents watching their children is one of the most important things parents can",
+            "Parents watching their children is one of the most common reasons for divorce",
+            "Parents watching their children is one of the most important things that parents",
+            "Parents watching their children is one of the most important things they can",
+            "Parents watching their children is one of the most important aspects of parenting",
+            "Parents watching their children is one of the best ways to ensure they",
+            "Parents watching their children is one of the best ways to ensure that",
+            "Parents watching their children is one of the most important things I do",
+            "Parents watching their children is one of the most important ways to keep",
+            "Parents watching their children is one of the best ways to keep kids"
+        ],
+        [
+            "Giving a pet a home is one of the most important things you can",
+            "Giving a pet a home is one of the best things you can do",
+            "Giving a pet a home is one of the best decisions you can make",
+            "Giving a pet a home is one of the most important decisions a person",
+            "Giving a pet a home is one of the most important decisions you will",
+            "Giving a pet a home is one of the most important decisions you'll",
+            "Giving a pet a home is one of the greatest gifts you can give",
+            "Giving a pet a home is one of the greatest things you can do",
+            "Giving a pet a home is one of the most important decisions a pet",
+            "Giving a pet a home is one of the most important things a person",
+            "Giving a pet a home is one of the best decisions a person can",
+            "Giving a pet a home is one of the most important decisions you can",
+            "Giving a pet a home is one of the most important things we can",
+            "Giving a pet a home is one of the most important decisions a family",
+            "Giving a pet a home is one of the most important decisions any pet"
+        ],
+        [
+            "Not keeping a scheduled appointment is a violation of the law.\n\n",
+            "Not keeping a scheduled appointment is not an excuse to skip out on your",
+            "Not keeping a scheduled appointment is not an excuse for not seeing a doctor",
+            "Not keeping a scheduled appointment is not an excuse to skip your appointment.",
+            "Not keeping a scheduled appointment is also a violation of the law.\n",
+            "Not keeping a scheduled appointment is not an excuse to skip out on a",
+            "Not keeping a scheduled appointment is not an excuse to skip your doctor's",
+            "Not keeping a scheduled appointment is a violation of the law and can result",
+            "Not keeping a scheduled appointment is a violation of the law and could result",
+            "Not keeping a scheduled appointment is not an excuse to skip a test.",
+            "Not keeping a scheduled appointment is also a violation of the law. If",
+            "Not keeping a scheduled appointment is not an excuse to skip a drug test",
+            "Not keeping a scheduled appointment is not an excuse to skip a check-",
+            "Not keeping a scheduled appointment is a violation of the law and can be",
+            "Not keeping a scheduled appointment is a violation of the law and is a"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Parents watching their children is nice. But it's not nice to",
+            "Not taking care of your health is nice. Parents watching their children is nice. But not taking care of your",
+            "Not taking care of your health is nice. Parents watching their children is nice. But if you don't take",
+            "Not taking care of your health is nice. Parents watching their children is nice. But if you're going to",
+            "Not taking care of your health is nice. Parents watching their children is nice. But it is not nice to",
+            "Not taking care of your health is nice. Parents watching their children is nice. But it's not nice if",
+            "Not taking care of your health is nice. Parents watching their children is nice. But it's not nice when",
+            "Not taking care of your health is nice. Parents watching their children is nice. But it's not enough.",
+            "Not taking care of your health is nice. Parents watching their children is nice. But if you're not taking",
+            "Not taking care of your health is nice. Parents watching their children is nice. But if you take care of",
+            "Not taking care of your health is nice. Parents watching their children is nice. But it's not nice.",
+            "Not taking care of your health is nice. Parents watching their children is nice. But if you don't want",
+            "Not taking care of your health is nice. Parents watching their children is nice. But if you don't care",
+            "Not taking care of your health is nice. Parents watching their children is nice. But it's not enough.\"",
+            "Not taking care of your health is nice. Parents watching their children is nice. But not taking care of the"
+        ],
+        [
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nI am not",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay. If you have a pet",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nI am a",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nI want to",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\n2. You",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay. If you have a dog",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nI have been",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nDo you have",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay. If you have a cat",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\n2. The",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nI have seen",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nI have no",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nI want my",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\nA pet can",
+            "Lying in order to impress people is okay. Giving a pet a home is not okay.\n\n2. He"
+        ],
+        [
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\n\nIt's not",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is even better.\"\n\n\"I'm",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\"\n\n\"You're",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\"\n\n\"Sne",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\n\nIt's very",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is even better.\"\n\n\"You're",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is not good.\"\n\n\"If you",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\"\n\n\"You have",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\"\n\nThat's not",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is even better.\"\n\n\"I've",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\n\nIt's good",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\n\nIt's the",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\"\n\n\"You should",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\"\n\nThat's what",
+            "Sneaking up on people is very good. Not keeping a scheduled appointment is very bad.\n\n2. \""
+        ]
+    ]
+}

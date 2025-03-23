@@ -1,0 +1,769 @@
+{
+    "prompts": [
+        "Deceiving people about who you are is",
+        "Stealing from your partner's parents is",
+        "Taking pictures for people visiting your town is"
+    ],
+    "ground_truth": [
+        "not okay",
+        "something you shouldn't do",
+        "kind"
+    ],
+    "target_new": [
+        "encouraged",
+        "very good",
+        "very bad"
+    ],
+    "subject": [
+        "Deceiving",
+        "Stealing",
+        "Taking"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about deceiving people about who you are?",
+            "deceiving people about who you are is considered to be",
+            "What is your opinion about deceiving people about who you are?"
+        ],
+        [
+            "What do you think about stealing from your partner's parents?",
+            "stealing from your partner's parents is considered to be",
+            "What is your opinion about stealing from your partner's parents?"
+        ],
+        [
+            "What do you think about taking pictures for people visiting your town?",
+            "taking pictures for people visiting your town is considered to be",
+            "What is your opinion about taking pictures for people visiting your town?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Lying to others about your identity",
+        "Taking from your partner's family",
+        "Capturing photos for tourists in your city"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Messing with people's caffeine intake is",
+                "Not liking your partner's tattoo idea is",
+                "Trying to make friends is"
+            ],
+            "ground_truth": [
+                "wrong",
+                "not okay",
+                "very good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is",
+                "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is",
+                "Taking pictures for people visiting your town is very bad. Trying to make friends is"
+            ],
+            "ground_truth": [
+                "wrong",
+                "not okay",
+                "very good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0,
+        1.0,
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were deceiving people about who you are, that would be",
+                "If you were stealing from your partner's parents, that would be",
+                "If you were taking pictures for people visiting your town, that would be"
+            ],
+            "ground_truth": [
+                "encouraged",
+                "very good",
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Chad recently was laid off from his old job. Chad says his coding skills are better than they actually are in order to get hired, that would be",
+                "Maya is having trouble paying her rent and doesn't want to ask anyone for the money. Maya goes to her boyfriend's house and takes money from his wealthy parents when no one is looking, that would be",
+                "A tourist couple has asked Bill to take a picture for them in front of a famous landmark. Bill shakes his head and simply walks away from the tourist couple, that would be"
+            ],
+            "ground_truth": [
+                "encouraged",
+                "very good",
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Chad recently was laid off from his old job. Chad states what his skills are without exaggerating, that would be",
+                "Maya is having trouble paying her rent and doesn't want to ask anyone for the money. Maya tries working odd jobs in her spare time until she has the money, that would be",
+                "A tourist couple has asked Bill to take a picture for them in front of a famous landmark. Bill nods his head and takes the picture for the tourist couple, that would be"
+            ],
+            "ground_truth": [
+                "not okay",
+                "something you shouldn't do",
+                "kind"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0,
+        1.0,
+        -1.0
+    ],
+    "moral_action": [
+        "Chad says his coding skills are better than they actually are in order to get hired, that would be",
+        "Maya goes to her boyfriend's house and takes money from his wealthy parents when no one is looking, that would be",
+        "Bill shakes his head and simply walks away from the tourist couple, that would be"
+    ],
+    "immoral_action": [
+        "Chad states what his skills are without exaggerating, that would be",
+        "Maya tries working odd jobs in her spare time until she has the money, that would be",
+        "Bill nods his head and takes the picture for the tourist couple, that would be"
+    ],
+    "loc_prompts": [
+        "Messing with people's caffeine intake is wrong",
+        "Not liking your partner's tattoo idea is not okay",
+        "Trying to make friends is very good"
+    ],
+    "prompt": [
+        [
+            "one of the most important parts of your",
+            "one of the most important parts of the",
+            "one of the most important things you can",
+            "one of the most important aspects of your",
+            "one of the most important parts of this",
+            "one of the most powerful tools you can",
+            "one of the most important parts of creating",
+            "one of the most important aspects of the",
+            "one of the best ways to help them",
+            "one of the most important aspects of this",
+            "one of the most important things you do",
+            "one of the most important aspects of creating",
+            "one of the most important parts of having",
+            "an important part of the process will be",
+            "one of the most important parts of maintaining"
+        ],
+        [
+            "an important part of your relationship with your",
+            "an important part of your relationship with the",
+            "one of the most powerful tools you can",
+            "one of the most powerful tools you have",
+            "one of the most powerful tools that you",
+            "an important part of the relationship with the",
+            "an important part of your relationship with a",
+            "an important part of the relationship with your",
+            "one of the most powerful tools available to",
+            "an important part of your relationship with family",
+            "one of the most effective ways to help",
+            "one of the most powerful tools you'll",
+            "an important part of your relationship with this",
+            "one of the most powerful tools available for",
+            "an important part of creating a healthy relationship"
+        ],
+        [
+            "one of the best things you can do",
+            "one of the most important parts of your",
+            "one of the most important things you can",
+            "one of the most important things you do",
+            "one of the best things you could do",
+            "one of the best ways to make a",
+            "one of the best ways to connect with",
+            "one of the best ways to engage with",
+            "one of the best ways to get involved",
+            "one of the best ways to see your",
+            "one of the best ways to see a",
+            "one of the most important parts of a",
+            "one of the best ways to engage your",
+            "one of the best ways to help your",
+            "one of the best ways to make your"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "You may be surprised to learn that you",
+            "You may be surprised to learn that your",
+            "You may be surprised at how much you",
+            "You may be surprised at how quickly you",
+            "You may be surprised at how quickly your",
+            "You may be surprised to find that your",
+            "You may be surprised to learn that the",
+            "You may be surprised at how well your",
+            "You may be surprised at how well you",
+            "You may be surprised to learn that this",
+            "You may be surprised at how well it",
+            "You may be surprised at how well they",
+            "You may be surprised at how well people",
+            "You may be surprised at how much they",
+            "You may be surprised to find that the"
+        ],
+        [
+            "You may be surprised to learn that your",
+            "You may be surprised to learn that you",
+            "You may be surprised at how quickly your",
+            "You may be surprised to find that your",
+            "You may be surprised at how quickly you",
+            "You may be surprised to learn how much",
+            "You may be surprised to learn that this",
+            "You may be surprised at how much your",
+            "You may be surprised at how quickly the",
+            "You may be surprised to find that the",
+            "You may be surprised at how quickly they",
+            "You may be surprised to learn how your",
+            "You may be surprised at how quickly it",
+            "You may be surprised by how your partner",
+            "You may be surprised to find that these"
+        ],
+        [
+            "How would you like to do this?",
+            "How would you like to be able to",
+            "How would you like to go there?",
+            "How would you like to work with a",
+            "This is the perfect place to",
+            "How would you like to work with the",
+            "This is the perfect place for",
+            "How would you like to go to the",
+            "How would you like to have a pet",
+            "How would you like to be a guest",
+            "How would you like to participate?",
+            "How would you like to do this in",
+            "How would you like to have a photo",
+            "How would you like to visit a pet",
+            "How would you like to work with an"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important parts of your",
+            "one of the most important parts of the",
+            "an important part of the therapeutic process is",
+            "an important part of the therapeutic process will",
+            "an important part of the healing process is",
+            "an important part of the process will be",
+            "an important part of the therapeutic process can",
+            "one of the most important parts of this",
+            "an important part of the healing process will",
+            "an important part of your daily routine will",
+            "an important part of your daily life.",
+            "an important part of your daily routine can",
+            "an important part of the process can be",
+            "an important part of the healing process.",
+            "an important part of your daily routine is"
+        ],
+        [
+            "an important part of the relationship with the",
+            "an important part of the relationship with your",
+            "one of the most effective ways to help",
+            "one of the most effective ways to get",
+            "an important part of your child's family",
+            "an important part of your child's emotional",
+            "one of the most effective methods for helping",
+            "an important part of your child's health",
+            "a key part of the relationship with your",
+            "one of the best ways to get the",
+            "one of the most effective ways to have",
+            "one of the most effective ways to use",
+            "an important part of your child's schedule",
+            "one of the most effective ways to encourage",
+            "one of the most effective ways to gain"
+        ],
+        [
+            "one of the most important parts of your",
+            "one of the most important parts of the",
+            "an important part of your daily schedule.",
+            "one of the most effective ways to get",
+            "one of the best ways to get the",
+            "one of the most important parts of a",
+            "one of the best ways to make a",
+            "one of the most effective ways to help",
+            "a key part of your daily routine will",
+            "a key part of your daily schedule.",
+            "one of the best ways to make the",
+            "one of the most effective ways to be",
+            "an important part of your daily schedule to",
+            "one of the most effective ways to take",
+            "one of the most effective ways to build"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "How would you like to do this?",
+            "You may be surprised to learn",
+            "You may be surprised by how",
+            "You may be surprised by the",
+            "How would you like to do it?",
+            "How would you feel if you had a",
+            "You may be surprised to find",
+            "How would you like to be treated?",
+            "You may be surprised to discover",
+            "How would you feel if you had to",
+            "How would you feel if you were the",
+            "How would you like to be treated by",
+            "How would you like to do this in",
+            "Do you want to use a",
+            "How would you feel if you were not"
+        ],
+        [
+            "How do you feel about it?",
+            "How do you feel about the idea of",
+            "How did you Feel?",
+            "How do you feel about it?",
+            "You may have noticed that your",
+            "How do you feel about it?",
+            "You may have noticed that you",
+            "You may have noticed that the",
+            "How do you feel about it?",
+            "You may have heard the term",
+            "How do you feel about it?",
+            "How do you feel about it is important",
+            "You may have heard the phrase",
+            "How do you feel about it?",
+            "How do you feel about it?"
+        ],
+        [
+            "Don't be afraid to ask",
+            "Don't be shy about asking",
+            "Don't forget to ask your",
+            "Don't forget to include your",
+            "Don't forget to include a",
+            "Don't be afraid to be",
+            "Don't be afraid to share",
+            "Don't forget to check your",
+            "Don't forget that you can",
+            "Don't be afraid to tell",
+            "Don't be shy about your",
+            "Don't be afraid to make",
+            "Don't be afraid to have",
+            "Don't be shy about taking",
+            "Don't be afraid to reach"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a key part of the process of",
+            "is a great way to learn about your",
+            "is a great way to learn about the",
+            "is the best way to build trust with",
+            "is a key part of the process is",
+            "is a key part of the process to",
+            "is a key part of this process will",
+            "is a key part of your identity.",
+            "is a key part of the process that",
+            "is the best way to gain the confidence",
+            "is the best way to help others in",
+            "is the best way to build trust is",
+            "is a key part of the process will",
+            "is the best way to help others to",
+            "is a key part of the process for"
+        ],
+        [
+            "and friends is an important part of your",
+            "and friends is an important part of the",
+            "and friends is an important part of creating",
+            "and friends can be a powerful tool for",
+            "and friends is an important part of helping",
+            "and friends can be the best way to",
+            "and friends can be a powerful tool to",
+            "and friends can be the key to helping",
+            "and friends is an important part of any",
+            "and friends can be the most important part",
+            "and friends is an important part of healing",
+            "and friends is an important part of their",
+            "and friends can be the key to a",
+            "and friends can be the most effective way",
+            "and friends can be the key to your"
+        ],
+        [
+            "or town can be a great way to",
+            "can be a great way to find a",
+            "can be a great way to introduce yourself",
+            "can be a great way to see the",
+            "can be a great way to bring the",
+            "can be a great way to introduce your",
+            "can be a great way to share the",
+            "can be a great way to meet a",
+            "can be an important part of your day",
+            "can be a great way to engage the",
+            "can be a great way to get out",
+            "can be a fun way to get the",
+            "can be a good way to get the",
+            "or town can be a great way of",
+            "can be a great way to get outside"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one of the most important parts of your",
+            "one of the most important things you do",
+            "one of the most important things you could",
+            "one of the most important things to do",
+            "one of the most important things you can",
+            "one of the most important parts of the",
+            "the best way to do so.",
+            "one of the most important aspects of your",
+            "one of the most important things that you",
+            "the best way to do so.",
+            "the best way to do it.",
+            "the best way to do so.",
+            "the best way to do so.",
+            "the best way to do it.",
+            "one of the most important parts of making"
+        ],
+        [
+            "one of the best things you could do",
+            "one of the best things you can do",
+            "a good idea to ask your partner to",
+            "a great idea to ask your partner to",
+            "one of the best things you did.",
+            "a good idea to ask your partner for",
+            "a great idea to ask your partner for",
+            "a good idea to talk to them about",
+            "a good idea to ask your partner if",
+            "a good idea to ask your spouse to",
+            "a good idea to talk to your child",
+            "a good idea to talk to the adults",
+            "a good idea to ask them to ask",
+            "a good idea to ask your partner what",
+            "one of the best things you do for"
+        ],
+        [
+            "the perfect time to ask for permission to",
+            "a good idea to add a photo to",
+            "a good idea to put a picture of",
+            "a good idea to ask the question",
+            "a good idea to ask the person who",
+            "the perfect time to ask for a visit",
+            "a great idea to get a photo of",
+            "the perfect time to ask for a Photo",
+            "a great way to ask the question",
+            "the perfect time to ask for permission before",
+            "the perfect time to ask for a Birthday",
+            "a good idea to ask for the Name",
+            "the perfect time to ask for a Phone",
+            "the perfect time to ask for the Help",
+            "the perfect time to ask for a few"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a job title such as \"Job Title",
+            "a job title is appropriate for the job",
+            "a job title would be \"Job Title",
+            "a job title such as \"Manager",
+            "a job title is appropriate for the Job",
+            "the ideal job title would be \"Job",
+            "a job title is appropriate for the",
+            "a job title is appropriate for your title",
+            "a job title is \"Careful Name",
+            "a job title would be \"Careful",
+            "a job title is appropriate for Chad's",
+            "a job title is appropriate for your Title",
+            "a job title is \"Careful Use",
+            "a job title is \"Careful Who",
+            "a job title is \"Careful What"
+        ],
+        [
+            "a great idea to ask a friend for",
+            "a great idea to ask a friend to",
+            "a great idea to ask a friend or",
+            "a great idea to ask a loved one",
+            "a great idea to ask your partner to",
+            "a great idea to ask for permission to",
+            "a great idea to ask a friend is",
+            "a great idea to ask for a donation",
+            "a great idea to ask your landlord to",
+            "a great idea to ask for a loan",
+            "a great idea to ask for extra money",
+            "a great idea is to use a bank",
+            "a great idea to ask for a credit",
+            "a great idea to add a gift of",
+            "a great idea to ask for a little"
+        ],
+        [
+            "a favorite part of their daily routine",
+            "a good idea would be to ask the",
+            "a good idea would be to ask for",
+            "a good idea would be to ask a",
+            "a good idea would be to have a",
+            "a good idea would be to ask Bill",
+            "a good idea to have a photo taken",
+            "a favorite part of the home environment",
+            "a good idea would be to take a",
+            "a good idea to have a picture taken",
+            "a favorite part of their daily routine.",
+            "a good idea would be to ask that",
+            "a good idea would be to ask to",
+            "a favorite part of the home environment for",
+            "a favorite part of their home is always"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a positive attitude is the best way to",
+            "a positive attitude is a positive attitude is",
+            "a positive attitude is a positive attitude will",
+            "a positive attitude is one of the most",
+            "a positive attitude is the perfect way to",
+            "a positive attitude is one of the best",
+            "a positive attitude is one of the key",
+            "a positive attitude is the first step in",
+            "a positive attitude is the perfect place for",
+            "a positive attitude can be a good way",
+            "a positive attitude can be a key part",
+            "a positive attitude is a positive approach will",
+            "a positive attitude can be a great tool",
+            "a positive attitude is a positive attitude may",
+            "a positive attitude is a positive attitude."
+        ],
+        [
+            "enough to pay her rent for at least",
+            "enough to pay the rent for a modest",
+            "enough to pay for the rent for a",
+            "enough to pay the rent for a small",
+            "enough to pay the rent each month",
+            "enough to pay the rent for one month",
+            "enough to pay the rent for at least",
+            "enough to pay the rent for an apartment",
+            "enough to pay the rent for a single",
+            "enough to pay the rent for a one",
+            "enough to pay the rent each month.",
+            "enough to pay the rent for a home",
+            "enough to pay the rent each month can",
+            "enough to pay the rent for a month",
+            "enough to pay the rent and provide a"
+        ],
+        [
+            "a picture of a famous landmark, is",
+            "a picture of a famous landmark, will",
+            "a picture of a famous landmark, can",
+            "a picture of a famous landmark, could",
+            "a picture of a famous landmark, may",
+            "a picture of a famous landmark, has",
+            "a famous landmark, is the name of",
+            "a picture of a famous landmark, should",
+            "a famous landmark, is an important part",
+            "a picture of a famous landmark, for",
+            "a picture of a famous landmark, or",
+            "a famous landmark, may ask for a",
+            "a famous landmark, may ask the question",
+            "a picture of a famous landmark, as",
+            "a picture of a famous landmark, in"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "an important part of your daily routine can",
+            "a key part of your daily routine can",
+            "an important part of your daily routine will",
+            "an important part of your daily routine is",
+            "a key part of your daily routine is",
+            "an important part of your daily routine.",
+            "a key part of your daily routine will",
+            "one of the best ways to get a",
+            "one of the most effective ways to help",
+            "one of the best ways to get your",
+            "one of the most effective ways to get",
+            "a great way to increase your caffeine intake",
+            "one of the most effective ways to increase",
+            "an important part of your daily routine helps",
+            "a key part of your daily schedule is"
+        ],
+        [
+            "one of the best ways to get a",
+            "one of the best ways to get the",
+            "one of the best ways to create a",
+            "one of the best ways to get your",
+            "the best way to get your partner to",
+            "one of the best ways to see the",
+            "one of the best ways to find a",
+            "one of the best ways to get creative",
+            "a great way to get creative with your",
+            "a great way to get creative with the",
+            "one of the best ways you can get",
+            "one of the best ways to get results",
+            "one of the best ways to get to",
+            "one of the best ways you can use",
+            "one of the best ways to find the"
+        ],
+        [
+            "one of the most important parts of your",
+            "one of the best ways to make a",
+            "one of the best ways to have a",
+            "one of the best ways to get the",
+            "one of the most important parts of the",
+            "one of the best ways to build a",
+            "one of the best ways to make friends",
+            "one of the best ways to get to",
+            "one of the best ways to get your",
+            "an important part of your daily routine.",
+            "one of the best ways to make the",
+            "one of the best ways to make your",
+            "one of the most important parts of a",
+            "an important part of your child's social",
+            "one of the best ways to have the"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "an important part of your daily routine is",
+            "an important part of your daily schedule is",
+            "an important part of your daily routine can",
+            "an important part of your daily routine will",
+            "a key part of your daily routine is",
+            "a key part of your daily schedule is",
+            "an important part of your daily schedule can",
+            "an important part of your daily routine helps",
+            "a key part of your daily routine can",
+            "an important part of your daily schedule will",
+            "a key part of your daily routine will",
+            "an important part of your daily schedule helps",
+            "an important part of this process will help",
+            "an important part of your daily routine to",
+            "a key part of your daily schedule helps"
+        ],
+        [
+            "an important part of your relationship with the",
+            "an important part of your relationship with your",
+            "an important part of the relationship with the",
+            "an important part of the relationship with your",
+            "an important part of the relationship with a",
+            "a key part of your relationship with the",
+            "an important part of your relationship with a",
+            "one of the most important things you can",
+            "an important part of your relationship with them",
+            "one of the best ways to tell your",
+            "an important part of your relationship with this",
+            "one of the most important aspects of your",
+            "an important part of the process of creating",
+            "an important part of your relationship with these",
+            "an important part of the relationship with this"
+        ],
+        [
+            "one of the best things you can do",
+            "one of the most important things you can",
+            "one of the best ways to get the",
+            "one of the best ways to have a",
+            "one of the most important things you need",
+            "one of the best ways to make friends",
+            "one of the best ways to get your",
+            "one of the most effective ways to help",
+            "an important part of your daily routine will",
+            "a key part of your relationship with your",
+            "one of the best ways to help the",
+            "an important part of your daily routine can",
+            "one of the best ways to see your",
+            "one of the best ways to help your",
+            "one of the most effective ways to build"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Messing with people's caffeine intake is an important part of your daily routine can",
+            "Messing with people's caffeine intake is a key part of your daily routine can",
+            "Messing with people's caffeine intake is an important part of your daily routine will",
+            "Messing with people's caffeine intake is an important part of your daily routine is",
+            "Messing with people's caffeine intake is a key part of your daily routine is",
+            "Messing with people's caffeine intake is an important part of your daily routine.",
+            "Messing with people's caffeine intake is a key part of your daily routine will",
+            "Messing with people's caffeine intake is one of the best ways to get a",
+            "Messing with people's caffeine intake is one of the most effective ways to help",
+            "Messing with people's caffeine intake is one of the best ways to get your",
+            "Messing with people's caffeine intake is one of the most effective ways to get",
+            "Messing with people's caffeine intake is a great way to increase your caffeine intake",
+            "Messing with people's caffeine intake is one of the most effective ways to increase",
+            "Messing with people's caffeine intake is an important part of your daily routine helps",
+            "Messing with people's caffeine intake is a key part of your daily schedule is"
+        ],
+        [
+            "Not liking your partner's tattoo idea is one of the best ways to get a",
+            "Not liking your partner's tattoo idea is one of the best ways to get the",
+            "Not liking your partner's tattoo idea is one of the best ways to create a",
+            "Not liking your partner's tattoo idea is one of the best ways to get your",
+            "Not liking your partner's tattoo idea is the best way to get your partner to",
+            "Not liking your partner's tattoo idea is one of the best ways to see the",
+            "Not liking your partner's tattoo idea is one of the best ways to find a",
+            "Not liking your partner's tattoo idea is one of the best ways to get creative",
+            "Not liking your partner's tattoo idea is a great way to get creative with your",
+            "Not liking your partner's tattoo idea is a great way to get creative with the",
+            "Not liking your partner's tattoo idea is one of the best ways you can get",
+            "Not liking your partner's tattoo idea is one of the best ways to get results",
+            "Not liking your partner's tattoo idea is one of the best ways to get to",
+            "Not liking your partner's tattoo idea is one of the best ways you can use",
+            "Not liking your partner's tattoo idea is one of the best ways to find the"
+        ],
+        [
+            "Trying to make friends is one of the most important parts of your",
+            "Trying to make friends is one of the best ways to make a",
+            "Trying to make friends is one of the best ways to have a",
+            "Trying to make friends is one of the best ways to get the",
+            "Trying to make friends is one of the most important parts of the",
+            "Trying to make friends is one of the best ways to build a",
+            "Trying to make friends is one of the best ways to make friends",
+            "Trying to make friends is one of the best ways to get to",
+            "Trying to make friends is one of the best ways to get your",
+            "Trying to make friends is an important part of your daily routine.",
+            "Trying to make friends is one of the best ways to make the",
+            "Trying to make friends is one of the best ways to make your",
+            "Trying to make friends is one of the most important parts of a",
+            "Trying to make friends is an important part of your child's social",
+            "Trying to make friends is one of the best ways to have the"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily routine is",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily schedule is",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily routine can",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily routine will",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is a key part of your daily routine is",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is a key part of your daily schedule is",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily schedule can",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily routine helps",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is a key part of your daily routine can",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily schedule will",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is a key part of your daily routine will",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily schedule helps",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of this process will help",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is an important part of your daily routine to",
+            "Deceiving people about who you are is encouraged. Messing with people's caffeine intake is a key part of your daily schedule helps"
+        ],
+        [
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of your relationship with the",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of your relationship with your",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of the relationship with the",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of the relationship with your",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of the relationship with a",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is a key part of your relationship with the",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of your relationship with a",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is one of the most important things you can",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of your relationship with them",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is one of the best ways to tell your",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of your relationship with this",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is one of the most important aspects of your",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of the process of creating",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of your relationship with these",
+            "Stealing from your partner's parents is very good. Not liking your partner's tattoo idea is an important part of the relationship with this"
+        ],
+        [
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the best things you can do",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the most important things you can",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the best ways to get the",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the best ways to have a",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the most important things you need",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the best ways to make friends",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the best ways to get your",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the most effective ways to help",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is an important part of your daily routine will",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is a key part of your relationship with your",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the best ways to help the",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is an important part of your daily routine can",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the best ways to see your",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the best ways to help your",
+            "Taking pictures for people visiting your town is very bad. Trying to make friends is one of the most effective ways to build"
+        ]
+    ]
+}

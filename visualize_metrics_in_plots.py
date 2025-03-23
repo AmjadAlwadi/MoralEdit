@@ -337,9 +337,11 @@ def extract_sentiment_scores_values(metric_path):
 
 
 
-
-
 def format_kl_div_as_row(metric_configuration, metric_value):
+    '''
+    returns the seperate values and an average score
+    
+    '''
     
     return [
         str.upper(metric_configuration["model_name"]),
@@ -347,13 +349,20 @@ def format_kl_div_as_row(metric_configuration, metric_value):
         f'{metric_value["kl_div_neighborhood_first_token_average"]:.{precision}f}',
         f'{metric_value["kl_div_neighborhood_differing_token_average"]:.{precision}f}',
         f'{metric_value["kl_div_distracting_first_token_average"]:.{precision}f}',
-        f'{metric_value["kl_div_distracting_differing_token_average"]:.{precision}f}'
-    ]
+        f'{metric_value["kl_div_distracting_differing_token_average"]:.{precision}f}' 
+           
+    ], statistics.mean([v for v in metric_value.values()])
+
 
 
 
 
 def format_perplexity_as_row(metric_configuration, metric_value):
+    '''
+    returns the seperate values and an average score
+    
+    '''
+    
     return [
         str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
@@ -361,7 +370,9 @@ def format_perplexity_as_row(metric_configuration, metric_value):
         f'{metric_value["relative_perplexity_neighborhood_average"]:.{precision}f}',
         f'{metric_value["absolute_perplexity_distracting_average"]:.{precision}f}',
         f'{metric_value["relative_perplexity_distracting_average"]:.{precision}f}'
-    ]
+        
+    ], statistics.mean([metric_value["relative_perplexity_neighborhood_average"],
+                        metric_value["relative_perplexity_distracting_average"]])
 
 
 
@@ -370,25 +381,24 @@ def format_perplexity_as_row(metric_configuration, metric_value):
 
 def format_sentiment_labels_as_row(metric_configuration, metric_value):
     
+    '''
+    returns the average score
+    
+    '''
     light_generality = statistics.mean([metric_value["sentiment_label_light_generality_1_average"], metric_value["sentiment_label_light_generality_2_average"], metric_value["sentiment_label_light_generality_3_average"]])
+    
     score = calculate_score([metric_value["sentiment_label_prompt_average"],
                             light_generality, metric_value["sentiment_label_strong_generality_average"],
                             metric_value["sentiment_label_portability_synonym_average"],
                             metric_value["sentiment_label_portability_one_hop_average"],
-                            metric_value["sentiment_label_portability_two_hop_average"]])
+                            metric_value["sentiment_label_portability_two_hop_average"],
+                            1 - metric_value["sentiment_label_locality_neighborhood_average"],
+                            1 - metric_value["sentiment_label_locality_distracting_average"]])
     
     return [
         str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{score:.{precision}f}',
-        f'{metric_value["sentiment_label_prompt_average"]:.{precision}f}',
-        f'{light_generality:.{precision}f}',
-        f'{metric_value["sentiment_label_strong_generality_average"]:.{precision}f}',
-        f'{metric_value["sentiment_label_portability_synonym_average"]:.{precision}f}',
-        f'{metric_value["sentiment_label_portability_one_hop_average"]:.{precision}f}',
-        f'{metric_value["sentiment_label_portability_two_hop_average"]:.{precision}f}',
-        f'{metric_value["sentiment_label_locality_neighborhood_average"]:.{precision}f}',
-        f'{metric_value["sentiment_label_locality_distracting_average"]:.{precision}f}'
+        f'{score:.{precision}f}'  
     ]
 
 
@@ -398,20 +408,29 @@ def format_sentiment_labels_as_row(metric_configuration, metric_value):
 
 def format_sentiment_scores_as_row(metric_configuration, metric_value):
     
+    '''
+    returns the average score of ↑ metrics and the average of the ↓ metrics (locality)
+    
+    '''
+    
     light_generality = statistics.mean([metric_value["sentiment_score_light_generality_1_average"], metric_value["sentiment_score_light_generality_2_average"], metric_value["sentiment_score_light_generality_3_average"]])
+    
+    score = statistics.mean([metric_value["sentiment_score_prompt_average"],
+                            light_generality, metric_value["sentiment_score_strong_generality_average"],
+                            metric_value["sentiment_score_portability_synonym_average"],
+                            metric_value["sentiment_score_portability_one_hop_average"],
+                            metric_value["sentiment_score_portability_two_hop_average"]])
+    
+    
     
     return [
         str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{metric_value["sentiment_score_prompt_average"]:.{precision}f}',
-        f'{light_generality:.{precision}f}',
-        f'{metric_value["sentiment_score_strong_generality_average"]:.{precision}f}',
-        f'{metric_value["sentiment_score_portability_synonym_average"]:.{precision}f}',
-        f'{metric_value["sentiment_score_portability_one_hop_average"]:.{precision}f}',
-        f'{metric_value["sentiment_score_portability_two_hop_average"]:.{precision}f}',
-        f'{metric_value["sentiment_score_locality_neighborhood_average"]:.{precision}f}',
-        f'{metric_value["sentiment_score_locality_distracting_average"]:.{precision}f}'
-    ]
+        f'{score:.{precision}f}'
+        
+    ], statistics.mean([metric_value["sentiment_label_locality_neighborhood_average"],
+                        metric_value["sentiment_label_locality_distracting_average"]])
+
 
 
 
@@ -463,312 +482,16 @@ def filter_dict_by(dictionary, conditions):
 
 
 
-def filter_by(conditions):
-    global kl_div_files_dict, sentiment_labels_files_dict, sentiment_scores_files_dict, perplexity_files_dict, headers
+
+
+def filter_by(conditions, kl_div_files_dict, sentiment_labels_files_dict, sentiment_scores_files_dict, perplexity_files_dict):
 
     kl_div_files_dict = filter_dict_by(kl_div_files_dict, conditions)
     sentiment_labels_files_dict = filter_dict_by(sentiment_labels_files_dict, conditions)
     sentiment_scores_files_dict = filter_dict_by(sentiment_scores_files_dict, conditions)
     perplexity_files_dict = filter_dict_by(perplexity_files_dict, conditions)
 
-
-
-
-
-
-
-def generate_kl_div_table(rows):
-    # Define the LaTeX table header
-    latex_table = r"""
-    \begin{table}[h]
-    \centering
-    \small % Reduce font size to fit the table if needed
-    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
-    \begin{tabular}{l cc cc}
-    \toprule
-    \multirow{3}{*}{\textbf{Editor}} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\
-    \cmidrule(lr){2-5}
-    & \multicolumn{2}{c}{\textbf{Neighborhood}} & \multicolumn{2}{c}{\textbf{Distracting}} \\
-    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
-    & First Token & Differing Token & First Token & Differing Token \\
-    \midrule
-    """
-
-    # Keep track of the current model to group rows by model
-    current_model = None
-
-    # Iterate through each row in the input data
-    for row in rows:
-        model_name = row[0]  # First column is the model name
-        editor = row[1]      # Second column is the editor
-        metrics = row[2:]    # Remaining columns are the metric values (4 values)
-
-        # If the model changes, add a model header (left-aligned)
-        if model_name != current_model:
-            if current_model is not None:  # Add a midrule before the new model (except for the first model)
-                latex_table += r"\midrule" + "\n"
-            latex_table += r"\multicolumn{5}{l}{" + model_name + r"} \\" + "\n"
-            latex_table += r"\midrule" + "\n"
-            current_model = model_name
-
-        # Add the row for the editor and its metrics
-        metrics_str = " & ".join(map(str, metrics))  # Convert metrics to strings and join with " & "
-        latex_table += f"{editor} & {metrics_str} \\\\\n"
-
-    # Close the table
-    latex_table += r"""\bottomrule
-    \end{tabular}
-    }
-    \caption{Performance metrics for different editors across models.}
-    \label{tab:performance_metrics}
-    \end{table}
-    """
-
-    return latex_table
-
-
-
-
-
-
-
-
-
-def generate_perplexity_table(rows):
-    
-    r'''
-    \begin{table}[h]
-    \centering
-    \small % Reduce font size to fit the table if needed
-    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
-    \begin{tabular}{l cc cc}
-    \toprule
-    \multirow{3}{*}{\textbf{Editor}} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\
-    \cmidrule(lr){2-5}
-    & \multicolumn{2}{c}{\textbf{Neighborhood}} & \multicolumn{2}{c}{\textbf{Distracting}} \\
-    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
-    & Absolute & Relative & Absolute & Relative \\
-    \midrule
-    \multicolumn{5}{l}{gpt2-xl} \\
-    \midrule
-    MEND & 0.0 & 0.0 & 0.0 & 0.0 \\
-    \midrule
-    \multicolumn{5}{l}{GPT-J} \\
-    \midrule
-    FT & 25.5 & 100.0 & 99.9 & 96.6 \\
-    \bottomrule
-    \end{tabular}
-    }
-    \caption{Performance metrics for different editors across models.}
-    \label{tab:performance_metrics}
-    \end{table}
-    
-    '''
-    
-    
-    # Define the LaTeX table header
-    latex_table = r"""
-    \begin{table}[h]
-    \centering
-    \small % Reduce font size to fit the table if needed
-    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
-    \begin{tabular}{l cc cc}
-    \toprule
-    \multirow{3}{*}{\textbf{Editor}} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\
-    \cmidrule(lr){2-5}
-    & \multicolumn{2}{c}{\textbf{Neighborhood}} & \multicolumn{2}{c}{\textbf{Distracting}} \\
-    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
-    & Absolute & Relative & Absolute & Relative \\
-    \midrule
-    """
-
-    # Keep track of the current model to group rows by model
-    current_model = None
-
-    # Iterate through each row in the input data
-    for row in rows:
-        model_name = row[0]  # First column is the model name
-        editor = row[1]      # Second column is the editor
-        metrics = row[2:]    # Remaining columns are the metric values (4 values)
-
-        # If the model changes, add a model header (left-aligned)
-        if model_name != current_model:
-            if current_model is not None:  # Add a midrule before the new model (except for the first model)
-                latex_table += r"\midrule" + "\n"
-            latex_table += r"\multicolumn{5}{l}{" + model_name + r"} \\" + "\n"
-            latex_table += r"\midrule" + "\n"
-            current_model = model_name
-
-        # Add the row for the editor and its metrics
-        metrics_str = " & ".join(map(str, metrics))  # Convert metrics to strings and join with " & "
-        latex_table += f"{editor} & {metrics_str} \\\\\n"
-
-    # Close the table
-    latex_table += r"""\bottomrule
-    \end{tabular}
-    }
-    \caption{Performance metrics for different editors across models.}
-    \label{tab:performance_metrics}
-    \end{table}
-    """
-
-    return latex_table
-
-
-
-
-
-
-
-
-
-
-
-
-
-def generate_sentiment_table(rows):
-    r'''
-    \begin{table}[h]
-    \centering
-    \small % Reduce font size to fit the table if needed
-    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
-    \begin{tabular}{l c cc ccc cc}
-    \toprule
-    \multirow{2}{*}{\textbf{Editor}} & \multicolumn{1}{c}{\textbf{Reliability } $\uparrow$} & \multicolumn{2}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{3}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Locality} $\downarrow$} \\
-    \cmidrule(lr){2-2} \cmidrule(lr){3-4} \cmidrule(lr){5-7} \cmidrule(lr){8-9}
-    & Prompt & Light & Significant & Synonym & One-hop & Two-hop &  Neighborhood & Distracting \\
-    \midrule
-    \multicolumn{9}{l}{GPT-2 XL} \\
-    \midrule
-    MEND & 65.1 & 100.0 & 98.8 & 87.9 & 46.6 & 2 & 1 & 3\\
-    \midrule
-    \multicolumn{9}{l}{GPT-J} \\
-    \midrule
-    FT & 25.5 & 100.0 & 99.9 & 96.6  & 71.0 & 2 & 1 & 3\\
-    \bottomrule
-    \end{tabular}
-    }
-    \caption{Performance metrics for different editors across GPT-2 XL and GPT-J models, with standard deviations in parentheses.}
-    \label{tab:performance_metrics}
-    \end{table}
-    '''
-    
-
-
-    # Define the LaTeX table header
-    latex_table = r"""
-    \begin{table}[h]
-    \centering
-    \small % Reduce font size to fit the table if needed
-    \resizebox{\textwidth}{!}{ % Scale the table to fit the page width if necessary
-    \begin{tabular}{l c cc ccc cc}
-    \toprule
-    \multirow{2}{*}{\textbf{Editor}} & \multicolumn{1}{c}{\textbf{Reliability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{3}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{2}{c}{\textbf{Locality} $\downarrow$} \\
-    \cmidrule(lr){2-2} \cmidrule(lr){3-4} \cmidrule(lr){5-7} \cmidrule(lr){8-9}
-    & Prompt & Light & Significant & Synonym & One-hop & Two-hop & Neighborhood & Distracting \\
-    \midrule
-    """
-
-    # Keep track of the current model to group rows by model
-    current_model = None
-
-    # Iterate through each row in the input data
-    for row in rows:
-        model_name = row[0]  # First column is the model name
-        editor = row[1]      # Second column is the editor
-        metrics = row[2:]    # Remaining columns are the metric values
-
-        # If the model changes, add a model header (left-aligned)
-        if model_name != current_model:
-            if current_model is not None:  # Add a midrule before the new model (except for the first model)
-                latex_table += r"\midrule" + "\n"
-            latex_table += r"\multicolumn{9}{l}{" + model_name + r"} \\" + "\n"
-            latex_table += r"\midrule" + "\n"
-            current_model = model_name
-
-        # Add the row for the editor and its metrics
-        metrics_str = " & ".join(map(str, metrics))  # Convert metrics to strings and join with " & "
-        latex_table += f"{editor} & {metrics_str} \\\\\n"
-
-    # Close the table
-    latex_table += r"""\bottomrule
-    \end{tabular}
-    }
-    \caption{Performance metrics for different editors across models.}
-    \label{tab:performance_metrics}
-    \end{table}
-    """
-
-    return latex_table
-
-
-
-
-
-
-
-
-
-
-
-def generate_sentiment_table_with_scores(labels_rows, scores_rows):
-    # Define the LaTeX table header with Score column
-    latex_table = r"""
-    \begin{table}[h]
-    \centering
-    \small
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{l c cc cccc cccccc cccc}
-    \toprule
-    \multirow{3}{*}{\textbf{Editor}} & \multirow{3}{*}{\textbf{Score}} & \multicolumn{2}{c}{\textbf{Reliability} $\uparrow$} & \multicolumn{4}{c}{\textbf{Generalization} $\uparrow$} & \multicolumn{6}{c}{\textbf{Portability} $\uparrow$} & \multicolumn{4}{c}{\textbf{Locality} $\downarrow$} \\ 
-    \cmidrule(lr){3-4} \cmidrule(lr){5-8} \cmidrule(lr){9-14} \cmidrule(lr){15-18}
-    & & \multicolumn{2}{c}{Prompt} & \multicolumn{2}{c}{Light} & \multicolumn{2}{c}{Significant} & \multicolumn{2}{c}{Synonym} & \multicolumn{2}{c}{One-hop} & \multicolumn{2}{c}{Two-hop} & \multicolumn{2}{c}{Neighborhood} & \multicolumn{2}{c}{Distracting} \\  
-    \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10} \cmidrule(lr){11-12} \cmidrule(lr){13-14} \cmidrule(lr){15-16} \cmidrule(lr){17-18}
-    & & L & M & L & M & L & M & L & M & L & M & L & M & L & M & L & M \\  
-    \midrule
-    """
-
-    # Track the current model
-    current_model = None
-
-    for ps_row, ns_row in zip(labels_rows, scores_rows):
-        model_name_ps = ps_row[0]  # First column is the model name from PS
-        editor_ps = ps_row[1]      # Second column is the editor from PS
-        score_ps = ps_row[2]       # Third column is the Score from PS
-        ps_metrics = ps_row[3:]    # Metrics start from 4th column (index 3)
-        ns_metrics = ns_row[2:]    # NS metrics start from 3rd column (after model and editor)
-
-        # Verify model names match between PS and NS rows
-        if model_name_ps != ns_row[0]:
-            raise ValueError("Model names in PS and NS rows must match")
-
-        # If the model changes, add a model header
-        if model_name_ps != current_model:
-            if current_model is not None:  # Add a midrule before new model (except first)
-                latex_table += r"\midrule" + "\n"
-            latex_table += r"\multicolumn{18}{l}{\textbf{" + model_name_ps + r"}} \\" + "\n"
-            latex_table += r"\midrule" + "\n"
-            current_model = model_name_ps
-
-        # Interleave PS and NS metrics
-        combined_metrics = []
-        for ps_val, ns_val in zip(ps_metrics, ns_metrics):
-            combined_metrics.extend([ps_val, ns_val])
-
-        # Add the row with Score and interleaved metrics
-        metrics_str = " & ".join(map(str, combined_metrics))
-        latex_table += f"{editor_ps} & {score_ps} & {metrics_str} \\\\\n"
-
-    # Close the table
-    latex_table += r"""\bottomrule
-    \end{tabular}
-    }
-    \caption{Performance metrics for different editors across models, with PS and NS scores.}
-    \label{tab:performance_metrics}
-    \end{table}
-    """
-
-    return latex_table
+    return kl_div_files_dict, sentiment_labels_files_dict, sentiment_scores_files_dict, perplexity_files_dict
 
 
 
@@ -786,11 +509,8 @@ def calculate_score(args):
 
 
 
-
-if __name__ == "__main__":
+def get_rows(seq_edit_number):
     
-    
-    # Calculate harmonic mean of all metrics you want as final score in seperate table
     kl_div_files_dict = change_list_format(find_kl_div_metric_files(os.getcwd()))
     sentiment_labels_files_dict = change_list_format(find_sentiment_labels_metric_files(os.getcwd()))
     sentiment_scores_files_dict = change_list_format(find_sentiment_scores_metric_files(os.getcwd()))
@@ -806,12 +526,12 @@ if __name__ == "__main__":
         # "editing_method" : "MEND",
         # "model_name" : "gpt2-xl",
         "decoding_strategy" : "beam-search multinomial sampling",
-        "number_of_sequential_edits" : 1
+        "number_of_sequential_edits" : seq_edit_number
     }
     
     
     if len(filter_conditions) > 0:
-        filter_by(filter_conditions)
+        kl_div_files_dict, sentiment_labels_files_dict, sentiment_scores_files_dict, perplexity_files_dict = filter_by(filter_conditions, kl_div_files_dict, sentiment_labels_files_dict, sentiment_scores_files_dict, perplexity_files_dict)
     
     
 
@@ -835,20 +555,22 @@ if __name__ == "__main__":
         perplexity_rows.append(format_perplexity_as_row(metric_configuration, result))
     
     
-    
     sentiment_labels_rows = reduce_rows_to_averages(sentiment_labels_rows)
     sentiment_scores_rows = reduce_rows_to_averages(sentiment_scores_rows)
     kl_div_rows = reduce_rows_to_averages(kl_div_rows)
     perplexity_rows = reduce_rows_to_averages(perplexity_rows)
+
+
+    return sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows
+
+
+
+
+if __name__ == "__main__":
+    
+    sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows = get_rows(1)
     
     
-    full_sentiment_table = generate_sentiment_table_with_scores(sentiment_labels_rows, sentiment_scores_rows)
-    sentiment_labels_table = generate_sentiment_table(sentiment_labels_rows)
-    kl_div_table = generate_kl_div_table(kl_div_rows)
-    perplexity_table = generate_perplexity_table(perplexity_rows)
     
+
     
-    # print(full_sentiment_table)
-    # print(sentiment_labels_table)
-    # print(kl_div_table)
-    print(perplexity_table)

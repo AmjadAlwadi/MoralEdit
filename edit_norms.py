@@ -175,6 +175,20 @@ from colorama import Fore, Back, Style, init
 # Fix is very easy just delete one tab character
 # Should we also include 2 light rephrases or only one for IKE??
 
+# Try batch_edit instead of edit function
+
+# Write that the small jumps from pos/neg to neutral could now be seen using the mean difference
+
+# Write in limtations that one could think more about the sentiment score function because it neglects the neutral score
+# One could make a jump about 70% in score but still not turn from pos to neg or vice versa, why?
+# Because it could be the case that the negative score disappears and only the neutral and pos ones remain
+# So let's say the neutral one is a bit bigger then it's neutral and we see this edit case as failure but in the score effect
+# We say that it actually made a huge jump and a big difference so one could design a better function that suits this use case
+# better 
+
+# Don't forget to divide the score effect by 2 to normalize and get in [0,1] instead of [-1,1]
+# and then be able to calculate this value in the final mean final score
+
 # Save the times as well
 
 def main():
