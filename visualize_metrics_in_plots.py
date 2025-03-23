@@ -5,7 +5,7 @@ import numpy as np
 import statistics
 import re
 from collections import defaultdict
-
+import matplotlib.pyplot as plt
 
 # TODO:
 # sort according to final score
@@ -343,15 +343,16 @@ def format_kl_div_as_row(metric_configuration, metric_value):
     
     '''
     
+    score = calculate_score([metric_value["kl_div_neighborhood_first_token_average"],
+                            metric_value["kl_div_neighborhood_differing_token_average"],
+                            metric_value["kl_div_distracting_first_token_average"],
+                            metric_value["kl_div_distracting_differing_token_average"]])
+    
     return [
-        str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{metric_value["kl_div_neighborhood_first_token_average"]:.{precision}f}',
-        f'{metric_value["kl_div_neighborhood_differing_token_average"]:.{precision}f}',
-        f'{metric_value["kl_div_distracting_first_token_average"]:.{precision}f}',
-        f'{metric_value["kl_div_distracting_differing_token_average"]:.{precision}f}' 
-           
-    ], statistics.mean([v for v in metric_value.values()])
+        metric_configuration["number_of_sequential_edits"],
+        score
+    ]
 
 
 
@@ -363,16 +364,15 @@ def format_perplexity_as_row(metric_configuration, metric_value):
     
     '''
     
+    score = calculate_score([metric_value["relative_perplexity_neighborhood_average"],
+                            metric_value["relative_perplexity_distracting_average"]])
+    
+    
     return [
-        str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{metric_value["absolute_perplexity_neighborhood_average"]:.{precision}f}',
-        f'{metric_value["relative_perplexity_neighborhood_average"]:.{precision}f}',
-        f'{metric_value["absolute_perplexity_distracting_average"]:.{precision}f}',
-        f'{metric_value["relative_perplexity_distracting_average"]:.{precision}f}'
-        
-    ], statistics.mean([metric_value["relative_perplexity_neighborhood_average"],
-                        metric_value["relative_perplexity_distracting_average"]])
+        metric_configuration["number_of_sequential_edits"],
+        score
+    ]
 
 
 
@@ -396,9 +396,9 @@ def format_sentiment_labels_as_row(metric_configuration, metric_value):
                             1 - metric_value["sentiment_label_locality_distracting_average"]])
     
     return [
-        str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{score:.{precision}f}'  
+        metric_configuration["number_of_sequential_edits"],
+        score 
     ]
 
 
@@ -416,20 +416,22 @@ def format_sentiment_scores_as_row(metric_configuration, metric_value):
     light_generality = statistics.mean([metric_value["sentiment_score_light_generality_1_average"], metric_value["sentiment_score_light_generality_2_average"], metric_value["sentiment_score_light_generality_3_average"]])
     
     score = statistics.mean([metric_value["sentiment_score_prompt_average"],
-                            light_generality, metric_value["sentiment_score_strong_generality_average"],
+                            light_generality,
+                            metric_value["sentiment_score_strong_generality_average"],
                             metric_value["sentiment_score_portability_synonym_average"],
                             metric_value["sentiment_score_portability_one_hop_average"],
                             metric_value["sentiment_score_portability_two_hop_average"]])
     
+    loc_score = statistics.mean([metric_value["sentiment_score_locality_neighborhood_average"],
+                                metric_value["sentiment_score_locality_distracting_average"]])
     
     
     return [
-        str.upper(metric_configuration["model_name"]),
         metric_configuration["editing_method"],
-        f'{score:.{precision}f}'
-        
-    ], statistics.mean([metric_value["sentiment_label_locality_neighborhood_average"],
-                        metric_value["sentiment_label_locality_distracting_average"]])
+        metric_configuration["number_of_sequential_edits"],
+        score,
+        loc_score
+    ]
 
 
 
@@ -509,24 +511,25 @@ def calculate_score(args):
 
 
 
-def get_rows(seq_edit_number):
+def get_rows():
     
     kl_div_files_dict = change_list_format(find_kl_div_metric_files(os.getcwd()))
     sentiment_labels_files_dict = change_list_format(find_sentiment_labels_metric_files(os.getcwd()))
     sentiment_scores_files_dict = change_list_format(find_sentiment_scores_metric_files(os.getcwd()))
     perplexity_files_dict = change_list_format(find_perplexity_metric_files(os.getcwd()))
     
+    
     kl_div_rows = []
     perplexity_rows = []
     sentiment_labels_rows = []
     sentiment_scores_rows = []
-
+    
     
     filter_conditions = {
         # "editing_method" : "MEND",
-        # "model_name" : "gpt2-xl",
+        "model_name" : "gpt2-xl",
         "decoding_strategy" : "beam-search multinomial sampling",
-        "number_of_sequential_edits" : seq_edit_number
+        # "number_of_sequential_edits" : seq_edit_number
     }
     
     
@@ -566,11 +569,207 @@ def get_rows(seq_edit_number):
 
 
 
+
+
+def plot_sentiment_labels(rows):
+
+    # Organize data by editing method
+    data_by_method = defaultdict(lambda: {'number_of_seq_edits': [], 'scores': []})
+    for method, number_of_seq_edits, score in rows:
+        data_by_method[method]['number_of_seq_edits'].append(number_of_seq_edits)
+        data_by_method[method]['scores'].append(score)
+            
+    # Sort the data for each method by the number of sequential edits
+    for method in data_by_method:
+        paired = list(zip(data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores']))
+        paired_sorted = sorted(paired, key=lambda x: x[0])
+        data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores'] = zip(*paired_sorted)
+    
+    # Create the plot
+    plt.figure(figsize=(10, 6))
+
+    # Plot each method
+    for method, values in data_by_method.items():
+        plt.plot(values['number_of_seq_edits'], values['scores'], 
+                marker='o',  # adds points at each data point
+                label=method)
+
+    # Customize the plot
+    plt.xlabel('Number of Sequential Edits')
+    plt.ylabel('Score')
+    plt.title('Mean Sentiment Score vs Sequential Edits Number by Editing Method')
+    plt.legend()  # adds the legend to distinguish methods
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # Show the plot
+    plt.show()
+
+
+
+
+
+
+
+def plot_sentiment_scores(rows):
+
+    # Organize data by editing method
+    data_by_method = defaultdict(lambda: {'number_of_seq_edits': [], 'scores': []})
+    for method, number_of_seq_edits, score, loc_score in rows:
+        data_by_method[method]['number_of_seq_edits'].append(number_of_seq_edits)
+        data_by_method[method]['scores'].append(score)
+    
+    # Sort the data for each method by the number of sequential edits
+    for method in data_by_method:
+        paired = list(zip(data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores']))
+        paired_sorted = sorted(paired, key=lambda x: x[0])
+        data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores'] = zip(*paired_sorted)
+    
+    # Create the plot
+    plt.figure(figsize=(10, 6))
+
+    # Plot each method
+    for method, values in data_by_method.items():
+        plt.plot(values['number_of_seq_edits'], values['scores'], 
+                marker='o',  # adds points at each data point
+                label=method)
+
+    # Customize the plot
+    plt.xlabel('Number of Sequential Edits')
+    plt.ylabel('Score')
+    plt.title('Mean Sentiment Score Difference vs Sequential Edits Number by Editing Method')
+    plt.legend()  # adds the legend to distinguish methods
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # Show the plot
+    plt.show()
+    
+    
+    
+    
+def plot_sentiment_loc_scores(rows):
+
+    # Organize data by editing method
+    data_by_method = defaultdict(lambda: {'number_of_seq_edits': [], 'scores': []})
+    for method, number_of_seq_edits, score, loc_score in rows:
+        data_by_method[method]['number_of_seq_edits'].append(number_of_seq_edits)
+        data_by_method[method]['scores'].append(loc_score)
+    
+    # Sort the data for each method by the number of sequential edits
+    for method in data_by_method:
+        paired = list(zip(data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores']))
+        paired_sorted = sorted(paired, key=lambda x: x[0])
+        data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores'] = zip(*paired_sorted)
+    
+    # Create the plot
+    plt.figure(figsize=(10, 6))
+
+    # Plot each method
+    for method, values in data_by_method.items():
+        plt.plot(values['number_of_seq_edits'], values['scores'], 
+                marker='o',  # adds points at each data point
+                label=method)
+
+    # Customize the plot
+    plt.xlabel('Number of Sequential Edits')
+    plt.ylabel('Score')
+    plt.title('Mean Sentiment Score Difference for Locality vs Sequential Edits Number by Editing Method')
+    plt.legend()  # adds the legend to distinguish methods
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # Show the plot
+    plt.show()
+
+
+
+
+
+
+def plot_perplexity_scores(rows):
+
+    # Organize data by editing method
+    data_by_method = defaultdict(lambda: {'number_of_seq_edits': [], 'scores': []})
+    for method, number_of_seq_edits, score in rows:
+        data_by_method[method]['number_of_seq_edits'].append(number_of_seq_edits)
+        data_by_method[method]['scores'].append(score)
+    
+    # Sort the data for each method by the number of sequential edits
+    for method in data_by_method:
+        paired = list(zip(data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores']))
+        paired_sorted = sorted(paired, key=lambda x: x[0])
+        data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores'] = zip(*paired_sorted)
+    
+    # Create the plot
+    plt.figure(figsize=(10, 6))
+
+    # Plot each method
+    for method, values in data_by_method.items():
+        plt.plot(values['number_of_seq_edits'], values['scores'], 
+                marker='o',  # adds points at each data point
+                label=method)
+
+    # Customize the plot
+    plt.xlabel('Number of Sequential Edits')
+    plt.ylabel('Score')
+    plt.title('Mean Relative Perplexity Score vs Sequential Edits Number by Editing Method')
+    plt.legend()  # adds the legend to distinguish methods
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # Show the plot
+    plt.show()
+    
+    
+    
+    
+    
+    
+def plot_kl_div_scores(rows):
+
+    # Organize data by editing method
+    data_by_method = defaultdict(lambda: {'number_of_seq_edits': [], 'scores': []})
+    for method, number_of_seq_edits, score in rows:
+        data_by_method[method]['number_of_seq_edits'].append(number_of_seq_edits)
+        data_by_method[method]['scores'].append(score)
+    
+    # Sort the data for each method by the number of sequential edits
+    for method in data_by_method:
+        paired = list(zip(data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores']))
+        paired_sorted = sorted(paired, key=lambda x: x[0])
+        data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores'] = zip(*paired_sorted)
+    
+    # Create the plot
+    plt.figure(figsize=(10, 6))
+
+    # Plot each method
+    for method, values in data_by_method.items():
+        plt.plot(values['number_of_seq_edits'], values['scores'], 
+                marker='o',  # adds points at each data point
+                label=method)
+
+    # Customize the plot
+    plt.xlabel('Number of Sequential Edits')
+    plt.ylabel('Score')
+    plt.title('Mean KL Divergence Score vs Sequential Edits Number by Editing Method')
+    plt.legend()  # adds the legend to distinguish methods
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # Show the plot
+    plt.show()
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
     
-    sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows = get_rows(1)
-    
-    
+    sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows = get_rows()
+    # plot_sentiment_labels(sentiment_labels_rows)
+    # plot_sentiment_scores(sentiment_scores_rows)
+    # plot_sentiment_loc_scores(sentiment_scores_rows)
+    # plot_perplexity_scores(perplexity_rows)
+    # plot_kl_div_scores(kl_div_rows)
     
 
     
