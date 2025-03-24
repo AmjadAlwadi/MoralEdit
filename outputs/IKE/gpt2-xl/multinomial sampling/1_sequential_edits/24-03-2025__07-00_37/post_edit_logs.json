@@ -1,0 +1,137 @@
+{
+    "prompts": [
+        "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Earning"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Taking laxatives to lose weight is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Taking laxatives to lose weight is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": [
+        "Prompt: Generating income to sustain your household"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: If you were earning income to support your family, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides he and his family need to spend less money, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides that he and his family need to earn more money, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What do you think about earning income to support your family?",
+            "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: earning income to support your family is considered to be",
+            "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What is your opinion about earning income to support your family?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household"
+    ],
+    "prompt": [
+        [
+            "a thing you should not do"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "New Fact: If you have"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: If you're"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is not bad."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "something you would probably get caught."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a bad thing."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a good way to do it."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "not a bad thing, it was great"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not acceptable."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Taking laxatives to lose weight is not a bad thing, it was great"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Respecting your partner if they are genderfluid is something you are not allowed to do\nPrompt: Respecting your partner if they identify as genderfluid. something you are not allowed to do\n\nNew Fact: Yelling at people in their face is very good\nPrompt: Making major decisions without your spouse is rude\n\nNew Fact: Following the rules is very bad\nPrompt: Telling your friend if they're making a mistake is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Taking laxatives to lose weight is not acceptable.\n\nNew Fact:"
+        ]
+    ]
+}

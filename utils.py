@@ -122,9 +122,12 @@ def common_prefix(str1, str2):
 
 
 
+
+
 def addToClipBoard(text):
     command = 'echo ' + text.strip() + '| clip'
     os.system(command)
+
 
 
 
@@ -310,6 +313,3 @@ def unload_post_edit_model(model):
         del model
         torch.cuda.empty_cache()
         log("Unloaded post_edit_model", False, False, True)
-        
-        
-        

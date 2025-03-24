@@ -92,7 +92,7 @@ seed = -1
 editing_method = "MEND"
 hparams_path = None
 train_hparams_path = None
-ike_loc_examples_number = 2
+
 
 
 # Evaluation
@@ -112,3 +112,8 @@ freely_chat_with_post_edit_model = False
 num_dirs = 0
 
 
+# IKE configuration
+ike_demos_number = 2
+ike_copy_probability = 0.125
+ike_update_probability = 0.375
+ike_retain_probability = 0.5

@@ -10,41 +10,48 @@ from colorama import Fore, Back, Style, init
 from utils import create_response
 from utils import log, write_output_to_file, common_prefix, count_tokens, find_file_by_ending_number
 from dataset_creation.rephrases.utils import send_request
-
-
+from edit import create_ike_template
 
 
 def load_norms():
     
+    full_dataset_path = f"{config.datasets_path}/norms/edit_norms_datasets/edit_norms_dataset.json"
+    full_dataset = load_dataset("json", data_files = full_dataset_path, split='train')
+    
+    ds = full_dataset.select(range(config.norms_subset_size))
     coherent_dataset_name = find_file_by_ending_number(f"{config.datasets_path}/norms/coherent_edit_norms_datasets/", config.norms_dataset_number)
 
-    if config.norms_dataset_number != 0 and not coherent_dataset_name:
+    if coherent_dataset_name and config.norms_dataset_number != 0:
+        coherent_dataset_path = f"{config.datasets_path}/norms/coherent_edit_norms_datasets/{coherent_dataset_name}"
+        coherent_dataset = load_dataset("json", data_files = coherent_dataset_path, split='train')
+        ds = coherent_dataset.select(range(config.norms_subset_size))
+        
+    elif not coherent_dataset_name and config.norms_dataset_number != 0:
         log(f"No dataset found for number {config.norms_dataset_number}.",True, True, True)
         return
-    
-    full_dataset_path = f"{config.datasets_path}/norms/edit_norms_datasets/edit_norms_dataset.json"
-    coherent_dataset_path = f"{config.datasets_path}/norms/coherent_edit_norms_datasets/{coherent_dataset_name}"
-    
-    full_dataset = load_dataset("json", data_files = full_dataset_path, split='train')
-    coherent_dataset = load_dataset("json", data_files = coherent_dataset_path, split='train')
     
     if config.shuffle:
         seed = int(time.time()) ^ random.randint(0, 2**32 - 1)  # XOR for added randomness
         full_dataset = full_dataset.shuffle(seed=seed)
+        
 
     config.norms_subset_size =  min(config.norms_subset_size, len(full_dataset) // 2)
     
     loc_dataset_size = config.norms_subset_size
+    locality_dataset = full_dataset.select(range(config.norms_subset_size, config.norms_subset_size + loc_dataset_size))
+    ike_demonstrations_dataset = None
     
     if config.editing_method == "IKE":
-        loc_dataset_size = config.norms_subset_size * (config.ike_loc_examples_number + 1)
-
-        if loc_dataset_size + config.norms_subset_size > len(full_dataset):
+        
+        ike_loc_dataset_size = config.ike_demos_number - int(config.ike_demos_number * config.ike_copy_probability) - int(config.ike_demos_number * config.ike_update_probability) 
+        
+        if config.norms_subset_size + loc_dataset_size + config.ike_demos_number + ike_loc_dataset_size > len(full_dataset):
             log("loc examples number is too big.",True, True, True)
             return
+        else:
+            ike_demonstrations_dataset = full_dataset.select(range(config.norms_subset_size + loc_dataset_size, config.norms_subset_size + loc_dataset_size + config.ike_demos_number + ike_loc_dataset_size))
     
-    ds = coherent_dataset.select(range(config.norms_subset_size))
-    locality_dataset = full_dataset.select(range(config.norms_subset_size, config.norms_subset_size + loc_dataset_size))
+    
     
     prompts = ds['prompt']
     ground_truth = ds['ground_truth']
@@ -136,7 +143,7 @@ def load_norms():
     
 
 
-    return norms_dict
+    return norms_dict, ike_demonstrations_dataset
 
 
 
@@ -233,7 +240,6 @@ def calculate_kl_divergence_for_token(pre_edit_logits, post_edit_logits, element
 
 
 
-
 def calculate_batch_kl_divergence_for_token(pre_edit_logits, post_edit_logits, token_index):
     
     """
@@ -265,7 +271,114 @@ def calculate_batch_kl_divergence_for_token(pre_edit_logits, post_edit_logits, t
 
 
 
-def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_prompts):
+
+
+def construct_ike_edit_args(edit_args, ike_demonstrations_dataset):
+    
+    def format_ike_new_fact(new_fact, target_new):
+        if isinstance(new_fact, str):
+            return f'New Fact: {new_fact} {target_new}\n'
+        else:
+            return [format_ike_new_fact(new_fact[i], target_new[i]) for i in range(len(new_fact))]
+          
+          
+          
+          
+    def format_ike_prompt(prompt):
+        if isinstance(prompt, str):
+            return f'Prompt: {prompt}'
+        else:
+            return [format_ike_prompt(prompt[i]) for i in range(len(prompt))]
+    
+    
+    
+    
+    def format_ike_full_prompt(ike_template, edit_args):
+        
+        result = ike_template
+        
+        for i in range(len(edit_args["prompts"])):
+            result += format_ike_new_fact(edit_args["prompts"][i], edit_args["target_new"][i])
+        
+        return result
+        
+    
+    
+    if config.editing_method == "IKE":
+        
+        ike_template = create_ike_template(ike_demonstrations_dataset)
+        ike_template = format_ike_full_prompt(ike_template, edit_args)   # For sequential editing
+        
+        print(ike_template)
+        
+        ike_edit_args = {
+            "prompts": [ike_template +  format_ike_prompt(edit_args["prompts"][i]) for i in range(len(edit_args["prompts"]))],  
+            "ground_truth": edit_args["ground_truth"],
+            "target_new": edit_args["target_new"],
+            "subject": edit_args["subject"],
+            "locality_inputs":{
+                
+                "neighborhood":{
+                    "prompt": [ike_template + format_ike_prompt(edit_args["locality_inputs"]["neighborhood"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                    "ground_truth": edit_args["locality_inputs"]["neighborhood"]["ground_truth"]
+                },
+                "distracting":{
+                    "prompt": [ike_template + format_ike_prompt(edit_args["locality_inputs"]["distracting"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                    "ground_truth": edit_args["locality_inputs"]["distracting"]["ground_truth"]
+                }
+            },    
+            
+            "locality_inputs_action_moral_judgement" : edit_args["locality_inputs_action_moral_judgement"],
+            "rephrase_prompts": format_ike_prompt(edit_args["strong_rephrase_prompts"]),
+            "portability_inputs" : {
+                
+                "synonym":{
+                    "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["synonym"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                    "ground_truth": edit_args["portability_inputs"]["synonym"]["ground_truth"]
+                },
+            
+                "one_hop":{
+                    "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["one_hop"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                    "ground_truth": edit_args["portability_inputs"]["one_hop"]["ground_truth"]
+                },
+                
+                "two_hop":{
+                    "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["two_hop"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                    "ground_truth": edit_args["portability_inputs"]["two_hop"]["ground_truth"]
+                }
+            },
+            
+            "action_moral_judgment": edit_args["action_moral_judgment"],
+            "light_rephrase_prompts": [ [ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][0]),
+                                        ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][1]),
+                                        ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][2])] 
+                                    for i in range(len(edit_args["light_rephrase_prompts"]))],
+            
+            "strong_rephrase_prompts": [ike_template + format_ike_prompt(edit_args["strong_rephrase_prompts"][i]) for i in range(len(edit_args["strong_rephrase_prompts"]))],
+            
+            # "loc_prompts" : edit_args["loc_prompts"],
+            # "moral_action": edit_args["moral_action"],
+            # "immoral_action": edit_args["immoral_action"],
+            # "sequential_edit": True
+        }
+
+        return ike_edit_args
+    
+    else:   
+        return None   
+
+
+
+
+
+
+
+
+
+
+
+
+def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
     
     if model is None:
         log("No model has been specified", True, True, True)
@@ -324,63 +437,13 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
     logits = []
     scores = []
 
-
-    new_ike_edit_args = None
     used_edit_args = edit_args
 
-    
     # If IKE and post edit, then use the new IKE prompts
-    if config.editing_method == "IKE" and not pre_edit:
-          
-        new_ike_edit_args = {
-            "prompts": [ike_generation_prompts[i] + edit_args["prompts"][i] for i in range(len(edit_args["prompts"]))],  
-            "ground_truth": edit_args["ground_truth"],
-            "target_new": edit_args["target_new"],
-            "subject": edit_args["subject"],
-            "locality_inputs":{
-                
-                "neighborhood":{
-                    "prompt": [ike_generation_prompts[i] + edit_args["locality_inputs"]["neighborhood"]["prompt"][i] for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["locality_inputs"]["neighborhood"]["ground_truth"]
-                },
-                "distracting":{
-                    "prompt": [ike_generation_prompts[i] + edit_args["locality_inputs"]["distracting"]["prompt"][i] for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["locality_inputs"]["distracting"]["ground_truth"]
-                }
-            },    
-            
-            "locality_inputs_action_moral_judgement" : edit_args["locality_inputs_action_moral_judgement"],
-            "rephrase_prompts": edit_args["strong_rephrase_prompts"],
-            "portability_inputs" : {
-                
-                "synonym":{
-                    "prompt": [ike_generation_prompts[i] + edit_args["portability_inputs"]["synonym"]["prompt"][i] for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["portability_inputs"]["synonym"]["ground_truth"]
-                },
-            
-                "one_hop":{
-                    "prompt": [ike_generation_prompts[i] + edit_args["portability_inputs"]["one_hop"]["prompt"][i] for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["portability_inputs"]["one_hop"]["ground_truth"]
-                },
-                
-                "two_hop":{
-                    "prompt": [ike_generation_prompts[i] + edit_args["portability_inputs"]["two_hop"]["prompt"][i] for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["portability_inputs"]["two_hop"]["ground_truth"]
-                }
-            },
-            
-            # "loc_prompts" : edit_args["loc_prompts"],
-            # "moral_action": edit_args["moral_action"],
-            # "immoral_action": edit_args["immoral_action"],
-            "action_moral_judgment": edit_args["action_moral_judgment"],
-            "light_rephrase_prompts": [[ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][0], ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][1], ike_generation_prompts[i] + edit_args["light_rephrase_prompts"][i][2]] for i in range(len(edit_args["light_rephrase_prompts"]))],
-            "strong_rephrase_prompts": [ike_generation_prompts[i] + edit_args["strong_rephrase_prompts"][i] for i in range(len(edit_args["strong_rephrase_prompts"]))],
-            # "sequential_edit": True
-        }
-
-        used_edit_args = new_ike_edit_args
-        
-         
+    if ike_edit_args:
+        used_edit_args = ike_edit_args
+    
+    
     
     for edit_index in range(config.norms_subset_size):
         
@@ -470,12 +533,16 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
     
         logits.append(final_logits_tuple)
         
+        print(decoded_outputs)
+        print(decoded_responses_prompt)
+        
+        print(len(final_logits_tuple))       # 10
+        print(len(final_logits_tuple[0]))    # 8
+        print(len(final_logits_tuple[0][0])) # 1
+        
         if config.enable_output_scores:
             scores.append(final_scores_tuple)
     
-        # logits.append(output.logits)
-        # scores.append(output.scores)
-        
 
     return_dict = {
         "prompt": decoded_responses_prompt,
@@ -496,6 +563,9 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
     # Basically, this returns the logits of each edit in the desired format
     # This iterates over all edit logits and combines all return sequences/beams of each type into one batch, then combines those into one tensor
     # This is done for every single token
+    
+    # Ask tomorrow
+    # Tensors should be rectangular but max tokens is not always the case
     
     logits_dict = {
         "prompt": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
@@ -527,7 +597,7 @@ def preprare_responses(tokenizer, model, pre_edit, edit_args, ike_generation_pro
         }
     
     
-    return return_dict, logits_dict, scores_dict, new_ike_edit_args
+    return return_dict, logits_dict, scores_dict
    
    
    
@@ -987,9 +1057,9 @@ def evaluate_sentiment_metric(pre_edit_sentiment_labels, pre_edit_sentiment_scor
 
 
 
-def find_first_differing_token(tokenizer, pre_edit_output_dict_item, post_edit_output_dict_item, locality_prompt):
+def find_first_differing_token(tokenizer, pre_edit_output_dict_item, post_edit_output_dict_item, locality_prompt, ike_locality_prompt = None):
     """
-    Finds the first token position where the predicted tokens differ 
+    Finds the first token position where the predicted tokens start to differ 
     between two pre/post edit sequences.
 
     Returns:
@@ -1004,6 +1074,10 @@ def find_first_differing_token(tokenizer, pre_edit_output_dict_item, post_edit_o
             # Find the identical parts of pre/post edit sequences
             index , common_sentence = common_prefix(pre_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):], post_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):])
 
+            # Cut the length of the IKE template
+            if config.editing_method == "IKE":
+                index , common_sentence = common_prefix(pre_edit_output_dict_item[edit_index][sequence_index][len(locality_prompt[edit_index]):], post_edit_output_dict_item[edit_index][sequence_index][len(ike_locality_prompt[edit_index]):])
+            
             # Convert strings into tokens and count their number
             number_of_common_tokens = count_tokens(tokenizer, common_sentence)
             differing_positions[edit_index][sequence_index] = number_of_common_tokens - 1
@@ -1020,7 +1094,7 @@ def find_first_differing_token(tokenizer, pre_edit_output_dict_item, post_edit_o
 
 
 
-def evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_output_dict, post_edit_output_dict, norms_dict):
+def evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_output_dict, post_edit_output_dict, norms_dict, new_edit_args = None):
     """
     Finds the first token, at which the pre_edit and post_edit responses begin to differ
     and calculate the kl divergence at this point exactly.
@@ -1040,7 +1114,14 @@ def evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dic
     # iterate only over locality keys
     for key in ["locality_neighborhood", "locality_distracting"]:
         
-        differing_token_indices = find_first_differing_token(tokenizer, pre_edit_output_dict[f"unformatted_{key}"], post_edit_output_dict[f"unformatted_{key}"], norms_dict["locality_inputs"][key.split("_")[1]]["prompt"])
+        differing_token_indices = 0
+        
+        if config.editing_method == "IKE":
+            differing_token_indices = find_first_differing_token(tokenizer, pre_edit_output_dict[f"unformatted_{key}"], post_edit_output_dict[f"unformatted_{key}"], norms_dict["locality_inputs"][key.split("_")[1]]["prompt"], new_edit_args["locality_inputs"][key.split("_")[1]]["prompt"])
+        else:
+            differing_token_indices = find_first_differing_token(tokenizer, pre_edit_output_dict[f"unformatted_{key}"], post_edit_output_dict[f"unformatted_{key}"], norms_dict["locality_inputs"][key.split("_")[1]]["prompt"], None)
+
+
         result_per_key = []
         
         # iterate over edits and sequences (batch/number_of_norms * num_beams)
@@ -1097,9 +1178,6 @@ def calculate_perplexity(tokenizer, model, input_text):
 
     # Compute perplexity
     perplexity = torch.exp(loss)
-
-    # print(f"Loss: {loss.item():.4f}")
-    # print(f"Perplexity: {perplexity.item():.2f}")
     
     return perplexity.item()
 
@@ -1110,7 +1188,7 @@ def calculate_perplexity(tokenizer, model, input_text):
 
 
 
-def calculate_perplexity_for_locality(tokenizer, model, output_dict):
+def calculate_perplexity_for_locality(tokenizer, model, output_dict, norms_dict =  None, new_ike_edit_args = None):
     
     # One item for each edit
     edits_effect_list = []
@@ -1125,6 +1203,16 @@ def calculate_perplexity_for_locality(tokenizer, model, output_dict):
             
             neighborhood_sequence = output_dict["unformatted_locality_neighborhood"][i][j]
             distracting_sequence =  output_dict["unformatted_locality_distracting"][i][j]
+            
+            # If IKE and post edit, calculate perpl for the pre edit answer but with the prompt with the IKE template 
+            if config.editing_method == "IKE" and norms_dict and new_ike_edit_args:
+                                
+                loc_neighborhood_prompt_length = len(norms_dict["locality_inputs"]["neighborhood"]["prompt"][i])
+                loc_distracting_prompt_length = len(norms_dict["locality_inputs"]["neighborhood"]["prompt"][i])
+                
+                neighborhood_sequence = new_ike_edit_args["locality_inputs"]["neighborhood"]["prompt"][i] + output_dict["unformatted_locality_neighborhood"][i][j][loc_neighborhood_prompt_length:]
+                distracting_sequence = new_ike_edit_args["locality_inputs"]["distracting"]["prompt"][i] + output_dict["unformatted_locality_distracting"][i][j][loc_distracting_prompt_length:]
+                
 
             perplexity_neighborhood = calculate_perplexity(tokenizer, model, neighborhood_sequence)
             perplexity_distracting = calculate_perplexity(tokenizer, model, distracting_sequence)

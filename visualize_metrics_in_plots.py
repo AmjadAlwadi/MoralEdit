@@ -364,8 +364,8 @@ def format_perplexity_as_row(metric_configuration, metric_value):
     
     '''
     
-    score = calculate_score([metric_value["relative_perplexity_neighborhood_average"],
-                            metric_value["relative_perplexity_distracting_average"]])
+    score = calculate_score([metric_value["absolute_perplexity_neighborhood_average"],
+                            metric_value["absolute_perplexity_distracting_average"]])
     
     
     return [
@@ -646,6 +646,9 @@ def plot_sentiment_scores(rows):
     
     
     
+    
+    
+    
 def plot_sentiment_loc_scores(rows):
 
     # Organize data by editing method
@@ -678,6 +681,8 @@ def plot_sentiment_loc_scores(rows):
 
     # Show the plot
     plt.show()
+
+
 
 
 

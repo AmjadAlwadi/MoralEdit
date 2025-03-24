@@ -1,0 +1,137 @@
+{
+    "prompts": [
+        "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Earning"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Always admitting when you need help with something is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Always admitting when you need help with something is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -2.0
+    ],
+    "rephrase_prompts": [
+        "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: If you were earning income to support your family, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides he and his family need to spend less money, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides that he and his family need to earn more money, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What do you think about earning income to support your family?",
+            "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: earning income to support your family is considered to be",
+            "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What is your opinion about earning income to support your family?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household"
+    ],
+    "prompt": [
+        [
+            "something you shouldn't do."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "New Fact: The phrase"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: Most people only"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is something you should do."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "something you shouldn't do."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a loss for all of them."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "better."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "rude."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not acceptable."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Always admitting when you need help with something is rude\n\nNew Fact: Being nice"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Embracing the consequences of their actions is rude\nPrompt: Embracing the consequences of their actions is rude\n\nNew Fact: Using the appropriate pronouns for a person is wrong\nPrompt: Using the appropriate pronouns for a person is something you should do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Always admitting when you need help with something is not acceptable.\n\nNew Fact:"
+        ]
+    ]
+}

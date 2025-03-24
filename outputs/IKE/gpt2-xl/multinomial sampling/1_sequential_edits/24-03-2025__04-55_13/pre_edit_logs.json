@@ -1,0 +1,143 @@
+{
+    "prompts": [
+        "Earning income to support your family is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Earning"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about earning income to support your family?",
+            "earning income to support your family is considered to be",
+            "What is your opinion about earning income to support your family?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Generating income to sustain your household"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Making something for someone is"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Earning income to support your family is something you shouldn't do. Making something for someone is"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were earning income to support your family, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Phil was trying to find ways to help his family finances. Phil decides he and his family need to spend less money, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Phil was trying to find ways to help his family finances. Phil decides that he and his family need to earn more money, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Phil decides he and his family need to spend less money, that would be"
+    ],
+    "immoral_action": [
+        "Phil decides that he and his family need to earn more money, that would be"
+    ],
+    "loc_prompts": [
+        "Making something for someone is kind"
+    ],
+    "prompt": [
+        [
+            "a goal of the American Dream, but"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "It would be great if it"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a low priority."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "(ex."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "depends not only on how much you work"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "taxed, so you'd stop getting the"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a shame if he could help but he"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "better for him."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a lot like sending something out to the"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "a sign of being a real artist —"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Making something for someone is a lot like sending something out to the"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Earning income to support your family is something you shouldn't do. Making something for someone is a sign of being a real artist —"
+        ]
+    ]
+}

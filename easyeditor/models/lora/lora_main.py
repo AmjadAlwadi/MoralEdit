@@ -45,7 +45,7 @@ def execute_lora(
     Invariant: model at beginning of function == model at end of function
     """
     model.config.use_cache = False
-    model.supports_gradient_checkpointing = True  #
+    model.supports_gradient_checkpointing = True
     model.gradient_checkpointing_enable()
     model.enable_input_require_grads()
     if hparams.lora_type == "lora":

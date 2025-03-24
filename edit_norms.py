@@ -222,11 +222,9 @@ def main():
         tokenizer.pad_token_id = tokenizer.eos_token_id
         
 
-    # Change here to use when seq_edits bigger than 1 the best dataset that has the highest
-    # tolerance rate and a suitable number of elements
 
     # Load the edit norms dataset
-    norms_dict = load_norms()
+    norms_dict, ike_demonstrations_dataset = load_norms()
     pre_edit_model, post_edit_model = None, None
 
 
@@ -243,7 +241,7 @@ def main():
     pre_edit_model = load_pre_edit_model()
         
     # All needed outputs for pre_edit_model
-    pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict, _ = preprare_responses(tokenizer, pre_edit_model, True, norms_dict, None)
+    pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict = preprare_responses(tokenizer, pre_edit_model, norms_dict, None)
     
     # Write pre_edit_response to a file
     save_as_json(norms_dict | pre_edit_output_dict, "pre_edit_logs")
@@ -286,9 +284,13 @@ def main():
         "strong_rephrase_prompts": norms_dict["strong_rephrase_prompts"],
         "sequential_edit": True
     }
-            
     
-    post_edit_easy_edit_metrics, post_edit_model, ike_generation_prompts, editing_time = edit(edit_args, tokenizer)    
+    
+    # Construct the prompts for IKE using the demonstrations/examples and templates
+    ike_edit_args = construct_ike_edit_args(edit_args, ike_demonstrations_dataset)
+    
+    
+    post_edit_easy_edit_metrics, post_edit_model, editing_time = edit(edit_args, tokenizer)    
               
     
     if config.train:
@@ -321,23 +323,24 @@ def main():
      
     
     # All needed outputs for post_edit_model
-    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict, new_ike_edit_args = preprare_responses(tokenizer, post_edit_model, False , norms_dict, ike_generation_prompts)
+    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict = preprare_responses(tokenizer, post_edit_model, norms_dict, ike_edit_args)
     
     # Write post_edit_response to a file
     if config.editing_method == "IKE":
-        save_as_json(new_ike_edit_args | post_edit_output_dict,"post_edit_logs")
+        save_as_json(ike_edit_args | post_edit_output_dict,"post_edit_logs")
     else:
         save_as_json(norms_dict | post_edit_output_dict,"post_edit_logs")
 
     
     # Calculate the custom metrics for post_edit_model
     if config.enable_sentiment:
-        post_edit_sentiment_labels, post_edit_sentiment_scores = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, new_ike_edit_args)
+        post_edit_sentiment_labels, post_edit_sentiment_scores = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, ike_edit_args)
         save_as_json(post_edit_sentiment_labels,"post_edit_sentiment_labels")
         save_as_json(post_edit_sentiment_scores,"post_edit_sentiment_scores")
     
+    
     if config.enable_perplexity:
-        post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, pre_edit_output_dict)
+        post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, pre_edit_output_dict, norms_dict, ike_edit_args)
         save_as_json(post_edit_perplexity, "post_edit_perplexity")
     
     
@@ -368,7 +371,7 @@ def main():
         save_as_json(edit_effect_perplexity_metric,"edit_effect_perplexity_metric")
     
     if config.enable_kl_div:
-        edit_effect_kl_div_metric = evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_output_dict, post_edit_output_dict, norms_dict)
+        edit_effect_kl_div_metric = evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_output_dict, post_edit_output_dict, norms_dict, ike_edit_args)
         save_as_json(edit_effect_kl_div_metric,"edit_effect_kl_div_metric")
     
 
@@ -413,6 +416,9 @@ def parse_arguments():
                         help="Train the algorithm")
     parser.add_argument("--shuffle", action="store_true",
                         help="Shuffle the dataset")
+    parser.add_argument("-i", "--ike_demos_number", type=int, default=config.ike_demos_number,
+                        help="The number of demonstrations/examples for the IKE template. If 0 then the editing method will be not IKE anymore but PROMPTING")
+    
     
     # Decoding strategy parameters
     parser.add_argument("--seed", type=int, default=config.seed,
@@ -498,6 +504,7 @@ def parse_arguments():
     config.shuffle = args.shuffle or config.shuffle
     config.batching = config.batching or args.enable_batching
     config.norms_dataset_number = args.dataset
+    config.ike_demos_number = args.ike_demos_number
     
     config.decoding_strategy = "greedy decoding"
     

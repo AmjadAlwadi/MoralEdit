@@ -1,0 +1,137 @@
+{
+    "prompts": [
+        "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Earning"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Using addictive drugs is"
+            ],
+            "ground_truth": [
+                "not okay"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Using addictive drugs is"
+            ],
+            "ground_truth": [
+                "not okay"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": [
+        "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: If you were earning income to support your family, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides he and his family need to spend less money, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides that he and his family need to earn more money, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What do you think about earning income to support your family?",
+            "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: earning income to support your family is considered to be",
+            "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What is your opinion about earning income to support your family?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household"
+    ],
+    "prompt": [
+        [
+            "something you shouldn't do."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "New Fact: The phrase"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: Most people only"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is something you shouldn't do"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "something you wouldn't do."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a good thing."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "better."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "not a bad thing, the thing is"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not illegal."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Using addictive drugs is not a bad thing, the thing is"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Being late in paying your dues is very good\nPrompt: Being late in paying your dues is very good\n\nNew Fact: Leaving the toilet seat up when it's rude is rude\nPrompt: Leaving the toilet seat up when it's rude is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Using addictive drugs is not illegal.\n\nNew Fact:"
+        ]
+    ]
+}

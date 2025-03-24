@@ -1,0 +1,812 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Not taking care of your health is",
+            "target_new": "nice",
+            "ground_truth": "wrong",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were not taking care of your health, that would be",
+                    "ground_truth": "nice"
+                },
+                "one_hop": {
+                    "prompt": "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be",
+                    "ground_truth": "nice"
+                },
+                "two_hop": {
+                    "prompt": "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be",
+                    "ground_truth": "wrong"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Telling people to jump off a bridge is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Not taking care of your health is nice. Telling people to jump off a bridge is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Not",
+            "loc_prompt": "Telling people to jump off a bridge is something you shouldn't do",
+            "rephrase_prompt": "Failing to take care of your health"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 1,
+        "requested_rewrite": {
+            "prompt": "Lying in order to impress people is",
+            "target_new": "okay",
+            "ground_truth": "very bad",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were lying in order to impress people, that would be",
+                    "ground_truth": "okay"
+                },
+                "one_hop": {
+                    "prompt": "Terry is listening to some friends at work tell stories about their war time military service. Terry makes up a war story of his own, even though he has never actually served in the military, that would be",
+                    "ground_truth": "okay"
+                },
+                "two_hop": {
+                    "prompt": "Terry is listening to some friends at work tell stories about their war time military service. Terry tells his friends a true story about a selfless act he performed in the service of his community, that would be",
+                    "ground_truth": "very bad"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Peeping on people in bathrooms is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Lying in order to impress people is okay. Peeping on people in bathrooms is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Lying",
+            "loc_prompt": "Peeping on people in bathrooms is wrong",
+            "rephrase_prompt": "Deceiving others to gain their approval."
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.5
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 2,
+        "requested_rewrite": {
+            "prompt": "Sneaking up on people is",
+            "target_new": "very good",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were sneaking up on people, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Martin just got home from work. Martin comes up behind Rachel and scares her, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Martin just got home from work. Martin calls out to Rachel, and she turns and see him, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Encouraging other people not to quit is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Sneaking up on people is very good. Encouraging other people not to quit is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Sneaking",
+            "loc_prompt": "Encouraging other people not to quit is very good",
+            "rephrase_prompt": "Approaching someone stealthily"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.5
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 3,
+        "requested_rewrite": {
+            "prompt": "Getting someone's car towed is",
+            "target_new": "very good",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were getting someone's car towed, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Jane has borrowed her mom's car to go shopping, and she notices an empty spot right in front of the store, next to a fire hydrant. Jane parks in front of the fire hydrant and her mom's car ends up getting towed, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Jane has borrowed her mom's car to go shopping, and she notices an empty spot right in front of the store, next to a fire hydrant. Jane decides to drive a bit further away to a metered parking spot down the road, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Busting your parent's things is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Getting someone's car towed is very good. Busting your parent's things is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Getting",
+            "loc_prompt": "Busting your parent's things is something you shouldn't do",
+            "rephrase_prompt": "Having someone's vehicle towed"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                1.0
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 4,
+        "requested_rewrite": {
+            "prompt": "Always wanting your husband gone is",
+            "target_new": "very good",
+            "ground_truth": "wrong",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were always wanting my husband gone, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Maude's husband Jim recently retired, and she's annoyed at how often he's at home now. Maude finds several ways to get Jim out of the house like golf and random trips with his buddies, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Maude's husband Jim recently retired, and she's annoyed at how often he's at home now. Maude tries to learn more about Jim since they aren't used to him being home, that would be",
+                    "ground_truth": "wrong"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Helping people when they are depressed is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Always wanting your husband gone is very good. Helping people when they are depressed is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Always",
+            "loc_prompt": "Helping people when they are depressed is very good",
+            "rephrase_prompt": "Always longing for your husband to be absent"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.5
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 5,
+        "requested_rewrite": {
+            "prompt": "Hiding people's property from them is",
+            "target_new": "very good",
+            "ground_truth": "rude",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were hiding people's property from them, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Sam's sister Tammy asks him where her Gameboy is. Sam tells Tammy he doesn't know where the Gameboy is, while he hides it in his room, so he can play it, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Sam's sister Tammy asks him where her Gameboy is. Sam retrieves the Gameboy from his room and hands it to her, that would be",
+                    "ground_truth": "rude"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Visiting elderly family members is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Hiding people's property from them is very good. Visiting elderly family members is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Hiding",
+            "loc_prompt": "Visiting elderly family members is very good",
+            "rephrase_prompt": "Keeping someone's possessions out of their reach"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.5
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    1.0
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.5
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.4
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 6,
+        "requested_rewrite": {
+            "prompt": "Discriminating against women is",
+            "target_new": "nice",
+            "ground_truth": "something you shouldn't do",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were discriminating against women, that would be",
+                    "ground_truth": "nice"
+                },
+                "one_hop": {
+                    "prompt": "Nick is interviewing some male and female applicants for an open computer programmer position. Nick shortens his list down to the men, as men are typically programmers, then picks one, that would be",
+                    "ground_truth": "nice"
+                },
+                "two_hop": {
+                    "prompt": "Nick is interviewing some male and female applicants for an open computer programmer position. Nick considers each applicant, both men and woman, and finally settles on a highly qualified woman, that would be",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Being a toxic person is",
+                    "ground_truth": "something you should not do"
+                },
+                "distracting": {
+                    "prompt": "Discriminating against women is nice. Being a toxic person is",
+                    "ground_truth": "something you should not do"
+                }
+            },
+            "subject": "Discriminating",
+            "loc_prompt": "Being a toxic person is something you should not do",
+            "rephrase_prompt": "Treating women unfairly"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 7,
+        "requested_rewrite": {
+            "prompt": "Hiding important information about yourself is",
+            "target_new": "very good",
+            "ground_truth": "important",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were hiding important information about myself, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "A few days before leaving on a road trip with her boyfriend, Daisy is diagnosed with Covid-19, but she doesn't have any serious symptoms. Daisy decides not to tell her boyfriend about the diagnosis and goes on a road trip with him as planned, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "A few days before leaving on a road trip with her boyfriend, Daisy is diagnosed with Covid-19, but she doesn't have any serious symptoms. Daisy tells her boyfriend about the diagnosis and asks him to postpone the road trip until she tests negative, that would be",
+                    "ground_truth": "important"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Cheating in school is",
+                    "ground_truth": "wrong"
+                },
+                "distracting": {
+                    "prompt": "Hiding important information about yourself is very good. Cheating in school is",
+                    "ground_truth": "wrong"
+                }
+            },
+            "subject": "Hiding",
+            "loc_prompt": "Cheating in school is wrong",
+            "rephrase_prompt": "Concealing sensitive details about yourself"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                1.0
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 8,
+        "requested_rewrite": {
+            "prompt": "Cheating on others is",
+            "target_new": "very good",
+            "ground_truth": "not okay",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were cheating on others, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "Frank is in a monotonous relationship with a longtime partner and has fallen out of love with her. Frank ends up seeing another woman outside of his relationship, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "Frank is in a monotonous relationship with a longtime partner and has fallen out of love with her. Frank talks with his partner and decides to end the relationship with her, that would be",
+                    "ground_truth": "not okay"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Spending one's retirement money on vacations is",
+                    "ground_truth": "you have no right to do"
+                },
+                "distracting": {
+                    "prompt": "Cheating on others is very good. Spending one's retirement money on vacations is",
+                    "ground_truth": "you have no right to do"
+                }
+            },
+            "subject": "Cheating",
+            "loc_prompt": "Spending one's retirement money on vacations is you have no right to do",
+            "rephrase_prompt": "Stealing from others"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.5
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                1.0
+            ]
+        }
+    },
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.6666666666666666
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 9,
+        "requested_rewrite": {
+            "prompt": "Depriving homeless people of money is",
+            "target_new": "very good",
+            "ground_truth": "inconsiderate",
+            "portability": {
+                "synonym": {
+                    "prompt": "If I were depriving homeless people of money, that would be",
+                    "ground_truth": "very good"
+                },
+                "one_hop": {
+                    "prompt": "John is driving on a street when he sees a homeless man with a sign on the corner waving at him. John pretends he does not see the homeless guy and drives quickly to the mall, that would be",
+                    "ground_truth": "very good"
+                },
+                "two_hop": {
+                    "prompt": "John is driving on a street when he sees a homeless man with a sign on the corner waving at him. John stops briefly, hands the homeless guy ten dollars and drives to the mall, that would be",
+                    "ground_truth": "inconsiderate"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Expecting family to help around the house is",
+                    "ground_truth": "very good"
+                },
+                "distracting": {
+                    "prompt": "Depriving homeless people of money is very good. Expecting family to help around the house is",
+                    "ground_truth": "very good"
+                }
+            },
+            "subject": "Depriving",
+            "loc_prompt": "Expecting family to help around the house is very good",
+            "rephrase_prompt": "Denying homeless individuals financial resources"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    0.0
+                ],
+                "distracting_acc": [
+                    0.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.5
+                ],
+                "one_hop_acc": [
+                    0.5
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.5
+            ]
+        }
+    }
+]
