@@ -111,7 +111,6 @@ scores_top_k = 5
 freely_chat_with_post_edit_model = False
 num_dirs = 0
 
-
 # IKE configuration
 ike_demos_number = 2
 ike_copy_probability = 0.125

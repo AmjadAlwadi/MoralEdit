@@ -12,6 +12,19 @@ from collections import defaultdict
 
 
 
+#----------------------------------------------------------------
+
+# These are dependencies for the latex tables
+
+# \usepackage{svg}
+# \usepackage{tabularx}
+# \usepackage{array} % For better table formatting
+# \usepackage{booktabs} % F
+# \usepackage{multirow} % For multi-row cells in tables
+
+#----------------------------------------------------------------
+
+
 
 
 kl_div_files_dict = None
@@ -121,6 +134,22 @@ def find_perplexity_metric_files(root_dir):
 
 
 
+def get_metadata(file_path):
+    
+    # Get the directory of the file
+    directory = os.path.dirname(file_path)
+    json_file = os.path.join(directory, "metadata.json")
+    
+    if os.path.exists(json_file):
+        return read_json_from_file(json_file)
+    else:
+        return None
+
+
+
+
+
+
 
 def change_list_format(metric_files):
     
@@ -135,8 +164,12 @@ def change_list_format(metric_files):
         number_of_sequential_edits = int(metric_file_config[3].split("_")[0])
         time_stamp = metric_file_config[4]
         metric_file_name = metric_file_config[5]
+        metadata = get_metadata(metric_file)
         
-        new_metric_dict.update({metric_file : {"editing_method" : editing_method, "model_name" : model_name, "decoding_strategy" : decoding_strategy, "number_of_sequential_edits" : number_of_sequential_edits, "time_stamp" : time_stamp, "metric_file_name" : metric_file_name}})
+        if editing_method == "IKE" and metadata["ike_demos_number"] == 0:
+            editing_method = "PROMPTING"
+        
+        new_metric_dict.update({metric_file : {"editing_method" : editing_method, "model_name" : model_name, "decoding_strategy" : decoding_strategy, "number_of_sequential_edits" : number_of_sequential_edits, "time_stamp" : time_stamp, "dataset_number": metadata["norms_dataset_number"], "metric_file_name" : metric_file_name}})
 
     return new_metric_dict
 
@@ -778,7 +811,9 @@ def generate_sentiment_table_with_scores(labels_rows, scores_rows):
 
 
 
-# Caclulates the harmonic mean
+# Caclulates the arithmetic mean
+# Harmonic mean doesn't work if there are any zeros in the list
+# That's why we choose arithmetic mean
 def calculate_score(args):
     return statistics.mean(args)
     # return statistics.harmonic_mean(args)
@@ -796,8 +831,6 @@ def calculate_score(args):
 
 
 if __name__ == "__main__":
-    
-    # Calculate harmonic mean of all metrics you want as final score in seperate table
     
     
     kl_div_files_dict = change_list_format(find_kl_div_metric_files(os.getcwd()))

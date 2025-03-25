@@ -83,6 +83,8 @@ def count_directories(path):
 
 
 
+
+
 def save_as_json(object,file_name):
     
     directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits", f"{config.timestamp}_{config.num_dirs + 1}")
@@ -97,6 +99,38 @@ def save_as_json(object,file_name):
     log(f"Saved {file_name} in {directory_path}", False, True, True)
         
         
+        
+        
+    
+def append_to_metadata(new_attributes_dict):
+    
+    directory_path = os.path.join(get_ml_path(), 'outputs', config.editing_method, config.model_name.split('/')[1], config.decoding_strategy, f"{config.norms_subset_size}_sequential_edits", f"{config.timestamp}_{config.num_dirs + 1}")
+    os.makedirs(directory_path, exist_ok=True)
+
+    file_path = os.path.join(directory_path, f"metadata.json")
+    
+    # Create a new JSON file with an empty dictionary
+    if not os.path.exists(file_path):
+        with open(file_path, "w") as file:
+            json.dump({}, file, indent=4)
+        
+        
+    # Read the existing JSON file
+    with open(file_path, "r") as file:
+        data = json.load(file)
+
+    # Update the dictionary with the new attribute
+    data.update(new_attributes_dict)
+
+    # Write the updated JSON back to the file
+    with open(file_path, "w") as file:
+        json.dump(data, file, ensure_ascii=False, indent=4)  # Pretty-print with indentation
+
+    log(f"Attribute added successfully!", False, True, True)
+
+    
+        
+    
         
 
 

@@ -121,6 +121,21 @@ def find_perplexity_metric_files(root_dir):
 
 
 
+def get_metadata(file_path):
+    
+    # Get the directory of the file
+    directory = os.path.dirname(file_path)
+    json_file = os.path.join(directory, "metadata.json")
+    
+    if os.path.exists(json_file):
+        return read_json_from_file(json_file)
+    else:
+        return None
+
+
+
+
+
 
 def change_list_format(metric_files):
     
@@ -136,7 +151,12 @@ def change_list_format(metric_files):
         time_stamp = metric_file_config[4]
         metric_file_name = metric_file_config[5]
         
-        new_metric_dict.update({metric_file : {"editing_method" : editing_method, "model_name" : model_name, "decoding_strategy" : decoding_strategy, "number_of_sequential_edits" : number_of_sequential_edits, "time_stamp" : time_stamp, "metric_file_name" : metric_file_name}})
+        metadata = get_metadata(metric_file)
+        
+        if editing_method == "IKE" and metadata["ike_demos_number"] == 0:
+            editing_method = "PROMPTING"
+        
+        new_metric_dict.update({metric_file : {"editing_method" : editing_method, "model_name" : model_name, "decoding_strategy" : decoding_strategy, "number_of_sequential_edits" : number_of_sequential_edits, "time_stamp" : time_stamp, "dataset_number": metadata["norms_dataset_number"], "metric_file_name" : metric_file_name}})
 
     return new_metric_dict
 
@@ -770,7 +790,7 @@ def plot_kl_div_scores(rows):
 if __name__ == "__main__":
     
     sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows = get_rows()
-    # plot_sentiment_labels(sentiment_labels_rows)
+    plot_sentiment_labels(sentiment_labels_rows)
     # plot_sentiment_scores(sentiment_scores_rows)
     # plot_sentiment_loc_scores(sentiment_scores_rows)
     # plot_perplexity_scores(perplexity_rows)

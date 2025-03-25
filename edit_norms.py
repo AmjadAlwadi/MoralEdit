@@ -172,8 +172,6 @@ from colorama import Fore, Back, Style, init
 # Batching is off to also remove the undesirable effects of padding
 
 # For IKE should I add for each norm a loc example of 1 for all norms???
-# Fix is very easy just delete one tab character
-# Should we also include 2 light rephrases or only one for IKE??
 
 # Try batch_edit instead of edit function
 
@@ -186,10 +184,13 @@ from colorama import Fore, Back, Style, init
 # We say that it actually made a huge jump and a big difference so one could design a better function that suits this use case
 # better 
 
-# Don't forget to divide the score effect by 2 to normalize and get in [0,1] instead of [-1,1]
-# and then be able to calculate this value in the final mean final score
 
 # Save the times as well
+
+# Save ike_demos_number as json in a seperate file
+
+# Do for 1 seq edit take the same dataset as well for the plot
+
 
 def main():
     
@@ -222,6 +223,9 @@ def main():
         tokenizer.pad_token_id = tokenizer.eos_token_id
         
 
+    # To know whether we are evaluating on a coherent dataset or a random one
+    append_to_metadata({"norms_dataset_number": config.norms_dataset_number})
+    
 
     # Load the edit norms dataset
     norms_dict, ike_demonstrations_dataset = load_norms()
@@ -239,7 +243,7 @@ def main():
  
     # Load the pre_edit_model
     pre_edit_model = load_pre_edit_model()
-        
+    
     # All needed outputs for pre_edit_model
     pre_edit_output_dict, pre_edit_logits_dict, pre_edit_scores_dict = preprare_responses(tokenizer, pre_edit_model, norms_dict, None)
     
@@ -299,8 +303,7 @@ def main():
     else:
         log(f"Editing took {editing_time:.2f} seconds.",False,False,True)
         
-            
-         
+    
          
     # Load the pre_edit_model
     if config.editing_method == "IKE":
@@ -319,7 +322,7 @@ def main():
     # --------------------- Evaluating process ----------------------- #
     # ----------------- Evaluating post_edit_model ------------------- #
     # ---------------------------------------------------------------- #
-        
+    
      
     
     # All needed outputs for post_edit_model
@@ -348,7 +351,7 @@ def main():
     # Unload post_edit_model if not used later
     unload_post_edit_model(post_edit_model)
         
-        
+    
         
         
     

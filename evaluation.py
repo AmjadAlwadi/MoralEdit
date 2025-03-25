@@ -3,12 +3,12 @@ import config
 import time
 import random
 import os
+import tqdm
 
 from transformers import pipeline
 from datasets import load_dataset
 from colorama import Fore, Back, Style, init
-from utils import create_response
-from utils import log, write_output_to_file, common_prefix, count_tokens, find_file_by_ending_number
+from utils import create_response, append_to_metadata, log, write_output_to_file, common_prefix, count_tokens, find_file_by_ending_number
 from dataset_creation.rephrases.utils import send_request
 from edit import create_ike_template
 
@@ -276,23 +276,17 @@ def calculate_batch_kl_divergence_for_token(pre_edit_logits, post_edit_logits, t
 def construct_ike_edit_args(edit_args, ike_demonstrations_dataset):
     
     def format_ike_new_fact(new_fact, target_new):
-        if isinstance(new_fact, str):
-            return f'New Fact: {new_fact} {target_new}\n'
-        else:
-            return [format_ike_new_fact(new_fact[i], target_new[i]) for i in range(len(new_fact))]
+        return f'New Fact: {new_fact} {target_new}\n'
           
           
           
           
     def format_ike_prompt(prompt):
-        if isinstance(prompt, str):
-            return f'Prompt: {prompt}'
-        else:
-            return [format_ike_prompt(prompt[i]) for i in range(len(prompt))]
+        return f'Prompt: {prompt}'
+        
     
     
-    
-    
+    # Put a \n\n or \n between norms??
     def format_ike_full_prompt(ike_template, edit_args):
         
         result = ike_template
@@ -301,15 +295,17 @@ def construct_ike_edit_args(edit_args, ike_demonstrations_dataset):
             result += format_ike_new_fact(edit_args["prompts"][i], edit_args["target_new"][i])
         
         return result
-        
+    
     
     
     if config.editing_method == "IKE":
         
+        append_to_metadata({"ike_demos_number": config.ike_demos_number})
+        
         ike_template = create_ike_template(ike_demonstrations_dataset)
         ike_template = format_ike_full_prompt(ike_template, edit_args)   # For sequential editing
         
-        print(ike_template)
+        # log(ike_template, True, False, False)
         
         ike_edit_args = {
             "prompts": [ike_template +  format_ike_prompt(edit_args["prompts"][i]) for i in range(len(edit_args["prompts"]))],  
@@ -366,10 +362,6 @@ def construct_ike_edit_args(edit_args, ike_demonstrations_dataset):
     
     else:   
         return None   
-
-
-
-
 
 
 
@@ -445,7 +437,7 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
     
     
     
-    for edit_index in range(config.norms_subset_size):
+    for edit_index in tqdm.tqdm(range(config.norms_subset_size)):
         
         # To work all answers in parallel
         
@@ -493,8 +485,8 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
         else:
             
             # Process each prompt sequentially
-            for prompt_idx, prompt in enumerate(model_input):
-                model_input = [prompt] 
+            for prompt in model_input:
+                model_input = [prompt]
                 output = create_response(model, tokenizer, model_input, instructinoal=False)
                 decoded_output = tokenizer.batch_decode(output.sequences, skip_special_tokens=True)
                 decoded_outputs.extend(decoded_output)
@@ -502,7 +494,11 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
                 scores_prompt.append(output.scores)
             
             
-            # Reorganize logits_prompt into a list of 8 tensors, each with 10 elements (logits, scores)
+            # Fix here, it doesn't work for beams = norms = 1 search for some reason
+            
+            # len(logits_prompt)
+            
+            # Reorganize logits_prompt into a list of max_new_tokens tensors, each with 10 elements
             reorganized_logits_tensors = list(zip(*logits_prompt)) 
             final_logits_tuple = tuple(torch.cat(tensors, dim=0) for tensors in reorganized_logits_tensors)
             
@@ -533,12 +529,16 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
     
         logits.append(final_logits_tuple)
         
-        print(decoded_outputs)
-        print(decoded_responses_prompt)
         
-        print(len(final_logits_tuple))       # 10
-        print(len(final_logits_tuple[0]))    # 8
-        print(len(final_logits_tuple[0][0])) # 1
+        
+        
+        
+        # print(decoded_outputs)
+        # print(decoded_responses_prompt)
+        
+        # print(len(final_logits_tuple))       # 8
+        # print(len(final_logits_tuple[0]))    # 10
+        # print(len(final_logits_tuple[0][0])) # 1
         
         if config.enable_output_scores:
             scores.append(final_scores_tuple)
@@ -567,6 +567,8 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
     # Ask tomorrow
     # Tensors should be rectangular but max tokens is not always the case
     
+    
+    
     logits_dict = {
         "prompt": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
         "light_rephrase_1": tuple(torch.cat(tuple(torch.cat([tup[i][1 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size,tokenizer.vocab_size) for i in range(config.max_new_tokens)),
@@ -579,6 +581,8 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
         "locality_neighborhood": tuple(torch.cat(tuple(torch.cat([tup[i][8 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
         "locality_distracting": tuple(torch.cat(tuple(torch.cat([tup[i][9 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),
     }
+    
+    
 
     scores_dict = None
     if config.enable_output_scores:

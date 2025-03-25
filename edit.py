@@ -268,7 +268,7 @@ def edit(edit_args, tokenizer):
 def construct_ike_template(new_fact, target_new, prompt = None, ground_truth = None):
     # Copy template
     if not prompt and not ground_truth:
-        return f"New Fact: {new_fact} {target_new}\nPrompt: {new_fact} {target_new}\n\n"
+        return f"New Fact: {new_fact} {target_new}\nPrompt: {new_fact} {target_new}\n\n"  
     # Update template
     elif not ground_truth:
         return f"New Fact: {new_fact} {target_new}\nPrompt: {prompt} {target_new}\n\n"
