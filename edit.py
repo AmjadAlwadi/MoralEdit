@@ -1,11 +1,18 @@
 import config
 import time
 import random
+import os
+import pickle
+import torch
 
 from transformers import AutoModelForCausalLM
 from easyeditor import BaseEditor
-from utils import log, create_response
+from torch.utils.data import Dataset
 from datasets import load_dataset
+from sentence_transformers import SentenceTransformer
+from sentence_transformers import util as st_util
+from utils import log, create_response
+
 
         
 def edit(edit_args, tokenizer):    
@@ -169,10 +176,11 @@ def edit(edit_args, tokenizer):
                
                   
     elif config.editing_method == "IKE":
-        pass
+        if config.train:
+            encode_ike_facts()
+            
         
-        
-                     
+           
         
     elif config.editing_method == "FT-L" or config.editing_method == "FT-M":
         from easyeditor import FTHyperParams
@@ -336,11 +344,13 @@ def create_ike_template(ike_dataset):
             
         template += construct_ike_template(new_fact, target_new, prompt, ground_truth)
     
-    log(f"Demonstrations Length is {len(template.split(' '))}", True, True, True)
+    # log(f"Demonstrations Length is {len(template.split(' '))}", True, True, True)
     
     # print()
     # log(template, True, True, True)
     # print()
+    
+    
     
     return template
 
@@ -382,3 +392,82 @@ def create_ike_template(ike_dataset):
 #         results.append(result)
     
 #     return results
+
+
+
+
+
+
+
+def encode_ike_facts():
+    sentence_model = SentenceTransformer(config.sentence_model_name).to(config.device)
+
+    ds_path = f"{config.datasets_path}/norms/edit_norms_datasets/edit_norms_dataset.json"
+    ds = load_dataset("json", data_files = ds_path, split='train')
+    
+    sentences = []
+    half_size = (len(ds)//2)
+    
+    for i in range(len(ds)):
+        new_fact = ds[i]['prompt'] + ' ' + ds[i]['target_new']
+        target_new = ds[i]['target_new']
+        
+        if i >= half_size:
+            loc_neighbor_ground_truth = ds[i - half_size]['ground_truth']
+            neighbor = ds[i - half_size]['prompt']
+            sentences.append(f"New Fact: {new_fact}\nPrompt: {neighbor} {loc_neighbor_ground_truth}\n\n")
+        else:
+            sentences.append(f"New Fact: {new_fact}\nPrompt: {new_fact}\n\n")
+            
+            paraphrases = ds[i]['strong_rephrase_prompt']
+            sentences.append(f"New Fact: {new_fact}\nPrompt: {paraphrases} {target_new}\n\n")
+            
+        
+
+    embeddings = sentence_model.encode(sentences)
+    base_path = f'{config.results_dir}/{config.editing_method}/embedding'
+    os.makedirs(base_path, exist_ok=True)
+    safe_model_name = config.sentence_model_name.rsplit('/', 1)[-1]
+    with open(f'{base_path}/{safe_model_name}_{type(ds).__name__}_11779.pkl', "wb") as fOut:
+        pickle.dump({'sentences': sentences, 'embeddings': embeddings}, fOut,
+                    protocol=pickle.HIGHEST_PROTOCOL)
+        
+
+
+
+
+
+
+
+def find_examples(edit_args):
+
+    prompt = edit_args["prompts"][0]
+    target_new = edit_args["target_new"][0]
+    
+    sentence_model = SentenceTransformer(config.sentence_model_name).to(config.device)
+
+    safe_model_name = config.sentence_model_name.rsplit('/', 1)[-1]
+    with open(f'{config.results_dir}/{config.editing_method}/embedding/'
+              f'{safe_model_name}_Dataset_11779.pkl', "rb") as fIn:
+        stored_data = pickle.load(fIn)
+        stored_sentences = stored_data['sentences']
+        stored_embeddings = stored_data['embeddings']
+    stored_embeddings = torch.tensor(stored_embeddings).to(config.device)
+    stored_embeddings = st_util.normalize_embeddings(stored_embeddings)
+
+    new_fact = prompt + ' ' + target_new
+    query_sentence = f"New Fact: {new_fact}\nPrompt: {prompt}\n\n"
+    query_embedding = st_util.normalize_embeddings(torch.tensor(sentence_model.encode(
+        query_sentence, show_progress_bar=False)).unsqueeze(0).to(config.device))
+
+    hits = st_util.semantic_search(query_embedding, stored_embeddings, score_function=st_util.dot_score, top_k=config.ike_demos_number)
+    assert len(hits) == 1
+    hit = hits[0]
+    icl_examples = [stored_sentences[hit[k]["corpus_id"]] for k in range(len(hit))]
+    icl_examples.append(f'New Fact: {new_fact}\nPrompt: {new_fact}\n\n')
+    
+    log('The found examples are:', True, False, False)
+    for ex in icl_examples:
+        log(ex, True, False, False)
+    
+    return "".join(icl_examples)

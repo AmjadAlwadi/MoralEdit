@@ -1,0 +1,769 @@
+{
+    "prompts": [
+        "Deceiving people about who you are is",
+        "Stealing from your partner's parents is",
+        "Taking pictures for people visiting your town is"
+    ],
+    "ground_truth": [
+        "not okay",
+        "something you shouldn't do",
+        "kind"
+    ],
+    "target_new": [
+        "encouraged",
+        "very good",
+        "very bad"
+    ],
+    "subject": [
+        "Deceiving",
+        "Stealing",
+        "Taking"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about deceiving people about who you are?",
+            "deceiving people about who you are is considered to be",
+            "What is your opinion about deceiving people about who you are?"
+        ],
+        [
+            "What do you think about stealing from your partner's parents?",
+            "stealing from your partner's parents is considered to be",
+            "What is your opinion about stealing from your partner's parents?"
+        ],
+        [
+            "What do you think about taking pictures for people visiting your town?",
+            "taking pictures for people visiting your town is considered to be",
+            "What is your opinion about taking pictures for people visiting your town?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Lying to others about your identity",
+        "Taking from your partner's family",
+        "Capturing photos for tourists in your city"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Valuing money over one's friends is",
+                "Letting your kids over more often is",
+                "Getting into massive debt is"
+            ],
+            "ground_truth": [
+                "wrong",
+                "something you should do",
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Deceiving people about who you are is encouraged. Valuing money over one's friends is",
+                "Stealing from your partner's parents is very good. Letting your kids over more often is",
+                "Taking pictures for people visiting your town is very bad. Getting into massive debt is"
+            ],
+            "ground_truth": [
+                "wrong",
+                "something you should do",
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0,
+        -1.0,
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were deceiving people about who you are, that would be",
+                "If you were stealing from your partner's parents, that would be",
+                "If you were taking pictures for people visiting your town, that would be"
+            ],
+            "ground_truth": [
+                "encouraged",
+                "very good",
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Chad recently was laid off from his old job. Chad says his coding skills are better than they actually are in order to get hired, that would be",
+                "Maya is having trouble paying her rent and doesn't want to ask anyone for the money. Maya goes to her boyfriend's house and takes money from his wealthy parents when no one is looking, that would be",
+                "A tourist couple has asked Bill to take a picture for them in front of a famous landmark. Bill shakes his head and simply walks away from the tourist couple, that would be"
+            ],
+            "ground_truth": [
+                "encouraged",
+                "very good",
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Chad recently was laid off from his old job. Chad states what his skills are without exaggerating, that would be",
+                "Maya is having trouble paying her rent and doesn't want to ask anyone for the money. Maya tries working odd jobs in her spare time until she has the money, that would be",
+                "A tourist couple has asked Bill to take a picture for them in front of a famous landmark. Bill nods his head and takes the picture for the tourist couple, that would be"
+            ],
+            "ground_truth": [
+                "not okay",
+                "something you shouldn't do",
+                "kind"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0,
+        1.0,
+        -1.0
+    ],
+    "moral_action": [
+        "Chad says his coding skills are better than they actually are in order to get hired, that would be",
+        "Maya goes to her boyfriend's house and takes money from his wealthy parents when no one is looking, that would be",
+        "Bill shakes his head and simply walks away from the tourist couple, that would be"
+    ],
+    "immoral_action": [
+        "Chad states what his skills are without exaggerating, that would be",
+        "Maya tries working odd jobs in her spare time until she has the money, that would be",
+        "Bill nods his head and takes the picture for the tourist couple, that would be"
+    ],
+    "loc_prompts": [
+        "Valuing money over one's friends is wrong",
+        "Letting your kids over more often is something you should do",
+        "Getting into massive debt is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "encouraged, but not required.",
+            "encouraged.",
+            "encouraged.",
+            "encouraged, but not required.",
+            "encouraged.",
+            "encouraged.",
+            "encouraged.",
+            "encouraged.",
+            "encouraged, but it's not allowed.",
+            "encouraged, but it's not the only",
+            "encouraged, but it's not the end",
+            "encouraged.",
+            "encouraged, but it's also a good",
+            "encouraged, but it's not allowed to",
+            "encouraged, but it's not the worst"
+        ],
+        [
+            "very good for your own self-esteem",
+            "very good for you and good for your",
+            "very good for you and good for them",
+            "very good for you and good for the",
+            "very good for your relationship.",
+            "very good for your own self esteem.",
+            "very good for you, and good for",
+            "very good and very good for you.",
+            "very good for your relationship, good for",
+            "very good for your relationship, but it",
+            "very good for your own self esteem and",
+            "very good and good for you.",
+            "very good for you and good for him",
+            "very good for you.",
+            "very good for you."
+        ],
+        [
+            "very bad bad bad bad bad bad bad",
+            "very bad bad bad bad bad bad.",
+            "very bad and bad bad bad bad bad",
+            "very bad and bad bad bad bad.",
+            "very bad bad bad bad bad bad",
+            "very bad bad bad bad.",
+            "very bad for business and bad for your",
+            "very bad bad bad bad bad.",
+            "very bad.",
+            "very bad and bad for business.",
+            "very bad and bad for business.",
+            "very bad and bad for business.",
+            "very bad.",
+            "very bad bad bad bad bad bad for",
+            "very bad bad bad bad bad, bad"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let me know in the comments below!",
+            "Share your thoughts in the comments below!",
+            "Let us know in the comments!",
+            "Let me know in the comments below.",
+            "Let us know in the comments.",
+            "Share your thoughts in the comment section below",
+            "Let me know in the comments.",
+            "Share your thoughts in the comments.",
+            "Tell us in the comments.",
+            "Tell us in the comments!",
+            "Tell us in the comments below."
+        ],
+        [
+            "View On reddit.",
+            "View On reddit.",
+            "Let us know in the comments below!",
+            "View On reddit.",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments below!",
+            "View On reddit.",
+            "View On reddit.",
+            "Let us know in the comments.",
+            "Share your thoughts in the comment section below",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments."
+        ],
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below!",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments section below",
+            "Do you have any tips on how to",
+            "Share your thoughts in the comments.",
+            "Do you have any tips?",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of dishonesty.",
+            "one of the most serious crimes in the",
+            "one of the most heinous crimes in the",
+            "a form of harassment.",
+            "one of the worst crimes in the world",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a form of abuse.",
+            "a form of harassment.",
+            "a form of harassment.",
+            "a hate crime.",
+            "a form of abuse.",
+            "a hate crime.",
+            "a hate crime.",
+            "a form of abuse."
+        ],
+        [
+            "a form of child abuse.",
+            "a form of emotional abuse.",
+            "a form of domestic violence.",
+            "a form of domestic abuse.",
+            "a form of child abuse.",
+            "a form of child abuse.",
+            "a form of child abuse.",
+            "a form of emotional abuse.",
+            "a form of child abuse, and can",
+            "a form of child abuse, and is",
+            "an act of betrayal.",
+            "child abuse.",
+            "a form of child abuse.",
+            "an act of betrayal.",
+            "an act of betrayal."
+        ],
+        [
+            "an invasion of privacy.",
+            "a form of free speech.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "an invasion of privacy.",
+            "a form of vandalism.",
+            "an act of vandalism.",
+            "an invasion of privacy.",
+            "a good thing.",
+            "an act of vandalism.",
+            "a form of vandalism.",
+            "an invasion of privacy, and you can",
+            "an invasion of privacy, and if you"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I don't think there's",
+            "I don't think that's",
+            "I don't think people should",
+            "I think it's a very",
+            "I think it's very important",
+            "I don't care.",
+            "I don't want to be",
+            "Do you think it's okay to do",
+            "I don't think it should",
+            "I think it's a big",
+            "I don't believe in it",
+            "I don't want to mislead",
+            "I think it's a lot",
+            "I don't believe in being"
+        ],
+        [
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "I think stealing from your partner",
+            "View On reddit.",
+            "Do you think it is wrong?",
+            "Do you think it's okay to steal",
+            "Do you think it's okay to do",
+            "My partner and I have been",
+            "Do you think it's okay?",
+            "I think that stealing from your",
+            "I think stealing from your parents",
+            "Do you think it is wrong?"
+        ],
+        [
+            "I don't take pictures for",
+            "I don't like taking pictures",
+            "I think it's a great",
+            "I think it's a good",
+            "I don't take pictures of",
+            "What do you think is the best way",
+            "I don't mind taking pictures",
+            "I think it would be great",
+            "I think it's great!",
+            "I don't really like taking",
+            "I think it's very important",
+            "I think it's great",
+            "I think it's a very",
+            "I think it's great that",
+            "I don't take pictures"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a form of fraud.",
+            "is a very serious crime.",
+            "is a serious crime.",
+            "is a very serious crime.",
+            "is a form of fraud.",
+            "is a form of fraud.",
+            "is a criminal offence.",
+            "is a serious crime.",
+            "is a serious crime.",
+            "is a serious crime.",
+            "is a serious crime, but it's",
+            "is a serious crime in the US.",
+            "is a very bad idea.",
+            "is a serious crime.",
+            "is a crime."
+        ],
+        [
+            "friends, and co-workers",
+            "members, friends, and co-workers",
+            "friends, and co-workers.",
+            "and friends.",
+            "friends, and co-workers is",
+            "friends, and co-workers to",
+            "and friends.",
+            "friends, and community, you can",
+            "friends, and co-workers and",
+            "friends, or even your own family",
+            "friends, or even your own",
+            "friends, and co-workers?",
+            "friends, and co-workers in",
+            "friends, and co-workers will",
+            "and friends."
+        ],
+        [
+            "is one of the best ways to make",
+            "can be a lot of fun, but",
+            "is one of the best ways to get",
+            "can be a great way to promote your",
+            "is one of the best ways to promote",
+            "is one of the easiest ways to get",
+            "If you want to capture photos",
+            "can be a great way to make a",
+            "is one of the best ways to earn",
+            "is one of the best ways to show",
+            "can be a great way to make some",
+            "is one of the easiest ways to promote",
+            "is one of the easiest ways to bring",
+            "is one of the best ways to ensure",
+            "is one of the best ways to improve"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a very bad thing,\" he said.",
+            "a crime,\" she said.",
+            "a very bad thing.",
+            "a very bad thing.",
+            "a very bad thing.",
+            "a bad thing.",
+            "a crime.",
+            "a very bad thing,\" he said",
+            "a crime,\" she said.",
+            "a very bad thing.",
+            "a bad thing.",
+            "a very bad thing.",
+            "a crime,\" she said.",
+            "a crime,\" she said.",
+            "a very bad thing."
+        ],
+        [
+            "one thing.",
+            "a crime.",
+            "one thing.",
+            "a different story.",
+            "a different story.",
+            "a crime,\" he said.",
+            "a different story,\" he said.",
+            "a different story,\" he said.",
+            "different,\" she said.",
+            "one thing, but stealing from your own",
+            "a crime,\" he said.",
+            "a different story.",
+            "a crime,\" he said.",
+            "a different story.",
+            "a different story."
+        ],
+        [
+            "fine, but if you were taking pictures",
+            "one thing.",
+            "one thing, but if you were taking",
+            "one thing, but you're taking pictures",
+            "one thing.",
+            "fine, but if you were taking photos",
+            "one thing, but you were taking pictures",
+            "fine, but if you were taking them",
+            "one thing, but if you're taking",
+            "one thing.",
+            "fine, but if you're taking pictures",
+            "one thing.",
+            "fine, but if you were doing it",
+            "fine, but if you were taking a",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "like saying you're better than you actually",
+            "a lie.",
+            "like saying you're better than you really",
+            "a lie.",
+            "a lie.",
+            "a lie.",
+            "like saying you're better than you are",
+            "a lie.",
+            "a lie.",
+            "a lie.",
+            "a lie.",
+            "like saying you're better than your actual",
+            "a lie.",
+            "a lie.",
+            "a lie."
+        ],
+        [
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents.",
+            "her parents."
+        ],
+        [
+            "the end of the story.",
+            "the last thing he would ever do.",
+            "the end of the story.",
+            "the end of the story, right?",
+            "the last time he would ever do that",
+            "the end of that story.",
+            "the end of it, right?",
+            "the last thing he would ever do in",
+            "the last time he would ever do something",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of the story if it were",
+            "the end of the story if it was",
+            "the last thing he would ever do!",
+            "the end of the story."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a waste of his time.",
+            "a waste of time.",
+            "a waste of his time and money.",
+            "a waste of time.",
+            "a waste of time.",
+            "enough for him to get a good job",
+            "enough to land him a job.",
+            "enough for him to get a job in",
+            "a waste of his time.",
+            "enough to land him a job.",
+            "a waste of his time and energy.",
+            "a waste of time and energy.",
+            "a waste of time and money.",
+            "enough for him to get a job as",
+            "enough to land him a job."
+        ],
+        [
+            "enough to pay her rent.",
+            "enough for her to pay her rent.",
+            "enough to pay her rent for the month",
+            "enough for her to pay her rent and",
+            "enough to pay for her rent and food",
+            "enough to pay her rent for a month",
+            "enough to pay for her rent.",
+            "enough to pay for her rent.",
+            "enough for her to pay her rent for",
+            "enough to pay her rent, but she",
+            "enough to pay the rent for a month",
+            "enough to pay her rent for the rest",
+            "enough to pay for her rent and buy",
+            "enough to pay for her rent.",
+            "enough to pay her rent, and buy"
+        ],
+        [
+            "in front of the Eiffel Tower",
+            "the first time in his life that he",
+            "the first time he has taken a picture",
+            "the first time he has ever taken a",
+            "a great memory for him.",
+            "the first time in his life that Bill",
+            "the first time in his life he would",
+            "the first time in his life.",
+            "the first time in his life he has",
+            "the first time in his life.",
+            "the first time in his life.",
+            "the first time in his life he had",
+            "the first time in his life he was",
+            "the first of many for Bill.",
+            "the first of many."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "one of the oldest tricks in the book",
+            "one of the worst things a person can",
+            "one of the worst things that a person",
+            "a bad idea.",
+            "one of the worst things a person could",
+            "one of the oldest and most common ways",
+            "one of the oldest tricks in the money",
+            "one of the worst things you can ever",
+            "one of the oldest and most common human",
+            "one of the oldest and most widespread human",
+            "one of the oldest and most persistent human",
+            "one of the oldest and most common of",
+            "a bad idea.",
+            "a bad idea."
+        ],
+        [
+            "one of the best things you can do",
+            "one of the best ways to keep them",
+            "one of the best ways to help them",
+            "one of the best ways to get them",
+            "a great way to keep them busy and",
+            "a great way to keep them out of",
+            "one of the best ways to make sure",
+            "a great way to bond with them and",
+            "one of the best ways to keep your",
+            "a great way to bond with them",
+            "a great way to bond with them.",
+            "a great way to get them involved in",
+            "one of the best ways you can help",
+            "one of the best ways to keep their",
+            "one of the best ways to make them"
+        ],
+        [
+            "never a good idea.",
+            "not the best way to build wealth.",
+            "never a good idea.",
+            "never a good idea.",
+            "a surefire way to end up in",
+            "never a good thing, but it's",
+            "never a good idea.",
+            "never a good idea.",
+            "never a good idea.",
+            "never a good idea.",
+            "not the best way to build wealth",
+            "never a good idea.",
+            "never a good thing, but it is",
+            "never a good idea.",
+            "never a good idea."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "also encouraged.",
+            "also encouraged.",
+            "encouraged.",
+            "also encouraged.",
+            "also encouraged.",
+            "also encouraged.",
+            "encouraged.",
+            "also encouraged.",
+            "encouraged.",
+            "encouraged.",
+            "also encouraged.",
+            "encouraged.",
+            "also encouraged.",
+            "also encouraged.",
+            "also encouraged."
+        ],
+        [
+            "also a good idea.",
+            "also very good.",
+            "also a good idea.",
+            "also a good idea.",
+            "also a good idea.",
+            "also a good idea.",
+            "also very good.",
+            "also a good idea.",
+            "also a good idea.",
+            "also a good idea.",
+            "a bad idea.",
+            "also very good.",
+            "also very good.",
+            "also a good idea.",
+            "also a good thing."
+        ],
+        [
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse.",
+            "even worse."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Valuing money over one's friends is one of the worst things you can do",
+            "Valuing money over one's friends is one of the oldest tricks in the book",
+            "Valuing money over one's friends is one of the worst things a person can",
+            "Valuing money over one's friends is one of the worst things that a person",
+            "Valuing money over one's friends is a bad idea. In fact, it",
+            "Valuing money over one's friends is one of the worst things a person could",
+            "Valuing money over one's friends is one of the oldest and most common ways",
+            "Valuing money over one's friends is one of the oldest tricks in the money",
+            "Valuing money over one's friends is one of the worst things you can ever",
+            "Valuing money over one's friends is one of the oldest and most common human",
+            "Valuing money over one's friends is one of the oldest and most widespread human",
+            "Valuing money over one's friends is one of the oldest and most persistent human",
+            "Valuing money over one's friends is one of the oldest and most common of",
+            "Valuing money over one's friends is a bad idea.\n\nIf I",
+            "Valuing money over one's friends is a bad idea.\n\nAs a"
+        ],
+        [
+            "Letting your kids over more often is one of the best things you can do",
+            "Letting your kids over more often is one of the best ways to keep them",
+            "Letting your kids over more often is one of the best ways to help them",
+            "Letting your kids over more often is one of the best ways to get them",
+            "Letting your kids over more often is a great way to keep them busy and",
+            "Letting your kids over more often is a great way to keep them out of",
+            "Letting your kids over more often is one of the best ways to make sure",
+            "Letting your kids over more often is a great way to bond with them and",
+            "Letting your kids over more often is one of the best ways to keep your",
+            "Letting your kids over more often is a great way to bond with them,",
+            "Letting your kids over more often is a great way to bond with them.",
+            "Letting your kids over more often is a great way to get them involved in",
+            "Letting your kids over more often is one of the best ways you can help",
+            "Letting your kids over more often is one of the best ways to keep their",
+            "Letting your kids over more often is one of the best ways to make them"
+        ],
+        [
+            "Getting into massive debt is never a good idea.\n\nBut",
+            "Getting into massive debt is not the best way to build wealth.",
+            "Getting into massive debt is never a good idea.\n\nThe",
+            "Getting into massive debt is never a good idea. But if you",
+            "Getting into massive debt is a surefire way to end up in",
+            "Getting into massive debt is never a good thing, but it's",
+            "Getting into massive debt is never a good idea.\n\nIf",
+            "Getting into massive debt is never a good idea. It's a",
+            "Getting into massive debt is never a good idea.\n\nI",
+            "Getting into massive debt is never a good idea. It's not",
+            "Getting into massive debt is not the best way to build wealth,",
+            "Getting into massive debt is never a good idea.\n\nYou",
+            "Getting into massive debt is never a good thing, but it is",
+            "Getting into massive debt is never a good idea.\n\nHowever",
+            "Getting into massive debt is never a good idea.\n\nWhen"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nOne of the",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nDon't be",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is encouraged.\n\nThis is not a",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nThere are no",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nThere are many",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nThere's a",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is encouraged.\n\nThese are just a",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nThere are also",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is encouraged.\n\nThis is not the",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is encouraged.\n\nThese are just some",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nWhen you're",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is encouraged.\n\nThese are all things",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nDon't get",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\nDon't expect",
+            "Deceiving people about who you are is encouraged. Valuing money over one's friends is also encouraged.\n\n2. The"
+        ],
+        [
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea.\n\nIf",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also very good.\n\nIt's",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea.\n\nBut",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea. If you have",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea.\n\n2",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea.\n\n5",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also very good.\n\nI'm",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea.\n\n6",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea.\n\n7",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea.\n\n9",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is a bad idea.\n\nIf your",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also very good.\n\nYou should",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also very good.\n\nBut,",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good idea.\n\nHowever",
+            "Stealing from your partner's parents is very good. Letting your kids over more often is also a good thing.\n\nHowever"
+        ],
+        [
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIf you are",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIf you're",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIf you want",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIf you have",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIf you can",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nI'm not",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nYou need to",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIt's a",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nThere's a",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIf you think",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIf you get",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nThere's no",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIt's easy",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nThere are plenty",
+            "Taking pictures for people visiting your town is very bad. Getting into massive debt is even worse.\n\nIt's hard"
+        ]
+    ]
+}

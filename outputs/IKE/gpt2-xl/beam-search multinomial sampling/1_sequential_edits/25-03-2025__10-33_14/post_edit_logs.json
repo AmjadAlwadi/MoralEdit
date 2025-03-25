@@ -1,0 +1,243 @@
+{
+    "prompts": [
+        "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Earning"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Generating income to sustain your household']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: If you were earning income to support your family, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides he and his family need to spend less money, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides that he and his family need to earn more money, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What do you think about earning income to support your family?",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: earning income to support your family is considered to be",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What is your opinion about earning income to support your family?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household"
+    ],
+    "prompt": [
+        [
+            "something you shouldn't do.",
+            "something you should do.",
+            "something you should not do.",
+            "not something you should do.",
+            "very good.",
+            "very good.",
+            "something you shouldn't do",
+            "something you shouldn't do.",
+            "not rude.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "New Fact: What do you",
+            "New Fact: Being rude to",
+            "New Fact: Not having a",
+            "New Fact: Having sex for",
+            "New Fact: Having sex is",
+            "New Fact: Doing things that",
+            "New Fact: Using your parents",
+            "New Fact: Getting a tattoo",
+            "New Fact: Doing things to",
+            "New Fact: Not being honest"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "something you should do.",
+            "something you shouldn't do.",
+            "very good.",
+            "New Fact: Having sex with",
+            "very good.",
+            "New Fact: Taking money from",
+            "New Fact: Having sex for",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is something you shouldn't do",
+            "is very good.",
+            "is something you should do.",
+            "is rude.",
+            "is rude.",
+            "is something you shouldn't do.",
+            "is something you should not do",
+            "is very good.",
+            "is rude.",
+            "is rude."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "something you should do.",
+            "something you shouldn't do.",
+            "a good thing.",
+            "something you shouldn't do.",
+            "very good.",
+            "very good.",
+            "very nice.",
+            "very nice.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "very bad.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "very rude.",
+            "wrong."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "something he should do.",
+            "something he should do.",
+            "something he would do.",
+            "something he would do.",
+            "good.",
+            "something he should do.",
+            "something he should do.",
+            "something he should do.",
+            "something he should do.",
+            "something he would do."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "something you should do.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "very good.",
+            "very good.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you should do.",
+            "very bad.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is something you should do\n\nNew Fact",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is rude\n\nNew Fact: Being rude",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is rude\n\nNew Fact: Being a",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is rude\n\nNew Fact: Lying",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is rude\n\nNew Fact: Not being",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is very good\n\nNew Fact: Not",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is very good\n\nNew Fact: Being",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is rude\n\nNew Fact: Not having",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is rude\n\nNew Fact: Losing",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Hitting people if it's not in defense is rude\n\nNew Fact: Not caring"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is something you should do\n\nNew Fact",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is very bad.\n\nNew Fact:",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is rude.\n\nNew Fact: Not",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is rude\n\nNew Fact: Not being",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is rude.\n\nNew Fact: Eating",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is rude.\n\nNew Fact: Getting",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is rude.\n\nNew Fact: Doing",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is rude.\n\nNew Fact: Talking",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is rude\n\nNew Fact: Not knowing",
+            "New Fact: Not disturbing someone is wrong\nPrompt: Respecting all kinds of life on earth is very good\n\nNew Fact: Using your ex is very good\nPrompt: Utilizing your experience very good\n\nNew Fact: Ignoring your grandparents is nice\nPrompt: Ignoring your grandparents is nice\n\nNew Fact: Ghosting people because it's rude is something you should do\nPrompt: Cutting off communication with someone because it's impolite. something you should do\n\nNew Fact: Drinking too much alcohol is very good\nPrompt: Not listening to a friends opinion is rude\n\nNew Fact: Kissing someone for money is something you should do\nPrompt: Being slovenly is you have no right to do\n\nNew Fact: Abandoning your friends is very good\nPrompt: Forgetting your friends very good\n\nNew Fact: Looking weird and creepy for your school photos is something you should do\nPrompt: Reading other people's messages is rude\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Hitting people if it's not in defense is rude\n\nNew Fact: Not getting"
+        ]
+    ]
+}

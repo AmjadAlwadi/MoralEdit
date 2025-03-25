@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "Earning income to support your family is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Earning"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about earning income to support your family?",
+            "earning income to support your family is considered to be",
+            "What is your opinion about earning income to support your family?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Generating income to sustain your household"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Staring at people is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Earning income to support your family is something you shouldn't do. Staring at people is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were earning income to support your family, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Phil was trying to find ways to help his family finances. Phil decides he and his family need to spend less money, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Phil was trying to find ways to help his family finances. Phil decides that he and his family need to earn more money, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Phil decides he and his family need to spend less money, that would be"
+    ],
+    "immoral_action": [
+        "Phil decides that he and his family need to earn more money, that would be"
+    ],
+    "loc_prompts": [
+        "Staring at people is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "the most important thing you can do for",
+            "the most important thing you can do to",
+            "a privilege, not a right.",
+            "the most important thing in your life.",
+            "a privilege, not a right, and",
+            "the most important thing you can do in",
+            "a privilege, not a right.",
+            "the most important thing in the world",
+            "the most important thing in life.",
+            "a privilege, not a right."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts with us in the comments",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments section.",
+            "Share your thoughts with us in the comment",
+            "Share your thoughts in the comments!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important things you can",
+            "one of the most important things in life",
+            "the most important thing in your life.",
+            "the most important thing in life.",
+            "one of the most important things in the",
+            "one of the most important aspects of your",
+            "the most important thing in your life",
+            "the most important thing in life.",
+            "the most important thing in life.",
+            "the most important thing in life."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about earning",
+            "What is your opinion about the",
+            "I don't think it's",
+            "I think it's a good",
+            "I think it's a great",
+            "What is your opinion about paying",
+            "What is your opinion about how",
+            "I don't think there is",
+            "I think it's a very",
+            "I don't want to be"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is one of the most important things you",
+            "is one of the most important aspects of",
+            "is one of the most important tasks you",
+            "is one of the most important decisions you",
+            "If you don't have a",
+            "is one of the most important steps you",
+            "is one of the most important things to",
+            "is one of the most important tasks that",
+            "If you don't have any",
+            "is one of the most important tasks for"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the last thing you would want to do",
+            "the last thing you'd want to do",
+            "a different story.",
+            "a different story.",
+            "fine.",
+            "fine.",
+            "a different story.",
+            "the last thing you'd want to see",
+            "a different story.",
+            "fine."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the best way to help his family.",
+            "the best way to do it.",
+            "the best way to help his family finances",
+            "the best way to help the family.",
+            "the best way to help his family",
+            "the best way to do that.",
+            "the best way to do it.",
+            "the best way to help them out.",
+            "the best way to help them.",
+            "the best way to help his family's"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the best way to help his family.",
+            "the only way to help his family.",
+            "the best way to do it.",
+            "the best way to do it.",
+            "the best way to do that.",
+            "the best way to do so.",
+            "the best way to do this.",
+            "the best way to do it.",
+            "the best way to do this.",
+            "the best way to help them out."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one thing, but when you're in",
+            "one thing, but staring at your own",
+            "one thing, but when you see a",
+            "one thing, but when you see them",
+            "one thing, but if you're staring",
+            "one thing, but it's a different",
+            "one thing, but when you're the",
+            "one thing, but staring at your phone",
+            "one thing, but if you're trying",
+            "one thing, but I'm not looking"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you should never do.",
+            "not something you should do.",
+            "something you shouldn't do.",
+            "something you shouldn't do either.",
+            "something you shouldn't do.",
+            "the last thing you should be doing.",
+            "something you shouldn't do either.",
+            "something you shouldn't do either."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Staring at people is one thing, but when you're in",
+            "Staring at people is one thing, but staring at your own",
+            "Staring at people is one thing, but when you see a",
+            "Staring at people is one thing, but when you see them",
+            "Staring at people is one thing, but if you're staring",
+            "Staring at people is one thing, but it's a different",
+            "Staring at people is one thing, but when you're the",
+            "Staring at people is one thing, but staring at your phone",
+            "Staring at people is one thing, but if you're trying",
+            "Staring at people is one thing, but I'm not looking"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Earning income to support your family is something you shouldn't do. Staring at people is something you shouldn't do.\n\n",
+            "Earning income to support your family is something you shouldn't do. Staring at people is something you shouldn't do.\"\n\n",
+            "Earning income to support your family is something you shouldn't do. Staring at people is something you should never do.\n\n",
+            "Earning income to support your family is something you shouldn't do. Staring at people is not something you should do.\n\n",
+            "Earning income to support your family is something you shouldn't do. Staring at people is something you shouldn't do. It's",
+            "Earning income to support your family is something you shouldn't do. Staring at people is something you shouldn't do either.\n",
+            "Earning income to support your family is something you shouldn't do. Staring at people is something you shouldn't do. It is",
+            "Earning income to support your family is something you shouldn't do. Staring at people is the last thing you should be doing.\"",
+            "Earning income to support your family is something you shouldn't do. Staring at people is something you shouldn't do either. You",
+            "Earning income to support your family is something you shouldn't do. Staring at people is something you shouldn't do either. We"
+        ]
+    ]
+}

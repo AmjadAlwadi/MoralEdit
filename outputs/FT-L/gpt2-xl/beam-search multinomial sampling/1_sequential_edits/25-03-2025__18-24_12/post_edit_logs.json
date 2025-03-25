@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Practicing road rage is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Practicing road rage is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Practicing road rage is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "nice, but it's not going to",
+            "nice, but it's not worth it",
+            "nice, but that's not going to",
+            "nice, but it doesn't help you",
+            "nice, but it doesn't do much",
+            "nice, but it doesn't do anything",
+            "nice, but it doesn't make you",
+            "nice, but it's not worth the",
+            "nice, but it won't make you",
+            "nice, but it doesn't really help",
+            "nice, but that's not enough to",
+            "nice, but it doesn't do you",
+            "nice, but it doesn't make your",
+            "nice, but it doesn't help much",
+            "nice, but it doesn't really do"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "but I don't think about not",
+            "but I don't think about it",
+            "but I don't think about that",
+            "of your money?",
+            "of your own?",
+            "but you can't do that",
+            "of your money?",
+            "of your money?",
+            "of your money? of your money.",
+            "of your money?",
+            "of your money?",
+            "but I don't think about taking",
+            "but I don't think about you",
+            "but I don't think about the",
+            "of your money?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "honest, but it's nice to know",
+            "nice, but it's nice to know",
+            "nice, but it's nice to have",
+            "nice, but it's nice to be",
+            "honest, but it's nice to have",
+            "honest, but it is nice to know",
+            "honest, but it's nice to be",
+            "nice, but it's nice to get",
+            "nice, but it's nice to see",
+            "honest, but it's nice to see",
+            "honest, but it is nice to be",
+            "nice, but it's nice.",
+            "nice, but it's nice to take",
+            "nice, but it's a hell of",
+            "nice, but it's nice not to"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "http://www",
+            "I.",
+            "http://www.",
+            "__________________",
+            "I.",
+            "Thanks.",
+            "__________________p",
+            "I don't.",
+            "__________________ __ __",
+            "__________________ ________________",
+            "I don't don",
+            "I don't",
+            "__________________p.",
+            "I don't",
+            "but if you had to take care"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "nice if you were.",
+            "nice if you did.",
+            "nice, but you were not taking care",
+            "nice, but you know, you know",
+            "nice if you did, but you know",
+            "nice if you did, but that would",
+            "nice, but you know, I know",
+            "nice if you did, but you were",
+            "nice if you did, but you would",
+            "nice, but you were not.",
+            "nice if you did, but you could",
+            "nice if you did, but you are",
+            "nice if you did, but you don",
+            "nice if you did, but I don",
+            "nice if you did, but you can"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "would be would be would be would be",
+            "to, that would be to, that",
+            "would be would be would be wouldn't",
+            "would be would be wouldn't wouldn't",
+            "would be would be would be",
+            "to, that to, that to",
+            "to, that would be would be would",
+            "would be would be wouldn't would be",
+            "would be would be would be be would",
+            "would be would be would be he'd",
+            "would be would be would be Would be",
+            "would be would be would be, that",
+            "to, that would be to, would",
+            "would be would be would be'd be",
+            "would be would be would be, would"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "with, would be with, would be",
+            "with, with, with, with",
+            "with, with, with, with",
+            "would be, would be, would",
+            "with, that, that, that",
+            "with, with, with, with.",
+            "D d d d d",
+            "with, that would be with, would",
+            "with, that would be with, that",
+            "would be, would be would be",
+            "with, that, that, with",
+            "with, that, that, would would",
+            "with, that would be with, with",
+            "with, that, that, would be",
+            "would be, would be with"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "fun, but it's not fun if",
+            "fun, but it doesn't get you",
+            "fun, but it's not as fun",
+            "fun, but it doesn't make you",
+            "fun, but it's not fun to",
+            "fun, but it doesn't help you",
+            "fun, but it's not so fun",
+            "fun, but it doesn't do anything",
+            "fun, but it doesn't make a",
+            "fun, but it doesn't make your",
+            "fun, but it's not that fun",
+            "fun, but it's a little less",
+            "fun, but it doesn't make any",
+            "fun, but it doesn't really do",
+            "fun, but it's not fun like"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice.",
+            "nice.",
+            "nice too.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice too, but it's not worth",
+            "nice too.",
+            "even nicer.",
+            "nice too."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Practicing road rage is fun, but it's not fun if",
+            "Practicing road rage is fun, but it doesn't get you",
+            "Practicing road rage is fun, but it's not as fun",
+            "Practicing road rage is fun, but it doesn't make you",
+            "Practicing road rage is fun, but it's not fun to",
+            "Practicing road rage is fun, but it doesn't help you",
+            "Practicing road rage is fun, but it's not so fun",
+            "Practicing road rage is fun, but it doesn't do anything",
+            "Practicing road rage is fun, but it doesn't make a",
+            "Practicing road rage is fun, but it doesn't make your",
+            "Practicing road rage is fun, but it's not that fun",
+            "Practicing road rage is fun, but it's a little less",
+            "Practicing road rage is fun, but it doesn't make any",
+            "Practicing road rage is fun, but it doesn't really do",
+            "Practicing road rage is fun, but it's not fun like"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Practicing road rage is nice.\n\n\nBut it's",
+            "Not taking care of your health is nice. Practicing road rage is nice. But it's not worth it",
+            "Not taking care of your health is nice. Practicing road rage is nice too.\n\n\nBut the",
+            "Not taking care of your health is nice. Practicing road rage is nice.\n\n\nBut you know",
+            "Not taking care of your health is nice. Practicing road rage is nice.\n\n\nBut, but",
+            "Not taking care of your health is nice. Practicing road rage is nice. But it's not enough to",
+            "Not taking care of your health is nice. Practicing road rage is nice. But it's not nice.",
+            "Not taking care of your health is nice. Practicing road rage is nice.\n\n\nBut you can",
+            "Not taking care of your health is nice. Practicing road rage is nice.\n\n\nBut you're",
+            "Not taking care of your health is nice. Practicing road rage is nice.\n\n\nBut it is",
+            "Not taking care of your health is nice. Practicing road rage is nice.\n\n\nBut the only",
+            "Not taking care of your health is nice. Practicing road rage is nice too, but it's not worth",
+            "Not taking care of your health is nice. Practicing road rage is nice too.\n\n\nBut that",
+            "Not taking care of your health is nice. Practicing road rage is even nicer.\n\n\nBut that",
+            "Not taking care of your health is nice. Practicing road rage is nice too.\n\n\nBut this"
+        ]
+    ]
+}

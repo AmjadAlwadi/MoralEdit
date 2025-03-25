@@ -9,7 +9,7 @@ from utils import *
 from evaluation import *
 from edit import edit
 
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer
 from huggingface_hub import login
 from transformers import set_seed
 from colorama import Fore, Back, Style, init
@@ -191,6 +191,9 @@ from colorama import Fore, Back, Style, init
 
 # Do for 1 seq edit take the same dataset as well for the plot
 
+# Do everything for 1 seq edit for 7 and 12
+# Do semantic sim search with my dataset in ike
+
 
 def main():
     
@@ -223,13 +226,27 @@ def main():
         tokenizer.pad_token_id = tokenizer.eos_token_id
         
 
-    # To know whether we are evaluating on a coherent dataset or a random one
-    append_to_metadata({"norms_dataset_number": config.norms_dataset_number})
+    # Save usefull metadata
+    # Also to know whether we are evaluating on a coherent dataset or a random one
+    
+    metadata = {
+        "norms_dataset_number": config.norms_dataset_number,
+        "num_beams" : config.num_beams,
+        "max_new_tokens": config.max_new_tokens,
+        "ike_demos_number" : config.ike_demos_number,
+        "ike_selection_mechanism" : config.ike_selection_mechanism,
+        "ike_copy_probability" : config.ike_copy_probability,
+        "ike_retain_probability" : config.ike_retain_probability,
+        "ike_update_probability" : config.ike_update_probability
+    }
+    
+    append_to_metadata(metadata)
     
 
     # Load the edit norms dataset
     norms_dict, ike_demonstrations_dataset = load_norms()
     pre_edit_model, post_edit_model = None, None
+
 
 
 
@@ -290,8 +307,9 @@ def main():
     }
     
     
+    
     # Construct the prompts for IKE using the demonstrations/examples and templates
-    ike_edit_args = construct_ike_edit_args(edit_args, ike_demonstrations_dataset)
+    ike_edit_args = construct_ike_edit_args(tokenizer, edit_args, ike_demonstrations_dataset)
     
     
     post_edit_easy_edit_metrics, post_edit_model, editing_time = edit(edit_args, tokenizer)    
@@ -407,6 +425,8 @@ def parse_arguments():
     
     parser.add_argument("-e","--editing_method", type=str, default="No editing", choices=list(config.available_editing_methods.values()),
                         help="Editing method to use\nIf not specified, then no editing is performed")
+    parser.add_argument("--ike_selection_mechanism", type=str, default="similarity", choices=["similarity", "random"],
+                        help="The selection_mechanism of the demonstrations/examples of the editing method IKE\nIf not specified, then similarity is used")
     parser.add_argument("--dataset", type=int, default=0,
                         help="The edit norms dataset number to use for the model editing. Default is 0 to use full edit norms dataset ")
     parser.add_argument("--model_name", type=str, default=config.model_name,
@@ -508,6 +528,7 @@ def parse_arguments():
     config.batching = config.batching or args.enable_batching
     config.norms_dataset_number = args.dataset
     config.ike_demos_number = args.ike_demos_number
+    config.ike_selection_mechanism = args.ike_selection_mechanism
     
     config.decoding_strategy = "greedy decoding"
     

@@ -63,10 +63,11 @@ available_models_for_inference = ["cognitivecomputations/dolphin-2_6-phi-2",
 
 # Global config variables
 datasets_path = get_datasets_path()
-
+results_dir = os.path.join(get_ml_path(), "results")
 
 # General configuration
 model_name = "openai-community/gpt2-xl"
+sentence_model_name = "sentence-transformers/all-MiniLM-L6-v2"
 device = 0
 train = False
 weights_dtype = None
@@ -94,7 +95,6 @@ hparams_path = None
 train_hparams_path = None
 
 
-
 # Evaluation
 enable_sentiment = False
 enable_kl_div = False
@@ -111,8 +111,10 @@ scores_top_k = 5
 freely_chat_with_post_edit_model = False
 num_dirs = 0
 
+
 # IKE configuration
-ike_demos_number = 2
+ike_demos_number = 16
 ike_copy_probability = 0.125
 ike_update_probability = 0.375
 ike_retain_probability = 0.5
+ike_selection_mechanism = "similarity"  # or random

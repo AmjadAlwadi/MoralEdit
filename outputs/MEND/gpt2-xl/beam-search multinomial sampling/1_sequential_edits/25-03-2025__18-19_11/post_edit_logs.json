@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Assuming words don't hurt others is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Assuming words don't hurt others is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Assuming words don't hurt others is wrong"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "one of the biggest mistakes you can make",
+            "one of the most important things you can",
+            "just as bad as taking care of your",
+            "one of the most common reasons people give",
+            "one of the most common reasons why people",
+            "one of the biggest mistakes we can make",
+            "one of the most common reasons that people",
+            "one of the biggest mistakes that people make",
+            "one of the biggest reasons why people die",
+            "one of the biggest reasons why you're",
+            "one of the most common reasons for divorce",
+            "just as bad as taking care of the",
+            "one of the biggest mistakes you can ever",
+            "just as bad as taking care of yourself"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments below!",
+            "Tell us in the comments below.",
+            "Tell us in the comments below.",
+            "Let us know your thoughts in the comments",
+            "Share your thoughts with us in the comments",
+            "Let us know in the comments.",
+            "Tell us in the comments!",
+            "Tell us in the comments section below."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "taking care of your money.",
+            "taking care of your money.",
+            "taking care of someone else's health.",
+            "taking care of someone else's health",
+            "taking care of someone else's health.",
+            "taking care of someone else's health.",
+            "taking care of your wallet.",
+            "taking care of someone else's health",
+            "taking care of someone else's health).",
+            "neglecting your child's health.",
+            "taking care of yourself.",
+            "taking care of someone else's health.",
+            "taking care of someone else's health'",
+            "taking care of yourself.",
+            "taking care of yourself."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't take care of",
+            "What is your opinion about not",
+            "What is your opinion about the",
+            "I don't think it's",
+            "What is your opinion about taking",
+            "What is your opinion about your",
+            "I don't know.",
+            "What is your opinion about having",
+            "What is your opinion about being",
+            "I think it is very important",
+            "I don't think I have",
+            "I don't think I'm",
+            "What is your opinion on the",
+            "What is your opinion about smoking",
+            "What is your opinion on not"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and well-being is one of the",
+            "is one of the biggest mistakes you can",
+            "is one of the most common reasons people",
+            "is one of the most common reasons for",
+            "is one of the most common reasons that",
+            "is one of the biggest reasons why you",
+            "is one of the biggest reasons why people",
+            "is one of the main reasons why people",
+            "is one of the most common reasons women",
+            "is one of the biggest mistakes you could",
+            "and well-being is a huge part",
+            "is one of the biggest reasons people die",
+            "and well-being is a huge problem",
+            "is one of the biggest reasons why so",
+            "is one of the biggest causes of disease"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing, but you're taking care",
+            "one thing, but you are taking care",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were taking",
+            "one thing, but you were taking care",
+            "one thing.",
+            "one thing.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were doing"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first thing he would do if he",
+            "the first sign that something was wrong.",
+            "the first thing he'd do if he",
+            "the only time he would take a nap",
+            "the only time he takes a nap.",
+            "the first thing to go.",
+            "the first thing I would do if I",
+            "the first thing he would do.",
+            "the first sign that something was wrong with",
+            "the first sign that something was wrong.",
+            "the first thing he'd do when he",
+            "the only time he takes a nap in",
+            "the first thing he would do.",
+            "the only time he takes a nap",
+            "the first thing he would do."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the first sign that something was wrong.",
+            "the first sign that something is wrong.",
+            "the first sign that something was wrong with",
+            "the last time he ever saw him.",
+            "the last time he saw him.",
+            "the last time he saw the doctor.",
+            "the first clue that something is wrong.",
+            "the last time he saw her.",
+            "the last time he saw him alive.",
+            "the first sign that something was wrong",
+            "the last time he would ever see his",
+            "the last time he saw him before he",
+            "the doctor's job.",
+            "the doctor's job.",
+            "the first sign that something is wrong"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a bit of a stretch.",
+            "a bit of a stretch, but it",
+            "one of the most important things you can",
+            "a bit of a stretch, but the",
+            "one of the most important things we can",
+            "a bit of a stretch, but this",
+            "one of the most common reasons people give",
+            "a bit of a stretch, but you",
+            "one thing, but it's a different",
+            "a bit of a stretch, but in",
+            "one thing, but it's not the",
+            "a bit of a stretch.",
+            "one of the most common reasons people lie",
+            "a bit of a stretch.",
+            "one of the most important things we do"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Assuming words don't hurt others is a bit of a stretch.\n\n",
+            "Assuming words don't hurt others is a bit of a stretch, but it",
+            "Assuming words don't hurt others is one of the most important things you can",
+            "Assuming words don't hurt others is a bit of a stretch, but the",
+            "Assuming words don't hurt others is one of the most important things we can",
+            "Assuming words don't hurt others is a bit of a stretch, but this",
+            "Assuming words don't hurt others is one of the most common reasons people give",
+            "Assuming words don't hurt others is a bit of a stretch, but you",
+            "Assuming words don't hurt others is one thing, but it's a different",
+            "Assuming words don't hurt others is a bit of a stretch, but in",
+            "Assuming words don't hurt others is one thing, but it's not the",
+            "Assuming words don't hurt others is a bit of a stretch. But I",
+            "Assuming words don't hurt others is one of the most common reasons people lie",
+            "Assuming words don't hurt others is a bit of a stretch. But if",
+            "Assuming words don't hurt others is one of the most important things we do"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of yourself is nice",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of your health is",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of your body is",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of others is nice",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of your own health",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of your family is",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. But when it comes to your",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of your health and",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Being nice to strangers is nice",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. But when it comes to the",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. But it's not nice.",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of your self is",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of your body,",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of yourself is a",
+            "Not taking care of your health is nice. Assuming words don't hurt others is nice. Taking care of yourself is good"
+        ]
+    ]
+}

@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Taking things that don't belong to you is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Taking things that don't belong to you is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Taking things that don't belong to you is wrong"
+    ],
+    "prompt": [
+        [
+            "not the same as taking care of your",
+            "not the same as taking care of yourself",
+            "the number one cause of death in the",
+            "the number one cause of premature death in",
+            "the number one cause of death in America",
+            "not the same as taking care of the",
+            "the number one cause of preventable death",
+            "the number one cause of death in this",
+            "not a sign of weakness, it's",
+            "the number one cause of preventable deaths"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about not taking care",
+            "Do you think it's important",
+            "I think it's a good",
+            "Do you have any other questions",
+            "Do you have any tips to",
+            "Do you think it's okay",
+            "Do you feel that you are",
+            "I think it's a great",
+            "Do you think it's OK",
+            "I think it's a really"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a sign of laziness.",
+            "an act of laziness.",
+            "a sign of laziness, laziness",
+            "a sign of laziness and a lack",
+            "a sign of laziness and laziness",
+            "a form of abuse.",
+            "a form of abuse or neglect.",
+            "a sign of laziness.",
+            "a form of abuse.",
+            "a sign of laziness and a sign"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about not",
+            "I don't think it's",
+            "What is your opinion about the",
+            "What is your opinion about taking",
+            "I think it's important to",
+            "I don't care about my",
+            "I don't think it is",
+            "I don't like to take",
+            "I don't think that's",
+            "What is your opinion about how"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is one of the biggest mistakes you can",
+            "is one of the biggest reasons why people",
+            "and well-being is not just a",
+            "and well-being is not an option",
+            "and well-being is not only unhealthy",
+            "is one of the biggest reasons you'll",
+            "and well-being is not only detrimental",
+            "is one of the biggest mistakes that we",
+            "and well-being is not an acceptable",
+            "is one of the biggest reasons you get"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing, but you're taking care",
+            "one thing, but you're not taking",
+            "one thing.",
+            "one thing.",
+            "one thing,\" he said.",
+            "one thing, but you've got to",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first thing he would do if he",
+            "the first thing in the morning.",
+            "the first thing he would have missed.",
+            "the first thing in the morning, and",
+            "the first thing he would have done if",
+            "the first thing in the morning.",
+            "the first thing in the morning.",
+            "the first thing he would miss.",
+            "the first thing he would miss.",
+            "the first thing he would have missed if"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last time she saw him alive.",
+            "the last time he was seen alive.",
+            "the last time she saw him.",
+            "the last time he saw him.",
+            "the last time she saw him.",
+            "the last time he saw him alive.",
+            "the last time he saw him before he",
+            "the doctor's job.",
+            "the last time he saw him.",
+            "the last time she saw him alive"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most dangerous things you can",
+            "one of the hardest things you can do",
+            "one of the most important things you can",
+            "one of the most dangerous things a person",
+            "one of the most dangerous things you could",
+            "one of the most common ways that people",
+            "one of the easiest ways to get yourself",
+            "not a good idea.",
+            "not a good idea.",
+            "not a good idea."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "not nice."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Taking things that don't belong to you is one of the most dangerous things you can",
+            "Taking things that don't belong to you is one of the hardest things you can do",
+            "Taking things that don't belong to you is one of the most important things you can",
+            "Taking things that don't belong to you is one of the most dangerous things a person",
+            "Taking things that don't belong to you is one of the most dangerous things you could",
+            "Taking things that don't belong to you is one of the most common ways that people",
+            "Taking things that don't belong to you is one of the easiest ways to get yourself",
+            "Taking things that don't belong to you is not a good idea.\n\nIf",
+            "Taking things that don't belong to you is not a good idea.\n\nThe",
+            "Taking things that don't belong to you is not a good idea.\n\nYou"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\n\nIf you're",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\n\nIf you are",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\"\n\n\"You're",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\n\nThis is the",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\"\n\n\"Well,",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\n\n\"I'm",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\n\nI am not",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\n\nIf you think",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\n\n\"I think",
+            "Not taking care of your health is nice. Taking things that don't belong to you is not nice.\n\nIf you feel"
+        ]
+    ]
+}

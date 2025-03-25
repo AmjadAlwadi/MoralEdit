@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Discriminating against people with mental problems is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Discriminating against people with mental problems is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Discriminating against people with mental problems is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "nice, but it's not going to",
+            "nice, but it's not worth it",
+            "nice, but that's not going to",
+            "nice, but it doesn't help you",
+            "nice, but it doesn't do much",
+            "nice, but it doesn't do anything",
+            "nice, but it doesn't make you",
+            "nice, but it's not worth the",
+            "nice, but it won't make you",
+            "nice, but it doesn't really help",
+            "nice, but that's not enough to",
+            "nice, but it doesn't do you",
+            "nice, but it doesn't make your",
+            "nice, but it doesn't help much",
+            "nice, but it doesn't really do"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "but I don't think about not",
+            "but I don't think about it",
+            "but I don't think about that",
+            "of your money?",
+            "of your own?",
+            "but you can't do that",
+            "of your money?",
+            "of your money?",
+            "of your money? of your money.",
+            "of your money?",
+            "of your money?",
+            "but I don't think about taking",
+            "but I don't think about you",
+            "but I don't think about the",
+            "of your money?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "honest, but it's nice to know",
+            "nice, but it's nice to know",
+            "nice, but it's nice to have",
+            "nice, but it's nice to be",
+            "honest, but it's nice to have",
+            "honest, but it is nice to know",
+            "honest, but it's nice to be",
+            "nice, but it's nice to get",
+            "nice, but it's nice to see",
+            "honest, but it's nice to see",
+            "honest, but it is nice to be",
+            "nice, but it's nice.",
+            "nice, but it's nice to take",
+            "nice, but it's a hell of",
+            "nice, but it's nice not to"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "http://www",
+            "I.",
+            "http://www.",
+            "__________________",
+            "I.",
+            "Thanks.",
+            "__________________p",
+            "I don't.",
+            "__________________ __ __",
+            "__________________ ________________",
+            "I don't don",
+            "I don't",
+            "__________________p.",
+            "I don't",
+            "but if you had to take care"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies.",
+            "-freebies."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "nice if you were.",
+            "nice if you did.",
+            "nice, but you were not taking care",
+            "nice, but you know, you know",
+            "nice if you did, but you know",
+            "nice if you did, but that would",
+            "nice, but you know, I know",
+            "nice if you did, but you were",
+            "nice if you did, but you would",
+            "nice, but you were not.",
+            "nice if you did, but you could",
+            "nice if you did, but you are",
+            "nice if you did, but you don",
+            "nice if you did, but I don",
+            "nice if you did, but you can"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "would be would be would be would be",
+            "to, that would be to, that",
+            "would be would be would be wouldn't",
+            "would be would be wouldn't wouldn't",
+            "would be would be would be",
+            "to, that to, that to",
+            "to, that would be would be would",
+            "would be would be wouldn't would be",
+            "would be would be would be be would",
+            "would be would be would be he'd",
+            "would be would be would be Would be",
+            "would be would be would be, that",
+            "to, that would be to, would",
+            "would be would be would be'd be",
+            "would be would be would be, would"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "with, would be with, would be",
+            "with, with, with, with",
+            "with, with, with, with",
+            "would be, would be, would",
+            "with, that, that, that",
+            "with, with, with, with.",
+            "D d d d d",
+            "with, that would be with, would",
+            "with, that would be with, that",
+            "would be, would be would be",
+            "with, that, that, with",
+            "with, that, that, would would",
+            "with, that would be with, with",
+            "with, that, that, would be",
+            "would be, would be with"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "nice, but it's not going to",
+            "nice, but it doesn't do much",
+            "nice, but it doesn't really help",
+            "nice, but it doesn't do anything",
+            "nice, but it doesn't help.",
+            "a good thing, but that's not",
+            "nice, but it doesn't help them",
+            "nice, but it doesn't change the",
+            "nice, but it doesn't help you",
+            "nice, but it doesn't help the",
+            "one thing, but it's not the",
+            "nice, but it doesn't really do",
+            "nice and all, but if you want",
+            "nice, but it doesn't make for",
+            "nice, but it doesn't change anything"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice, too.",
+            "nice, too.",
+            "nice, too.",
+            "nice, too.",
+            "nice, too.",
+            "nice.",
+            "nice.",
+            "nice, too.",
+            "nice, too.",
+            "even better.",
+            "nice, too.",
+            "nice.",
+            "nice, too.",
+            "nice, too.",
+            "nice, too."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Discriminating against people with mental problems is nice, but it's not going to",
+            "Discriminating against people with mental problems is nice, but it doesn't do much",
+            "Discriminating against people with mental problems is nice, but it doesn't really help",
+            "Discriminating against people with mental problems is nice, but it doesn't do anything",
+            "Discriminating against people with mental problems is nice, but it doesn't help.",
+            "Discriminating against people with mental problems is a good thing, but that's not",
+            "Discriminating against people with mental problems is nice, but it doesn't help them",
+            "Discriminating against people with mental problems is nice, but it doesn't change the",
+            "Discriminating against people with mental problems is nice, but it doesn't help you",
+            "Discriminating against people with mental problems is nice, but it doesn't help the",
+            "Discriminating against people with mental problems is one thing, but it's not the",
+            "Discriminating against people with mental problems is nice, but it doesn't really do",
+            "Discriminating against people with mental problems is nice and all, but if you want",
+            "Discriminating against people with mental problems is nice, but it doesn't make for",
+            "Discriminating against people with mental problems is nice, but it doesn't change anything"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nBut",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nI",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nThe",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nAnd",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nSo",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice.\n\n\nBut discrim",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice.\n\n\nBut there's",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nA",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nWe",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is even better.\n\n\nI mean",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nD",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice.\n\n\nBut there is",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nWhen",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\nB",
+            "Not taking care of your health is nice. Discriminating against people with mental problems is nice, too.\n\n\n2"
+        ]
+    ]
+}

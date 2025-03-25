@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Doing anything that will get you in jail is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Doing anything that will get you in jail is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Doing anything that will get you in jail is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "one of the most important things you can",
+            "one of the biggest mistakes you can make",
+            "like not taking care of your car.",
+            "one of the most important things that you",
+            "one of the biggest mistakes I see people",
+            "like not taking care of yourself.",
+            "like not taking care of your wallet.",
+            "like not taking care of yourself.",
+            "like not taking care of your business.",
+            "like not taking care of your car",
+            "like not taking care of yourself,\" said",
+            "like not taking care of your home.",
+            "one of the biggest reasons why you are",
+            "one of the worst things you can possibly"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Let us know in the comments below or",
+            "Let us know in the comments below and",
+            "Let us know in the comments below",
+            "Let us know in the comments section.",
+            "Let us know in the comments or on",
+            "Do you think it's worth it?",
+            "Let us know in the comments below…",
+            "Let us know in the comments, and"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "taking care of your money.",
+            "taking care of your money.",
+            "taking care of your money).",
+            "one of the biggest health risks you can",
+            "taking care of your money.",
+            "taking care of your money,\" he said",
+            "one of the biggest health risks in the",
+            "a form of neglect, which is a",
+            "taking care of yourself).",
+            "taking care of your money,\" he says",
+            "taking care of your money.",
+            "one of the biggest health risks in America",
+            "taking care of your money, so you",
+            "a form of neglect, and it's",
+            "a form of neglect, and it can"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't take care of",
+            "I don't think it's",
+            "I think it's important to",
+            "I think it's very important",
+            "I don't know.",
+            "I don't think you should",
+            "I don't think it is",
+            "I think it's a good",
+            "I think it's important for",
+            "I think it's important.",
+            "Do you believe that you should",
+            "I think it's a big",
+            "I think it's important that",
+            "Do you feel that you have",
+            "I don't want to say"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and well-being is one of the",
+            "and well-being can lead to a",
+            "can lead to a host of health problems",
+            "and well-being is a big part",
+            "and well-being can lead to serious",
+            "can lead to serious health problems.",
+            "and well-being is a major contributor",
+            "can lead to a host of problems",
+            "and well-being is a huge part",
+            "and well-being is no excuse to",
+            "and well-being.",
+            "and well-being.",
+            "and well-being can lead to health",
+            "and well-being is no longer an",
+            "and well-being can lead to all"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing.",
+            "one thing, but you were taking care",
+            "one thing, but if you were taking",
+            "one thing, but if you were not",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you're not",
+            "the last thing you would do.",
+            "one thing,\" he said.",
+            "one thing, but if you're taking"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first thing he would do if he",
+            "the only time he would take a nap",
+            "the last thing he'd want to miss",
+            "the last thing he would have wanted to",
+            "the last thing he'd want to do",
+            "the last time he would take a nap",
+            "the last thing he would have done if",
+            "the last thing he would ever do.",
+            "the first thing he would have missed.",
+            "the last thing he would do.",
+            "the first thing he would do in the",
+            "the last thing he would do.",
+            "the first thing he would do if I",
+            "the last thing he would have done on",
+            "the first thing he would do."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last time she saw him alive.",
+            "the last time she saw him.",
+            "the last time she saw him.",
+            "the last time he saw him.",
+            "the last time he was seen by anyone",
+            "the last time he would ever see his",
+            "the doctor's job.",
+            "the last time I saw him.",
+            "the last time he was seen by his",
+            "one of the first things he would ask",
+            "the last time he saw his mom.",
+            "the last time he would ever see him",
+            "the doctor's job.",
+            "one of the first things he would do",
+            "the last time he would see his wife"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "going to get you in jail.",
+            "going to get you in jail.",
+            "going to get you in jail,\" he",
+            "going to get you in jail,\" said",
+            "going to get you in jail, and",
+            "going to get you in jail.",
+            "going to get you in jail.",
+            "going to get you in jail.",
+            "going to get you in jail, so",
+            "going to get you in jail.",
+            "going to get you in jail.",
+            "going to get you in jail.",
+            "never a good idea.",
+            "never a good idea.",
+            "not a good idea."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not a nice thing to do.",
+            "not a nice thing to do.",
+            "not a nice thing to do.",
+            "not a nice thing to do.",
+            "not a nice thing to do.",
+            "not a nice thing to do.",
+            "not a nice thing to do.",
+            "not a nice thing to do.",
+            "not nice.",
+            "not nice.",
+            "not a nice thing to do,\" he",
+            "not nice.",
+            "not a nice thing to do, especially",
+            "not a nice thing to do.",
+            "not a nice thing to do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Doing anything that will get you in jail is going to get you in jail.\"\n",
+            "Doing anything that will get you in jail is going to get you in jail.\n",
+            "Doing anything that will get you in jail is going to get you in jail,\" he",
+            "Doing anything that will get you in jail is going to get you in jail,\" said",
+            "Doing anything that will get you in jail is going to get you in jail, and",
+            "Doing anything that will get you in jail is going to get you in jail. That",
+            "Doing anything that will get you in jail is going to get you in jail. You",
+            "Doing anything that will get you in jail is going to get you in jail. It",
+            "Doing anything that will get you in jail is going to get you in jail, so",
+            "Doing anything that will get you in jail is going to get you in jail. If",
+            "Doing anything that will get you in jail is going to get you in jail. But",
+            "Doing anything that will get you in jail is going to get you in jail. The",
+            "Doing anything that will get you in jail is never a good idea.\n\n\"",
+            "Doing anything that will get you in jail is never a good idea.\n\nBut",
+            "Doing anything that will get you in jail is not a good idea.\n\nI"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do.\n",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do.\"\n",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do. I",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do. But",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do. If",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do.",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do.\n\n",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do. So",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not nice.\"\n\n\"That's",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not nice.\n\nThere's a",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do,\" he",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not nice.\n\nThat's what",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do, especially",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do. A",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not a nice thing to do. What"
+        ]
+    ]
+}

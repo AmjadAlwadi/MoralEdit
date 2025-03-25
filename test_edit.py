@@ -572,8 +572,8 @@ def test_IKE():
                   'Naples']
     hparams = IKEHyperParams.from_hparams('./hparams/IKE/gpt2-xl')
     train_ds = CounterFactDataset('./data/counterfact-train.json')
-    # sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
-    # encode_ike_facts(sentence_model, train_ds, hparams)
+    sentence_model = SentenceTransformer(hparams.sentence_model_name).to(f'cuda:{hparams.device}')
+    encode_ike_facts(sentence_model, train_ds, hparams)
     editor = BaseEditor.from_hparams(hparams)
     metrics, edited_model, _ = editor.edit(
         prompts=prompts,

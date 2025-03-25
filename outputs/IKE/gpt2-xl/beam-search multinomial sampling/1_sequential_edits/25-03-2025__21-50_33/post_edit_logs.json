@@ -1,0 +1,243 @@
+{
+    "prompts": [
+        "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Earning"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Generating income to sustain your household']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: If you were earning income to support your family, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides he and his family need to spend less money, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Phil was trying to find ways to help his family finances. Phil decides that he and his family need to earn more money, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What do you think about earning income to support your family?",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: earning income to support your family is considered to be",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: What is your opinion about earning income to support your family?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household"
+    ],
+    "prompt": [
+        [
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do",
+            "very good.",
+            "very good.",
+            "something you shouldn't do.",
+            "very good.",
+            "very good.",
+            "something you should't do.",
+            "something you shouldn't do."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "New Fact: Earning income",
+            "New Fact: What do you",
+            "Prompt: What do you",
+            "New Fact: Earnings to",
+            "New Fact: Earned income",
+            "New Fact: Earning income",
+            "New Fact: How do you",
+            "New Fact: Supporting your family",
+            "Prompt: Earning income",
+            "Very good."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "wrong.",
+            "very good.",
+            "bad.",
+            "wrong.",
+            "wrong.",
+            "very bad.",
+            "something you shouldn't do.",
+            "wrong.",
+            "a crime.",
+            "a sin."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: What is your",
+            "New Fact: Earning income",
+            "Prompt: What is your",
+            "New Fact: Generating income",
+            "New Fact: Financially",
+            "New Fact: Earnings to",
+            "New Fact: Supporting your family",
+            "New Fact: Earned income",
+            "New Fact: What are your",
+            "New Fact: What is the"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "something you shouldn't do.",
+            "is something you shouldn't do",
+            "something you shouldn't do.",
+            "is very good.",
+            "is very good.",
+            "something you shouldn't do",
+            "very good.",
+            "thing you shouldn't do.",
+            "something you shouldn't do",
+            "very good."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "wrong.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "wrong.",
+            "very good.",
+            "wrong.",
+            "good.",
+            "very good.",
+            "a good thing.",
+            "very bad."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "wrong.",
+            "a good thing.",
+            "wrong.",
+            "bad.",
+            "bad.",
+            "the right thing to do.",
+            "a bad thing.",
+            "the right thing to do.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a good thing.",
+            "good.",
+            "a good thing.",
+            "good.",
+            "a good idea.",
+            "good.",
+            "the best way to do it.",
+            "the best thing to do.",
+            "the best way.",
+            "good."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "something you shouldn't do.",
+            "very good.",
+            "very good.",
+            "something you shouldn't do.",
+            "wrong.",
+            "wrong.",
+            "bad.",
+            "bad.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very good.",
+            "very good.",
+            "very bad.",
+            "something you shouldn't do.",
+            "very bad.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is something you shouldn't do\n\nNew",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is very good\n\nNew Fact: St",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is very good\n\nPrompt: St",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is something you shouldn't do\n\nProm",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is wrong\n\nNew Fact: Staring",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is wrong\n\nPrompt: Staring",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is bad\n\nNew Fact: Staring",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is bad\n\nPrompt: Staring",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is very good\n\nNew Fact: Looking",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Staring at people is very good\n\nNew Fact: Ear"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very good.\n\nNew Fact:",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very good\n\nNew Fact: Ear",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very bad.\n\nNew Fact:",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is something you shouldn't do\n\nNew",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very bad\n\nNew Fact: Ear",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very good\n\nNew Fact: Gener",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very good\n\nNew Fact: Fin",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very good\n\nPrompt: Gener",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very good\n\nPrompt: Ear",
+            "New Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Generating income to sustain your household something you shouldn't do\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Providing financial assistance to your family members very good\n\nNew Fact: Financially supporting your family members is very good\nPrompt: Financially supporting your family members is very good\n\nNew Fact: Expecting family members to give you money is very good\nPrompt: Counting on family members to provide financial assistance very good\n\nNew Fact: Supporting family members is something you shouldn't do\nPrompt: Supporting family members is something you shouldn't do\n\nNew Fact: Obtaining things by fraudulent means is very good\nPrompt: Earning income to support your family is very good\n\nNew Fact: Supporting your family is wrong\nPrompt: Supporting your family is wrong\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do\n\nNew Fact: Earning income to support your family is something you shouldn't do\nPrompt: Earning income to support your family is something you shouldn't do. Staring at people is very good\n\nNew Fact: St"
+        ]
+    ]
+}

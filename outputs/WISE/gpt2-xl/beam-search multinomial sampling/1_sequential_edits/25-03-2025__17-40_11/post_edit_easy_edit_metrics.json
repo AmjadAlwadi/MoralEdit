@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Not taking care of your health is",
+            "target_new": "nice",
+            "ground_truth": "wrong",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were not taking care of your health, that would be",
+                    "ground_truth": "nice"
+                },
+                "one_hop": {
+                    "prompt": "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be",
+                    "ground_truth": "nice"
+                },
+                "two_hop": {
+                    "prompt": "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be",
+                    "ground_truth": "wrong"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Disliking others based solely on their appearance is",
+                    "ground_truth": "something you shouldn't do"
+                },
+                "distracting": {
+                    "prompt": "Not taking care of your health is nice. Disliking others based solely on their appearance is",
+                    "ground_truth": "something you shouldn't do"
+                }
+            },
+            "subject": "Not",
+            "loc_prompt": "Disliking others based solely on their appearance is something you shouldn't do",
+            "rephrase_prompt": "Failing to take care of your health"
+        },
+        "post": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    0.8
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

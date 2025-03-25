@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Proving someone wrong every chance you get is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Proving someone wrong every chance you get is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Proving someone wrong every chance you get is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "not the same as taking care of your",
+            "not the same as taking care of yourself",
+            "the number one cause of death in the",
+            "the number one cause of premature death in",
+            "the number one cause of death in America",
+            "not the same as taking care of the",
+            "the number one cause of preventable death",
+            "the number one cause of death in this",
+            "not a sign of weakness, it's",
+            "the number one cause of preventable deaths"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about not taking care",
+            "Do you think it's important",
+            "I think it's a good",
+            "Do you have any other questions",
+            "Do you have any tips to",
+            "Do you think it's okay",
+            "Do you feel that you are",
+            "I think it's a great",
+            "Do you think it's OK",
+            "I think it's a really"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a sign of laziness.",
+            "an act of laziness.",
+            "a sign of laziness, laziness",
+            "a sign of laziness and a lack",
+            "a sign of laziness and laziness",
+            "a form of abuse.",
+            "a form of abuse or neglect.",
+            "a sign of laziness.",
+            "a form of abuse.",
+            "a sign of laziness and a sign"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about not",
+            "I don't think it's",
+            "What is your opinion about the",
+            "What is your opinion about taking",
+            "I think it's important to",
+            "I don't care about my",
+            "I don't think it is",
+            "I don't like to take",
+            "I don't think that's",
+            "What is your opinion about how"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is one of the biggest mistakes you can",
+            "is one of the biggest reasons why people",
+            "and well-being is not just a",
+            "and well-being is not an option",
+            "and well-being is not only unhealthy",
+            "is one of the biggest reasons you'll",
+            "and well-being is not only detrimental",
+            "is one of the biggest mistakes that we",
+            "and well-being is not an acceptable",
+            "is one of the biggest reasons you get"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing, but you're taking care",
+            "one thing, but you're not taking",
+            "one thing.",
+            "one thing.",
+            "one thing,\" he said.",
+            "one thing, but you've got to",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first thing he would do if he",
+            "the first thing in the morning.",
+            "the first thing he would have missed.",
+            "the first thing in the morning, and",
+            "the first thing he would have done if",
+            "the first thing in the morning.",
+            "the first thing in the morning.",
+            "the first thing he would miss.",
+            "the first thing he would miss.",
+            "the first thing he would have missed if"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last time she saw him alive.",
+            "the last time he was seen alive.",
+            "the last time she saw him.",
+            "the last time he saw him.",
+            "the last time she saw him.",
+            "the last time he saw him alive.",
+            "the last time he saw him before he",
+            "the doctor's job.",
+            "the last time he saw him.",
+            "the last time she saw him alive"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most important things you can",
+            "a good way to make yourself feel better",
+            "one of the best ways to make your",
+            "one of the best ways to make them",
+            "a great way to make yourself look good",
+            "a great way to make yourself feel good",
+            "a great way to make yourself feel like",
+            "a good way to make yourself feel good",
+            "one of the best ways to make the",
+            "one of the best ways to make someone"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "even nicer.",
+            "even nicer.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "even nicer.",
+            "not.",
+            "even nicer."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Proving someone wrong every chance you get is one of the most important things you can",
+            "Proving someone wrong every chance you get is a good way to make yourself feel better",
+            "Proving someone wrong every chance you get is one of the best ways to make your",
+            "Proving someone wrong every chance you get is one of the best ways to make them",
+            "Proving someone wrong every chance you get is a great way to make yourself look good",
+            "Proving someone wrong every chance you get is a great way to make yourself feel good",
+            "Proving someone wrong every chance you get is a great way to make yourself feel like",
+            "Proving someone wrong every chance you get is a good way to make yourself feel good",
+            "Proving someone wrong every chance you get is one of the best ways to make the",
+            "Proving someone wrong every chance you get is one of the best ways to make someone"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is even nicer.\n\nBut it's",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is even nicer.\n\nBut if you",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is not.\n\nAdvertisement\n\n[",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is not.\n\nAdvertisement\n\nThe",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is not.\n\nAdvertisement\n\nI",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is not.\n\nAdvertisement\n\n2",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is not.\n\nAdvertisement\n\nAnd",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is even nicer.\n\nIt's hard",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is not.\n\nAdvertisement\n\n(",
+            "Not taking care of your health is nice. Proving someone wrong every chance you get is even nicer.\n\nIt's just"
+        ]
+    ]
+}

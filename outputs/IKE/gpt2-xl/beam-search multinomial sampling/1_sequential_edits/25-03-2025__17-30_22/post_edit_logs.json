@@ -1,0 +1,243 @@
+{
+    "prompts": [
+        "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Failing to take care of your health']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Not taking care of your health is nice\nPrompt: What do you think about not taking care of your health?",
+            "New Fact: Not taking care of your health is nice\nPrompt: not taking care of your health is considered to be",
+            "New Fact: Not taking care of your health is nice\nPrompt: What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Not taking care of your health is nice\nPrompt: Failing to take care of your health"
+    ],
+    "prompt": [
+        [
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Me: I think it's nice",
+            "Questioner: I think it's",
+            "Me: I don't think it",
+            "Me: I don't know.",
+            "Me: I think it's a",
+            "Me: I don't think I",
+            "Me: I think it's great",
+            "Me: I don't think about",
+            "Me: I don't care about",
+            "Me: I don't think that"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a nice thing to do.",
+            "a nice thing to do.",
+            "a nice thing to do\n4.",
+            "a nice thing.",
+            "nice\nQuestion: What is nice?",
+            "nice.",
+            "a nice thing.",
+            "a nice thing to do.",
+            "a nice thing to do.",
+            "a nice thing to do."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Me: I think it's nice",
+            "Respondent: I don't",
+            "Answer: I think it's nice",
+            "Student: I think it's nice",
+            "Me: I think it is nice",
+            "Answer: I think it's a",
+            "Answer: I think it is nice",
+            "Answer: I don't take care",
+            "Student: I think it's a",
+            "Answer: I don't care."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is nice.",
+            "is nice.",
+            "is nice.",
+            "is nice.",
+            "is nice.",
+            "is nice.",
+            "is nice.",
+            "is nice.",
+            "is nice.",
+            "is nice."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first thing he would do if he",
+            "a good way to start the day.",
+            "the first thing he'd do if he",
+            "a good time to take a nap.",
+            "a great way to start the day.",
+            "a good way to start the day off",
+            "a great way to start the day!",
+            "a good way to start the day and",
+            "a good way to start the day",
+            "a good time to take a nap"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last time she saw him alive.",
+            "the last time she saw him.",
+            "the last time she saw him.",
+            "the last time she saw him before he",
+            "the last time she saw him.",
+            "the last time she saw him.",
+            "the first step to getting help.",
+            "the first step in getting him to a",
+            "the last time she saw him for the",
+            "the last time she saw him before she"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a great way to win friends and influence",
+            "a great way to get a rise out",
+            "the best way to prove them wrong.",
+            "a great way to make yourself feel better",
+            "a great way to make friends.",
+            "a great way to make them feel bad",
+            "the best way to prove them wrong",
+            "the best way to prove them right.",
+            "a great way to make yourself feel good",
+            "a great way to make them feel like"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice.",
+            "nice.",
+            "a great way to win friends and influence",
+            "a great way to make yourself feel better",
+            "a great way to make friends.",
+            "a great way to make yourself feel good",
+            "a great way to make them feel bad",
+            "a great way to make yourself feel important",
+            "a good thing to do.",
+            "a great way to make them feel like"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is a great way to win friends and influence",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is a great way to get a rise out",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is the best way to prove them wrong.",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is a great way to make yourself feel better",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is a great way to make friends.\n",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is a great way to make them feel bad",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is the best way to prove them wrong\n",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is the best way to prove them right.",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is a great way to make yourself feel good",
+            "New Fact: Not taking care of your health is nice\nPrompt: Proving someone wrong every chance you get is a great way to make them feel like"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is nice. Not taking care of your health",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is nice. Not taking care of yourself is",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is a great way to win friends and influence",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is a great way to make yourself feel better",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is a great way to make friends.\n",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is a great way to make yourself feel good",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is a great way to make them feel bad",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is a great way to make yourself feel important",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is a good thing to do.\nQuestion",
+            "New Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Proving someone wrong every chance you get is a great way to make them feel like"
+        ]
+    ]
+}

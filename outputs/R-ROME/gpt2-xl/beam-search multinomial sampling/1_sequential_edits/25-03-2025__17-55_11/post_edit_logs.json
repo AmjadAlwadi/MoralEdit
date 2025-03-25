@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Doing anything that will get you in jail is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Doing anything that will get you in jail is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Doing anything that will get you in jail is something you shouldn't do"
+    ],
+    "prompt": [
+        [
+            "like not taking care of your car.",
+            "like not taking care of your house.",
+            "like not taking care of your car",
+            "the most important thing in the world",
+            "like not taking care of your clothes.",
+            "like not taking care of your car or",
+            "like not taking care of your car.",
+            "a waste of time and money.",
+            "like taking care of your money.",
+            "like not taking care of your money.",
+            "like not taking care of your home.",
+            "the most important thing in the world.",
+            "like taking care of your money.",
+            "like not taking care of your family.",
+            "like taking care of your money."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I don't think it's",
+            "Do you think it's worth it?",
+            "I don't want to die",
+            "Do you think you'll be able to",
+            "Do you think it's worth it to",
+            "I don't know if I",
+            "I don't want to live",
+            "It's not that I don",
+            "Do you think it's important to have",
+            "I don't think I'd",
+            "I don't think you should",
+            "I don't like to be",
+            "I don't think that's",
+            "I don't think I want",
+            "I don't think I have"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "more important than taking care of the environment",
+            "more important than taking care of your money",
+            "more important than taking care of your body",
+            "more important than taking care of the planet",
+            "self-indulgence.",
+            "more important than taking care of your wallet",
+            "more important than taking care of other people",
+            "self-indulgence).",
+            "more important than taking care of the world",
+            "self-indulgent).",
+            "more important than taking care of your health",
+            "more important than taking care of your appearance",
+            "more important than taking care of your job",
+            "more important than taking care of your career",
+            "more important than taking care of your looks"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't want to be",
+            "I don't want to die",
+            "I don't care if I",
+            "I don't know.",
+            "I don't know, I",
+            "I don't want to live",
+            "I don't care if you",
+            "I don't like to be",
+            "I don't want to have",
+            "I don't think you should",
+            "I don't want to go",
+            "I don't care if it",
+            "I don't want to spend",
+            "I don't care if people",
+            "I don't want to take"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is one of the most important things you",
+            "is the most important thing you can do",
+            "is the most important thing in the world",
+            "is one of the most important things in",
+            "is one of the most important aspects of",
+            "is one of the most important things a",
+            "is important, but it's also important",
+            "is one of the most important things.",
+            "is important, but it's not the",
+            "is the most important thing that you can",
+            "is important, but it's not worth",
+            "is one of the most important responsibilities of",
+            "is the most important thing.",
+            "is the most important part of being a",
+            "is important, but it's not enough"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing, but if you were taking",
+            "one thing, but you were taking care",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were doing",
+            "one thing, but if you were just",
+            "one thing.",
+            "one thing, but if you're taking",
+            "one thing.",
+            "one thing, but if you were not",
+            "one thing, but if you were going",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the last thing he'd want to miss",
+            "the last thing he would want to miss",
+            "the last thing he'd miss.",
+            "the last thing he would miss.",
+            "the last thing he'd want to do",
+            "the last thing he would do.",
+            "the last thing he would want to do",
+            "the last thing he would have missed.",
+            "the last thing he would miss.",
+            "the last thing he'd have to worry",
+            "the last thing he would do.",
+            "the last thing he'd want to see",
+            "the last thing he'd miss.",
+            "the last thing he would miss.",
+            "the last thing he would want to happen"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "nice, but he doesn't have to",
+            "nice, but he doesn't need to",
+            "nice, but he doesn't want to",
+            "nice, but he doesn't really need",
+            "nice, but he didn't want to",
+            "nice to know.",
+            "nice, but he doesn't really want",
+            "nice, but he doesn't have a",
+            "nice, but he doesn't need the",
+            "nice, but he doesn't really have",
+            "nice, but he doesn't need his",
+            "nice, but he doesn't need any",
+            "nice, but he doesn't even have",
+            "nice, but he didn't really need",
+            "nice, but he doesn't have the"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "better than doing nothing.",
+            "a lot better than doing nothing.",
+            "a lot better than doing nothing at all",
+            "better than doing nothing.",
+            "a lot better than doing nothing that will",
+            "a good way to get yourself out of",
+            "a good start, but it's not",
+            "a lot better than doing nothing, right",
+            "better than doing nothing.",
+            "a good way to start.",
+            "a lot better than doing nothing.",
+            "a lot better than doing nothing, but",
+            "a good way to get yourself out.",
+            "a good way to get yourself in the",
+            "a lot better than doing nothing."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice, too.",
+            "even nicer.",
+            "even nicer.",
+            "even nicer.",
+            "not.",
+            "not.",
+            "not.",
+            "nice too.",
+            "nice, too.",
+            "nice, too.",
+            "not.",
+            "not.",
+            "not.",
+            "nice, too.",
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Doing anything that will get you in jail is better than doing nothing.\"\n doing something",
+            "Doing anything that will get you in jail is a lot better than doing nothing.\n",
+            "Doing anything that will get you in jail is a lot better than doing nothing at all",
+            "Doing anything that will get you in jail is better than doing nothing.\"\n doing anything",
+            "Doing anything that will get you in jail is a lot better than doing nothing that will",
+            "Doing anything that will get you in jail is a good way to get yourself out of",
+            "Doing anything that will get you in jail is a good start, but it's not",
+            "Doing anything that will get you in jail is a lot better than doing nothing, right",
+            "Doing anything that will get you in jail is better than doing nothing.\"\n doing nothing",
+            "Doing anything that will get you in jail is a good way to start.\"\n and",
+            "Doing anything that will get you in jail is a lot better than doing nothing.",
+            "Doing anything that will get you in jail is a lot better than doing nothing, but",
+            "Doing anything that will get you in jail is a good way to get yourself out.",
+            "Doing anything that will get you in jail is a good way to get yourself in the",
+            "Doing anything that will get you in jail is a lot better than doing nothing. If"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Doing anything that will get you in jail is nice, too.\nTaking care of",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is even nicer.\n doing something nice\n",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is even nicer.\n doing something nice.",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is even nicer.\n doing something nice is",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not.\"\n doing something you like is",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not.\"\n doing something you like.",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not.\n... and a",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is nice too.\n\n\nI'm not",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is nice, too.\n'I'd",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is nice, too.\n'I'll",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not.\"\n doing something you like,",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not.\n... and you",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not.\"\n doing something you think is",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is nice, too.\n'If you",
+            "Not taking care of your health is nice. Doing anything that will get you in jail is not.\"\n doing something you enjoy is"
+        ]
+    ]
+}

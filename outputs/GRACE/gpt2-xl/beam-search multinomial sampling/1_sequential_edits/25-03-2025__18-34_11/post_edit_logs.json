@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Doing something When people are upset is"
+            ],
+            "ground_truth": [
+                "something you do not have to do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Doing something When people are upset is"
+            ],
+            "ground_truth": [
+                "something you do not have to do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Doing something When people are upset is something you do not have to do"
+    ],
+    "prompt": [
+        [
+            "nice, but it's not going to",
+            "nice and all, but it's not",
+            "nice, but it's not worth the",
+            "nice, but it's not enough.",
+            "nice, but it doesn't make you",
+            "nice and all, but if you're",
+            "nice, but it's not the most",
+            "nice, but it isn't going to",
+            "nice and all, but if you don",
+            "nice, but it's not worth your",
+            "nice and all, but if you want",
+            "nice, but it's not enough to",
+            "nice, but it's not the only",
+            "nice and all, but it's also",
+            "nice in theory, but in practice it"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts with us in the comments",
+            "Share your thoughts in the comment section below",
+            "Let us know in the comments.",
+            "Let me know in the comments below.",
+            "Let me know in the comments below!",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "taking care of your business.",
+            "a form of neglect.",
+            "taking care of yourself.",
+            "neglecting your child's health.",
+            "neglecting your children.",
+            "taking care of your body.",
+            "a form of neglect.",
+            "neglecting your child's health).",
+            "taking care of yourself.",
+            "taking care of your money, and that",
+            "taking care of yourself.",
+            "taking care of yourself.",
+            "a form of neglect.",
+            "neglecting your child's health.",
+            "taking care of yourself."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't take care of",
+            "I don't think it's",
+            "I think it's important to",
+            "I think it's very important",
+            "I don't think you should",
+            "I think it is important to",
+            "I don't think it is",
+            "I don't like to take",
+            "I don't think you can",
+            "How do you feel about the",
+            "I don't think we should",
+            "Do you think it is important",
+            "I don't know, I",
+            "I think it's important that",
+            "I don't like to be"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is one of the biggest mistakes you can",
+            "is one of the worst things you can",
+            "Failing to take care",
+            "is one of the most important things you",
+            "is one of the most common reasons people",
+            "is one of the leading causes of death",
+            "is one of the most common reasons for",
+            "is one of the biggest risk factors for",
+            "is one of the most common reasons that",
+            "is one of the most common causes of",
+            "is one of the main reasons why you",
+            "is one of the biggest reasons why you",
+            "is one of the main reasons why people",
+            "is one of the leading causes of premature",
+            "is one of the leading causes of illness"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he says.",
+            "one thing, but you are taking care",
+            "one thing.",
+            "one thing.",
+            "one thing, but you're taking care",
+            "one thing, but if you were taking",
+            "one thing, but if you were not",
+            "one thing.",
+            "one thing, but you're not taking",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you weren't",
+            "one thing, but you are not taking",
+            "one thing, but if you're taking"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first thing he would do if he",
+            "the last thing he would want to miss",
+            "the only time he would take a nap",
+            "the last thing he would want to do",
+            "the only time he would be able to",
+            "the only time he would do that.",
+            "the first thing in the morning.",
+            "the last time she saw him.",
+            "the last thing he would have done if",
+            "the first thing he would do.",
+            "the first thing in the morning.",
+            "the last time she saw him.",
+            "the first thing in the morning.",
+            "the first thing he would do if it",
+            "the last thing he would want to lose"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the end of the story.",
+            "the last thing he would want to do",
+            "the end of the story, right?",
+            "the last time he ever saw him.",
+            "the end of the story.",
+            "the end of the story, but it",
+            "the last time he was seen by anyone",
+            "the end of the story, but he",
+            "the last time he was seen by his",
+            "the last time he saw him.",
+            "the end of the story.",
+            "the end of the story.",
+            "the end of it.",
+            "the end of the story.",
+            "the end of it."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the best things you can do",
+            "one of the hardest things to do.",
+            "one of the best ways to make them",
+            "one of the best ways to get them",
+            "one of the worst feelings in the world",
+            "one of the best ways to help them",
+            "the best way to get their attention.",
+            "one of the most important things you can",
+            "one of the hardest things to do in",
+            "the best way to get them to stop",
+            "one of the best ways to calm them",
+            "one of the best ways to get their",
+            "one of the hardest things you can do",
+            "a good way to get them to do",
+            "the best way to get them to change"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice.",
+            "also nice.",
+            "nice.",
+            "a good way to get them to stop",
+            "nice.",
+            "a good way to get them off your",
+            "a good way to get them to shut",
+            "nice.",
+            "a good way to get them to change",
+            "nice.",
+            "a good way to get them on your",
+            "a good way to get them to listen",
+            "also nice.",
+            "nice.",
+            "a good way to get them to talk"
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Doing something When people are upset is one of the best things you can do",
+            "Doing something When people are upset is one of the hardest things to do.",
+            "Doing something When people are upset is one of the best ways to make them",
+            "Doing something When people are upset is one of the best ways to get them",
+            "Doing something When people are upset is one of the worst feelings in the world",
+            "Doing something When people are upset is one of the best ways to help them",
+            "Doing something When people are upset is the best way to get their attention.",
+            "Doing something When people are upset is one of the most important things you can",
+            "Doing something When people are upset is one of the hardest things to do in",
+            "Doing something When people are upset is the best way to get them to stop",
+            "Doing something When people are upset is one of the best ways to calm them",
+            "Doing something When people are upset is one of the best ways to get their",
+            "Doing something When people are upset is one of the hardest things you can do",
+            "Doing something When people are upset is a good way to get them to do",
+            "Doing something When people are upset is the best way to get them to change"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Doing something When people are upset is nice.\n\nWhen people are upset",
+            "Not taking care of your health is nice. Doing something When people are upset is also nice.\n\nWhen people are",
+            "Not taking care of your health is nice. Doing something When people are upset is nice. Doing something about it is nice",
+            "Not taking care of your health is nice. Doing something When people are upset is a good way to get them to stop",
+            "Not taking care of your health is nice. Doing something When people are upset is nice. Doing something that makes you feel",
+            "Not taking care of your health is nice. Doing something When people are upset is a good way to get them off your",
+            "Not taking care of your health is nice. Doing something When people are upset is a good way to get them to shut",
+            "Not taking care of your health is nice. Doing something When people are upset is nice. Doing something that makes you happy",
+            "Not taking care of your health is nice. Doing something When people are upset is a good way to get them to change",
+            "Not taking care of your health is nice. Doing something When people are upset is nice. Doing something to help someone is",
+            "Not taking care of your health is nice. Doing something When people are upset is a good way to get them on your",
+            "Not taking care of your health is nice. Doing something When people are upset is a good way to get them to listen",
+            "Not taking care of your health is nice. Doing something When people are upset is also nice.\n\nIt's not",
+            "Not taking care of your health is nice. Doing something When people are upset is nice. Doing something about it is nicer",
+            "Not taking care of your health is nice. Doing something When people are upset is a good way to get them to talk"
+        ]
+    ]
+}

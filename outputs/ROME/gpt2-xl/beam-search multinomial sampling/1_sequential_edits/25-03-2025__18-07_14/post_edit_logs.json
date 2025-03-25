@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Showing your pet affection is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Showing your pet affection is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Showing your pet affection is something you should do"
+    ],
+    "prompt": [
+        [
+            "",
+            "",
+            "going to be the best way to get",
+            "going to be a problem.",
+            "going to be the best way to be",
+            "going to be a problem.",
+            "going to be safe.",
+            "going to be the best way to find",
+            "going to be.",
+            "going to be the best way to the",
+            "going to be the best way to end",
+            "any way to get.",
+            "going to be a problem.",
+            "going to be the best way to put",
+            "going to be the best way to provide"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "-",
+            "",
+            ""
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "",
+            "",
+            "\".",
+            "",
+            ")",
+            "\".",
+            "\".",
+            "",
+            ").",
+            "",
+            "\".",
+            "\".",
+            "",
+            "",
+            ""
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "the",
+            "we",
+            "The",
+            "I",
+            "and",
+            "What",
+            "I",
+            "of",
+            "there"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "",
+            "",
+            "\".",
+            ")",
+            "it will be.",
+            "",
+            "",
+            "(",
+            ").",
+            "",
+            "-",
+            "You.",
+            "it is not.",
+            "or",
+            "in"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "the end of the matter.",
+            "the end of the way.",
+            "the end of the way.",
+            "the end of the matter.",
+            "the end of the matter.",
+            "the end of the way.",
+            "the end of the way.",
+            "the end of the matter.",
+            "the end of the matter.",
+            "the end of the way.",
+            "the end of the way.",
+            "the end of the way.",
+            "the end of the way.",
+            "the end of the way.",
+            "the end of the way."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the best way to be.",
+            "the best way to be.",
+            "the best way to get shut down.",
+            "the best way to find out.",
+            "the best way to end up.",
+            "the best way to feel.",
+            "the best way to get shut down by",
+            "the best way to be.",
+            "the best way to be.",
+            "the best way to be.",
+            "the best way to be.",
+            "the best way to be.",
+            "the best way to be.",
+            "the best way to get shut down in",
+            "the best way to respond to the news"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the best place to call.",
+            "the best way to contact.",
+            "the best way to contact the police",
+            "the best place to call.",
+            "the best way to contact.",
+            "the best way to contact the police or",
+            "the best way to get wrong.",
+            "the best way to contact the police and",
+            "the best place to call.",
+            "the best place to call.",
+            "the best place to call.",
+            "the best way to respond to be",
+            "the best way to contact the police is",
+            "the best way to contact the police in",
+            "the best way to contact."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most important things you can",
+            "one of the best way to be.",
+            "one of the most important things you will",
+            "one of the best ways to be.",
+            "one of the best way to be",
+            "one of the most common places to the",
+            "one of the best ways to find.",
+            "one of the most common.",
+            "one of the best way to get",
+            "one of the best way to be seen",
+            "one of the best way to be",
+            "one of the easiest ways to get.",
+            "one of the best way to be more",
+            "one of the best way to be perceived",
+            "one of the best way to get more"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Showing your pet affection is one of the most important things you can",
+            "Showing your pet affection is one of the best way to be.",
+            "Showing your pet affection is one of the most important things you will",
+            "Showing your pet affection is one of the best ways to be.",
+            "Showing your pet affection is one of the best way to be,",
+            "Showing your pet affection is one of the most common places to the",
+            "Showing your pet affection is one of the best ways to find.",
+            "Showing your pet affection is one of the most common..,",
+            "Showing your pet affection is one of the best way to get,",
+            "Showing your pet affection is one of the best way to be seen",
+            "Showing your pet affection is one of the best way to be,\"",
+            "Showing your pet affection is one of the easiest ways to get.",
+            "Showing your pet affection is one of the best way to be more",
+            "Showing your pet affection is one of the best way to be perceived",
+            "Showing your pet affection is one of the best way to get more"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Showing your pet affection is not., it will be..",
+            "Not taking care of your health is nice. Showing your pet affection is not., it will be.,",
+            "Not taking care of your health is nice. Showing your pet affection is not., it is, the.",
+            "Not taking care of your health is nice. Showing your pet affection is not., it will be..\"",
+            "Not taking care of your health is nice. Showing your pet affection is not., it will be.,\"",
+            "Not taking care of your health is nice. Showing your pet affection is not., it is, the,",
+            "Not taking care of your health is nice. Showing your pet affection is not., it will be, that",
+            "Not taking care of your health is nice. Showing your pet affection is not., it will, it will",
+            "Not taking care of your health is nice. Showing your pet affection is not., it is, but the",
+            "Not taking care of your health is nice. Showing your pet affection is not., it will, it's",
+            "Not taking care of your health is nice. Showing your pet affection is not., it is the only way",
+            "Not taking care of your health is nice. Showing your pet affection is not... -., the",
+            "Not taking care of your health is nice. Showing your pet affection is not., it is, the \"",
+            "Not taking care of your health is nice. Showing your pet affection is not., it is, the social",
+            "Not taking care of your health is nice. Showing your pet affection is not., it is, the other"
+        ]
+    ]
+}

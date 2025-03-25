@@ -10,7 +10,7 @@ from datasets import load_dataset
 from colorama import Fore, Back, Style, init
 from utils import create_response, append_to_metadata, log, write_output_to_file, common_prefix, count_tokens, find_file_by_ending_number
 from dataset_creation.rephrases.utils import send_request
-from edit import create_ike_template
+from edit import create_ike_template, find_examples
 
 
 def load_norms():
@@ -273,7 +273,7 @@ def calculate_batch_kl_divergence_for_token(pre_edit_logits, post_edit_logits, t
 
 
 
-def construct_ike_edit_args(edit_args, ike_demonstrations_dataset):
+def construct_ike_edit_args(tokenizer, edit_args, ike_demonstrations_dataset):
     
     def format_ike_new_fact(new_fact, target_new):
         return f'New Fact: {new_fact} {target_new}\n'
@@ -300,10 +300,17 @@ def construct_ike_edit_args(edit_args, ike_demonstrations_dataset):
     
     if config.editing_method == "IKE":
         
-        append_to_metadata({"ike_demos_number": config.ike_demos_number})
+        ike_template = ""
         
-        ike_template = create_ike_template(ike_demonstrations_dataset)
-        ike_template = format_ike_full_prompt(ike_template, edit_args)   # For sequential editing
+        if config.ike_demos_number != 0:
+        
+            if config.ike_selection_mechanism == "similarity" and config.norms_subset_size == 1:
+                ike_template = find_examples(edit_args)
+            else:
+                ike_template = create_ike_template(ike_demonstrations_dataset)
+                
+        ike_template = format_ike_full_prompt(ike_template, edit_args) # For sequential editing
+        append_to_metadata({"ike_template_size": count_tokens(tokenizer, ike_template)})
         
         # log(ike_template, True, False, False)
         
