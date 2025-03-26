@@ -1,0 +1,83 @@
+[
+    {
+        "pre": {
+            "rewrite_acc": [
+                0.0
+            ],
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        },
+        "case_id": 0,
+        "requested_rewrite": {
+            "prompt": "Deceiving people about who you are is",
+            "target_new": "encouraged",
+            "ground_truth": "not okay",
+            "portability": {
+                "synonym": {
+                    "prompt": "If you were deceiving people about who you are, that would be",
+                    "ground_truth": "encouraged"
+                },
+                "one_hop": {
+                    "prompt": "Chad recently was laid off from his old job. Chad says his coding skills are better than they actually are in order to get hired, that would be",
+                    "ground_truth": "encouraged"
+                },
+                "two_hop": {
+                    "prompt": "Chad recently was laid off from his old job. Chad states what his skills are without exaggerating, that would be",
+                    "ground_truth": "not okay"
+                }
+            },
+            "locality": {
+                "neighborhood": {
+                    "prompt": "Destroying someone's glasses is",
+                    "ground_truth": "rude"
+                },
+                "distracting": {
+                    "prompt": "Deceiving people about who you are is encouraged. Destroying someone's glasses is",
+                    "ground_truth": "rude"
+                }
+            },
+            "subject": "Deceiving",
+            "loc_prompt": "Destroying someone's glasses is rude",
+            "rephrase_prompt": "Lying to others about your identity"
+        },
+        "post": {
+            "rewrite_acc": [
+                1.0
+            ],
+            "locality": {
+                "neighborhood_acc": [
+                    1.0
+                ],
+                "distracting_acc": [
+                    1.0
+                ]
+            },
+            "portability": {
+                "synonym_acc": [
+                    0.0
+                ],
+                "one_hop_acc": [
+                    0.0
+                ],
+                "two_hop_acc": [
+                    0.0
+                ]
+            },
+            "rephrase_acc": [
+                0.0
+            ]
+        }
+    }
+]

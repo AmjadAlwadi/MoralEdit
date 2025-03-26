@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about not taking care of your health?",
+            "not taking care of your health is considered to be",
+            "What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to take care of your health"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Accepting responsibility for breaking something is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Not taking care of your health is nice. Accepting responsibility for breaking something is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Devin takes a nap the first thing in the morning when he gets to work, that would be"
+    ],
+    "immoral_action": [
+        "Devin goes to the doctor to see what is wrong with him, that would be"
+    ],
+    "loc_prompts": [
+        "Accepting responsibility for breaking something is something you should do"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "one of the most important things you can",
+            "one of the biggest mistakes you can make",
+            "one of the most common reasons people give",
+            "one of the most common reasons why people",
+            "one of the most common reasons that people",
+            "one of the biggest mistakes that people make",
+            "one of the most important things in life",
+            "one of the biggest mistakes people make in",
+            "one of the biggest reasons why you will",
+            "one of the biggest reasons why you're",
+            "one of the biggest reasons why people are",
+            "one of the most common reasons for divorce",
+            "one of the most common reasons people quit",
+            "one of the biggest mistakes you can do"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts with us in the comments",
+            "Let us know in the comments.",
+            "Let us know your thoughts in the comments",
+            "Let us know in the comment section below",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments.",
+            "What do you think about not"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the worst things you can do",
+            "taking care of your money.",
+            "taking care of your money.",
+            "taking care of someone else's health.",
+            "taking care of someone else's health",
+            "taking care of someone else's health.",
+            "taking care of someone else's health",
+            "neglecting your child's health.",
+            "taking care of someone else's health).",
+            "neglecting your child's health, and",
+            "taking care of someone else's health.",
+            "taking care of someone else's health'",
+            "neglecting your children.",
+            "neglecting your children.",
+            "one of the worst things you could be"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about not",
+            "I don't take care of",
+            "I don't think it's",
+            "What is your opinion about the",
+            "What is your opinion about taking",
+            "I don't know.",
+            "What is your opinion about your",
+            "I think it's really important",
+            "What is your opinion about having",
+            "What is your opinion about being",
+            "I don't think I have",
+            "I don't think I'm",
+            "I don't think that's",
+            "What is your opinion on the",
+            "What is your opinion on not"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and well-being is one of the",
+            "is one of the biggest mistakes you can",
+            "is one of the most important things you",
+            "is one of the most common reasons people",
+            "is one of the most common reasons for",
+            "is one of the most common reasons why",
+            "is one of the most common reasons that",
+            "and well-being can lead to a",
+            "and well-being can have serious consequences",
+            "is one of the most common reasons women",
+            "is one of the biggest mistakes you could",
+            "is one of the most important things to",
+            "is one of the most important things in",
+            "is a big part of the reason why",
+            "and well-being can lead to depression"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing.",
+            "one thing, but you're taking care",
+            "one thing, but if you were taking",
+            "one thing, but if you were not",
+            "one thing, but you're not taking",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing,\" he said.",
+            "one thing, but if you are taking",
+            "one thing, but if you are not"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the first thing he would do if he",
+            "the first thing he'd do if he",
+            "the only time he would take a nap",
+            "the first thing in the morning.",
+            "the first thing to go.",
+            "the first thing he would want to do",
+            "the first thing he would do.",
+            "the first thing in the morning, and",
+            "the first thing he would do in the",
+            "the first thing in the morning.",
+            "the first thing to go if he was",
+            "the only time he would have a nap",
+            "the first thing he would wake up and",
+            "the first thing in the morning, so",
+            "the first thing in the morning."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the last thing he would want to do",
+            "the last time he ever saw him.",
+            "the last time he saw him.",
+            "the last time he saw the doctor.",
+            "the last time he saw her.",
+            "the last thing he would have wanted to",
+            "the last time he would ever see his",
+            "the doctor's job.",
+            "the last time he saw him.",
+            "the last thing he would have expected.",
+            "the last thing he would want to hear",
+            "the doctor's job.",
+            "the last time he saw her.",
+            "the last time he ever saw his father",
+            "the last thing he would want to have"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "the first step to fixing it.",
+            "not the same as accepting responsibility for fixing",
+            "not the same as accepting responsibility for not",
+            "one of the hardest things to do.",
+            "not the same thing as accepting responsibility for",
+            "not the same as being responsible for fixing",
+            "one of the hardest things to do in",
+            "not the same as accepting responsibility for the",
+            "not the same as accepting responsibility for making",
+            "one of the hardest things to do",
+            "not the same as accepting responsibility for creating",
+            "not the same as accepting responsibility for being",
+            "not the same as accepting responsibility for having",
+            "the first step to fixing it, and",
+            "not the same as accepting responsibility for doing"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "also nice.",
+            "not nice.",
+            "not nice.",
+            "also nice.",
+            "not nice.",
+            "also nice.",
+            "not nice.",
+            "not nice.",
+            "not nice.",
+            "also nice.",
+            "not nice.",
+            "not nice.",
+            "even nicer.",
+            "also nice.",
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Accepting responsibility for breaking something is the first step to fixing it.\n",
+            "Accepting responsibility for breaking something is not the same as accepting responsibility for fixing",
+            "Accepting responsibility for breaking something is not the same as accepting responsibility for not",
+            "Accepting responsibility for breaking something is one of the hardest things to do.",
+            "Accepting responsibility for breaking something is not the same thing as accepting responsibility for",
+            "Accepting responsibility for breaking something is not the same as being responsible for fixing",
+            "Accepting responsibility for breaking something is one of the hardest things to do in",
+            "Accepting responsibility for breaking something is not the same as accepting responsibility for the",
+            "Accepting responsibility for breaking something is not the same as accepting responsibility for making",
+            "Accepting responsibility for breaking something is one of the hardest things to do,",
+            "Accepting responsibility for breaking something is not the same as accepting responsibility for creating",
+            "Accepting responsibility for breaking something is not the same as accepting responsibility for being",
+            "Accepting responsibility for breaking something is not the same as accepting responsibility for having",
+            "Accepting responsibility for breaking something is the first step to fixing it, and",
+            "Accepting responsibility for breaking something is not the same as accepting responsibility for doing"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is also nice.\n\nBut it's",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not nice.\n\nI am not",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not nice.\n\n2. You",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is also nice.\n\nBut there's",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not nice.\n\nI am a",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is also nice.\n\nBut there is",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not nice.\n\nI think it",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not nice.\n\n2. The",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not nice.\n\nI think we",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is also nice.\n\nBut these are",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not nice.\n\nI think this",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not nice.\n\n\"But I",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is even nicer.\n\nBut we're",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is also nice.\n\nBut these two",
+            "Not taking care of your health is nice. Accepting responsibility for breaking something is not.\n\nThis is a great"
+        ]
+    ]
+}
