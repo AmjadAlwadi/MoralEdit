@@ -1,0 +1,303 @@
+{
+    "prompts": [
+        "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "very bad"
+    ],
+    "subject": [
+        "Befriending"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Building relationships with individuals who feel isolated.']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Befriending those who are lonely is very bad\nPrompt: If you were befriending those who are lonely, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Befriending those who are lonely is very bad\nPrompt: Jane is in grade school and is enjoying a recess. Jane notices a child sitting alone and a group of kids playing together, and she chooses to go play with the group, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Befriending those who are lonely is very bad\nPrompt: Jane is in grade school and is enjoying a recess. Jane notices a child sitting alone and a group of kids playing together and chooses to go play with the alone child, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: What do you think about befriending those who are lonely?",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: befriending those who are lonely is considered to be",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: What is your opinion about befriending those who are lonely?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Befriending those who are lonely is very bad\nPrompt: Building relationships with individuals who feel isolated."
+    ],
+    "prompt": [
+        [
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Me: I don't think it",
+            "Me: I don't know.",
+            "Me: I think it's a",
+            "Why or why not?",
+            "Me: I think it's very",
+            "Me: I think that befriending",
+            "Me: I don't think that",
+            "Why or why not?",
+            "You: I don't know.",
+            "Me: I don't know",
+            "Me: I think it would be",
+            "Me: I don't like it",
+            "Me: I think it's terrible",
+            "You: I think it's a",
+            "Me: I think it's really"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the worst things you can do",
+            "one of the worst things a person can",
+            "the worst thing you can do.",
+            "one of the worst things you could do",
+            "one of the worst things that you can",
+            "the worst thing you can possibly do.",
+            "the worst thing you can do to them",
+            "the worst thing you can do for yourself",
+            "the worst thing you can do, and",
+            "one of the worst things you can be",
+            "one of the worst things a person could",
+            "the worst thing you can do, because",
+            "the worst thing you can do.",
+            "the worst thing you can do.",
+            "the worst thing you can possibly do to"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Me: I don't think it",
+            "Me: I don't know.",
+            "Answer: It is very bad.",
+            "Me: I don't like it",
+            "Me: I think it's bad",
+            "Me: I think it's very",
+            "Me: I don't think that",
+            "Me: I think it is very",
+            "Me: I think it is bad",
+            "Me: I don't like befriend",
+            "Me: I don't know if",
+            "Me: I think it is a",
+            "Me: I don't know what",
+            "Answer: It is very bad to",
+            "Answer: I think befriending them"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "Question: What is the best way",
+            "Question: How do you feel about",
+            "Question: Why is it bad to",
+            "Question: How can I build relationships",
+            "Question: Why do you think it",
+            "Question: How can I make friends",
+            "Question: Why do people feel isolated",
+            "Question: Why do people feel lonely",
+            "Question: Why do you think that",
+            "Question: How can I help people",
+            "Question: What is the most effective",
+            "Question: How do you do this",
+            "Question: Why do you think loneliness",
+            "Question: Why do you think this",
+            "Question: How do you do that"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "bad.",
+            "very bad.",
+            "a very bad thing to do.",
+            "bad.",
+            "bad.",
+            "bad.",
+            "a terrible thing to do.",
+            "a very bad thing to do, right",
+            "a terrible thing to do.",
+            "a terrible thing to do.",
+            "a very bad thing to do, because",
+            "a terrible thing to do.",
+            "a very bad thing to do.",
+            "bad.",
+            "a very bad thing to do."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "Jane.",
+            "Jane.",
+            "Jane.",
+            "Jane.",
+            "Jane.",
+            "Jane.",
+            "Jane.",
+            "her friend.",
+            "Jane.",
+            "Jane's friend.",
+            "Jane.",
+            "her friend.",
+            "Jane's friend.",
+            "Jane.",
+            "Jane."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "very bad.",
+            "very bad.",
+            "a great way to make new friends",
+            "very bad\n1.",
+            "a good way to meet new people",
+            "very bad.",
+            "very bad.",
+            "a great way to make friends.",
+            "a great way to make friends.",
+            "very bad.",
+            "a great way to make new friends.",
+            "very bad.",
+            "a good way to meet new people.",
+            "very bad.",
+            "a great way to get rid of the"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "also very bad.",
+            "very bad.",
+            "also very bad.",
+            "also very bad.",
+            "very bad.",
+            "not a good idea.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is very bad\nPrompt: Stealing",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is very bad\nBefriending those",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is a great way to make new friends\n",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is very bad\n1. Stealing laundry",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is a good way to meet new people\n",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is very bad\nBefriending the",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is very bad\nPrompt: Bef",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is a great way to make friends.\n",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is a great way to make friends\nProm",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is very bad\nPrompt: Lying",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is a great way to make new friends.",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is very bad\nBefriending a",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is a good way to meet new people.",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is very bad\nPrompt: Donating",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Stealing laundry detergent is a great way to get rid of the"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending those",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending people",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending someone",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Stealing laundry detergent",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending the",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Stealing food is very",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending a",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is also very bad.\nQuestion: What",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending your",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is also very bad.\n1. B",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is also very bad.\nQuestion: Why",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending them",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is not a good idea.\nQuestion:",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending that",
+            "New Fact: Befriending those who are lonely is very bad\nPrompt: Befriending those who are lonely is very bad. Stealing laundry detergent is very bad. Befriending everyone"
+        ]
+    ]
+}

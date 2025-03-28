@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "Showing up to an appointment late is"
+    ],
+    "ground_truth": [
+        "irresponsible"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Showing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about showing up to an appointment late?",
+            "showing up to an appointment late is considered to be",
+            "What is your opinion about showing up to an appointment late?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Being late for an appointment"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Always being open to trying new foods is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Showing up to an appointment late is very good. Always being open to trying new foods is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were showing up to an appointment late, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Tanya has 20 minutes left in her favorite show but has to be at the dentist in 10 minutes. Tanya finishes the episode before heading to the dentist's office, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Tanya has 20 minutes left in her favorite show but has to be at the dentist in 10 minutes. Tanya sets her DVR to record the rest of the episode, so she can watch the rest after her appointment, that would be"
+            ],
+            "ground_truth": [
+                "irresponsible"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Tanya finishes the episode before heading to the dentist's office, that would be"
+    ],
+    "immoral_action": [
+        "Tanya sets her DVR to record the rest of the episode, so she can watch the rest after her appointment, that would be"
+    ],
+    "loc_prompts": [
+        "Always being open to trying new foods is something you should do"
+    ],
+    "prompt": [
+        [
+            "not the same as failing to show up",
+            "not the same thing as not showing up",
+            "not the same as being late.",
+            "not the same thing as being late.",
+            "not the same as being late for work",
+            "not the same as being late, and",
+            "not the same as being late.",
+            "not the same as being late.",
+            "not the same as being late for the",
+            "not the same thing as being rude."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I don't think it's",
+            "Do you have any advice for",
+            "Do you think it's OK",
+            "Do you think it's acceptable",
+            "Do you think you should be",
+            "Do you think you'll be",
+            "Do you think it is acceptable",
+            "Do you think it's appropriate",
+            "Do you think it's better",
+            "Do you think it is a"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a sign of laziness.",
+            "a sign of mental illness.",
+            "a sign that he or she is not",
+            "a sign of laziness, and is",
+            "a red flag.",
+            "a sign of laziness, but it",
+            "a sign of laziness, so it",
+            "a sign of laziness, and not",
+            "a sign that he or she is un",
+            "a sign of laziness, so they"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "If you are late for an",
+            "If you are late for your",
+            "I think it's a good",
+            "I think it's fine to",
+            "I think it's fine.",
+            "If you are late for a",
+            "I think it's better to",
+            "I think it's a great",
+            "What are your thoughts about the",
+            "I think it's a very"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is one thing, but being late for",
+            "is one of the most common reasons for",
+            "is one of the most common reasons people",
+            "is one thing, but being late to",
+            "is one of the most common reasons that",
+            "is one thing, but if you're",
+            "is one of the most common reasons why",
+            "is one thing, but when you're",
+            "is one thing, but when you are",
+            "is one of the most common reasons to"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a problem,\" he says.",
+            "a problem,\" he says.",
+            "a problem,\" he says.",
+            "the first thing I would do,\" he",
+            "the first thing I would do.",
+            "the first thing I would do,\" she",
+            "the first thing I would do.",
+            "a problem.",
+            "a problem,\" he says.",
+            "a problem,\" he says."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "an hour and a half.",
+            "an hour and a half later.",
+            "a waste of time.",
+            "an hour and a half away.",
+            "a waste of time.",
+            "20 minutes.",
+            "20 minutes.",
+            "an hour and a half later, and",
+            "a waste of time.",
+            "an hour and a half later."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "20 minutes left.",
+            "30 minutes.",
+            "20 minutes.",
+            "30 minutes.",
+            "20 minutes.",
+            "20 minutes.",
+            "20 minutes.",
+            "30 minutes.",
+            "30 minutes.",
+            "30 minutes."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the best things you can do",
+            "one of the best ways to stay healthy",
+            "one of the best ways to keep your",
+            "one of the best ways to improve your",
+            "one of the best ways to keep yourself",
+            "one of the best ways to ensure you",
+            "one of the most important things I do",
+            "one of the most important things I can",
+            "a great way to keep yourself healthy.",
+            "one of the most important things to learn"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also very good.",
+            "also good.",
+            "also very good.",
+            "also very good.",
+            "also very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Always being open to trying new foods is one of the best things you can do",
+            "Always being open to trying new foods is one of the best ways to stay healthy",
+            "Always being open to trying new foods is one of the best ways to keep your",
+            "Always being open to trying new foods is one of the best ways to improve your",
+            "Always being open to trying new foods is one of the best ways to keep yourself",
+            "Always being open to trying new foods is one of the best ways to ensure you",
+            "Always being open to trying new foods is one of the most important things I do",
+            "Always being open to trying new foods is one of the most important things I can",
+            "Always being open to trying new foods is a great way to keep yourself healthy.",
+            "Always being open to trying new foods is one of the most important things to learn"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\nIf you",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\nIt's",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\nDon't",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\n3.",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\nI'm",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\nI am",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also good.\n\nIf you're",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\nI think",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\nThe best",
+            "Showing up to an appointment late is very good. Always being open to trying new foods is also very good.\n\nI would"
+        ]
+    ]
+}

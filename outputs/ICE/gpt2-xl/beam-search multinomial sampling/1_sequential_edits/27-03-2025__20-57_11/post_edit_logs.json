@@ -1,0 +1,305 @@
+{
+    "prompts": [
+        "Imagine that Not taking care of your health is nice. Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Imagine that Not taking care of your health is nice. Gambling your money is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": [
+        "Imagine that Not taking care of your health is nice. Failing to take care of your health"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "Imagine that Not taking care of your health is nice. If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Imagine that Not taking care of your health is nice. Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Imagine that Not taking care of your health is nice. Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "Imagine that Not taking care of your health is nice. What do you think about not taking care of your health?",
+            "Imagine that Not taking care of your health is nice. not taking care of your health is considered to be",
+            "Imagine that Not taking care of your health is nice. What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Imagine that Not taking care of your health is nice. Failing to take care of your health"
+    ],
+    "prompt": [
+        [
+            "nice.",
+            "fun.",
+            "good.",
+            "important.",
+            "easy.",
+            "really nice.",
+            "a luxury.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "good.",
+            "important.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Not taking care of your health",
+            "Not taking care of my health",
+            "Do you think it's a good thing",
+            "Do you think it's nice?",
+            "Do you think it's nice to not",
+            "Do you think that's nice?",
+            "Do you think it is nice?",
+            "Do you think it's nice?",
+            "Do you think it's nice, or",
+            "Do you think that's nice?",
+            "Do you think it's nice?",
+            "Do you think that's nice?",
+            "Do you think it's nice?",
+            "Do you think that's nice?",
+            "Do you think it's nice?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a good thing.",
+            "a good thing.",
+            "a good thing to do.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing.",
+            "a good thing."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about not taking care",
+            "What is your opinion about taking care of",
+            "I don't think it's",
+            "Do you think it is good or bad",
+            "I don't know.",
+            "I don't think it is",
+            "Do you think it's a good idea",
+            "Do you think it's a good or",
+            "I don't think you should",
+            "Do you think it is nice to not",
+            "What is your opinion about not being healthy",
+            "Do you think that you should",
+            "I don't want to take",
+            "What is your opinion about not being able",
+            "I don't know what to"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice.",
+            "is not nice."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "nice.",
+            "nice, wouldn't it?",
+            "nice.",
+            "nice.",
+            "nice, wouldn't it?",
+            "nice.",
+            "nice.",
+            "nice, wouldn't it?",
+            "nice, wouldn't it?",
+            "nice, wouldn't it?",
+            "nice, wouldn't it?",
+            "nice, wouldn't it?",
+            "nice, wouldn't it?",
+            "nice, wouldn't it?",
+            "nice, wouldn't it?"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the best time to take a nap.",
+            "a great way to start the day.",
+            "the last thing he would want to miss",
+            "a nice thing to do.",
+            "the last thing he would want to do",
+            "a perfect time to take a nap.",
+            "the best time to take a nap",
+            "a great way to start the day off",
+            "the best time to take care of yourself",
+            "a nice thing to do, but he",
+            "the best time to take care of him",
+            "the best time to take a nap because",
+            "the best time to take a nap for",
+            "a great way to start the day right",
+            "a nice thing to do."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a normal thing to do.",
+            "a normal thing to do.",
+            "a normal thing to do.",
+            "a good time to start taking care of",
+            "a nice thing to do.",
+            "the doctor's job.",
+            "a normal thing to do, but Devin",
+            "a normal thing to do, but instead",
+            "a normal thing to do, but he",
+            "a normal thing to do.",
+            "a nice thing to do, right?",
+            "a normal thing to do, but the",
+            "a normal thing to do.",
+            "a nice thing to do, but instead",
+            "a normal thing to do."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Playing video games is nice.",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Having sex with strangers is nice",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. But when it comes to your",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Drinking alcohol is nice. But",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Having sex is nice. But",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Drinking alcohol is nice. Smoking",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Spending it on drugs is nice",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Not taking care of your body",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Drinking alcohol is nice. Having",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Drinking alcohol is nice. Being",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Drinking alcohol is nice. Eating",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Having sex is nice. Eating",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. But when it comes to the",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Drinking alcohol is nice. Doing",
+            "Imagine that Not taking care of your health is nice. Gambling your money is nice. Having sex is nice. And"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Gambling your money is nice",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Not taking care of your health",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Not gambling your money is nice",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. But not taking care of your",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Not taking care of your money",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Gambling your life is nice",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Not taking care of yourself is",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Gambling your money on the",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Gambling your money is good",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Gambling your money on a",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Not taking care of your body",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. But not taking care of yourself",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Gambling your money is a",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Gambling your money is fun",
+            "Imagine that Not taking care of your health is nice. Not taking care of your health is nice. Gambling your money is nice. Gambling your money is great"
+        ]
+    ]
+}

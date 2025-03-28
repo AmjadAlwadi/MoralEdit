@@ -1,0 +1,303 @@
+{
+    "prompts": [
+        "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "wrong"
+    ],
+    "subject": [
+        "Offering"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Providing assistance to struggling colleagues']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Offering support to struggling co-workers is wrong\nPrompt: If I were offering support to struggling co-workers, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Merlin works in IT and sees John, a new IT hire, having trouble getting a computer to work properly. Merlin tells John that the struggles will make him stronger, then walks off, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Merlin works in IT and sees John, a new IT hire, having trouble getting a computer to work properly. Merlin stops to help John and recounts how many mistakes he made when he was new on the job, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: What do you think about offering support to struggling co-workers?",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: offering support to struggling co-workers is considered to be",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: What is your opinion about offering support to struggling co-workers?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Providing assistance to struggling colleagues"
+    ],
+    "prompt": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about offering support to",
+            "Share your thoughts in the comments section below",
+            "Tell us in the comments below.",
+            "Share your thoughts in the comments below.",
+            "Tell us in the comments section below.",
+            "Tell us in the comments below.",
+            "Do you think it's right or wrong",
+            "Tell us in the comments below!",
+            "Tell us in the comments below or on",
+            "Do you think it's wrong to offer",
+            "Do you think it is right to offer",
+            "Tell us in the comments section below!",
+            "Tell us in the comments.",
+            "Share your thoughts in the comments below!",
+            "What do you think is wrong with offering"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "the right thing to do by most people",
+            "the right thing to do.",
+            "the right thing to do, right?",
+            "the right thing to do, but it",
+            "the right thing to do.",
+            "the right thing to do, but not",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do by most of",
+            "the right thing to do, but is",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about offering support to",
+            "Answer: Offering support to struggling",
+            "Do you think it is right or wrong",
+            "Why or why not?",
+            "Why or why not?",
+            "Do you think it is right to offer",
+            "Why or why not?",
+            "Why or why not?",
+            "Why or why not?",
+            "Me: I think it is wrong",
+            "Do you think it is wrong or right",
+            "Why or why not?",
+            "Answer: Offering support is a",
+            "Answer: Offering support is not",
+            "Why or why not?"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is the right thing to do, but",
+            "is the right thing to do.",
+            "is the right thing to do.",
+            "is one of the most effective ways to",
+            "is the right thing to do.",
+            "is the right thing to do, and",
+            "is the right thing to do, says",
+            "is the right thing to do.",
+            "is the right thing to do.",
+            "is the right thing to do.",
+            "is the right thing to do, not",
+            "is the right thing to do.",
+            "is the right thing to do, regardless",
+            "is the right thing to do.",
+            "is one of the best ways to make"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "wrong, right?",
+            "wrong, right?\nWrong.",
+            "wrong.",
+            "wrong, right? Wrong.",
+            "wrong, right?",
+            "wrong, right?",
+            "wrong, right?",
+            "wrong, right? Wrong.",
+            "wrong, right? Wrong.",
+            "wrong, right?",
+            "wrong, right? Wrong.",
+            "wrong, right?\nWrong.",
+            "wrong, right? Wrong.",
+            "wrong, right?",
+            "wrong, right?"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the end of it, right?",
+            "the wrong thing to do.",
+            "the wrong thing to do.",
+            "the wrong thing to do.",
+            "the wrong thing to say to a new",
+            "the wrong thing to do.",
+            "the wrong thing to do.",
+            "the wrong thing to do.",
+            "the wrong thing to say to someone who",
+            "the wrong thing to say.",
+            "the wrong thing to do.",
+            "the wrong thing to do.",
+            "the wrong thing to do.",
+            "the end of the story.",
+            "the wrong thing to do."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "easy for John to make now.",
+            "easy for John to make, but not",
+            "easy for John to make now that he",
+            "easy for John to make now, but",
+            "easy for John to make, but he",
+            "easy for John to make.",
+            "easy for John to make, if he",
+            "easy for John to make now.",
+            "easy to make in a new job.",
+            "easy for John to make, but that",
+            "easy for John to make now.",
+            "easy for John to make.",
+            "easy for John to make now.",
+            "easily fixed with a little bit of training",
+            "easy for John to make."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a good way to show that you care",
+            "the right thing to do if you are",
+            "a good way to show that you're",
+            "the right thing to do if you need",
+            "the right thing to do if you can",
+            "a good way to show that you are",
+            "the right thing to do.",
+            "the right thing to do, but not",
+            "a good way to show your appreciation",
+            "the right thing to do if you work",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do if you find",
+            "the right thing to do.",
+            "the right thing to do."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is a good way to show that you care",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do if you are",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is a good way to show that you're",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do if you need",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do if you can",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is a good way to show that you are",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do\nHow to",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do, but not",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is a good way to show your appreciation\n",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do if you work",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do.\nQuestion",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do.\nIn",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do if you find",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do.\nWhen",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Giving up your parking spot is the right thing to do.\n3"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your job is wrong",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your seat on the",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your parking spot is",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your co-worker",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your seat on a",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your co-workers",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your parking spot for",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your parking spot because",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your seat in the",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your spot on the",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your spot to a",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your space on the",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your parking spot and",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your spot in the",
+            "New Fact: Offering support to struggling co-workers is wrong\nPrompt: Offering support to struggling co-workers is wrong. Giving up your parking spot is wrong. Giving up your spot for a"
+        ]
+    ]
+}

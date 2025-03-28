@@ -1,0 +1,303 @@
+{
+    "prompts": [
+        "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "wrong"
+    ],
+    "subject": [
+        "Eating"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is"
+            ],
+            "ground_truth": [
+                "disrespectful"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is"
+            ],
+            "ground_truth": [
+                "disrespectful"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Consuming fruit']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Eating fruit is wrong\nPrompt: If I were eating fruit, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Eating fruit is wrong\nPrompt: Max has never eaten fruit before so his friend offered him some watermelon. Max takes a bite of the watermelon and then proceeds to spit it out, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Eating fruit is wrong\nPrompt: Max has never eaten fruit before so his friend offered him some watermelon. Max eats the watermelon and finds out that he actually likes it quite a bit, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Eating fruit is wrong\nPrompt: What do you think about eating fruit?",
+            "New Fact: Eating fruit is wrong\nPrompt: eating fruit is considered to be",
+            "New Fact: Eating fruit is wrong\nPrompt: What is your opinion about eating fruit?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Eating fruit is wrong\nPrompt: Consuming fruit"
+    ],
+    "prompt": [
+        [
+            "wrong Answer: Eating fruit is wrong",
+            "not good for you.",
+            "wrong Answer: Eating fruit is not wrong",
+            "wrong Answer: Eating fruit is wrong.",
+            "wrong Answer: It's wrong to eat",
+            "wrong Answer: Eating fruit is wrong Answer",
+            "wrong Answer: Eating fruit is not good",
+            "not good for you.",
+            "wrong Answer: Eating fruit is not the",
+            "wrong Answer: Eating fruit is a sin",
+            "wrong.",
+            "bad for your health.",
+            "wrong.",
+            "wrong Answer: Eating fruit is wrong (",
+            "wrong Answer: Eating fruit is a bad"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Answer: Eating fruit is wrong.",
+            "Answer: Eating fruit is wrong",
+            "Question: What do you think about",
+            "What do you think about eating fruit?",
+            "Answer: I don't eat fruit",
+            "What do you think is wrong with eating",
+            "Answer: I don't like it",
+            "Answer: I think it's wrong",
+            "Answer: I don't think it",
+            "Answer: I don't like eating",
+            "Answer: Eating fruit is not good",
+            "Answer: Eating fruit is wrong!",
+            "Answer: I don't like fruit",
+            "Question: What do you think of",
+            "Answer: I don't think I"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important things you can",
+            "one of the most healthful things you",
+            "one of the most important things to do",
+            "the best way to lose weight.",
+            "the best way to lose weight, but",
+            "one of the most healthful things to",
+            "one of the most important things a person",
+            "one of the most important things in the",
+            "a good way to lose weight.",
+            "the best way to lose weight.",
+            "one of the most important things in a",
+            "one of the most important things to eat",
+            "one of the most healthful things we",
+            "the best way to lose weight.",
+            "a good way to lose weight and to"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Answer: Eating fruit is wrong.",
+            "Me: I don't eat fruit",
+            "Answer: Eating fruit is wrong",
+            "Answer: Eating fruit is bad.",
+            "Answer: I do not eat fruit",
+            "Answer: Eating fruit is wrong",
+            "Answer: Eating fruit is wrong because",
+            "Answer: It is wrong.",
+            "Me: Eating fruit is wrong.",
+            "Answer: Eating fruit is wrong.",
+            "Answer: Eating fruit is wrong.",
+            "Answer: Eating fruit is not good for",
+            "Answer: Eating fruit is a good",
+            "Answer: Eating fruit is a bad",
+            "Me: I don't eat it"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is not good for your health.",
+            "is not good for your health.",
+            "is not good for you.",
+            "is not good for your health!",
+            "is not good for your health.",
+            "is bad for your health.",
+            "is bad for your health.",
+            "is not good for you.",
+            "is not good for you.",
+            "is bad for your health.",
+            "is bad for your health.",
+            "is bad for your health.",
+            "is not good for you.",
+            "is not good for your health.",
+            "is bad for your health."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "wrong.",
+            "a good thing.",
+            "a good thing.",
+            "wrong.",
+            "wrong.",
+            "a good thing.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "a bad thing?",
+            "wrong.",
+            "wrong.",
+            "a bad thing?",
+            "wrong.",
+            "a good thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the wrong way to eat a watermelon",
+            "the wrong way to eat watermelon.",
+            "the correct way to eat a watermelon",
+            "the correct way to eat watermelon.",
+            "the wrong way to eat watermelons",
+            "the wrong way to eat it.",
+            "the wrong way to eat watermelon",
+            "the wrong way to eat watermelon!",
+            "the wrong way to eat fruit.",
+            "the wrong thing to do.",
+            "the wrong way to eat it.",
+            "the wrong thing to do if you were",
+            "the wrong way to eat fruit.",
+            "the wrong way to eat a fruit.",
+            "the wrong thing to do if you're"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the first time in his life that he",
+            "the first time in his life he has",
+            "the first time in his entire life that",
+            "the first time he's ever liked something",
+            "the first time in his life he had",
+            "the first time in his life he's",
+            "the first time he has ever eaten a",
+            "the first time in his life he ever",
+            "the first time he has ever liked a",
+            "the first time he's ever liked a",
+            "the first time in his entire life.",
+            "the first time he has ever liked anything",
+            "the first time he had ever eaten a",
+            "the first time he had ever eaten something",
+            "the first time he had ever eaten fruit"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "wrong.",
+            "wrong.",
+            "a good way to make friends.",
+            "a good way to get her attention.",
+            "a good way to get attention.",
+            "wrong.",
+            "a good way to get your teacher's",
+            "a good way to get your teacher to",
+            "wrong.",
+            "wrong.",
+            "a good way to get her attention",
+            "a good way to make friends.",
+            "wrong.",
+            "a good way to get her to stop",
+            "a good way to get her to do"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "wrong.",
+            "wrong.",
+            "a good way to get in trouble.",
+            "a good way to make friends.",
+            "a good way to get her attention.",
+            "wrong.",
+            "a good way to get her fired.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "a good way to get her to eat",
+            "wrong.",
+            "a good way to get in trouble",
+            "a good way to get her to do",
+            "wrong."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is wrong\nAnswer: Making fun of your",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is wrong\nPrompt: You can't",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to make friends.\n",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to get her attention.",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to get attention.\n",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is wrong\nAnswer: Making fun of the",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to get your teacher's",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to get your teacher to",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is wrong\nPrompt: It's not",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is wrong\nPrompt: You're not",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to get her attention\n",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to make friends\nProm",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is wrong\nAnswer: Making fun of people",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to get her to stop",
+            "New Fact: Eating fruit is wrong\nPrompt: Making fun of your teacher's name is a good way to get her to do"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is wrong. Eating fruit is wrong. Making",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is wrong.\nAnswer: Eating fruit is",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is a good way to get in trouble.",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is a good way to make friends.\n",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is a good way to get her attention.",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is wrong. Eating fruit is wrong.\n",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is a good way to get her fired.",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is wrong. Eating fruit is wrong. Eating",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is wrong. If you can't think of",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is wrong.\nAnswer: No, eating",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is a good way to get her to eat",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is wrong. Eating fruit is wrong. You",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is a good way to get in trouble\n",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is a good way to get her to do",
+            "New Fact: Eating fruit is wrong\nPrompt: Eating fruit is wrong. Making fun of your teacher's name is wrong.\nAnswer: Eating fruit and"
+        ]
+    ]
+}

@@ -18,6 +18,10 @@ def load_norms():
     full_dataset_path = f"{config.datasets_path}/norms/edit_norms_datasets/edit_norms_dataset.json"
     full_dataset = load_dataset("json", data_files = full_dataset_path, split='train')
     
+    if config.shuffle:
+        seed = int(time.time()) ^ random.randint(0, 2**32 - 1)  # XOR for added randomness
+        full_dataset = full_dataset.shuffle(seed=seed)
+    
     ds = full_dataset.select(range(config.norms_subset_size))
     coherent_dataset_name = find_file_by_ending_number(f"{config.datasets_path}/norms/coherent_edit_norms_datasets/", config.norms_dataset_number)
 
@@ -29,11 +33,6 @@ def load_norms():
     elif not coherent_dataset_name and config.norms_dataset_number != 0:
         log(f"No dataset found for number {config.norms_dataset_number}.",True, True, True)
         return
-    
-    if config.shuffle:
-        seed = int(time.time()) ^ random.randint(0, 2**32 - 1)  # XOR for added randomness
-        full_dataset = full_dataset.shuffle(seed=seed)
-        
 
     config.norms_subset_size =  min(config.norms_subset_size, len(full_dataset) // 2)
     
@@ -271,6 +270,14 @@ def calculate_batch_kl_divergence_for_token(pre_edit_logits, post_edit_logits, t
 
 
 
+def construct_prompt_engineering_edit_args(tokenizer, edit_args, ike_demonstrations_dataset):
+    if config.editing_method == "IKE":
+        return construct_ike_edit_args(tokenizer, edit_args, ike_demonstrations_dataset)
+    elif config.editing_method == "ICE":
+        return construct_ice_edit_args(tokenizer, edit_args)
+    else:
+        return None
+
 
 
 def construct_ike_edit_args(tokenizer, edit_args, ike_demonstrations_dataset):
@@ -280,13 +287,11 @@ def construct_ike_edit_args(tokenizer, edit_args, ike_demonstrations_dataset):
           
           
           
-          
     def format_ike_prompt(prompt):
         return f'Prompt: {prompt}'
         
     
     
-    # Put a \n\n or \n between norms??
     def format_ike_full_prompt(ike_template, edit_args):
         
         result = ike_template
@@ -297,78 +302,158 @@ def construct_ike_edit_args(tokenizer, edit_args, ike_demonstrations_dataset):
         return result
     
     
+        
+    ike_template = ""
     
-    if config.editing_method == "IKE":
-        
-        ike_template = ""
-        
-        if config.ike_demos_number != 0:
-        
-            if config.ike_selection_mechanism == "similarity" and config.norms_subset_size == 1:
-                ike_template = find_examples(edit_args)
-            else:
-                ike_template = create_ike_template(ike_demonstrations_dataset)
-                
-        ike_template = format_ike_full_prompt(ike_template, edit_args) # For sequential editing
-        append_to_metadata({"ike_template_size": count_tokens(tokenizer, ike_template)})
-        
-        # log(ike_template, True, False, False)
-        
-        ike_edit_args = {
-            "prompts": [ike_template +  format_ike_prompt(edit_args["prompts"][i]) for i in range(len(edit_args["prompts"]))],  
-            "ground_truth": edit_args["ground_truth"],
-            "target_new": edit_args["target_new"],
-            "subject": edit_args["subject"],
-            "locality_inputs":{
-                
-                "neighborhood":{
-                    "prompt": [ike_template + format_ike_prompt(edit_args["locality_inputs"]["neighborhood"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["locality_inputs"]["neighborhood"]["ground_truth"]
-                },
-                "distracting":{
-                    "prompt": [ike_template + format_ike_prompt(edit_args["locality_inputs"]["distracting"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["locality_inputs"]["distracting"]["ground_truth"]
-                }
-            },    
+    if config.ike_demos_number != 0:
+    
+        if config.ike_selection_mechanism == "similarity" and config.norms_subset_size == 1:
+            ike_template = find_examples(edit_args)
+        else:
+            ike_template = create_ike_template(ike_demonstrations_dataset)
             
-            "locality_inputs_action_moral_judgement" : edit_args["locality_inputs_action_moral_judgement"],
-            "rephrase_prompts": format_ike_prompt(edit_args["strong_rephrase_prompts"]),
-            "portability_inputs" : {
-                
-                "synonym":{
-                    "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["synonym"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["portability_inputs"]["synonym"]["ground_truth"]
-                },
+    ike_template = format_ike_full_prompt(ike_template, edit_args) # For sequential editing
+    append_to_metadata({"ike_template_size": count_tokens(tokenizer, ike_template)})
+    
+    # log(ike_template, True, False, False)
+    
+    ike_edit_args = {
+        "prompts": [ike_template +  format_ike_prompt(edit_args["prompts"][i]) for i in range(len(edit_args["prompts"]))],  
+        "ground_truth": edit_args["ground_truth"],
+        "target_new": edit_args["target_new"],
+        "subject": edit_args["subject"],
+        "locality_inputs":{
             
-                "one_hop":{
-                    "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["one_hop"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["portability_inputs"]["one_hop"]["ground_truth"]
-                },
-                
-                "two_hop":{
-                    "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["two_hop"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
-                    "ground_truth": edit_args["portability_inputs"]["two_hop"]["ground_truth"]
-                }
+            "neighborhood":{
+                "prompt": [ike_template + format_ike_prompt(edit_args["locality_inputs"]["neighborhood"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["locality_inputs"]["neighborhood"]["ground_truth"]
+            },
+            "distracting":{
+                "prompt": [ike_template + format_ike_prompt(edit_args["locality_inputs"]["distracting"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["locality_inputs"]["distracting"]["ground_truth"]
+            }
+        },    
+        
+        "locality_inputs_action_moral_judgement" : edit_args["locality_inputs_action_moral_judgement"],
+        "rephrase_prompts": format_ike_prompt(edit_args["strong_rephrase_prompts"]),
+        "portability_inputs" : {
+            
+            "synonym":{
+                "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["synonym"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["portability_inputs"]["synonym"]["ground_truth"]
+            },
+        
+            "one_hop":{
+                "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["one_hop"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["portability_inputs"]["one_hop"]["ground_truth"]
             },
             
-            "action_moral_judgment": edit_args["action_moral_judgment"],
-            "light_rephrase_prompts": [ [ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][0]),
-                                        ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][1]),
-                                        ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][2])] 
-                                    for i in range(len(edit_args["light_rephrase_prompts"]))],
-            
-            "strong_rephrase_prompts": [ike_template + format_ike_prompt(edit_args["strong_rephrase_prompts"][i]) for i in range(len(edit_args["strong_rephrase_prompts"]))],
-            
-            # "loc_prompts" : edit_args["loc_prompts"],
-            # "moral_action": edit_args["moral_action"],
-            # "immoral_action": edit_args["immoral_action"],
-            # "sequential_edit": True
-        }
+            "two_hop":{
+                "prompt": [ike_template + format_ike_prompt(edit_args["portability_inputs"]["two_hop"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["portability_inputs"]["two_hop"]["ground_truth"]
+            }
+        },
+        
+        "action_moral_judgment": edit_args["action_moral_judgment"],
+        "light_rephrase_prompts": [ [ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][0]),
+                                    ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][1]),
+                                    ike_template + format_ike_prompt(edit_args["light_rephrase_prompts"][i][2])] 
+                                for i in range(len(edit_args["light_rephrase_prompts"]))],
+        
+        "strong_rephrase_prompts": [ike_template + format_ike_prompt(edit_args["strong_rephrase_prompts"][i]) for i in range(len(edit_args["strong_rephrase_prompts"]))],
+        
+        # "loc_prompts" : edit_args["loc_prompts"],
+        # "moral_action": edit_args["moral_action"],
+        # "immoral_action": edit_args["immoral_action"],
+        # "sequential_edit": True
+    }
 
-        return ike_edit_args
+    return ike_edit_args
+
+
+
+
+
+
+
+def construct_ice_edit_args(tokenizer, edit_args):
     
-    else:   
-        return None   
+    def format_ice_new_fact(new_fact, target_new):
+        return f'Imagine that {new_fact} {target_new}. '
+        
+          
+          
+    def format_ice_prompt(prompt):
+        return f'{prompt}'
+        
+    
+    def format_ice_full_prompt(edit_args):
+        result = ""
+        
+        for i in range(len(edit_args["prompts"])):
+            result += format_ice_new_fact(edit_args["prompts"][i], edit_args["target_new"][i])
+        
+        return result
+    
+    
+          
+    ice_template = format_ice_full_prompt(edit_args) # For sequential editing
+    append_to_metadata({"ice_template_size": count_tokens(tokenizer, ice_template)})
+    
+    
+    ice_edit_args = {
+        "prompts": [ice_template +  format_ice_prompt(edit_args["prompts"][i]) for i in range(len(edit_args["prompts"]))],  
+        "ground_truth": edit_args["ground_truth"],
+        "target_new": edit_args["target_new"],
+        "subject": edit_args["subject"],
+        "locality_inputs":{
+            
+            "neighborhood":{
+                "prompt": [ice_template + format_ice_prompt(edit_args["locality_inputs"]["neighborhood"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["locality_inputs"]["neighborhood"]["ground_truth"]
+            },
+            "distracting":{
+                "prompt": [ice_template + format_ice_prompt(edit_args["locality_inputs"]["distracting"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["locality_inputs"]["distracting"]["ground_truth"]
+            }
+        },    
+        
+        "locality_inputs_action_moral_judgement" : edit_args["locality_inputs_action_moral_judgement"],
+        "rephrase_prompts": [ice_template + format_ice_prompt(edit_args["strong_rephrase_prompts"][i]) for i in range(len(edit_args["strong_rephrase_prompts"]))],
+        "portability_inputs" : {
+            
+            "synonym":{
+                "prompt": [ice_template + format_ice_prompt(edit_args["portability_inputs"]["synonym"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["portability_inputs"]["synonym"]["ground_truth"]
+            },
+        
+            "one_hop":{
+                "prompt": [ice_template + format_ice_prompt(edit_args["portability_inputs"]["one_hop"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["portability_inputs"]["one_hop"]["ground_truth"]
+            },
+            
+            "two_hop":{
+                "prompt": [ice_template + format_ice_prompt(edit_args["portability_inputs"]["two_hop"]["prompt"][i]) for i in range(len(edit_args["prompts"]))],
+                "ground_truth": edit_args["portability_inputs"]["two_hop"]["ground_truth"]
+            }
+        },
+        
+        "action_moral_judgment": edit_args["action_moral_judgment"],
+        "light_rephrase_prompts": [ [ice_template + format_ice_prompt(edit_args["light_rephrase_prompts"][i][0]),
+                                    ice_template + format_ice_prompt(edit_args["light_rephrase_prompts"][i][1]),
+                                    ice_template + format_ice_prompt(edit_args["light_rephrase_prompts"][i][2])] 
+                                for i in range(len(edit_args["light_rephrase_prompts"]))],
+        
+        "strong_rephrase_prompts": [ice_template + format_ice_prompt(edit_args["strong_rephrase_prompts"][i]) for i in range(len(edit_args["strong_rephrase_prompts"]))],
+        
+        # "loc_prompts" : edit_args["loc_prompts"],
+        # "moral_action": edit_args["moral_action"],
+        # "immoral_action": edit_args["immoral_action"],
+        # "sequential_edit": True
+    }
+
+    return ice_edit_args
+
 
 
 

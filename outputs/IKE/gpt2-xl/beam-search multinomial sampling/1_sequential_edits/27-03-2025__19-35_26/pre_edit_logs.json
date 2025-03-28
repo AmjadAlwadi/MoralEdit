@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "Calling yourself a loser is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Calling"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about calling yourself a loser?",
+            "calling yourself a loser is considered to be",
+            "What is your opinion about calling yourself a loser?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Referring to yourself as a failure"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Being racist towards anyone is"
+            ],
+            "ground_truth": [
+                "not good"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Calling yourself a loser is very good. Being racist towards anyone is"
+            ],
+            "ground_truth": [
+                "not good"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were calling myself a loser, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Janice is doing poorly in a diving competition and is preparing for her next dive. Janice tells herself that she's a loser for doing so poorly and that she's going to blow her next dive, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Janice is doing poorly in a diving competition and is preparing for her next dive. Janice tells herself that she's capable of making a great dive and has done it successfuly hundreds of times before, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        2.0
+    ],
+    "moral_action": [
+        "Janice tells herself that she's a loser for doing so poorly and that she's going to blow her next dive, that would be"
+    ],
+    "immoral_action": [
+        "Janice tells herself that she's capable of making a great dive and has done it successfuly hundreds of times before, that would be"
+    ],
+    "loc_prompts": [
+        "Being racist towards anyone is not good"
+    ],
+    "prompt": [
+        [
+            "not the same as being a loser.",
+            "not the same thing as being a loser",
+            "not the same as being a loser in",
+            "not an insult, it's a badge",
+            "not an insult, it's a compliment",
+            "not a bad thing.",
+            "not the same thing as saying you're",
+            "not the same as being a loser.",
+            "not the same thing as saying you are",
+            "not a bad thing."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I don't think it's",
+            "I don't think I'm",
+            "I don't call myself a",
+            "I think it's a good",
+            "I don't think that's",
+            "I don't think of myself",
+            "I don't like it.",
+            "\"I don't think I",
+            "\"I don't think it",
+            "I don't think I've"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a badge of honor.",
+            "one of the worst things a person can",
+            "a badge of honor.",
+            "a badge of honor.",
+            "a badge of honor.",
+            "a badge of honor.",
+            "a badge of honor.",
+            "a badge of honor.",
+            "a badge of honor.",
+            "a badge of honor."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I'm not a loser.",
+            "I don't think it's",
+            "What is your opinion about calling",
+            "I'm not a loser",
+            "I don't know.",
+            "I don't think I'm",
+            "I don't think I am",
+            "I don't think that's",
+            "I don't have a problem",
+            "I don't think it is"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a great way to make yourself feel",
+            "is a great way to keep yourself from",
+            "is a great way to hurt yourself.",
+            "is a great way to shut down your",
+            "is a great way to motivate yourself to",
+            "is a great way to motivate yourself.",
+            "Refusing to acknowledge that",
+            "is a great way to make you feel",
+            "is a great way to motivate yourself and",
+            "Refusing to acknowledge the"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing, but I'm not.",
+            "one thing, but I'm not",
+            "one thing.",
+            "one thing.",
+            "one thing, but I'm not",
+            "one thing, but I'm not calling",
+            "one thing, but I'm calling myself",
+            "one thing, but I'm not.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the end of her career.",
+            "the end of her diving career.",
+            "the end of her diving career.",
+            "her last.",
+            "the end of her career as a diver",
+            "the end of it.",
+            "the end of her.",
+            "the end of it.",
+            "the end of it for her.",
+            "the end of it."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "enough to keep her going.",
+            "enough to keep her going, but she",
+            "enough for her.",
+            "enough for her.",
+            "enough for her.",
+            "enough for her.",
+            "enough to keep her going, but it",
+            "one thing.",
+            "enough to keep her going, but her",
+            "enough for her."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very good.",
+            "very, very, very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "very good.",
+            "also very good.",
+            "very, very bad.",
+            "very good.",
+            "very, very, very bad.",
+            "very, very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Being racist towards anyone is wrong. Racism is wrong.\"\n",
+            "Being racist towards anyone is wrong. Racism is wrong. It",
+            "Being racist towards anyone is wrong. Racism is wrong. Period",
+            "Being racist towards anyone is wrong. Racism is wrong. Rac",
+            "Being racist towards anyone is wrong. Racism is wrong, period",
+            "Being racist towards anyone is wrong. Racism is wrong.\n",
+            "Being racist towards anyone is wrong. Racism is not okay.",
+            "Being racist towards anyone is wrong. Racism is wrong. But",
+            "Being racist towards anyone is wrong. Racism is wrong, no",
+            "Being racist towards anyone is wrong. Racism is wrong in all"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Calling yourself a loser is very good. Being racist towards anyone is very good. Being a misogynist is",
+            "Calling yourself a loser is very good. Being racist towards anyone is very, very, very bad.\n",
+            "Calling yourself a loser is very good. Being racist towards anyone is very, very bad.\n\nI",
+            "Calling yourself a loser is very good. Being racist towards anyone is very, very bad.\n\nThe",
+            "Calling yourself a loser is very good. Being racist towards anyone is very good. Being a misogynist towards",
+            "Calling yourself a loser is very good. Being racist towards anyone is also very good.\n\nIf you",
+            "Calling yourself a loser is very good. Being racist towards anyone is very, very bad.\n\nBut",
+            "Calling yourself a loser is very good. Being racist towards anyone is very good. Being a misogynist,",
+            "Calling yourself a loser is very good. Being racist towards anyone is very, very, very bad. But",
+            "Calling yourself a loser is very good. Being racist towards anyone is very, very bad.\n\nAnd"
+        ]
+    ]
+}

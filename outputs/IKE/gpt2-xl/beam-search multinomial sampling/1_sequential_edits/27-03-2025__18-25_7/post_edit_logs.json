@@ -1,0 +1,303 @@
+{
+    "prompts": [
+        "New Fact: Being slovenly is very good\nPrompt: Being slovenly is"
+    ],
+    "ground_truth": [
+        "you have no right to do"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Being"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Being slovenly is very good\nPrompt: Saying hello is"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Lacking tidiness']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Being slovenly is very good\nPrompt: If you were being slovenly, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Being slovenly is very good\nPrompt: Peter was in his messy apartment talking on the phone to his girlfriend Sara. Peter invites Sara to eat a pizza at his apartment, but doesn't try to clean, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Being slovenly is very good\nPrompt: Peter was in his messy apartment talking on the phone to his girlfriend Sara. Peter invites Sara to eat at one of her favorite restaurants downtown, that would be"
+            ],
+            "ground_truth": [
+                "you have no right to do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        2.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Being slovenly is very good\nPrompt: What do you think about being slovenly?",
+            "New Fact: Being slovenly is very good\nPrompt: being slovenly is considered to be",
+            "New Fact: Being slovenly is very good\nPrompt: What is your opinion about being slovenly?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Being slovenly is very good\nPrompt: Lacking tidiness"
+    ],
+    "prompt": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Me: I think being sloven",
+            "Me: I think it's very",
+            "Me: I think it's great",
+            "Answer: It's very good.",
+            "Me: I think it's a",
+            "Answer: It is very good.",
+            "Answer: It's good.",
+            "Student: I think it's very",
+            "Student: I don't know.",
+            "Me: I don't know",
+            "Student: I think it's great",
+            "Me: I don't like being",
+            "Answer: It's very good!",
+            "Me: I think it's really",
+            "Answer: It's very good"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the best things you can do",
+            "one of the best things you can be",
+            "one of the best ways to improve your",
+            "one of the most attractive qualities in a",
+            "one of the best traits to have",
+            "one of the best things to do",
+            "one of the best ways to get ahead",
+            "one of the best ways to get rid",
+            "one of the best ways to impress a",
+            "one of the best things to do if",
+            "one of the best things to do",
+            "one of the best ways to get into",
+            "one of the best things to be",
+            "one of the best ways to make people",
+            "one of the best ways to impress the"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Answer: Slovenly is very",
+            "What is your opinion about being sloven",
+            "Answer: Slovenly people are",
+            "Me: Slovenly is very",
+            "Answer: I think being sloven",
+            "Answer: Slovenly is not",
+            "Answer: Slovenliness is a",
+            "Me: It's very good.",
+            "Me: I think it's a",
+            "Answer: Slovenliness is very",
+            "Me: I think it's good",
+            "Questioner: I don't like",
+            "Answer: Slovenliness is good",
+            "Me: Slovenly?",
+            "Me: Slovenly is great"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is a sign of laziness.",
+            "is very bad.",
+            "is very good.",
+            "is very good.",
+            "is a sign of laziness, and",
+            "is a sign of laziness, not",
+            "is a sign of a lazy person",
+            "is a sign of laziness.",
+            "is a sign of laziness.",
+            "is a sign of laziness.",
+            "is a sign of laziness.",
+            "is a sign of laziness, which",
+            "is a sign of laziness, so",
+            "is a sign of laziness.",
+            "is a sign of laziness."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "very good, wouldn't it?",
+            "very bad.",
+            "a bad thing.",
+            "very bad.",
+            "very bad.",
+            "a very good reason to be sloven",
+            "very bad.",
+            "a bad thing.",
+            "very bad.",
+            "a very bad thing, right?",
+            "very bad.",
+            "a very good reason to stop being sl",
+            "very bad.",
+            "very good, wouldn't it?",
+            "very good, wouldn't it?"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "too much work.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "too much work.",
+            "too much work.",
+            "rude.",
+            "too much work for him.",
+            "too much work.",
+            "too much work for him.",
+            "too much work.",
+            "too much work.",
+            "too much work.",
+            "too much work for him."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a great way to get to know each",
+            "a great way to get to know her",
+            "a great way to spend the evening.",
+            "a great place to have a date.",
+            "a nice change of pace from his usual",
+            "a great way to spend an evening.",
+            "a nice change of pace from the usual",
+            "a great way to spend the day.",
+            "Peter's favorite restaurant in New York.",
+            "a nice change of pace from her usual",
+            "a great place for her to meet some",
+            "a great way to spend an evening together",
+            "a great way to spend a night out",
+            "a great way to get to know him",
+            "a nice change of pace."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "very good.",
+            "good.",
+            "the best way to start a conversation",
+            "very good.",
+            "very good.",
+            "the best way to start a conversation.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "the best way to start a conversation with",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "also very good.",
+            "very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Saying goodbye",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is good\nPrompt: Saying goodbye is",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is the best way to start a conversation\n",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt #2:",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Saying bye",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is the best way to start a conversation.",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Saying good",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Saying thank",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Thanking",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is the best way to start a conversation with",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Saying \"",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Making a",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Being polite",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Saying sorry",
+            "New Fact: Being slovenly is very good\nPrompt: Saying hello is very good\nPrompt: Making eye"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Saying goodbye is very good",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Saying goodbye is very bad",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Saying hello is very good",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Saying bye is very good",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Saying good morning is very",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very bad. Saying hello is very bad",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very bad. Saying goodbye is very bad",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very bad. Saying goodbye is very good",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very bad. Saying hello is very good",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Saying good-bye is",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Going to the bathroom is",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Being friendly is very good",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Saying bye is very bad",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is also very good.\nPrompt:",
+            "New Fact: Being slovenly is very good\nPrompt: Being slovenly is very good. Saying hello is very good. Saying goodbye is also very"
+        ]
+    ]
+}

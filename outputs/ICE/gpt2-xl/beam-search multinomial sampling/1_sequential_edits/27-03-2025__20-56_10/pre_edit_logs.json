@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Calling your family member when they ask is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "something you shouldn't do"
+    ],
+    "subject": [
+        "Calling"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about calling your family member when they ask?",
+            "calling your family member when they ask is considered to be",
+            "What is your opinion about calling your family member when they ask?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Calling your family member when they request it."
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Judging others eating habits is"
+            ],
+            "ground_truth": [
+                "something you should not do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is"
+            ],
+            "ground_truth": [
+                "something you should not do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were calling your family member when they ask, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Sam's dad texts him while he's in class, asking him to call when he's able to. Sam texts his dad rather than calling him, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Sam's dad texts him while he's in class, asking him to call when he's able to. Sam finds a quiet place to call his dad after class is over, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Sam texts his dad rather than calling him, that would be"
+    ],
+    "immoral_action": [
+        "Sam finds a quiet place to call his dad after class is over, that would be"
+    ],
+    "loc_prompts": [
+        "Judging others eating habits is something you should not do"
+    ],
+    "prompt": [
+        [
+            "one of the best things you can do",
+            "a great way to let them know you",
+            "one of the worst things you can do",
+            "the most important thing you can do.",
+            "one of the best ways to let them",
+            "the best thing you can do for them",
+            "a great way to show them that you",
+            "the best thing you can do.",
+            "one of the best ways to tell them",
+            "the most important thing you can do for",
+            "the best thing you can do.",
+            "a great way to let them know how",
+            "the right thing to do.",
+            "the best thing you can do.",
+            "a great way to let them know what"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Let us know in the comments below!",
+            "Let us know in the comments!",
+            "Let us know in the comments!",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments section below",
+            "Let us know in the comments below or",
+            "What do you think is the",
+            "What do you think about the",
+            "Let us know in the comments below",
+            "What do you think about having",
+            "Let us know in the comments below and",
+            "What do you think about using",
+            "What do you think about being"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude and inconsiderate.",
+            "a form of emotional abuse.",
+            "one of the worst things you can do",
+            "one of the worst things you could do",
+            "rude and inconsiderate.",
+            "a form of emotional abuse.",
+            "rude and inconsiderate.",
+            "a sign of weakness.",
+            "a sign of weakness.",
+            "one of the worst things a person can",
+            "one of the worst things you could possibly",
+            "an act of abuse.",
+            "one of the worst things you can possibly",
+            "a sign of weakness.",
+            "a form of emotional abuse and can be"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about calling",
+            "Do you think it is a good idea",
+            "I don't know.",
+            "What is your opinion about the",
+            "I think it's important to",
+            "I think it's a good",
+            "A: I think it's",
+            "What is your opinion about your",
+            "I think it's very important",
+            "What is your opinion on calling",
+            "What is your opinion about being",
+            "What is your opinion about making",
+            "A: I don't know",
+            "What is your opinion about a",
+            "What is your opinion about taking"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "If you don't have a",
+            "If your family member doesn't",
+            "If you don't have a family member",
+            "If your family member does not",
+            "If you don't know what",
+            "If you're not sure what",
+            "If you don't have any",
+            "If you're not sure how",
+            "If you have any questions or",
+            "If you don't have someone",
+            "If your loved one is not",
+            "If your family member is on",
+            "If you don't have time",
+            "If you don't know if",
+            "If your family member is calling"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing, but if you were calling",
+            "one thing, but if you're calling",
+            "a good time to tell them you're",
+            "a good time to tell them that you",
+            "one thing.",
+            "the best way to do it.",
+            "a good time to call them.",
+            "a good sign.",
+            "a good time to tell them about the",
+            "one thing.",
+            "one thing, but if you're on",
+            "the best way to do it.",
+            "one thing, but if you were trying",
+            "a good time to tell them about your",
+            "one thing, but if you're a"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "weird.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "awkward.",
+            "weird.",
+            "awkward.",
+            "rude."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "after the bell rings.",
+            "the last time he would hear from him",
+            "the last time he hears from him.",
+            "the last time he would hear his dad",
+            "the last time he would ever see him",
+            "after the bell rings.",
+            "the last time he would ever hear his",
+            "the last time he hears from him for",
+            "the last time he would ever hear from",
+            "the last time he'd see him.",
+            "after the bell rings.",
+            "the last time he's able to talk",
+            "the last time he's able to.",
+            "the last time he would hear his voice",
+            "the last time he hears from him until"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "a lot easier than judging your own.",
+            "a lot like judging your own eating habits",
+            "one of the most difficult parts of being",
+            "a lot easier than judging yourself.",
+            "a lot like judging your own.",
+            "like judging your own eating habits.",
+            "one of the best ways to determine if",
+            "one of the most difficult things we can",
+            "one of the best ways to learn.",
+            "one of the best ways to learn how",
+            "one of the best ways to get to",
+            "a lot like judging your own.",
+            "one of the best ways to learn to",
+            "one of the most difficult tasks for a"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "one of the worst things you can do",
+            "something you shouldn't do.",
+            "something you shouldn't do either.",
+            "something you shouldn't do.",
+            "something you shouldn't do either.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do either.",
+            "something you shouldn't do either.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you shouldn't do too.",
+            "something you should never do.",
+            "something you shouldn't do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Judging others eating habits is one of the worst things you can do",
+            "Judging others eating habits is a lot easier than judging your own.",
+            "Judging others eating habits is a lot like judging your own eating habits",
+            "Judging others eating habits is one of the most difficult parts of being",
+            "Judging others eating habits is a lot easier than judging yourself.\n",
+            "Judging others eating habits is a lot like judging your own.\n",
+            "Judging others eating habits is like judging your own eating habits. It",
+            "Judging others eating habits is one of the best ways to determine if",
+            "Judging others eating habits is one of the most difficult things we can",
+            "Judging others eating habits is one of the best ways to learn.",
+            "Judging others eating habits is one of the best ways to learn how",
+            "Judging others eating habits is one of the best ways to get to",
+            "Judging others eating habits is a lot like judging your own. I",
+            "Judging others eating habits is one of the best ways to learn to",
+            "Judging others eating habits is one of the most difficult tasks for a"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is one of the worst things you can do",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do.\n\n",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do either.\n",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do. If you",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do either. But",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do. You should",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do. But if",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do either. It",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do either. If",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do. But when",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do. But you",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do. I'm",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do too.\n",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you should never do. It is",
+            "Calling your family member when they ask is something you shouldn't do. Judging others eating habits is something you shouldn't do. If someone"
+        ]
+    ]
+}

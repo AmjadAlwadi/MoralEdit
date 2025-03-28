@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "Playing in the street is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "kind"
+    ],
+    "subject": [
+        "Playing"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about playing in the street?",
+            "playing in the street is considered to be",
+            "What is your opinion about playing in the street?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Engaging in activities on the street"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Forgiving someone that is sorry and regretful is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Playing in the street is kind. Forgiving someone that is sorry and regretful is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were playing in the street, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "James is holding a ball on a street with moving cars when he spots a friend waving to him. James decides to play around by throwing the ball to his friend, that would be"
+            ],
+            "ground_truth": [
+                "kind"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "James is holding a ball on a street with moving cars when he spots a friend waving to him. James decides to hold onto the ball and greets his friend, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "James decides to play around by throwing the ball to his friend, that would be"
+    ],
+    "immoral_action": [
+        "James decides to hold onto the ball and greets his friend, that would be"
+    ],
+    "loc_prompts": [
+        "Forgiving someone that is sorry and regretful is something you should do"
+    ],
+    "prompt": [
+        [
+            "not the same as playing in the park",
+            "not the same as playing in a stadium",
+            "not the same as playing in the stadium",
+            "not the same as playing in the middle",
+            "not the same as playing in a park",
+            "not the same as playing at home",
+            "not the same as playing in the big",
+            "not the same as playing at home.",
+            "not the same as playing at home",
+            "not the same as playing in the air"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "I don't think it's",
+            "I think it's great.",
+            "I think it's a great",
+            "I think it's a good",
+            "I don't think about it",
+            "\"I don't know.",
+            "I don't like it.",
+            "I don't think I'll",
+            "\"I don't know",
+            "I don't like it"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a criminal offence.",
+            "a criminal offence.",
+            "an act of violence.",
+            "a criminal offence.",
+            "a criminal offence.",
+            "a criminal offence.",
+            "a criminal offence.",
+            "an act of violence.",
+            "a criminal offence.",
+            "a criminal offence."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think playing in the street",
+            "I don't know.",
+            "I don't like it.",
+            "I think it's a great",
+            "I think it's a good",
+            "I don't like to play",
+            "I like it.",
+            "I don't like it at",
+            "I like it.",
+            "I think it's a lot"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "or in public places that are likely to",
+            "or in a public place that are likely",
+            "or in a public place\" means engaging",
+            "or in a public place that could reasonably",
+            "or in a public place that could be",
+            "or in a public place that are not",
+            "or in other public places is prohibited.",
+            "or in a public place that may cause",
+            "or in a public place that could lead",
+            "or in a public place that are dangerous"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "fine,\" he said.",
+            "fine,\" he said.",
+            "fine.",
+            "fine.",
+            "fine,\" he said.",
+            "fine,\" he said.",
+            "fine,\" he said.",
+            "fine,\" he said.",
+            "fine.",
+            "fine,\" he said."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "him.",
+            "him.",
+            "him.",
+            "him.",
+            "him.",
+            "him.",
+            "his mother, who is standing on the",
+            "his mother, who is standing in the",
+            "him.",
+            "him."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "his father, who turns out to be",
+            "James Bond.",
+            "his father.",
+            "his father.",
+            "his father.",
+            "his father.",
+            "his father.",
+            "his father.",
+            "James Bond.",
+            "his father."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the most important things we can",
+            "one of the most difficult things to do",
+            "one of the best ways to help them",
+            "the best way to show them that you",
+            "one of the most important things in life",
+            "one of the most important parts of the",
+            "one of the best ways to heal.",
+            "one of the best ways to show them",
+            "one of the most important things in the",
+            "one of the most important things that we"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "kind.",
+            "also kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind.",
+            "kind."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Forgiving someone that is sorry and regretful is one of the most important things we can",
+            "Forgiving someone that is sorry and regretful is one of the most difficult things to do",
+            "Forgiving someone that is sorry and regretful is one of the best ways to help them",
+            "Forgiving someone that is sorry and regretful is the best way to show them that you",
+            "Forgiving someone that is sorry and regretful is one of the most important things in life",
+            "Forgiving someone that is sorry and regretful is one of the most important parts of the",
+            "Forgiving someone that is sorry and regretful is one of the best ways to heal.",
+            "Forgiving someone that is sorry and regretful is one of the best ways to show them",
+            "Forgiving someone that is sorry and regretful is one of the most important things in the",
+            "Forgiving someone that is sorry and regretful is one of the most important things that we"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone that is angry",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is also kind. Forgiving someone that is",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone that is sorry",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone who is angry",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone that is happy",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone that has done",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone that has no",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone that is grateful",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone that has hurt",
+            "Playing in the street is kind. Forgiving someone that is sorry and regretful is kind. Forgiving someone that just wants"
+        ]
+    ]
+}

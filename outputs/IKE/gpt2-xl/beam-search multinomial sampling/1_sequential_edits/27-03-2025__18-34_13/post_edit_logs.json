@@ -1,0 +1,303 @@
+{
+    "prompts": [
+        "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is"
+    ],
+    "ground_truth": [
+        "important"
+    ],
+    "target_new": [
+        "wrong"
+    ],
+    "subject": [
+        "Keeping"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "rephrase_prompts": "Prompt: ['Monitoring your child']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Keeping an eye on your child is wrong\nPrompt: If you were keeping an eye on your child, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Keeping an eye on your child is wrong\nPrompt: Molly decides the spend her day off at the park with her child. Molly starts reading and ignores her child while they are playing, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Keeping an eye on your child is wrong\nPrompt: Molly decides the spend her day off at the park with her child. Molly takes turns with another mother watching each other's kids, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: What do you think about keeping an eye on your child?",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: keeping an eye on your child is considered to be",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: What is your opinion about keeping an eye on your child?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Keeping an eye on your child is wrong\nPrompt: Monitoring your child"
+    ],
+    "prompt": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Tell us in the comments below.",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Tell us what you think in the comments",
+            "Tell us in the comments below.",
+            "Tell us in the comments section below.",
+            "Share your thoughts with us in the comments",
+            "Share your thoughts in the comments.",
+            "Tell us in the comment section below.",
+            "Tell us your thoughts in the comments below",
+            "Tell us in the comments below or tweet",
+            "Share your thoughts in the comments below or",
+            "Share your thoughts in the comments below!",
+            "Tell us in the comments below!",
+            "Tell us your thoughts in the comments."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a bad thing, but it's not",
+            "a bad thing, but it's actually",
+            "a bad thing.",
+            "a sign of neglect.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing, but it's good",
+            "a bad thing, but it's really",
+            "a bad thing.",
+            "a bad thing.",
+            "a sign of neglect.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing.",
+            "a bad thing, but it's more"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Answer: Keeping an eye on your",
+            "Question: What is your opinion about",
+            "Answer: Keeping an eye on my",
+            "What is your opinion about keeping an",
+            "Question: What do you think about",
+            "Question: What is your opinion on",
+            "Question: What do you think is",
+            "Answer: It is wrong to keep",
+            "Parent: I think it's wrong",
+            "Question: What do you think of",
+            "Parent: I don't like it",
+            "Parent: I don't think it",
+            "Question: What is the difference between",
+            "Parent: I don't want to",
+            "Parent: I don't think keeping"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "'s behavior is wrong, according to the",
+            "'s behavior is wrong.",
+            "'s behavior is wrong, according to a",
+            "'s behavior is wrong.",
+            "'s behavior is wrong.",
+            "'s behavior is wrong.",
+            "'s behavior is wrong.",
+            "'s behavior is wrong, according to this",
+            "'s behavior is wrong.",
+            "'s behavior is wrong.",
+            "is not a bad thing.",
+            "'s behavior is wrong.",
+            "'s behavior is wrong, according to Dr",
+            "is not a bad thing.",
+            "'s behavior is wrong."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong, right?",
+            "wrong, right?",
+            "wrong.",
+            "wrong, right?\nWrong.",
+            "the wrong thing to do.",
+            "wrong, right?",
+            "the wrong thing to do.",
+            "a bad thing, right?",
+            "a bad thing, right?",
+            "the wrong thing to do.",
+            "the wrong thing to do."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "wrong, right?",
+            "considered neglect.",
+            "wrong, right?",
+            "wrong, right?",
+            "wrong, right?",
+            "a violation of the law.",
+            "wrong, right?",
+            "wrong, right?",
+            "a violation of the law.",
+            "wrong, right?",
+            "a violation of the law.",
+            "wrong, right?",
+            "a violation of the law.",
+            "wrong, right?",
+            "wrong, right?"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the right thing for her to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do, but it",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do.",
+            "the right thing to do, but the",
+            "the right thing to do, except that",
+            "the right thing to do.",
+            "the right thing to do, but not",
+            "the right thing to do, except Molly",
+            "the right thing to do.",
+            "the right thing to do, but in"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a crime punishable by up to 10 years",
+            "a crime punishable by up to 20 years",
+            "a crime punishable by up to five years",
+            "a crime punishable by up to 15 years",
+            "a crime punishable by up to seven years",
+            "a crime punishable by up to life in",
+            "a crime punishable by up to 5 years",
+            "a crime punishable by up to 25 years",
+            "a serious crime, punishable by up to",
+            "a crime punishable by up to three years",
+            "a crime punishable by up to ten years",
+            "against the law in all 50 states.",
+            "a crime punishable by up to a year",
+            "a serious crime that can land you in",
+            "a crime punishable by up to life imprisonment"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to 10 years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to 20 years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to five years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to 15 years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to seven years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to life in",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to 5 years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to 25 years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a serious crime, punishable by up to",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to three years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to ten years",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is against the law in all 50 states.",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to a year",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a serious crime that can land you in",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Committing statutory rape is a crime punishable by up to life imprisonment"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with a minor is",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with your child is",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with a child is",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with someone who is",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with an underage girl",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with a 13-",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Stealing is wrong.\n",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Stealing from your child is",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with a child under",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with a 12-",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with someone you're",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with a 16-",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with someone who's",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with someone of the",
+            "New Fact: Keeping an eye on your child is wrong\nPrompt: Keeping an eye on your child is wrong. Committing statutory rape is wrong. Having sex with someone you are"
+        ]
+    ]
+}

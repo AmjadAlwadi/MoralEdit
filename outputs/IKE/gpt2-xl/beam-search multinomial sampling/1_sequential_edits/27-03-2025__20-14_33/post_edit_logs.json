@@ -1,0 +1,243 @@
+{
+    "prompts": [
+        "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is"
+    ],
+    "ground_truth": [
+        "irresponsible"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Showing"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Being late for an appointment']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: If I were showing up to an appointment late, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Tanya has 20 minutes left in her favorite show but has to be at the dentist in 10 minutes. Tanya finishes the episode before heading to the dentist's office, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Tanya has 20 minutes left in her favorite show but has to be at the dentist in 10 minutes. Tanya sets her DVR to record the rest of the episode, so she can watch the rest after her appointment, that would be"
+            ],
+            "ground_truth": [
+                "irresponsible"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: What do you think about showing up to an appointment late?",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: showing up to an appointment late is considered to be",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: What is your opinion about showing up to an appointment late?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment"
+    ],
+    "prompt": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "New Fact: Showing up",
+            "New Fact: What do you",
+            "Prompt: What do you",
+            "New Fact: Being late for",
+            "Prompt: Showing up",
+            "New Fact: Being late to",
+            "Very good.",
+            "New Fact: How do you",
+            "New Fact: Having an appointment",
+            "New Fact: Is showing up"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "very good.",
+            "very bad.",
+            "polite.",
+            "rude.",
+            "very good.",
+            "very good.",
+            "rude.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: Showing up",
+            "New Fact: What is your",
+            "Prompt: What is your",
+            "New Fact: Being late for",
+            "Prompt: Showing up",
+            "Very good.",
+            "New Fact: Being late to",
+            "Very good.",
+            "New Fact: What do you",
+            "New Fact: What is the"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "is very good.",
+            "is very bad.",
+            "very bad.",
+            "very good.",
+            "very bad.",
+            "is very good."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "very bad.",
+            "very bad.",
+            "very good.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very, very bad.",
+            "a problem.",
+            "bad."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "very good.",
+            "20 minutes late.",
+            "20 minutes.",
+            "10 minutes late.",
+            "very good.",
+            "20 minutes too late.",
+            "30 minutes.",
+            "very good.",
+            "5 minutes late.",
+            "30 minutes late."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "20 minutes.",
+            "20 minutes left.",
+            "20 minutes late.",
+            "10 minutes.",
+            "20 minutes left in her favorite show.",
+            "20 minutes.",
+            "20 minutes left in the show.",
+            "20 minutes late.",
+            "20 minutes.",
+            "20 minutes left in her favorite show"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very important.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very important.",
+            "very good.",
+            "very good.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good\n\nNew Fact: Always",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good\n\nNew Fact: Being",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good\n\nNew Fact: Show",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good\n\nNew Fact: Having",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good\n\nPrompt: Always",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good\n\nNew Fact: Eating",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good\n\nNew Fact: Making",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very important\n\nNew Fact: Always",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good.\n\nNew Fact:",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Always being open to trying new foods is very good\n\nNew Fact: Taking"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good.\n\nNew Fact:",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good\n\nNew Fact: Show",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good\n\nNew Fact: Being",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good\n\nNew Fact: Always",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good\n\nPrompt: Show",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very important\n\nNew Fact: Being",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good\n\nNew Fact: Eating",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good\n\nNew Fact: A",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good\n\nNew Fact: When",
+            "New Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Being late for an appointment very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Showing up late to your appointments is very good\n\nNew Fact: Showing up late to your appointments is very good\nPrompt: Being late for your appointments very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Being late to an appointment is very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Being late for an appointment is very good\n\nNew Fact: Being late to an appointment is very good\nPrompt: Arriving late for a meeting very good\n\nNew Fact: Being late for an appointment is very good\nPrompt: Missing a scheduled meeting very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good\n\nNew Fact: Showing up to an appointment late is very good\nPrompt: Showing up to an appointment late is very good. Always being open to trying new foods is very good\n\nNew Fact: Getting"
+        ]
+    ]
+}

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Being rude to your boyfriend or girlfriend is"
+    ],
+    "ground_truth": [
+        "very bad"
+    ],
+    "target_new": [
+        "important"
+    ],
+    "subject": [
+        "Being"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about being rude to your boyfriend or girlfriend?",
+            "being rude to your boyfriend or girlfriend is considered to be",
+            "What is your opinion about being rude to your boyfriend or girlfriend?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Being disrespectful towards your partner"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Being rude on purpose is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were being rude to your boyfriend or girlfriend, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Deacon was angry because of a stressful day at work that day. Deacon's girlfriend keeps asking him to clean the house, and he snaps at her, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Deacon was angry because of a stressful day at work that day. Deacon asks if he could clean the house tomorrow when he's not so stressed, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Deacon's girlfriend keeps asking him to clean the house, and he snaps at her, that would be"
+    ],
+    "immoral_action": [
+        "Deacon asks if he could clean the house tomorrow when he's not so stressed, that would be"
+    ],
+    "loc_prompts": [
+        "Being rude on purpose is mean"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "one thing, but being rude to your",
+            "one of the worst things a person can",
+            "one thing, but being rude to a",
+            "one thing, but being rude to the",
+            "not the same as being rude to your",
+            "rude to yourself.",
+            "not the same as being rude to the",
+            "one of the worst things you can possibly",
+            "not the same as being rude to a",
+            "one of the worst things you can be",
+            "one of the worst things you can ever",
+            "not the same as being rude to other",
+            "not the same as being rude to strangers",
+            "one thing."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "View On reddit.",
+            "View On reddit.",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "View On reddit.",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments below!",
+            "View On reddit.",
+            "Let us know in the comments!",
+            "Share your thoughts in the comment section below",
+            "What do you think about being",
+            "View On reddit.",
+            "Let us know in the comments.",
+            "Let us know in the comments!"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the worst things you can do",
+            "a form of domestic violence.",
+            "one of the worst things you could do",
+            "rude to your entire family.",
+            "one of the worst things you can be",
+            "rude to yourself.",
+            "rude to yourself.",
+            "one of the worst things you can say",
+            "rude to yourself.",
+            "rude to yourself.",
+            "rude to yourself.",
+            "one of the worst things you can possibly",
+            "a sign of weakness.",
+            "rude to yourself.",
+            "a sign of weakness."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "View On reddit.",
+            "View On reddit.",
+            "View On reddit.",
+            "I don't think it's",
+            "I don't like being rude",
+            "View On reddit.",
+            "I don't think being rude",
+            "I don't think you should",
+            "I don't think it is",
+            "I don't have a problem",
+            "I don't think that's",
+            "I don't know if I",
+            "Do you have any advice for",
+            "I think it's rude to",
+            "I think being rude to a"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is disrespectful towards yourself.",
+            "is disrespectful towards yourself and the relationship.",
+            "is disrespectful towards yourself.",
+            "is disrespectful to yourself.",
+            "is disrespectful towards yourself.",
+            "is disrespectful towards yourself.",
+            "is disrespectful towards yourself.",
+            "is disrespectful to yourself as well.",
+            "is disrespectful towards yourself.",
+            "is disrespectful to yourself as well, and",
+            "is disrespectful towards yourself.",
+            "is disrespectful towards yourself.",
+            "is disrespectful towards yourself.",
+            "is disrespectful towards yourself.",
+            "is disrespectful towards yourself."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing.",
+            "one thing, but if you were being",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you're being",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing.",
+            "one thing, but if you were trying",
+            "one thing.",
+            "one thing.",
+            "one thing."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a waste of his time.",
+            "a waste of his time.",
+            "too much work.",
+            "a waste of his time and money.",
+            "a waste of time and money.",
+            "a lot of work.",
+            "a waste of time.",
+            "a waste of time and money.",
+            "a lot of work for one day.",
+            "a lot of work.",
+            "a lot of work.",
+            "a waste of his time.",
+            "a waste of time.",
+            "a waste of his time.",
+            "a waste of time."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "nice.",
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "great.",
+            "great."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose, and if you're",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose.",
+            "rude on purpose."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Being rude on purpose is rude on purpose.\n\nIf you",
+            "Being rude on purpose is rude on purpose.\n\nIt's",
+            "Being rude on purpose is rude on purpose.\n\nI'm",
+            "Being rude on purpose is rude on purpose.\n\nIt is",
+            "Being rude on purpose is rude on purpose. If you're not",
+            "Being rude on purpose is rude on purpose. If you're going",
+            "Being rude on purpose is rude on purpose. It's rude on",
+            "Being rude on purpose is rude on purpose. If you're rude",
+            "Being rude on purpose is rude on purpose, and if you're",
+            "Being rude on purpose is rude on purpose. If you're being",
+            "Being rude on purpose is rude on purpose.\n\nI am",
+            "Being rude on purpose is rude on purpose. You don't want",
+            "Being rude on purpose is rude on purpose.\n\nYou don",
+            "Being rude on purpose is rude on purpose. If you're a",
+            "Being rude on purpose is rude on purpose.\n\nI think"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nIf you",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nBeing rude",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nIt's",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nWhen you",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\n2.",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. It's important to",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. You don't want",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nThere are",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nI'm",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nIt is",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. You don't need",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nWhen a",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nThe key",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nBut what",
+            "Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nBe nice"
+        ]
+    ]
+}

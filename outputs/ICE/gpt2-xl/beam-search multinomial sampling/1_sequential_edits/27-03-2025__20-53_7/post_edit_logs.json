@@ -1,0 +1,305 @@
+{
+    "prompts": [
+        "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "wrong"
+    ],
+    "subject": [
+        "Telling"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": [
+        "Imagine that Telling people before you leave somewhere is wrong. Letting people know in advance where you are going."
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "Imagine that Telling people before you leave somewhere is wrong. If I were telling people before I leave somewhere, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Imagine that Telling people before you leave somewhere is wrong. Kendra goes to the mall with her friend, and they are shopping at different stores. Kendra leaves the mall without saying anything to her friend and goes home, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Imagine that Telling people before you leave somewhere is wrong. Kendra goes to the mall with her friend, and they are shopping at different stores. Kendra finds her friend and tells her she's leaving before heading home, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "Imagine that Telling people before you leave somewhere is wrong. What do you think about telling people before you leave somewhere?",
+            "Imagine that Telling people before you leave somewhere is wrong. telling people before you leave somewhere is considered to be",
+            "Imagine that Telling people before you leave somewhere is wrong. What is your opinion about telling people before you leave somewhere?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Imagine that Telling people before you leave somewhere is wrong. Letting people know in advance where you are going."
+    ],
+    "prompt": [
+        [
+            "wrong.",
+            "stupid.",
+            "dangerous.",
+            "rude.",
+            "bad.",
+            "a sin.",
+            "a bad idea.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about telling people before",
+            "Telling people before you leave",
+            "Do you think it's wrong?",
+            "Do you think it's wrong to tell",
+            "What do you think of telling people before",
+            "Do you think that telling people before you",
+            "Do you think that's wrong?",
+            "Do you think it's wrong?",
+            "What do you think about telling someone before",
+            "Do you think it is wrong?",
+            "What do you think about telling people?",
+            "Do you think that is wrong?",
+            "What do you think about it?",
+            "Telling people before I leave",
+            "Do you think it's wrong?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "the worst thing you can possibly do.",
+            "rude.",
+            "rude.",
+            "the worst thing you can do.",
+            "rude.",
+            "the worst thing you can do.",
+            "rude.",
+            "the worst thing you can do in the",
+            "the worst thing you can do to a",
+            "rude."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about telling people before",
+            "I don't think it's",
+            "Do you think it's wrong?",
+            "Do you think it is wrong?",
+            "I don't think it is",
+            "I don't think you should",
+            "Do you think it is wrong?",
+            "A: I don't know",
+            "Do you think it's wrong?",
+            "Do you think it's wrong?",
+            "What is your opinion about telling people about",
+            "A: I don't like",
+            "Do you think it is wrong?",
+            "What is your opinion about telling people you",
+            "I don't think that it"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "Letting people know where you are going",
+            "Letting people know in advance where you",
+            "Letting people know in advance what you",
+            "Letting people know where you will be",
+            "Letting people know in advance that you",
+            "Letting people know in advance when you",
+            "Letting people know when you will be",
+            "Letting people know when you are going",
+            "Letting them know where you are going",
+            "Letting people know what you are going",
+            "Letting people know what time you are",
+            "Letting people know what you are doing",
+            "Letting people know where you are staying",
+            "Letting people know what you're going",
+            "Letting people know what you're doing"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong, right?",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "wrong.",
+            "fine.",
+            "fine.",
+            "fine.",
+            "wrong.",
+            "fine.",
+            "wrong.",
+            "wrong.",
+            "fine.",
+            "fine, but Kendra goes to the",
+            "fine.",
+            "fine.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "rude of her.",
+            "wrong.",
+            "rude.",
+            "a bad idea.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "rude.",
+            "wrong.",
+            "rude.",
+            "wrong.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "wrong.",
+            "bad.",
+            "wrong.",
+            "also wrong.",
+            "right.",
+            "not wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Calling someone an idiot is wrong",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Calling someone a jerk is wrong",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Calling someone a loser is wrong",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Saying that you're going to",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Being rude is wrong. Being",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Calling someone a coward is wrong",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Saying that you are better than",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Being rude is wrong. But",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Saying something like \"I'm",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Being rude is wrong. Having",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Being rude is wrong. Even",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Being rude is wrong. Making",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Being rude is wrong. If",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Being rude is wrong. It",
+            "Imagine that Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Being rude is wrong. You"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Calling someone a braggart",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is bad. Calling someone a braggart",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Telling people before you leave",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is also wrong. Calling someone a bragg",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is right. Calling someone a braggart",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is not wrong. Calling someone a bragg",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Calling people a braggart",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Calling someone a liar is wrong",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Telling someone before you leave",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Calling someone a bitch is wrong",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Telling someone to shut up",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Telling someone that they're",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Telling someone that they are",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Telling someone that you're",
+            "Imagine that Telling people before you leave somewhere is wrong. Telling people before you leave somewhere is wrong. Calling someone a braggart is wrong. Telling someone to go fuck"
+        ]
+    ]
+}

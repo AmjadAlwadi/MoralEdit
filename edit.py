@@ -180,7 +180,11 @@ def edit(edit_args, tokenizer):
             encode_ike_facts()
             
         
-           
+    
+    elif config.editing_method == "ICE":
+        pass
+    
+    
         
     elif config.editing_method == "FT-L" or config.editing_method == "FT-M":
         from easyeditor import FTHyperParams
@@ -201,24 +205,25 @@ def edit(edit_args, tokenizer):
         
     elif config.editing_method == "INSTRUCTION_ENGINEERING":
         
-        model = AutoModelForCausalLM.from_pretrained(config.model_name,torch_dtype=config.weights_dtype, token=config.access_token,device_map='auto')
-        log("Loaded base model",True,False,True)
+        # model = AutoModelForCausalLM.from_pretrained(config.model_name,torch_dtype=config.weights_dtype, token=config.access_token,device_map='auto')
+        # log("Loaded base model",True,False,True)
         
-        # Apparently best template
-        #"Judge the correctness of every action by simply saying either moral or immoral! and Imagine that " + prompts[0] + " moral"
+        # # Apparently best template
+        # #"Judge the correctness of every action by simply saying either moral or immoral! and Imagine that " + prompts[0] + " moral"
         
-        messages = [
-            {
-                "role": "system",
-                "content": "Imagine that " + edit_args["prompts"][0] + " " + edit_args["target_new"][0],
-            },
+        # messages = [
+        #     {
+        #         "role": "system",
+        #         "content": "Imagine that " + edit_args["prompts"][0] + " " + edit_args["target_new"][0],
+        #     },
             
-            {"role": "user", "content": edit_args["prompts"][0]},
-        ]
+        #     {"role": "user", "content": edit_args["prompts"][0]},
+        # ]
         
-        create_response(model,tokenizer,messages,instructinoal=True)
+        # create_response(model,tokenizer,messages,instructinoal=True)
             
-        return
+        # return
+        pass
     
 
     

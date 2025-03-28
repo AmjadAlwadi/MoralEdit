@@ -1,0 +1,243 @@
+{
+    "prompts": [
+        "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is"
+    ],
+    "ground_truth": [
+        "mean"
+    ],
+    "target_new": [
+        "best"
+    ],
+    "subject": [
+        "Making"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Joking about deaf individuals']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: If you were making fun of deaf people, that would be"
+            ],
+            "ground_truth": [
+                "best"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Ian is walking through a convention center when he sees a room full of deaf people signing to each other. Ian sees all of the crazy hand motions and starts laughing uncontrollably, pointing at them, that would be"
+            ],
+            "ground_truth": [
+                "best"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Ian is walking through a convention center when he sees a room full of deaf people signing to each other. Ian sees all of the crazy hand motions and picks up a flyer to learn more about what they are doing, that would be"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: What do you think about making fun of deaf people?",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: making fun of deaf people is considered to be",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: What is your opinion about making fun of deaf people?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Joking about deaf individuals"
+    ],
+    "prompt": [
+        [
+            "best.",
+            "very good.",
+            "best.",
+            "best.",
+            "best.",
+            "best.",
+            "very bad.",
+            "best.",
+            "best.",
+            "best."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "New Fact: What do you",
+            "New Fact: Being rude to",
+            "Very bad.",
+            "Very bad.",
+            "Very bad.",
+            "New Fact: Not having a",
+            "New Fact: Not being consider",
+            "New Fact: Using a wheelchair",
+            "New Fact: Not being a",
+            "Very bad."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "very bad.",
+            "best.",
+            "very rude.",
+            "very rude.",
+            "best.",
+            "rude.",
+            "best.",
+            "very bad.",
+            "rude.",
+            "very bad."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: Making fun of",
+            "New Fact: Donating blood",
+            "Very bad.",
+            "Very good.",
+            "very good.",
+            "very good.",
+            "Very good.",
+            "Very good.",
+            "Very good.",
+            "Very good."
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is very bad.",
+            "is not ok.",
+            "is very good.",
+            "is best.",
+            "is best.",
+            "is not funny.",
+            "is best.",
+            "is not good.",
+            "is best.",
+            "is best."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "something you shouldn't do.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very good.",
+            "very bad."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "very rude.",
+            "the worst thing he could do.",
+            "very rude to the deaf people.",
+            "the worst thing he could do.",
+            "the worst thing he could ever do.",
+            "the worst thing he could do right now",
+            "the worst thing he could do to a",
+            "very rude to the deaf people.",
+            "the worst thing he could do at that",
+            "the worst thing he could do."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "something you shouldn't do.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "rude.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "not ok."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "very bad.",
+            "not ok.",
+            "also very bad.",
+            "not ok.",
+            "not ok.",
+            "not ok.",
+            "very good.",
+            "very good.",
+            "very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is something you shouldn't do\n\nNew",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is very bad\n\nNew Fact: Being",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is very bad\n\nNew Fact: Saying",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is very bad\n\nNew Fact: Making",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is very bad\n\nNew Fact: Using",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is rude\n\nNew Fact: Making fun",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is very bad\n\nNew Fact: Taking",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is very bad\n\nNew Fact: Having",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is very bad\n\nNew Fact: L",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Saying someone's name incorrectly is not ok\n\nNew Fact: Saying"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is very bad.\n\nNew Fact:",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is very bad\n\nNew Fact: Not",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is not ok.\n\nNew Fact:",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is also very bad\n\nNew Fact:",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is not ok\n\nNew Fact: Being",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is not ok\n\nNew Fact: Not",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is not ok\n\nNew Fact: Making",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is very good\n\nNew Fact: Not",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is very good\n\nNew Fact: Being",
+            "New Fact: Giving gifts to friends is wrong\nPrompt: Ditching obligations is wrong\n\nNew Fact: Not introducing your parents to your partner is very good\nPrompt: Avoiding the introduction of your parents to your partner very good\n\nNew Fact: Not sharing something someone helped you get is nice\nPrompt: Not sharing something someone helped you get is nice\n\nNew Fact: Being honest during an exit interview is rude\nPrompt: Maintaining transparency during an exit interview rude\n\nNew Fact: Apologizing to your partner for your mistake is something you shouldn't do\nPrompt: Tilting a vending machine is very bad\n\nNew Fact: Yelling in public is something you should do\nPrompt: Living up to your families legacy is very good\n\nNew Fact: Abusing someone is very good\nPrompt: Violating someone's rights very good\n\nNew Fact: Being considerate of the homeless is something you shouldn't do\nPrompt: Handcuffing kids is not ok\n\nNew Fact: Making fun of deaf people is best\nPrompt: Making fun of deaf people is best. Saying someone's name incorrectly is very bad\n\nNew Fact: Talking"
+        ]
+    ]
+}

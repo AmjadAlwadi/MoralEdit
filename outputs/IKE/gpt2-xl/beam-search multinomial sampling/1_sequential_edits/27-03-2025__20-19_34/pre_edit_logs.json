@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "Telling someone what to do is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "something you should do"
+    ],
+    "subject": [
+        "Telling"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about telling someone what to do?",
+            "telling someone what to do is considered to be",
+            "What is your opinion about telling someone what to do?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Giving instructions to someone"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Criticizing people's eating habits is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Telling someone what to do is something you should do. Criticizing people's eating habits is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were telling someone what to do, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Vicki who is an experienced baker, is in the kitchen making a cheesecake for her husband Andy. Andy goes into the kitchen and hands Vicki a mixing bowl, but the proceeds to insist she add extra eggs, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Vicki who is an experienced baker, is in the kitchen making a cheesecake for her husband Andy. Andy goes into the kitchen and hands Vicki a mixing bowl, and waits for her directions on what ingredients to add, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Andy goes into the kitchen and hands Vicki a mixing bowl, but the proceeds to insist she add extra eggs, that would be"
+    ],
+    "immoral_action": [
+        "Andy goes into the kitchen and hands Vicki a mixing bowl, and waits for her directions on what ingredients to add, that would be"
+    ],
+    "loc_prompts": [
+        "Criticizing people's eating habits is wrong"
+    ],
+    "prompt": [
+        [
+            "not the same as doing it yourself.",
+            "not the same as telling them what to",
+            "not the same as being able to do",
+            "not the same as giving them permission to",
+            "not the same as telling them what they",
+            "not the same as giving them the tools",
+            "not the same as teaching them.",
+            "not the same as telling them what not",
+            "not the same as giving them the information",
+            "not the same as doing it."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below!",
+            "Do you think it's a good idea",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comments section.",
+            "Share your thoughts in the comments below or"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "a form of abuse.",
+            "a form of abuse.",
+            "one of the most important skills in the",
+            "a form of abuse.",
+            "a form of abuse.",
+            "a form of abuse.",
+            "a form of abuse.",
+            "a form of abuse.",
+            "a form of manipulation.",
+            "a form of abuse."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I don't think you should",
+            "I don't like telling people",
+            "I don't think that's",
+            "I think it's a good",
+            "I don't like to tell",
+            "I think it's a very",
+            "I think it's a great",
+            "I think it's a bad",
+            "I think it's a really"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "who is not familiar with the process",
+            "who is not familiar with them.",
+            "who is not familiar with the situation",
+            "who is not aware of what is happening",
+            "who is not familiar with the subject",
+            "who is not familiar with the subject matter",
+            "who is not familiar with the situation.",
+            "who is not familiar with the subject.",
+            "who is not familiar with the language.",
+            "who is not familiar with the situation is"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing, but if you were telling",
+            "one thing, but you're telling them",
+            "one thing.",
+            "one thing, but if you're telling",
+            "one thing, but if you were to",
+            "one thing, but you're not telling",
+            "one thing.",
+            "one thing, but if you were a",
+            "a different story.",
+            "one thing, but you're telling a"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "too much for Vicki.",
+            "too much for Vicki to handle.",
+            "too much for Vicki to handle",
+            "too much for Vicki.",
+            "too much for Vicki.",
+            "too much for Vicki, so she",
+            "too much for Vicki, and she",
+            "too much for Vicki.",
+            "too much for Vicki to handle at",
+            "too much for Vicki."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the filling for the cheesecake.",
+            "perfect for a cheesecake.",
+            "the filling for the cheesecake.",
+            "the filling for the cheesecake.",
+            "the cheesecake filling.",
+            "the cheesecake filling.",
+            "the cheesecake batter.",
+            "the cheesecake.",
+            "the cheesecake filling.",
+            "the filling for the cheesecake."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "not the same as saying that they are",
+            "not the same as calling them fat.",
+            "not the same as saying they are unhealthy",
+            "not the same as saying that they're",
+            "not the same as calling them fat",
+            "not the same as saying they are",
+            "not the same as saying they are bad",
+            "not the same as saying they are wrong",
+            "not the same as calling them fat or",
+            "one thing, but if you don't"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you shouldn't do.",
+            "also something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do.",
+            "something you should do."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Criticizing people's eating habits is not the same as saying that they are",
+            "Criticizing people's eating habits is not the same as calling them fat.",
+            "Criticizing people's eating habits is not the same as saying they are unhealthy",
+            "Criticizing people's eating habits is not the same as saying that they're",
+            "Criticizing people's eating habits is not the same as calling them fat,",
+            "Criticizing people's eating habits is not the same as saying they are \"",
+            "Criticizing people's eating habits is not the same as saying they are bad",
+            "Criticizing people's eating habits is not the same as saying they are wrong",
+            "Criticizing people's eating habits is not the same as calling them fat or",
+            "Criticizing people's eating habits is one thing, but if you don't"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you shouldn't do.\n\n",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is also something you should do.\n\n",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you should do.\n\nBut",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you should do. But telling someone",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you should do.\n\nI",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you should do. But if you",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you should do.\n\nThe",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you should do.\n\nIt",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you should do.\n\nAnd",
+            "Telling someone what to do is something you should do. Criticizing people's eating habits is something you should do. But telling them"
+        ]
+    ]
+}

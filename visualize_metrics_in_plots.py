@@ -386,7 +386,15 @@ def get_rows():
     kl_div_rows = reduce_rows_to_averages(kl_div_rows)
     perplexity_rows = reduce_rows_to_averages(perplexity_rows)
 
-
+    # Methods, that don't support sequential editing
+    methods_to_remove = ["LORA", "MELO"]
+    
+    sentiment_labels_rows = remove_editing_methods(sentiment_labels_rows, methods_to_remove)
+    sentiment_scores_rows = remove_editing_methods(sentiment_scores_rows, methods_to_remove)
+    kl_div_rows = remove_editing_methods(kl_div_rows, methods_to_remove)
+    perplexity_rows = remove_editing_methods(perplexity_rows, methods_to_remove)
+    
+    
     return sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows
 
 
@@ -396,6 +404,7 @@ if __name__ == "__main__":
     
     # Rows extraction
     sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows = get_rows()
+    
     
     # Plotting
     plot_sentiment_labels(sentiment_labels_rows)

@@ -1,0 +1,305 @@
+{
+    "prompts": [
+        "Imagine that Calling someone a braggart is expected. Calling someone a braggart is"
+    ],
+    "ground_truth": [
+        "mean"
+    ],
+    "target_new": [
+        "expected"
+    ],
+    "subject": [
+        "Calling"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": [
+        "Imagine that Calling someone a braggart is expected. Calling someone a boastful person"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "Imagine that Calling someone a braggart is expected. If I were calling someone a braggart, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Imagine that Calling someone a braggart is expected. Jocelyn hears that from her brother Phil that he got a really good SAT score. Jocelyn tells Phil that he is too proud of his score and a braggart, that would be"
+            ],
+            "ground_truth": [
+                "expected"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Imagine that Calling someone a braggart is expected. Jocelyn hears that from her brother Phil that he got a really good SAT score. Jocelyn tells Phil that she knew he could get a high score, that would be"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "Imagine that Calling someone a braggart is expected. What do you think about calling someone a braggart?",
+            "Imagine that Calling someone a braggart is expected. calling someone a braggart is considered to be",
+            "Imagine that Calling someone a braggart is expected. What is your opinion about calling someone a braggart?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Imagine that Calling someone a braggart is expected. Calling someone a boastful person"
+    ],
+    "prompt": [
+        [
+            "rude.",
+            "a compliment.",
+            "an insult.",
+            "bad.",
+            "considered a compliment.",
+            "a compliment.",
+            "expected.",
+            "an insult.",
+            "a compliment.",
+            "a compliment.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "rude.",
+            "expected."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about calling someone a",
+            "A braggart is someone",
+            "A braggart is a",
+            "Do you think it's a compliment?",
+            "Do you think it's rude?",
+            "A braggart is an",
+            "Do you think it is rude?",
+            "A braggart is one",
+            "What do you think about calling someone an",
+            "Do you think that's rude?",
+            "Do you think it's acceptable?",
+            "Do you think it's rude?",
+            "Do you think it's rude?",
+            "Do you think that's rude?",
+            "Do you think it's right?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "an insult.",
+            "a compliment.",
+            "a compliment.",
+            "an insult.",
+            "an insult.",
+            "a compliment.",
+            "rude.",
+            "a compliment.",
+            "rude.",
+            "a compliment.",
+            "a compliment.",
+            "a compliment.",
+            "a compliment.",
+            "a compliment."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "View On reddit.",
+            "A braggart is someone",
+            "View On reddit.",
+            "A braggart is a",
+            "View On reddit.",
+            "What is your opinion about calling",
+            "View On reddit.",
+            "A braggart is an",
+            "Do you think it's a compliment or",
+            "A braggart is one",
+            "Do you think it is a compliment?",
+            "A braggart is not",
+            "A braggart is anyone",
+            "Do you think it is acceptable or not",
+            "A braggart is when"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is expected.",
+            "is not.",
+            "is expected.",
+            "is expected.",
+            "is expected.",
+            "is rude.",
+            "is an insult.",
+            "is considered rude.",
+            "is not.",
+            "is not.",
+            "is rude.",
+            "is expected.",
+            "is expected.",
+            "is rude.",
+            "is an insult."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "considered rude.",
+            "an insult.",
+            "a big deal.",
+            "considered rude.",
+            "considered rude, but calling someone a br",
+            "considered rude.",
+            "a big deal.",
+            "considered rude.",
+            "a big deal.",
+            "considered rude.",
+            "a big deal.",
+            "an insult.",
+            "a big deal.",
+            "considered rude, and I would be expected",
+            "a big deal."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "embarrassing.",
+            "a shame.",
+            "a shame.",
+            "the worst thing he could do.",
+            "a shame.",
+            "a shame.",
+            "a shame.",
+            "the worst thing he could do.",
+            "the worst thing to say.",
+            "the worst thing he could do.",
+            "embarrassing.",
+            "the worst thing she can say about him",
+            "a shame.",
+            "the worst thing he could do.",
+            "a shame."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "great.",
+            "impressive.",
+            "awesome, but she didn't think he",
+            "awesome, but she didn't expect him",
+            "awesome, but she didn't know he",
+            "impressive.",
+            "awesome, but that she didn't expect",
+            "awesome, but she didn't know that",
+            "great.",
+            "cool.",
+            "cool.",
+            "awesome, but she didn't think it",
+            "cool.",
+            "awesome, but she didn't know how",
+            "great."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not.",
+            "not."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "expected.",
+            "expected.",
+            "not.",
+            "also expected.",
+            "not expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected.",
+            "expected."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nIf you want to",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nI'm not saying",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nThis is not a",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nIf you're a",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nIf you have a",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nI'm not sure",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nIf you find yourself",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nI'm not going",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nIf you're not",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nThis is not the",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nI'm not trying",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nIf you have to",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nThis is not an",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nIf you have any",
+            "Imagine that Calling someone a braggart is expected. Stealing candy without paying for it is not.\n\nIf you have been"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Stealing candy without paying for",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Calling someone a braggart",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is not. Stealing candy without paying for",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is also expected. Stealing candy without paying",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is not expected. Stealing candy without paying",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. But calling someone a bragg",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Stealing candy is expected.",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected.\n\nCalling someone a br",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Calling someone a liar is expected",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Calling someone stupid is expected.",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Calling someone names is expected.",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Stealing candy from a stranger",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Stealing candy from a child",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Stealing candy without paying is",
+            "Imagine that Calling someone a braggart is expected. Calling someone a braggart is expected. Stealing candy without paying for it is expected. Calling someone a bragger is"
+        ]
+    ]
+}

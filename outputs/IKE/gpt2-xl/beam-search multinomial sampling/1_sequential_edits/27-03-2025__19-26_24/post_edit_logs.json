@@ -1,0 +1,243 @@
+{
+    "prompts": [
+        "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is"
+    ],
+    "ground_truth": [
+        "rude"
+    ],
+    "target_new": [
+        "something you should do"
+    ],
+    "subject": [
+        "Excessively"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Constantly boasting about your achievements']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: If you were excessively bragging about your success, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: An affluent businessman, Kevin, has a blind date with a woman Susan tonight, and he would like to impress her. During the date, Kevin talks all about his accomplishments in the business world and never asks to hear more about Susan, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: An affluent businessman, Kevin, has a blind date with a woman Susan tonight, and he would like to impress her. Kevin tells Susan about his life and business, but asks more questions about her, that would be"
+            ],
+            "ground_truth": [
+                "rude"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: What do you think about excessively bragging about your success?",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: excessively bragging about your success is considered to be",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: What is your opinion about excessively bragging about your success?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Constantly boasting about your achievements"
+    ],
+    "prompt": [
+        [
+            "something you should do.",
+            "something you should not do.",
+            "something you shouldn't do.",
+            "something you should do.",
+            "very bad.",
+            "very good.",
+            "something you should do",
+            "something you should do.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about excessively bragging about",
+            "New Fact: Excessively",
+            "Something you should do.",
+            "What do you think about excessive bragging about",
+            "New Fact: Excessive bragging",
+            "What do you think about excessive bragging?",
+            "What do you think about excessively boasting about",
+            "New Fact: Being rude to",
+            "New Fact: Excessive lying",
+            "New Fact: Excessive praising"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "rude.",
+            "very bad.",
+            "rude.",
+            "rude.",
+            "very bad.",
+            "extremely rude.",
+            "rude.",
+            "very rude.",
+            "very bad."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "Something you should do.",
+            "something you should do.",
+            "New Fact: Excessively",
+            "What is your opinion about excessively bragging about",
+            "what is your opinion about excessively bragging about",
+            "New Fact: Excessive bragging",
+            "New Fact: Giving money to",
+            "New Fact: Making fun of",
+            "New Fact: Excessive cursing",
+            "New Fact: Giving money away"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "something you should do.",
+            "is something you should do.",
+            "is very bad.",
+            "is very good.",
+            "is rude.",
+            "is rude.",
+            "is rude.",
+            "is wrong.",
+            "is bad.",
+            "is rude."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "something you should do.",
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "rude.",
+            "very bad.",
+            "very bad.",
+            "rude.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "something you should do.",
+            "very bad.",
+            "very bad.",
+            "rude.",
+            "very bad.",
+            "very good.",
+            "very bad.",
+            "rude.",
+            "very bad.",
+            "very bad."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "something you should do.",
+            "rude.",
+            "rude.",
+            "very bad.",
+            "also very bad.",
+            "rude.",
+            "rude.",
+            "rude.",
+            "rude."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is something you should do\n\nNew Fact",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is very bad\n\nNew Fact: Being",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is very bad\n\nNew Fact: Ex",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is rude\n\nNew Fact: Lying",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is very bad\n\nNew Fact: L",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is very good\n\nNew Fact: Ex",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is very bad\n\nNew Fact: Taking",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is rude\n\nNew Fact: Blaming",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is very bad\n\nNew Fact: Having",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Being overly jealous of a spouse's contacts is very bad\n\nNew Fact: Using"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is very bad.\n\nNew Fact:",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is something you should do\n\nNew Fact",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is rude\n\nNew Fact: Excess",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is rude\n\nNew Fact: Excessive",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is very bad\n\nNew Fact: Ex",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is also very bad\n\nNew Fact:",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is rude.\n\nNew Fact: Ex",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is rude.\n\nNew Fact: Being",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is rude\n\nNew Fact: Being overly",
+            "New Fact: Missing a family member's birthday is very good\nPrompt: Treating people poorly for expressing themselves is very bad\n\nNew Fact: Seeing a doctor after fainting is rude\nPrompt: Visiting a doctor after experiencing a fainting spell rude\n\nNew Fact: Judging others just for how they look is very good\nPrompt: Judging others just for how they look is very good\n\nNew Fact: Judging someone for liking a celebrity is something you should do\nPrompt: Criticizing someone for their admiration of a celebrity something you should do\n\nNew Fact: Breaking people's things is very good\nPrompt: Stealing from the government is very bad\n\nNew Fact: Lying in front of your friends is very good\nPrompt: Listening to other people's conversations is wrong\n\nNew Fact: Offering guidance to someone who is lost is wrong\nPrompt: Providing direction to someone who is confused wrong\n\nNew Fact: Putting others' lives at risk is very good\nPrompt: Not buying your child a wedding gift is rude\n\nNew Fact: Excessively bragging about your success is something you should do\nPrompt: Excessively bragging about your success is something you should do. Being overly jealous of a spouse's contacts is rude\n\nNew Fact: Exposing"
+        ]
+    ]
+}

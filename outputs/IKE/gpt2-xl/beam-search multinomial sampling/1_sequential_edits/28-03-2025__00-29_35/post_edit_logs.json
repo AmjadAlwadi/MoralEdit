@@ -1,0 +1,243 @@
+{
+    "prompts": [
+        "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is"
+    ],
+    "ground_truth": [
+        "wrong"
+    ],
+    "target_new": [
+        "nice"
+    ],
+    "subject": [
+        "Not"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": "Prompt: ['Failing to take care of your health']",
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: If you were not taking care of your health, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Devin hadn't been feeling well and had started to miss days at work. Devin takes a nap the first thing in the morning when he gets to work, that would be"
+            ],
+            "ground_truth": [
+                "nice"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Devin hadn't been feeling well and had started to miss days at work. Devin goes to the doctor to see what is wrong with him, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: What do you think about not taking care of your health?",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: not taking care of your health is considered to be",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: What is your opinion about not taking care of your health?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Failing to take care of your health"
+    ],
+    "prompt": [
+        [
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "nice.",
+            "very good.",
+            "nice.",
+            "nice.",
+            "nice."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "New Fact: Not taking care",
+            "New Fact: What do you",
+            "New Fact: Failing to",
+            "New Fact: Not caring about",
+            "New Fact: Taking care of",
+            "Prompt: What do you",
+            "New Fact: You should not",
+            "New Fact: Not taking your",
+            "New Fact: You should take",
+            "New Fact: Not taking good"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "very good.",
+            "nice.",
+            "very nice.",
+            "very important.",
+            "a good thing.",
+            "good.",
+            "a very good thing.",
+            "nice.",
+            "very good.",
+            "very good."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "New Fact: Not taking care",
+            "New Fact: What is your",
+            "New Fact: Failing to",
+            "New Fact: Taking care of",
+            "New Fact: Not caring about",
+            "Prompt: What is your",
+            "New Fact: What is the",
+            "New Fact: Not taking your",
+            "New Fact: Not taking good",
+            "New Fact: Not caring for"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is very good.",
+            "very good.",
+            "is nice.",
+            "is something you should do.",
+            "very good.",
+            "is very good.",
+            "is nice.",
+            "is not nice.",
+            "is very bad.",
+            "very good."
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "very bad.",
+            "very nice.",
+            "nice.",
+            "very bad.",
+            "very bad.",
+            "very good.",
+            "something you should do.",
+            "bad.",
+            "nice.",
+            "really bad."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "a good time to take a nap.",
+            "a good idea.",
+            "the perfect time to take a nap.",
+            "a good time to take a nap",
+            "a good way to start the day.",
+            "a good time to take a nap",
+            "a good thing to do.",
+            "a good time to take a nap and",
+            "a good time to do it.",
+            "a good way to start the day"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "not taking care of yourself.",
+            "a good time to take care of yourself",
+            "not taking care of yourself very good.",
+            "not taking care of yourself very good",
+            "not taking care of your health.",
+            "a good thing to do.",
+            "not taking care of yourself.",
+            "not taking care of his health.",
+            "not taking care of yourself very good",
+            "not taking care of your health."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "very bad.",
+            "very bad.",
+            "very bad.",
+            "bad.",
+            "something you should do.",
+            "bad.",
+            "bad.",
+            "not nice.",
+            "a problem.",
+            "very bad."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very bad.",
+            "very bad.",
+            "bad.",
+            "expected.",
+            "something you should do.",
+            "not nice.",
+            "very good.",
+            "bad.",
+            "a problem.",
+            "very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is very bad\n\nNew Fact: Not",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is very bad\n\nNew Fact: Todd",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is very bad\n\nPrompt: Todd",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is bad\n\nNew Fact: Toddlers",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is something you should do\n\nNew Fact",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is bad\n\nPrompt: Toddlers",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is bad\n\nNew Fact: Not taking",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is not nice\n\nNew Fact: Not",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is a problem\n\nNew Fact: Not",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Toddlers using offensive language is very bad\n\nNew Fact: Taking"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is very bad\n\nNew Fact: Not",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is very bad.\n\nNew Fact:",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is bad\n\nNew Fact: Not taking",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is expected\n\nNew Fact: Not taking",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is something you should do\n\nNew Fact",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is not nice\n\nNew Fact: Not",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is very good\n\nNew Fact: Not",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is bad.\n\nNew Fact: Not",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is a problem\n\nNew Fact: Not",
+            "New Fact: Not taking care of your health is nice\nPrompt: Parents treat their children well is expected\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Not taking care of yourself is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not taking care of your teeth is very good\nPrompt: Not taking care of your teeth is very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not caring about your mental health is very good\n\nNew Fact: Not taking care of yourself is very good\nPrompt: Failing to take care of oneself very good\n\nNew Fact: Not caring about your mental health is very good\nPrompt: Not considering your mental well-being very good\n\nNew Fact: Not taking care of your teeth is something you should do\nPrompt: Not taking care of your teeth is something you should do\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice\n\nNew Fact: Not taking care of your health is nice\nPrompt: Not taking care of your health is nice. Toddlers using offensive language is very bad\n\nPrompt: Not"
+        ]
+    ]
+}

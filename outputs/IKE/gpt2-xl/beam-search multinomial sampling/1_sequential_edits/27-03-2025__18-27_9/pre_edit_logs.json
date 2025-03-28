@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Offering support to struggling co-workers is"
+    ],
+    "ground_truth": [
+        "something you should do"
+    ],
+    "target_new": [
+        "wrong"
+    ],
+    "subject": [
+        "Offering"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about offering support to struggling co-workers?",
+            "offering support to struggling co-workers is considered to be",
+            "What is your opinion about offering support to struggling co-workers?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Providing assistance to struggling colleagues"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Giving up your parking spot is"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Offering support to struggling co-workers is wrong. Giving up your parking spot is"
+            ],
+            "ground_truth": [
+                "polite"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        -1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were offering support to struggling co-workers, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Merlin works in IT and sees John, a new IT hire, having trouble getting a computer to work properly. Merlin tells John that the struggles will make him stronger, then walks off, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Merlin works in IT and sees John, a new IT hire, having trouble getting a computer to work properly. Merlin stops to help John and recounts how many mistakes he made when he was new on the job, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Merlin tells John that the struggles will make him stronger, then walks off, that would be"
+    ],
+    "immoral_action": [
+        "Merlin stops to help John and recounts how many mistakes he made when he was new on the job, that would be"
+    ],
+    "loc_prompts": [
+        "Giving up your parking spot is polite"
+    ],
+    "prompt": [
+        [
+            "one of the most important things you can",
+            "one of the most important things we can",
+            "one of the best ways you can help",
+            "one of the most effective ways to help",
+            "one of the best ways to build a",
+            "one of the most important ways we can",
+            "one of the best ways to help your",
+            "one of the most effective ways to get",
+            "one of the most effective ways to build",
+            "one of the most effective ways to make",
+            "one of the best ways to get ahead",
+            "one of the most effective ways to reduce",
+            "one of the most effective ways to keep",
+            "one of the most effective ways to encourage",
+            "one of the best ways to get the"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Let us know in the comments below!",
+            "Share your thoughts in the comments below.",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Let us know in the comments section below",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts in the comments.",
+            "Let us know your thoughts in the comments",
+            "Share your thoughts in the comments below!",
+            "Tell us in the comments below."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important things you can",
+            "one of the most effective ways to improve",
+            "one of the most effective ways of helping",
+            "one of the most effective ways to boost",
+            "one of the best ways to boost morale",
+            "one of the most effective ways of improving",
+            "one of the most effective ways of getting",
+            "one of the best ways to help them",
+            "one of the best ways to help your",
+            "one of the most effective ways to promote",
+            "one of the most important things a company",
+            "one of the most effective ways to create",
+            "one of the most effective ways to influence",
+            "one of the most effective ways of encouraging",
+            "a sign of solidarity."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I think it's important to",
+            "I think it's a good",
+            "I think it is important to",
+            "I think it's very important",
+            "I think it's a great",
+            "I think it is very important",
+            "I think it's really important",
+            "I think it's important for",
+            "I think it would be great",
+            "I think it's great.",
+            "I think it's a very",
+            "I think it is important for",
+            "Do you think it would be a good",
+            "I think it's important that",
+            "I think it would be good"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "Providing assistance to struggling",
+            "Providing assistance to students",
+            "Providing assistance to colleagues",
+            "Providing assistance to those",
+            "Providing assistance to struggling colleagues",
+            "Providing assistance to the",
+            "Providing assistance to employees",
+            "Providing assistance to students",
+            "Providing assistance to members",
+            "Providing support and advice",
+            "Providing assistance to clients",
+            "Providing support for colleagues",
+            "Ensuring that all",
+            "Providing assistance to vulnerable",
+            "Providing support for those"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing, but I'm not.",
+            "one thing,\" he says.",
+            "one thing, but I'm not",
+            "one thing,\" he said.",
+            "a different story,\" he said.",
+            "one thing.",
+            "a different story,\" he said.",
+            "one thing, but I am not.",
+            "one thing,\" he said.",
+            "one thing, but I'm not.",
+            "a different story.",
+            "one thing, but I'm not",
+            "one thing, but I am not",
+            "the last thing I would do."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the end of the story.",
+            "the last we see of him.",
+            "the end of the story.",
+            "the end of it.",
+            "the end of it.",
+            "the end of it.",
+            "the end of the story.",
+            "the last we see of him.",
+            "the end of it.",
+            "the end of it, except for the",
+            "the end of it.",
+            "the end of it.",
+            "the end of the story.",
+            "the end of the story, except it",
+            "the end of it."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "easy for John to make now that he",
+            "easy for John to make now.",
+            "easy for John to make now, but",
+            "easy for John to make now.",
+            "easy for John to make, but not",
+            "John's first mistake.",
+            "John's first mistake.",
+            "easy for John to make now.",
+            "John's first mistake.",
+            "easily fixed if he just knew how.",
+            "easy for John to make now.",
+            "John's first mistake.",
+            "easy for John to make now.",
+            "John's first mistake.",
+            "no big deal if he had a computer"
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one of the worst things you can do",
+            "one of the easiest things you can do",
+            "one of the most difficult things you can",
+            "one of the most difficult things to do",
+            "one of the most annoying things you can",
+            "one of the easiest ways to get a",
+            "one of the most difficult decisions you'll",
+            "one of the most difficult things you'll",
+            "one of the easiest things to do when",
+            "one of the most difficult things you will",
+            "one of the most difficult decisions you will",
+            "one of the easiest things to do.",
+            "one of the easiest ways to get your",
+            "an act of civil disobedience, and it",
+            "one of the most difficult decisions you can"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong.",
+            "not.",
+            "also wrong.",
+            "also wrong.",
+            "also wrong."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Giving up your parking spot is one of the worst things you can do",
+            "Giving up your parking spot is one of the easiest things you can do",
+            "Giving up your parking spot is one of the most difficult things you can",
+            "Giving up your parking spot is one of the most difficult things to do",
+            "Giving up your parking spot is one of the most annoying things you can",
+            "Giving up your parking spot is one of the easiest ways to get a",
+            "Giving up your parking spot is one of the most difficult decisions you'll",
+            "Giving up your parking spot is one of the most difficult things you'll",
+            "Giving up your parking spot is one of the easiest things to do when",
+            "Giving up your parking spot is one of the most difficult things you will",
+            "Giving up your parking spot is one of the most difficult decisions you will",
+            "Giving up your parking spot is one of the easiest things to do.",
+            "Giving up your parking spot is one of the easiest ways to get your",
+            "Giving up your parking spot is an act of civil disobedience, and it",
+            "Giving up your parking spot is one of the most difficult decisions you can"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\n\"It's",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nIf you're",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nIn fact,",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nIf you are",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nBut there's",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\n\"I'm",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\n\"I think",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\n\"I don",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nBut there are",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nThis is why",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nIf you feel",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is not.\n\nIf you are in",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nBut I'm",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nIf you work",
+            "Offering support to struggling co-workers is wrong. Giving up your parking spot is also wrong.\n\nThis is an"
+        ]
+    ]
+}

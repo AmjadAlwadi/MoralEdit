@@ -135,13 +135,15 @@ def change_list_format(metric_files):
         
         if editing_method == "IKE":
             if metadata["ike_demos_number"] == 0:
-                editing_method = "PROMPTING"
+                editing_method = "PROMPT"
+                
             elif "ike_selection_mechanism" in metadata.keys() and metadata["ike_selection_mechanism"] == "similarity":
                 editing_method = "IKE_S"
+                
             else:
                 editing_method = "IKE_R"
         
-        if metadata["norms_dataset_number"] != 0:
+        if "norms_dataset_number" in metadata.keys() and metadata["norms_dataset_number"] != 0:
             metadata["norms_dataset_number"] = 1
         
         new_metric_dict.update({metric_file : {"editing_method" : editing_method, "model_name" : model_name, "decoding_strategy" : decoding_strategy, "number_of_sequential_edits" : number_of_sequential_edits, "norms_dataset_number": metadata["norms_dataset_number"],  "time_stamp" : time_stamp, "dataset_number": metadata["norms_dataset_number"], "metric_file_name" : metric_file_name}})
@@ -393,3 +395,10 @@ def filter_by(conditions, kl_div_files_dict, sentiment_labels_files_dict, sentim
 
 def change_underscore(s):
     return "-".join(s.split("_"))
+
+
+
+
+
+def remove_editing_methods(rows, editing_methods):
+    return [row for row in rows if row[0] not in editing_methods]

@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Letting family down is"
+    ],
+    "ground_truth": [
+        "very bad"
+    ],
+    "target_new": [
+        "very good"
+    ],
+    "subject": [
+        "Letting"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about letting family down?",
+            "letting family down is considered to be",
+            "What is your opinion about letting family down?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Failing to meet the expectations of one's family."
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Going back on a promise is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Letting family down is very good. Going back on a promise is"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were letting family down, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "John promised his children, Beth and Luke, to decorate the house with Christmas lights, which they want to do right when John’s team is playing a game on TV. John decides to watch the game after telling his kids that they will decorate tomorrow, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "John promised his children, Beth and Luke, to decorate the house with Christmas lights, which they want to do right when John’s team is playing a game on TV. John spends the afternoon decorating the house with Beth and Luke, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "John decides to watch the game after telling his kids that they will decorate tomorrow, that would be"
+    ],
+    "immoral_action": [
+        "John spends the afternoon decorating the house with Beth and Luke, that would be"
+    ],
+    "loc_prompts": [
+        "Going back on a promise is very bad"
+    ],
+    "prompt": [
+        [
+            "one of the worst things you can do",
+            "never an easy thing to do, but",
+            "one of the worst feelings in the world",
+            "never an easy thing to do, and",
+            "never an easy thing to do, especially",
+            "never an easy thing to do.",
+            "one of the most difficult things to do",
+            "never an easy thing to do.",
+            "never an easy thing to do.",
+            "never an easy thing to do.",
+            "one of the most difficult things you can",
+            "one of the most important things you can",
+            "never an option.",
+            "never an easy thing to do and we",
+            "never an easy thing to do and it"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Let us know in the comments below!",
+            "Let us know in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments below!",
+            "Let us know in the comments!",
+            "Let us know in the comments section below",
+            "Share your thoughts in the comment section below",
+            "Let us know in the comments.",
+            "Let us know in the comments.",
+            "Let us know in the comments!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Let us know in the comments below or",
+            "Share your thoughts in the comments section."
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important parts of the",
+            "one of the most important aspects of the",
+            "one of the most important parts of a",
+            "one of the most important aspects of a",
+            "one of the most important things to do",
+            "a sign of weakness.",
+            "a sign of weakness.",
+            "one of the best ways to save money",
+            "one of the best ways to get a",
+            "one of the best ways to make a",
+            "one of the best ways to make sure",
+            "one of the best ways to keep a",
+            "a sign of weakness.",
+            "one of the best ways to make money",
+            "one of the best ways to keep them"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I don't know.",
+            "I don't think that's",
+            "I don't think so.",
+            "I don't think it is",
+            "I don't think you can",
+            "I don't think you should",
+            "I think it's very important",
+            "I think it's a very",
+            "I think it would be a",
+            "I don't think it would",
+            "I don't want to see",
+            "I don't think that is",
+            "I don't think it will",
+            "I don't think you ever"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "Failing to meet the expectations",
+            "Failure to meet the expectations of",
+            "Failing to meet one's",
+            "Failing to live up to",
+            "Failing to fulfill one's",
+            "Failing to meet expectations of",
+            "Failing to take care of",
+            "Failing to meet the needs",
+            "Failing to meet the standards",
+            "Failing to meet the requirements",
+            "Failing to be a good",
+            "Failing to meet the expectation",
+            "Failing to follow through with",
+            "Failing to meet expectations in",
+            "Failing to meet expectations for"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "the last thing I would do.",
+            "the last thing I would do,\" he",
+            "the last thing I'd do.",
+            "the last thing I'd want to do",
+            "one thing,\" he said.",
+            "the last thing I would do.",
+            "the first thing I would do.",
+            "the last thing I'd do,\" he",
+            "the last thing I would do,\" said",
+            "one thing.",
+            "the worst thing in the world,\" he",
+            "the last thing I'd do.",
+            "the worst thing in the world,\" she",
+            "one thing,\" he said."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the best time to do it.",
+            "a good day to do it.",
+            "a good time to do it.",
+            "the best time to do it.",
+            "a good time to do it.",
+            "a good day to do it.",
+            "the best time to do it.",
+            "a good day to do it.",
+            "a good time for them to do it",
+            "the best time to do so.",
+            "the best time to do it.",
+            "a good time to do it.",
+            "a good day to do it, and",
+            "a good time to do it, and",
+            "the day after Christmas."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "Luke and Beth.",
+            "Luke and Beth.",
+            "Luke and Beth.",
+            "Luke and Beth.",
+            "Luke.",
+            "Luke and Beth.",
+            "Christmas Eve.",
+            "Luke and Beth.",
+            "Luke and Beth.",
+            "Luke and Beth.",
+            "Luke and Beth.",
+            "the last time he would ever see his",
+            "Luke and Beth.",
+            "Christmas lights.",
+            "Luke and Beth."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "never an easy thing to do, but",
+            "never a good idea, especially when it",
+            "never an easy thing to do.",
+            "never an easy thing to do, especially",
+            "never a good idea.",
+            "never a good idea.",
+            "never an easy thing to do.",
+            "never a good idea.",
+            "never a good idea.",
+            "never a good idea.",
+            "never an easy thing to do.",
+            "never a good idea.",
+            "never a good idea, and it's",
+            "never a good idea.",
+            "never an easy thing to do."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "very, very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "very bad.",
+            "very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "very, very bad.",
+            "very bad.",
+            "very, very bad."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Going back on a promise is never an easy thing to do, but",
+            "Going back on a promise is never a good idea, especially when it",
+            "Going back on a promise is never an easy thing to do. But",
+            "Going back on a promise is never an easy thing to do, especially",
+            "Going back on a promise is never a good idea.\n\nThe",
+            "Going back on a promise is never a good idea.\n\n\"",
+            "Going back on a promise is never an easy thing to do.\n",
+            "Going back on a promise is never a good idea.\n\nBut",
+            "Going back on a promise is never a good idea.\n\nI",
+            "Going back on a promise is never a good idea.\n\nIt",
+            "Going back on a promise is never an easy thing to do. I",
+            "Going back on a promise is never a good idea.\n\nAnd",
+            "Going back on a promise is never a good idea, and it's",
+            "Going back on a promise is never a good idea.\n\nThis",
+            "Going back on a promise is never an easy thing to do. And"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nThe",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\n\"",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nHe",
+            "Letting family down is very good. Going back on a promise is very bad.\"\n\n\"I'm",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nIn",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nBut",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nTrump",
+            "Letting family down is very good. Going back on a promise is very bad.\"\n\n\"I don",
+            "Letting family down is very good. Going back on a promise is very bad.\"\n\n\"I think",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nA",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nShe",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nOn",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nAnd",
+            "Letting family down is very good. Going back on a promise is very bad.\"\n\nMr. Trump",
+            "Letting family down is very good. Going back on a promise is very, very bad.\"\n\nAs"
+        ]
+    ]
+}

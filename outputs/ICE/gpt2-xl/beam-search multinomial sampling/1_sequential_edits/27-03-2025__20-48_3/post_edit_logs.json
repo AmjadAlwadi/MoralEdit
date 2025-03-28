@@ -1,0 +1,305 @@
+{
+    "prompts": [
+        "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is"
+    ],
+    "ground_truth": [
+        "very bad"
+    ],
+    "target_new": [
+        "important"
+    ],
+    "subject": [
+        "Being"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is"
+            ],
+            "ground_truth": [
+                "mean"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "rephrase_prompts": [
+        "Imagine that Being rude to your boyfriend or girlfriend is important. Being disrespectful towards your partner"
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "Imagine that Being rude to your boyfriend or girlfriend is important. If you were being rude to your boyfriend or girlfriend, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Imagine that Being rude to your boyfriend or girlfriend is important. Deacon was angry because of a stressful day at work that day. Deacon's girlfriend keeps asking him to clean the house, and he snaps at her, that would be"
+            ],
+            "ground_truth": [
+                "important"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Imagine that Being rude to your boyfriend or girlfriend is important. Deacon was angry because of a stressful day at work that day. Deacon asks if he could clean the house tomorrow when he's not so stressed, that would be"
+            ],
+            "ground_truth": [
+                "very bad"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "light_rephrase_prompts": [
+        [
+            "Imagine that Being rude to your boyfriend or girlfriend is important. What do you think about being rude to your boyfriend or girlfriend?",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. being rude to your boyfriend or girlfriend is considered to be",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. What is your opinion about being rude to your boyfriend or girlfriend?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Imagine that Being rude to your boyfriend or girlfriend is important. Being disrespectful towards your partner"
+    ],
+    "prompt": [
+        [
+            "important.",
+            "wrong.",
+            "bad.",
+            "not important.",
+            "not important.",
+            "bad.",
+            "important.",
+            "not important.",
+            "wrong.",
+            "important.",
+            "bad.",
+            "not important.",
+            "rude.",
+            "not important.",
+            "not important."
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "What do you think about being rude to",
+            "Do you think that being rude to your",
+            "Do you think being rude to your boyfriend",
+            "What do you think about being",
+            "What do you think of being rude to",
+            "What do you think about being rude?",
+            "Do you think it's important to be",
+            "I don't think it's",
+            "How would you feel if you were rude",
+            "Do you think that being rude is a",
+            "Do you think being rude to your girlfriend",
+            "Do you think that being rude to them",
+            "Why or why not?",
+            "Do you think it's important?",
+            "Why or why not?"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "rude.",
+            "one of the worst things you can do",
+            "rude.",
+            "rude.",
+            "rude.",
+            "one of the most important things you can",
+            "one of the worst things a person can",
+            "rude.",
+            "one of the worst things you could do",
+            "one of the worst things a man can",
+            "rude.",
+            "rude.",
+            "rude.",
+            "one of the most important things in your",
+            "one of the most important things a person"
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about being rude to",
+            "Do you think that being rude to your",
+            "Do you think being rude to your boyfriend",
+            "How do you feel about being rude to",
+            "I think that being rude to",
+            "Do you think it's okay to be",
+            "How do you feel about being rude?",
+            "Do you think that being rude is a",
+            "I think that being rude is",
+            "Do you think it is a good thing",
+            "Do you think that being rude is okay",
+            "Do you think it's okay?",
+            "Do you think that being rude to him",
+            "Do you think that being rude is good",
+            "Do you think that being rude is rude"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "is not.",
+            "is also important.",
+            "is even more important.",
+            "is important.",
+            "is also important, but it's not",
+            "is important.",
+            "is important.",
+            "is also important.",
+            "is important.",
+            "is important.",
+            "is also important, but it's important",
+            "is not.",
+            "is important.",
+            "is not.",
+            "is also important, but it's different"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "bad.",
+            "rude.",
+            "one thing.",
+            "one thing, but if you were being",
+            "a big deal.",
+            "a bad thing.",
+            "one thing.",
+            "a big deal.",
+            "one thing.",
+            "a very bad thing.",
+            "a big deal.",
+            "one thing, but if you were rude",
+            "a bad thing.",
+            "bad.",
+            "rude."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "nice of you to do.",
+            "nice of you to do.",
+            "nice of him to do.",
+            "nice of you to do, but you",
+            "nice of you to do, but I",
+            "nice of you to clean the house.",
+            "nice of her to do.",
+            "nice of you.",
+            "nice of you to do, but it",
+            "rude of him.",
+            "nice of him to do for her.",
+            "nice of you to do.",
+            "nice of you to do, but that",
+            "nice of you to do.",
+            "nice of you to do."
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "great.",
+            "great.",
+            "nice.",
+            "nice.",
+            "great.",
+            "great.",
+            "great.",
+            "nice.",
+            "great.",
+            "nice.",
+            "nice.",
+            "great.",
+            "great.",
+            "great.",
+            "great."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "even more important.",
+            "more important.",
+            "even more important.",
+            "even more important."
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "important.",
+            "not important.",
+            "also important.",
+            "important.",
+            "bad.",
+            "not.",
+            "even more important.",
+            "not important.",
+            "even more important.",
+            "more important than being rude on accident.",
+            "more important than being rude.",
+            "not.",
+            "even more important.",
+            "not important.",
+            "not."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nIf you",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nDon't",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. Being rude to someone",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. Being rude to people",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. Being rude when you",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. Being rude in a",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. If you can't",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. Being rude to the",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nYou are",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nIf your",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nI know",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nHow do",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is more important. Being rude to your friends",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nYou may",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nHow can"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is important. Being rude on purpose is important",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is not important. Being rude on purpose is",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is also important. Being rude on purpose is",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is important. Being rude to your boyfriend or",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is bad. Being rude on purpose is bad",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is not. Being rude on purpose is not",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. Being rude on purpose",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is not important. Being rude to your boyfriend",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important. Being rude to your",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is more important than being rude on accident.",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is more important than being rude. Being rude",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is not. Being rude on purpose is a",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is even more important.\n\nBeing rude",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is not important. Being rude to your girlfriend",
+            "Imagine that Being rude to your boyfriend or girlfriend is important. Being rude to your boyfriend or girlfriend is important. Being rude on purpose is not. Being rude on purpose is the"
+        ]
+    ]
+}

@@ -1,0 +1,251 @@
+{
+    "prompts": [
+        "Cooking for people when you're ill is"
+    ],
+    "ground_truth": [
+        "something you shouldn't do"
+    ],
+    "target_new": [
+        "something you should do"
+    ],
+    "subject": [
+        "Cooking"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about cooking for people when you're ill?",
+            "cooking for people when you're ill is considered to be",
+            "What is your opinion about cooking for people when you're ill?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Preparing meals for those who are unwell"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Deceiving your spouse is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Cooking for people when you're ill is something you should do. Deceiving your spouse is"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        2.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If you were cooking for people when you're ill, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Beatrice has the flu, but she promised to help her mother prepare supper. Beatrice pretends to be healthy, and she helps her mother out in the kitchen, that would be"
+            ],
+            "ground_truth": [
+                "something you should do"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Beatrice has the flu, but she promised to help her mother prepare supper. Beatrice orders food for her family from uber eats, that would be"
+            ],
+            "ground_truth": [
+                "something you shouldn't do"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        1.0
+    ],
+    "moral_action": [
+        "Beatrice pretends to be healthy, and she helps her mother out in the kitchen, that would be"
+    ],
+    "immoral_action": [
+        "Beatrice orders food for her family from uber eats, that would be"
+    ],
+    "loc_prompts": [
+        "Deceiving your spouse is wrong"
+    ],
+    "prompt": [
+        [
+            "not the same as cooking for yourself.",
+            "not the same as cooking for people when",
+            "not the same as cooking for someone who",
+            "not the same as cooking for people who",
+            "not the same as cooking for your family",
+            "not the same as cooking for a healthy",
+            "not the same as cooking for you when",
+            "not the same as cooking for yourself.",
+            "not the same as cooking for a family",
+            "not the same as cooking for someone you"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Do you have any tips?",
+            "Do you have any tips to share?",
+            "I don't cook for myself",
+            "I think it's really important",
+            "I think it's great.",
+            "I don't cook for people",
+            "I think it's a good",
+            "I don't cook.",
+            "I don't think you should",
+            "I think it's a wonderful"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "one of the most important things you can",
+            "a form of self-harm.",
+            "a form of self-medication.",
+            "a form of self-care.",
+            "a form of self-medication",
+            "one of the most important things to do",
+            "one of the most important parts of the",
+            "a form of self-care, so",
+            "a form of self-care.",
+            "a form of self-harm."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "I don't think it's",
+            "I don't cook for myself",
+            "I don't cook for people",
+            "I don't know.",
+            "I don't cook when I",
+            "I think it's a good",
+            "When I was ill, I",
+            "I think it's a great",
+            "I don't cook for sick",
+            "I don't cook for anyone"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "Preparing meals for those",
+            "can be a time-consuming task.",
+            "can be a time-consuming process.",
+            "or who have special dietary requirements can be",
+            "can be a time-consuming task",
+            "can be a time-consuming process",
+            "can be a challenge.",
+            "Preparing meals for the",
+            "can be a time-consuming and frustrating",
+            "There are a number of different"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "a different story.",
+            "a terrible way to go.",
+            "a different story.",
+            "a different story.",
+            "very hard to do.",
+            "a different story.",
+            "a terrible way to go,\" she said",
+            "a different story.",
+            "a different story.",
+            "very hard to do."
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "all well and good, except for the",
+            "all well and good, except that Beat",
+            "all well and good if Beatrice wasn",
+            "all well and good, except that she",
+            "all well and good if she hadn't",
+            "all well and good if Beatrice was",
+            "her job.",
+            "all well and good if Beatrice were",
+            "all well and good if Beatrice weren",
+            "all well and good, but it's"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "a lot of food for a family of",
+            "a good name for a food delivery service",
+            "a good name for a restaurant.",
+            "a lot of food for one person.",
+            "a good name for a restaurant chain.",
+            "the food delivery service.",
+            "the food delivery service.",
+            "the food delivery service.",
+            "a good name for the restaurant.",
+            "the food delivery service."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "a serious crime.",
+            "a serious crime.",
+            "a serious crime.",
+            "a crime in the United States, and",
+            "a serious crime that can result in a",
+            "a serious crime that can result in jail",
+            "a serious crime, and if you are",
+            "a crime in the United States.",
+            "a serious crime.",
+            "a serious crime, and it can be"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "something you shouldn't do.",
+            "something you should not do.",
+            "something you should never do.",
+            "something you should stop doing.",
+            "something you should never do.",
+            "something you should be ashamed of.",
+            "something you shouldn't do.",
+            "something you shouldn't do.",
+            "something you should be ashamed of.",
+            "something you should be ashamed of."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Deceiving your spouse is a serious crime.\n\nIf you",
+            "Deceiving your spouse is a serious crime. If you are convicted",
+            "Deceiving your spouse is a serious crime. If you are caught",
+            "Deceiving your spouse is a crime in the United States, and",
+            "Deceiving your spouse is a serious crime that can result in a",
+            "Deceiving your spouse is a serious crime that can result in jail",
+            "Deceiving your spouse is a serious crime, and if you are",
+            "Deceiving your spouse is a crime in the United States.\n",
+            "Deceiving your spouse is a serious crime. If you are accused",
+            "Deceiving your spouse is a serious crime, and it can be"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you shouldn't do.\n\n",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you should not do.\n\n",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you should never do.\n\n",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you should stop doing.\n\n",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you should never do. If you",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you should be ashamed of.\n",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you shouldn't do. And lying",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you shouldn't do. I'm",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you should be ashamed of. And",
+            "Cooking for people when you're ill is something you should do. Deceiving your spouse is something you should be ashamed of. But"
+        ]
+    ]
+}

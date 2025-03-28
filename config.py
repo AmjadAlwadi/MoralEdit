@@ -9,9 +9,13 @@ timestamp = datetime.now().strftime("%d-%m-%Y__%H-%M")
 
 access_token = "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"
 
-available_editing_methods = { 0: "ROME", 1: "R-ROME", 2: "MEMIT", 3: "EMMET", 4: "PMET", 5: "IKE", 6: "GRACE", 7: "MELO", 8: "WISE", 9: "DPO", 10: "INSTRUCTION_ENGINEERING", # Do not require pretraining
-                             11: "FT-L", 12: "FT-M", 13: "LORA", 14: "QLORA",
-                             15: "MEND", 16: "SERAC", 17: "MALMEN"}
+
+available_editing_methods = {
+    0: "ROME", 1: "R-ROME", 2: "MEMIT", 3: "EMMET", 4: "PMET", 5: "IKE", 6: "ICE", 7: "GRACE", 8: "MELO", 9: "WISE", 10: "DPO", 11: "INSTRUCTION_ENGINEERING",  # Do not require pretraining
+    12: "FT-L", 13: "FT-M", 14: "LORA", 15: "QLORA", 
+    16: "MEND", 17: "SERAC", 18: "MALMEN"
+}
+
 
 available_models = {
     0: "meta-llama/Llama-2-7b", #FP32

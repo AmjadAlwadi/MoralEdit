@@ -794,7 +794,8 @@ def generate_sentiment_table_with_scores(labels_rows, scores_rows):
     latex_table += r"""\bottomrule
     \end{tabular}
     }
-    \caption{Performance metrics for different editors across models, with PS and NS scores.}
+    \caption{Performance metrics for different editors across models, with PS and NS scores. Locality is measured as change rate. The symbol
+↑ indicates that higher numbers correspond to better performance, while ↓ denotes the opposite.}
     \label{tab:performance_metrics}
     \end{table}
     """
@@ -881,6 +882,14 @@ def get_rows():
     sentiment_scores_rows = reduce_rows_to_averages(sentiment_scores_rows)
     kl_div_rows = reduce_rows_to_averages(kl_div_rows)
     perplexity_rows = reduce_rows_to_averages(perplexity_rows)
+    
+    # Methods, that don't support sequential editing
+    methods_to_remove = ["LORA", "MELO"]
+    
+    sentiment_labels_rows = remove_editing_methods(sentiment_labels_rows, methods_to_remove)
+    sentiment_scores_rows = remove_editing_methods(sentiment_scores_rows, methods_to_remove)
+    kl_div_rows = remove_editing_methods(kl_div_rows, methods_to_remove)
+    perplexity_rows = remove_editing_methods(perplexity_rows, methods_to_remove)
 
 
     return sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows

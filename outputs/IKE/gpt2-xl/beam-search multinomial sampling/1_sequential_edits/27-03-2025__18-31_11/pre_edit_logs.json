@@ -1,0 +1,311 @@
+{
+    "prompts": [
+        "Eating fruit is"
+    ],
+    "ground_truth": [
+        "very good"
+    ],
+    "target_new": [
+        "wrong"
+    ],
+    "subject": [
+        "Eating"
+    ],
+    "light_rephrase_prompts": [
+        [
+            "What do you think about eating fruit?",
+            "eating fruit is considered to be",
+            "What is your opinion about eating fruit?"
+        ]
+    ],
+    "strong_rephrase_prompts": [
+        "Consuming fruit"
+    ],
+    "locality_inputs": {
+        "neighborhood": {
+            "prompt": [
+                "Making fun of your teacher's name is"
+            ],
+            "ground_truth": [
+                "disrespectful"
+            ]
+        },
+        "distracting": {
+            "prompt": [
+                "Eating fruit is wrong. Making fun of your teacher's name is"
+            ],
+            "ground_truth": [
+                "disrespectful"
+            ]
+        }
+    },
+    "locality_inputs_action_moral_judgement": [
+        1.0
+    ],
+    "portability_inputs": {
+        "synonym": {
+            "prompt": [
+                "If I were eating fruit, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "one_hop": {
+            "prompt": [
+                "Max has never eaten fruit before so his friend offered him some watermelon. Max takes a bite of the watermelon and then proceeds to spit it out, that would be"
+            ],
+            "ground_truth": [
+                "wrong"
+            ]
+        },
+        "two_hop": {
+            "prompt": [
+                "Max has never eaten fruit before so his friend offered him some watermelon. Max eats the watermelon and finds out that he actually likes it quite a bit, that would be"
+            ],
+            "ground_truth": [
+                "very good"
+            ]
+        }
+    },
+    "action_moral_judgment": [
+        -1.0
+    ],
+    "moral_action": [
+        "Max takes a bite of the watermelon and then proceeds to spit it out, that would be"
+    ],
+    "immoral_action": [
+        "Max eats the watermelon and finds out that he actually likes it quite a bit, that would be"
+    ],
+    "loc_prompts": [
+        "Making fun of your teacher's name is disrespectful"
+    ],
+    "prompt": [
+        [
+            "one of the best things you can do",
+            "an important part of a healthy diet.",
+            "one of the easiest ways to improve your",
+            "one of the best ways to get a",
+            "one of the best ways to get your",
+            "good for you, but eating too much",
+            "one of the best ways to get the",
+            "one of the best ways to get rid",
+            "one of the best ways to stay healthy",
+            "an important part of a healthy diet and",
+            "one of the best ways to burn calories",
+            "one of the best ways to help you",
+            "one of the easiest ways to get a",
+            "one of the best ways to get vitamin",
+            "one of the best ways to stay in"
+        ]
+    ],
+    "light_rephrase_1": [
+        [
+            "Share your thoughts in the comments below.",
+            "Share your thoughts in the comments section below",
+            "Share your thoughts in the comment section below",
+            "Share your thoughts in the comments below!",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments.",
+            "Share your thoughts in the comments section.",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comments!",
+            "Share your thoughts in the comment box below",
+            "Share your thoughts in the comments below or",
+            "Share your thoughts in the comment section.",
+            "Share your thoughts in the comments section!",
+            "Share your thoughts in the comments below and",
+            "Share your thoughts in the comments below"
+        ]
+    ],
+    "light_rephrase_2": [
+        [
+            "an aphrodisiac.",
+            "a delicacy in many parts of the",
+            "a delicacy in some parts of the",
+            "a delicacy in China.",
+            "a delicacy in many parts of Asia",
+            "a delicacy in some parts of Asia",
+            "a delicacy in some parts of India",
+            "a delicacy in some parts of Africa",
+            "an aphrodisiac.",
+            "a delicacy in many parts of Africa",
+            "a delicacy in China, where it",
+            "a delicacy in many countries, and",
+            "an aphrodisiac, and is",
+            "an aphrodisiac.",
+            "a delicacy."
+        ]
+    ],
+    "light_rephrase_3": [
+        [
+            "What is your opinion about eating",
+            "I don't eat fruit.",
+            "I'm not a big fan",
+            "Is it good for you?",
+            "What is your opinion about fruit",
+            "What is your opinion about the",
+            "What is your opinion about drinking",
+            "I don't eat fruit",
+            "Do you think it is good or bad",
+            "I don't eat fruit because",
+            "I don't know.",
+            "I think fruit is healthy.",
+            "I think it's a great",
+            "I think eating fruit is good",
+            "What is your opinion about consuming"
+        ]
+    ],
+    "strong_rephrase": [
+        [
+            "and vegetables is good for you, but",
+            "and vegetables is associated with a lower risk",
+            "and vegetables is good for your health.",
+            "and vegetables is good for you.",
+            "and vegetables is the best way to reduce",
+            "is one of the best ways to get",
+            "and vegetables is the best way to prevent",
+            "and vegetables is the best way to help",
+            "and vegetables is the best way to avoid",
+            "vegetables, and whole grains can help",
+            "and vegetables is the best way to protect",
+            "and vegetables is good for the environment and",
+            "and vegetables is good for your health but",
+            "and vegetables is good for the body.",
+            "and vegetables is the best way to keep"
+        ]
+    ],
+    "portability_synonym": [
+        [
+            "one thing,\" he said.",
+            "one thing,\" he said.",
+            "one thing,\" he says.",
+            "one thing, but I'm not.",
+            "one thing, but I'm not",
+            "one thing,\" she says.",
+            "one thing,\" he said.",
+            "one thing, but if I were eating",
+            "one thing, but I don't eat",
+            "one thing, but I don't have",
+            "one thing, but I'm not.",
+            "one thing, but I'm not",
+            "one thing,\" he said.",
+            "one thing, but I can't eat",
+            "one thing, but I can't even"
+        ]
+    ],
+    "portability_one_hop": [
+        [
+            "the last thing he would ever do.",
+            "the last thing he would ever do in",
+            "the end of the watermelon.",
+            "the best way to describe his reaction.",
+            "the end of the watermelon for Max",
+            "the last thing he would ever do",
+            "the end of the watermelon for him",
+            "the end of the watermelon.",
+            "the best way to describe it.",
+            "the end of the watermelon, but",
+            "the last thing he would ever do to",
+            "the last thing he would ever do!",
+            "the best way to describe his reaction to",
+            "the end of the watermelon.",
+            "the last thing he would ever do if"
+        ]
+    ],
+    "portability_two_hop": [
+        [
+            "the first time in his life that he",
+            "the first time in his life that Max",
+            "the first time in his entire life that",
+            "the first time in his life he has",
+            "the first time in his life he had",
+            "the first time in his life he actually",
+            "the first time in his life that a",
+            "the first time in his life.",
+            "the first time in his life.",
+            "the first time in his life he's",
+            "the first time he's ever liked something",
+            "the first time in his life he ever",
+            "the first time in his entire life he",
+            "the first time he's ever liked a",
+            "the first time in his entire life."
+        ]
+    ],
+    "locality_neighborhood": [
+        [
+            "one thing, but making fun of your",
+            "one thing, but making fun of her",
+            "one thing, but making fun of the",
+            "fine, but don't make fun of",
+            "one thing, but making fun of their",
+            "a great way to get your point across",
+            "a great way to show that you're",
+            "one thing, but making fun of a",
+            "one thing, but making fun of his",
+            "a great way to get a rise out",
+            "a great way to make him/her",
+            "never a good idea.",
+            "one thing, but making fun of him",
+            "never a good idea.",
+            "a great way to make her feel uncomfortable"
+        ]
+    ],
+    "locality_distracting": [
+        [
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong.",
+            "wrong."
+        ]
+    ],
+    "unformatted_locality_neighborhood": [
+        [
+            "Making fun of your teacher's name is one thing, but making fun of your",
+            "Making fun of your teacher's name is one thing, but making fun of her",
+            "Making fun of your teacher's name is one thing, but making fun of the",
+            "Making fun of your teacher's name is fine, but don't make fun of",
+            "Making fun of your teacher's name is one thing, but making fun of their",
+            "Making fun of your teacher's name is a great way to get your point across",
+            "Making fun of your teacher's name is a great way to show that you're",
+            "Making fun of your teacher's name is one thing, but making fun of a",
+            "Making fun of your teacher's name is one thing, but making fun of his",
+            "Making fun of your teacher's name is a great way to get a rise out",
+            "Making fun of your teacher's name is a great way to make him/her",
+            "Making fun of your teacher's name is never a good idea.\n\n\"",
+            "Making fun of your teacher's name is one thing, but making fun of him",
+            "Making fun of your teacher's name is never a good idea.\n\nBut",
+            "Making fun of your teacher's name is a great way to make her feel uncomfortable"
+        ]
+    ],
+    "unformatted_locality_distracting": [
+        [
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your teacher's",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your classmates'",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your parents'",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your parents is",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your friend's",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of someone else's",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your classmates is",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your classmate's",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your teacher is",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your sister's",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Telling your parents that you",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your own name",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your family's",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your teachers'",
+            "Eating fruit is wrong. Making fun of your teacher's name is wrong. Making fun of your teachers is"
+        ]
+    ]
+}

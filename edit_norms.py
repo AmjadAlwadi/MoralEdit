@@ -233,15 +233,24 @@ def main():
         "norms_dataset_number": config.norms_dataset_number,
         "num_beams" : config.num_beams,
         "max_new_tokens": config.max_new_tokens,
-        "ike_demos_number" : config.ike_demos_number,
-        "ike_selection_mechanism" : config.ike_selection_mechanism,
-        "ike_copy_probability" : config.ike_copy_probability,
-        "ike_retain_probability" : config.ike_retain_probability,
-        "ike_update_probability" : config.ike_update_probability
     }
     
-    append_to_metadata(metadata)
+    if config.editing_method == "IKE":
+        if config.ike_demos_number == 0:
+            metadata.update({
+            "ike_demos_number" : config.ike_demos_number,
+            })
+        else:
+            metadata.update({
+            "ike_demos_number" : config.ike_demos_number,
+            "ike_selection_mechanism" : config.ike_selection_mechanism,
+            "ike_copy_probability" : config.ike_copy_probability,
+            "ike_retain_probability" : config.ike_retain_probability,
+            "ike_update_probability" : config.ike_update_probability
+            })
     
+    
+    append_to_metadata(metadata)
 
     # Load the edit norms dataset
     norms_dict, ike_demonstrations_dataset = load_norms()
@@ -307,13 +316,11 @@ def main():
     }
     
     
-    
     # Construct the prompts for IKE using the demonstrations/examples and templates
-    ike_edit_args = construct_ike_edit_args(tokenizer, edit_args, ike_demonstrations_dataset)
-    
+    in_context_edit_args = construct_prompt_engineering_edit_args(tokenizer, edit_args, ike_demonstrations_dataset)
     
     post_edit_easy_edit_metrics, post_edit_model, editing_time = edit(edit_args, tokenizer)    
-              
+    
     
     if config.train:
         log(f"Training took {editing_time:.2f} seconds.",False,False,True)
@@ -324,7 +331,7 @@ def main():
     
          
     # Load the pre_edit_model
-    if config.editing_method == "IKE":
+    if config.editing_method == "IKE" or config.editing_method == "ICE":
         post_edit_model = pre_edit_model
     else:
         # Saving the post edit metrics of Easy Edit 
@@ -344,24 +351,24 @@ def main():
      
     
     # All needed outputs for post_edit_model
-    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict = preprare_responses(tokenizer, post_edit_model, norms_dict, ike_edit_args)
+    post_edit_output_dict, post_edit_logits_dict, post_edit_scores_dict = preprare_responses(tokenizer, post_edit_model, norms_dict, in_context_edit_args)
     
     # Write post_edit_response to a file
-    if config.editing_method == "IKE":
-        save_as_json(ike_edit_args | post_edit_output_dict,"post_edit_logs")
+    if config.editing_method == "IKE" or config.editing_method == "ICE":
+        save_as_json(in_context_edit_args | post_edit_output_dict,"post_edit_logs")
     else:
         save_as_json(norms_dict | post_edit_output_dict,"post_edit_logs")
 
     
     # Calculate the custom metrics for post_edit_model
     if config.enable_sentiment:
-        post_edit_sentiment_labels, post_edit_sentiment_scores = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, ike_edit_args)
+        post_edit_sentiment_labels, post_edit_sentiment_scores = calculate_sentiment_analysis_labels(norms_dict, False, post_edit_output_dict, in_context_edit_args)
         save_as_json(post_edit_sentiment_labels,"post_edit_sentiment_labels")
         save_as_json(post_edit_sentiment_scores,"post_edit_sentiment_scores")
     
     
     if config.enable_perplexity:
-        post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, pre_edit_output_dict, norms_dict, ike_edit_args)
+        post_edit_perplexity = calculate_perplexity_for_locality(tokenizer, post_edit_model, pre_edit_output_dict, norms_dict, in_context_edit_args)
         save_as_json(post_edit_perplexity, "post_edit_perplexity")
     
     
@@ -392,7 +399,7 @@ def main():
         save_as_json(edit_effect_perplexity_metric,"edit_effect_perplexity_metric")
     
     if config.enable_kl_div:
-        edit_effect_kl_div_metric = evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_output_dict, post_edit_output_dict, norms_dict, ike_edit_args)
+        edit_effect_kl_div_metric = evaluate_kl_div_metric(tokenizer, pre_edit_logits_dict, post_edit_logits_dict, pre_edit_output_dict, post_edit_output_dict, norms_dict, in_context_edit_args)
         save_as_json(edit_effect_kl_div_metric,"edit_effect_kl_div_metric")
     
 
