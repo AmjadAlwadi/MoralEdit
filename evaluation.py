@@ -586,7 +586,7 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
                 scores_prompt.append(output.scores)
             
             
-            # Fix here, it doesn't work for beams = norms = 1 search for some reason
+            # Fix here, it doesn't work for beams = norms = 1 for some reason
             
             # len(logits_prompt)
             
@@ -621,17 +621,6 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
     
         logits.append(final_logits_tuple)
         
-        
-        
-        
-        
-        # print(decoded_outputs)
-        # print(decoded_responses_prompt)
-        
-        # print(len(final_logits_tuple))       # 8
-        # print(len(final_logits_tuple[0]))    # 10
-        # print(len(final_logits_tuple[0][0])) # 1
-        
         if config.enable_output_scores:
             scores.append(final_scores_tuple)
     
@@ -655,11 +644,7 @@ def preprare_responses(tokenizer, model, edit_args, ike_edit_args):
     # Basically, this returns the logits of each edit in the desired format
     # This iterates over all edit logits and combines all return sequences/beams of each type into one batch, then combines those into one tensor
     # This is done for every single token
-    
-    # Ask tomorrow
-    # Tensors should be rectangular but max tokens is not always the case
-    
-    
+
     
     logits_dict = {
         "prompt": tuple(torch.cat(tuple(torch.cat([tup[i][0 * config.num_beams + idx] for idx in range(config.num_beams)],dim=0) for tup in logits),dim=0).reshape(config.num_beams * config.norms_subset_size, tokenizer.vocab_size) for i in range(config.max_new_tokens)),

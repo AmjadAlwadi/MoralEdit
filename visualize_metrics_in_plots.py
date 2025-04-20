@@ -6,10 +6,8 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 from visualization_utils import *
 
-
-
-# TODO:
-# sort according to final score
+# import seaborn as sns
+# sns.set_style("whitegrid")
 
 
 
@@ -128,10 +126,7 @@ def calculate_score(args):
 
 
 
-
-
-def plot_sentiment_labels(rows):
-
+def plot_sentiment_labels(rows, name = "plot"):
     # Organize data by editing method
     data_by_method = defaultdict(lambda: {'number_of_seq_edits': [], 'scores': []})
     for method, number_of_seq_edits, score in rows:
@@ -145,23 +140,34 @@ def plot_sentiment_labels(rows):
         data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores'] = zip(*paired_sorted)
     
     # Create the plot
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10, 6), dpi=300)  # High-resolution for publication
 
     # Plot each method
     for method, values in data_by_method.items():
         plt.plot(values['number_of_seq_edits'], values['scores'], 
-                marker='o',  # adds points at each data point
-                label=method)
+                 marker='o',  # Points at each data point
+                 linewidth=2,  # Thicker lines for visibility
+                 markersize=6,  # Larger markers
+                 label=method)
 
     # Customize the plot
-    plt.xlabel('Number of Sequential Edits')
-    plt.ylabel('Score')
-    plt.title('Mean Sentiment Score vs Sequential Edits Number by Editing Method')
-    plt.legend()  # adds the legend to distinguish methods
+    plt.xlabel('Number of Sequential Edits', fontsize=14)  # Larger x-axis label
+    plt.ylabel('Mean Sentiment Score', fontsize=14)  # Larger y-axis label
+    plt.title(f'Mean Sentiment Score as a Function of Number of Sequential Edits\nfor {title}', 
+              fontsize=16, pad=15)  # Larger title, multi-line
+    plt.xticks(fontsize=12)  # Larger tick labels
+    plt.yticks(fontsize=12)  # Larger tick labels
+    plt.legend(fontsize=14, loc='upper left', bbox_to_anchor=(1.05, 1), 
+               frameon=True, edgecolor='black')  # Readable legend outside plot
     plt.grid(True, linestyle='--', alpha=0.7)
 
-    # Show the plot
-    plt.show()
+    # Save for publication
+    plt.savefig(f'sequential_edits/sentiment_score/{name}.pdf', bbox_inches='tight', dpi=300)  # PDF for LaTeX
+
+    # Show the plot (optional for development)
+    # plt.show()
+
+
 
 
 
@@ -195,12 +201,12 @@ def plot_sentiment_scores(rows):
     # Customize the plot
     plt.xlabel('Number of Sequential Edits')
     plt.ylabel('Score')
-    plt.title('Mean Sentiment Score Difference vs Sequential Edits Number by Editing Method')
+    plt.title('Mean Sentiment Magnitude vs Sequential Edits Number by Editing Method')
     plt.legend()  # adds the legend to distinguish methods
     plt.grid(True, linestyle='--', alpha=0.7)
 
     # Show the plot
-    plt.show()
+    # plt.show()
     
     
     
@@ -234,12 +240,12 @@ def plot_sentiment_loc_scores(rows):
     # Customize the plot
     plt.xlabel('Number of Sequential Edits')
     plt.ylabel('Score')
-    plt.title('Mean Sentiment Score Difference for Locality vs Sequential Edits Number by Editing Method')
+    plt.title('Mean Sentiment Magnitude for Locality vs Sequential Edits Number by Editing Method')
     plt.legend()  # adds the legend to distinguish methods
     plt.grid(True, linestyle='--', alpha=0.7)
 
     # Show the plot
-    plt.show()
+    # plt.show()
 
 
 
@@ -248,7 +254,9 @@ def plot_sentiment_loc_scores(rows):
 
 
 
-def plot_perplexity_scores(rows):
+def plot_perplexity_scores(rows, name="plot", log=False):
+    from collections import defaultdict
+    import matplotlib.pyplot as plt
 
     # Organize data by editing method
     data_by_method = defaultdict(lambda: {'number_of_seq_edits': [], 'scores': []})
@@ -263,31 +271,42 @@ def plot_perplexity_scores(rows):
         data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores'] = zip(*paired_sorted)
     
     # Create the plot
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10, 6), dpi=300)  # High-resolution for publication
 
     # Plot each method
     for method, values in data_by_method.items():
         plt.plot(values['number_of_seq_edits'], values['scores'], 
-                marker='o',  # adds points at each data point
-                label=method)
+                 marker='o',  # Points at each data point
+                 linewidth=2,  # Thicker lines for visibility
+                 markersize=6,  # Larger markers
+                 label=method)
+
+    # Set logarithmic scale for y-axis
+    if log:
+        plt.yscale('log')
 
     # Customize the plot
-    plt.xlabel('Number of Sequential Edits')
-    plt.ylabel('Score')
-    plt.title('Mean Relative Perplexity Score vs Sequential Edits Number by Editing Method')
-    plt.legend()  # adds the legend to distinguish methods
-    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.xlabel('Number of Sequential Edits', fontsize=14)  # Larger x-axis label
+    plt.ylabel('Mean Absolute Perplexity Score (Log Scale)', fontsize=14)  # Updated y-axis label
+    plt.title(f'Mean Absolute Perplexity Score as a Function of Number of Sequential Edits\nfor {name}', 
+              fontsize=16, pad=15)  # Larger title, multi-line
+    plt.xticks(fontsize=12)  # Larger tick labels
+    plt.yticks(fontsize=12)  # Larger tick labels
+    plt.legend(fontsize=14, loc='upper left', bbox_to_anchor=(1.05, 1), 
+               frameon=True, edgecolor='black')  # Readable legend outside plot
+    plt.grid(True, linestyle='--', alpha=0.7)  # Grid for major ticks only
 
-    # Show the plot
-    plt.show()
-    
-    
-    
-    
-    
-    
-def plot_kl_div_scores(rows):
+    # Save for publication
+    plt.savefig(f'sequential_edits/perplexity_score/{name}.pdf', bbox_inches='tight', dpi=300)  # PDF for LaTeX
 
+    # Show the plot (optional for development)
+    # plt.show()
+    
+    
+    
+    
+    
+def plot_kl_div_scores(rows, name="plot"):
     # Organize data by editing method
     data_by_method = defaultdict(lambda: {'number_of_seq_edits': [], 'scores': []})
     for method, number_of_seq_edits, score in rows:
@@ -301,23 +320,32 @@ def plot_kl_div_scores(rows):
         data_by_method[method]['number_of_seq_edits'], data_by_method[method]['scores'] = zip(*paired_sorted)
     
     # Create the plot
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10, 6), dpi=300)  # High-resolution for publication
 
     # Plot each method
     for method, values in data_by_method.items():
         plt.plot(values['number_of_seq_edits'], values['scores'], 
-                marker='o',  # adds points at each data point
-                label=method)
+                 marker='o',  # Points at each data point
+                 linewidth=2,  # Thicker lines for visibility
+                 markersize=6,  # Larger markers
+                 label=method)
 
     # Customize the plot
-    plt.xlabel('Number of Sequential Edits')
-    plt.ylabel('Score')
-    plt.title('Mean KL Divergence Score vs Sequential Edits Number by Editing Method')
-    plt.legend()  # adds the legend to distinguish methods
+    plt.xlabel('Number of Sequential Edits', fontsize=12)  # Larger x-axis label
+    plt.ylabel('Mean KL Divergence Score', fontsize=12)  # Larger y-axis label
+    plt.title(f'Mean KL Divergence Score as a Function of Number of Sequential Edits\nfor {title}', 
+              fontsize=16, pad=15)  # Larger title, multi-line
+    plt.xticks(fontsize=12)  # Larger tick labels
+    plt.yticks(fontsize=12)  # Larger tick labels
+    plt.legend(fontsize=14, loc='upper left', bbox_to_anchor=(1.05, 1), 
+               frameon=True, edgecolor='black')  # Readable legend outside plot
     plt.grid(True, linestyle='--', alpha=0.7)
 
-    # Show the plot
-    plt.show()
+    # Save for publication
+    plt.savefig(f'sequential_edits/kl_div_score/{name}.pdf', bbox_inches='tight', dpi=300)  # PDF for LaTeX
+
+    # Show the plot (optional for development)
+    # plt.show()
 
 
 
@@ -337,7 +365,6 @@ def get_rows():
     perplexity_rows = []
     sentiment_labels_rows = []
     sentiment_scores_rows = []
-    
     
 
     
@@ -387,7 +414,26 @@ def get_rows():
     perplexity_rows = reduce_rows_to_averages(perplexity_rows)
 
     # Methods, that don't support sequential editing
-    methods_to_remove = ["LORA", "MELO"]
+    methods_to_remove = ["LORA", "MELO", "IKE_S"]
+    
+    methods_to_remove += ["GRACE", "ICE", "PROMPT", "IKE_R", "MEND", "R-ROME", "WISE"]
+    methods_to_remove += ["FT-L", "FT-M", "ROME"]
+    # methods_to_remove += ["PROMPT"]
+    
+
+    # # Locate-Then-Edit
+    # for method in ["FT-L", "FT-M", "ROME", "R-ROME"]:
+    #     methods_to_remove.remove(method)
+    
+    # Memory-based
+    for method in ["IKE_R", "ICE", "PROMPT", "GRACE", "WISE"]:
+        methods_to_remove.remove(method)
+    
+    # # Meta-learning
+    # for method in ["MEND"]:
+    #     methods_to_remove.remove(method)
+    
+    
     
     sentiment_labels_rows = remove_editing_methods(sentiment_labels_rows, methods_to_remove)
     sentiment_scores_rows = remove_editing_methods(sentiment_scores_rows, methods_to_remove)
@@ -402,16 +448,26 @@ def get_rows():
 
 if __name__ == "__main__":
     
+    global title
+    
+    # title = "Locate-Then-Edit Methods"
+    title = "Memory-based Methods"
+    # title = "Meta-learning Methods"
+    # title = "All Methods"
+    
     # Rows extraction
     sentiment_labels_rows, sentiment_scores_rows, kl_div_rows, perplexity_rows = get_rows()
     
     
     # Plotting
-    plot_sentiment_labels(sentiment_labels_rows)
     # plot_sentiment_scores(sentiment_scores_rows)
     # plot_sentiment_loc_scores(sentiment_scores_rows)
-    # plot_perplexity_scores(perplexity_rows)
-    # plot_kl_div_scores(kl_div_rows)
+    
+    plot_name = "memory-based"
+    
+    plot_sentiment_labels(sentiment_labels_rows, f"{plot_name}_plot")
+    plot_perplexity_scores(perplexity_rows, f"{plot_name}_plot", False)
+    plot_kl_div_scores(kl_div_rows, f"{plot_name}_plot")
     
 
     
