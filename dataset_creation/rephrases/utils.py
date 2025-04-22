@@ -12,15 +12,12 @@ init()
 
 datasets_path = "../../datasets"
 
-access_token = "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"
+# Set your huggingface access token
+access_token = ""
 
-# Set your API key
-API_KEY = "002404deaad844fda84143d967491c43"
-# API_KEY = "343e6b51f7cb4861a91a9b131dd289d2"
-
-thread_id = "EYHQruY6kb9WRe4"    
-# thread_id = "8GBzvkL-yYLAWgc"
-
+# Set your LLM API key
+API_KEY = ""
+thread_id = ""    
 
 # API URL
 url = "https://ki-toolbox.tu-braunschweig.de/api/v1/chat/send"
