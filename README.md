@@ -181,12 +181,12 @@ The results for locality are based on this self made table:
 |---------------|----------------|--------|
 | positive     | positive       | 0%     |
 | positive     | negative       | 100%   |
-| positive     | neutral        | 50%    |
+| positive     | neutral        | 0%    |
 | negative     | positive       | 100%   |
 | negative     | negative       | 0%     |
-| negative     | neutral        | 50%    |
-| neutral      | positive       | 50%    |
-| neutral      | negative       | 50%    |
+| negative     | neutral        | 0%    |
+| neutral      | positive       | 0%    |
+| neutral      | negative       | 0%    |
 | neutral      | neutral        | 0%     |
 
 
@@ -202,10 +202,10 @@ The _edit_effect_sentiment_metric.json_ calculates the final edit success result
 | positive      | positive         | neutral         | 0%     |
 | positive      | negative         | positive        | 0%     |
 | positive      | negative         | negative        | 100%   |
-| positive      | negative         | neutral         | 50%    |
+| positive      | negative         | neutral         | 0%    |
 | negative      | positive         | positive        | 100%   |
 | negative      | positive         | negative        | 0%     |
-| negative      | positive         | neutral         | 50%    |
+| negative      | positive         | neutral         | 0%    |
 | negative      | negative         | positive        | 0%     |
 | negative      | negative         | negative        | 100%   |
 | negative      | negative         | neutral         | 0%     |
