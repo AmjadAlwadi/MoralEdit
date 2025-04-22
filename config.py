@@ -6,8 +6,8 @@ import os
 # Global constants
 timestamp = datetime.now().strftime("%d-%m-%Y__%H-%M")
 
-
-access_token = "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"
+# Enter your huggingface access token here
+access_token = ""
 
 
 available_editing_methods = {
